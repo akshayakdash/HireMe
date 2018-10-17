@@ -1,0 +1,48 @@
+﻿@model IEnumerable<HireMe.Models.UserInfo>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@if (ViewBag.displayMenu == "Yes")
+{
+    <h1>Welcome Admin. Now you can create user Role.</h1>
+    <h3>
+        <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
+    </h3>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="box-title">
+                <b>Users with Roles</b>
+            </h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="panel-body">
+            <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
+                <thead>
+                    <tr>
+                        <td><b>Username</b></td>
+                        <td><b>Email</b></td>
+                        <td><b>Roles</b></td>
+                    </tr>
+                </thead>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}
+else
+{
+    <h2>  Welcome <strong>@ViewBag.Name</strong> :) .We will add user module soon </h2>
+}  
