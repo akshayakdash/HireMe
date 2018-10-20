@@ -1,50 +1,101 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- FAVICON AND APPLE TOUCH -->
+    <link rel="shortcut icon" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-180x180.png">
+    <meta name="msapplication-TileImage" content="mstile.png">
+    <meta name="msapplication-TileColor" content="#fe005a">
+    <meta name="theme-color" content="#fe005a">
+    <title>@ViewBag.Title - Select A Job</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i%7CRaleway:400,700%7CSource+Sans+Pro:300,400,400i,600,600i,700,900">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
+   
+
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+<body class="sticky-header header-classic page-header-style-1 footer-style-1">
+    @*<div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                        {
+                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                        }
+
+                        <li>@Html.ActionLink("About", "About", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        </div>*@
+    @*<div class="container body-content">*@
+    @RenderBody()
+    <hr />
 
-                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                    {
-                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                    }
 
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    <footer id="footer-container">
+        <div id="footer-bottom">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-sm-6 order-2 order-sm-1">
 
+                        <div class="widget widget-text">
+
+                            <div>
+                                <p>Select A Job &copy; @DateTime.Now.Year - All rights reserved</p>
+                            </div>
+
+                        </div><!-- widget-text -->
+
+                    </div><!-- col -->
+                    <div class="col-sm-6 order-1 order-sm-2">
+
+                        <div class="widget widget-social">
+
+                            <div class="social-media">
+
+                                <a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a>
+                                <a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                                <a class="instagram" href="#"><i class="fa fa-instagram"></i></a>
+                                <a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
+                                <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+
+                            </div><!-- social-media -->
+
+                        </div><!-- widget-social -->
+
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container -->
+
+        </div><!-- footer-bottom -->
+
+    </footer>
+    @*</div>*@
+    <a id="scroll-up" class="waves"><i class="fa fa-angle-up"></i></a>
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
 </body>
 </html>

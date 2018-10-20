@@ -8,15 +8,13 @@
 
 @if (ViewBag.displayMenu == "Yes")
 {
-    <h1>Welcome Admin. Now you can create user Role.</h1>
-    <h3>
-        <li>@Html.ActionLink("Manage Role", "Index", "Role")</li>
-    </h3>
+    <h1>Welcome Admin</h1>
+
 
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h3 class="box-title">
-                <b>Users with Roles</b>
+                <b>Users</b>
             </h3>
         </div>
         <!-- /.box-header -->
@@ -24,8 +22,10 @@
             <table class="table table-hover table-bordered table-condensed" id="UsersWithRoles">
                 <thead>
                     <tr>
-                        <td><b>Username</b></td>
+                        <td><b>UserName</b></td>
                         <td><b>Email</b></td>
+                        <td><b>Contact Number</b></td>
+                        <td><b>Address</b></td>
                         <td><b>Roles</b></td>
                     </tr>
                 </thead>
@@ -34,15 +34,136 @@
                     <tr>
                         <td>@user.Username</td>
                         <td>@user.Email</td>
+                        <td>@user.PhoneNumber</td>
+                        <td>@user.Address</td>
                         <td>@user.Role</td>
 
                     </tr>
                 }
             </table>
+
+            @Html.ActionLink("Manage Role", "Index", "Role")
+
         </div>
     </div>
 }
 else
 {
-    <h2>  Welcome <strong>@ViewBag.Name</strong> :) .We will add user module soon </h2>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search a Profile</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
+        <a href="#"><img src="~/assets/images/lifecycle.png" alt=""> Process recruiment lifecycle</a>
+        <a href="#"><img src="~/assets/images/message.png" alt=""> Manage my message & notification</a>
+        <a href="#"><img src="~/assets/images/post-message.png" alt=""> Post a new message on the conversation thread</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/settings.png" alt=""> Manage my settings</a>
+        <a href="#"><img src="~/assets/images/feedback.png" alt=""> Share my feedbacks about the plate form</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/bug.png" alt=""> Rise an Bug/issue</a>
+    </div>
+
+    <div id="main-container-user">
+
+        <div id="page-content" style="background: #f3f8fb;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <span class="menu-but" onclick="openNav()">&#9776; MENU</span>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center">
+                            <h2>User Acount</h2>
+
+                            <h3>  Welcome <strong>@ViewBag.Name</strong> :) </h3>
+                            <h5>Looking a Job Here</h5>
+                        </div><!-- headline -->
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+
+                                <div class="blog-article">
+
+                                    <div class="blog-article-thumbnail">
+                                        <a href="blog-post-no-sidebar.html"><img src="~/assets/images/research-proces.jpg" alt=""></a>
+                                    </div><!-- blog-article-thumbnail -->
+
+                                    <h3 class="blog-article-title"><a href="blog-post-no-sidebar.html">Research Process</a></h3>
+
+                                    <div class="blog-article-content">
+
+                                        <p>
+                                            Cras metus enim, luctus ut urna in, rutrum accumsan mi. Nunc magna tortor, tincidunt vitae
+                                            orci ac, pharetra vehicula erat. Etiam nec odio vestibulum est mattis efficitur vel ut magna.
+                                            Pellentesque sit amet tellus blandit, tincidunt enim vel, semper purus.  Donec et molestie
+                                            nibh. Fusce faucibus, quam at tempor lobortis, ipsum diam dignissim mauris, et accumsan risus
+                                            nibh vel eros. Sed at augue sit amet quam semper eleifend. Sed nulla odio, euismod at orci at,
+                                            molestie semper lectus. Maecenas rutrum augue id augue vehicula, ut volutpat risus cursus.
+                                            Phasellus cursus blandit nisi id aliquet. Cras bibendum dui at lobortis malesuada. Integer
+                                            tristique tellus nisl. Cras id dolor lacus. Pellentesque ac luctus augue. Sed nec posuere
+                                            elit. Integer vitae tincidunt mauris.
+                                        </p>
+
+                                    </div><!-- blog-article-content -->
+
+                                </div><!-- blog-article -->
+
+                            </div><!-- col -->
+                            <div class="col-lg-6">
+
+                                <div class="blog-article">
+
+                                    <div class="blog-article-thumbnail">
+                                        <a href="blog-post-no-sidebar.html"><img src="~/assets/images/rules.jpg" alt=""></a>
+                                    </div><!-- blog-article-thumbnail -->
+
+                                    <h3 class="blog-article-title"><a href="blog-post-no-sidebar.html">Basic Rules</a></h3>
+
+                                    <div class="blog-article-content">
+
+                                        <p>
+                                            Cras metus enim, luctus ut urna in, rutrum accumsan mi. Nunc magna tortor, tincidunt vitae
+                                            orci ac, pharetra vehicula erat. Etiam nec odio vestibulum est mattis efficitur vel ut magna.
+                                            Pellentesque sit amet tellus blandit, tincidunt enim vel, semper purus.  Donec et molestie
+                                            nibh. Fusce faucibus, quam at tempor lobortis, ipsum diam dignissim mauris, et accumsan risus
+                                            nibh vel eros. Sed at augue sit amet quam semper eleifend. Sed nulla odio, euismod at orci at,
+                                            molestie semper lectus. Maecenas rutrum augue id augue vehicula, ut volutpat risus cursus.
+                                            Phasellus cursus blandit nisi id aliquet. Cras bibendum dui at lobortis malesuada. Integer
+                                            tristique tellus nisl. Cras id dolor lacus. Pellentesque ac luctus augue. Sed nec posuere
+                                            elit. Integer vitae tincidunt mauris.
+                                        </p>
+
+                                    </div><!-- blog-article-content -->
+
+                                </div><!-- blog-article -->
+
+                            </div>
+
+
+                        </div><!-- row -->
+                    </div>
+
+                </div><!-- row -->
+            </div><!-- container -->
+        </div>
+
+
+
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "280px";
+            document.getElementById("main-container-user").style.marginLeft = "280px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main-container-user").style.marginLeft = "0";
+        }
+    </script>
 }  

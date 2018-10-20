@@ -176,7 +176,7 @@ namespace HireMe.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -192,11 +192,11 @@ namespace HireMe.Controllers
                     //Ends Here     
                     return RedirectToAction("Index", "Users");
                 }
-                ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                          .ToList(), "Name", "Name");
+               
                 AddErrors(result);
             }
-
+            ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                         .ToList(), "Name", "Name");
             // If we got this far, something failed, redisplay form    
             return View(model);
         }

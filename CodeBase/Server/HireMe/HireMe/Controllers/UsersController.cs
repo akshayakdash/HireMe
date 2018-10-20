@@ -39,6 +39,10 @@ namespace HireMe.Controllers
                                           UserId = usr.Id,
                                           Username = usr.UserName,
                                           Email = usr.Email,
+                                          PhoneNumber = usr.PhoneNumber,
+                                          Address = usr.Address,
+                                          FirstName = usr.FirstName,
+                                          LastName = usr.LastName,
                                           RoleNames = (from userRole in usr.Roles
                                                        join role in context.Roles on userRole.RoleId
                                                        equals role.Id
@@ -47,6 +51,10 @@ namespace HireMe.Controllers
                                       {
                                           UserId = p.UserId,
                                           Username = p.Username,
+                                          FirstName = p.FirstName,
+                                          LastName = p.LastName,
+                                          Address = p.Address,
+                                          PhoneNumber = p.PhoneNumber,
                                           Email = p.Email,
                                           Role = string.Join(",", p.RoleNames)
                                       });
@@ -68,7 +76,7 @@ namespace HireMe.Controllers
                 ApplicationDbContext context = new ApplicationDbContext();
                 var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
                 var s = UserManager.GetRoles(user.GetUserId());
-                if (s[0].ToString() == "Admin")
+                if (s != null && s.Count > 0 && s[0].ToString() == "Admin")
                 {
                     return true;
                 }

@@ -16,6 +16,12 @@ namespace HireMe.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+
+        //public int Age { get; set; }
+        public string Address { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -23,6 +29,7 @@ namespace HireMe.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer<ApplicationDbContext>(null);
         }
 
         public static ApplicationDbContext Create()

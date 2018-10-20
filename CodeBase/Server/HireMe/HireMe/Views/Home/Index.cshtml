@@ -1,31 +1,332 @@
-﻿@*@{
-    ViewBag.Title = "Home Page";
-}
+﻿
+<div id="main-container">
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+    <div class="rev_slider_wrapper mb-0">
+        <div class="rev_slider" data-version="5.4.5">
+            <ul>
+                <li data-transition="fade">
+                    <img src="assets/images/bg-slide-1.jpg" alt="">
+                    <div class="tp-caption title-xl"
+                         data-x="300"
+                         data-y="center"
+                         data-voffset="0"
+                         data-start="1300"
+                         data-speed="300"
+                         data-transform_in="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;"
+                         data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
+                        <span class="text-gradient">Personal Home Management Platform</span>
+                    </div>
+                    <div class="tp-caption"
+                         data-x="750"
+                         data-y="center"
+                         data-voffset="100"
+                         data-start="1450"
+                         data-speed="300"
+                         data-transform_in="o:0;sX:0.75;sY:0.75;s:250;e:Power2.easeInOut;"
+                         data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
+                        <a class="btn btn-style-1 waves" href="#">Download The Mobile App Here</a>
+                    </div>
+                </li>
+                <li data-transition="fade">
+                    <img src="assets/images/bg-slide-2.jpg" alt="">
+                    <div class="tp-caption title-xl"
+                         data-x="300"
+                         data-y="center"
+                         data-voffset="0"
+                         data-start="1300"
+                         data-speed="300"
+                         data-transform_in="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;"
+                         data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
+                        <span class="text-gradient">Personal Home Management Platform</span>
+                    </div>
+                    <div class="tp-caption"
+                         data-x="750"
+                         data-y="center"
+                         data-voffset="100"
+                         data-start="1450"
+                         data-speed="300"
+                         data-transform_in="o:0;sX:0.75;sY:0.75;s:250;e:Power2.easeInOut;"
+                         data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
+                        <a class="btn btn-style-1 waves" href="#">Download The Mobile App Here</a>
+                    </div>
+                </li>
+            </ul>
+        </div><!-- rev_slider -->
+    </div><!-- rev_slider_wrapper -->
+    <!-- HEADER -->
+    <header id="header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                            <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                            <li><a href="#">ADMIN</a></li>
+                            <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
+                                <ul class="secondary-menu">
+                                    <li><a class="waves" href="index.html">Home</a></li>
+                                    <li><a class="waves" href="#">ADMIN</a></li>
+                                    <li><a class="waves" href="#">LOGIN</a></li>
+                                    <li><a class="waves" href="#">CONTACT</a></li>
+                                    <li><a class="waves" href="#">AIDE</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header><!-- HEADER -->
+    <!-- PAGE CONTENT -->
+
+
+    <div id="page-content" style="padding:0 0 50px 0;">
+        <div class="hr mt-0 ml-3 mr-3 ml-xl-5 mr-xl-5"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="headline text-center mb-1">
+                        <h2>Who are you?</h2>
+                        <h5>Choose from the 2 option below</h5>
+                    </div><!-- headline -->
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div>
+
+        <section class="team-section">
+            <div class="container">
+                <div class="team-wrapper">
+                    <div class="row">
+                        <div class="col-sm-12 col-lg-4 wow fadeInLeft">
+                            <div class="team-column">
+                                <figure>
+                                    <div class="grid-holder">
+                                        <a href="#"><img src="assets/images/employer.jpg" alt=""></a>
+                                        <div class="team-content-holder">
+                                            <div class="personal-info">
+                                                <h3>Employer</h3>
+                                                <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                            </div>
+                                            <!-- .awsm-personal-info -->
+                                            <div class="team-contact-info">
+                                                <p>You are looking for an employee. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                                @*<a class="btn btn-style-1 waves" href="#">Start Here</a>*@
+                                                @Html.ActionLink("Start Here", "Register", "Account", null, new { @class = "btn btn-style-1 waves" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4">
+                            <div class="team-column">
+                                <figure>
+                                    <div class="grid-holder">
+                                        <a href="#"><img src="assets/images/candidate.jpg" alt=""></a>
+                                        <div class="team-content-holder">
+                                            <div class="personal-info">
+                                                <h3>Candidat</h3>
+                                                <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                            </div>
+                                            <!-- .awsm-personal-info -->
+                                            <div class="team-contact-info">
+                                                <p>You are looking for an employer. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                                @Html.ActionLink("Start Here", "Register", "Account", null, new { @class = "btn btn-style-1 waves" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-lg-4 wow fadeInRight">
+                            <div class="team-column">
+                                <figure>
+                                    <div class="grid-holder">
+                                        <a href="#"><img src="assets/images/agency.jpg" alt=""></a>
+                                        <div class="team-content-holder">
+                                            <div class="personal-info">
+                                                <h3>Agency</h3>
+                                                <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                            </div>
+                                            <!-- .awsm-personal-info -->
+                                            <div class="team-contact-info">
+                                                <p>You are looking for candidats. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                                <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </figure>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="page-content" style="padding-bottom:0;">
+        <div class="hr mt-0 ml-3 mr-3 ml-xl-5 mr-xl-5"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="headline text-center mb-5">
+                        <h2>Services</h2>
+                        <h5>We guarantee you a unique experience on this platform</h5>
+                    </div><!-- headline -->
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div>
+        <div class="container pt-5">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.1s">
+                    <div class="service-box style-5">
+                        <span><i class="bizhub-icon-television"></i></span>
+                        <div class="service-box-content">
+                            <h5><a href="single-service.html">Verified Profile</a></h5>
+                            <p>Vestibulum vulputate arcu risus, vel laoreet felis sagittis at. Aenean quis elit laoreet volutpat.</p>
+                        </div><!-- service-box-content -->
+                    </div><!-- service-box -->
+                </div><!-- col -->
+                <div class="col-lg-3 col-sm-6 wow fadeInLeft">
+                    <div class="service-box style-5">
+                        <span><i class="bizhub-icon-photo-camera"></i></span>
+                        <div class="service-box-content">
+                            <h5><a href="single-service.html">Filter by Criteria</a></h5>
+                            <p>Etiam nec odio vestibulum est mattis efficitur vel ut magna. Pellentesque sit amet tellus blandit.</p>
+                        </div><!-- service-box-content -->
+                    </div><!-- service-box -->
+                </div><!-- col -->
+                <div class="col-lg-3 col-sm-6 wow fadeInRight">
+                    <div class="service-box style-5">
+                        <span><i class="bizhub-icon-note"></i></span>
+                        <div class="service-box-content">
+                            <h5><a href="single-service.html">Notes & Recommendations</a></h5>
+                            <p>Praesent tempus nibh lacinia tortor fringilla, ac aliquet est aliquet. Praesent sit amet tempor dui.</p>
+                        </div><!-- service-box-content -->
+                    </div><!-- service-box -->
+                </div><!-- col -->
+                <div class="col-lg-3 col-sm-6 wow fadeInRight" data-wow-delay="0.1s">
+                    <div class="service-box style-5">
+                        <span><i class="bizhub-icon-smartphone"></i></span>
+                        <div class="service-box-content">
+                            <h5><a href="single-service.html">Messaging</a></h5>
+                            <p>Vestibulum vulputate arcu risus, vel laoreet felis sagittis at. Aenean quis elit laoreet volutpat.</p>
+                        </div><!-- service-box-content -->
+                    </div><!-- service-box -->
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+    </div><!-- PAGE CONTENT -->
+    <div id="page-content" style="padding-bottom:0;">
+        <section class="full-section" id="section-111">
+            <div class="full-section-container">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="headline text-center">
+                                <h2>Contact Us</h2>
+                                <h5>Lets know your comments on our platform</h5>
+                            </div><!-- headline -->
+
+                            <form id="contact-form" name="contact-form" method="post" action="http://www.vertiqalteam.com/bizhub/demo-12/assets/php/send.php" novalidate="novalidate">
+                                <fieldset>
+
+                                    <div id="alert-area"></div>
+
+                                    <div class="row">
+                                        <div class="col-md-4">
+
+                                            <p>
+                                                <input class="col-12" id="name" type="text" name="name" placeholder="Name">
+                                            </p>
+
+                                        </div><!-- col -->
+                                        <div class="col-md-4">
+
+                                            <p>
+                                                <input class="col-12" id="email" type="text" name="email" placeholder="E-mail">
+                                            </p>
+
+                                        </div><!-- col -->
+                                        <div class="col-md-4">
+
+                                            <p>
+                                                <input class="col-12" id="subject" type="text" name="email" placeholder="Subject">
+                                            </p>
+
+                                        </div><!-- col -->
+                                    </div><!-- row -->
+
+                                    <p>
+                                        <textarea class="col-12" id="message" name="message" rows="5" cols="25" placeholder="Message"></textarea>
+                                    </p>
+
+                                    <p class="text-center">
+                                        <button class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Send</button>
+                                    </p>
+
+                                </fieldset>
+                            </form>
+
+                        </div><!-- col -->
+                    </div><!-- row -->
+                </div><!-- container -->
+
+            </div><!-- full-section-container -->
+        </section>
+
+    </div><!-- PAGE CONTENT -->
+    <!-- FOOTER -->
+    <!-- FOOTER -->
+
 </div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>*@
