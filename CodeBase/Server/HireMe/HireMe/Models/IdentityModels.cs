@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 
 namespace HireMe.Models
 {
@@ -22,19 +23,9 @@ namespace HireMe.Models
 
         //public int Age { get; set; }
         public string Address { get; set; }
+
+        //spublic List<ApplicationUserSecurityQuestionAnswer> SecurityQuestionAnswers { get; set; }
     }
 
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
-    {
-        public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
-        {
-            Database.SetInitializer<ApplicationDbContext>(null);
-        }
-
-        public static ApplicationDbContext Create()
-        {
-            return new ApplicationDbContext();
-        }
-    }
+   
 }
