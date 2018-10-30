@@ -5,7 +5,7 @@
         <div class="rev_slider" data-version="5.4.5">
             <ul>
                 <li data-transition="fade">
-                    <img src="assets/images/bg-slide-1.jpg" alt="">
+                    <img src="~/assets/images/bg-slide-1.jpg" alt="">
                     <div class="tp-caption title-xl"
                          data-x="300"
                          data-y="center"
@@ -28,7 +28,7 @@
                     </div>
                 </li>
                 <li data-transition="fade">
-                    <img src="assets/images/bg-slide-2.jpg" alt="">
+                    <img src="~/assets/images/bg-slide-2.jpg" alt="">
                     <div class="tp-caption title-xl"
                          data-x="300"
                          data-y="center"
@@ -63,7 +63,7 @@
                     <!-- LOGO -->
                     <div id="logo">
                         <a href="index.html">
-                            <img src="assets/images/logo.png" alt="">
+                            <img src="~/assets/images/logo.png" alt="">
                         </a>
                     </div><!-- LOGO -->
 
@@ -148,7 +148,7 @@
                             <div class="team-column">
                                 <figure>
                                     <div class="grid-holder">
-                                        <a href="#"><img src="assets/images/employer.jpg" alt=""></a>
+                                        <a href="#"><img src="~/assets/images/employer.jpg" alt=""></a>
                                         <div class="team-content-holder">
                                             <div class="personal-info">
                                                 <h3>Employer</h3>
@@ -156,7 +156,7 @@
                                             </div>
                                             <!-- .awsm-personal-info -->
                                             <div class="team-contact-info">
-                                                <p>You are looking for an employee. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                                <p>You are looking for a short term home service (nanny, Cook...) or occasional (troubleshooting, braiding, Esthetician...)</p>
                                                 @*<a class="btn btn-style-1 waves" href="#">Start Here</a>*@
                                                 @Html.ActionLink("Start Here", "Register", "Account", null, new { @class = "btn btn-style-1 waves" })
                                             </div>
@@ -169,7 +169,7 @@
                             <div class="team-column">
                                 <figure>
                                     <div class="grid-holder">
-                                        <a href="#"><img src="assets/images/candidate.jpg" alt=""></a>
+                                        <a href="#"><img src="~/assets/images/candidate.jpg" alt=""></a>
                                         <div class="team-content-holder">
                                             <div class="personal-info">
                                                 <h3>Candidat</h3>
@@ -177,7 +177,7 @@
                                             </div>
                                             <!-- .awsm-personal-info -->
                                             <div class="team-contact-info">
-                                                <p>You are looking for an employer. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                                <p>You are looking for a home job to propose a qualified service for long term service (nanny, Guardian…) or a short term  (School support, ceremony organization…)</p>
                                                 @Html.ActionLink("Start Here", "Register", "Account", null, new { @class = "btn btn-style-1 waves" })
                                             </div>
                                         </div>
@@ -189,7 +189,7 @@
                             <div class="team-column">
                                 <figure>
                                     <div class="grid-holder">
-                                        <a href="#"><img src="assets/images/agency.jpg" alt=""></a>
+                                        <a href="#"><img src="~/assets/images/agency.jpg" alt=""></a>
                                         <div class="team-content-holder">
                                             <div class="personal-info">
                                                 <h3>Agency</h3>
@@ -197,7 +197,7 @@
                                             </div>
                                             <!-- .awsm-personal-info -->
                                             <div class="team-contact-info">
-                                                <p>You are looking for candidats. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                                                <p>You are looking for new candidates to hire or home employer for your candidates. You would like to manage efficiently your research</p>
                                                 <a class="btn btn-style-1 waves" href="#">Start Here</a>
                                             </div>
                                         </div>
@@ -217,8 +217,8 @@
                 <div class="col-md-12">
 
                     <div class="headline text-center mb-5">
-                        <h2>Services</h2>
-                        <h5>We guarantee you a unique experience on this platform</h5>
+                        <h2>STRONG POINTS OF JOBTEK</h2>
+                        @*<h5>We guarantee you a unique experience on this platform</h5>*@
                     </div><!-- headline -->
 
                 </div><!-- col -->
@@ -228,37 +228,49 @@
             <div class="row">
                 <div class="col-lg-3 col-sm-6 wow fadeInLeft" data-wow-delay="0.1s">
                     <div class="service-box style-5">
-                        <span><i class="bizhub-icon-television"></i></span>
+                        <span>
+                        @*<i class="bizhub-icon-television"></i>*@
+                            <img src="~/assets/images/multiservice.png" />
+                        </span>
                         <div class="service-box-content">
-                            <h5><a href="single-service.html">Verified Profile</a></h5>
-                            <p>Vestibulum vulputate arcu risus, vel laoreet felis sagittis at. Aenean quis elit laoreet volutpat.</p>
+                            <h5><a href="single-service.html">MULTI SERVICES AT HOME</a></h5>
+                            <p>Offer you long term services of quality (nanny, Cook...) but also occasional services of professionals (troubleshooting, Estheticians...)</p>
                         </div><!-- service-box-content -->
                     </div><!-- service-box -->
                 </div><!-- col -->
                 <div class="col-lg-3 col-sm-6 wow fadeInLeft">
                     <div class="service-box style-5">
-                        <span><i class="bizhub-icon-photo-camera"></i></span>
+                        <span>
+                        @*<i class="bizhub-icon-photo-camera"></i>*@
+                            <img src="~/assets/images/filter.png" />
+                        </span>
                         <div class="service-box-content">
-                            <h5><a href="single-service.html">Filter by Criteria</a></h5>
-                            <p>Etiam nec odio vestibulum est mattis efficitur vel ut magna. Pellentesque sit amet tellus blandit.</p>
+                            <h5><a href="single-service.html">FILTRE BY MULTI CRITERIA</a></h5>
+                            <p>Target with a few clicks the ideal profile thanks to the panoply of customized criteria put at your disposal (agency profile, read/write, verified ID...)</p>
                         </div><!-- service-box-content -->
                     </div><!-- service-box -->
                 </div><!-- col -->
                 <div class="col-lg-3 col-sm-6 wow fadeInRight">
                     <div class="service-box style-5">
-                        <span><i class="bizhub-icon-note"></i></span>
+                        <span>
+                        @*<i class="bizhub-icon-note"></i>*@
+                            <img src="~/assets/images/mission.png" />
+                        </span>
                         <div class="service-box-content">
-                            <h5><a href="single-service.html">Notes & Recommendations</a></h5>
-                            <p>Praesent tempus nibh lacinia tortor fringilla, ac aliquet est aliquet. Praesent sit amet tempor dui.</p>
+                            <h5><a href="single-service.html">PRECISION & CLARITY</a></h5>
+                            <p>The accuracy of the profile info displayed will allow you to make in a few seconds a clear opinion if the candidate meets your expectations</p>
                         </div><!-- service-box-content -->
                     </div><!-- service-box -->
                 </div><!-- col -->
                 <div class="col-lg-3 col-sm-6 wow fadeInRight" data-wow-delay="0.1s">
                     <div class="service-box style-5">
-                        <span><i class="bizhub-icon-smartphone"></i></span>
+                        <span>
+                        @*<i class="bizhub-icon-smartphone"></i>*@
+                            <img src="~/assets/images/recommendation.png" />
+                        </span>
                         <div class="service-box-content">
-                            <h5><a href="single-service.html">Messaging</a></h5>
-                            <p>Vestibulum vulputate arcu risus, vel laoreet felis sagittis at. Aenean quis elit laoreet volutpat.</p>
+                            <h5><a href="single-service.html">NOTES & RECOMMENDATIONS</a></h5>
+                            <p>Use feedback from the "JOBTEK community" to identify confidence profiles and guide your choice</p>
                         </div><!-- service-box-content -->
                     </div><!-- service-box -->
                 </div><!-- col -->
@@ -278,7 +290,7 @@
                                 <h5>Lets know your comments on our platform</h5>
                             </div><!-- headline -->
 
-                            <form id="contact-form" name="contact-form" method="post" action="http://www.vertiqalteam.com/bizhub/demo-12/assets/php/send.php" novalidate="novalidate">
+                            <form id="contact-form" name="contact-form" method="post" action="http://www.vertiqalteam.com/bizhub/demo-12/~/assets/php/send.php" novalidate="novalidate">
                                 <fieldset>
 
                                     <div id="alert-area"></div>
