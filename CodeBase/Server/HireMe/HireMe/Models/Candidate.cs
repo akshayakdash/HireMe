@@ -301,8 +301,6 @@ namespace HireMe.Models
         public List<ApplicationUserSecurityQuestionAnswer> UserSecurityQuestionAnswers { get; set; }
     }
 
-
-
     public enum Gender
     {
         Male = 0,
