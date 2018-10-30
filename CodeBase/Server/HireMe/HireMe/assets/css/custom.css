@@ -49,7 +49,7 @@
 body {
 	position: relative;
 	left: 0;
-	font: 16px/28px "Source Sans Pro", sans-serif;
+	font: 16px/25px "Source Sans Pro", sans-serif;
 	background-color: #fff;
 	color: #636363;
 	-webkit-transition: left 0.25s;
