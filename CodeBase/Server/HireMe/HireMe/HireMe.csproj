@@ -247,6 +247,8 @@
     <Content Include="assets\images\calendar.png" />
     <Content Include="assets\images\candidate.jpg" />
     <Content Include="assets\images\check.png" />
+    <Content Include="assets\images\company.png" />
+    <Content Include="assets\images\description.png" />
     <Content Include="assets\images\email.png" />
     <Content Include="assets\images\employer.jpg" />
     <Content Include="assets\images\feedback.png" />
@@ -282,6 +284,7 @@
     <Content Include="assets\images\search-white.png" />
     <Content Include="assets\images\search.png" />
     <Content Include="assets\images\settings.png" />
+    <Content Include="assets\images\url.png" />
     <Content Include="assets\images\user.png" />
     <Content Include="assets\images\zoom.png" />
     <Content Include="Content\bootstrap.css" />

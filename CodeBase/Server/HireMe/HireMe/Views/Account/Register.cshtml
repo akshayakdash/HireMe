@@ -1,4 +1,6 @@
-﻿@*@model HireMe.Models.RegisterViewModel
+﻿
+
+@*@model HireMe.Models.RegisterViewModel
     @{
         ViewBag.Title = "Register";
     }
@@ -53,159 +55,266 @@
     @section Scripts {
         @Scripts.Render("~/bundles/jqueryval")
     }*@
-
-@model HireMe.Models.RegisterViewModel
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-
-    @Html.AntiForgeryToken()
-
-    <div id="page-content" style="background: #f3f8fb;">
-
+<div id="main-container">
+    <!-- HEADER -->
+    <header id="header">
         <div class="container-fluid">
             <div class="row">
-                <div class="hr mt-0 ml-3 mr-3 ml-xl-5 mr-xl-5"></div>
-                <div class="col-md-12">
-                    <div class="headline text-center">
-                        <h2>Registration form</h2>
-                        <h5>Donec quis dignissim magna. In gravida volutpat risus</h5>
-                        @Html.ValidationSummary("", new { @class = "text-danger" })
-                    </div><!-- headline -->
-                </div>
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
+                                <ul class="secondary-menu">
+                                    <li><a class="waves" href="index.html">Home</a></li>
+                                    <li><a class="waves" href="#">ADMIN</a></li>
+                                    <li><a class="waves" href="#">LOGIN</a></li>
+                                    <li><a class="waves" href="#">CONTACT</a></li>
+                                    <li><a class="waves" href="#">AIDE</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
             </div><!-- row -->
-        </div><!-- container -->
+        </div><!-- container-fluid -->
 
-        <div class="container">
-            <div class="mx-auto col-md-8 formreg">
-                <div class="tabs style-2">
-                    <div class="tab-content" style="margin-top:0;">
-                        <div class="tab-pane fade show active" id="tab-1-1">
-                            <div class="form-section">
-                                <h6 class="text-uppercase">Name & Address</h6>
+    </header><!-- HEADER -->
+    <!-- PAGE CONTENT -->
+    @model HireMe.Models.RegisterViewModel
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
 
-                                <fieldset>
-
-                                    <div id="alert-area"></div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                        </div>
-                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First name" })
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                        </div>
-                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last name" })
-                                    </div>
+        @Html.AntiForgeryToken()
 
 
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                        </div>
-                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
-                                    </div>
-                                </fieldset>
-
-                            </div>
-                            <div class="form-section">
-                                <h6 class="text-uppercase">Email & Phone</h6>
-
-                                <fieldset>
-
-                                    <div id="alert-area"></div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
-                                        </div>
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                        </div>
-                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name" })
-                                    </div>
-
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
-                                        </div>
-                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Contact number" })
-                                    </div>
-
-                                </fieldset>
-
-                            </div>
-                        </div><!-- tab-pane -->
-                        <div class="tab-pane fade" id="tab-1-2">
-                            <div class="form-section">
-                                <h6 class="text-uppercase">Document to Download</h6>
-
-                                <fieldset>
-
-                                    <div id="alert-area"></div>
-
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Profile Picture" id="usr" name="username">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="User Id" id="usr" name="username">
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                        </div>
-                                        @Html.DropDownList("UserRoles", (SelectList)ViewBag.UserRolesViewBag, "--select role--", new { @class = "form-control" })
-                                    </div>
-
-                                </fieldset>
-                            </div>
-                            <div class="form-section">
-                                <h6 class="text-uppercase">Passwords</h6>
-
-                                <fieldset>
-
-                                    <div id="alert-area"></div>
-
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
-                                        </div>
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
-                                    </div>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
-                                        </div>
-                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password" })
-                                    </div>
-
-                                </fieldset>
-
-                            </div>
-                            <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
-                            @*<input type="submit" class="btn btn-style-1 btn-lg waves" value="Register" />*@
-                        </div><!-- tab-pane -->
+        <div id="page-content" style="background: #f3f8fb;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center">
+                            <h2>Registration form</h2>
+                            <h5>Donec quis dignissim magna. In gravida volutpat risus</h5>
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                        </div><!-- headline -->
                     </div>
-                    <ul class="nav nav-tabs" style="width: 100%;">
-                        <li style="width: 50%;">
-                            <a style="float:left;" class="active" href="#tab-1-1" data-toggle="tab">Back</a>
-                        </li>
-                        <li style="width: 50%;">
-                            <a style="float:right;" href="#tab-1-2" data-toggle="tab">Next</a>
-                        </li>
-                    </ul>
+                </div><!-- row -->
+            </div><!-- container -->
+
+            <div class="container">
+                <div class="mx-auto col-md-8 formreg">
+                    <div class="tabs style-2">
+                        <div class="tab-content" style="margin-top:0;">
+                            <div class="tab-pane fade show active" id="tab-1-1">
+                                <div class="form-section">
+                                    <h6 class="text-uppercase">Name & Address</h6>
+
+                                    <fieldset>
+
+                                        <div id="alert-area"></div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First name" })
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last name" })
+                                        </div>
+
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                            </div>
+                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+                                <div class="form-section">
+                                    <h6 class="text-uppercase">Email & Phone</h6>
+
+                                    <fieldset>
+
+                                        <div id="alert-area"></div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name" })
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Contact number" })
+                                        </div>
+
+                                    </fieldset>
+
+                                </div>
+                            </div><!-- tab-pane -->
+                            <div class="tab-pane fade" id="tab-1-2">
+                                <div class="form-section">
+                                    <h6 class="text-uppercase">Document to Upload</h6>
+
+                                    <fieldset>
+
+                                        <div id="alert-area"></div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="Profile Picture" id="usr" name="username">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                            </div>
+                                            <input type="text" class="form-control" placeholder="User Id" id="usr" name="username">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.DropDownList("UserRoles", (SelectList)ViewBag.UserRolesViewBag, "--select role--", new { @class = "form-control" })
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+
+
+                                @* Agency Section *@
+                                <div class="form-section">
+                                    <h6 class="text-uppercase">Agency Section</h6>
+                                    <fieldset>
+                                        <div id="alert-area"></div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/company.png" alt=""></span>
+                                            </div>
+                                            <input class="form-control" name="Company" placeholder="Company Name" type="text">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            <input class="form-control" name="Responsiblename" placeholder="Responsible Name" type="text">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/url.png" alt=""></span>
+                                            </div>
+                                            <input class="form-control" name="URL" placeholder="Website URL to compagny website" type="text">
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/description.png" alt=""></span>
+                                            </div>
+                                            <textarea class="form-control" name="Description" placeholder="Description of compagny activities" type="text" rows="2"></textarea>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+
+
+                                <div class="form-section">
+                                    <h6 class="text-uppercase">Passwords</h6>
+
+                                    <fieldset>
+
+                                        <div id="alert-area"></div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
+                                            </div>
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
+                                            </div>
+                                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password" })
+                                        </div>
+
+                                    </fieldset>
+
+                                </div>
+                                <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                                @*<input type="submit" class="btn btn-style-1 btn-lg waves" value="Register" />*@
+                            </div><!-- tab-pane -->
+                        </div>
+                        <ul class="nav nav-tabs" style="width: 100%;">
+                            <li style="width: 50%;">
+                                <a style="float:left;" class="active" href="#tab-1-1" data-toggle="tab">Back</a>
+                            </li>
+                            <li style="width: 50%;">
+                                <a style="float:right;" href="#tab-1-2" data-toggle="tab">Next</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
         </div>
 
+    }
     </div>
-}
