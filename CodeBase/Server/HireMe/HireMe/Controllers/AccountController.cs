@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HireMe.Models;
+using System.IO;
 
 namespace HireMe.Controllers
 {
@@ -23,7 +24,7 @@ namespace HireMe.Controllers
             context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -35,9 +36,9 @@ namespace HireMe.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -121,7 +122,7 @@ namespace HireMe.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -138,10 +139,20 @@ namespace HireMe.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult Register(string userRole = "")
         {
-            ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
-                                    .ToList(), "Name", "Name");
+            if (!string.IsNullOrWhiteSpace(userRole))
+            {
+                ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                       .ToList(), "Name", "Name", userRole);
+                ViewBag.SelectedRole = userRole;
+            }
+            else
+            {
+                ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
+                                        .ToList(), "Name", "Name", "Candidate");
+                ViewBag.SelectedRole = "Candidate";
+            }
             return View();
         }
 
@@ -176,8 +187,41 @@ namespace HireMe.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName };
+
+                // now check if it has file associated with it
+
+                #region ProfileImageUpload
+                string imagePath = string.Empty;
+                if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
+                {
+                    //Use Namespace called :  System.IO  
+                    string FileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
+
+                    //To Get File Extension  
+                    string FileExtension = Path.GetExtension(model.profile_pic.FileName);
+
+                    //Add Current Date To Attached File Name  
+                    FileName = DateTime.Now.ToString("yyyyMMdd") + "-" + FileName.Trim() + FileExtension;
+
+                    //Get Upload path from Web.Config file AppSettings.  
+                    //string UploadPath = ConfigurationManager.AppSettings["UserImagePath"].ToString();
+
+                    var UploadPath = Path.Combine(Server.MapPath("~/App_Data/uploads"), FileName);
+                    imagePath = UploadPath;
+
+                    //Its Create complete path to store in server.  
+                    //model.ImagePath = UploadPath + FileName;
+
+                    //To copy and save file into server.  
+                    model.profile_pic.SaveAs(imagePath);
+                }
+                #endregion
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = imagePath };
                 var result = await UserManager.CreateAsync(user, model.Password);
+
+                // now based on role we need to make an entry to the corresponding tables Candidate, Employer and Agency
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
@@ -192,12 +236,13 @@ namespace HireMe.Controllers
                     //Ends Here     
                     return RedirectToAction("Index", "Users");
                 }
-               
+
                 AddErrors(result);
             }
             ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                          .ToList(), "Name", "Name");
-            // If we got this far, something failed, redisplay form    
+            // If we got this far, something failed, redisplay form   
+            ViewBag.SelectedRole = model.UserRoles;
             return View(model);
         }
 

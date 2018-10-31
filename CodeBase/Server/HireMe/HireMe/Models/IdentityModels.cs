@@ -24,6 +24,8 @@ namespace HireMe.Models
         //public int Age { get; set; }
         public string Address { get; set; }
 
+        public string ProfilePicUrl { get; set; }
+
         //spublic List<ApplicationUserSecurityQuestionAnswer> SecurityQuestionAnswers { get; set; }
     }
 

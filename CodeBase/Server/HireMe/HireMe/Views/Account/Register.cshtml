@@ -55,7 +55,7 @@
     }*@
 
 @model HireMe.Models.RegisterViewModel
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
 
     @Html.AntiForgeryToken()
@@ -151,23 +151,60 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Profile Picture" id="usr" name="username">
+                                        <input type="file" class="form-control" placeholder="Profile Picture" id="profile_pic" name="profile_pic">
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                         </div>
-                                        <input type="text" class="form-control" placeholder="Proof of ID" id="usr" name="username">
+                                        <input type="file" class="form-control" placeholder="Proof of ID" id="id_proof" name="id_proof">
                                     </div>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-3" style="display:none;">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                         </div>
-                                        @Html.DropDownList("UserRoles", (SelectList)ViewBag.UserRolesViewBag, "--select role--", new { @class = "form-control" })
+                                        @Html.DropDownList("UserRoles", (SelectList)ViewBag.UserRolesViewBag, "--select role--", new { @class = "form-control", @style = "display:none;" })
                                     </div>
 
                                 </fieldset>
                             </div>
+
+                            @if (ViewBag.SelectedRole == "Agency")
+                            {
+                                <div class="form-section">
+                                    <h6 class="text-uppercase">Agency Section</h6>
+
+                                    <fieldset>
+
+                                        <div id="alert-area"></div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "Company Name" })
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "Responsible name" })
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "Website URL" })
+                                        </div>
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                            </div>
+                                            @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "Some description about the company activities" })
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            }
                             <div class="form-section">
                                 <h6 class="text-uppercase">Passwords</h6>
 
@@ -192,7 +229,7 @@
 
                             </div>
                             <div class="form-section">
-                                
+
 
                                 <fieldset>
 
@@ -201,7 +238,7 @@
                                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
                                         <label class="form-check-label" for="exampleCheck1"><a href="#"><i>I agree terms and conditions</i></a></label>
                                     </div>
-                                  
+
 
                                 </fieldset>
                             </div>

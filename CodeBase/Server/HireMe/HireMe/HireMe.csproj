@@ -234,6 +234,7 @@
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utility\CustomValidationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\custom.css" />
