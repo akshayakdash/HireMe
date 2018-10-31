@@ -547,7 +547,7 @@ i.text-xl {
 .headline:before {
 	display: inline-block;
 	width: 2px;
-	height: 33px;
+	/*height: 33px;*/
 	margin-bottom: 15px;
 	background-color: #fe005a;
 	background: -webkit-linear-gradient(bottom, #fe005a, #310068);
@@ -8630,4 +8630,100 @@ blockquote > *:last-child {
     color: #fff;
     font-weight: 600;
     border-right: #fe005a 5px solid;
+}
+.profileitems {
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: #f7f7f7;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    border:1px solid #ccc;
+    display:table;
+    width:100%;
+}
+    .profileitems:hover {
+        background-color: transparent;
+        border: 1px solid rgba(0,0,0,0);
+    }
+.profileitems:hover:after {
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-left: 1px solid #ff5353;
+    border-right: 1px solid #ffc547;
+    background-size: 100% 1px;
+    background-position: 0 0, 0 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient(30deg, #ff5353, #ffc547), linear-gradient(30deg, #ff5353, #ffc547);
+    opacity: 0;
+    content: "";
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+}
+.profileitems:hover:after {
+    opacity: 1;
+}
+.profileitems .left {
+max-width: 100px;
+float:left;
+}
+.profileitems .left img {
+    width: 100px;
+    border-radius: 50%;
+    height: 100px;
+    border: 2px solid #eee;
+}
+.profileitems .left .rating {
+text-align:center;
+}
+.profileitems .favorite {
+    text-align: center;
+    position: absolute;
+    padding: 0 5px;
+    top: 0px;
+    right: 0;
+}
+.profileitems .right {
+    margin-left:120px;
+}
+.profileitems .right h1, .profileitems .right h2 {
+    font-size: 16px;
+    line-height: initial;
+    margin-bottom: 5px;
+}
+.profileitems .right h1 span {
+    color:forestgreen;
+}
+.profileitems .right .location {
+    font-size: 14px;
+    font-weight: 600;
+}
+.profileitems .right .published {
+    font-size: 12px;
+    font-weight: 700;
+}
+.profileitems .right .published span{
+    font-size: 12px;
+    font-weight: 400;
+}
+.profileitems .profile-footer {
+    font-size: 13px;
+    float: left;
+    background: rgba(0, 0, 0, 0.09);
+    width: 100%;
+    padding: 5px 10px;
+    border-radius: 5px;
+    max-height: 34px;
+    overflow: hidden;
+}
+.profileitems .profile-footer p{
+    margin:0;
 }

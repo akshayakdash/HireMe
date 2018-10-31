@@ -1,7 +1,160 @@
-﻿@{
-    ViewBag.Title = "About";
-}
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+﻿<div id="main-container">
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
 
-<p>Use this area to provide additional information.</p>
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
+                                <ul class="secondary-menu">
+                                    <li><a class="waves" href="index.html">Home</a></li>
+                                    <li><a class="waves" href="#">ADMIN</a></li>
+                                    <li><a class="waves" href="#">LOGIN</a></li>
+                                    <li><a class="waves" href="#">CONTACT</a></li>
+                                    <li><a class="waves" href="#">AIDE</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header><!-- HEADER -->
+    <!-- PAGE CONTENT -->
+
+    <!-- PAGE CONTENT -->
+    <div id="page-content">
+        <div id="page-header">
+            <div class="ken-burns" style="background-image:url(../images/backgrounds/page-header-1.jpg);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>About us</h1>
+                        <ol class="breadcrumb">
+                            <li><a href="#">Home</a></li>
+                            <li class="active">About us</li>
+                        </ol>
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container -->
+        </div><!-- page-header -->
+       
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="headline style-2 mb-5">
+                        <h5>Why choose us?</h5>
+                        <h2>A truly multi-use <br class="d-none d-md-block"> theme</h2>
+                    </div><!-- headline -->
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <p>
+                        Cras metus enim, luctus ut urna in, rutrum accumsan mi. Nunc magna tortor, tincidunt vitae orci ac,
+                        pharetra vehicula erat. Etiam nec odio vestibulum est mattis efficitur vel ut magna. Pellente sque sit
+                        amet tellus blandit, tincidunt enim vel, semper purus. Cras metus enim, luctus ut urna in, rutrum
+                        accumsan mi. Nunc magna tortor, tincidunt vitae orci.
+                    </p>
+                    <p>
+                        Nunc magna tortor, tincidunt vitae orci ac, pharetra vehicula erat. Etiam nec odio vestibulum est
+                        mattis efficitur vel ut magna. Pellentesque sit amet tellus blandit, tincidunt enim vel, semper purus.
+                        Cras metus enim, luctus.
+                    </p>
+                    <br>
+                    <p><a class="btn btn-style-1 waves" href="#">Find out more</a></p>
+                </div><!-- col -->
+                <div class="col-md-6">
+                    <div class="testimonial-4">
+                        <h6>&quot; simply great &quot;</h6>
+                        <blockquote>
+                            <p>
+                                <em>
+                                    &quot;Lorem ipsum dolor sit amet, conse ctetur adipiscing elit. lobortis dolor. Cras placerat
+                                    lectus a posuere aliq uet. Curabitur quis vehicula.&quot;
+                                </em>
+                            </p>
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <img src="../images/testimonials/image-7.jpg" alt="">
+                            <p>Mark Ronson, <span>Creatika</span></p>
+                        </div><!-- testimonial-author -->
+                    </div><!-- testimonial -->
+                    <div class="testimonial-4">
+                        <h6>&quot; fun and usefull &quot;</h6>
+                        <blockquote>
+                            <p>
+                                <em>
+                                    &quot;Nunc magna tortor, tincidunt vitae orci ac, pharetra vehicula erat. Etiam nec odio vestibulum
+                                    est mattis efficitur vel ut magna cidunt enim vel.&quot;
+                                </em>
+                            </p>
+                        </blockquote>
+                        <div class="testimonial-author">
+                            <img src="../images/testimonials/image-9.jpg" alt="">
+                            <p>Cristian Smith, <span>L’atelier</span></p>
+                        </div><!-- testimonial-author -->
+                    </div><!-- testimonial -->
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+
+    </div><!-- PAGE CONTENT -->
+</div>
+
+    @{
+        ViewBag.Title = "About";
+    }
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>
+
+    <p>Use this area to provide additional information.</p>
