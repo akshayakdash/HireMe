@@ -55,6 +55,7 @@
     }*@
 
 @model HireMe.Models.RegisterViewModel
+@using System.Linq
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
 
@@ -225,20 +226,55 @@
                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password" })
                                     </div>
 
+                                    @if (ViewBag.SecurityQuestions != null)
+                                    {
+                                        <div class="row">
+                                            @foreach (var item in ViewBag.SecurityQuestions)
+                                            {
+                                                <div class="col-lg-6">
+                                                    <div class="checkbox">
+                                                        <label>
+                                                            <b>Security Question</b><br />
+                                                            <input type="checkbox" class="chb" name="SecurityQuestionId" value="@item.SecurityQuestionId"/>
+                                                            @*@Html.CheckBoxFor(p => p.SecurityQuestionId, new { @value= item.Id})*@
+                                                            @item.Question
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "Enter security question's answer" })
+                                        </div>
+                                    }
+
                                 </fieldset>
 
                             </div>
+
+
                             <div class="form-section">
 
 
                                 <fieldset>
 
 
-                                    <div class="form-check">
-                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                        <label class="form-check-label" for="exampleCheck1"><a href="#"><i>I agree terms and conditions</i></a></label>
+                                    @*<div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                            <label class="form-check-label" for="exampleCheck1"><a href="#"><i>I agree terms and conditions</i></a></label>
+                                        </div>*@
+                                    <div class="checkbox">
+                                        <label>
+                                            @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
+                                            @Html.ActionLink("I agree terms and conditions", "actionname", "controllername")
+                                            <span></span>
+                                        </label>
                                     </div>
-
 
                                 </fieldset>
                             </div>
@@ -260,3 +296,4 @@
 
     </div>
 }
+

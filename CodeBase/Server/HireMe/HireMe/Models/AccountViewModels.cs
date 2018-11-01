@@ -109,6 +109,15 @@ namespace HireMe.Models
         public HttpPostedFileBase profile_pic { get; set; }
         public HttpPostedFileBase id_proof { get; set; }
 
+        [Required(ErrorMessage ="Please agree the terms and conditions")]
+        [Display(Name ="Agree Terms and Conditions")]
+        public bool AgreeTermsAndConditions { get; set; }
+
+        [Required(ErrorMessage = "Please select the security question.")]
+        public int SecurityQuestionId { get; set; }
+        [Required(ErrorMessage = "Please enter the security question's answer.")]
+        public string SecurityQuestionAnswer { get; set; }
+
         #region Agency Section
         [Display(Name = "Company Name")]
         [RequiredIf("UserRoles", "Agency", ErrorMessage = "Comapny name is required")]

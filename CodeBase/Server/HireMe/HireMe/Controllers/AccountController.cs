@@ -141,6 +141,7 @@ namespace HireMe.Controllers
         [AllowAnonymous]
         public ActionResult Register(string userRole = "")
         {
+            ViewBag.SecurityQuestions = context.SecurityQuestions.ToList().Take(3);
             if (!string.IsNullOrWhiteSpace(userRole))
             {
                 ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
@@ -216,11 +217,17 @@ namespace HireMe.Controllers
                     model.profile_pic.SaveAs(imagePath);
                 }
                 #endregion
-
+                var securityQuestionAnswer = new ApplicationUserSecurityQuestionAnswer { SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer };
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = imagePath };
+                user.SecurityQuestionAnswers = new System.Collections.Generic.List<ApplicationUserSecurityQuestionAnswer> { securityQuestionAnswer };
                 var result = await UserManager.CreateAsync(user, model.Password);
 
+                // now save the security question answer for the user
+                //context.UserSecurityQuestionAnswers.Add(new ApplicationUserSecurityQuestionAnswer { AspNetUserId = user.Id, SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer });
+
                 // now based on role we need to make an entry to the corresponding tables Candidate, Employer and Agency
+
+                //await context.SaveChangesAsync();
 
                 if (result.Succeeded)
                 {
@@ -243,6 +250,7 @@ namespace HireMe.Controllers
                                          .ToList(), "Name", "Name");
             // If we got this far, something failed, redisplay form   
             ViewBag.SelectedRole = model.UserRoles;
+            ViewBag.SecurityQuestions = context.SecurityQuestions.ToList().Take(3);
             return View(model);
         }
 

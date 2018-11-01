@@ -28,5 +28,8 @@ namespace HireMe.Models
         //public DbSet<CountryJobMapper> CountryJobMappers { get; set; }
         //public DbSet<JobRequest> JobRequests { get; set; }
         //public DbSet<JobOffer> JobOffers { get; set; }
+
+        public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
+        public DbSet<ApplicationUserSecurityQuestionAnswer> UserSecurityQuestionAnswers { get; set; }
     }
 }

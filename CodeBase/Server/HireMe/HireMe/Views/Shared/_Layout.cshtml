@@ -97,5 +97,15 @@
     @Scripts.Render("~/bundles/jquery")
     @*@Scripts.Render("~/bundles/bootstrap")*@
     @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+    $(".chb").change(function () {
+        var checked = $(this).is(':checked');
+        $(".chb").prop('checked', false);
+        if (checked) {
+            $(this).prop('checked', true);
+        }
+    });
+    </script>
 </body>
 </html>

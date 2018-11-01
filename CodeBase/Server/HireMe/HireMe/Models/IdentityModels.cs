@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Collections.Generic;
+using System;
 
 namespace HireMe.Models
 {
@@ -26,7 +27,9 @@ namespace HireMe.Models
 
         public string ProfilePicUrl { get; set; }
 
-        //spublic List<ApplicationUserSecurityQuestionAnswer> SecurityQuestionAnswers { get; set; }
+        public DateTime? ActiveUntil { get; set; }
+
+        public List<ApplicationUserSecurityQuestionAnswer> SecurityQuestionAnswers { get; set; }
     }
 
    

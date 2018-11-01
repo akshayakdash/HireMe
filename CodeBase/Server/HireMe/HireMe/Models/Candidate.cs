@@ -280,9 +280,9 @@ namespace HireMe.Models
     public class ApplicationUserSecurityQuestionAnswer
     {
         public int Id { get; set; }
-        public int AspNetUserId { get; set; }
+        public string AspNetUserId { get; set; }
         [ForeignKey("AspNetUserId")]
-        public AppUser ApplicationUser { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
         public int SecurityQuestionId { get; set; }
         [ForeignKey("SecurityQuestionId")]
         public SecurityQuestion SecurityQuestion { get; set; }
