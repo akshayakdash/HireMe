@@ -4015,8 +4015,9 @@
  ***********************************************************************************/
 
 .portfolio-item {
-	margin-bottom: 50px;
-	overflow: hidden;
+    margin-bottom: 50px;
+    overflow: hidden;
+    border: 1px solid #ccc;
 }
 
 .portfolio-item-thumbnail {
@@ -5195,10 +5196,14 @@ position: relative;
     border-bottom: 3px solid #fe005a;
 }
 .formreg .tabs.style-2 .nav-tabs > li > a:hover, .tabs.style-2 .nav-tabs > li > a.active {
-    opacity:0.3;
+    opacity:1;
     color:#000;
     display: block;
 }
-
+.nav-tabs > li > a img {
+    display: block;
+    width: 30px;
+    margin: auto;
+}
 
 

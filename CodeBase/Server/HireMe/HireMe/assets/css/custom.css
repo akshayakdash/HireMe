@@ -2184,6 +2184,7 @@ dl {
 	background-color: transparent;
 	color: #252525;
 	font-size: 17px;
+    opacity:0.6;
 }
 
 .tabs.style-2 .nav-tabs > li > a:before {
