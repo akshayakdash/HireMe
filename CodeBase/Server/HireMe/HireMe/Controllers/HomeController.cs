@@ -76,12 +76,18 @@ namespace HireMe.Controllers
             }
 
             // creating Creating Employee role     
-            if (!roleManager.RoleExists("Employee"))
+            if (!roleManager.RoleExists("Candidate"))
             {
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employee";
+                role.Name = "Candidate";
                 roleManager.Create(role);
+            }
 
+            if (!roleManager.RoleExists("Agency"))
+            {
+                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+                role.Name = "Agency";
+                roleManager.Create(role);
             }
         }
     }

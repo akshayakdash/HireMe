@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using HireMe.Utility;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace HireMe.Models
 {
@@ -74,7 +76,7 @@ namespace HireMe.Models
         public string UserName { get; set; }
 
         [Required]
-        [Display(Name ="First Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
@@ -103,6 +105,37 @@ namespace HireMe.Models
         [Required]
         [Display(Name = "UserRoles")]
         public string UserRoles { get; set; }
+
+        public HttpPostedFileBase profile_pic { get; set; }
+        public HttpPostedFileBase id_proof { get; set; }
+
+        [Required(ErrorMessage ="Please agree the terms and conditions")]
+        [Display(Name ="Agree Terms and Conditions")]
+        public bool AgreeTermsAndConditions { get; set; }
+
+        [Required(ErrorMessage = "Please select the security question.")]
+        public int SecurityQuestionId { get; set; }
+        [Required(ErrorMessage = "Please enter the security question's answer.")]
+        public string SecurityQuestionAnswer { get; set; }
+
+        #region Agency Section
+        [Display(Name = "Company Name")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Comapny name is required")]
+        public string CompanyName { get; set; }
+
+        [Display(Name ="Responsible Name")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Responsible name is required")]
+        public string ResponsibleName { get; set; }
+
+        [Display(Name = "Website URL")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Website URL is required")]
+        [DataType(DataType.Url)]
+        public string WebSiteUrl { get; set; }
+
+        [Display(Name = "Company Activities")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Company activity description is required")]
+        public string CompanyActivity { get; set; }
+        #endregion
     }
 
     public class ResetPasswordViewModel
