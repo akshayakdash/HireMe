@@ -31,5 +31,9 @@ namespace HireMe.Models
 
         public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
         public DbSet<ApplicationUserSecurityQuestionAnswer> UserSecurityQuestionAnswers { get; set; }
+
+        public DbSet<JobCategory> JobCategories { get; set; }
+
+        public DbSet<Job> Jobs { get; set; }
     }
 }
