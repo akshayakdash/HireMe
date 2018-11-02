@@ -1,7 +1,9 @@
 namespace HireMe.Migrations
 {
+    using HireMe.Models;
     using HireMe.Utility;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -31,8 +33,56 @@ namespace HireMe.Migrations
 
             context.SecurityQuestions.AddOrUpdate(
                 p => p.Question,
-                    new Models.SecurityQuestion { Question = "What is your favourite movie ?"},
-                    new Models.SecurityQuestion { Question = "What is your favourite food ?"}
+                    new Models.SecurityQuestion { Question = "What is your favourite movie ?" },
+                    new Models.SecurityQuestion { Question = "What is your favourite food ?" }
+            );
+
+            context.JobCategories.AddOrUpdate(
+                p => p.CategoryName,
+                new Models.JobCategory
+                {
+                    CategoryName = "Home Job",
+                    Description = "",
+                    Jobs = new System.Collections.Generic.List<Models.Job> {
+                        new Models.Job{ JobName = "Nanny", JobGroup = "Internal Home Job", JobTasks = new System.Collections.Generic.List<Models.JobTask>{
+                            new Models.JobTask{JobTaskName = "Cleaning",TaskParamType = Models.ParamType.CheckBox},
+                            new Models.JobTask{JobTaskName = "Cooking", TaskParamType = Models.ParamType.CheckBox
+                                //SubTasks = new List<Models.JobTask> {
+                                //    new Models.JobTask{ JobTaskName = "African Food", TaskParamType = Models.ParamType.CheckBox,
+                                //        SubTasks = new List<JobTask>{
+                                //            new JobTask{JobTaskName = "Sauces", TaskParamType = ParamType.CheckBox},
+                                //            new JobTask{ JobTaskName = "Grill", TaskParamType = ParamType.CheckBox}
+                                //        } },
+                                //    new JobTask{ JobTaskName = "European Food", TaskParamType = ParamType.CheckBox,
+                                //        SubTasks = new List<JobTask>{
+                                //            new JobTask{JobTaskName = "Oven Food", TaskParamType = ParamType.CheckBox},
+                                //            new JobTask{JobTaskName = "Dessert", TaskParamType = ParamType.CheckBox}
+                                //        }
+                                //    }
+                                //} }
+                            }
+                        }
+                        },
+
+                        new Models.Job{ JobName = "Cook", JobGroup = "Internal Home Job",JobTasks = new System.Collections.Generic.List<Models.JobTask>{
+
+                        } },
+
+                        new Models.Job{ JobName = "Guardian", JobGroup = "External Home Job",JobTasks = new System.Collections.Generic.List<Models.JobTask>{
+
+                        } }
+                    }
+                },
+
+                new Models.JobCategory
+                {
+                    CategoryName = "Troubleshooting",
+                    Jobs = new System.Collections.Generic.List<Models.Job> {
+                    new Models.Job{ JobName = "Plumber"},
+
+                    new Models.Job{ JobName = "Electrician"}
+                }
+                }
             );
         }
     }

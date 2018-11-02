@@ -148,7 +148,7 @@ namespace HireMe.Models
         public int JobCategoryId { get; set; }
         public string CategoryName { get; set; }
         public string Description { get; set; }
-        public string JobGroupName { get; set; }
+        //public string JobGroupName { get; set; }
 
         public List<Job> Jobs { get; set; }
     }
@@ -158,6 +158,9 @@ namespace HireMe.Models
         public int JobId { get; set; }
         public string JobName { get; set; }
         public int JobCategoryId { get; set; } // FK
+
+        public string JobGroup { get; set; }
+
         public string JobDesc { get; set; }
         
         public string IconImage { get; set; }
@@ -202,7 +205,7 @@ namespace HireMe.Models
         public int? ParentJobTaskId { get; set; }
         [ForeignKey("ParentJobTaskId")]
         public virtual ICollection<JobTask> SubTasks { get; set; }
-        //public virtual JobTask JobTask1 { get; set; }
+        public virtual JobTask JobTask1 { get; set; }
         public List<CountryJobTaskMapper> JobTaskCountryMapper { get; set; }
     }
 
