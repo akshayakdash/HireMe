@@ -218,6 +218,8 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobCategoriesController.cs" />
+    <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -228,11 +230,18 @@
     <Compile Include="Migrations\201810312003598_initial.Designer.cs">
       <DependentUpon>201810312003598_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811011814230_job_category_added.cs" />
+    <Compile Include="Migrations\201811011814230_job_category_added.Designer.cs">
+      <DependentUpon>201811011814230_job_category_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811011846067_job_group_name_added.cs" />
+    <Compile Include="Migrations\201811011846067_job_group_name_added.Designer.cs">
+      <DependentUpon>201811011846067_job_group_name_added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Candidate.cs" />
-    <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MySqlIdentityConfiguration\MySqlConfiguration.cs" />
@@ -324,7 +333,9 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -361,6 +372,16 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Role\Index.cshtml" />
     <Content Include="Views\Role\Create.cshtml" />
+    <Content Include="Views\JobCategories\Create.cshtml" />
+    <Content Include="Views\JobCategories\Delete.cshtml" />
+    <Content Include="Views\JobCategories\Details.cshtml" />
+    <Content Include="Views\JobCategories\Edit.cshtml" />
+    <Content Include="Views\JobCategories\Index.cshtml" />
+    <Content Include="Views\Jobs\Create.cshtml" />
+    <Content Include="Views\Jobs\Delete.cshtml" />
+    <Content Include="Views\Jobs\Details.cshtml" />
+    <Content Include="Views\Jobs\Edit.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -381,6 +402,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201810312003598_initial.resx">
       <DependentUpon>201810312003598_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811011814230_job_category_added.resx">
+      <DependentUpon>201811011814230_job_category_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811011846067_job_group_name_added.resx">
+      <DependentUpon>201811011846067_job_group_name_added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
