@@ -20,6 +20,39 @@ namespace HireMe.Models
             return new ApplicationDbContext();
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Candidate>().
+            HasMany(c => c.FavouriteJobOffers).
+            WithMany().
+            Map(
+             m =>
+             {
+                 m.MapLeftKey("CandidateId");
+                 m.MapRightKey("JobOfferId");
+                 m.ToTable("CandidateFavouriteJobOffer", "jobtek");
+             });
+
+            modelBuilder.Entity<Employer>().
+            HasMany(c => c.FavouriteJobRequests).
+            WithMany().
+            Map(
+             m =>
+             {
+                 m.MapLeftKey("CandidateId");
+                 m.MapRightKey("JobRequestId");
+                 m.ToTable("EmployerFavouriteJobRequest", "jobtek");
+             });
+
+            modelBuilder.Entity<ApplicationUser>()
+           .HasMany(user => user.Candidates)
+           .WithOptional()
+           .HasForeignKey(candidate => candidate.AspNetUserId);
+
+
+        }
+
         //public DbSet<Candidate> Candidates { get; set; }
         //public DbSet<Agency> Agencies { get; set; }
         //public DbSet<Employer> Employers { get; set; }

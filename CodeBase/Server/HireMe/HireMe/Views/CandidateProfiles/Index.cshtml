@@ -1,0 +1,243 @@
+﻿@model IEnumerable<HireMe.Models.CandidateProfile>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CandidateId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AgencyId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExperienceInYears)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExperienceInMonths)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdProofDoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdProofDocDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfileVerified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffTypeDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disponibility)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CityId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistrictId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.District)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryTypeDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CanRead)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CanWrite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMinSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SleepOnSite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMinRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinGroupPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxGroupPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishProfile)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CandidateId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgencyId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExperienceInYears)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExperienceInMonths)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdProofDoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdProofDocDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfileVerified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffTypeDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disponibility)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistrictId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.District)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryTypeDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryTypeOtherDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CanRead)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CanWrite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMinSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMaxSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SleepOnSite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMinRooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMaxRooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinGroupPeople)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxGroupPeople)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UpdatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublishProfile)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

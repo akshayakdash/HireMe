@@ -8,6 +8,10 @@ namespace HireMe.Models
 {
     public class Candidate
     {
+        public Candidate()
+        {
+            JobRequests = new List<JobRequest>();
+        }
         public int CandidateId { get; set; }
         public string AspNetUserId { get; set; }
         //[ForeignKey("AspNetUserId")]
@@ -17,9 +21,9 @@ namespace HireMe.Models
         public Gender Gender { get; set; }
         [NotMapped]
         public string GenderDesc { get; set; }
-        public int Age { get; set; }
-        public int ExperienceInYears { get; set; }
-        public int ExperienceInMonths { get; set; }
+        public int? Age { get; set; }
+        public int? ExperienceInYears { get; set; }
+        public int? ExperienceInMonths { get; set; }
 
         public string IdProofDoc { get; set; }
         public string IdProofDocDesc { get; set; }
@@ -30,15 +34,15 @@ namespace HireMe.Models
         public string StaffTypeDesc { get; set; }
         public DateTime Disponibility { get; set; }
 
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         [NotMapped]
         public string City { get; set; }
 
-        public int DistrictId { get; set; }
+        public int? DistrictId { get; set; }
         [NotMapped]
         public string District { get; set; }
 
@@ -55,11 +59,11 @@ namespace HireMe.Models
 
         public bool SleepOnSite { get; set; }
 
-        public int ExpectedMinRooms { get; set; }
-        public int ExpectedMaxRooms { get; set; }
+        public int? ExpectedMinRooms { get; set; }
+        public int? ExpectedMaxRooms { get; set; }
 
-        public int MinGroupPeople { get; set; }
-        public int MaxGroupPeople { get; set; }
+        public int? MinGroupPeople { get; set; }
+        public int? MaxGroupPeople { get; set; }
 
         public string CreatedDate { get; set; }
         public string CreatedBy { get; set; }
@@ -74,6 +78,10 @@ namespace HireMe.Models
 
     public class Agency
     {
+        public Agency()
+        {
+            Candidates = new List<Candidate>();
+        }
         public int AgencyId { get; set; }
 
         public string AspNetUserId { get; set; }
@@ -89,15 +97,15 @@ namespace HireMe.Models
 
         public string CompanyActivityDesc { get; set; }
 
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
         [NotMapped]
         public string City { get; set; }
 
-        public int DistrictId { get; set; }
+        public int? DistrictId { get; set; }
         [NotMapped]
         public string District { get; set; }
 
@@ -113,6 +121,11 @@ namespace HireMe.Models
 
     public class Employer
     {
+        public Employer()
+        {
+            JobOffers = new List<JobOffer>();
+            FavouriteJobRequests = new List<JobRequest>();
+        }
         public int EmployerId { get; set; }
         public string AspNetUserId { get; set; }
         //[ForeignKey("AspNetUserId")]
@@ -210,8 +223,11 @@ namespace HireMe.Models
         public int? ParentJobTaskId { get; set; }
         [ForeignKey("ParentJobTaskId")]
         public virtual ICollection<JobTask> SubTasks { get; set; }
-        public virtual JobTask JobTask1 { get; set; }
+        //public virtual JobTask JobTask1 { get; set; }
         public List<CountryJobTaskMapper> JobTaskCountryMapper { get; set; }
+
+        [NotMapped]
+        public bool Selected { get; set; }
     }
 
     public class CountryJobTaskMapper
@@ -346,19 +362,19 @@ namespace HireMe.Models
         public string Answer { get; set; }
     }
 
-    //Please note this is only a mapper table
-    public class CandidateFavouriteJobOffer
-    {
-        public int CandidateId { get; set; }
-        public int JobOfferId { get; set; }
-    }
+    ////Please note this is only a mapper table
+    //public class CandidateFavouriteJobOffer
+    //{
+    //    public int CandidateId { get; set; }
+    //    public int JobOfferId { get; set; }
+    //}
 
-    // Please note this is only a mapper table
-    public class EmployerFavouriteJobRequest
-    {
-        public int EmployerId { get; set; }
-        public int JobRequestId { get; set; }
-    }
+    //// Please note this is only a mapper table
+    //public class EmployerFavouriteJobRequest
+    //{
+    //    public int EmployerId { get; set; }
+    //    public int JobRequestId { get; set; }
+    //}
 
     //public class AppUser
     //{

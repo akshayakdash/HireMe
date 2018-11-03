@@ -120,7 +120,7 @@
                         @for (int i = 0; i < Model.Count(); i++)
                         {
                             var item = Model.ElementAt(i);
-                            <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-"+i)" data-toggle="tab"><img src="~/assets/images/home-icon.png" />@item.CategoryName</a></li>
+                            <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
                         }
 
 
@@ -135,6 +135,10 @@
                     </ul>
 
                     <div class="tab-content">
+                        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                    .Select(c => c.Value);
+                            string role = roles.FirstOrDefault();}
 
                         @for (int i = 0; i < Model.Count(); i++)
                         {
@@ -151,7 +155,18 @@
                                                             <img src="~/assets/images/portfolio/cook.jpg" alt="">
                                                             <div class="portfolio-item-hover"></div>
                                                             <div class="portfolio-item-description">
-                                                                <h5><a href="~/Jobs/Details/@(job.JobId)">@job.JobName</a></h5>
+                                                                @if (role == "Candidate")
+                                                                {
+                                                                    <h5><a href="~/CandidateProfiles/Create/@(job.JobId)">@job.JobName</a></h5>
+                                                                }
+                                                                else if (role == "Employer")
+                                                                {
+
+                                                                }
+                                                                else
+                                                                {
+                                                                    <h5><a href="~/Jobs/Details/@(job.JobId)">@job.JobName</a></h5>
+                                                                }
                                                             </div><!-- portfolio-item-description -->
                                                             <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
                                                         </div><!-- portfolio-item-thumbnail -->
