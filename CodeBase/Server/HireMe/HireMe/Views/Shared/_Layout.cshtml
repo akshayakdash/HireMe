@@ -19,7 +19,7 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-   
+
 
 </head>
 <body class="sticky-header header-classic page-header-style-1 footer-style-1">
@@ -99,13 +99,33 @@
     @RenderSection("scripts", required: false)
 
     <script type="text/javascript">
-    $(".chb").change(function () {
-        var checked = $(this).is(':checked');
-        $(".chb").prop('checked', false);
-        if (checked) {
-            $(this).prop('checked', true);
-        }
-    });
+        $(".chb").change(function () {
+            var checked = $(this).is(':checked');
+            $(".chb").prop('checked', false);
+            if (checked) {
+                $(this).prop('checked', true);
+            }
+        });
+
+
+        //$(function () {
+        //    $('a[data-toggle="tab"]').on('click', function (e) {
+        //        $('a[data-toggle="tab"]').removeClass("active");
+        //        $('.tab-content .tab-pane').removeClass("active");
+        //        //window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+        //        $('#job-tab a[href="' + $(e.target).attr('href') + '"]').tab('show');
+        //        $('#job-tab a[href="' + $(e.target).attr('href') + '"]').addClass("active");
+        //        var tabId = $(e.target).attr('href');
+        //       // $('.tab-content .tab-pane[id="' + $(e.target).attr('href') + '"]')
+        //        $(tabId).addClass("active");
+        //    });
+        //    //var activeTab = window.localStorage.getItem('activeTab');
+        //    //console.log(activeTab);
+        //    //if (activeTab) {
+        //    //    $('#job-tab a[href="' + activeTab + '"]').tab('show');
+        //    //    window.localStorage.removeItem("activeTab");
+        //    //}
+        //});
     </script>
 </body>
 </html>

@@ -4,38 +4,238 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@*<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-       
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-       
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.JobCategoryId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.JobCategoryId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.JobCategoryId })
-        </td>
-    </tr>
-}
+            <th></th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.JobCategoryId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.JobCategoryId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.JobCategoryId })
+                </td>
+            </tr>
+        }
+
+    </table>*@
+
+<div id="main-container">
+    <header id="header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
+                                <ul class="secondary-menu">
+                                    <li><a class="waves" href="index.html">Home</a></li>
+                                    <li><a class="waves" href="#">ADMIN</a></li>
+                                    <li><a class="waves" href="#">LOGIN</a></li>
+                                    <li><a class="waves" href="#">CONTACT</a></li>
+                                    <li><a class="waves" href="#">AIDE</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header>
+
+    <div class="container wow fadeInUp">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="tabs style-2 mt-lg-5 pt-lg-5">
+
+                    <ul class="nav nav-tabs job-tab">
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                            var item = Model.ElementAt(i);
+                            <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-"+i)" data-toggle="tab"><img src="~/assets/images/home-icon.png" />@item.CategoryName</a></li>
+                        }
+
+
+
+
+
+
+                        @*<li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                            <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                            <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                            <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>*@
+                    </ul>
+
+                    <div class="tab-content">
+
+                        @for (int i = 0; i < Model.Count(); i++)
+                        {
+                            var item = Model.ElementAt(i);
+                            <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-1-"+i)">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="isotope cols-3 gutter">
+                                            @foreach (var job in item.Jobs)
+                                            {
+                                                <div class="isotope-item categ-1 categ-2">
+                                                    <div class="portfolio-item">
+                                                        <div class="portfolio-item-thumbnail">
+                                                            <img src="~/assets/images/portfolio/cook.jpg" alt="">
+                                                            <div class="portfolio-item-hover"></div>
+                                                            <div class="portfolio-item-description">
+                                                                <h5><a href="~/Jobs/Details/@(job.JobId)">@job.JobName</a></h5>
+                                                            </div><!-- portfolio-item-description -->
+                                                            <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                        </div><!-- portfolio-item-thumbnail -->
+                                                    </div><!-- portfolio-item -->
+                                                </div>
+                                            }
+
+
+                                            @*<div class="isotope-item categ-1 categ-2">
+                                                    <div class="portfolio-item">
+                                                        <div class="portfolio-item-thumbnail">
+                                                            <img src="~/assets/images/portfolio/nanny.jpg" alt="">
+                                                            <div class="portfolio-item-hover"></div>
+                                                            <div class="portfolio-item-description">
+                                                                <h5><a href="#">Nanny/ Housekeeper</a></h5>
+                                                            </div><!-- portfolio-item-description -->
+                                                            <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                        </div><!-- portfolio-item-thumbnail -->
+                                                    </div><!-- portfolio-item -->
+                                                </div><!-- isotope-item -->
+
+                                                <div class="isotope-item categ-1 categ-2">
+                                                    <div class="portfolio-item">
+                                                        <div class="portfolio-item-thumbnail">
+                                                            <img src="~/assets/images/portfolio/guardian.jpg" alt="">
+                                                            <div class="portfolio-item-hover"></div>
+                                                            <div class="portfolio-item-description">
+                                                                <h5><a href="#">Guardian</a></h5>
+                                                            </div><!-- portfolio-item-description -->
+                                                            <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                        </div><!-- portfolio-item-thumbnail -->
+                                                    </div><!-- portfolio-item -->
+                                                </div><!-- isotope-item -->*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+
+                        @*<div class="tab-pane fade" id="tab-1-2">
+                                <div class="service-box style-9 icon-left">
+                                    <span><i class="bizhub-icon-shuffle"></i></span>
+                                    <div class="service-box-content">
+                                        <h5><a href="single-service.html">Troubleshooting</a></h5>
+                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                    </div><!-- service-box-content -->
+                                </div><!-- service-box -->
+                            </div><!-- tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-1-3">
+                                <div class="service-box style-9 icon-left">
+                                    <span><i class="bizhub-icon-shuffle"></i></span>
+                                    <div class="service-box-content">
+                                        <h5><a href="single-service.html">Course</a></h5>
+                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                    </div><!-- service-box-content -->
+                                </div><!-- service-box -->
+                            </div><!-- tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-1-4">
+                                <div class="service-box style-9 icon-left">
+                                    <span><i class="bizhub-icon-shuffle"></i></span>
+                                    <div class="service-box-content">
+                                        <h5><a href="single-service.html">Hairstyle/ Care</a></h5>
+                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                    </div><!-- service-box-content -->
+                                </div><!-- service-box -->
+                            </div><!-- tab-pane -->
+
+                            <div class="tab-pane fade" id="tab-1-5">
+                                <div class="service-box style-9 icon-left">
+                                    <span><i class="bizhub-icon-shuffle"></i></span>
+                                    <div class="service-box-content">
+                                        <h5><a href="single-service.html">Organization Ceremony</a></h5>
+                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                    </div><!-- service-box-content -->
+                                </div><!-- service-box -->
+                            </div><!-- tab-pane -->*@
+
+                    </div><!-- tab-content -->
+                </div><!-- tabs -->
+            </div>
+        </div>
+    </div>
+</div>
