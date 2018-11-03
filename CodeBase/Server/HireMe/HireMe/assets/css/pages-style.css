@@ -5207,3 +5207,27 @@ position: relative;
 }
 
 
+.filter-box {
+    position: relative;
+    z-index: 1;
+    padding: 20px;
+    background-color: #fff;
+    color: #636363;
+    box-shadow: 0 4px 15px 1px rgba(0, 0, 0, 0.15);
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.filter-box .filter-header {
+    float: left;
+    padding-right: 10px;
+    font-weight: 600;
+}
+.inline{
+    display:inline-block;
+}
+.radio + .radio {
+    margin-left: 10px;
+}
