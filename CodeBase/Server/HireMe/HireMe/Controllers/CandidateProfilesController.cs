@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using Microsoft.AspNet.Identity;
+using AutoMapper;
 
 namespace HireMe.Controllers
 {
@@ -15,10 +17,14 @@ namespace HireMe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         //// GET: CandidateProfiles
-        //public ActionResult Index()
-        //{
-        //    return View(db.CandidateProfiles.ToList());
-        //}
+        public ActionResult Index()
+        {
+            var candidatesEntity = db.Candidates
+                .Include(p => p.JobRequests.Select(t => t.JobRequestJobTasks))
+                .ToList();
+            var candidates = Mapper.Map<List<CandidateProfileViewModel>>(candidatesEntity);
+            return View(candidates);
+        }
 
         //// GET: CandidateProfiles/Details/5
         //public ActionResult Details(int? id)
@@ -41,12 +47,18 @@ namespace HireMe.Controllers
             // now prepare the job tasks for the job
 
             // get the job tasks for a job
+            if (id.HasValue)
+            {
+                Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == id);
 
-            Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == id);
-          
-            var candidateProfile = new CandidateProfileViewModel { JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks) };
+                var candidateProfile = new CandidateProfileViewModel { JobId = id.Value, JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks) };
 
-            return View(candidateProfile);
+                return View(candidateProfile);
+            }
+            else
+            {
+                return View(new CandidateProfileViewModel { });
+            }
         }
 
         // POST: CandidateProfiles/Create
@@ -60,9 +72,57 @@ namespace HireMe.Controllers
             {
                 //db.CandidateProfiles.Add(candidateProfile);
                 //db.SaveChanges();
+
+                // first check if a candidate exists with the aspnet userid or not
+                var userId = User.Identity.GetUserId();
+               
+                var existingCandidate = db.Candidates.Include(path => path.JobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
+                if (existingCandidate == null)
+                {
+                    var appUser = db.Users.Find(userId);
+                    var candidate = AutoMapper.Mapper.Map<Candidate>(candidateProfile);
+                    candidate.UserName = User.Identity.GetUserName();
+                    candidate.ProfilePicUrl = appUser.ProfilePicUrl;
+                    var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
+
+                    candidateProfile.JobTasks.ForEach(task =>
+                    {
+                        if (task.Selected)
+                        {
+                            jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                        }
+                    });
+
+                    candidate.JobRequests.Add(jobRequest);
+
+                    var appUsr = db.Users.Include(p => p.Candidates).FirstOrDefault(p => p.Id == userId);
+
+                    appUsr.Candidates.Add(candidate);
+                    db.SaveChanges();
+                }
+                else
+                {
+
+
+                    var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
+
+                    candidateProfile.JobTasks.ForEach(task =>
+                    {
+                        if (task.Selected)
+                        {
+                            jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                        }
+                    });
+
+                    existingCandidate.JobRequests.Add(jobRequest);
+                    db.SaveChanges();
+                }
+
+                // check the role and navigate to the myjobrequests page or naviget to SearchJobOffers?jobId = jobId
                 return RedirectToAction("Index");
             }
-
+            Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == candidateProfile.JobId);
+            candidateProfile.JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks);
             return View(candidateProfile);
         }
 

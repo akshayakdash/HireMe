@@ -220,6 +220,13 @@ namespace HireMe.Controllers
                 var securityQuestionAnswer = new ApplicationUserSecurityQuestionAnswer { SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer };
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = imagePath };
                 user.SecurityQuestionAnswers = new System.Collections.Generic.List<ApplicationUserSecurityQuestionAnswer> { securityQuestionAnswer };
+
+                if (model.UserRoles.Contains("Agency"))
+                {
+                    var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = imagePath };
+                    user.Agencies = new System.Collections.Generic.List<Agency> { agency };
+                }
+
                 var result = await UserManager.CreateAsync(user, model.Password);
 
                 // now save the security question answer for the user
@@ -228,6 +235,8 @@ namespace HireMe.Controllers
                 // now based on role we need to make an entry to the corresponding tables Candidate, Employer and Agency
 
                 //await context.SaveChangesAsync();
+
+                
 
                 if (result.Succeeded)
                 {

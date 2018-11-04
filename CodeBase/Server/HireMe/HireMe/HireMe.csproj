@@ -224,9 +224,13 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AgencyController.cs" />
     <Compile Include="Controllers\CandidateProfilesController.cs" />
+    <Compile Include="Controllers\EmployerJobOffersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobCategoriesController.cs" />
+    <Compile Include="Controllers\JobOffersController.cs" />
+    <Compile Include="Controllers\JobRequestsController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -250,6 +254,26 @@
     <Compile Include="Migrations\201811030753410_Job_Category_Image_Added.Designer.cs">
       <DependentUpon>201811030753410_Job_Category_Image_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811031958527_JobRequest_Added.cs" />
+    <Compile Include="Migrations\201811031958527_JobRequest_Added.Designer.cs">
+      <DependentUpon>201811031958527_JobRequest_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811032208193_Candidate_UserName_ProfilePicUrl_Added.cs" />
+    <Compile Include="Migrations\201811032208193_Candidate_UserName_ProfilePicUrl_Added.Designer.cs">
+      <DependentUpon>201811032208193_Candidate_UserName_ProfilePicUrl_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811032304140_Job_Offer_new_column_added.cs" />
+    <Compile Include="Migrations\201811032304140_Job_Offer_new_column_added.Designer.cs">
+      <DependentUpon>201811032304140_Job_Offer_new_column_added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811032322443_Min_Age_Column_Added_To_Job_Offer.cs" />
+    <Compile Include="Migrations\201811032322443_Min_Age_Column_Added_To_Job_Offer.Designer.cs">
+      <DependentUpon>201811032322443_Min_Age_Column_Added_To_Job_Offer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811040018195_agency_Details.cs" />
+    <Compile Include="Migrations\201811040018195_agency_Details.Designer.cs">
+      <DependentUpon>201811040018195_agency_Details.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -258,6 +282,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MySqlIdentityConfiguration\MySqlConfiguration.cs" />
+    <Compile Include="Models\RegisterCandidateViewModel.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -401,6 +426,26 @@
     <Content Include="Views\CandidateProfiles\Details.cshtml" />
     <Content Include="Views\CandidateProfiles\Edit.cshtml" />
     <Content Include="Views\CandidateProfiles\Index.cshtml" />
+    <Content Include="Views\JobRequests\Create.cshtml" />
+    <Content Include="Views\JobRequests\Delete.cshtml" />
+    <Content Include="Views\JobRequests\Details.cshtml" />
+    <Content Include="Views\JobRequests\Edit.cshtml" />
+    <Content Include="Views\JobRequests\Index.cshtml" />
+    <Content Include="Views\EmployerJobOffers\Create.cshtml" />
+    <Content Include="Views\EmployerJobOffers\Delete.cshtml" />
+    <Content Include="Views\EmployerJobOffers\Details.cshtml" />
+    <Content Include="Views\EmployerJobOffers\Edit.cshtml" />
+    <Content Include="Views\EmployerJobOffers\Index.cshtml" />
+    <Content Include="Views\Agency\RegisterCandidate.cshtml" />
+    <Content Include="Views\Agency\GetAgencyCandidates.cshtml" />
+    <Content Include="Views\Agency\GetJobCategories.cshtml" />
+    <Content Include="Views\Agency\CreateCandidateProfile.cshtml" />
+    <Content Include="Views\Agency\GetJobRequests.cshtml" />
+    <Content Include="Views\JobOffers\Create.cshtml" />
+    <Content Include="Views\JobOffers\Delete.cshtml" />
+    <Content Include="Views\JobOffers\Details.cshtml" />
+    <Content Include="Views\JobOffers\Edit.cshtml" />
+    <Content Include="Views\JobOffers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -430,6 +475,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811030753410_Job_Category_Image_Added.resx">
       <DependentUpon>201811030753410_Job_Category_Image_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811031958527_JobRequest_Added.resx">
+      <DependentUpon>201811031958527_JobRequest_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811032208193_Candidate_UserName_ProfilePicUrl_Added.resx">
+      <DependentUpon>201811032208193_Candidate_UserName_ProfilePicUrl_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811032304140_Job_Offer_new_column_added.resx">
+      <DependentUpon>201811032304140_Job_Offer_new_column_added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811032322443_Min_Age_Column_Added_To_Job_Offer.resx">
+      <DependentUpon>201811032322443_Min_Age_Column_Added_To_Job_Offer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811040018195_agency_Details.resx">
+      <DependentUpon>201811040018195_agency_Details.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

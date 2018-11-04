@@ -32,8 +32,8 @@ namespace HireMe.Models
         public List<ApplicationUserSecurityQuestionAnswer> SecurityQuestionAnswers { get; set; }
 
         public List<Candidate> Candidates { get; set; }
-        //public List<Agency> Agencies { get; set; }
-        //public List<Employer> Employers { get; set; }
+        public List<Agency> Agencies { get; set; }
+        public List<Employer> Employers { get; set; }
     }
 
    

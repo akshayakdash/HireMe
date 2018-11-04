@@ -1,0 +1,372 @@
+﻿@model IEnumerable<HireMe.Models.Candidate>
+
+@{
+    ViewBag.Title = "GetAgencyCandidates";
+}
+
+
+
+
+
+
+<div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                    .Select(c => c.Value);
+        string role = roles.FirstOrDefault();}
+
+    @if (role == "Candidate")
+            {
+        <h2>Candidate Account</h2>
+            <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
+
+                <a href="~/JobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
+
+                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
+    }
+    else if (role == "Employer")
+    {
+        <h2>Employerr Account</h2>
+            <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employee</a>
+
+                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
+
+                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
+    }
+    else if (role == "Agency")
+    {
+        <h2>Agency Account</h2>
+            <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
+
+                <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Create a Job Request</a>
+
+                <a href="~/Agency/GetJobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
+
+                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
+    }
+
+
+    @*<a href="#"><img src="~/assets/images/lifecycle.png" alt=""> Process recruiment lifecycle</a>
+        <a href="#"><img src="~/assets/images/message.png" alt=""> Manage my message & notification</a>
+        <a href="#"><img src="~/assets/images/post-message.png" alt=""> Post a new message on the conversation thread</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/settings.png" alt=""> Manage my settings</a>
+        <a href="#"><img src="~/assets/images/feedback.png" alt=""> Share my feedbacks about the plate form</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/bug.png" alt=""> Rise an Bug/issue</a>*@
+</div>
+
+<div id="main-container">
+    <header id="header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
+                                <ul class="secondary-menu">
+                                    <li><a class="waves" href="index.html">Home</a></li>
+                                    <li><a class="waves" href="#">ADMIN</a></li>
+                                    <li><a class="waves" href="#">LOGIN</a></li>
+                                    <li><a class="waves" href="#">CONTACT</a></li>
+                                    <li><a class="waves" href="#">AIDE</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header>
+    
+
+    <div class="container">
+        
+        <!---- Tab Section -->
+        <div class="container wow fadeInUp">
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table">
+                        <tr>
+
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.Gender)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Age)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExperienceInYears)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExperienceInMonths)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdProofDoc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdProofDocDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ProfileVerified)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.StaffType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Disponibility)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CountryId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CityId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DistrictId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SalaryType)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CanRead)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CanWrite)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpectedMinSalary)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.SleepOnSite)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpectedMinRooms)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MinGroupPeople)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.MaxGroupPeople)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreatedDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CreatedBy)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UpdatedDate)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UpdatedBy)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.FirstName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.LastName)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ContactNo)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.EmailId)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Address)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.AdditionalDescription)
+                            </th>
+                            <th></th>
+                        </tr>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Gender)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Age)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExperienceInYears)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExperienceInMonths)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdProofDoc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdProofDocDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProfileVerified)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StaffType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Disponibility)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CountryId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CityId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DistrictId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SalaryType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SalaryTypeOtherDesc)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CanRead)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CanWrite)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpectedMinSalary)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpectedMaxSalary)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SleepOnSite)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpectedMinRooms)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ExpectedMaxRooms)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MinGroupPeople)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MaxGroupPeople)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UpdatedBy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ContactNo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EmailId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.AdditionalDescription)
+                                </td>
+                                <td>
+
+                                    @Html.ActionLink("Details", "Details", new { id = item.CandidateId }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.CandidateId })
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!---- Tab Section end-->
+
+    </div>
+
+</div>
+
+<script>
+     function openNav() {
+         document.getElementById("mySidenav").style.width = "280px";
+         document.getElementById("main-container-user").style.marginLeft = "280px";
+     }
+
+     function closeNav() {
+         document.getElementById("mySidenav").style.width = "0";
+         document.getElementById("main-container-user").style.marginLeft = "0";
+     }
+</script>

@@ -1,4 +1,4 @@
-﻿@model HireMe.Models.CandidateProfileViewModel
+﻿@model HireMe.Models.EmployerJobOfferViewModel
 @using HireMe.Models
 
 @{
@@ -25,7 +25,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                 @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
                 @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
                 @item.JobTaskName
-                @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)
+                @*@Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
                 @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
                 @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
 
@@ -44,8 +44,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-   
 
     <div id="page-content" style="background: #f3f8fb;">
 
@@ -122,7 +120,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                     <div class="row">
                                                         <div class="col-sm-6">
                                                             <div class="filter-header">Age</div>
-                                                            @Html.TextBoxFor(p => p.Age)
+                                                            @Html.TextBoxFor(p => p.MinAge)
+                                                            &amp;
+                                                            @Html.TextBoxFor(p => p.MaxAge)
                                                             @*<div class="row">
                                                                     <div class="col-lg-6 col-md-6">
                                                                         <select>
@@ -249,7 +249,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                     <span></span>
                                                                 </label>
                                                             </div>
-                                                           
+
                                                         </div>
                                                     </div>
 

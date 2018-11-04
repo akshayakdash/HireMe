@@ -18,6 +18,9 @@ namespace HireMe.Models
         //public AppUser ApplicationUser { get; set; }
         public int? AgencyId { get; set; }
 
+        public string UserName { get; set; }
+        public string ProfilePicUrl { get; set; }
+
         public Gender Gender { get; set; }
         [NotMapped]
         public string GenderDesc { get; set; }
@@ -69,6 +72,15 @@ namespace HireMe.Models
         public string CreatedBy { get; set; }
         public string UpdatedDate { get; set; }
         public string UpdatedBy { get; set; }
+
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ContactNo { get; set; }
+        public string EmailId { get; set; }
+        public string Address { get; set; }
+
+        public string AdditionalDescription { get; set; }
 
         public List<JobRequest> JobRequests { get; set; }
 
@@ -157,6 +169,8 @@ namespace HireMe.Models
         public List<JobOffer> JobOffers { get; set; }
 
         public List<JobRequest> FavouriteJobRequests { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 
     // Master tables
@@ -250,7 +264,11 @@ namespace HireMe.Models
     {
         public int JobRequestId { get; set; }
         public int CandidateId { get; set; }
+        [ForeignKey("CandidateId")]
+        public Candidate Candidate { get; set; }
         public int JobId { get; set; }
+        [ForeignKey("JobId")]
+        public Job Job { get; set; }
         public bool IsPublished { get; set; }
         public DateTime PublishedDate { get; set; }
         public DateTime ValidTill { get; set; }
@@ -274,12 +292,20 @@ namespace HireMe.Models
     {
         public int JobOfferId { get; set; }
         public int JobId { get; set; }
+        [ForeignKey("JobId")]
+        public Job Job { get; set; }
         public int EmployerId { get; set; }
+        [ForeignKey("EmployerId")]
+        public Employer Employer { get; set; }
 
         public Gender Gender { get; set; }
         [NotMapped]
         public string GenderDesc { get; set; }
         public int Age { get; set; }
+
+        public int MinAge { get; set; }
+        public int MaxAge { get; set; }
+
         public int ExperienceInYears { get; set; }
         public int ExperienceInMonths { get; set; }
 
@@ -324,9 +350,11 @@ namespace HireMe.Models
         public int MaxGroupPeople { get; set; }
 
 
-        //public bool IsPublished { get; set; }
+        public bool IsPublished { get; set; }
         public DateTime PublishedDate { get; set; }
         public DateTime ValidTill { get; set; }
+
+        public string AdditionalDescription { get; set; }
 
         public List<JobOfferJobTask> JobOfferJobTasks { get; set; }
     }
@@ -414,5 +442,19 @@ namespace HireMe.Models
         DatePicker = 2,
         Number = 3,
         SelectBox = 4
+    }
+
+    public enum CountryEnum
+    {
+        Country1,
+        Country2,
+        Country3,
+        Country4
+    }
+
+    public enum CityEnum
+    {
+        City1,
+        City2
     }
 }

@@ -31,7 +31,7 @@ namespace HireMe.Models
              {
                  m.MapLeftKey("CandidateId");
                  m.MapRightKey("JobOfferId");
-                 m.ToTable("CandidateFavouriteJobOffer", "jobtek");
+                 m.ToTable("CandidateFavouriteJobOffer");
              });
 
             modelBuilder.Entity<Employer>().
@@ -42,13 +42,23 @@ namespace HireMe.Models
              {
                  m.MapLeftKey("CandidateId");
                  m.MapRightKey("JobRequestId");
-                 m.ToTable("EmployerFavouriteJobRequest", "jobtek");
+                 m.ToTable("EmployerFavouriteJobRequest");
              });
 
             modelBuilder.Entity<ApplicationUser>()
            .HasMany(user => user.Candidates)
            .WithOptional()
            .HasForeignKey(candidate => candidate.AspNetUserId);
+
+            modelBuilder.Entity<ApplicationUser>()
+          .HasMany(user => user.Employers)
+          .WithOptional()
+          .HasForeignKey(empl => empl.AspNetUserId);
+
+            modelBuilder.Entity<ApplicationUser>()
+          .HasMany(user => user.Agencies)
+          .WithOptional()
+          .HasForeignKey(agncy => agncy.AspNetUserId);
 
 
         }
@@ -68,5 +78,14 @@ namespace HireMe.Models
         public DbSet<JobCategory> JobCategories { get; set; }
 
         public DbSet<Job> Jobs { get; set; }
+        public DbSet<Candidate> Candidates { get; set; }
+
+        public System.Data.Entity.DbSet<HireMe.Models.JobRequest> JobRequests { get; set; }
+
+        public System.Data.Entity.DbSet<HireMe.Models.JobOffer> JobOffers { get; set; }
+
+        public DbSet<Employer> Employers { get; set; }
+
+        public DbSet<Agency> Agencies { get; set; }
     }
 }
