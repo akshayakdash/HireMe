@@ -1,13 +1,15 @@
-﻿@model IEnumerable<HireMe.Models.JobCategory>
+﻿
+@{
+    ViewBag.Title = "GetJobCategories";
+}
+
+@model IEnumerable<HireMe.Models.JobCategory>
 
 @{
     ViewBag.Title = "Index";
 }
 
-@{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                    .Select(c => c.Value);
-    string role = roles.FirstOrDefault();}
+
 <div id="main-container">
     <header id="header">
 
@@ -37,7 +39,7 @@
 
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                             {
-                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
                             }
 
                             @*
@@ -82,20 +84,6 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="tabs style-2 mt-lg-5 pt-lg-5">
-                    @if (role == "Candidate")
-                    {
-                        <h2 style="text-align:center">Select your Job</h2>
-                    }
-                    else if (role == "Employer")
-                    {
-                        <h2 style="text-align:center">What you are looking for ?</h2>
-                    }
-                    else if (role == "Agency")
-                    {
-                        <h2 style="text-align:center">Select Job for candidate</h2>
-                    }
-                   
-
                     <ul class="nav nav-tabs job-tab">
                         @for (int i = 0; i < Model.Count(); i++)
                         {
@@ -105,7 +93,10 @@
                     </ul>
 
                     <div class="tab-content">
-                      
+                        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+  .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+  .Select(c => c.Value);
+                            string role = roles.FirstOrDefault();}
 
                         @for (int i = 0; i < Model.Count(); i++)
                         {
@@ -132,7 +123,8 @@
                                                                 }
                                                                 else if (role == "Agency")
                                                                 {
-                                                                    <h5><a href="~/Agency/CreateCandidateProfile/@(job.JobId)">@job.JobName</a></h5>
+                                                                    @*<h5><a href="~/Agency/CreateCandidateProfile/@(job.JobId)">@job.JobName</a></h5>*@
+                                                                    <h5>@Html.ActionLink(job.JobName, "CreateCandidateProfile", "Agency", new { candidateId = ViewBag.CandidateId, jobId = job.JobId }, null) </h5>
                                                                 }
                                                                 else
                                                                 {

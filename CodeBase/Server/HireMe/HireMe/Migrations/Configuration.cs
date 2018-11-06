@@ -42,7 +42,7 @@ namespace HireMe.Migrations
                 new Models.JobCategory
                 {
                     CategoryName = "Home Job",
-                    IconImage = "~/assets/images/home-icon.png",
+                    IconImage = "/assets/images/home-icon.png",
                     Description = "",
                     Jobs = new System.Collections.Generic.List<Models.Job> {
                         new Models.Job{ JobName = "Nanny", JobGroup = "Internal Home Job", JobTasks = new System.Collections.Generic.List<Models.JobTask>{
@@ -78,7 +78,7 @@ namespace HireMe.Migrations
                 new Models.JobCategory
                 {
                     CategoryName = "Troubleshooting",
-                    IconImage = "~/assets/images/settings-icon.png",
+                    IconImage = "/assets/images/settings-icon.png",
                     Jobs = new System.Collections.Generic.List<Models.Job> {
                     new Models.Job{ JobName = "Plumber"},
 
@@ -89,7 +89,7 @@ namespace HireMe.Migrations
                 new Models.JobCategory
                 {
                     CategoryName = "HairStyle/Care",
-                    IconImage = "~/assets/images/salon-icon.png",
+                    IconImage = "/assets/images/salon-icon.png",
                     Jobs = new List<Job> {
                         new Job{ JobName = "Hair Dresser"},
                         new Job{ JobName = "Manicure/Pedicure/Massage"}
@@ -99,7 +99,7 @@ namespace HireMe.Migrations
                  new Models.JobCategory
                  {
                      CategoryName = "Ceremony Organization",
-                     IconImage = "~/assets/images/ceremony-icon.png",
+                     IconImage = "/assets/images/ceremony-icon.png",
                      Jobs = new List<Job> {
                         new Job{ JobName = "Server/Caterer"},
                         new Job{ JobName = "Decorator"}
@@ -109,7 +109,7 @@ namespace HireMe.Migrations
                  new Models.JobCategory
                  {
                      CategoryName = "Course",
-                     IconImage = "~/assets/images/course-icon.png",
+                     IconImage = "/assets/images/course-icon.png",
                      Jobs = new List<Job> {
                         new Job{ JobName = "School Support"},
                         new Job{ JobName = "Music Course"}

@@ -30,6 +30,10 @@ namespace HireMe.Models
         public DateTime? ActiveUntil { get; set; }
 
         public List<ApplicationUserSecurityQuestionAnswer> SecurityQuestionAnswers { get; set; }
+
+        public List<Candidate> Candidates { get; set; }
+        public List<Agency> Agencies { get; set; }
+        public List<Employer> Employers { get; set; }
     }
 
    

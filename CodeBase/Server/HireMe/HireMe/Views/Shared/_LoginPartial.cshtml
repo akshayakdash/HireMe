@@ -16,7 +16,7 @@
 else
 {
     @*<ul class="menu clearfix pull-right login-partial">*@
-        <li>@Html.ActionLink("REGISTER", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("REGISTER", "Register", "Account", routeValues: new { userRole = "Candidate" }, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     @*</ul>*@
 }

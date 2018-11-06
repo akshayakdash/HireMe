@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HireMe.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,16 @@ namespace HireMe
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AutoMapper.Mapper.Initialize(config =>
+            {
+                config.CreateMap<JobTask, JobTaskViewModel>();
+                config.CreateMap<CandidateProfileViewModel, Candidate>();
+                config.CreateMap<Candidate,CandidateProfileViewModel > ();
+                config.CreateMap<EmployerJobOfferViewModel, JobOffer>();
+                config.CreateMap<JobOffer, EmployerJobOfferViewModel>();
+                config.CreateMap<RegisterCandidateViewModel, Candidate>();
+            });
         }
     }
 }
