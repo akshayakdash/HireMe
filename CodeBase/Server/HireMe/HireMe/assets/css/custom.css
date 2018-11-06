@@ -47,7 +47,7 @@
  ***********************************************************************************/
 
 body {
-	position: relative;
+	/*position: relative;*/
 	left: 0;
 	font: 16px/25px "Source Sans Pro", sans-serif;
 	background-color: #fff;
@@ -541,7 +541,7 @@ i.text-xl {
  ***********************************************************************************/
 
 .headline {
-	margin-bottom: 70px;
+	margin-bottom: 20px;
 }
 
 .headline:before {
@@ -564,9 +564,10 @@ i.text-xl {
 	font-size: 60px;
 }
 
-.headline h2 {
-	text-transform: uppercase;
-}
+    .headline h2 {
+        text-transform: uppercase;
+        font-size: 25px;
+    }
 
 .headline h5 {
 	margin-bottom: 7px;
@@ -967,7 +968,7 @@ dl {
 .btn {
 	position: relative;
 	z-index: 1;
-	padding: 19px 37px;
+	padding: 12px 37px;
 	margin-right: 20px;
 	margin-bottom: 20px;
 	border: none;
@@ -994,16 +995,16 @@ dl {
 }
 
 .btn-xs {
-    padding: 15px 30px;
+    padding: 12px 30px;
     font-size: 11px;
 }
 
 .btn-lg {
-	padding: 19px 50px;
+	padding: 12px 50px;
 }
 
 .btn-xl {
-	padding: 19px 100px;
+	padding: 12px 100px;
 }
 
 /* STYLE 1 */
@@ -1034,7 +1035,7 @@ dl {
 }
 
 .btn-style-1:after {
-	margin: 7px;
+	margin: 3px;
 	background-color: #fe005a;
 }
 
@@ -2145,7 +2146,7 @@ dl {
 }
 
 .tab-content {
-	margin: 40px 0;
+	margin: 20px 0;
 }
 
 .tab-pane > *:last-child {
@@ -8644,8 +8645,8 @@ blockquote > *:last-child {
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
     border:1px solid #ccc;
-    display:table;
-    width:100%;
+    /*display:table;
+    width:100%;*/
 }
     .profileitems:hover {
         background-color: transparent;
@@ -8715,16 +8716,18 @@ text-align:center;
     font-size: 12px;
     font-weight: 400;
 }
-.profileitems .profile-footer {
-    font-size: 13px;
-    float: left;
-    background: rgba(0, 0, 0, 0.09);
-    width: 100%;
-    padding: 5px 10px;
-    border-radius: 5px;
-    max-height: 34px;
-    overflow: hidden;
-}
+    .profileitems .profile-footer {
+        font-size: 13px;
+        /*float: left;*/
+        background: rgba(0, 0, 0, 0.09);
+        width: 100%;
+        padding: 5px 10px;
+        border-radius: 5px;
+        /*max-height: 34px;*/
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 .profileitems .profile-footer p{
     margin:0;
 }
@@ -8758,7 +8761,7 @@ text-align:center;
         margin-left: -10px;
         top: 0;
         height: 100%;
-        background: rgba(255,255,255,0.8);
+        background: #f51179;
         text-align: center;
     }
         .searchprofile-section .team-contact-info::before {
@@ -8816,15 +8819,18 @@ text-align:center;
         -moz-transition: -moz-transform 0.4s, opacity 0.1s;
         transition: transform 0.4s, opacity 0.1s;
     }
-
-    .searchprofile-section:hover .social-icons li {
-        opacity: 1;
-        -moz-transform: translateY(0px);
-        -webkit-transform: translateY(0px);
-        -o-transform: translateY(0px);
-        -ms-transform: translateY(0px);
-        transform: translateY(0px);
-    }
+        .searchprofile-section:hover .team-contact-info .social-icons li >a{
+            color:#fff;
+            font-size:30px;
+        }
+        .searchprofile-section:hover .social-icons li {
+            opacity: 1;
+            -moz-transform: translateY(0px);
+            -webkit-transform: translateY(0px);
+            -o-transform: translateY(0px);
+            -ms-transform: translateY(0px);
+            transform: translateY(0px);
+        }
 
         .searchprofile-section:hover .social-icons li:nth-child(1) {
             -webkit-transition-delay: 100ms;
@@ -8871,3 +8877,270 @@ text-align:center;
         transform: translateY(-4px);
     }
 
+/* GRID */
+.col {
+    padding: 10px 20px;
+    margin-bottom: 10px;
+    background: #fff;
+    color: #666666;
+    text-align: center;
+    font-weight: 400;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.row h3 {
+    color: #666666;
+}
+
+.row.grid {
+    margin-left: 0;
+}
+
+.grid {
+    position: relative;
+    width: 100%;
+    background: #fff;
+    color: #666666;
+    border-radius: 2px;
+    margin-bottom: 25px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+    .grid .grid-header {
+        position: relative;
+        border-bottom: 1px solid #ddd;
+        padding: 8px 10px 5px 20px;
+        background: #e9f1f5;
+    }
+
+        .grid .grid-header:before,
+        .grid .grid-header:after {
+            display: table;
+            content: " ";
+        }
+
+        .grid .grid-header:after {
+            clear: both;
+        }
+
+        .grid .grid-header span,
+        .grid .grid-header > .fa {
+            display: inline-block;
+            margin: 0;
+            font-weight: 300;
+            font-size: 1.5em;
+            float: left;
+        }
+
+        .grid .grid-header span {
+            padding: 3px 5px;
+        }
+
+        .grid .grid-header > .fa {
+            padding: 5px 10px 0 0;
+        }
+
+        .grid .grid-header > .grid-tools {
+            padding: 4px 10px;
+        }
+
+            .grid .grid-header > .grid-tools a {
+                color: #999999;
+                padding-left: 10px;
+                cursor: pointer;
+            }
+
+                .grid .grid-header > .grid-tools a:hover {
+                    color: #666666;
+                }
+
+    .grid .grid-body {
+        padding: 15px 20px 15px 20px;
+        font-size: 0.9em;
+        line-height: 1.9em;
+    }
+
+    .grid .full {
+        padding: 0 !important;
+    }
+.Filterjob {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fe005a;
+    color: #fff;
+    font-size: 24px;
+    line-height: 42px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    color: #fff!important;
+}
+.Filterjob:hover {
+    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 3px 12px 0 rgba(0, 0, 0, 0.12);
+}
+.jobsearch-section {
+    padding: 8px;
+    background: #e9f1f5;
+    margin-bottom: 50px;
+}
+    .jobsearch-section .right-section {
+        padding: 8px;
+        background: #E91E63;
+        width: 300px;
+        position: absolute;
+        right: 8px;
+        height: 99%;
+    }
+    .jobsearch-section .left-section {
+        background: #fff;
+        margin-right: 308px;
+        display: block;
+    }
+    .jobsearch-section .left-section .header {
+        background: #fff;
+        padding: 12px 16px;
+        /*border-bottom: 1px solid #f0f0f0;*/
+        height: 100%;
+        position:relative;
+    }
+    .jobsearch-section .left-section .body {
+        background: #fff;
+        padding: 10px 16px;
+        display:block;
+        height: 100%;
+    }
+        .jobsearch-section .left-section .grid-title {
+            display: inline-block;
+            margin: 0;
+            font-weight: 300;
+            font-size: 1.5em;
+            float: left;
+        }
+        .jobsearch-section .left-section .header .fa {
+            display: inline-block;
+            margin: 0;
+            font-weight: 300;
+            font-size: 1.5em;
+            float: left;
+        }
+    .jobsearch-section .header:before, .jobsearch-section .header:after {
+        display: table;
+        content: " ";
+    }
+    .jobsearch-section .header:after {
+        clear: both;
+    }
+    .jobsearch-section .header > .fa {
+        padding: 2px 10px 0 0;
+    }
+/*Switch*/
+.switch {
+    position: absolute;
+    /* margin: -7px auto; */
+    width: 250px;
+    height: 35px;
+    border: 2px solid #E91E63;
+    color: #ccc;
+    font-size: 16px;
+    border-radius: 25px;
+    TOP: 8px;
+    right: 15px;
+    font-weight:600;
+}
+
+.quality {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    line-height: 30px;
+}
+
+    .quality:first-child label {
+        border-radius: 25px 0 0 25px;
+    }
+
+    .quality:last-child label {
+        border-radius: 0 25px 25px 0;
+    }
+
+    .quality label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        text-align: center;
+        transition: transform 0.4s, color 0.4s, background-color 0.4s;
+    }
+
+    .quality input[type="radio"] {
+        appearance: none;
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+
+        .quality input[type="radio"]:focus {
+            outline: 0;
+            outline-offset: 0;
+        }
+
+        .quality input[type="radio"]:checked ~ label {
+            background-color: #E91E63;
+            color: #fff;
+        }
+
+        .quality input[type="radio"]:active ~ label {
+            transform: scale(1.05);
+        }
+.filter-selected {
+    display: block;
+    padding: 5px 16px;
+    /* background: #aaa; */
+    border-bottom: 1px solid #f0f0f0;
+}
+.filter-selected i {
+    font-size: 16px;
+}
+.filter-selected span {
+    padding: 0 15px;
+    font-size: 13px;
+}
+
+/*Registration Page*/
+.outer {
+    display: table;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #008ad2 url(/assets/images/reg-bg.jpg) no-repeat center center;
+    background-size: cover;
+}
+
+.form-box {
+    background: #fff;
+    padding: 15px;
+    margin: 35px 0;
+    border-radius: 10px;
+    width: 550px;
+    position: absolute;
+    right: 30px;
+}
+
+@media only screen and (max-width: 767px) and (min-width: 320px) {
+    .form-box {
+        background: #fff;
+        width: 100%;
+        position: relative;
+        right: 0;
+    }
+}

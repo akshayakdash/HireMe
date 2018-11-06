@@ -338,6 +338,7 @@
     <Content Include="assets\images\post-message.png" />
     <Content Include="assets\images\radio.png" />
     <Content Include="assets\images\recommendation.png" />
+    <Content Include="assets\images\reg-bg.jpg" />
     <Content Include="assets\images\registrationbg.jpg" />
     <Content Include="assets\images\research-proces.jpg" />
     <Content Include="assets\images\rules.jpg" />
