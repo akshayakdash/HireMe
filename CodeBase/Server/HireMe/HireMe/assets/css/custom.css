@@ -277,8 +277,8 @@ input[type="checkbox"] ~ span {
 	display: inline-block;
 	top: 2px;
 	left: 0;
-	width: 24px;
-	height: 24px;
+	width: 15px;
+	height: 15px;
 	margin-right: 10px;
 }
 
@@ -299,8 +299,10 @@ input[type="checkbox"]:checked ~ span {
 
 .radio label,
 .checkbox label {
-	padding-left: 25px;
-	margin-bottom: 5px;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    line-height: 19px;
+    cursor:pointer;
 }
 
 button,
@@ -5685,9 +5687,9 @@ blockquote > *:last-child {
 }
 
 #section-33 {
-	padding: 100px 0 60px;
-	margin-top: 60px;
-	background-image: url(../../../images/backgrounds/bg-10.jpg);
+    padding: 100px 0 60px;
+    margin-top: 60px;
+    background-image: url(/assets/images/bg2.jpg);
 }
 
 #section-34 {
@@ -8991,16 +8993,25 @@ text-align:center;
     margin-bottom: 50px;
 }
     .jobsearch-section .right-section {
-        padding: 8px;
-        background: #E91E63;
-        width: 300px;
+        /*padding: 8px;*/
+        background: #822242;
+        width: 350px;
         position: absolute;
         right: 8px;
         height: 99%;
+        color: #fff;
+    }
+        .jobsearch-section .right-section > .header {
+            padding: 5px 12px;
+            background: rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+        }
+    .jobsearch-section .right-section > .body {
+        padding: 5px 8px;
     }
     .jobsearch-section .left-section {
         background: #fff;
-        margin-right: 308px;
+        margin-right: 358px;
         display: block;
     }
     .jobsearch-section .left-section .header {
@@ -9143,4 +9154,106 @@ text-align:center;
         position: relative;
         right: 0;
     }
+}
+
+/*Small Switch*/
+.switch-area {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.switch-area-inner {
+    /*margin-left: 10px;
+    margin-top: 3px;*/
+}
+.switchsmall {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    margin:0;
+}
+
+    .switchsmall input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+.slider1 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider1:before {
+        position: absolute;
+        content: "";
+        height: 15px;
+        width: 15px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider1 {
+    background-color: #2196F3!important;
+}
+
+input:focus + .slider1 {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider1:before {
+    -webkit-transform: translateX(19px);
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
+}
+
+/* Rounded sliders */
+.slider1.round {
+    border-radius: 34px;
+    width: 40px;
+    background: #ccc;
+    height: 20px;
+}
+
+    .slider1.round:before {
+        border-radius: 50%;
+    }
+.filtersection-panel {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom:4px;
+}
+.filtersection-header {
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 0 10px;
+    width: 100%;
+    position: relative;
+}
+.filtersection-body {
+    padding: 5px 10px;
+}
+.inlineform-filter {
+    display: block;
+}
+.inlineform-filter select, .inlineform-filter input, .inlineform-filter textarea {
+    margin-bottom:0;
+}
+.inlineform-filter select, .inlineform-filter input {
+    height: 30px;
+    padding: 4px 12px;
+}
+.filtersection-header .switchsmall {
+    right: 5px;
+    position: absolute;
+    top: 0;
 }

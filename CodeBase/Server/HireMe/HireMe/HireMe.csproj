@@ -293,12 +293,14 @@
   <ItemGroup>
     <Content Include="assets\css\custom.css" />
     <Content Include="assets\css\pages-style.css" />
+    <Content Include="assets\css\vgorpv.css" />
     <Content Include="assets\images\age.png" />
     <Content Include="assets\images\agency.jpg" />
     <Content Include="assets\images\arrow.png" />
     <Content Include="assets\images\bg-footer.jpg" />
     <Content Include="assets\images\bg-slide-1.jpg" />
     <Content Include="assets\images\bg-slide-2.jpg" />
+    <Content Include="assets\images\bg2.jpg" />
     <Content Include="assets\images\blog-post-1.jpg" />
     <Content Include="assets\images\blog-post-2.jpg" />
     <Content Include="assets\images\bug.png" />
@@ -324,6 +326,7 @@
     <Content Include="assets\images\logo.png" />
     <Content Include="assets\images\manage-favorites.png" />
     <Content Include="assets\images\map.png" />
+    <Content Include="assets\images\Marketing.mov" />
     <Content Include="assets\images\message.png" />
     <Content Include="assets\images\mission.png" />
     <Content Include="assets\images\multiservice.png" />
@@ -351,6 +354,8 @@
     <Content Include="assets\images\url.png" />
     <Content Include="assets\images\user.png" />
     <Content Include="assets\images\zoom.png" />
+    <Content Include="assets\js\custom.js" />
+    <Content Include="assets\js\vgorpv.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

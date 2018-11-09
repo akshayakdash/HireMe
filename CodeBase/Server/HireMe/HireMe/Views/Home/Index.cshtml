@@ -22,9 +22,12 @@
                          data-voffset="100"
                          data-start="1450"
                          data-speed="300"
+                         style="left:100%;"
                          data-transform_in="o:0;sX:0.75;sY:0.75;s:250;e:Power2.easeInOut;"
                          data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
-                        <a class="btn btn-style-1 waves" href="#">Download The Mobile App Here</a>
+                        <a class="play-but" data-fancybox data-small-btn="false" data-width="640" data-height="360" href="https://youtu.be/3PyO0iOHwH8">
+                            <i style="font-size:28px;" class="bizhub-icon-play-button"></i>
+                        </a>
                     </div>
                 </li>
                 <li data-transition="fade">
@@ -45,9 +48,13 @@
                          data-voffset="100"
                          data-start="1450"
                          data-speed="300"
+                         style="left:100%;"
                          data-transform_in="o:0;sX:0.75;sY:0.75;s:250;e:Power2.easeInOut;"
                          data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
-                        <a class="btn btn-style-1 waves" href="#">Download The Mobile App Here</a>
+                        @*<a class="btn btn-style-1 waves" href="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" data-fancybox data-small-btn="false"><i style="font-size:28px;" class="bizhub-icon-play-button"></i> <span>Play Video</span></a>*@
+                        <a class="play-but" data-fancybox data-small-btn="false" data-width="640" data-height="360" href="https://youtu.be/3PyO0iOHwH8">
+                            <i style="font-size:28px;" class="bizhub-icon-play-button"></i>
+                        </a>
                     </div>
                 </li>
             </ul>
@@ -133,76 +140,79 @@
 
                     <div class="headline text-center mb-1">
                         <h2>Who are you?</h2>
-                        <h5>Choose from the 2 option below</h5>
                     </div><!-- headline -->
 
                 </div><!-- col -->
             </div><!-- row -->
         </div>
 
-        <section class="team-section">
-            <div class="container">
-                <div class="team-wrapper">
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-4 wow fadeInLeft">
-                            <div class="team-column">
-                                <figure>
-                                    <div class="grid-holder">
-                                        <a href="#"><img src="~/assets/images/employer.jpg" alt=""></a>
-                                        <div class="team-content-holder">
-                                            <div class="personal-info">
-                                                <h3>Employer</h3>
-                                                <a class="btn btn-style-1 waves" href="#">Start Here</a>
-                                            </div>
-                                            <!-- .awsm-personal-info -->
-                                            <div class="team-contact-info">
-                                                <p>You are looking for a short term home service (nanny, Cook...) or occasional (troubleshooting, braiding, Esthetician...)</p>
-                                                @*<a class="btn btn-style-1 waves" href="#">Start Here</a>*@
-                                                @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Employer" }, new { @class = "btn btn-style-1 waves" })
+        <section class="team-section full-section dark-section parallax" id="section-33">
+            <div class="full-section-overlay" data-overlay-opacity="13" data-overlay-color="linear-gradient(left, #ff005a, #310068)" style="opacity: 0.3;"></div>
+            <div class="full-section-container">
+                <div class="container">
+                    <div class="team-wrapper  wow fadeInUp">
+                        <div class="row">
+                            <div class="col-sm-12 col-lg-4">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <a href="#"><img src="~/assets/images/candidate.jpg" alt=""></a>
+                                            <div class="team-content-holder">
+                                                <div class="personal-info">
+                                                    <h3>Candidat</h3>
+                                                    <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                                </div>
+                                                <!-- .awsm-personal-info -->
+                                                <div class="team-contact-info">
+                                                    <p>You are looking for a home job to propose a qualified service for long term service (nanny, Guardian…) or a short term  (School support, ceremony organization…)</p>
+                                                    @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Candidate" }, new { @class = "btn btn-style-1 waves" })
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </figure>
+                                    </figure>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4">
-                            <div class="team-column">
-                                <figure>
-                                    <div class="grid-holder">
-                                        <a href="#"><img src="~/assets/images/candidate.jpg" alt=""></a>
-                                        <div class="team-content-holder">
-                                            <div class="personal-info">
-                                                <h3>Candidat</h3>
-                                                <a class="btn btn-style-1 waves" href="#">Start Here</a>
-                                            </div>
-                                            <!-- .awsm-personal-info -->
-                                            <div class="team-contact-info">
-                                                <p>You are looking for a home job to propose a qualified service for long term service (nanny, Guardian…) or a short term  (School support, ceremony organization…)</p>
-                                                @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Candidate" }, new { @class = "btn btn-style-1 waves" })
+                            <div class="col-sm-12 col-lg-4">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <a href="#"><img src="~/assets/images/employer.jpg" alt=""></a>
+                                            <div class="team-content-holder">
+                                                <div class="personal-info">
+                                                    <h3>Employer</h3>
+                                                    <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                                </div>
+                                                <!-- .awsm-personal-info -->
+                                                <div class="team-contact-info">
+                                                    <p>You are looking for a short term home service (nanny, Cook...) or occasional (troubleshooting, braiding, Esthetician...)</p>
+                                                    @*<a class="btn btn-style-1 waves" href="#">Start Here</a>*@
+                                                    @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Employer" }, new { @class = "btn btn-style-1 waves" })
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </figure>
+                                    </figure>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-lg-4 wow fadeInRight">
-                            <div class="team-column">
-                                <figure>
-                                    <div class="grid-holder">
-                                        <a href="#"><img src="~/assets/images/agency.jpg" alt=""></a>
-                                        <div class="team-content-holder">
-                                            <div class="personal-info">
-                                                <h3>Agency</h3>
-                                                <a class="btn btn-style-1 waves" href="#">Start Here</a>
-                                            </div>
-                                            <!-- .awsm-personal-info -->
-                                            <div class="team-contact-info">
-                                                <p>You are looking for new candidates to hire or home employer for your candidates. You would like to manage efficiently your research</p>
-                                               @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Agency" }, new { @class = "btn btn-style-1 waves" })
+                            
+                            <div class="col-sm-12 col-lg-4">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <a href="#"><img src="~/assets/images/agency.jpg" alt=""></a>
+                                            <div class="team-content-holder">
+                                                <div class="personal-info">
+                                                    <h3>Agency</h3>
+                                                    <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                                </div>
+                                                <!-- .awsm-personal-info -->
+                                                <div class="team-contact-info">
+                                                    <p>You are looking for new candidates to hire or home employer for your candidates. You would like to manage efficiently your research</p>
+                                                    @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Agency" }, new { @class = "btn btn-style-1 waves" })
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </figure>
+                                    </figure>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -211,7 +221,7 @@
         </section>
     </div>
     <div id="page-content" style="padding-bottom:0;">
-        <div class="hr mt-0 ml-3 mr-3 ml-xl-5 mr-xl-5"></div>
+       
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -277,68 +287,4 @@
             </div><!-- row -->
         </div><!-- container -->
     </div><!-- PAGE CONTENT -->
-    <div id="page-content" style="padding-bottom:0;">
-        <section class="full-section" id="section-111">
-            <div class="full-section-container">
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-
-                            <div class="headline text-center">
-                                <h2>Contact Us</h2>
-                                <h5>Lets know your comments on our platform</h5>
-                            </div><!-- headline -->
-
-                            <form id="contact-form" name="contact-form" method="post" action="http://www.vertiqalteam.com/bizhub/demo-12/~/assets/php/send.php" novalidate="novalidate">
-                                <fieldset>
-
-                                    <div id="alert-area"></div>
-
-                                    <div class="row">
-                                        <div class="col-md-4">
-
-                                            <p>
-                                                <input class="col-12" id="name" type="text" name="name" placeholder="Name">
-                                            </p>
-
-                                        </div><!-- col -->
-                                        <div class="col-md-4">
-
-                                            <p>
-                                                <input class="col-12" id="email" type="text" name="email" placeholder="E-mail">
-                                            </p>
-
-                                        </div><!-- col -->
-                                        <div class="col-md-4">
-
-                                            <p>
-                                                <input class="col-12" id="subject" type="text" name="email" placeholder="Subject">
-                                            </p>
-
-                                        </div><!-- col -->
-                                    </div><!-- row -->
-
-                                    <p>
-                                        <textarea class="col-12" id="message" name="message" rows="5" cols="25" placeholder="Message"></textarea>
-                                    </p>
-
-                                    <p class="text-center">
-                                        <button class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Send</button>
-                                    </p>
-
-                                </fieldset>
-                            </form>
-
-                        </div><!-- col -->
-                    </div><!-- row -->
-                </div><!-- container -->
-
-            </div><!-- full-section-container -->
-        </section>
-
-    </div><!-- PAGE CONTENT -->
-    <!-- FOOTER -->
-    <!-- FOOTER -->
-
 </div>
