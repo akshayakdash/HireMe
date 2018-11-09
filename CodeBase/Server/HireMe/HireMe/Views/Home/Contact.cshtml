@@ -74,6 +74,7 @@
             <div class="jobsearch-section">
                 <div class="right-section">
                     <div class="header">
+                        <a title="Filter" id="FilterClose" class="filter-close"><i class="bizhub-icon-close-2"></i></a>
                         <i class="fa fa-filter"></i>Set all filter to Indifferent
                         <div class="switch-area">
                             <label class="switchsmall">
@@ -180,76 +181,247 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Years of Experiences
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-sm-2 text-center">
+                                                    <i class="fa fa-plus"></i>
+                                                </div>
+                                                <div class="col-sm-3" style="padding-left: 0;">
+                                                    <select class="">
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Type of Staff
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option1" value="option1" checked>
+                                                Agency
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option2" value="option2">
+                                                Independant
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Disponibility
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="widget widget-calendar">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" title="Monday">M</th>
+                                                        <th scope="col" title="Tuesday">T</th>
+                                                        <th scope="col" title="Wednesday">W</th>
+                                                        <th scope="col" title="Thursday">T</th>
+                                                        <th scope="col" title="Friday">F</th>
+                                                        <th scope="col" title="Saturday">S</th>
+                                                        <th scope="col" title="Sunday">S</th>
+                                                    </tr>
+                                                </thead>
 
-                                
-                                
+                                                <tbody>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                        <td>6</td>
+                                                        <td>7</td>
+                                                        <td>8</td>
+                                                        <td>9</td>
+                                                        <td>10</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>11</td>
+                                                        <td>12</td>
+                                                        <td>13</td>
+                                                        <td id="today">14</td>
+                                                        <td>15</td>
+                                                        <td>16</td>
+                                                        <td>17</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>18</td>
+                                                        <td>19</td>
+                                                        <td>20</td>
+                                                        <td>21</td>
+                                                        <td>22</td>
+                                                        <td>23</td>
+                                                        <td>24</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>25</td>
+                                                        <td>26</td>
+                                                        <td>27</td>
+                                                        <td>28</td>
+                                                        <td>29</td>
+                                                        <td>30</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row mt-2">
+                        <div class="row">
                             <div class="col-md-12">
-                                <div class="filtersection-header">
-                                    Years of Experiences
-                                    <div class="switch-area-inner">
-                                        <label class="switchsmall">
-                                            <input type="checkbox">
-                                            <span class="slider1 round"></span>
-                                        </label>
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Localizations
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="inlineform-filter">
-                                    <i class="fa fa-plus" style="float: left;line-height: 36px;margin-right: 10px;"></i>
-                                    <div>
-                                        <select class="">
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
+                                    <div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div>City</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div>District</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-2">
+                        <div class="row">
                             <div class="col-md-12">
-                                <div class="filtersection-header">
-                                    Type of Staff
-                                    <div class="switch-area-inner">
-                                        <label class="switchsmall">
-                                            <input type="checkbox">
-                                            <span class="slider1 round"></span>
-                                        </label>
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Salary Between
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="options" id="option1" value="option1" checked>
-                                        Agency
-                                        <span></span>
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="options" id="option2" value="option2">
-                                        Independant
-                                        <span></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-2">
-                            <div class="col-md-12">
-                                <div class="filtersection-header">
-                                    Disponibility
-                                    <div class="switch-area-inner">
-                                        <label class="switchsmall">
-                                            <input type="checkbox">
-                                            <span class="slider1 round"></span>
-                                        </label>
+                                    <div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-md-12 mb-2">
+                                                    <div class="radio inline mr-2">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Monthly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Hourly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <select class="">
+                                                        <option>25</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2 text-center">&amp;</div>
+                                                <div class="col-md-5">
+                                                    <select class="">
+                                                        <option>35</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="widget-calendar">
-                                    Calendar
                                 </div>
                             </div>
                         </div>
@@ -258,6 +430,7 @@
                 <div class="left-section">
                     <div class="header">
                         <i class="fa fa-align-left"></i>
+                        
                         <span class="grid-title">Searching for</span>
                         <div class='switch'>
                             <div class='quality'>
@@ -268,6 +441,8 @@
                                 <label for='q2'>Job Offer</label>
                             </div>
                         </div>
+                        <a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>
+                       
                     </div>
                     <div class="filter-selected">
                         <i class="fa fa-filter"></i><span>Agency</span>
@@ -422,179 +597,6 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="container">
-            <div class="row">
-                <!-- BEGIN HORIZONTAL FORM -->
-                <div class="col-md-12">
-                    <div class="grid">
-                        <div class="grid-header">
-                            <i class="fa fa-align-left"></i>
-                            <span class="grid-title">Search Results</span>
-                            @*<div class="pull-right grid-tools">
-                                <a title="Filter" class="Filterjob"><i class="fa fa-filter"></i></a>
-                            </div>*@
-                            <a title="Filter" class="Filterjob"><i class="fa fa-filter"></i></a>
-                        </div>
-
-                        <div class="grid-body">
-                           <div class="row">
-                               <div class="col-lg-4 col-md-6 col-sm-6">
-                                   <div class="profileitems searchprofile-section">
-                                       <div class="left">
-                                           <img src="~/assets/images/image-18.jpg" />
-                                           <div class="rating">
-                                               <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                           </div>
-                                           <div class="favorite">
-                                               <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
-                                           </div>
-                                       </div>
-                                       <div class="right">
-                                           <h1>Women<span>(AGENCY)</span></h1>
-                                           <h2 class="name">Justine KABLAN</h2>
-                                           <p class="location">(ARABIAN)</p>
-                                           <div class="published">Published: <span>02/09/2018</span></div>
-                                       </div>
-                                       <div class="profile-footer">
-                                           I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                                       </div>
-                                       <div class="team-contact-info">
-                                           <ul class="social-icons">
-                                               <li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                               <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>
-                                               <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                           </ul>
-                                       </div>
-                                   </div>
-                               </div><!-- col -->
-
-
-                               <div class="col-lg-4 col-md-6 col-sm-6">
-                                   <div class="profileitems">
-                                       <div class="left">
-                                           <img src="~/assets/images/image-18.jpg" />
-                                           <div class="rating">
-                                               <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                           </div>
-                                           <div class="favorite">
-                                               <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                                           </div>
-                                       </div>
-                                       <div class="right">
-                                           <h1>Women<span>(AGENCY)</span></h1>
-                                           <h2 class="name">Justine KABLAN</h2>
-                                           <p class="location">(ARABIAN)</p>
-                                           <div class="published">Published: <span>02/09/2018</span></div>
-                                       </div>
-                                       <div class="profile-footer">
-                                           I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                                       </div>
-                                   </div>
-                               </div><!-- col -->
-                               <div class="col-lg-4 col-md-6 col-sm-6">
-                                   <div class="profileitems">
-                                       <div class="left">
-                                           <img src="~/assets/images/image-18.jpg" />
-                                           <div class="rating">
-                                               <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                           </div>
-                                           <div class="favorite">
-                                               <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                                           </div>
-                                       </div>
-                                       <div class="right">
-                                           <h1>Women<span>(AGENCY)</span></h1>
-                                           <h2 class="name">Justine KABLAN</h2>
-                                           <p class="location">(ARABIAN)</p>
-                                           <div class="published">Published: <span>02/09/2018</span></div>
-                                       </div>
-                                       <div class="profile-footer">
-                                           I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                                       </div>
-                                   </div>
-                               </div><!-- col -->
-
-                               <div class="col-md-4 col-sm-6">
-                                   <div class="profileitems">
-                                       <div class="left">
-                                           <img src="~/assets/images/image-18.jpg" />
-                                           <div class="rating">
-                                               <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                           </div>
-                                           <div class="favorite">
-                                               <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
-                                           </div>
-                                       </div>
-                                       <div class="right">
-                                           <h1>Women<span>(AGENCY)</span></h1>
-                                           <h2 class="name">Justine KABLAN</h2>
-                                           <p class="location">(ARABIAN)</p>
-                                           <div class="published">Published: <span>02/09/2018</span></div>
-                                       </div>
-                                       <div class="profile-footer">
-                                           I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                                       </div>
-                                   </div>
-                               </div><!-- col -->
-
-                               <div class="col-md-4 col-sm-6">
-                                   <div class="profileitems">
-                                       <div class="left">
-                                           <img src="~/assets/images/image-18.jpg" />
-                                           <div class="rating">
-                                               <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                           </div>
-                                           <div class="favorite">
-                                               <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                                           </div>
-                                       </div>
-                                       <div class="right">
-                                           <h1>Women<span>(AGENCY)</span></h1>
-                                           <h2 class="name">Justine KABLAN</h2>
-                                           <p class="location">(ARABIAN)</p>
-                                           <div class="published">Published: <span>02/09/2018</span></div>
-                                       </div>
-                                       <div class="profile-footer">
-                                           I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                                       </div>
-                                   </div>
-                               </div><!-- col -->
-                               <div class="col-md-4 col-sm-6">
-                                   <div class="profileitems">
-                                       <div class="left">
-                                           <img src="~/assets/images/image-18.jpg" />
-                                           <div class="rating">
-                                               <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                           </div>
-                                           <div class="favorite">
-                                               <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                                           </div>
-                                       </div>
-                                       <div class="right">
-                                           <h1>Women<span>(AGENCY)</span></h1>
-                                           <h2 class="name">Justine KABLAN</h2>
-                                           <p class="location">(ARABIAN)</p>
-                                           <div class="published">Published: <span>02/09/2018</span></div>
-                                       </div>
-                                       <div class="profile-footer">
-                                           I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                                       </div>
-                                   </div>
-                               </div><!-- col -->
-                           </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END HORIZONTAL FORM -->
-
-
-
-                
-           
-            </div><!-- row -->
-        </div><!-- container -->
         <!---- Tab Section -->
         <div class="container wow fadeInUp">
             <div class="row">
@@ -1011,3 +1013,27 @@
             <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
         </address>
     </div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#FilterjobId").click(function () {                
+                $('.jobsearch-section .left-section').css('margin-right', '358px');
+                $('.jobsearch-section .right-section').css('right', '0');
+                $('.Filterjob').css('display', 'none');
+                $('.switch').css('right', '10px');
+                
+            });
+            $("#FilterClose").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '0');
+                $('.jobsearch-section .right-section').css('right', '-350px');
+                $('.Filterjob').css('display', 'block');
+                $('.switch').css('right', '50px');
+            });
+        });
+
+    </script>
+
+}

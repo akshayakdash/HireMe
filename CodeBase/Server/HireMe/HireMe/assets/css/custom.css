@@ -8968,12 +8968,12 @@ text-align:center;
     }
 .Filterjob {
     position: absolute;
-    bottom: 2px;
-    right: 2px;
+    bottom: 5px;
+    right: 5px;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #fe005a;
+    background-color: #666666;
     color: #fff;
     font-size: 24px;
     line-height: 42px;
@@ -8984,8 +8984,36 @@ text-align:center;
     transition: all 0.25s;
     color: #fff!important;
 }
-.Filterjob:hover {
-    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 3px 12px 0 rgba(0, 0, 0, 0.12);
+    .Filterjob:hover {
+        box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 3px 12px 0 rgba(0, 0, 0, 0.12);
+        background-color: #fe005a;
+    }
+
+.filter-close {
+    position: relative;
+    float: left;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.31);
+    color: #fff;
+    font-size: 10px;
+    padding: 1px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 10px;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+    .filter-close:hover {
+        box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 3px 12px 0 rgba(0, 0, 0, 0.12);
+        background-color: #fe005a;
+    }
+.Filterjob .fa {
+    float: none !important;
+    font-size: 25px !important;
 }
 .jobsearch-section {
     padding: 8px;
@@ -8998,8 +9026,11 @@ text-align:center;
         width: 350px;
         position: absolute;
         right: 8px;
-        height: 99%;
         color: #fff;
+        right: -350px;
+        z-index: 2;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
     }
         .jobsearch-section .right-section > .header {
             padding: 5px 12px;
@@ -9011,11 +9042,13 @@ text-align:center;
     }
     .jobsearch-section .left-section {
         background: #fff;
-        margin-right: 358px;
+        /*margin-right: 358px;*/
         display: block;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
     }
     .jobsearch-section .left-section .header {
-        background: #fff;
+        background: #ddd;
         padding: 12px 16px;
         /*border-bottom: 1px solid #f0f0f0;*/
         height: 100%;
@@ -9058,11 +9091,11 @@ text-align:center;
     width: 250px;
     height: 35px;
     border: 2px solid #E91E63;
-    color: #ccc;
+    color: #333;
     font-size: 16px;
     border-radius: 25px;
     TOP: 8px;
-    right: 15px;
+    right: 50px;
     font-weight:600;
 }
 
@@ -9122,10 +9155,12 @@ text-align:center;
 .filter-selected i {
     font-size: 16px;
 }
-.filter-selected span {
-    padding: 0 15px;
-    font-size: 13px;
-}
+    .filter-selected span {
+        padding: 0 15px;
+        font-size: 13px;
+        font-weight: 600;
+        color: #fe005a;
+    }
 
 /*Registration Page*/
 .outer {
@@ -9252,8 +9287,20 @@ input:checked + .slider1:before {
     height: 30px;
     padding: 4px 12px;
 }
-.filtersection-header .switchsmall {
-    right: 5px;
-    position: absolute;
-    top: 0;
+.inlineform-filter select[multiple] {
+    height: auto;
+}
+    .inlineform-filter input[type="radio"], input[type="checkbox"] {
+        height:0;
+        padding:0;
+    }
+    .filtersection-header .switchsmall {
+        right: 5px;
+        position: absolute;
+        top: 0;
+    }
+.widget-calendar{
+    background:#fff;
+    color:#333;
+    margin-bottom:0;
 }
