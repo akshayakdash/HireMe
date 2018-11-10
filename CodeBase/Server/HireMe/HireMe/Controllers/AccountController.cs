@@ -141,7 +141,7 @@ namespace HireMe.Controllers
         [AllowAnonymous]
         public ActionResult Register(string userRole = "")
         {
-            ViewBag.SecurityQuestions = context.SecurityQuestions.ToList().Take(3);
+            ViewBag.SecurityQuestions = context.SecurityQuestions.ToList();
             if (!string.IsNullOrWhiteSpace(userRole))
             {
                 ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
