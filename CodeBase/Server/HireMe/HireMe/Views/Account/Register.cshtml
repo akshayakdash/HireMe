@@ -175,24 +175,21 @@
                                                     </div>
 
                                                     @if (ViewBag.SecurityQuestions != null)
-                                            {
-                                            <div class="row">
-                                                @foreach (var item in ViewBag.SecurityQuestions)
                                                     {
+                                            <div class="row">
+                                             
                                                     <div class="col-lg-6">
                                                         <div class="checkbox">
                                                             <label>
                                                                 <b>Security Question</b><br />
-                                                                <input type="checkbox" class="chb" name="SecurityQuestionId" value="@item.SecurityQuestionId" />
-                                                                @*@Html.CheckBoxFor(p => p.SecurityQuestionId, new { @value= item.Id})*@
-                                                                @item.Question
-                                                                <span></span>
+@Html.DropDownList("accountid", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"))
+                                                                
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    }
+                                                    
                                             </div>
-
+                                                    
                                             <div class="input-group mb-3">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
