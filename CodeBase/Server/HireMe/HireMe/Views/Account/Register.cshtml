@@ -1,5 +1,9 @@
 ﻿
-
+<style>
+    #footer-container{
+        display:none;
+    }
+</style>
 @model HireMe.Models.RegisterViewModel
 @using System.Linq
 
@@ -71,14 +75,14 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
                                                         </div>
-                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
                                                         <span class="input-lable">Email</span>
                                                     </div>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                         </div>
-                                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name" })
+                                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "" })
                                                         <span class="input-lable">User name</span>
                                                     </div>
 
@@ -86,7 +90,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
                                                         </div>
-                                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Contact number" })
+                                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
                                                         <span class="input-lable">Contact number</span>
                                                     </div>
 
@@ -140,28 +144,28 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                             </div>
-                                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "Company Name" })
+                                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Company Name</span>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                             </div>
-                                            @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "Responsible name" })
+                                            @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Responsible Name</span>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                             </div>
-                                            @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "Website URL" })
+                                            @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Website URL</span>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                             </div>
-                                            @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "Some description about the company activities" })
+                                            @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Description</span>
                                         </div>
                                     </fieldset>
@@ -178,14 +182,14 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
                                                         </div>
-                                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "" })
                                                         <span class="input-lable">Password</span>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
                                                         </div>
-                                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password" })
+                                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "" })
                                                         <span class="input-lable">Confirm password</span>
                                                     </div>
 
