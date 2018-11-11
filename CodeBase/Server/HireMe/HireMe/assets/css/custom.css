@@ -547,7 +547,7 @@ i.text-xl {
 }
 
 .headline:before {
-	display: inline-block;
+	/*display: inline-block;*/
 	width: 2px;
 	/*height: 33px;*/
 	margin-bottom: 15px;
@@ -9177,7 +9177,7 @@ text-align:center;
     position: absolute;
     width: 100%;
     height: 100%;
-    background: #008ad2 url(/assets/images/reg-bg.jpg) no-repeat center center;
+    /*background: #008ad2 url(/assets/images/reg-bg.jpg) no-repeat center center;*/
     background-size: cover;
 }
 
