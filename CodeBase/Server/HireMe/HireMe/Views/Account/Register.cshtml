@@ -179,12 +179,14 @@
                                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
                                                         </div>
                                                         @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                                                        <span class="input-lable">Password</span>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
                                                         </div>
                                                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password" })
+                                                        <span class="input-lable">Confirm password</span>
                                                     </div>
 
                                                     @if (ViewBag.SecurityQuestions != null)
