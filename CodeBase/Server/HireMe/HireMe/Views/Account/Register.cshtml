@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-12 formreg">
                                 <div class="tabs style-2">
-                                    <div class="tab-content" style="margin-top:0;">
+                                    <div class="tab-content regd-form" style="margin-top:0;">
                                         <div class="tab-pane fade show active" id="tab-1-1">
                                             <div class="form-section">
                                                 <h6 class="text-uppercase">Name & Address</h6>
@@ -39,13 +39,15 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                         </div>
-                                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "First name" })
+                                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
+                                                        <span class="input-lable">First Name</span>
                                                     </div>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                         </div>
-                                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last name" })
+                                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
+                                                        <span class="input-lable">Last Name</span>
                                                     </div>
 
 
@@ -53,7 +55,8 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                         </div>
-                                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Address" })
+                                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "" })
+                                                        <span class="input-lable">Address</span>
                                                     </div>
                                                 </fieldset>
 
@@ -69,12 +72,14 @@
                                                             <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
                                                         </div>
                                                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                                        <span class="input-lable">Email</span>
                                                     </div>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                         </div>
                                                         @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User name" })
+                                                        <span class="input-lable">User name</span>
                                                     </div>
 
                                                     <div class="input-group mb-2">
@@ -82,6 +87,7 @@
                                                             <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
                                                         </div>
                                                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "Contact number" })
+                                                        <span class="input-lable">Contact number</span>
                                                     </div>
 
                                                 </fieldset>
@@ -101,18 +107,21 @@
                                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                         </div>
                                                         <input type="file" class="form-control" placeholder="Profile Picture" id="profile_pic" name="profile_pic">
+                                                        <span class="input-lable">Profile Picture</span>
                                                     </div>
                                                     <div class="input-group mb-3">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                                         </div>
                                                         <input type="file" class="form-control" placeholder="Proof of ID" id="id_proof" name="id_proof">
+                                                        <span class="input-lable">Proof of ID</span>
                                                     </div>
                                                     <div class="input-group mb-3" style="display:none;">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                         </div>
                                                         @Html.DropDownList("UserRoles", (SelectList)ViewBag.UserRolesViewBag, "--select role--", new { @class = "form-control", @style = "display:none;" })
+                                                        <span class="input-lable">User Roles</span>
                                                     </div>
 
                                                 </fieldset>
@@ -132,24 +141,28 @@
                                                 <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "Company Name" })
+                                            <span class="input-lable">Company Name</span>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "Responsible name" })
+                                            <span class="input-lable">Responsible Name</span>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "Website URL" })
+                                            <span class="input-lable">Website URL</span>
                                         </div>
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
                                             </div>
                                             @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "Some description about the company activities" })
+                                            <span class="input-lable">Description</span>
                                         </div>
                                     </fieldset>
                                 </div>

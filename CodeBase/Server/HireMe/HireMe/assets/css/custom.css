@@ -2076,7 +2076,7 @@ dl {
  ***********************************************************************************/
 
 .nav-tabs {
-	justify-content: center;
+	/*justify-content: center;*/
 	border-bottom: none;
 	margin-bottom: 70px;
 }
@@ -2173,7 +2173,7 @@ dl {
 
 /* STYLE 2 */
 .tabs.style-2 .nav-tabs {
-	display: inline-flex;
+	/*display: inline-flex;*/
 	border-bottom: 3px solid #f8f8fb;
 	margin-bottom: 10px;
 }
@@ -2186,8 +2186,9 @@ dl {
 	padding: 10px;
 	background-color: transparent;
 	color: #252525;
-	font-size: 17px;
+	font-size: 15px;
     opacity:0.6;
+    font-weight:normal;
 }
 
 .tabs.style-2 .nav-tabs > li > a:before {
@@ -2423,7 +2424,7 @@ dl {
 
 	.tabs.style-2 .nav-tabs > li > a {
 		padding: 10px 25px;
-		font-size: 18px;
+		/*font-size: 18px;*/
 	}
 
 	.tab-content .counter i {
@@ -2440,7 +2441,7 @@ dl {
 
 	.tabs.style-2 .nav-tabs > li > a {
 		padding: 10px 5px;
-		font-size: 16px;
+		/*font-size: 16px;*/
 	}
 
 	.vertical-tabs-2 .tab-content {
@@ -9037,15 +9038,23 @@ text-align:center;
             background: rgba(0, 0, 0, 0.2);
             font-weight: 600;
         }
-    .jobsearch-section .right-section > .body {
-        padding: 5px 8px;
-    }
+        .jobsearch-section .right-section > .body {
+            padding: 5px 8px;
+            max-height: 500px;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .jobsearch-section .right-section > .footer {
+            padding: 5px 8px;
+            text-align:center;
+        }
     .jobsearch-section .left-section {
         background: #fff;
         /*margin-right: 358px;*/
         display: block;
         -webkit-transition: all 0.25s;
         transition: all 0.25s;
+        position:relative;
     }
     .jobsearch-section .left-section .header {
         background: #ddd;
@@ -9304,3 +9313,74 @@ input:checked + .slider1:before {
     color:#333;
     margin-bottom:0;
 }
+/*--------------Filter Loader----------------*/
+.lds-ripple {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    margin-left: 50%;
+    margin-top: 10%;
+}
+
+    .lds-ripple div {
+        position: absolute;
+        border: 4px solid #fe005a;
+        opacity: 1;
+        border-radius: 50%;
+        animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+
+.lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+}
+
+@keyframes lds-ripple {
+    0% {
+        top: 28px;
+        left: 28px;
+        width: 0;
+        height: 0;
+        opacity: 1;
+    }
+
+    100% {
+        top: -1px;
+        left: -1px;
+        width: 58px;
+        height: 58px;
+        opacity: 0;
+    }
+}
+.filter-overlay {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    z-index: 2;
+    display:none;
+}
+.tab-section {
+    padding: 8px;
+    background: #e9f1f5;
+}
+.tab-section-body {
+    background: #fff;
+    padding:10px 15px;
+}
+.regd-form{
+
+}
+.regd-form .input-group {
+    position:relative;
+}
+    .regd-form .input-group .input-lable {
+        position: absolute;
+        right: 0;
+        z-index: 1;
+        font-size: 12px;
+        font-style: italic;
+        top: 0;
+        /* background: red; */
+        padding: 7px 12px;
+    }

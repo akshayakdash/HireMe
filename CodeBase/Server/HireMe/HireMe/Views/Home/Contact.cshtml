@@ -46,7 +46,9 @@
                                     </li>
                                 </ul>
                             </li>
-
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
                             @Html.Partial("_LoginPartial")
                             <li class="secondary-menu-btn">
                                 <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
@@ -426,8 +428,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="footer">
+                        <button type="submit" class="btn btn-default btn-lg"><i class="bizhub-icon-search"></i> Search</button>
+                    </div>
                 </div>
                 <div class="left-section">
+                    <div class="filter-overlay">
+                        <div class="lds-ripple"><div></div><div></div></div>
+                    </div>
                     <div class="header">
                         <i class="fa fa-align-left"></i>
                         
@@ -473,6 +481,7 @@
                                         <ul class="social-icons">
                                             <li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" title="Favorite"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
                                             <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
@@ -598,401 +607,470 @@
             </div>
         </div>
         <!---- Tab Section -->
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="tabs style-2 mt-lg-5 pt-lg-5">
 
-                        <ul class="nav nav-tabs">
-                            <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
-                            <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                            <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
-                            <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                            <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
-                        </ul>
+            <div class="full-section-container wow fadeInUp">
+                <div class="tab-section">
+                    <div class="tab-section-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tabs style-2">
 
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-1-1">
+                                    <ul class="nav nav-tabs">
+                                        <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                        <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                        <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                        <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                        <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="tab-1-1">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/cook.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Cook</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/nanny.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Nanny/ Housekeeper</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/guardian.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Guardian</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-2">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/plumber.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Plumber</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/electrician.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Electrician</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/music.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Music Courses</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-3">
+                                            <div class="service-box style-9 icon-left">
+                                                <span><i class="bizhub-icon-shuffle"></i></span>
+                                                <div class="service-box-content">
+                                                    <h5><a href="single-service.html">Course</a></h5>
+                                                    <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                                </div><!-- service-box-content -->
+                                            </div><!-- service-box -->
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-4">
+                                            <div class="service-box style-9 icon-left">
+                                                <span><i class="bizhub-icon-shuffle"></i></span>
+                                                <div class="service-box-content">
+                                                    <h5><a href="single-service.html">Hairstyle/ Care</a></h5>
+                                                    <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                                </div><!-- service-box-content -->
+                                            </div><!-- service-box -->
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-5">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/catering.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Home Catering</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/Ceremony.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Ceremony Organization</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- tab-pane -->
+
+                                    </div><!-- tab-content -->
+                                </div><!-- tabs -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!---- Tab Section end-->
+
+       
+
+
+            <!--Search Section-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center">
+                            <h5><i class="bizhub-icon-search"></i> Search Criterias</h5>
+                            <h2>Employer</h2>
+                        </div>
+                    </div><!-- col -->
+                </div><!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="text-center">Set all filters to </h5>
+                        <div class="tabs switch-tabs" style="position:relative;margin-bottom:20px;">
+                            <ul class="nav nav-tabs" style="margin-bottom:20px;">
+                                <li><a class="active" href="#tab-6-1" data-toggle="tab">Active</a></li>
+                                <li><a href="#tab-6-2" data-toggle="tab">Inactive</a></li>
+                            </ul>
+                        </div>
+                        <div class="filter-box">
+                            <form>
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="isotope cols-3 gutter">
-                                            <div class="isotope-item categ-1 categ-2">
-                                                <div class="portfolio-item">
-                                                    <div class="portfolio-item-thumbnail">
-                                                        <img src="~/assets/images/portfolio/cook.jpg" alt="">
-                                                        <div class="portfolio-item-hover"></div>
-                                                        <div class="portfolio-item-description">
-                                                            <h5><a href="#">Cook</a></h5>
-                                                        </div><!-- portfolio-item-description -->
-                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
-                                                    </div><!-- portfolio-item-thumbnail -->
-                                                </div><!-- portfolio-item -->
-                                            </div><!-- isotope-item -->
+                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Gender</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Woman
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Man
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Type of staff</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Agency
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Independant
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Age</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Years of Experiences</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filter-header">Localizations</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select multiple="">
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                    <option>Option five</option>
+                                                    <option>Option six</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select multiple="">
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                    <option>Option five</option>
+                                                    <option>Option six</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">ID Card Checked</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Yes
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            No
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Disponibility</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="date">
+                                                        <input type="text" class="form-control" placeholder="DD/MM" data-beatpicker="true" data-beatpicker-format="['MM','DD','YYYY'],separator:'/'">
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
 
-                                            <div class="isotope-item categ-1 categ-2">
-                                                <div class="portfolio-item">
-                                                    <div class="portfolio-item-thumbnail">
-                                                        <img src="~/assets/images/portfolio/nanny.jpg" alt="">
-                                                        <div class="portfolio-item-hover"></div>
-                                                        <div class="portfolio-item-description">
-                                                            <h5><a href="#">Nanny/ Housekeeper</a></h5>
-                                                        </div><!-- portfolio-item-description -->
-                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
-                                                    </div><!-- portfolio-item-thumbnail -->
-                                                </div><!-- portfolio-item -->
-                                            </div><!-- isotope-item -->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filter-header">Salary between</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Monthly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Hourly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Other
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <select>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <select>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                            <div class="isotope-item categ-1 categ-2">
-                                                <div class="portfolio-item">
-                                                    <div class="portfolio-item-thumbnail">
-                                                        <img src="~/assets/images/portfolio/guardian.jpg" alt="">
-                                                        <div class="portfolio-item-hover"></div>
-                                                        <div class="portfolio-item-description">
-                                                            <h5><a href="#">Guardian</a></h5>
-                                                        </div><!-- portfolio-item-description -->
-                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
-                                                    </div><!-- portfolio-item-thumbnail -->
-                                                </div><!-- portfolio-item -->
-                                            </div><!-- isotope-item -->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filter-header">Additional Criterias</div>
+                                                <textarea id="comment" class="col-12" name="comment" rows="2" placeholder="Comment"></textarea>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- tab-pane -->
-                            
-                            <div class="tab-pane fade" id="tab-1-2">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Troubleshooting</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
+                            </form>
+                        </div>
+                    </div><!-- col -->
+                </div><!-- row -->
 
-                            <div class="tab-pane fade" id="tab-1-3">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Course</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
+            </div><!-- container -->
+            <!--Search Section end-->
 
-                            <div class="tab-pane fade" id="tab-1-4">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Hairstyle/ Care</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
-
-                            <div class="tab-pane fade" id="tab-1-5">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Organization Ceremony</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
-
-                        </div><!-- tab-content -->
-                    </div><!-- tabs -->
-                </div>
-            </div>
         </div>
-        <!---- Tab Section end-->
-
-        <!--Search Section-->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="headline text-center">
-                        <h5><i class="bizhub-icon-search"></i> Search Criterias</h5>
-                        <h2>Employer</h2>
-                    </div>
-                </div><!-- col -->
-            </div><!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h5 class="text-center">Set all filters to </h5>
-                    <div class="tabs switch-tabs" style="position:relative;margin-bottom:20px;">
-                        <ul class="nav nav-tabs" style="margin-bottom:20px;">
-                            <li><a class="active" href="#tab-6-1" data-toggle="tab">Active</a></li>
-                            <li><a href="#tab-6-2" data-toggle="tab">Inactive</a></li>
-                        </ul>
-                    </div>
-                   <div class="filter-box">
-                       <form>
-                           <div class="row">
-                               <div class="col-md-6" style="border-right:2px solid #ff6a00;">
-                                   <div class="row">
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Gender</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Woman
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Man
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Type of staff</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Agency
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Independant
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                   </div>
-                                   <div class="row">
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Age</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <div class="row">
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Years of Experiences</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <div class="row">
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="row">
-                                       <div class="col-sm-12">
-                                           <div class="filter-header">Localizations</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                       </div>
-                                        <div class="col-sm-6">
-                                            <select multiple="">
-                                                <option>Option one</option>
-                                                <option>Option two</option>
-                                                <option>Option three</option>
-                                                <option>Option four</option>
-                                                <option>Option five</option>
-                                                <option>Option six</option>
-                                            </select>
-                                        </div>
-                                       <div class="col-sm-6">
-                                           <select multiple="">
-                                               <option>Option one</option>
-                                               <option>Option two</option>
-                                               <option>Option three</option>
-                                               <option>Option four</option>
-                                               <option>Option five</option>
-                                               <option>Option six</option>
-                                           </select>
-                                       </div>
-                                    </div>
-                               </div>
-                               <div class="col-md-6">
-                                   <div class="row">
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">ID Card Checked</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Yes
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       No
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Disponibility</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="date">
-                                                   <input type="text" class="form-control" placeholder="DD/MM" data-beatpicker="true" data-beatpicker-format="['MM','DD','YYYY'],separator:'/'">
-                                               </div>
-                                           </p>
-                                       </div>
-                                   </div>
-
-                                   <div class="row">
-                                       <div class="col-sm-12">
-                                           <div class="filter-header">Salary between</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Monthly
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Hourly
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Other
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                       <div class="col-lg-6 col-md-6">
-                                           <select>
-                                               <option value="1">1</option>
-                                               <option value="2">2</option>
-                                               <option value="3">3</option>
-                                               <option value="4">4</option>
-                                               <option value="5">5</option>
-                                               <option value="6">6</option>
-                                           </select>
-                                       </div>
-                                       <div class="col-lg-6 col-md-6">
-                                           <select>
-                                               <option value="1">1</option>
-                                               <option value="2">2</option>
-                                               <option value="3">3</option>
-                                               <option value="4">4</option>
-                                               <option value="5">5</option>
-                                               <option value="6">6</option>
-                                           </select>
-                                       </div>
-                                   </div>
-
-                                   <div class="row">
-                                       <div class="col-sm-12">
-                                           <div class="filter-header">Additional Criterias</div>
-                                           <textarea id="comment" class="col-12" name="comment" rows="2" placeholder="Comment"></textarea>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </form>
-                   </div>
-                </div><!-- col -->
-            </div><!-- row -->
-
-        </div><!-- container -->
-
-        <!--Search Section end-->
-
-    </div>
 
         @{
             ViewBag.Title = "Contact";
@@ -1024,6 +1102,7 @@
                 $('.jobsearch-section .right-section').css('right', '0');
                 $('.Filterjob').css('display', 'none');
                 $('.switch').css('right', '10px');
+                $('.filter-overlay').css('display', 'block');
                 
             });
             $("#FilterClose").click(function () {
@@ -1031,6 +1110,7 @@
                 $('.jobsearch-section .right-section').css('right', '-350px');
                 $('.Filterjob').css('display', 'block');
                 $('.switch').css('right', '50px');
+                $('.filter-overlay').css('display', 'none');
             });
         });
 
