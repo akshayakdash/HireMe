@@ -36,7 +36,7 @@ namespace HireMe
                         "~/assets/plugins/viewport/jquery.viewport.min.js",
                         "~/assets/plugins/menu/hoverintent.min.js",
                         "~/assets/plugins/menu/superfish.min.js",
-                        "~/assets/plugins/fancybox/jquery.fancybox.min.js",
+                        //"~/assets/plugins/fancybox/jquery.fancybox.min.js",
                         "~/assets/plugins/revolutionslider/js/jquery.themepunch.tools.min.js",
                         "~/assets/plugins/revolutionslider/js/jquery.themepunch.revolution.min.js",
                         "~/assets/plugins/revolutionslider/js/extensions/revolution.extension.actions.min.js",
@@ -51,6 +51,7 @@ namespace HireMe
                         "~/assets/plugins/owl-carousel/owl.carousel.min.js",
                         "~/assets/plugins/parallax/jquery.stellar.min.js",
                         "~/assets/plugins/animations/wow.min.js",
+                        "~/assets/js/vgorpv.js",
                         "~/assets/js/custom.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
@@ -62,7 +63,7 @@ namespace HireMe
                       "~/assets/bootstrap/css/bootstrap.min.css",
                       "~/assets/fonts/fontawesome/css/font-awesome.min.css",
                       "~/assets/fonts/bizhub-icons/css/bizhub-icons.min.css",
-                      "~/assets/plugins/fancybox/jquery.fancybox.min.css",
+                      //"~/assets/plugins/fancybox/jquery.fancybox.min.css",
                       "~/assets/plugins/revolutionslider/css/settings.css",
                       "~/assets/plugins/revolutionslider/css/layers.css",
                       "~/assets/plugins/revolutionslider/css/navigation.css",
@@ -71,6 +72,7 @@ namespace HireMe
                       "~/assets/plugins/ytplayer/css/jquery.mb.ytplayer.min.css",
                       "~/assets/plugins/beatpicker/beatpicker.min.css",
                       "~/assets/plugins/animations/animate.min.css",
+                      "~/assets/css/vgorpv.css",
                       "~/assets/css/custom.css",
                       "~/assets/css/pages-style.css"));
         }

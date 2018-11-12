@@ -46,7 +46,9 @@
                                     </li>
                                 </ul>
                             </li>
-
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
                             @Html.Partial("_LoginPartial")
                             <li class="secondary-menu-btn">
                                 <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
@@ -70,575 +72,1117 @@
     <!-- PAGE CONTENT -->
 
     <div id="page-content">
-        <div id="page-header">
-            <div class="ken-burns" style="background-image:url(../images/backgrounds/page-header-7.jpg);"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>Contact</h1>
-                        <ol class="breadcrumb">
-                            <li><a href="#">Home</a></li>
-                            <li class="active">Contact</li>
-                        </ol>
-                    </div><!-- col -->
-                </div><!-- row -->
-            </div><!-- container -->
-        </div><!-- page-header -->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="headline style-2 mb-5">
-                        <h5>Why choose us?</h5>
-                        <h2>A truly multi-use <br class="d-none d-md-block"> theme</h2>
-                    </div><!-- headline -->
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container -->
-        <div class="container">
-            <div class="row">
-
-                <div class="col-md-4 col-sm-6">
-                    <div class="profileitems">
-                        <div class="left">
-                            <img src="~/assets/images/image-18.jpg" />
-                            <div class="rating">
-                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                            </div>
-                            <div class="favorite">
-                                <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h1>Women<span>(AGENCY)</span></h1>
-                            <h2 class="name">Justine KABLAN</h2>
-                            <p class="location">(ARABIAN)</p>
-                            <div class="published">Published: <span>02/09/2018</span></div>
-                        </div>
-                        <div class="profile-footer">
-                            I offer my service for babysitting for long term period
+        <div class="full-section-container">
+            <div class="jobsearch-section">
+                <div class="right-section">
+                    <div class="header">
+                        <a title="Filter" id="FilterClose" class="filter-close"><i class="bizhub-icon-close-2"></i></a>
+                        <i class="fa fa-filter"></i>Set all filter to Indifferent
+                        <div class="switch-area">
+                            <label class="switchsmall">
+                                <input type="checkbox">
+                                <span class="slider1 round"></span>
+                            </label>
                         </div>
                     </div>
-                </div><!-- col -->
+                    <div class="body search-filter-section">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Gender
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
 
-                <div class="col-md-4 col-sm-6">
-                    <div class="profileitems">
-                        <div class="left">
-                            <img src="~/assets/images/image-18.jpg" />
-                            <div class="rating">
-                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                            </div>
-                            <div class="favorite">
-                                <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h1>Women<span>(AGENCY)</span></h1>
-                            <h2 class="name">Justine KABLAN</h2>
-                            <p class="location">(ARABIAN)</p>
-                            <div class="published">Published: <span>02/09/2018</span></div>
-                        </div>
-                        <div class="profile-footer">
-                            <p>
-                                I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children 
-                            </p>
-                        </div>
-                    </div>
-                </div><!-- col -->
-                <div class="col-md-4 col-sm-6">
-                    <div class="profileitems">
-                        <div class="left">
-                            <img src="~/assets/images/image-18.jpg" />
-                            <div class="rating">
-                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                            </div>
-                            <div class="favorite">
-                                <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h1>Women<span>(AGENCY)</span></h1>
-                            <h2 class="name">Justine KABLAN</h2>
-                            <p class="location">(ARABIAN)</p>
-                            <div class="published">Published: <span>02/09/2018</span></div>
-                        </div>
-                        <div class="profile-footer">
-                            <p>
-                                I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                            </p>
-                        </div>
-                    </div>
-                </div><!-- col -->
-
-                <div class="col-md-4 col-sm-6">
-                    <div class="profileitems">
-                        <div class="left">
-                            <img src="~/assets/images/image-18.jpg" />
-                            <div class="rating">
-                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                            </div>
-                            <div class="favorite">
-                                <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h1>Women<span>(AGENCY)</span></h1>
-                            <h2 class="name">Justine KABLAN</h2>
-                            <p class="location">(ARABIAN)</p>
-                            <div class="published">Published: <span>02/09/2018</span></div>
-                        </div>
-                        <div class="profile-footer">
-                            I offer my service for babysitting for long term period
-                        </div>
-                    </div>
-                </div><!-- col -->
-
-                <div class="col-md-4 col-sm-6">
-                    <div class="profileitems">
-                        <div class="left">
-                            <img src="~/assets/images/image-18.jpg" />
-                            <div class="rating">
-                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                            </div>
-                            <div class="favorite">
-                                <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h1>Women<span>(AGENCY)</span></h1>
-                            <h2 class="name">Justine KABLAN</h2>
-                            <p class="location">(ARABIAN)</p>
-                            <div class="published">Published: <span>02/09/2018</span></div>
-                        </div>
-                        <div class="profile-footer">
-                            <p>
-                                I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                            </p>
-                        </div>
-                    </div>
-                </div><!-- col -->
-                <div class="col-md-4 col-sm-6">
-                    <div class="profileitems">
-                        <div class="left">
-                            <img src="~/assets/images/image-18.jpg" />
-                            <div class="rating">
-                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                            </div>
-                            <div class="favorite">
-                                <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
-                            </div>
-                        </div>
-                        <div class="right">
-                            <h1>Women<span>(AGENCY)</span></h1>
-                            <h2 class="name">Justine KABLAN</h2>
-                            <p class="location">(ARABIAN)</p>
-                            <div class="published">Published: <span>02/09/2018</span></div>
-                        </div>
-                        <div class="profile-footer">
-                            <p>
-                                I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
-                            </p>
-                        </div>
-                    </div>
-                </div><!-- col -->
-           
-                </div><!-- row -->
-        </div><!-- container -->
-        <!---- Tab Section -->
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="tabs style-2 mt-lg-5 pt-lg-5">
-
-                        <ul class="nav nav-tabs">
-                            <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
-                            <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                            <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
-                            <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                            <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-1-1">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="isotope cols-3 gutter">
-                                            <div class="isotope-item categ-1 categ-2">
-                                                <div class="portfolio-item">
-                                                    <div class="portfolio-item-thumbnail">
-                                                        <img src="~/assets/images/portfolio/cook.jpg" alt="">
-                                                        <div class="portfolio-item-hover"></div>
-                                                        <div class="portfolio-item-description">
-                                                            <h5><a href="#">Cook</a></h5>
-                                                        </div><!-- portfolio-item-description -->
-                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
-                                                    </div><!-- portfolio-item-thumbnail -->
-                                                </div><!-- portfolio-item -->
-                                            </div><!-- isotope-item -->
-
-                                            <div class="isotope-item categ-1 categ-2">
-                                                <div class="portfolio-item">
-                                                    <div class="portfolio-item-thumbnail">
-                                                        <img src="~/assets/images/portfolio/nanny.jpg" alt="">
-                                                        <div class="portfolio-item-hover"></div>
-                                                        <div class="portfolio-item-description">
-                                                            <h5><a href="#">Nanny/ Housekeeper</a></h5>
-                                                        </div><!-- portfolio-item-description -->
-                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
-                                                    </div><!-- portfolio-item-thumbnail -->
-                                                </div><!-- portfolio-item -->
-                                            </div><!-- isotope-item -->
-
-                                            <div class="isotope-item categ-1 categ-2">
-                                                <div class="portfolio-item">
-                                                    <div class="portfolio-item-thumbnail">
-                                                        <img src="~/assets/images/portfolio/guardian.jpg" alt="">
-                                                        <div class="portfolio-item-hover"></div>
-                                                        <div class="portfolio-item-description">
-                                                            <h5><a href="#">Guardian</a></h5>
-                                                        </div><!-- portfolio-item-description -->
-                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
-                                                    </div><!-- portfolio-item-thumbnail -->
-                                                </div><!-- portfolio-item -->
-                                            </div><!-- isotope-item -->
+                                    <div class="filtersection-body">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option1" value="option1" checked>
+                                                Woman
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option2" value="option2">
+                                                Man
+                                                <span></span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                            </div><!-- tab-pane -->
-                            
-                            <div class="tab-pane fade" id="tab-1-2">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Troubleshooting</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        ID Card Checked
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option1" value="option1" checked>
+                                                Yes
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option2" value="option2">
+                                                No
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Age
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <select class="">
+                                                        <option>25</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2 text-center">&amp;</div>
+                                                <div class="col-md-5">
+                                                    <select class="">
+                                                        <option>35</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Years of Experiences
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-sm-2 text-center">
+                                                    <i class="fa fa-plus"></i>
+                                                </div>
+                                                <div class="col-sm-3" style="padding-left: 0;">
+                                                    <select class="">
+                                                        <option>2</option>
+                                                        <option>3</option>
+                                                        <option>4</option>
+                                                        <option>5</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Type of Staff
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option1" value="option1" checked>
+                                                Agency
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                <input type="radio" name="options" id="option2" value="option2">
+                                                Independant
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Disponibility
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="widget widget-calendar">
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col" title="Monday">M</th>
+                                                        <th scope="col" title="Tuesday">T</th>
+                                                        <th scope="col" title="Wednesday">W</th>
+                                                        <th scope="col" title="Thursday">T</th>
+                                                        <th scope="col" title="Friday">F</th>
+                                                        <th scope="col" title="Saturday">S</th>
+                                                        <th scope="col" title="Sunday">S</th>
+                                                    </tr>
+                                                </thead>
 
-                            <div class="tab-pane fade" id="tab-1-3">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Course</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
+                                                <tbody>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                        <td>1</td>
+                                                        <td>2</td>
+                                                        <td>3</td>
+                                                    </tr>
 
-                            <div class="tab-pane fade" id="tab-1-4">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Hairstyle/ Care</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>5</td>
+                                                        <td>6</td>
+                                                        <td>7</td>
+                                                        <td>8</td>
+                                                        <td>9</td>
+                                                        <td>10</td>
+                                                    </tr>
 
-                            <div class="tab-pane fade" id="tab-1-5">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Organization Ceremony</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
+                                                    <tr>
+                                                        <td>11</td>
+                                                        <td>12</td>
+                                                        <td>13</td>
+                                                        <td id="today">14</td>
+                                                        <td>15</td>
+                                                        <td>16</td>
+                                                        <td>17</td>
+                                                    </tr>
 
-                        </div><!-- tab-content -->
-                    </div><!-- tabs -->
+                                                    <tr>
+                                                        <td>18</td>
+                                                        <td>19</td>
+                                                        <td>20</td>
+                                                        <td>21</td>
+                                                        <td>22</td>
+                                                        <td>23</td>
+                                                        <td>24</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>25</td>
+                                                        <td>26</td>
+                                                        <td>27</td>
+                                                        <td>28</td>
+                                                        <td>29</td>
+                                                        <td>30</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Localizations
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div>City</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div>District</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Salary Between
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-md-12 mb-2">
+                                                    <div class="radio inline mr-2">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Monthly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Hourly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <select class="">
+                                                        <option>25</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-2 text-center">&amp;</div>
+                                                <div class="col-md-5">
+                                                    <select class="">
+                                                        <option>35</option>
+                                                        <option>30</option>
+                                                        <option>35</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Read
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <img src="~/assets/images/eyeglass.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Write
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <img src="~/assets/images/write.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Sleep on Site
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <img src="~/assets/images/sleep.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Child Care
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <img src="~/assets/images/childcare.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Cleaning
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <img src="~/assets/images/cleaning.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="filtersection-panel">
+                                    <div class="filtersection-header">
+                                        Laundry
+                                        <div class="switch-area-inner">
+                                            <label class="switchsmall">
+                                                <input type="checkbox">
+                                                <span class="slider1 round"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="filtersection-body">
+                                        <img src="~/assets/images/laundry.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="footer">
+                        <button type="submit" class="btn btn-default btn-lg"><i class="bizhub-icon-search"></i> Search</button>
+                    </div>
+                </div>
+                <div class="left-section">
+                    <div class="filter-overlay">
+                        <div class="lds-ripple"><div></div><div></div></div>
+                    </div>
+                    <div class="header">
+                        <i class="fa fa-align-left"></i>
+                        
+                        <span class="grid-title">Searching for</span>
+                        <div class='switch'>
+                            <div class='quality'>
+                                <input checked id='q1' name='q' type='radio' value='q1'>
+                                <label for='q1'>Job Request</label>
+                            </div><div class='quality'>
+                                <input id='q2' name='q' type='radio' value='q2'>
+                                <label for='q2'>Job Offer</label>
+                            </div>
+                        </div>
+                        <a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>
+                       
+                    </div>
+                    <div class="filter-selected">
+                        <i class="fa fa-filter"></i><span>Agency</span>
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="profileitems searchprofile-section">
+                                    <div class="left">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                        <div class="rating">
+                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="favorite">
+                                            <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h1>Women<span>(AGENCY)</span></h1>
+                                        <h2 class="name">Justine KABLAN</h2>
+                                        <p class="location">(ARABIAN)</p>
+                                        <div class="published">Published: <span>02/09/2018</span></div>
+                                    </div>
+                                    <div class="profile-footer">
+                                        I offer my service for babysitting for long term period I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
+                                    </div>
+                                    <div class="team-contact-info">
+                                        <ul class="social-icons">
+                                            <li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" title="Favorite"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                            <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div><!-- col -->
+
+
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="profileitems">
+                                    <div class="left">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                        <div class="rating">
+                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="favorite">
+                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h1>Women<span>(AGENCY)</span></h1>
+                                        <h2 class="name">Justine KABLAN</h2>
+                                        <p class="location">(ARABIAN)</p>
+                                        <div class="published">Published: <span>02/09/2018</span></div>
+                                    </div>
+                                    <div class="profile-footer" title="I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children">
+                                            I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
+                                    </div>
+                                </div>
+                            </div><!-- col -->
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="profileitems">
+                                    <div class="left">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                        <div class="rating">
+                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="favorite">
+                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h1>Women<span>(AGENCY)</span></h1>
+                                        <h2 class="name">Justine KABLAN</h2>
+                                        <p class="location">(ARABIAN)</p>
+                                        <div class="published">Published: <span>02/09/2018</span></div>
+                                    </div>
+                                    <div class="profile-footer">
+                                        I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
+                                    </div>
+                                </div>
+                            </div><!-- col -->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="profileitems">
+                                    <div class="left">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                        <div class="rating">
+                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="favorite">
+                                            <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h1>Women<span>(AGENCY)</span></h1>
+                                        <h2 class="name">Justine KABLAN</h2>
+                                        <p class="location">(ARABIAN)</p>
+                                        <div class="published">Published: <span>02/09/2018</span></div>
+                                    </div>
+                                    <div class="profile-footer">
+                                        I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
+                                    </div>
+                                </div>
+                            </div><!-- col -->
+
+                            <div class="col-md-4 col-sm-6">
+                                <div class="profileitems">
+                                    <div class="left">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                        <div class="rating">
+                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="favorite">
+                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h1>Women<span>(AGENCY)</span></h1>
+                                        <h2 class="name">Justine KABLAN</h2>
+                                        <p class="location">(ARABIAN)</p>
+                                        <div class="published">Published: <span>02/09/2018</span></div>
+                                    </div>
+                                    <div class="profile-footer">
+                                        I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
+                                    </div>
+                                </div>
+                            </div><!-- col -->
+                            <div class="col-md-4 col-sm-6">
+                                <div class="profileitems">
+                                    <div class="left">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                        <div class="rating">
+                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="favorite">
+                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h1>Women<span>(AGENCY)</span></h1>
+                                        <h2 class="name">Justine KABLAN</h2>
+                                        <p class="location">(ARABIAN)</p>
+                                        <div class="published">Published: <span>02/09/2018</span></div>
+                                    </div>
+                                    <div class="profile-footer">
+                                        I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children
+                                    </div>
+                                </div>
+                            </div><!-- col -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!---- Tab Section -->
+
+            <div class="full-section-container wow fadeInUp">
+                <div class="tab-section">
+                    <div class="tab-section-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tabs style-2">
+
+                                    <ul class="nav nav-tabs">
+                                        <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                        <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                        <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                        <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                        <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                                    </ul>
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="tab-1-1">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/cook.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Cook</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/nanny.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Nanny/ Housekeeper</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/guardian.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Guardian</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-2">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/plumber.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Plumber</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/electrician.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Electrician</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/music.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Music Courses</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-3">
+                                            <div class="service-box style-9 icon-left">
+                                                <span><i class="bizhub-icon-shuffle"></i></span>
+                                                <div class="service-box-content">
+                                                    <h5><a href="single-service.html">Course</a></h5>
+                                                    <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                                </div><!-- service-box-content -->
+                                            </div><!-- service-box -->
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-4">
+                                            <div class="service-box style-9 icon-left">
+                                                <span><i class="bizhub-icon-shuffle"></i></span>
+                                                <div class="service-box-content">
+                                                    <h5><a href="single-service.html">Hairstyle/ Care</a></h5>
+                                                    <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
+                                                </div><!-- service-box-content -->
+                                            </div><!-- service-box -->
+                                        </div><!-- tab-pane -->
+
+                                        <div class="tab-pane fade" id="tab-1-5">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/catering.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Home Catering</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="~/assets/images/portfolio/Ceremony.jpg" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        <h5><a href="#">Ceremony Organization</a></h5>
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div><!-- isotope-item -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- tab-pane -->
+
+                                    </div><!-- tab-content -->
+                                </div><!-- tabs -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         <!---- Tab Section end-->
 
-        <!--Search Section-->
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="headline text-center">
-                        <h5><i class="bizhub-icon-search"></i> Search Criterias</h5>
-                        <h2>Employer</h2>
-                    </div>
-                </div><!-- col -->
-            </div><!-- row -->
-            <div class="row">
-                <div class="col-md-12">
-                    <h5 class="text-center">Set all filters to </h5>
-                    <div class="tabs switch-tabs" style="position:relative;margin-bottom:20px;">
-                        <ul class="nav nav-tabs" style="margin-bottom:20px;">
-                            <li><a class="active" href="#tab-6-1" data-toggle="tab">Active</a></li>
-                            <li><a href="#tab-6-2" data-toggle="tab">Inactive</a></li>
-                        </ul>
-                    </div>
-                   <div class="filter-box">
-                       <form>
-                           <div class="row">
-                               <div class="col-md-6" style="border-right:2px solid #ff6a00;">
-                                   <div class="row">
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Gender</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Woman
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Man
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Type of staff</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Agency
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Independant
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                   </div>
-                                   <div class="row">
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Age</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <div class="row">
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                           </div>
-                                       </div>
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Years of Experiences</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <div class="row">
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                               <div class="col-lg-6 col-md-6">
-                                                   <select>
-                                                       <option value="1">1</option>
-                                                       <option value="2">2</option>
-                                                       <option value="3">3</option>
-                                                       <option value="4">4</option>
-                                                       <option value="5">5</option>
-                                                       <option value="6">6</option>
-                                                   </select>
-                                               </div>
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <div class="row">
-                                       <div class="col-sm-12">
-                                           <div class="filter-header">Localizations</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                       </div>
-                                        <div class="col-sm-6">
-                                            <select multiple="">
-                                                <option>Option one</option>
-                                                <option>Option two</option>
-                                                <option>Option three</option>
-                                                <option>Option four</option>
-                                                <option>Option five</option>
-                                                <option>Option six</option>
-                                            </select>
+       
+
+
+            <!--Search Section-->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center">
+                            <h5><i class="bizhub-icon-search"></i> Search Criterias</h5>
+                            <h2>Employer</h2>
+                        </div>
+                    </div><!-- col -->
+                </div><!-- row -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5 class="text-center">Set all filters to </h5>
+                        <div class="tabs switch-tabs" style="position:relative;margin-bottom:20px;">
+                            <ul class="nav nav-tabs" style="margin-bottom:20px;">
+                                <li><a class="active" href="#tab-6-1" data-toggle="tab">Active</a></li>
+                                <li><a href="#tab-6-2" data-toggle="tab">Inactive</a></li>
+                            </ul>
+                        </div>
+                        <div class="filter-box">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Gender</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Woman
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Man
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Type of staff</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Agency
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Independant
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
                                         </div>
-                                       <div class="col-sm-6">
-                                           <select multiple="">
-                                               <option>Option one</option>
-                                               <option>Option two</option>
-                                               <option>Option three</option>
-                                               <option>Option four</option>
-                                               <option>Option five</option>
-                                               <option>Option six</option>
-                                           </select>
-                                       </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Age</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Years of Experiences</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        <select>
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filter-header">Localizations</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select multiple="">
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                    <option>Option five</option>
+                                                    <option>Option six</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <select multiple="">
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                    <option>Option five</option>
+                                                    <option>Option six</option>
+                                                </select>
+                                            </div>
+                                        </div>
                                     </div>
-                               </div>
-                               <div class="col-md-6">
-                                   <div class="row">
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">ID Card Checked</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Yes
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       No
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                       <div class="col-sm-6">
-                                           <div class="filter-header">Disponibility</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="date">
-                                                   <input type="text" class="form-control" placeholder="DD/MM" data-beatpicker="true" data-beatpicker-format="['MM','DD','YYYY'],separator:'/'">
-                                               </div>
-                                           </p>
-                                       </div>
-                                   </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">ID Card Checked</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Yes
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            No
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filter-header">Disponibility</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="date">
+                                                        <input type="text" class="form-control" placeholder="DD/MM" data-beatpicker="true" data-beatpicker-format="['MM','DD','YYYY'],separator:'/'">
+                                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
 
-                                   <div class="row">
-                                       <div class="col-sm-12">
-                                           <div class="filter-header">Salary between</div>
-                                           <div class="checkbox">
-                                               <label>
-                                                   <input type="checkbox" value="">
-                                                   <span></span>
-                                               </label>
-                                           </div>
-                                           <p>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Monthly
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Hourly
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                               <div class="radio inline">
-                                                   <label>
-                                                       <input type="radio" name="options" id="option2" value="option2">
-                                                       Other
-                                                       <span></span>
-                                                   </label>
-                                               </div>
-                                           </p>
-                                       </div>
-                                       <div class="col-lg-6 col-md-6">
-                                           <select>
-                                               <option value="1">1</option>
-                                               <option value="2">2</option>
-                                               <option value="3">3</option>
-                                               <option value="4">4</option>
-                                               <option value="5">5</option>
-                                               <option value="6">6</option>
-                                           </select>
-                                       </div>
-                                       <div class="col-lg-6 col-md-6">
-                                           <select>
-                                               <option value="1">1</option>
-                                               <option value="2">2</option>
-                                               <option value="3">3</option>
-                                               <option value="4">4</option>
-                                               <option value="5">5</option>
-                                               <option value="6">6</option>
-                                           </select>
-                                       </div>
-                                   </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filter-header">Salary between</div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" value="">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <p>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Monthly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Hourly
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="radio inline">
+                                                        <label>
+                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                            Other
+                                                            <span></span>
+                                                        </label>
+                                                    </div>
+                                                </p>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <select>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-lg-6 col-md-6">
+                                                <select>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                </select>
+                                            </div>
+                                        </div>
 
-                                   <div class="row">
-                                       <div class="col-sm-12">
-                                           <div class="filter-header">Additional Criterias</div>
-                                           <textarea id="comment" class="col-12" name="comment" rows="2" placeholder="Comment"></textarea>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </form>
-                   </div>
-                </div><!-- col -->
-            </div><!-- row -->
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filter-header">Additional Criterias</div>
+                                                <textarea id="comment" class="col-12" name="comment" rows="2" placeholder="Comment"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div><!-- col -->
+                </div><!-- row -->
 
-        </div><!-- container -->
+            </div><!-- container -->
+            <!--Search Section end-->
 
-        <!--Search Section end-->
-
-    </div>
+        </div>
 
         @{
             ViewBag.Title = "Contact";
@@ -659,3 +1203,29 @@
             <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
         </address>
     </div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#FilterjobId").click(function () {                
+                $('.jobsearch-section .left-section').css('margin-right', '358px');
+                $('.jobsearch-section .right-section').css('right', '0');
+                $('.Filterjob').css('display', 'none');
+                $('.switch').css('right', '10px');
+                $('.filter-overlay').css('display', 'block');
+                
+            });
+            $("#FilterClose").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '0');
+                $('.jobsearch-section .right-section').css('right', '-350px');
+                $('.Filterjob').css('display', 'block');
+                $('.switch').css('right', '50px');
+                $('.filter-overlay').css('display', 'none');
+            });
+        });
+
+    </script>
+
+}

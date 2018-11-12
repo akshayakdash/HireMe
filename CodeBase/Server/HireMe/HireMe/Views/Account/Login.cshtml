@@ -1,71 +1,19 @@
 ﻿<!-- HEADER -->
-<header id="header">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-2">
+<style>
+    #footer-container {
+        display: none;
+    }
 
-                <!-- LOGO -->
-                <div id="logo">
-                    <a href="index.html">
-                        <img src="~/assets/images/logo.png" alt="">
-                    </a>
-                </div><!-- LOGO -->
+    .background {
+        background: #008ad2 url(/assets/images/reg-bg.jpg) no-repeat center center;
+        background-size: cover;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        position: fixed;
+    }
+</style>
 
-            </div><!-- col -->
-            <div class="col-sm-10">
-
-                <!-- MENU -->
-                <nav>
-
-                    <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-
-                    <ul class="menu clearfix" id="menu">
-                        @*
-                            <li class="active"><a href="index.html">HOME</a></li>*@
-                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                        @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                        }
-
-                        @*
-                            <li><a href="#">ADMIN</a></li>
-                            <li><a href="#">LOGIN</a></li>*@
-                        <li>@Html.ActionLink("About", "About", "Home")</li>
-                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        <li class="dropdown">
-                            <a href="#">AIDE</a>
-                            <ul>
-                                <li>
-                                    <a class="waves" href="about-us.html">REPORT A BUG</a>
-                                </li>
-                                <li>
-                                    <a class="waves" href="services.html">SHARE YOUR OPINION</a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        @Html.Partial("_LoginPartial")
-                        <li class="secondary-menu-btn">
-                            <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
-                            <ul class="secondary-menu">
-                                <li><a class="waves" href="index.html">Home</a></li>
-                                <li><a class="waves" href="#">ADMIN</a></li>
-                                <li><a class="waves" href="#">LOGIN</a></li>
-                                <li><a class="waves" href="#">CONTACT</a></li>
-                                <li><a class="waves" href="#">AIDE</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-
-                </nav>
-
-            </div><!-- col -->
-        </div><!-- row -->
-    </div><!-- container-fluid -->
-
-</header><!-- HEADER -->
 <!-- PAGE CONTENT -->
 
 @using HireMe.Models
@@ -73,40 +21,38 @@
 @{
     ViewBag.Title = "Log in";
 }
-<div class="container">
+<div class="background"></div>
+<!--NEW CODE-->
+<div class="form-box">
     <div class="row">
         <div class="col-md-12">
-
             <div class="headline text-center">
-                <h2>@ViewBag.Title</h2>
-
-            </div><!-- headline -->
-
-        </div><!-- col -->
-    </div><!-- row -->
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6 col-md-offset-3" style="margin-left:25%;">
-
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "login" }))
-            {
-                @Html.AntiForgeryToken()
+                <div class="form-logo">
+                    <img src="~/assets/images/logo.png" alt="JOBtek" />
+                </div>
+                <h2>Login</h2>
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <fieldset>
-
-                    <p>
-                        @*<input class="col-12" id="email" type="email" placeholder="E-mail address">*@
-                        @Html.TextBoxFor(m => m.Email, new { @class = "col-12", @type = "email", @placeholder = "E-mail address" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </p>
-
-                    <p>
-                        @*<input class="col-12" id="password" type="password" placeholder="Password">*@
-                        @Html.PasswordFor(m => m.Password, new { @class = "col-12", @placeholder = "Password" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </p>
-
+            </div><!-- headline -->
+        </div>
+    </div><!-- row -->
+    <div class="row">
+        <div class="col-md-12 regd-form formreg">
+            <fieldset>
+                <div class="form-section">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
+                        </div>
+                        <input type="text" class="form-control">
+                        <span class="input-lable">E-mail address</span>
+                    </div>
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
+                        </div>
+                        <input type="password" class="form-control">
+                        <span class="input-lable">Password</span>
+                    </div>
                     <div class="checkbox">
                         <label>
                             @Html.CheckBoxFor(m => m.RememberMe)
@@ -114,73 +60,75 @@
                             <span></span>
                         </label>
                     </div>
-
-                    <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
-
-                </fieldset>
-
-            }
-
-            @*<a href="#">Don't have an account?</a>*@ @Html.ActionLink("Don't have an account?", "Register")<br class="d-block d-sm-none">
-            <a href="#">Forgotten password?</a>
-
-        </div><!-- col -->
-    </div><!-- row -->
-</div>
-@*<div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <section id="loginForm">
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                    @Html.AntiForgeryToken()
-                    <h4>Use a local account to log in.</h4>
-                    <hr />
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </div>
+                    <div class="col-md-12 text-center">
+                        <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
                     </div>
-                    <div class="form-group">
-                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                        <div class="col-md-10">
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </div>
+                    <div class="col-md-12 text-center">
+                        @Html.ActionLink("Don't have an account?", "Register")<br class="d-block d-sm-none">
+                        <a href="#">Forgotten password?</a>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <div class="checkbox">
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                @Html.LabelFor(m => m.RememberMe)
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log in" class="btn btn-default" />
-                        </div>
-                    </div>
-                    <p>
-                        @Html.ActionLink("Register as a new user", "Register")
-                    </p>
-                    Enable this once you have account confirmation enabled for password reset functionality
-                        <p>
-                            @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                        </p>
-                }
-            </section>
-        </div>
-        <div class="col-md-4">
-           <section id="socialLoginForm">
-                    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-                </section>
+                </div>
+            </fieldset>
         </div>
     </div>
-</div>*@
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+</div>
+<!--/NEW CODE-->
+
+
+
+
+
+
+
+
+
+<!--OLD CODE-->
+<div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="margin-left:25%;">
+
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "login" }))
+            {
+                    @Html.AntiForgeryToken()
+                   
+                    <fieldset>
+
+                        <p>
+                            @*<input class="col-12" id="email" type="email" placeholder="E-mail address">*@
+                            @Html.TextBoxFor(m => m.Email, new { @class = "col-12", @type = "email", @placeholder = "E-mail address" })
+                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        </p>
+
+                        <p>
+                            @*<input class="col-12" id="password" type="password" placeholder="Password">*@
+                            @Html.PasswordFor(m => m.Password, new { @class = "col-12", @placeholder = "Password" })
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                        </p>
+
+                        <div class="checkbox">
+                            <label>
+                                @Html.CheckBoxFor(m => m.RememberMe)
+                                Remember me
+                                <span></span>
+                            </label>
+                        </div>
+
+                        <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
+
+                    </fieldset>
+
+                }
+
+                @*<a href="#">Don't have an account?</a>*@ @Html.ActionLink("Don't have an account?", "Register")<br class="d-block d-sm-none">
+                <a href="#">Forgotten password?</a>
+
+            </div><!-- col -->
+        </div><!-- row -->
+    </div>
+<!--/OLD CODE-->
+
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

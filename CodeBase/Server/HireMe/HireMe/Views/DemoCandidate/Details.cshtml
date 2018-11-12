@@ -1,0 +1,314 @@
+﻿@model HireMe.Models.Candidate
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Candidate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUserId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUserId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgencyId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgencyId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfilePicUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfilePicUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperienceInYears)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExperienceInYears)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExperienceInMonths)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExperienceInMonths)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProofDoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProofDoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProofDocDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdProofDocDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProfileVerified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProfileVerified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StaffType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StaffType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Disponibility)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Disponibility)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountryId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CityId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CityId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DistrictId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DistrictId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SalaryTypeOtherDesc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanRead)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanRead)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CanWrite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CanWrite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedMinSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedMinSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedMaxSalary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SleepOnSite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SleepOnSite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedMinRooms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedMinRooms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpectedMaxRooms)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinGroupPeople)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinGroupPeople)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaxGroupPeople)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaxGroupPeople)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UpdatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UpdatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmailId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmailId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdditionalDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdditionalDescription)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CandidateId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
