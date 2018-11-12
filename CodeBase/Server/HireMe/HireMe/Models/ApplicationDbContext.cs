@@ -87,5 +87,9 @@ namespace HireMe.Models
         public DbSet<Employer> Employers { get; set; }
 
         public DbSet<Agency> Agencies { get; set; }
+
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<District> Districts { get; set; }
     }
 }

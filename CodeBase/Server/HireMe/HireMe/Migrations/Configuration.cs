@@ -85,7 +85,7 @@ namespace HireMe.Migrations
                     new Models.Job{ JobName = "Electrician"}
                 }
                 },
-                
+
                 new Models.JobCategory
                 {
                     CategoryName = "HairStyle/Care",

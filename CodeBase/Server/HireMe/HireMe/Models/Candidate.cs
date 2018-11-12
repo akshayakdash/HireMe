@@ -206,6 +206,22 @@ namespace HireMe.Models
         public string CountryName { get; set; }
 
         public List<CountryJobMapper> CountryJobMappers { get; set; }
+        public List<City> Cities { get; set; }
+    }
+
+    public class City
+    {
+        public int CityId { get; set; }
+        public int CountryId { get; set; }
+        public string CityName { get; set; }
+        public List<District> Districts { get; set; }
+    }
+
+    public class District
+    {
+        public int DistrictId { get; set; }
+        public int CityId { get; set; }
+        public string DistrictName { get; set; }
     }
 
     public class CountryJobMapper

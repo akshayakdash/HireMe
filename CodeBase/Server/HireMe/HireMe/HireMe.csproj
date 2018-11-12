@@ -239,41 +239,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201810312003598_initial.cs" />
-    <Compile Include="Migrations\201810312003598_initial.Designer.cs">
-      <DependentUpon>201810312003598_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201811121758451_initial.cs" />
+    <Compile Include="Migrations\201811121758451_initial.Designer.cs">
+      <DependentUpon>201811121758451_initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811011814230_job_category_added.cs" />
-    <Compile Include="Migrations\201811011814230_job_category_added.Designer.cs">
-      <DependentUpon>201811011814230_job_category_added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811011846067_job_group_name_added.cs" />
-    <Compile Include="Migrations\201811011846067_job_group_name_added.Designer.cs">
-      <DependentUpon>201811011846067_job_group_name_added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811030753410_Job_Category_Image_Added.cs" />
-    <Compile Include="Migrations\201811030753410_Job_Category_Image_Added.Designer.cs">
-      <DependentUpon>201811030753410_Job_Category_Image_Added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811031958527_JobRequest_Added.cs" />
-    <Compile Include="Migrations\201811031958527_JobRequest_Added.Designer.cs">
-      <DependentUpon>201811031958527_JobRequest_Added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811032208193_Candidate_UserName_ProfilePicUrl_Added.cs" />
-    <Compile Include="Migrations\201811032208193_Candidate_UserName_ProfilePicUrl_Added.Designer.cs">
-      <DependentUpon>201811032208193_Candidate_UserName_ProfilePicUrl_Added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811032304140_Job_Offer_new_column_added.cs" />
-    <Compile Include="Migrations\201811032304140_Job_Offer_new_column_added.Designer.cs">
-      <DependentUpon>201811032304140_Job_Offer_new_column_added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811032322443_Min_Age_Column_Added_To_Job_Offer.cs" />
-    <Compile Include="Migrations\201811032322443_Min_Age_Column_Added_To_Job_Offer.Designer.cs">
-      <DependentUpon>201811032322443_Min_Age_Column_Added_To_Job_Offer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201811040018195_agency_Details.cs" />
-    <Compile Include="Migrations\201811040018195_agency_Details.Designer.cs">
-      <DependentUpon>201811040018195_agency_Details.cs</DependentUpon>
+    <Compile Include="Migrations\201811121808053_Country_State_District_Added.cs" />
+    <Compile Include="Migrations\201811121808053_Country_State_District_Added.Designer.cs">
+      <DependentUpon>201811121808053_Country_State_District_Added.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -483,32 +455,11 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201810312003598_initial.resx">
-      <DependentUpon>201810312003598_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811121758451_initial.resx">
+      <DependentUpon>201811121758451_initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811011814230_job_category_added.resx">
-      <DependentUpon>201811011814230_job_category_added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811011846067_job_group_name_added.resx">
-      <DependentUpon>201811011846067_job_group_name_added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811030753410_Job_Category_Image_Added.resx">
-      <DependentUpon>201811030753410_Job_Category_Image_Added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811031958527_JobRequest_Added.resx">
-      <DependentUpon>201811031958527_JobRequest_Added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811032208193_Candidate_UserName_ProfilePicUrl_Added.resx">
-      <DependentUpon>201811032208193_Candidate_UserName_ProfilePicUrl_Added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811032304140_Job_Offer_new_column_added.resx">
-      <DependentUpon>201811032304140_Job_Offer_new_column_added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811032322443_Min_Age_Column_Added_To_Job_Offer.resx">
-      <DependentUpon>201811032322443_Min_Age_Column_Added_To_Job_Offer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811040018195_agency_Details.resx">
-      <DependentUpon>201811040018195_agency_Details.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811121808053_Country_State_District_Added.resx">
+      <DependentUpon>201811121808053_Country_State_District_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
