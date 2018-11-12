@@ -211,7 +211,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
                                                         </div>
-                                                        @Html.DropDownList("accountid", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"))
+                                                        @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"))
                                                         <span class="input-lable">Security Question</span>
                                                     </div>
 
