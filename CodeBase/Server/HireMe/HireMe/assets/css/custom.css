@@ -9446,3 +9446,32 @@ input:checked + .slider1:before {
     color: #FFEB3B;
     text-transform: uppercase;
 }
+
+
+.favo-card-header {
+    background-color: #E91E63;
+    border-bottom: 1px solid #E91E63;
+    color: white;
+    font-weight: bold;
+}
+.favo-card-body {
+    padding: .25rem;
+}
+
+ .favo-card-body .profileitems .left img {
+        width: 70px;
+        border-radius: 50%;
+        height: 70px;
+        border: 2px solid #eee;
+    }
+
+    .favo-card-body .profileitems .right {
+        margin-left: 80px;
+    }
+
+        .favo-card-body .profileitems .right .location {
+            margin-bottom: 0px;
+        }
+    .favo-card-body .profileitems {
+        margin-bottom: 5px;
+    }
