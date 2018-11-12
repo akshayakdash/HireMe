@@ -22,6 +22,12 @@ namespace HireMe.Controllers
         [HttpGet]
         public ActionResult RegisterCandidate()
         {
+            var userId = User.Identity.GetUserId();
+            // get the agencyid
+            var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
+
+            ViewBag.AgencyProfileVerfied = agency.ProfileVerified;
+
             return View();
         }
         [HttpPost]

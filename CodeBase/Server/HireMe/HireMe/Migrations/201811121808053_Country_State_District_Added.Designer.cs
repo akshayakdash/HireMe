@@ -7,13 +7,13 @@ namespace HireMe.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Job_Category_Image_Added : IMigrationMetadata
+    public sealed partial class Country_State_District_Added : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Job_Category_Image_Added));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Country_State_District_Added));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811030753410_Job_Category_Image_Added"; }
+            get { return "201811121808053_Country_State_District_Added"; }
         }
         
         string IMigrationMetadata.Source
