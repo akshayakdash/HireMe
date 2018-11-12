@@ -228,6 +228,8 @@
     <Compile Include="Controllers\CandidateProfilesController.cs" />
     <Compile Include="Controllers\DemoCandidateController.cs" />
     <Compile Include="Controllers\EmployerJobOffersController.cs" />
+    <Compile Include="Controllers\FavouriteJobOffersController.cs" />
+    <Compile Include="Controllers\FavouriteJobRequestsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobCategoriesController.cs" />
     <Compile Include="Controllers\JobOffersController.cs" />
@@ -437,6 +439,16 @@
     <Content Include="Views\DemoCandidate\SC1.cshtml" />
     <Content Include="Views\DemoCandidate\SC2.cshtml" />
     <Content Include="Views\DemoCandidate\ManageFavo.cshtml" />
+    <Content Include="Views\FavouriteJobOffers\Create.cshtml" />
+    <Content Include="Views\FavouriteJobOffers\Delete.cshtml" />
+    <Content Include="Views\FavouriteJobOffers\Details.cshtml" />
+    <Content Include="Views\FavouriteJobOffers\Edit.cshtml" />
+    <Content Include="Views\FavouriteJobOffers\Index.cshtml" />
+    <Content Include="Views\FavouriteJobRequests\Create.cshtml" />
+    <Content Include="Views\FavouriteJobRequests\Delete.cshtml" />
+    <Content Include="Views\FavouriteJobRequests\Details.cshtml" />
+    <Content Include="Views\FavouriteJobRequests\Edit.cshtml" />
+    <Content Include="Views\FavouriteJobRequests\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
