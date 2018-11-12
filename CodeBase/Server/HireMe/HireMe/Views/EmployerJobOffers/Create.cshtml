@@ -185,14 +185,15 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                     </label>
                                                                 </div>*@
                                                         </div>
+                                                        @Html.HiddenFor(p => p.Country, new { @value = "Ivory"})
                                                         <div class="col-sm-6">
-                                                            Select Country
-                                                            @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CountryEnum))), "Select Country", new { @class = "form-control" })
+                                                            Select City
+                                                            @Html.DropDownListFor(p => p.City, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
 
                                                         </div>
                                                         <div class="col-sm-6">
-                                                            Select City
-                                                            @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
+                                                            Select District
+                                                            @Html.DropDownListFor(p => p.District, new SelectList(Enum.GetValues(typeof(DistrictEnum))), "Select District", new { @class = "form-control" })
                                                         </div>
                                                         <div class="col-sm-12">
                                                             <div class="filter-header">Salary between</div>

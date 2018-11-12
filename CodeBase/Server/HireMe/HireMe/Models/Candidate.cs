@@ -454,7 +454,25 @@ namespace HireMe.Models
 
     public enum CityEnum
     {
-        City1,
-        City2
+        Abidjan,
+        Yamoussoukro
+    }
+
+    public enum DistrictEnum
+    {
+        Abobo,
+        Adjamé,
+        Anyama,
+        Attécoubé,
+        Bingerville,
+        Cocody,
+        Koumassi,
+        Marcory,
+        Plateau,
+        Portbouët,
+        Treichville,
+        Songon,
+        Yopougon
+
     }
 }
