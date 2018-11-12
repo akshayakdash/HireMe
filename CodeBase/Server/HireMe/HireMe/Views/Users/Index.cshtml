@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HireMe.Models.UserInfo>
+﻿@*@model IEnumerable<HireMe.Models.UserInfo>
 
 @{
     ViewBag.Title = "Index";
@@ -31,14 +31,14 @@
                 </thead>
                 @foreach (var user in Model)
                 {
-                    <tr>
-                        <td>@user.Username</td>
-                        <td>@user.Email</td>
-                        <td>@user.PhoneNumber</td>
-                        <td>@user.Address</td>
-                        <td>@user.Role</td>
+                <tr>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.PhoneNumber</td>
+                    <td>@user.Address</td>
+                    <td>@user.Role</td>
 
-                    </tr>
+                </tr>
                 }
             </table>
 
@@ -72,18 +72,14 @@ else
                             <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
 
                             <ul class="menu clearfix" id="menu">
-                                @*
-                                <li class="active"><a href="index.html">HOME</a></li>*@
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
-                                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
                                 }
 
-                                @*
-                                <li><a href="#">ADMIN</a></li>
-                                <li><a href="#">LOGIN</a></li>*@
+                              
                                 <li>@Html.ActionLink("About", "About", "Home")</li>
                                 <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                                 <li class="dropdown">
@@ -130,41 +126,33 @@ else
 
         @if (role == "Candidate")
         {
-            <h2>Candidate Account</h2>
-            <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
+        <h2>Candidate Account</h2>
+        <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
 
-            <a href="~/JobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
+        <a href="~/JobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
 
-            <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
         }
         else if (role == "Employer")
         {
-            <h2>Employer     Account</h2>
-            <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employee</a>
+        <h2>Employer     Account</h2>
+        <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employee</a>
 
-            <a href="~/JobOffers" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Offers</a>
+        <a href="~/JobOffers" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Offers</a>
 
-            <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
         }
         else if (role == "Agency")
         {
-            <h2>Agency Account</h2>
-            <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
+        <h2>Agency Account</h2>
+        <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
 
-            <a href="~/Agency/RegisterCandidate" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Create a Job Request</a>
+        <a href="~/Agency/RegisterCandidate" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Create a Job Request</a>
 
-            <a href="~/Agency/GetJobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
+        <a href="~/Agency/GetJobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
 
-            <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
+        <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
         }
-
-
-        @*<a href="#"><img src="~/assets/images/lifecycle.png" alt=""> Process recruiment lifecycle</a>
-        <a href="#"><img src="~/assets/images/message.png" alt=""> Manage my message & notification</a>
-        <a href="#"><img src="~/assets/images/post-message.png" alt=""> Post a new message on the conversation thread</a>
-        <a href="#" style="line-height: 40px;"><img src="~/assets/images/settings.png" alt=""> Manage my settings</a>
-        <a href="#"><img src="~/assets/images/feedback.png" alt=""> Share my feedbacks about the plate form</a>
-        <a href="#" style="line-height: 40px;"><img src="~/assets/images/bug.png" alt=""> Rise an Bug/issue</a>*@
     </div>
 
     <div id="main-container-user">
@@ -272,4 +260,226 @@ else
             document.getElementById("main-container-user").style.marginLeft = "0";
         }
     </script>
-            }  
+            }*@  
+
+
+
+
+
+<div id="main-container-user" style="margin-left: 280px;">
+    <!-- HEADER -->
+    <header id="header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header><!-- HEADER -->
+    @*<div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="menu-but" onclick="openNav()">&#9776; MENU</span>
+                </div>
+            </div>
+        </div>*@
+    <div id="mySidenav" class="sidenav" style="width: 280px;">
+
+        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                        .Select(c => c.Value);
+            string role = roles.FirstOrDefault();}
+
+
+        <div class="sidenav-header">User Account - @role</div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <a href="~/Users" class="active"><i class="fa fa-home"></i>Dashboard</a>
+        @*<a href="#"><i class="fa fa-search"></i>Job request/ Job offer</a>
+        <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
+        <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
+        <a href="#"><i class="fa fa-heart"></i>Manage my Favorites</a>
+        <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
+        <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
+        <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
+        <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>*@
+
+        @if (role == "Candidate")
+        {
+           
+            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/JobRequests" ><i class="fa fa-search"></i> Job Requests</a>
+
+            <a href="~/FavouriteJobOffers" ><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Employer")
+        {
+           
+            <a href="~/JobCategories" ><i class="fa fa-search"></i> Search Employee</a>
+
+            <a href="~/JobOffers" ><i class="fa fa-search"></i> My Job Offers</a>
+
+            <a href="~/FavouriteJobRequests" ><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Agency")
+        {
+            
+            <a href="~/JobCategories" ><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/Agency/RegisterCandidate" ><i class="fa fa-search"></i> Create a Job Request</a>
+
+            <a href="~/Agency/GetJobRequests" ><i class="fa fa-search"></i> My Job Requests</a>
+
+            <a href="#" ><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                    <h2>Dashboard</h2>
+                </div>
+            </div>
+
+            <div class="col-md-6 wow fadeInLeft">
+                <div class="image-box style-2 text-left">
+                    <div class="image-box-thumbnail">
+                        <a href="#"><img src="~/assets/images/tuto-image.jpg" alt=""></a>
+                    </div><!-- image-box-thumbnail -->
+                    <h4><a href="#">All the Tuto in Video</a></h4>
+                    <ul class="video-list">
+                        <li><a href="#">How to search a profile?</a></li>
+                        <li><a href="#">How to manage favorite?</a></li>
+                        <li><a href="#">How to give a Note & Recommandation?</a></li>
+                        <li><a href="#">How to publish a Job offer/ Job request?</a></li>
+                    </ul>
+                </div><!-- text-box -->
+            </div>
+
+            <div class="col-md-6 wow fadeInRight">
+                <div class="image-box style-2 text-left">
+                    <div class="image-box-thumbnail">
+                        <a href="#"><img src="~/assets/images/rules1.jpg" alt=""></a>
+                    </div><!-- image-box-thumbnail -->
+                    <h4><a href="#">What are the rules follow in our communauty?</a></h4>
+                    <strong>Respect each other:</strong>
+                    <ul class="bullet-list">
+                        <li>Once you find a profile and you want to contact him, please be polite, no racism terms, and don’t insist if the user is not interested</li>
+                    </ul>
+                    <strong>Give note & recommendations:</strong>
+                    <ul class="bullet-list">
+                        <li>After hiring a profile, don’t forget to let a note & comment to ...</li>
+                    </ul>
+                </div><!-- text-box -->
+            </div>
+
+            <div class="col-md-6 wow fadeInLeft">
+                <div class="image-box style-2 text-left">
+                    <div class="image-box-thumbnail">
+                        <a href="#"><img src="~/assets/images/search-profile.jpg" alt=""></a>
+                    </div><!-- image-box-thumbnail -->
+                    <h4><a href="#">How to search a profil?</a></h4>
+                    <strong>Define your search criterias:</strong>
+                    <ul class="bullet-list">
+                        <li>Go to the section « Search a Job request/Job offer »</li>
+                        <li>Define your search criterias from the panoply of customized criterias</li>
+                        <li>Launch the search command</li>
+                    </ul>
+                    <strong>Check the profile details:</strong>
+                    <ul class="bullet-list">
+                        <li>Check all the profil detail (profile picture, age,  localisation,ID checked logo…)</li>
+                    </ul>
+                </div><!-- text-box -->
+            </div>
+
+            <div class="col-md-6 wow fadeInRight">
+                <div class="image-box style-2 text-left">
+                    <div class="image-box-thumbnail">
+                        <a href="#"><img src="~/assets/images/publish.jpg" alt=""></a>
+                    </div><!-- image-box-thumbnail -->
+                    <h4><a href="#">How to publish a Job offer or a Job request?</a></h4>
+                    <strong>From your user account:</strong>
+                    <ul class="bullet-list">
+                        <li>Go to the section « Publish a job offer » or « Job request »</li>
+                        <li>Fill a short form to define your profile criterias & expectations</li>
+                        <li>Submit the form</li>
+                    </ul>
+                    <strong>Admin validation:</strong>
+                    <ul class="bullet-list">
+                        <li>Once the form is submitted, an admin will check you form (text & pictures) and validate it to make it visible by the othter members</li>
+                    </ul>
+                </div><!-- text-box -->
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("main-container-user").style.marginLeft = "280px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main-container-user").style.marginLeft = "0";
+    }
+</script>
