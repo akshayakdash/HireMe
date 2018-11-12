@@ -1,6 +1,7 @@
 ﻿using HireMe.Utility;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Web;
 
 namespace HireMe.Models
@@ -117,6 +118,18 @@ namespace HireMe.Models
         public int SecurityQuestionId { get; set; }
         [Required(ErrorMessage = "Please enter the security question's answer.")]
         public string SecurityQuestionAnswer { get; set; }
+
+        public int? CountryId { get; set; }
+        [NotMapped]
+        public string Country { get; set; }
+
+        public int? CityId { get; set; }
+        [NotMapped]
+        public string City { get; set; }
+
+        public int? DistrictId { get; set; }
+        [NotMapped]
+        public string District { get; set; }
 
         #region Agency Section
         [Display(Name = "Company Name")]

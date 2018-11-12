@@ -1,249 +1,561 @@
 ﻿@model IEnumerable<HireMe.Models.Candidate>
 
-@{
-    ViewBag.Title = "Index";
-}
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
 
-<h2>Index</h2>
+<div id="main-container-user" style="margin-left: 280px;">
+    <!-- HEADER -->
+    <header id="header">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AgencyId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfilePicUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExperienceInYears)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExperienceInMonths)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdProofDoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdProofDocDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfileVerified)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StaffType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Disponibility)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CityId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DistrictId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalaryType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CanRead)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CanWrite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMinSalary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SleepOnSite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMinRooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MinGroupPeople)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxGroupPeople)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContactNo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EmailId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AdditionalDescription)
-        </th>
-        <th></th>
-    </tr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AgencyId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfilePicUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExperienceInYears)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExperienceInMonths)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdProofDoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdProofDocDesc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfileVerified)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StaffType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Disponibility)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CountryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DistrictId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalaryType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalaryTypeOtherDesc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CanRead)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CanWrite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMinSalary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMaxSalary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SleepOnSite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMinRooms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMaxRooms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MinGroupPeople)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxGroupPeople)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactNo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmailId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdditionalDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CandidateId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CandidateId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CandidateId })
-        </td>
-    </tr>
-}
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
 
-</table>
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header><!-- HEADER -->
+
+    <div id="mySidenav" class="sidenav" style="width: 280px;">
+        <div class="sidenav-header">User Account (Candidat/ Employer)</div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <a href="#"><i class="fa fa-home"></i>Dashboard</a>
+        <a href="#"><i class="fa fa-search"></i>Job request/ Job offer</a>
+        <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
+        <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
+        <a href="#" class="active"><i class="fa fa-heart"></i>Manage my Favorites</a>
+        <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
+        <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
+        <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
+        <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>
+    </div>
+
+
+
+    <!---- Tab Section -->
+    <!---- Tab Section -->
+
+    <div class="full-section-container wow fadeInUp">
+        <div class="tab-section">
+            <div class="tab-section-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                            <h2>My Favorites</h2>
+                        </div>
+
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header favo-card-header">
+                                            My Favorites
+                                        </div>
+                                        <div class="card-body favo-card-body">
+                                            <div class="profileitems">
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                    @*<div class="favorite">
+                                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                                        </div>*@
+                                                </div>
+                                                <div class="right">
+                                                    <h1>Women<span>(AGENCY)</span></h1>
+                                                    <h2 class="name">Justine KABLAN</h2>
+                                                    <p class="location">(ARABIAN)</p>
+                                                    <div class="published">Published: <span>02/09/2018</span></div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="profileitems">
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                    @*<div class="favorite">
+                                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                                        </div>*@
+                                                </div>
+                                                <div class="right">
+                                                    <h1>Women<span>(AGENCY)</span></h1>
+                                                    <h2 class="name">Justine KABLAN</h2>
+                                                    <p class="location">(ARABIAN)</p>
+                                                    <div class="published">Published: <span>02/09/2018</span></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    2 of 2
+                                </div>
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header favo-card-header">
+                                            Profile Hired
+                                        </div>
+                                        <div class="card-body favo-card-body">
+                                            <div class="profileitems">
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                    @*<div class="favorite">
+                                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                                        </div>*@
+                                                </div>
+                                                <div class="right">
+                                                    <h1>Women<span>(AGENCY)</span></h1>
+                                                    <h2 class="name">Justine KABLAN</h2>
+                                                    <p class="location">(ARABIAN)</p>
+                                                    <div class="published">Published: <span>02/09/2018</span></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body favo-card-body">
+                                            <div class="profileitems">
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                    @*<div class="favorite">
+                                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                                        </div>*@
+                                                </div>
+                                                <div class="right">
+                                                    <h1>Women<span>(AGENCY)</span></h1>
+                                                    <h2 class="name">Justine KABLAN</h2>
+                                                    <p class="location">(ARABIAN)</p>
+                                                    <div class="published">Published: <span>02/09/2018</span></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    2 of 2
+                                </div>
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header favo-card-header">
+                                            Contract Completed
+                                        </div>
+                                        <div class="card-body favo-card-body">
+                                            <div class="profileitems">
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                    @*<div class="favorite">
+                                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                                        </div>*@
+                                                </div>
+                                                <div class="right">
+                                                    <h1>Women<span>(AGENCY)</span></h1>
+                                                    <h2 class="name">Justine KABLAN</h2>
+                                                    <p class="location">(ARABIAN)</p>
+                                                    <div class="published">Published: <span>02/09/2018</span></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="card-body favo-card-body">
+                                            <div class="profileitems">
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                    @*<div class="favorite">
+                                                            <a href="javascropt(0);"><i class="fa fa-heart"></i></a>
+                                                        </div>*@
+                                                </div>
+                                                <div class="right">
+                                                    <h1>Women<span>(AGENCY)</span></h1>
+                                                    <h2 class="name">Justine KABLAN</h2>
+                                                    <p class="location">(ARABIAN)</p>
+                                                    <div class="published">Published: <span>02/09/2018</span></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="headline text-center">
+                        <h2>Our Trusted Partners</h2>
+                    </div><!-- headline -->
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="owl-carousel logos-slider">
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
+                    </div><!-- logos-slider -->
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+    </div>
+
+    <!---- Tab Section end-->
+    <div class="full-section-container wow fadeInUp">
+
+    </div>
+
+    <!---- Tab Section end-->
+
+
+
+
+
+</div>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("main-container-user").style.marginLeft = "280px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main-container-user").style.marginLeft = "0";
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AspNetUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AgencyId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfilePicUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExperienceInYears)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExperienceInMonths)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProofDoc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdProofDocDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProfileVerified)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StaffType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disponibility)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CountryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DistrictId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalaryType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanRead)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanWrite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedMinSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SleepOnSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedMinRooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinGroupPeople)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxGroupPeople)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdditionalDescription)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AgencyId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfilePicUrl)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperienceInYears)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExperienceInMonths)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProofDoc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdProofDocDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProfileVerified)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StaffType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disponibility)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CountryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CityId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DistrictId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalaryType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SalaryTypeOtherDesc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanRead)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CanWrite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedMinSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedMaxSalary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SleepOnSite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedMinRooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ExpectedMaxRooms)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinGroupPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxGroupPeople)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedBy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdditionalDescription)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.CandidateId }) |
+                @Html.ActionLink("Details", "Details", new { id=item.CandidateId }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.CandidateId })
+            </td>
+        </tr>
+    }
+
+    </table>*@
+
+
