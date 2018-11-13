@@ -37,73 +37,30 @@
     </div><!-- row -->
     <div class="row">
         <div class="col-md-12 regd-form formreg">
-            <fieldset>
-                <div class="form-section">
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
-                        </div>
-                        <input type="text" class="form-control">
-                        <span class="input-lable">E-mail address</span>
-                    </div>
-                    <div class="input-group mb-2">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
-                        </div>
-                        <input type="password" class="form-control">
-                        <span class="input-lable">Password</span>
-                    </div>
-                    <div class="checkbox">
-                        <label>
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            Remember me
-                            <span></span>
-                        </label>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
-                    </div>
-                    <div class="col-md-12 text-center">
-                        @Html.ActionLink("Don't have an account?", "Register")<br class="d-block d-sm-none">
-                        <a href="#">Forgotten password?</a>
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-    </div>
-</div>
-<!--/NEW CODE-->
-
-
-
-
-
-
-
-
-
-<!--OLD CODE-->
-<div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3" style="margin-left:25%;">
-
-                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "login" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "login" }))
             {
-                    @Html.AntiForgeryToken()
-                   
-                    <fieldset>
+                @Html.AntiForgeryToken()
+                <fieldset>
+                    <div class="form-section">
 
-                        <p>
-                            @*<input class="col-12" id="email" type="email" placeholder="E-mail address">*@
-                            @Html.TextBoxFor(m => m.Email, new { @class = "col-12", @type = "email", @placeholder = "E-mail address" })
-                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                        </p>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
+                            </div>
+                            @*<input type="text" class="form-control">
+                            <span class="input-lable">E-mail address</span>*@
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", @placeholder = "E-mail address" })
+                            <span class="input-lable">E-mail address</span>
+                            @*@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
+                        </div>
 
-                        <p>
-                            @*<input class="col-12" id="password" type="password" placeholder="Password">*@
-                            @Html.PasswordFor(m => m.Password, new { @class = "col-12", @placeholder = "Password" })
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                        </p>
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
+                            </div>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                            <span class="input-lable">Password</span>
+                        </div>
 
                         <div class="checkbox">
                             <label>
@@ -112,23 +69,24 @@
                                 <span></span>
                             </label>
                         </div>
-
-                        <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
-
-                    </fieldset>
-
-                }
-
-                @*<a href="#">Don't have an account?</a>*@ @Html.ActionLink("Don't have an account?", "Register")<br class="d-block d-sm-none">
-                <a href="#">Forgotten password?</a>
-
-            </div><!-- col -->
-        </div><!-- row -->
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
+                        </div>
+                        <div class="col-md-12 text-center">
+                            @Html.ActionLink("Don't have an account?", "Register")<br class="d-block d-sm-none">
+                            <a href="#">Forgotten password?</a>
+                        </div>
+                    </div>
+                </fieldset>
+            }
+        </div>
     </div>
-<!--/OLD CODE-->
+</div>
+<!--/NEW CODE-->
 
 
 
-    @section Scripts {
-        @Scripts.Render("~/bundles/jqueryval")
-    }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

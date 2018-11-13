@@ -237,6 +237,8 @@
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Controllers\SearchJobOffersController.cs" />
+    <Compile Include="Controllers\SearchJobRequestsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -449,6 +451,16 @@
     <Content Include="Views\FavouriteJobRequests\Details.cshtml" />
     <Content Include="Views\FavouriteJobRequests\Edit.cshtml" />
     <Content Include="Views\FavouriteJobRequests\Index.cshtml" />
+    <Content Include="Views\SearchJobRequests\Create.cshtml" />
+    <Content Include="Views\SearchJobRequests\Delete.cshtml" />
+    <Content Include="Views\SearchJobRequests\Details.cshtml" />
+    <Content Include="Views\SearchJobRequests\Edit.cshtml" />
+    <Content Include="Views\SearchJobRequests\Index.cshtml" />
+    <Content Include="Views\SearchJobOffers\Create.cshtml" />
+    <Content Include="Views\SearchJobOffers\Delete.cshtml" />
+    <Content Include="Views\SearchJobOffers\Details.cshtml" />
+    <Content Include="Views\SearchJobOffers\Edit.cshtml" />
+    <Content Include="Views\SearchJobOffers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

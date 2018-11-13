@@ -10,107 +10,116 @@ using HireMe.Models;
 
 namespace HireMe.Controllers
 {
-    public class FavouriteJobRequestsController : Controller
+    public class SearchJobRequestsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: FavouriteJobRequests
+        // GET: SearchJobRequests
         public ActionResult Index()
         {
-            return View(db.Employers.ToList());
+            var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
+            return View(jobRequests.ToList());
         }
 
-        // GET: FavouriteJobRequests/Details/5
+        // GET: SearchJobRequests/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employer employer = db.Employers.Find(id);
-            if (employer == null)
+            JobRequest jobRequest = db.JobRequests.Find(id);
+            if (jobRequest == null)
             {
                 return HttpNotFound();
             }
-            return View(employer);
+            return View(jobRequest);
         }
 
-        // GET: FavouriteJobRequests/Create
-        public ActionResult Create(int id)
+        // GET: SearchJobRequests/Create
+        public ActionResult Create()
         {
+            ViewBag.CandidateId = new SelectList(db.Candidates, "CandidateId", "AspNetUserId");
+            ViewBag.JobId = new SelectList(db.Jobs, "JobId", "JobName");
             return View();
         }
 
-        // POST: FavouriteJobRequests/Create
+        // POST: SearchJobRequests/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EmployerId,AspNetUserId,Gender,CountryId,CityId,DistrictId,ProfileVerified,CreatedBy,CreatedDate,UpdatedBy,UpdatedDate,FirstName,LastName")] Employer employer)
+        public ActionResult Create([Bind(Include = "JobRequestId,CandidateId,JobId,IsPublished,PublishedDate,ValidTill,JobRequestDescription")] JobRequest jobRequest)
         {
             if (ModelState.IsValid)
             {
-                db.Employers.Add(employer);
+                db.JobRequests.Add(jobRequest);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(employer);
+            ViewBag.CandidateId = new SelectList(db.Candidates, "CandidateId", "AspNetUserId", jobRequest.CandidateId);
+            ViewBag.JobId = new SelectList(db.Jobs, "JobId", "JobName", jobRequest.JobId);
+            return View(jobRequest);
         }
 
-        // GET: FavouriteJobRequests/Edit/5
+        // GET: SearchJobRequests/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employer employer = db.Employers.Find(id);
-            if (employer == null)
+            JobRequest jobRequest = db.JobRequests.Find(id);
+            if (jobRequest == null)
             {
                 return HttpNotFound();
             }
-            return View(employer);
+            ViewBag.CandidateId = new SelectList(db.Candidates, "CandidateId", "AspNetUserId", jobRequest.CandidateId);
+            ViewBag.JobId = new SelectList(db.Jobs, "JobId", "JobName", jobRequest.JobId);
+            return View(jobRequest);
         }
 
-        // POST: FavouriteJobRequests/Edit/5
+        // POST: SearchJobRequests/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EmployerId,AspNetUserId,Gender,CountryId,CityId,DistrictId,ProfileVerified,CreatedBy,CreatedDate,UpdatedBy,UpdatedDate,FirstName,LastName")] Employer employer)
+        public ActionResult Edit([Bind(Include = "JobRequestId,CandidateId,JobId,IsPublished,PublishedDate,ValidTill,JobRequestDescription")] JobRequest jobRequest)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employer).State = EntityState.Modified;
+                db.Entry(jobRequest).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(employer);
+            ViewBag.CandidateId = new SelectList(db.Candidates, "CandidateId", "AspNetUserId", jobRequest.CandidateId);
+            ViewBag.JobId = new SelectList(db.Jobs, "JobId", "JobName", jobRequest.JobId);
+            return View(jobRequest);
         }
 
-        // GET: FavouriteJobRequests/Delete/5
+        // GET: SearchJobRequests/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employer employer = db.Employers.Find(id);
-            if (employer == null)
+            JobRequest jobRequest = db.JobRequests.Find(id);
+            if (jobRequest == null)
             {
                 return HttpNotFound();
             }
-            return View(employer);
+            return View(jobRequest);
         }
 
-        // POST: FavouriteJobRequests/Delete/5
+        // POST: SearchJobRequests/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employer employer = db.Employers.Find(id);
-            db.Employers.Remove(employer);
+            JobRequest jobRequest = db.JobRequests.Find(id);
+            db.JobRequests.Remove(jobRequest);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

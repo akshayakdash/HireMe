@@ -1,0 +1,213 @@
+﻿@model IEnumerable<HireMe.Models.JobOffer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Employer.AspNetUserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Job.JobName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinAge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxAge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExperienceInYears)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExperienceInMonths)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdProofDoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IdProofDocDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfileVerified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StaffType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Disponibility)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CountryId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CityId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DistrictId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CanRead)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CanWrite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMinSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SleepOnSite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMinRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MinGroupPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxGroupPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPublished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublishedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValidTill)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdditionalDescription)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employer.AspNetUserId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Job.JobName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinAge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxAge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExperienceInYears)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExperienceInMonths)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdProofDoc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdProofDocDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfileVerified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StaffType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Disponibility)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CountryId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CityId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DistrictId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryTypeOtherDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CanRead)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CanWrite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMinSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMaxSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SleepOnSite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMinRooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpectedMaxRooms)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinGroupPeople)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxGroupPeople)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsPublished)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PublishedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ValidTill)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdditionalDescription)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.JobOfferId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.JobOfferId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.JobOfferId })
+        </td>
+    </tr>
+}
+
+</table>
