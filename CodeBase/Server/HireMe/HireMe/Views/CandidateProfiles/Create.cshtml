@@ -13,303 +13,976 @@
 
     @helper ShowTaskTree(IEnumerable<HireMe.Models.JobTaskViewModel> jobTasks)
     {
-    for (int i = 0; i < jobTasks.Count(); i++)
-    {
-        count = count + 1;
-        var item = jobTasks.ElementAt(i);
-            <div class="checkbox" style="margin-left:25px;">
-                <label>
+for (int i = 0; i < jobTasks.Count(); i++)
+{
+    count = count + 1;
+    var item = jobTasks.ElementAt(i);
 
+        <div class="col-sm-12">
+            <div class="filtersection-panel">
+                <div class="filtersection-header">
                     @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
                     @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
-                    @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
                     @item.JobTaskName
-                    @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)
-
-
-                    <span></span>
-                </label>
-                @if (item.SubTasks.Any())
-                {
-
-                    @ShowTaskTree(item.SubTasks)
-
-                }
+                    <div class="switch-area-inner switch-area-inner-cus">
+                        <label class="checkbox">
+                            @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
+                            <span class=""></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filtersection-body">
+                    <div class="">
+                        @Html.TextBoxFor(p => p.JobTasks[count - 1].Note, new { @class = "form-control", @placeholder = "Comment" })
+                    </div>
+                </div>
             </div>
-    }
-    }
-
-    <div id="main-container">
-        <header id="header">
-
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-2">
-
-                        <!-- LOGO -->
-                        <div id="logo">
-                            <a href="index.html">
-                                <img src="~/assets/images/logo.png" alt="">
-                            </a>
-                        </div><!-- LOGO -->
-
-                    </div><!-- col -->
-                    <div class="col-sm-10">
-
-                        <!-- MENU -->
-                        <nav>
-
-                            <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-
-                            <ul class="menu clearfix" id="menu">
-
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                {
-                                    <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                                }
-
-
-                                <li>@Html.ActionLink("About", "About", "Home")</li>
-                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                                <li class="dropdown">
-                                    <a href="#">AIDE</a>
-                                    <ul>
-                                        <li>
-                                            <a class="waves" href="about-us.html">REPORT A BUG</a>
-                                        </li>
-                                        <li>
-                                            <a class="waves" href="services.html">SHARE YOUR OPINION</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-                                @Html.Partial("_LoginPartial")
-                                <li class="secondary-menu-btn">
-                                    <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
-                                    <ul class="secondary-menu">
-                                        <li><a class="waves" href="index.html">Home</a></li>
-                                        <li><a class="waves" href="#">ADMIN</a></li>
-                                        <li><a class="waves" href="#">LOGIN</a></li>
-                                        <li><a class="waves" href="#">CONTACT</a></li>
-                                        <li><a class="waves" href="#">AIDE</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-
-                        </nav>
-
-                    </div><!-- col -->
-                </div><!-- row -->
-            </div><!-- container-fluid -->
-
-        </header>
-
-        <div class="container">
-            @using (Html.BeginForm())
+            @if (item.SubTasks.Any())
             {
-                @Html.AntiForgeryToken()
+
+                @ShowTaskTree(item.SubTasks)
+
+            }
+        </div>
 
 
 
-                <div id="page-content" style="background: #f3f8fb;">
+    }
+    }
 
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="hr mt-0 ml-3 mr-3 ml-xl-5 mr-xl-5"></div>
-                            <div class="col-md-12">
-                                <div class="headline text-center">
-                                    <h2>Registration form</h2>
+ @*   <div id="main-container">
+            <header id="header">
 
-                                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                                </div><!-- headline -->
-                            </div>
-                        </div><!-- row -->
-                    </div><!-- container -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-2">
 
-                    <div class="container">
-                        <div class="mx-auto col-md-8 formreg">
-                            <div class="tabs style-2">
-                                <div class="tab-content" style="margin-top:0;">
-                                    <div class="tab-pane fade show active" id="tab-1-1">
+                            <!-- LOGO -->
+                            <div id="logo">
+                                <a href="index.html">
+                                    <img src="~/assets/images/logo.png" alt="">
+                                </a>
+                            </div><!-- LOGO -->
+
+                        </div><!-- col -->
+                        <div class="col-sm-10">
+
+                            <!-- MENU -->
+                            <nav>
+
+                                <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                                <ul class="menu clearfix" id="menu">
+
+                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                    {
+                                        <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                                    }
+
+
+                                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                    <li class="dropdown">
+                                        <a href="#">AIDE</a>
+                                        <ul>
+                                            <li>
+                                                <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                            </li>
+                                            <li>
+                                                <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    @Html.Partial("_LoginPartial")
+                                    <li class="secondary-menu-btn">
+                                        <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
+                                        <ul class="secondary-menu">
+                                            <li><a class="waves" href="index.html">Home</a></li>
+                                            <li><a class="waves" href="#">ADMIN</a></li>
+                                            <li><a class="waves" href="#">LOGIN</a></li>
+                                            <li><a class="waves" href="#">CONTACT</a></li>
+                                            <li><a class="waves" href="#">AIDE</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </nav>
+
+                        </div><!-- col -->
+                    </div><!-- row -->
+                </div><!-- container-fluid -->
+
+            </header>
+
+            <div class="container">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+
+
+                    <div id="page-content" style="background: #f3f8fb;">
+
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="hr mt-0 ml-3 mr-3 ml-xl-5 mr-xl-5"></div>
+                                <div class="col-md-12">
+                                    <div class="headline text-center">
+                                        <h2>Registration form</h2>
+
+                                        @Html.ValidationSummary("", new { @class = "text-danger" })
+                                    </div><!-- headline -->
+                                </div>
+                            </div><!-- row -->
+                        </div><!-- container -->
+
+                        <div class="container">
+                            <div class="mx-auto col-md-8 formreg">
+                                <div class="tabs style-2">
+                                    <div class="tab-content" style="margin-top:0;">
+                                        <div class="tab-pane fade show active" id="tab-1-1">
+                                            <div class="form-section">
+                                                <h6 class="text-uppercase">My Criteria</h6>
+
+                                                <fieldset>
+
+                                                    <div id="alert-area"></div>
+                                                    <div class="filter-box">
+                                                        <form>
+                                                            <div class="row">
+                                                                <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="filter-header">Gender</div>
+
+                                                                            <p>
+                                                                                <div class="radio inline">
+                                                                                    <label>
+                                                                                        @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
+                                                                                        Male
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="radio inline">
+                                                                                    <label>
+                                                                                        @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
+                                                                                        Female
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="filter-header">Type of staff</div>
+
+                                                                            <p>
+                                                                                <div class="radio inline">
+                                                                                    <label>
+                                                                                        @Html.RadioButtonFor(p => p.StaffType, StaffType.Agency, new { @value = StaffType.Agency })
+                                                                                        Agency
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                                <div class="radio inline">
+                                                                                    <label>
+                                                                                        @Html.RadioButtonFor(p => p.StaffType, StaffType.Independent, new { @value = StaffType.Independent })
+                                                                                        Independant
+                                                                                        <span></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="filter-header">Age</div>
+                                                                            <div class="row">
+                                                                                @Html.TextBoxFor(p => p.Age)
+                                                                            </div>
+
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="filter-header">Years of Experience</div>
+                                                                            <div class="row">
+                                                                                @Html.TextBoxFor(p => p.ExperienceInYears)
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="filter-header">Localizations</div>
+
+                                                                        </div>
+                                                                        @Html.HiddenFor(p => p.Country, new { @value = "Ivory" })
+
+                                                                        <div class="col-sm-6">
+                                                                            Select City
+                                                                            @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
+
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            Select District
+                                                                            @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(DistrictEnum))), "Select District", new { @class = "form-control" })
+                                                                        </div>
+                                                                        <div class="col-sm-12">
+                                                                            <div class="filter-header">Salary between</div>
+
+                                                                            @Html.TextBoxFor(p => p.ExpectedMinSalary)
+                                                                            @Html.TextBoxFor(p => p.ExpectedMaxSalary)
+
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="filter-header">Read</div>
+                                                                            <div class="checkbox">
+                                                                                <label>
+                                                                                    @Html.CheckBoxFor(p => p.CanRead)
+                                                                                    <span></span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="filter-header">Write</div>
+                                                                            <div class="checkbox">
+                                                                                <label>
+                                                                                    @Html.CheckBoxFor(p => p.CanWrite)
+                                                                                    <span></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="filter-header">Disponibility</div>
+
+                                                                        <p>
+                                                                            <div class="date">
+
+                                                                                @Html.TextBoxFor(p => p.Disponibility, new { @type = "datepicker" })
+                                                                            </div>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="filter-header">Sleep On Site</div>
+                                                                        <div class="checkbox">
+                                                                            <label>
+                                                                                @Html.CheckBoxFor(p => p.SleepOnSite)
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="row">
+
+                                                                    <div class="col-sm-12">
+                                                                        <div class="filter-header">Number of rooms</div>
+
+                                                                        @Html.TextBoxFor(p => p.ExpectedMinRooms)
+                                                                        @Html.TextBoxFor(p => p.ExpectedMaxRooms)
+
+                                                                    </div>
+                                                                    <div class="col-sm-12">
+                                                                        <div class="filter-header">Number of people</div>
+
+                                                                        @Html.TextBoxFor(p => p.MinGroupPeople)
+                                                                        @Html.TextBoxFor(p => p.MaxGroupPeople)
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="row">
+                                                                    <div class="col-sm-12">
+                                                                        <div class="filter-header">Additional Criterias</div>
+                                                                        @Html.TextAreaFor(p => p.AdditionalDescription)
+                                                                        @Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </fieldset>
+
+                                        </div>
+
+                                    </div><!-- tab-pane -->
+                                    <div class="tab-pane fade" id="tab-1-2">
                                         <div class="form-section">
-                                            <h6 class="text-uppercase">My Criteria</h6>
+                                            <h6 class="text-uppercase">My Tasks</h6>
+                                            @ShowTaskTree(Model.JobTasks.Where(p => p.ParentJobTaskId == null))
 
-                                            <fieldset>
+                                        </div>
 
-                                                <div id="alert-area"></div>
-                                                <div class="filter-box">
-                                                    <form>
-                                                        <div class="row">
-                                                            <div class="col-md-6" style="border-right:2px solid #ff6a00;">
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <div class="filter-header">Gender</div>
 
-                                                                        <p>
-                                                                            <div class="radio inline">
-                                                                                <label>
-                                                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
-                                                                                    Male
-                                                                                    <span></span>
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="radio inline">
-                                                                                <label>
-                                                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
-                                                                                    Female
-                                                                                    <span></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </p>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="filter-header">Type of staff</div>
+                                        <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                                    </div><!-- tab-pane -->
+                                </div>
+                                <ul class="nav nav-tabs" style="width: 100%;">
+                                    <li style="width: 50%;">
+                                        <a style="float:left;" class="active" href="#tab-1-1" data-toggle="tab">Back</a>
+                                    </li>
+                                    <li style="width: 50%;">
+                                        <a style="float:right;" href="#tab-1-2" data-toggle="tab">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
 
-                                                                        <p>
-                                                                            <div class="radio inline">
-                                                                                <label>
-                                                                                    @Html.RadioButtonFor(p => p.StaffType, StaffType.Agency, new { @value = StaffType.Agency })
-                                                                                    Agency
-                                                                                    <span></span>
-                                                                                </label>
-                                                                            </div>
-                                                                            <div class="radio inline">
-                                                                                <label>
-                                                                                    @Html.RadioButtonFor(p => p.StaffType, StaffType.Independent, new { @value = StaffType.Independent })
-                                                                                    Independant
-                                                                                    <span></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <div class="filter-header">Age</div>
-                                                                        <div class="row">
-                                                                            @Html.TextBoxFor(p => p.Age)
-                                                                        </div>
+                </div>
+            }
+        </div>
 
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="filter-header">Years of Experience</div>
-                                                                        <div class="row">
-                                                                            @Html.TextBoxFor(p => p.ExperienceInYears)
-                                                                        </div>
+    </div>*@
 
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-12">
-                                                                        <div class="filter-header">Localizations</div>
 
-                                                                    </div>
-                                                                    @Html.HiddenFor(p => p.Country, new { @value = "Ivory" })
 
-                                                                    <div class="col-sm-6">
-                                                                        Select City
-                                                                        @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
 
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        Select District
-                                                                        @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(DistrictEnum))), "Select District", new { @class = "form-control" })
-                                                                    </div>
-                                                                    <div class="col-sm-12">
-                                                                        <div class="filter-header">Salary between</div>
 
-                                                                        @Html.TextBoxFor(p => p.ExpectedMinSalary)
-                                                                        @Html.TextBoxFor(p => p.ExpectedMaxSalary)
 
-                                                                    </div>
-                                                                </div>
+
+
+
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
+
+<div id="main-container-user" style="margin-left: 280px;">
+    <!-- HEADER -->
+    <header id="header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header><!-- HEADER -->
+    @*<div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <span class="menu-but" onclick="openNav()">&#9776; MENU</span>
+                </div>
+            </div>
+        </div>*@
+    <div id="mySidenav" class="sidenav" style="width: 280px;">
+        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                .Select(c => c.Value);
+            string role = roles.FirstOrDefault();}
+
+
+        <div class="sidenav-header">User Account - @role</div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
+        @*<a href="#"><i class="fa fa-search"></i>Job request/ Job offer</a>
+            <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
+            <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
+            <a href="#"><i class="fa fa-heart"></i>Manage my Favorites</a>
+            <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
+            <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
+            <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
+            <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>*@
+
+        @if (role == "Candidate")
+        {
+
+            <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
+
+            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Employer")
+        {
+
+            <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employee</a>
+
+            <a href="~/JobOffers"><i class="fa fa-search"></i> My Job Offers</a>
+
+            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Agency")
+        {
+
+            <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
+
+            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
+
+            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+    </div>
+
+
+
+    <div class="full-section-container wow fadeInUp">
+@using (Html.BeginForm())
+            {
+    @Html.AntiForgeryToken()
+        <div class="tab-section">
+            <div class="tab-section-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tabs style-2">
+                            <div class="tab-header">
+                                Set my criterias
+                            </div>
+                            <div class="tab-content search-criteria" style="margin-top:0;">
+
+                                <div class="tab-pane fade show active" id="tab-1-1">
+                                    <div class="row">
+                                        <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+
+                                            <div class="row">
+                                                @*<div class="col-md-12">
+                                                    <div class="common-header mb-2">
+                                                        Set all filters to “inactive”
+                                                        <div class="switch-area">
+                                                            <label class="switchsmall">
+                                                                <input type="checkbox">
+                                                                <span class="slider1 round"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Gender
+                                                            @*<div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>*@
+                                                        </div>
+
+                                                        <div class="filtersection-body">
+                                                            <div class="radio">
+                                                                <label>
+                                                                   @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
+                                                                Female
+                                                                    <span></span>
+                                                                </label>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="row">
-                                                                    <div class="col-sm-6">
-                                                                        <div class="filter-header">Read</div>
-                                                                        <div class="checkbox">
-                                                                            <label>
-                                                                                @Html.CheckBoxFor(p => p.CanRead)
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="filter-header">Write</div>
-                                                                        <div class="checkbox">
-                                                                            <label>
-                                                                                @Html.CheckBoxFor(p => p.CanWrite)
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <div class="filter-header">Disponibility</div>
-                                                                       
-                                                                    <p>
-                                                                        <div class="date">
-                                                                           
-                                                                            @Html.TextBoxFor(p => p.Disponibility, new { @type = "datepicker" })
-                                                                        </div>
-                                                                    </p>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="filter-header">Sleep On Site</div>
-                                                                    <div class="checkbox">
-                                                                        <label>
-                                                                            @Html.CheckBoxFor(p => p.SleepOnSite)
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-
-                                                                </div>
+                                                            <div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
+                                                                    Male
+                                                                    <span></span>
+                                                                </label>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Type of Staff
+                                                            @*<div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>*@
+                                                        </div>
 
+                                                        <div class="filtersection-body">
+                                                            <div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(p => p.StaffType, StaffType.Agency, new { @value = StaffType.Agency })
+                                                                    Agency
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio">
+                                                                <label>
+                                                                    @Html.RadioButtonFor(p => p.StaffType, StaffType.Independent, new { @value = StaffType.Independent })
+                                                                    Independant
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Age
+                                                            @*<div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>*@
+                                                        </div>
+
+                                                        <div class="filtersection-body">
                                                             <div class="row">
-
-                                                                <div class="col-sm-12">
-                                                                    <div class="filter-header">Number of rooms</div>
-
-                                                                    @Html.TextBoxFor(p => p.ExpectedMinRooms)
-                                                                    @Html.TextBoxFor(p => p.ExpectedMaxRooms)
-
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    @Html.TextBoxFor(p => p.Age, new { @class = "form-control" })
+                                                                    @*<select>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+                                                                        <option value="6">6</option>
+                                                                    </select>
                                                                 </div>
-                                                                <div class="col-sm-12">
-                                                                    <div class="filter-header">Number of people</div>
-
-                                                                    @Html.TextBoxFor(p => p.MinGroupPeople)
-                                                                    @Html.TextBoxFor(p => p.MaxGroupPeople)
-
-                                                                </div>
-
-                                                            </div>
-
-                                                            <div class="row">
-                                                                <div class="col-sm-12">
-                                                                    <div class="filter-header">Additional Criterias</div>
-                                                                    @Html.TextAreaFor(p => p.AdditionalDescription)
-                                                                    @Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    <select>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+                                                                        <option value="6">6</option>
+                                                                    </select>*@
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </form>
-                                            </div>
-                                        </fieldset>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Years of Experience
+                                                            @*<div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>*@
+                                                        </div>
 
+                                                        <div class="filtersection-body">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-md-12">
+                                                                    @Html.TextBoxFor(p => p.ExperienceInYears, new { @class = "form-control" })
+                                                                    @*<select>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+                                                                        <option value="6">6</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    <select>
+                                                                        <option value="1">1</option>
+                                                                        <option value="2">2</option>
+                                                                        <option value="3">3</option>
+                                                                        <option value="4">4</option>
+                                                                        <option value="5">5</option>
+                                                                        <option value="6">6</option>
+                                                                    </select>*@
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Localizations
+                                                            @*<div class="switch-area-inner">
+                            <label class="switchsmall">
+                                <input type="checkbox">
+                                <span class="slider1 round"></span>
+                            </label>
+                        </div>*@
+                                                        </div>
+
+                                                        <div class="filtersection-body">
+                                                            @Html.HiddenFor(p => p.Country, new { @value = "Ivory" })
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
+
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(DistrictEnum))), "Select District", new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Salary Between
+                                                            @*<div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>*@
+                                                        </div>
+
+                                                        <div class="filtersection-body">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="radio">
+                                                                        <label>
+                                                                            <input type="radio" name="options" id="option1" value="option1" checked>
+                                                                            Monthly
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio">
+                                                                        <label>
+                                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                                            Hourly
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio">
+                                                                        <label>
+                                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                                            Other
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            @Html.TextBoxFor(p => p.ExpectedMinSalary, new { @class = "form-control" })
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                           @Html.TextBoxFor(p => p.ExpectedMaxSalary, new { @class = "form-control" })
+                                                                        </div>
+                                                                        @*<div class="col-md-12">
+                                                                            <input type="text" class="form-control" placeholder="Additional Description" />
+                                                                        </div>*@
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            
+                                        </div>
                                     </div>
 
                                 </div><!-- tab-pane -->
                                 <div class="tab-pane fade" id="tab-1-2">
-                                    <div class="form-section">
-                                        <h6 class="text-uppercase">My Tasks</h6>
-                                        @ShowTaskTree(Model.JobTasks.Where(p => p.ParentJobTaskId == null))
+                                    <div class="row">
+                                        <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Read
+                                                            <div class="switch-area-inner switch-area-inner-cus">
+                                                                <label class="checkbox">
+                                                                  @Html.CheckBoxFor(p => p.CanRead)
+                                                                    <span class=""></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body">
+                                                            <div class="icon-section">
+                                                                <img src="~/assets/images/eyeglass1.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Write
+                                                            <div class="switch-area-inner switch-area-inner-cus">
+                                                                <label class="checkbox">
+                                                                    @Html.CheckBoxFor(p => p.CanWrite)
+                                                                    <span class=""></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body">
+                                                            <div class="icon-section">
+                                                                <img src="~/assets/images/write1.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Sleep on Site
+                                                            <div class="switch-area-inner switch-area-inner-cus">
+                                                                <label class="checkbox">
+                                                                    @Html.CheckBoxFor(p => p.SleepOnSite)
+                                                                    <span class=""></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body">
+                                                            <div class="icon-section">
+                                                                <img src="~/assets/images/sleep1.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Disponibility
+                                                            @*<div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>*@
+                                                        </div>
 
+                                                        <div class="filtersection-body">
+                                                            <div class="date">
+                                                               @Html.TextBoxFor(p => p.Disponibility, new { @type = "datepicker" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Number of rooms
+
+                                                        </div>
+
+                                                        <div class="filtersection-body">
+                                                           
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    @Html.TextBoxFor(p => p.ExpectedMinRooms, new { @class = "form-control" })
+
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    @Html.TextBoxFor(p => p.ExpectedMaxRooms, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Number of people
+
+                                                        </div>
+
+                                                        <div class="filtersection-body">
+
+                                                            <div class="row">
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    @Html.TextBoxFor(p => p.MinGroupPeople, new { @class = "form-control" })
+
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6">
+                                                                    @Html.TextBoxFor(p => p.MaxGroupPeople, new { @class = "form-control" })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                          
+                                            <div class="row">
+                                                @ShowTaskTree(Model.JobTasks.Where(p => p.ParentJobTaskId == null))
+                                                @*<div class="col-sm-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Cooking
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="filtersection-body">
+                                                            <div class="icon-section">
+                                                                <img src="~/assets/images/cooking1.png" alt="">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Africaine Food
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body">
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="options" id="option2" value="option2">
+                                                                    Souces
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="options" id="option2" value="option2">
+                                                                    Grilling
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <textarea id="comment" class="form-control" name="comment" rows="1" placeholder="Comment"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            European Food
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body">
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="options" id="option2" value="option2">
+                                                                    Souces
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="checkbox">
+                                                                <label>
+                                                                    <input type="checkbox" name="options" id="option2" value="option2">
+                                                                    Grilling
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <textarea id="comment" class="form-control" name="comment" rows="1" placeholder="Comment"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Additional Description
+                                                            @*<div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>*@
+                                                        </div>
+                                                        <div class="filtersection-body">
+                                                            @*<textarea id="comment" class="form-control" name="comment" rows="2" placeholder="Comment"></textarea>*@
+                                                            @Html.TextAreaFor(p => p.AdditionalDescription, new { @class = "form-control" , @placeholder = "Comment" })
+                                                            @Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
-
-                                    <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
                                 </div><!-- tab-pane -->
                             </div>
                             <ul class="nav nav-tabs" style="width: 100%;">
@@ -321,20 +994,44 @@
                                 </li>
                             </ul>
                         </div>
+
+
+
+
                     </div>
                 </div>
-
             </div>
+        </div>
+
         }
+
+
     </div>
 
+    <!---- Tab Section end-->
+
+
+
+
+
+
+
 </div>
+<script>
+     function openNav() {
+         document.getElementById("mySidenav").style.width = "280px";
+         document.getElementById("main-container-user").style.marginLeft = "280px";
+     }
 
-
-
-
-
-
+     function closeNav() {
+         document.getElementById("mySidenav").style.width = "0";
+         document.getElementById("main-container-user").style.marginLeft = "0";
+     }
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@
