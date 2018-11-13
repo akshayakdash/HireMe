@@ -81,6 +81,8 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                         </div>
+
+                                                      
                                                         @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
                                                         <span class="input-lable">Country</span>
                                                     </div>
@@ -88,14 +90,24 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                         </div>
-                                                        @Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })
+                                                        @Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
+                                                                    {
+                                                       new SelectListItem{ Text="Choose City", Value = "" },
+                                                                        new SelectListItem{ Text="Abidjan (Capitale Eco)", Value = "1" },
+                                                                        new SelectListItem{ Text="Yamoussoukro (Capitale Pol)", Value = "2" },
+                                                                        new SelectListItem{ Text="Abengourou", Value = "3" },
+                                                                        new SelectListItem{ Text="Anyama", Value = "4" },
+                                                                        new SelectListItem{ Text="Agnibilékrou", Value = "5" },
+                                                                     }, htmlAttributes: new { @class = "form-control", id = "City" })
+                                                        @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
                                                         <span class="input-lable">City</span>
                                                     </div>
                                                     <div class="input-group mb-2">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                         </div>
-                                                        @Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })
+                                                        <select id="District" name="DistrictId" class = "form-control"></select>
+                                                        @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
                                                         <span class="input-lable">District</span>
                                                     </div>
                                                 </fieldset>
@@ -236,7 +248,7 @@
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
                                                         </div>
-                                                        @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"))
+                                                        @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control"})
                                                         <span class="input-lable">Security Question</span>
                                                     </div>
 
@@ -279,7 +291,44 @@
                         </div>
 
                         </div>
-               
-       
-                    }
-               
+
+
+        }
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")}
+<script>
+     $(document).ready(function () {
+         var locations = {
+             '0':[],
+             '1': ['Choose District', 'Abobo', 'Adjamé', 'Anyama', 'Attécoubé', 'Bingerville'],
+             '2': ['Choose District'],
+             '3': ['Choose District'],
+             '4': ['Choose District'],
+             '5': ['Choose District'],
+
+         }
+         
+         var $District = $('#District');
+         $('#City').change(function () {
+             
+            
+             var city = $(this).val(), lcns = locations[city] || [];
+
+             //var html = $.map(lcns, function (lcn,index) {
+             //    return '<option value="' + index + '">' + lcn + '</option>'
+             //}).join('');
+           
+             var html = "";
+             for (var i = 0; i < locations[city].length; i++) {
+                 alert(html);
+                 html = html + '<option value="' + i + '">' + locations[city][i] + '</option>'
+             }
+            
+             $District.html(html)
+         });
+     });
+</script>
+
+
+              

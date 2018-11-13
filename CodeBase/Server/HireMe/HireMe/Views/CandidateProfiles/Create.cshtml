@@ -1028,7 +1028,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
          document.getElementById("main-container-user").style.marginLeft = "0";
      }
 </script>
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 @*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

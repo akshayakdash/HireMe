@@ -125,7 +125,7 @@ namespace HireMe.Controllers
                 }
 
                 // check the role and navigate to the myjobrequests page or naviget to SearchJobOffers?jobId = jobId
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "JobOffers");
             }
             Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == employerJobOffer.JobId);
             employerJobOffer.JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks);
