@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HireMe.Models;
 using System.IO;
+using System.Collections.Generic;
 
 namespace HireMe.Controllers
 {
@@ -154,6 +155,13 @@ namespace HireMe.Controllers
                                         .ToList(), "Name", "Name", "Candidate");
                 ViewBag.SelectedRole = "Candidate";
             }
+            var country = context.Countries.ToList();
+            var city = context.Cities.ToList();
+            var district = context.Districts.ToList();
+
+            ViewBag.Country = country;
+            ViewBag.City = city;
+            ViewBag.District = district;
             return View();
         }
 
@@ -240,7 +248,7 @@ namespace HireMe.Controllers
 
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                  //  await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771    
                     // Send an email with this link    
@@ -250,7 +258,7 @@ namespace HireMe.Controllers
                     //Assign Role to user Here       
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
                     //Ends Here     
-                    return RedirectToAction("Index", "Users");
+                    return RedirectToAction("Login", "Account");
                 }
 
                 AddErrors(result);
@@ -540,7 +548,7 @@ namespace HireMe.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Users");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
