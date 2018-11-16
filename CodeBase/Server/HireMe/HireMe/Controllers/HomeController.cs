@@ -40,55 +40,55 @@ namespace HireMe.Controllers
 
 
             // In Startup iam creating first Admin Role and creating a default Admin User     
-            if (!roleManager.RoleExists("Admin"))
-            {
+            //if (!roleManager.RoleExists("Admin"))
+            //{
 
-                // first we create Admin rool    
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Admin";
-                roleManager.Create(role);
+            //    // first we create Admin rool    
+            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            //    role.Name = "Admin";
+            //    roleManager.Create(role);
 
-                //Here we create a Admin super user who will maintain the website                   
+            //    //Here we create a Admin super user who will maintain the website                   
 
-                var user = new ApplicationUser();
-                user.UserName = "akshaya";
-                user.Email = "akshayakdash@gmail.com";
+            //    var user = new ApplicationUser();
+            //    user.UserName = "akshaya";
+            //    user.Email = "akshayakdash@gmail.com";
 
-                string userPWD = "Akshaya@123";
+            //    string userPWD = "Akshaya@123";
 
-                var chkUser = UserManager.Create(user, userPWD);
+            //    var chkUser = UserManager.Create(user, userPWD);
 
-                //Add default User to Role Admin    
-                if (chkUser.Succeeded)
-                {
-                    var result1 = UserManager.AddToRole(user.Id, "Admin");
+            //    //Add default User to Role Admin    
+            //    if (chkUser.Succeeded)
+            //    {
+            //        var result1 = UserManager.AddToRole(user.Id, "Admin");
 
-                }
-            }
+            //    }
+            //}
 
             // creating Creating Manager role     
-            if (!roleManager.RoleExists("Employer"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Employer";
-                roleManager.Create(role);
+            //if (!roleManager.RoleExists("Employer"))
+            //{
+            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            //    role.Name = "Employer";
+            //    roleManager.Create(role);
 
-            }
+            //}
 
-            // creating Creating Employee role     
-            if (!roleManager.RoleExists("Candidate"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Candidate";
-                roleManager.Create(role);
-            }
+            //// creating Creating Employee role     
+            //if (!roleManager.RoleExists("Candidate"))
+            //{
+            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            //    role.Name = "Candidate";
+            //    roleManager.Create(role);
+            //}
 
-            if (!roleManager.RoleExists("Agency"))
-            {
-                var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "Agency";
-                roleManager.Create(role);
-            }
+            //if (!roleManager.RoleExists("Agency"))
+            //{
+            //    var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
+            //    role.Name = "Agency";
+            //    roleManager.Create(role);
+            //}
         }
     }
 }

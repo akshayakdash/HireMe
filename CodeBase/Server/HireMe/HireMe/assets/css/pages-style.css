@@ -1238,6 +1238,9 @@
 	#mobile-menu > li.secondary-menu-btn {
 		display: none;
 	}
+    .mobile-app{
+            margin-top: 15px;
+    }
 
 }
 
@@ -1253,6 +1256,10 @@
 	#mobile-menu > li.secondary-menu-btn {
 		display: none;
 	}
+     .mobile-app{
+            display:block;
+            float:none;
+    }
 
 }
 

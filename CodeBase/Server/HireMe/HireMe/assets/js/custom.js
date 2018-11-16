@@ -905,7 +905,7 @@
             $(".rev_slider").revolution({
                 sliderType: "standard",
                 sliderLayout: "auto",
-                delay: 5000,
+                delay: 2500,
                 spinner: 'none',
                 navigation: {
                     arrows:{
@@ -971,7 +971,7 @@
                 items: 1,
                 autoplay: true,
                 autoplayTimeout: 3000,
-                autoplayHoverPause: true,
+                autoplayHoverPause: false,
                 smartSpeed: 1200,
                 loop: true,
                 nav: true,
