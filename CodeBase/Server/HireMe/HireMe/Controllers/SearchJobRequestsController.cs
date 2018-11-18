@@ -7,6 +7,9 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using HireMe.Utility;
+using System.Collections;
+using System.Linq.Dynamic;
 
 namespace HireMe.Controllers
 {
@@ -15,10 +18,50 @@ namespace HireMe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SearchJobRequests
-        public ActionResult Index()
+        public ActionResult Index(Gender? gender = null, string yearsOfExperience = "")
         {
-            var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
-            return View(jobRequests.ToList());
+            JobRequestSearchParam searchParam = null;//Session["JobRequestSearchParam"] as JobRequestSearchParam;
+
+            if (gender != null || !string.IsNullOrWhiteSpace(yearsOfExperience))
+            {
+                searchParam = new JobRequestSearchParam { };
+                searchParam.Gender = gender.Value;
+                if (!string.IsNullOrWhiteSpace(yearsOfExperience))
+                    searchParam.YearsOfExperience = yearsOfExperience;
+            }
+
+            if (searchParam == null)
+            {
+                var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
+                return View(jobRequests.ToList());
+            }
+            else
+            {
+                object[] queryString = searchParam.GetSearchQuery();
+                ArrayList searchArgs = (ArrayList)queryString[1];
+                var jobRequests = db.JobRequests
+                    .Include(j => j.Candidate)
+                    .Include(j => j.Job)
+                    .AsQueryable()
+                    .Where(queryString[0].ToString(), searchArgs.ToArray());
+
+
+                //var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
+                return View(jobRequests.ToList());
+            }
+        }
+
+        [HttpGet]
+        public ActionResult SetJobRequestSearchParam(Gender gender, string yearsOfExperience)
+        {
+            var jobRequestSearchParam = new JobRequestSearchParam { Gender = gender };
+
+            if (string.IsNullOrEmpty(yearsOfExperience) && yearsOfExperience != "undefined")
+            {
+                jobRequestSearchParam.YearsOfExperience = yearsOfExperience;
+            }
+            Session["JobRequestSearchParam"] = jobRequestSearchParam;
+            return new JsonResult { };
         }
 
         // GET: SearchJobRequests/Details/5
@@ -126,11 +169,11 @@ namespace HireMe.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            //if (disposing)
+            //{
+            //    db.Dispose();
+            //}
+            //base.Dispose(disposing);
         }
     }
 }

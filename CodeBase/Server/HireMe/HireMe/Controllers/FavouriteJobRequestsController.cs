@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
@@ -17,7 +18,11 @@ namespace HireMe.Controllers
         // GET: FavouriteJobRequests
         public ActionResult Index()
         {
-            return View(db.Employers.ToList());
+            var userId = User.Identity.GetUserId();
+
+            var existingEmployer = db.Employers.Include(t => t.FavouriteJobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
+
+            return View(existingEmployer.FavouriteJobRequests);
         }
 
         // GET: FavouriteJobRequests/Details/5
@@ -36,9 +41,24 @@ namespace HireMe.Controllers
         }
 
         // GET: FavouriteJobRequests/Create
+        [HttpGet]
         public ActionResult Create(int id)
         {
-            return View();
+
+            // first get the logged in user id -- Employer
+            var userId = User.Identity.GetUserId();
+
+            var existingEmployer = db.Employers.Include(t => t.FavouriteJobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
+
+            if (existingEmployer != null) {
+                // now get the job request from id
+                var jobRequest = db.JobRequests.Find(id);
+
+                existingEmployer.FavouriteJobRequests.Add(jobRequest);
+            }
+
+            //return View();
+            return new JsonResult { };
         }
 
         // POST: FavouriteJobRequests/Create

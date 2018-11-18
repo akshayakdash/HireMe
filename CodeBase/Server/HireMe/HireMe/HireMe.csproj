@@ -266,6 +266,7 @@
     <Compile Include="Utility\CustomValidationAttribute.cs" />
     <Compile Include="Utility\EnumExtension.cs" />
     <Compile Include="Utility\MySqlMigrationGenerator.cs" />
+    <Compile Include="Utility\SearchParam.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\custom.css" />
