@@ -1,213 +1,743 @@
 ﻿@model IEnumerable<HireMe.Models.JobOffer>
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
 
-@{
-    ViewBag.Title = "Index";
-}
+<script>
+    function setFavouriteJobOffer(jobOfferId) {
 
-<h2>Index</h2>
+        //alert(jobRequestId);
+        $.ajax
+            ({
+                url: '/FavouritejobOffers/Create?id=' + jobOfferId,
+                //data: { "id": jobRequestId },
+                type: 'get',
+                success: function (result) {
+                    //$('.modal-box').text(result).fadeIn(700, function () {
+                    //    setTimeout(function () {
+                    //        $('.modal-box').fadeOut();
+                    //    }, 2000);
+                    //});
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Employer.AspNetUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Job.JobName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Age)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MinAge)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxAge)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExperienceInYears)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExperienceInMonths)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdProofDoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdProofDocDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfileVerified)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StaffType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Disponibility)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CityId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DistrictId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalaryType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CanRead)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CanWrite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMinSalary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SleepOnSite)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMinRooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MinGroupPeople)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MaxGroupPeople)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsPublished)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PublishedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ValidTill)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AdditionalDescription)
-        </th>
-        <th></th>
-    </tr>
+                    alert("Job Offer added to your favourite list.");
+                }
+            });
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Employer.AspNetUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Job.JobName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Age)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MinAge)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxAge)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExperienceInYears)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExperienceInMonths)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdProofDoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdProofDocDesc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfileVerified)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StaffType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Disponibility)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CountryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DistrictId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalaryType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SalaryTypeOtherDesc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CanRead)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CanWrite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMinSalary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMaxSalary)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SleepOnSite)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMinRooms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ExpectedMaxRooms)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MinGroupPeople)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxGroupPeople)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsPublished)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PublishedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ValidTill)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AdditionalDescription)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.JobOfferId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.JobOfferId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.JobOfferId })
-        </td>
-    </tr>
-}
+    }
 
-</table>
+    function setjobOffersearchParam() {
+        var gender = $('input[name="options"]').val();
+        var yearsOfExp = $(".yrs_of_exp").val();
+
+        console.log("Gender" + gender);
+        console.log("years of exp = " + yearsOfExp);
+        //SetJobRequestSearchParam
+
+        //$.ajax
+        //    ({
+        //        url: '/SearchJobRequests/SetJobRequestSearchParam?Gender=' + gender + "&YearsOfExperience=" + yearsOfExp,
+        //        data: { "Gender": gender, "YearsOfExperience": yearsOfExp },
+        //        contentType: "json",
+        //        type: 'get',
+        //        success: function (result) {
+        //            //$('.modal-box').text(result).fadeIn(700, function () {
+        //            //    setTimeout(function () {
+        //            //        $('.modal-box').fadeOut();
+        //            //    }, 2000);
+        //            //});
+
+        //            alert("Job Request added to your favourite list.");
+        //        }
+        //    });
+
+        // window.location.href = "SearchJobRequests?gender=" + gender + "&yearsOfExperience=" + yearsOfExp;
+    }
+</script>
+
+
+<div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobOfferCtrl">
+
+    <header id="header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header>
+
+    <div id="mySidenav" class="sidenav" style="width: 280px;">
+
+        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                                                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                            .Select(c => c.Value);
+            string role = roles.FirstOrDefault();}
+
+
+        <div class="sidenav-header">User Account - @role</div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
+
+        @if (role == "Candidate")
+        {
+
+            <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
+
+            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Employer")
+        {
+
+            <a href="~/SearchJobRequests" class="active"><i class="fa fa-search"></i> Search Employee</a>
+
+            <a href="~/JobOffers"><i class="fa fa-search"></i> My Job Offers</a>
+
+            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Agency")
+        {
+
+            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
+
+            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
+
+            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+    </div>
+
+
+
+    <div class="full-section-container">
+        <div class="jobsearch-section">
+            <div class="right-section">
+                <div class="header">
+                    <a title="Filter" id="FilterClose" class="filter-close"><i class="bizhub-icon-close-2"></i></a>
+                    <i class="fa fa-filter"></i>Set all filter to Indifferent
+                    <div class="switch-area">
+                        <label class="switchsmall">
+                            <input type="checkbox">
+                            <span class="slider1 round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="body search-filter-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Gender
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="filtersection-body">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender" ng-value="1" data-ng-model="searchParam.Gender">
+                                            Woman
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender" ng-value="0" data-ng-model="searchParam.Gender">
+                                            Man
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    ID Card Checked
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="options" id="option1" value="option1" checked>
+                                            Yes
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="options" id="option2" value="option2">
+                                            No
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Age
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="inlineform-filter">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <select class="">
+                                                    <option>25</option>
+                                                    <option>30</option>
+                                                    <option>35</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 text-center">&amp;</div>
+                                            <div class="col-md-5">
+                                                <select class="">
+                                                    <option>35</option>
+                                                    <option>30</option>
+                                                    <option>35</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Years of Experiences
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="inlineform-filter">
+                                        <div class="row">
+                                            <div class="col-sm-2 text-center">
+                                                <i class="fa fa-plus"></i>
+                                            </div>
+                                            <div class="col-sm-3" style="padding-left: 0;">
+                                                <select class="yrs_of_exp">
+                                                    <option value="">--select--</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Type of Staff
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="options" id="option1" value="option1" checked>
+                                            Agency
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="options" id="option2" value="option2">
+                                            Independant
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Disponibility
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="widget widget-calendar">
+                                        <input type="date" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Localizations
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                @*<div class="filtersection-body">
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div>City</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div>District</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Salary Between
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="inlineform-filter">
+                                        <div class="row">
+                                            <div class="col-md-12 mb-2">
+                                                <div class="radio inline mr-2">
+                                                    <label>
+                                                        <input type="radio" name="options" id="option2" value="option2">
+                                                        Monthly
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                                <div class="radio inline">
+                                                    <label>
+                                                        <input type="radio" name="options" id="option2" value="option2">
+                                                        Hourly
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <select class="">
+                                                    <option>25</option>
+                                                    <option>30</option>
+                                                    <option>35</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 text-center">&amp;</div>
+                                            <div class="col-md-5">
+                                                <select class="">
+                                                    <option>35</option>
+                                                    <option>30</option>
+                                                    <option>35</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Read
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <img src="~/assets/images/eyeglass.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Write
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <img src="~/assets/images/write.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Sleep on Site
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <img src="~/assets/images/sleep.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Child Care
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <img src="~/assets/images/childcare.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Cleaning
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <img src="~/assets/images/cleaning.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Laundry
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <img src="~/assets/images/laundry.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-default btn-lg" data-ng-click="searchJobOffers()"><i class="bizhub-icon-search"></i> Search</button>
+                </div>
+            </div>
+            <div class="left-section">
+                <div class="filter-overlay">
+                    <div class="lds-ripple"><div></div><div></div></div>
+                </div>
+                <div class="header">
+                    @*<i class="fa fa-align-left"></i>
+
+                        <span class="grid-title">Searching for</span>
+                        <div class='switch'>
+                            <div class='quality'>
+                                <input checked id='q1' name='q' type='radio' value='q1'>
+                                <label for='q1'>Job Request</label>
+                            </div><div class='quality'>
+                                <input id='q2' name='q' type='radio' value='q2'>
+                                <label for='q2'>Job Offer</label>
+                            </div>
+                        </div>*@
+                    <a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>
+
+                </div>
+                @*<div class="filter-selected">
+                        <i class="fa fa-filter"></i><span>Agency</span>
+                    </div>*@
+                <div class="body">
+                    <div class="row">
+                      
+                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobOffers">
+                            <div class="profileitems searchprofile-section">
+                                <div class="left">
+                                    <img src="~/assets/images/image-18.jpg" />
+                                    <div class="rating">
+                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                    </div>
+                                    <div class="favorite">
+                                        <a href="#" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobOffer(jr.JobOfferId)"><i class="fa fa-heart-o"></i></a>
+                                    </div>
+                                </div>
+                                <div class="right">
+                                    <h1>{{jr.Employer.Gender == 1 ? "Man" : "Woman"}}<span></span></h1>
+                                    <h2 class="name" data-ng-bind="jr.Employer.FirstName"></h2>
+                                    <h2 class="name" data-ng-bind="jr.Job.JobName"></h2>
+                                    <p class="location">{{jr.Employer.Country}}</p>
+                                    <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
+                                </div>
+                                <div class="profile-footer">
+                                    {{jr.JobRequestDescription}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-if="jobOffers.length == 0">
+
+                            <h3>No job offer found based on your search criteria.</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("main-container-user").style.marginLeft = "280px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main-container-user").style.marginLeft = "0";
+    }
+    </script>
+
+    @section scripts {
+
+        <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#FilterjobId").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '358px');
+                $('.jobsearch-section .right-section').css('right', '0');
+                $('.Filterjob').css('display', 'none');
+                $('.switch').css('right', '10px');
+                $('.filter-overlay').css('display', 'block');
+
+            });
+            $("#FilterClose").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '0');
+                $('.jobsearch-section .right-section').css('right', '-350px');
+                $('.Filterjob').css('display', 'block');
+                $('.switch').css('right', '50px');
+                $('.filter-overlay').css('display', 'none');
+            });
+        });
+
+        </script>
+
+        <script>
+        //$('#set_favourite_job_req_link').click(function () {
+
+
+
+        //    $.ajax
+        //        ({
+        //            url: 'reservebook.php',
+        //            data: { "bookID": book_id },
+        //            type: 'post',
+        //            success: function (result) {
+        //                $('.modal-box').text(result).fadeIn(700, function () {
+        //                    setTimeout(function () {
+        //                        $('.modal-box').fadeOut();
+        //                    }, 2000);
+        //                });
+        //            }
+        //        });
+        //});
+        </script>
+        <script src="~/Scripts/angular.min.js"></script>
+        <script type="text/javascript">
+        var app = angular.module('myApp', []);
+        app.controller('searchJobOfferCtrl', function ($scope, $http) {
+            $scope.jobOffers = [];
+            $scope.message = "Welcome Angular JS";
+            $scope.searchParam = {};
+
+
+            $scope.searchjobOffers = function() {
+                $http.get("/api/jobtekapi/SearchJobOffers", {
+                    //params: { page: 1, limit: 100, sort: 'name', direction: 'desc' },
+                    //headers: { 'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==' }
+                    params: $scope.searchParam
+                })
+                .then(function (response) {
+                    console.log(response.data);
+                    $scope.jobOffers = response.data;
+                });
+            }
+
+            $scope.setFavouriteJobOffer = function(jobOfferid) {
+
+                //alert(jobRequestId);
+                $.ajax
+                    ({
+                        url: '/FavouritejobOffers/Create?id=' + jobOfferid,
+                        //data: { "id": jobRequestId },
+                        type: 'get',
+                        success: function (result) {
+                            //$('.modal-box').text(result).fadeIn(700, function () {
+                            //    setTimeout(function () {
+                            //        $('.modal-box').fadeOut();
+                            //    }, 2000);
+                            //});
+
+                            alert("Job Offer added to your favourite list.");
+                        }
+                    });
+
+            }
+
+            $scope.searchjobOffers();
+        });
+        </script>
+
+    }

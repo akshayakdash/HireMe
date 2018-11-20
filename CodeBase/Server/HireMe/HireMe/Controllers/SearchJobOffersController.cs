@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
@@ -14,11 +15,34 @@ namespace HireMe.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
+        /// <summary>
+        /// This method checks if the candidate profile exists or not 
+        /// if the candidate profile exists then it will navigate to the search employer page
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CheckCandidateProfileExists()
+        {
+            var userId = User.Identity.GetUserId();
+
+            var existingCandidate = db.Candidates.Include(path => path.JobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
+
+            if (existingCandidate != null && existingCandidate.JobRequests != null && existingCandidate.JobRequests.Count > 0)
+            {
+                return RedirectToAction("", "SearchJobOffers", null);
+            }
+            else
+            {
+                return RedirectToAction("", "JobCategories", null);
+            }
+        }
+
         // GET: SearchJobOffers
         public ActionResult Index()
         {
-            var jobOffers = db.JobOffers.Include(j => j.Employer).Include(j => j.Job);
-            return View(jobOffers.ToList());
+            //var jobOffers = db.JobOffers.Include(j => j.Employer).Include(j => j.Job);
+            return View();
         }
 
         // GET: SearchJobOffers/Details/5

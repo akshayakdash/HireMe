@@ -12,7 +12,7 @@
         $.ajax
             ({
                 url: '/FavouriteJobRequests/Create?id=' + jobRequestId,
-                data: { "id": jobRequestId },
+                //data: { "id": jobRequestId },
                 type: 'get',
                 success: function (result) {
                     //$('.modal-box').text(result).fadeIn(700, function () {
@@ -52,13 +52,13 @@
         //        }
         //    });
 
-       // window.location.href = "SearchJobRequests?gender=" + gender + "&yearsOfExperience=" + yearsOfExp;
+        // window.location.href = "SearchJobRequests?gender=" + gender + "&yearsOfExperience=" + yearsOfExp;
     }
 </script>
 
 
-<div id="main-container-user" style="margin-left: 280px;">
-    <!-- HEADER -->
+<div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobRequestCtrl">
+
     <header id="header">
 
         <div class="container-fluid">
@@ -121,19 +121,13 @@
             </div><!-- row -->
         </div><!-- container-fluid -->
 
-    </header><!-- HEADER -->
-    @*<div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="menu-but" onclick="openNav()">&#9776; MENU</span>
-                </div>
-            </div>
-        </div>*@
+    </header>
+
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                        .Select(c => c.Value);
+                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                        .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -141,14 +135,6 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
         <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
-        @*<a href="#"><i class="fa fa-search"></i>Job request/ Job offer</a>
-            <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
-            <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
-            <a href="#"><i class="fa fa-heart"></i>Manage my Favorites</a>
-            <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
-            <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
-            <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
-            <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>*@
 
         @if (role == "Candidate")
         {
@@ -213,14 +199,14 @@
                                 <div class="filtersection-body">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="options" id="option1" value="1" checked>
+                                            <input type="radio" name="gender" ng-value="1" data-ng-model="searchParam.Gender">
                                             Woman
                                             <span></span>
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="options" id="option2" value="2">
+                                            <input type="radio" name="gender" ng-value="0" data-ng-model="searchParam.Gender">
                                             Man
                                             <span></span>
                                         </label>
@@ -316,6 +302,7 @@
                                             </div>
                                             <div class="col-sm-3" style="padding-left: 0;">
                                                 <select class="yrs_of_exp">
+                                                    <option value="">--select--</option>
                                                     <option>2</option>
                                                     <option>3</option>
                                                     <option>4</option>
@@ -373,71 +360,6 @@
                                 </div>
                                 <div class="filtersection-body">
                                     <div class="widget widget-calendar">
-                                        @*<table>
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col" title="Monday">M</th>
-                                                        <th scope="col" title="Tuesday">T</th>
-                                                        <th scope="col" title="Wednesday">W</th>
-                                                        <th scope="col" title="Thursday">T</th>
-                                                        <th scope="col" title="Friday">F</th>
-                                                        <th scope="col" title="Saturday">S</th>
-                                                        <th scope="col" title="Sunday">S</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    <tr>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>&nbsp;</td>
-                                                        <td>1</td>
-                                                        <td>2</td>
-                                                        <td>3</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>4</td>
-                                                        <td>5</td>
-                                                        <td>6</td>
-                                                        <td>7</td>
-                                                        <td>8</td>
-                                                        <td>9</td>
-                                                        <td>10</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>11</td>
-                                                        <td>12</td>
-                                                        <td>13</td>
-                                                        <td id="today">14</td>
-                                                        <td>15</td>
-                                                        <td>16</td>
-                                                        <td>17</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>18</td>
-                                                        <td>19</td>
-                                                        <td>20</td>
-                                                        <td>21</td>
-                                                        <td>22</td>
-                                                        <td>23</td>
-                                                        <td>24</td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>25</td>
-                                                        <td>26</td>
-                                                        <td>27</td>
-                                                        <td>28</td>
-                                                        <td>29</td>
-                                                        <td>30</td>
-                                                        <td>&nbsp;</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>*@
                                         <input type="date" />
                                     </div>
                                 </div>
@@ -457,33 +379,33 @@
                                     </div>
                                 </div>
                                 @*<div class="filtersection-body">
-                                    <div class="inlineform-filter">
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div>City</div>
-                                                <select multiple="">
-                                                    <option>Option one</option>
-                                                    <option>Option two</option>
-                                                    <option>Option three</option>
-                                                    <option>Option four</option>
-                                                    <option>Option five</option>
-                                                    <option>Option six</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div>District</div>
-                                                <select multiple="">
-                                                    <option>Option one</option>
-                                                    <option>Option two</option>
-                                                    <option>Option three</option>
-                                                    <option>Option four</option>
-                                                    <option>Option five</option>
-                                                    <option>Option six</option>
-                                                </select>
+                                        <div class="inlineform-filter">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div>City</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div>District</div>
+                                                    <select multiple="">
+                                                        <option>Option one</option>
+                                                        <option>Option two</option>
+                                                        <option>Option three</option>
+                                                        <option>Option four</option>
+                                                        <option>Option five</option>
+                                                        <option>Option six</option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>*@
+                                    </div>*@
                             </div>
                         </div>
                     </div>
@@ -653,7 +575,7 @@
 
                 </div>
                 <div class="footer">
-                    <button type="button" class="btn btn-default btn-lg" onclick="setJobRequestSearchParam()"><i class="bizhub-icon-search"></i> Search</button>
+                    <button type="button" class="btn btn-default btn-lg" data-ng-click="searchJobRequests()"><i class="bizhub-icon-search"></i> Search</button>
                 </div>
             </div>
             <div class="left-section">
@@ -661,24 +583,24 @@
                     <div class="lds-ripple"><div></div><div></div></div>
                 </div>
                 <div class="header">
-                    <i class="fa fa-align-left"></i>
+                    @*<i class="fa fa-align-left"></i>
 
-                    <span class="grid-title">Searching for</span>
-                    <div class='switch'>
-                        <div class='quality'>
-                            <input checked id='q1' name='q' type='radio' value='q1'>
-                            <label for='q1'>Job Request</label>
-                        </div><div class='quality'>
-                            <input id='q2' name='q' type='radio' value='q2'>
-                            <label for='q2'>Job Offer</label>
-                        </div>
-                    </div>
+                        <span class="grid-title">Searching for</span>
+                        <div class='switch'>
+                            <div class='quality'>
+                                <input checked id='q1' name='q' type='radio' value='q1'>
+                                <label for='q1'>Job Request</label>
+                            </div><div class='quality'>
+                                <input id='q2' name='q' type='radio' value='q2'>
+                                <label for='q2'>Job Offer</label>
+                            </div>
+                        </div>*@
                     <a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>
 
                 </div>
-                <div class="filter-selected">
-                    <i class="fa fa-filter"></i><span>Agency</span>
-                </div>
+                @*<div class="filter-selected">
+                        <i class="fa fa-filter"></i><span>Agency</span>
+                    </div>*@
                 <div class="body">
                     <div class="row">
                         @*<div class="col-lg-4 col-md-6 col-sm-6">
@@ -713,8 +635,8 @@
                             </div>*@<!-- col -->
 
 
-
-                        @foreach (var item in Model)
+                       
+                        @*@foreach (var item in Model)
                         {
                             <div class="col-md-4 col-md-6 col-sm-6">
                                 <div class="profileitems searchprofile-section">
@@ -739,10 +661,37 @@
                                     </div>
                                 </div>
                             </div>
-                        }
+                        }*@
 
+                        
+                            <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests">
+                                <div class="profileitems searchprofile-section">
+                                    <div class="left">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                        <div class="rating">
+                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                        </div>
+                                        <div class="favorite">
+                                            <a href="#" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="right">
+                                        <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
+                                        <h2 class="name" data-ng-bind="jr.Candidate.UserName"></h2>
+                                        <h2 class="name" data-ng-bind="jr.Job.JobName"></h2>
+                                        <p class="location">{{jr.Candidate.Country}}</p>
+                                        <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
+                                    </div>
+                                    <div class="profile-footer">
+                                       {{jr.JobRequestDescription}}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-if="jobRequests.length == 0">
 
-                    </div>
+                            <h3>No job request found based on your search criteria.</h3>
+                        </div>
                 </div>
             </div>
         </div>
@@ -804,6 +753,51 @@
         //            }
         //        });
         //});
+    </script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('myApp', []);
+        app.controller('searchJobRequestCtrl', function ($scope, $http) {
+            $scope.jobRequests = [];
+            $scope.message = "Welcome Angular JS";
+            $scope.searchParam = {};
+
+
+            $scope.searchJobRequests = function() {
+                $http.get("/api/jobtekapi/SearchJobRequests", {
+                    //params: { page: 1, limit: 100, sort: 'name', direction: 'desc' },
+                    //headers: { 'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==' }
+                    params: $scope.searchParam
+                })
+                .then(function (response) {
+                    console.log(response.data);
+                    $scope.jobRequests = response.data;
+                });
+            }
+
+            $scope.setFavouriteJobRequest = function(jobRequestId) {
+
+                //alert(jobRequestId);
+                $.ajax
+                    ({
+                        url: '/FavouriteJobRequests/Create?id=' + jobRequestId,
+                        //data: { "id": jobRequestId },
+                        type: 'get',
+                        success: function (result) {
+                            //$('.modal-box').text(result).fadeIn(700, function () {
+                            //    setTimeout(function () {
+                            //        $('.modal-box').fadeOut();
+                            //    }, 2000);
+                            //});
+
+                            alert("Job Request added to your favourite list.");
+                        }
+                    });
+
+            }
+
+            $scope.searchJobRequests();
+        });
     </script>
 
 }

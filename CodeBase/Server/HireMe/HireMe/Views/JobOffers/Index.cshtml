@@ -70,18 +70,11 @@
         </div><!-- container-fluid -->
 
     </header><!-- HEADER -->
-    @*<div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="menu-but" onclick="openNav()">&#9776; MENU</span>
-                </div>
-            </div>
-        </div>*@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                    .Select(c => c.Value);
+                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                        .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -89,14 +82,6 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
         <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
-        @*<a href="#"><i class="fa fa-search"></i>Job request/ Job offer</a>
-            <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
-            <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
-            <a href="#"><i class="fa fa-heart"></i>Manage my Favorites</a>
-            <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
-            <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
-            <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
-            <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>*@
 
         @if (role == "Candidate")
         {
@@ -110,7 +95,7 @@
         else if (role == "Employer")
         {
 
-            <a href="~/SearchJobRequests" ><i class="fa fa-search"></i> Search Employee</a>
+            <a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>
 
             <a href="~/JobOffers" class="active"><i class="fa fa-search"></i> My Job Offers</a>
 
@@ -138,29 +123,29 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                            @if (role == "Candidate")
-                            {
-                                <h2>Select your Job</h2>
-                            }
-                            else if (role == "Employer")
-                            {
-                                <h2>What you are looking for ?</h2>
-                            }
-                            else if (role == "Agency")
-                            {
-                                <h2>Select Job for candidate</h2>
-                            }
-
+                            @*@if (role == "Candidate")
+                                {
+                                    <h2>Select your Job</h2>
+                                }
+                                else if (role == "Employer")
+                                {
+                                    <h2>What you are looking for ?</h2>
+                                }
+                                else if (role == "Agency")
+                                {
+                                    <h2>Select Job for candidate</h2>
+                                }*@
+                            <h2>My Job Offers</h2>
                         </div>
                         <div class="tabs style-2">
 
                             @*<ul class="nav nav-tabs job-tab">
-                                @for (int i = 0; i < Model.Count(); i++)
-                                {
-                                    var item = Model.ElementAt(i);
-                                    <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
-                                }
-                            </ul>*@
+                                    @for (int i = 0; i < Model.Count(); i++)
+                                    {
+                                        var item = Model.ElementAt(i);
+                                        <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
+                                    }
+                                </ul>*@
                             <ul class="nav nav-tabs job-tab">
                                 <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
                                 <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
@@ -171,99 +156,279 @@
 
                             <div class="tab-content">
 
-                                
-                                    
-                                    <div class="tab-pane fade show active" id="tab-1-1">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="isotope cols-3 gutter">
-                                                    @if (Model != null)
+
+
+                                <div class="tab-pane fade show active" id="tab-1-1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="isotope cols-3 gutter">
+                                                @if (Model != null)
                                                     {
-                                                        foreach (var item in Model)
+                                                        foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
                                                         {
-                                                            <div class="col-md-4 col-sm-6">
-                                                                <div class="profileitems">
-                                                                    <div class="left">
-                                                                        <img src="~/assets/images/image-18.jpg" />
-                                                                        <div class="rating">
+                                                    <div class="col-md-4 col-sm-6">
+                                                        <div class="profileitems">
+                                                            <div class="left">
+                                                                <img src="~/assets/images/image-18.jpg" />
+                                                                <div class="rating">
 
-                                                                        </div>
-                                                                        <div class="favorite">
+                                                                </div>
+                                                                <div class="favorite">
 
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                                        <h2 class="name">@item.Employer.FirstName</h2>
-                                                                        <h2 class="name">@item.Job.JobName</h2>
-
-                                                                        <div class="published">Published: <span>@item.PublishedDate</span></div>
-                                                                    </div>
-                                                                    <div class="profile-footer">
-                                                                        @item.AdditionalDescription
-                                                                    </div>
                                                                 </div>
                                                             </div>
+                                                            <div class="right">
+                                                                <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
+                                                                <h2 class="name">@item.Employer.FirstName</h2>
+                                                                <h2 class="name">@item.Job.JobName</h2>
+
+                                                                <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                            </div>
+                                                            <div class="profile-footer">
+                                                                @item.AdditionalDescription
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                         }
 
-                                                        <div style="    text-align: center;">
-                                                           
-                                                            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Add</a></button>
+                                                    <div style="    text-align: center;">
 
-                                                        </div>
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                    </div>
                                                     }
                                                     else
                                                     {
-                                                        <div style="    text-align: center;">
-                                                            <div class="col-lg-12">No job offers available</div>
-                                                            <div></div>
-                                                           
+                                                    <div style="    text-align: center;">
+                                                        <div class="col-lg-12">No job offers available</div>
+                                                        <div></div>
 
-                                                        </div>
+
+                                                    </div>
                                                          }
 
 
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
                                 <div class="tab-pane fade" id="tab-1-2">
-                                    <div class="service-box style-9 icon-left">
-                                        <span><i class="bizhub-icon-shuffle"></i></span>
-                                        <div class="service-box-content">
-                                            <h5><a href="single-service.html">Troubleshooting</a></h5>
-                                            <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                        </div><!-- service-box-content -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="isotope cols-3 gutter">
+                                                @if (Model != null)
+                                                {
+                                                    foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
+                                                    {
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <div class="profileitems">
+                                                                <div class="left">
+                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <div class="rating">
+
+                                                                    </div>
+                                                                    <div class="favorite">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="right">
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
+                                                                    <h2 class="name">@item.Employer.FirstName</h2>
+                                                                    <h2 class="name">@item.Job.JobName</h2>
+
+                                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                                </div>
+                                                                <div class="profile-footer">
+                                                                    @item.AdditionalDescription
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                    <div style="    text-align: center;">
+
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div style="    text-align: center;">
+                                                        <div class="col-lg-12">No job offers available</div>
+                                                        <div></div>
+
+
+                                                    </div>
+                                                }
+
+
+                                            </div>
+                                        </div>
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-1-3">
-                                    <div class="service-box style-9 icon-left">
-                                        <span><i class="bizhub-icon-shuffle"></i></span>
-                                        <div class="service-box-content">
-                                            <h5><a href="single-service.html">Course</a></h5>
-                                            <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                        </div><!-- service-box-content -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="isotope cols-3 gutter">
+                                                @if (Model != null)
+                                                {
+                                                    foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
+                                                    {
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <div class="profileitems">
+                                                                <div class="left">
+                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <div class="rating">
+
+                                                                    </div>
+                                                                    <div class="favorite">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="right">
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
+                                                                    <h2 class="name">@item.Employer.FirstName</h2>
+                                                                    <h2 class="name">@item.Job.JobName</h2>
+
+                                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                                </div>
+                                                                <div class="profile-footer">
+                                                                    @item.AdditionalDescription
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                    <div style="    text-align: center;">
+
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div style="    text-align: center;">
+                                                        <div class="col-lg-12">No job offers available</div>
+                                                        <div></div>
+
+
+                                                    </div>
+                                                }
+
+
+                                            </div>
+                                        </div>
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-1-4">
-                                    <div class="service-box style-9 icon-left">
-                                        <span><i class="bizhub-icon-shuffle"></i></span>
-                                        <div class="service-box-content">
-                                            <h5><a href="single-service.html">Hairstyle/ Care</a></h5>
-                                            <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                        </div><!-- service-box-content -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="isotope cols-3 gutter">
+                                                @if (Model != null)
+                                                {
+                                                    foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
+                                                    {
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <div class="profileitems">
+                                                                <div class="left">
+                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <div class="rating">
+
+                                                                    </div>
+                                                                    <div class="favorite">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="right">
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
+                                                                    <h2 class="name">@item.Employer.FirstName</h2>
+                                                                    <h2 class="name">@item.Job.JobName</h2>
+
+                                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                                </div>
+                                                                <div class="profile-footer">
+                                                                    @item.AdditionalDescription
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                    <div style="    text-align: center;">
+
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div style="    text-align: center;">
+                                                        <div class="col-lg-12">No job offers available</div>
+                                                        <div></div>
+
+
+                                                    </div>
+                                                }
+
+
+                                            </div>
+                                        </div>
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-1-5">
-                                    <div class="service-box style-9 icon-left">
-                                        <span><i class="bizhub-icon-shuffle"></i></span>
-                                        <div class="service-box-content">
-                                            <h5><a href="single-service.html">Organization Ceremony</a></h5>
-                                            <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                        </div><!-- service-box-content -->
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="isotope cols-3 gutter">
+                                                @if (Model != null)
+                                                {
+                                                    foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
+                                                    {
+                                                        <div class="col-md-4 col-sm-6">
+                                                            <div class="profileitems">
+                                                                <div class="left">
+                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <div class="rating">
+
+                                                                    </div>
+                                                                    <div class="favorite">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="right">
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
+                                                                    <h2 class="name">@item.Employer.FirstName</h2>
+                                                                    <h2 class="name">@item.Job.JobName</h2>
+
+                                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                                </div>
+                                                                <div class="profile-footer">
+                                                                    @item.AdditionalDescription
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    }
+
+                                                    <div style="    text-align: center;">
+
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div style="    text-align: center;">
+                                                        <div class="col-lg-12">No job offers available</div>
+                                                        <div></div>
+
+
+                                                    </div>
+                                                }
+
+
+                                            </div>
+                                        </div>
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 
@@ -315,230 +480,6 @@
         document.getElementById("main-container-user").style.marginLeft = "0";
     }
 </script>
-
-@*<div id="main-container">
-    <header id="header">
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-2">
-
-                    <!-- LOGO -->
-                    <div id="logo">
-                        <a href="index.html">
-                            <img src="~/assets/images/logo.png" alt="">
-                        </a>
-                    </div><!-- LOGO -->
-
-                </div><!-- col -->
-                <div class="col-sm-10">
-
-                    <!-- MENU -->
-                    <nav>
-
-                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-
-                        <ul class="menu clearfix" id="menu">
-                           
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                            {
-                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                            }
-
-                          
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li class="dropdown">
-                                <a href="#">AIDE</a>
-                                <ul>
-                                    <li>
-                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
-                                    </li>
-                                    <li>
-                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            @Html.Partial("_LoginPartial")
-                            <li class="secondary-menu-btn">
-                                <a href="#"><i class="bizhub-icon-menu-bars"></i></a>
-                                <ul class="secondary-menu">
-                                    <li><a class="waves" href="index.html">Home</a></li>
-                                    <li><a class="waves" href="#">ADMIN</a></li>
-                                    <li><a class="waves" href="#">LOGIN</a></li>
-                                    <li><a class="waves" href="#">CONTACT</a></li>
-                                    <li><a class="waves" href="#">AIDE</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                    </nav>
-
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container-fluid -->
-
-    </header>
-
-    <div class="container">
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                        .Select(c => c.Value);
-                string role = roles.FirstOrDefault();}
-
-            @if (role == "Candidate")
-            {
-                <h2>Candidate Account</h2>
-                <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
-
-                <a href="~/JobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
-
-                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
-            }
-            else if (role == "Employer")
-            {
-                <h2>Employerr Account</h2>
-                <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employee</a>
-
-                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
-
-                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
-            }
-            else if (role == "Agency")
-            {
-                <h2>Agency Account</h2>
-                <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Search Employer</a>
-
-                <a href="~/JobCategories" style="line-height: 40px;"><img src="~/assets/images/search-profile.png" alt=""> Create a Job Request</a>
-
-                <a href="~/JobRequests" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> My Job Requests</a>
-
-                <a href="#" style="line-height: 40px;"><img src="~/assets/images/manage-favorites.png" alt=""> Manage my favorites</a>
-            }
-
-
-           
-        </div>
-        <!---- Tab Section -->
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="tabs style-2 mt-lg-5 pt-lg-5">
-
-                        <ul class="nav nav-tabs">
-                            <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
-                            <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                            <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
-                            <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                            <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
-                        </ul>
-
-                        <div class="tab-content">
-                            <div class="tab-pane fade show active" id="tab-1-1">
-                                <div class="container">
-                                    <div class="row">
-                                        @if (Model != null)
-                                        {
-                                            foreach (var item in Model)
-                                            {
-                                                <div class="col-md-4 col-sm-6">
-                                                    <div class="profileitems">
-                                                        <div class="left">
-                                                            <img src="~/assets/images/image-18.jpg" />
-                                                            <div class="rating">
-                                                               
-                                                            </div>
-                                                            <div class="favorite">
-                                                               
-                                                            </div>
-                                                        </div>
-                                                        <div class="right">
-                                                            <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                            <h2 class="name">@item.Employer.FirstName</h2>
-                                                            <h2 class="name">@item.Job.JobName</h2>
-                                                          
-                                                            <div class="published">Published: <span>@item.PublishedDate</span></div>
-                                                        </div>
-                                                        <div class="profile-footer">
-                                                            @item.AdditionalDescription
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            }
-                                        }
-                                        else {
-                                            <div class="col-lg-12">No job offers available</div>
-                                        }</div><!-- row -->
-                                </div>
-                            </div><!-- tab-pane -->
-
-                            <div class="tab-pane fade" id="tab-1-2">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Troubleshooting</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
-
-                            <div class="tab-pane fade" id="tab-1-3">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Course</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
-
-                            <div class="tab-pane fade" id="tab-1-4">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Hairstyle/ Care</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
-
-                            <div class="tab-pane fade" id="tab-1-5">
-                                <div class="service-box style-9 icon-left">
-                                    <span><i class="bizhub-icon-shuffle"></i></span>
-                                    <div class="service-box-content">
-                                        <h5><a href="single-service.html">Organization Ceremony</a></h5>
-                                        <p>Pellentesque sit amet tellus blandit. Etiam nec odio vestibulum est mattis efficitur vel ut magna.</p>
-                                    </div><!-- service-box-content -->
-                                </div><!-- service-box -->
-                            </div><!-- tab-pane -->
-
-                        </div><!-- tab-content -->
-                    </div><!-- tabs -->
-                </div>
-            </div>
-        </div>
-        <!---- Tab Section end-->
-
-    </div>
-
-</div>
-
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "280px";
-        document.getElementById("main-container-user").style.marginLeft = "280px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main-container-user").style.marginLeft = "0";
-    }
-</script>*@
 
 
 

@@ -14,6 +14,8 @@ namespace HireMe.Utility
     {
        public Gender Gender { get; set; }
        public string Age { get; set; }
+        public string MinAge { get; set; }
+        public string MaxAge { get; set; }
         public StaffType StaffType { get; set; }
         public string YearsOfExperience { get; set; }
 
@@ -26,7 +28,7 @@ namespace HireMe.Utility
             ArrayList paramList = new ArrayList();
             int paramCount = 0;
             StringBuilder queryString = new StringBuilder();
-            if (Gender != null && Gender != default(Gender))
+            if (Gender != null)
             {
                 queryString.Append(" and Candidate.Gender = @" + paramCount);
                 paramList.Add(Gender);
@@ -36,8 +38,8 @@ namespace HireMe.Utility
 
             if (!string.IsNullOrWhiteSpace(Age))
             {
-                queryString.Append(" and Candidate.Age = @" + Age);
-                paramList.Add(Age);
+                queryString.Append(" and Candidate.Age = @" + paramCount);
+                paramList.Add(int.Parse(Age));
                 paramCount++;
             }
 
