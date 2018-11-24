@@ -254,9 +254,9 @@
     <Compile Include="Migrations\201811121808053_Country_State_District_Added.Designer.cs">
       <DependentUpon>201811121808053_Country_State_District_Added.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811180628367_mapper_table_column_changed.cs" />
-    <Compile Include="Migrations\201811180628367_mapper_table_column_changed.Designer.cs">
-      <DependentUpon>201811180628367_mapper_table_column_changed.cs</DependentUpon>
+    <Compile Include="Migrations\201811241933355_Profile_Pic_Base64Encode.cs" />
+    <Compile Include="Migrations\201811241933355_Profile_Pic_Base64Encode.Designer.cs">
+      <DependentUpon>201811241933355_Profile_Pic_Base64Encode.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -510,8 +510,8 @@
     <EmbeddedResource Include="Migrations\201811121808053_Country_State_District_Added.resx">
       <DependentUpon>201811121808053_Country_State_District_Added.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811180628367_mapper_table_column_changed.resx">
-      <DependentUpon>201811180628367_mapper_table_column_changed.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811241933355_Profile_Pic_Base64Encode.resx">
+      <DependentUpon>201811241933355_Profile_Pic_Base64Encode.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

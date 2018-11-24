@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
@@ -17,7 +18,14 @@ namespace HireMe.Controllers
         // GET: JobRequests
         public ActionResult Index()
         {
-            return View(db.JobRequests.Include(path => path.Job).Include(t => t.Candidate).ToList());
+            var userId = User.Identity.GetUserId();
+            // get the candidateId
+            var candidate = db.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
+            return View(db.JobRequests
+                .Include(path => path.Job)
+                .Include(t => t.Candidate)
+                .Where(j => j.CandidateId == candidate.CandidateId)
+                .ToList());
         }
 
         // GET: JobRequests/Details/5
