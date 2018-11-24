@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
@@ -17,7 +18,19 @@ namespace HireMe.Controllers
         // GET: FavouriteJobRequests
         public ActionResult Index()
         {
-            return View(db.Employers.ToList());
+            var userId = User.Identity.GetUserId();
+
+            var existingEmployer = db.Employers.Include(t => t.FavouriteJobRequests.Select(c => c.Job)).FirstOrDefault(p => p.AspNetUserId == userId);
+            if (existingEmployer != null && existingEmployer.FavouriteJobRequests != null && existingEmployer.FavouriteJobRequests.Count > 0)
+            {
+                existingEmployer.FavouriteJobRequests.ForEach(favJobRequest =>
+                {
+                    db.Entry(favJobRequest).Reference(p => p.Candidate).Load();
+                });
+                return View(existingEmployer.FavouriteJobRequests);
+            }
+
+            return View();
         }
 
         // GET: FavouriteJobRequests/Details/5
@@ -36,9 +49,26 @@ namespace HireMe.Controllers
         }
 
         // GET: FavouriteJobRequests/Create
+        [HttpGet]
         public ActionResult Create(int id)
         {
-            return View();
+
+            // first get the logged in user id -- Employer
+            var userId = User.Identity.GetUserId();
+
+            var existingEmployer = db.Employers.Include(t => t.FavouriteJobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
+
+            if (existingEmployer != null)
+            {
+                // now get the job request from id
+                var jobRequest = db.JobRequests.Find(id);
+
+                existingEmployer.FavouriteJobRequests.Add(jobRequest);
+            }
+            db.SaveChanges();
+
+            //return View();
+            return Json("Successfully added to favourites.", JsonRequestBehavior.AllowGet);
         }
 
         // POST: FavouriteJobRequests/Create
@@ -92,16 +122,20 @@ namespace HireMe.Controllers
         // GET: FavouriteJobRequests/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            // first get the logged in user id -- Employer
+            var userId = User.Identity.GetUserId();
+
+            var existingEmployer = db.Employers.Include(t => t.FavouriteJobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
+
+            if (existingEmployer != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // now get the job request from id
+                var jobRequest = db.JobRequests.Find(id);
+
+                existingEmployer.FavouriteJobRequests.Remove(jobRequest);
             }
-            Employer employer = db.Employers.Find(id);
-            if (employer == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employer);
+            db.SaveChanges();
+            return Json("Successfully removed from your favourites.", JsonRequestBehavior.AllowGet);
         }
 
         // POST: FavouriteJobRequests/Delete/5

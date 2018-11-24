@@ -821,7 +821,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                                                         <div class="filtersection-body">
                                                             <div class="date">
-                                                               @Html.TextBoxFor(p => p.Disponibility, new { @type = "datepicker" })
+                                                               @Html.TextBoxFor(p => p.Disponibility, new { @type = "date" })
                                                             </div>
                                                         </div>
                                                     </div>
@@ -974,6 +974,15 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             @Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label class="checkbox">
+                                                        @Html.CheckBoxFor(p => p.PublishProfile)
+                                                        <span class=""></span>
+                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publish As a Job Request
+                                                    </label>
                                                 </div>
                                             </div>
                                             <div class="row">

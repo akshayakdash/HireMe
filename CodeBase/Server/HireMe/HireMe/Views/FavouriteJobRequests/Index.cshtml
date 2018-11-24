@@ -1,99 +1,175 @@
-﻿@model IEnumerable<HireMe.Models.Employer>
+﻿@model IEnumerable<HireMe.Models.JobRequest>
 
-@{
-    ViewBag.Title = "Index";
-}
+<script type="text/javascript">
+    function deleteFavouriteJobRequest(jobRequestId) {
 
-<h2>Index</h2>
+        //alert(jobRequestId);
+        $.ajax
+            ({
+                url: '/FavouriteJobRequests/Delete?id=' + jobRequestId,
+                //data: { "id": jobRequestId },
+                type: 'get',
+                success: function (result) {
+                    //$('.modal-box').text(result).fadeIn(700, function () {
+                    //    setTimeout(function () {
+                    //        $('.modal-box').fadeOut();
+                    //    }, 2000);
+                    //});
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AspNetUserId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Gender)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CountryId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CityId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DistrictId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProfileVerified)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdatedDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastName)
-        </th>
-        <th></th>
-    </tr>
+                    alert("Job Request deleted from your favourite list.");
+                    window.location.reload();
+                }
+            });
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AspNetUserId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Gender)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CountryId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DistrictId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProfileVerified)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.EmployerId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.EmployerId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.EmployerId })
-        </td>
-    </tr>
-}
+    }
+</script>
 
-</table>
+<div id="main-container-user" style="margin-left: 280px;">
+    <header id="header">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
+                            </li>
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header>
+    <div id="mySidenav" class="sidenav" style="width: 280px;">
+
+        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                .Select(c => c.Value);
+            string role = roles.FirstOrDefault();}
+
+
+        <div class="sidenav-header">User Account - @role</div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
+        @if (role == "Candidate")
+        {
+
+            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
+
+            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Employer")
+        {
+
+            <a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>
+
+            <a href="~/JobOffers" class="active"><i class="fa fa-search"></i> My Job Offers</a>
+
+            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Agency")
+        {
+
+            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
+
+            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
+
+            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+    </div>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-4 col-sm-6">
+                <div class="profileitems">
+                    <div class="left">
+                        <img src="~/assets/images/image-18.jpg" />
+                        <div class="rating">
+
+                        </div>
+                        <div class="favorite">
+
+                        </div>
+                    </div>
+                    <div class="right">
+                        <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
+                        
+                        <h2 class="name">@item.Candidate.FirstName</h2>
+                        <h2 class="name">@item.Candidate.UserName</h2>
+                        <h3 class="name">@item.Candidate.ContactNo</h3>
+                        <h2 class="name">@item.Job.JobName</h2>
+
+                        <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
+                    </div>
+                    <div class="profile-footer">
+                        @item.JobRequestDescription
+                        <div class="row">
+                            <button class="btn-default" type="button" onclick="deleteFavouriteJobRequest(@item.Job.JobId)">Delete</button>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row"><h2>You do not have any favourite job request.</h2></div>
+    }
+</div>

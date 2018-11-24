@@ -15,17 +15,34 @@ namespace HireMe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: FavouriteJobOffers
+        //public ActionResult Index()
+        //{
+        //    var userId = User.Identity.GetUserId();
+        //    if (userId != null) { 
+        //    var candidate = db.Candidates.Include(t=>t.FavouriteJobOffers).FirstOrDefault(p => p.AspNetUserId == userId);
+        //    return View(candidate.FavouriteJobOffers.ToList());
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+        //}
+
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            if (userId != null) { 
-            var candidate = db.Candidates.Include(t=>t.FavouriteJobOffers).FirstOrDefault(p => p.AspNetUserId == userId);
-            return View(candidate.FavouriteJobOffers.ToList());
-            }
-            else
+
+            var existingCandidate = db.Candidates.Include(t => t.FavouriteJobOffers.Select(c => c.Job)).FirstOrDefault(p => p.AspNetUserId == userId);
+            if (existingCandidate != null && existingCandidate.FavouriteJobOffers != null && existingCandidate.FavouriteJobOffers.Count > 0)
             {
-                return View();
+                existingCandidate.FavouriteJobOffers.ForEach(favJobRequest =>
+                {
+                    db.Entry(favJobRequest).Reference(p => p.Employer).Load();
+                });
+                return View(existingCandidate.FavouriteJobOffers);
             }
+
+            return View();
         }
 
         // GET: FavouriteJobOffers/Details/5
@@ -44,9 +61,27 @@ namespace HireMe.Controllers
         }
 
         // GET: FavouriteJobOffers/Create
-        public ActionResult Create()
+        // GET: FavouriteJobRequests/Create
+        [HttpGet]
+        public ActionResult Create(int id)
         {
-            return View();
+
+            // first get the logged in user id -- Employer
+            var userId = User.Identity.GetUserId();
+
+            var existingCandidate = db.Candidates.Include(t => t.FavouriteJobOffers).FirstOrDefault(p => p.AspNetUserId == userId);
+
+            if (existingCandidate != null)
+            {
+                // now get the job request from id
+                var jobOffer = db.JobOffers.Find(id);
+
+                existingCandidate.FavouriteJobOffers.Add(jobOffer);
+            }
+            db.SaveChanges();
+
+            //return View();
+            return Json("Successfully added to favourites.", JsonRequestBehavior.AllowGet);
         }
 
         // POST: FavouriteJobOffers/Create
@@ -100,16 +135,20 @@ namespace HireMe.Controllers
         // GET: FavouriteJobOffers/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
+            // first get the logged in user id -- Employer
+            var userId = User.Identity.GetUserId();
+
+            var existingCandidate = db.Candidates.Include(t => t.FavouriteJobOffers).FirstOrDefault(p => p.AspNetUserId == userId);
+
+            if (existingCandidate != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                // now get the job request from id
+                var jobOffer = db.JobOffers.Find(id);
+
+                existingCandidate.FavouriteJobOffers.Remove(jobOffer);
             }
-            Candidate candidate = db.Candidates.Find(id);
-            if (candidate == null)
-            {
-                return HttpNotFound();
-            }
-            return View(candidate);
+            db.SaveChanges();
+            return Json("Successfully removed from your favourites.", JsonRequestBehavior.AllowGet);
         }
 
         // POST: FavouriteJobOffers/Delete/5
