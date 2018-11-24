@@ -12,8 +12,8 @@ namespace HireMe.Utility
 
     public class JobRequestSearchParam
     {
-       public Gender Gender { get; set; }
-       public string Age { get; set; }
+        public Gender Gender { get; set; }
+        public string Age { get; set; }
         public string MinAge { get; set; }
         public string MaxAge { get; set; }
         public StaffType StaffType { get; set; }
@@ -78,4 +78,22 @@ namespace HireMe.Utility
         }
 
     }
+
+    public class MemberSearchParam
+    {
+        public MemberType MemberType { get; set; }
+        public Gender Gender { get; set; }
+        public int Job { get; set; }
+        public bool VerificationStatus { get; set; }
+        public int MinAge { get; set; }
+        public int MaxAge { get; set; }
+    }
+
+    public enum MemberType
+    {
+        Candidate = 1,
+        Employer = 2
+    }
+
+
 }

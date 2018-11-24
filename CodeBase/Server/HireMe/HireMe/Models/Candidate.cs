@@ -16,6 +16,8 @@ namespace HireMe.Models
         public string AspNetUserId { get; set; }
         //[ForeignKey("AspNetUserId")]
         //public AppUser ApplicationUser { get; set; }
+        [ForeignKey("AspNetUserId")]
+        public ApplicationUser ApplicationUser { get; set; }
         public int? AgencyId { get; set; }
 
         public string UserName { get; set; }
@@ -37,15 +39,22 @@ namespace HireMe.Models
         public string StaffTypeDesc { get; set; }
         public DateTime Disponibility { get; set; }
 
+
         public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
+        [ForeignKey("CountryId")]
+        public Country CountryEntity { get; set; }
 
         public int? CityId { get; set; }
+        [ForeignKey("CityId")]
+        public City CityEntity { get; set; }
         [NotMapped]
         public string City { get; set; }
 
         public int? DistrictId { get; set; }
+        [ForeignKey("DistrictId")]
+        public District DistrictEntity { get; set; }
         [NotMapped]
         public string District { get; set; }
 
@@ -109,18 +118,24 @@ namespace HireMe.Models
 
         public string CompanyActivityDesc { get; set; }
 
+
         public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
+        [ForeignKey("CountryId")]
+        public Country CountryEntity { get; set; }
 
         public int? CityId { get; set; }
+        [ForeignKey("CityId")]
+        public City CityEntity { get; set; }
         [NotMapped]
         public string City { get; set; }
 
         public int? DistrictId { get; set; }
+        [ForeignKey("DistrictId")]
+        public District DistrictEntity { get; set; }
         [NotMapped]
         public string District { get; set; }
-
         public bool ProfileVerified { get; set; }
 
         public List<Candidate> Candidates { get; set; }
@@ -142,20 +157,28 @@ namespace HireMe.Models
         public string AspNetUserId { get; set; }
         //[ForeignKey("AspNetUserId")]
         //public AppUser ApplicationUser { get; set; }
+        [ForeignKey("AspNetUserId")]
+        public ApplicationUser ApplicationUser { get; set; }
 
         public Gender Gender { get; set; }
         [NotMapped]
         public string GenderDesc { get; set; }
 
-        public int CountryId { get; set; }
+        public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
+        [ForeignKey("CountryId")]
+        public Country CountryEntity { get; set; }
 
-        public int CityId { get; set; }
+        public int? CityId { get; set; }
+        [ForeignKey("CityId")]
+        public City CityEntity { get; set; }
         [NotMapped]
         public string City { get; set; }
 
-        public int DistrictId { get; set; }
+        public int? DistrictId { get; set; }
+        [ForeignKey("DistrictId")]
+        public District DistrictEntity { get; set; }
         [NotMapped]
         public string District { get; set; }
 

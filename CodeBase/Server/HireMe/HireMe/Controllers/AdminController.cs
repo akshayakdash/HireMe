@@ -30,8 +30,50 @@ namespace HireMe.Controllers
             agency.ProfileVerified = true;
             db.SaveChanges();
             // else return success message
-            return Json("Agency Verified Successfully", JsonRequestBehavior.AllowGet);
+            return Json("Agency profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult Candidates()
+        {
+            var candidates = db.Candidates.Include(p => p.ApplicationUser).OrderByDescending(p => p.CandidateId).ToList();
+            return View(candidates);
+        }
+
+        public ActionResult ActivateCandidate(int id)
+        {
+            // first get the candidate by Id
+            var candidate = db.Candidates.Find(id);
+            // if candidate is null throw an exception
+            if (candidate == null)
+                throw new Exception("Candidate Not Found.");
+            candidate.ProfileVerified = true;
+            db.SaveChanges();
+            // else return success message
+            return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult Employers()
+        {
+            var employers = db.Employers.Include(p => p.ApplicationUser).OrderByDescending(p => p.EmployerId).ToList();
+            return View(employers);
+        }
+
+        public ActionResult ActivateEmployer(int id)
+        {
+            // first get the candidate by Id
+            var employer = db.Employers.Find(id);
+            // if candidate is null throw an exception
+            if (employer == null)
+                throw new Exception("Employer Not Found.");
+            employer.ProfileVerified = true;
+            db.SaveChanges();
+            // else return success message
+            return Json("Employer profile Verified Successfully", JsonRequestBehavior.AllowGet);
+        }
+
+
         // GET: Admin
         public ActionResult Index()
         {
@@ -120,6 +162,32 @@ namespace HireMe.Controllers
                 return HttpNotFound();
             }
             return View(agency);
+        }
+
+        [HttpGet]
+        public ActionResult ExportMembers()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [Obsolete]
+        public ActionResult ValidateUserProfiles()
+        {
+            return View();
+        }
+
+     
+        [HttpGet]
+        public ActionResult ValidateJobOffers()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ValidateJobRequests()
+        {
+            return View();
         }
 
         // POST: Admin/Delete/5
