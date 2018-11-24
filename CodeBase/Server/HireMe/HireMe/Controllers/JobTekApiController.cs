@@ -23,15 +23,20 @@ namespace HireMe.Controllers
             //searchParam = new JobRequestSearchParam { };
             //searchParam.Gender = Gender.Male;
             //searchParam.YearsOfExperience = 3;
-
-            object[] queryString = searchParam.GetSearchQuery();
-            ArrayList searchArgs = (ArrayList)queryString[1];
-            var jobRequests = db.JobRequests
-                .Include(j => j.Candidate)
-                .Include(j => j.Job)
-                .AsQueryable()
-                .Where(queryString[0].ToString(), searchArgs.ToArray());
-            return Request.CreateResponse(HttpStatusCode.OK, jobRequests.ToList());
+            if (searchParam != null)
+            {
+                object[] queryString = searchParam.GetSearchQuery();
+                ArrayList searchArgs = (ArrayList)queryString[1];
+                var jobRequests = db.JobRequests
+                    .Include(j => j.Candidate)
+                    .Include(j => j.Job)
+                    .AsQueryable()
+                    .Where(queryString[0].ToString(), searchArgs.ToArray());
+                return Request.CreateResponse(HttpStatusCode.OK, jobRequests.ToList());
+            }
+            else {
+                return Request.CreateResponse(HttpStatusCode.OK, db.JobRequests.Include(p => p.Candidate).Include(t => t.Job).ToList());
+            }
         }
 
         [HttpGet]

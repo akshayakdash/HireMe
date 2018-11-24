@@ -182,9 +182,16 @@ namespace HireMe.Controllers
             var userId = User.Identity.GetUserId();
             // get the agencyid
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
-            var jobRequests = db.JobRequests.Include(path => path.Job).Include(t => t.Candidate).ToList();
-            jobRequests = jobRequests.Where(p => p.Candidate.StaffType == StaffType.Agency && p.Candidate.AgencyId == agency.AgencyId).ToList();
-            return View(jobRequests);
+            if (agency != null)
+            {
+                var jobRequests = db.JobRequests.Include(path => path.Job).Include(t => t.Candidate).ToList();
+                jobRequests = jobRequests.Where(p => p.Candidate.StaffType == StaffType.Agency && p.Candidate.AgencyId == agency.AgencyId).ToList();
+                return View(jobRequests);
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
