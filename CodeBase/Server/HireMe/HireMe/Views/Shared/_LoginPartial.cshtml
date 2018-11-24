@@ -12,16 +12,16 @@
         <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fade fa-signout glyphicon glyphicon-off"></i>Log Off</a></li>*@
         <li class="dropdown profile-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-cog fa-lg"></i>
+                <i class="fa fa-user fa-lg"></i>
                 <span class="username">@User.Identity.GetUserName()</span>
                 <i class="caret"></i>
             </a>
             <ul class="dropdown-menu box profile">
                 <li>
-                    <a href="/Manage">Manage Account</a>
+                    <a href="/Manage"><i class="fa fa-gears"></i> Manage Account</a>
                 </li>
                 <li>
-                    <a href="javascript:document.getElementById('logoutForm').submit()">Log Off</a>
+                    <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i> Log Off</a>
                 </li>
             </ul>
         </li>
