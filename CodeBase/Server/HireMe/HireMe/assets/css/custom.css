@@ -9982,6 +9982,7 @@ blockquote {
     border: 1px solid #ccc;
     /*display:table;
     width:100%;*/
+    min-height: 185px;
 }
 
     .profileitems:hover {
@@ -10040,7 +10041,7 @@ blockquote {
         margin-left: 120px;
     }
 
-        .profileitems .right h1, .profileitems .right h2 {
+        .profileitems .right h1, .profileitems .right h2, .profileitems .right h3 {
             font-size: 16px;
             line-height: initial;
             margin-bottom: 5px;
@@ -10049,22 +10050,60 @@ blockquote {
             .profileitems .right h1 span {
                 color: forestgreen;
             }
-
+        .profileitems .right h2{
+            font-size: 16px;
+            line-height: initial;
+            margin-bottom: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
         .profileitems .right .location {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-bottom: 5px;
+        }
+        .profileitems .right .location span {
+            padding-right:5px;
         }
 
         .profileitems .right .published {
             font-size: 12px;
             font-weight: 700;
         }
+        .profileitems .right .age {
+            font-size: 14px;
+            font-weight: 400;
+            padding-right: 10px;
+            border-right: 1px solid #ccc;
+        }
+        .profileitems .right .experience {
+            font-size: 14px;
+            font-weight: 400;
+            padding-left: 10px;
+        }
 
             .profileitems .right .published span {
                 font-size: 12px;
                 font-weight: 400;
             }
-
+        .profileitems .validate {
+            font-size: 13px;
+            position: absolute;
+            background: #2f922f;
+            border-radius: 50%;
+            top: 2px;
+            left: 1px;
+            color: #fff;
+        }
+        .profileitems .validate .fa{
+            padding: 10px;
+            /* border-radius: 50%; */
+            font-size: 18px;
+        }
     .profileitems .profile-footer {
         font-size: 13px;
         /*float: left;*/
@@ -10380,7 +10419,7 @@ blockquote {
         /*padding: 8px;*/
         background: #822242;
         width: 350px;
-        position: absolute;
+        position: fixed;
         right: 8px;
         color: #fff;
         right: -350px;
@@ -11053,4 +11092,35 @@ margin:0;
 }
 .home a .fa {
     font-size: 18px;
+}
+.profile-menu .caret {
+    border-bottom-color: #555555;
+    border-top-color: #555555;
+}
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 4px solid;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+.profile-menu a:hover .caret {
+    border-bottom-color: #111111;
+    border-top-color: #111111;
+}
+.dropdown-menu.box.profile > li > a > i {
+    font-size: 17px;
+    display: inline-block;
+    padding-right: 10px;
+}
+.dropdown-menu.box li a {
+    border-bottom: 1px solid #ebebeb !important;
+    font-size: 0.9em;
+    list-style: none;
+    padding: 10px 10px !important;
+    width: 100%;
+    display: inline-block;
 }
