@@ -11124,3 +11124,39 @@ margin:0;
     width: 100%;
     display: inline-block;
 }
+.modal {
+    width: 100%;
+    position: fixed;
+    text-align: left;
+    margin: 0px auto;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 1050;
+}
+.modal-backdrop{
+    display:none;
+}
+.profile-pic{
+    border: 1px solid #ccc;
+    padding: 2px;
+    border-radius: 5px;
+    margin-bottom:10px;
+}
+.profile-info{
+
+}
+.modal-header{
+    padding: 10px 20px;
+    background:#fe005a;
+}
+.modal-header .close{
+    position: absolute;
+    right: 17px;
+    color:#fff;
+}
+.modal-title {
+    font-weight:300;
+    color:#fff;
+}
