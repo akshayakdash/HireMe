@@ -200,39 +200,75 @@ namespace HireMe.Controllers
                 // now check if it has file associated with it
 
                 #region ProfileImageUpload
-                string imagePath = string.Empty;
+                string profileImagePath = string.Empty;
                 if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
                 {
-                    //Use Namespace called :  System.IO  
-                    string FileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
+                    ////Use Namespace called :  System.IO  
+                    //string FileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
 
-                    //To Get File Extension  
-                    string FileExtension = Path.GetExtension(model.profile_pic.FileName);
+                    ////To Get File Extension  
+                    //string FileExtension = Path.GetExtension(model.profile_pic.FileName);
 
-                    //Add Current Date To Attached File Name  
-                    FileName = DateTime.Now.ToString("yyyyMMdd") + "-" + FileName.Trim() + FileExtension;
+                    ////Add Current Date To Attached File Name  
+                    //FileName = DateTime.Now.ToString("yyyyMMdd") + "-" + FileName.Trim() + FileExtension;
 
-                    //Get Upload path from Web.Config file AppSettings.  
-                    //string UploadPath = ConfigurationManager.AppSettings["UserImagePath"].ToString();
+                    ////Get Upload path from Web.Config file AppSettings.  
+                    ////string UploadPath = ConfigurationManager.AppSettings["UserImagePath"].ToString();
 
-                    var UploadPath = Path.Combine(Server.MapPath("~/App_Data/uploads"), FileName);
-                    imagePath = UploadPath;
+                    //var UploadPath = Path.Combine(Server.MapPath("~/App_Data/uploads"), FileName);
+                    //imagePath = UploadPath;
 
-                    //Its Create complete path to store in server.  
-                    //model.ImagePath = UploadPath + FileName;
+                    ////Its Create complete path to store in server.  
+                    ////model.ImagePath = UploadPath + FileName;
 
-                    //To copy and save file into server.  
-                    model.profile_pic.SaveAs(imagePath);
+                    ////To copy and save file into server.  
+                    //model.profile_pic.SaveAs(imagePath);
+
+                    string theFileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
+                    byte[] thePictureAsBytes = new byte[model.profile_pic.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(model.profile_pic.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
+                    }
+                    profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                }
+                #endregion
+
+                #region Id Card
+                string idProofImagePath = string.Empty;
+                if (model.id_proof != null && model.id_proof.ContentLength > 0)
+                {
+                   
+
+                    string theFileName = Path.GetFileNameWithoutExtension(model.id_proof.FileName);
+                    byte[] thePictureAsBytes = new byte[model.id_proof.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(model.id_proof.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(model.id_proof.ContentLength);
+                    }
+                    idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
                 #endregion
                 var securityQuestionAnswer = new ApplicationUserSecurityQuestionAnswer { SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer };
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = imagePath };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath };
                 user.SecurityQuestionAnswers = new System.Collections.Generic.List<ApplicationUserSecurityQuestionAnswer> { securityQuestionAnswer };
 
                 if (model.UserRoles.Contains("Agency"))
                 {
-                    var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = imagePath };
+                    var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath };
                     user.Agencies = new System.Collections.Generic.List<Agency> { agency };
+                }
+                else if (model.UserRoles.Contains("Candidate"))
+                {
+                    var candidate = new Candidate { FirstName = model.FirstName, LastName = model.LastName, Address= model.Address, EmailId = model.Email, ContactNo = model.PhoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath };
+                    user.Candidates = new List<Candidate> { candidate };
+                }
+                else if (model.UserRoles.Contains("Employer"))
+                {
+                    var employer = new Employer { FirstName = model.FirstName, LastName = model.LastName, Gender = Gender.Male, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath };
+
+                    // need to add countryid, cityId and districtId to Employer entity
+                    user.Employers = new List<Employer> { employer };
                 }
 
                 var result = await UserManager.CreateAsync(user, model.Password);
@@ -244,11 +280,11 @@ namespace HireMe.Controllers
 
                 //await context.SaveChangesAsync();
 
-                
+
 
                 if (result.Succeeded)
                 {
-                  //  await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //  await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771    
                     // Send an email with this link    

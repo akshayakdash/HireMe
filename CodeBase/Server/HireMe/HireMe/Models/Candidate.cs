@@ -144,6 +144,7 @@ namespace HireMe.Models
         public string CreatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public string UpdatedDate { get; set; }
+
     }
 
     public class Employer
@@ -194,6 +195,12 @@ namespace HireMe.Models
         public List<JobRequest> FavouriteJobRequests { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        // Columns added later 
+        public string IdProofDoc { get; set; }
+        public string IdProofDocDesc { get; set; }
+
+         public string ProfilePicUrl { get; set; }
     }
 
     // Master tables
