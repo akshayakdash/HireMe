@@ -26,6 +26,11 @@
 <div class="form-box">
     <div class="row">
         <div class="col-md-12">
+            <div class="home">
+                <a href="/" class="">
+                    <i class="fa fa-home"></i>&nbsp;Home
+                </a>
+            </div>
             <div class="headline text-center">
                 <div class="form-logo">
                     <img src="~/assets/images/logo.png" alt="JOBtek" />
@@ -72,10 +77,10 @@
                         <div class="col-md-12 text-center">
                             <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
                         </div>
-                        <div class="col-md-12 text-center">
-                            @Html.ActionLink("Don't have an account?", "Register")<br class="d-block d-sm-none">
-                            <a href="#">Forgotten password?</a>
-                        </div>
+                        <span>
+                            @Html.ActionLink("Don't have an account?", "Register")
+                        </span>
+                        <span style="float:right;"><a href="#">Forgotten password?</a></span>
                     </div>
                 </fieldset>
             }

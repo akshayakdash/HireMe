@@ -9928,7 +9928,7 @@ blockquote {
 
     .sidenav .closebtn {
         position: absolute;
-        top: 35px;
+        top: 9px;
         right: -1px;
         font-size: 36px;
         /* margin-left: 50px; */
@@ -11039,4 +11039,18 @@ margin:0;
   position: static !important;
   width: auto;
   overflow: visible;
+}
+.home {
+    position: absolute;
+}
+.home a{
+    color: #666;
+    text-decoration: none;
+}
+.home a:hover{
+    color: #fe005a;
+    text-decoration: none;
+}
+.home a .fa {
+    font-size: 18px;
 }
