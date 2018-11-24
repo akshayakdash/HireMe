@@ -65,13 +65,7 @@
         </div><!-- container-fluid -->
 
     </header><!-- HEADER -->
-    @*<div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <span class="menu-but" onclick="openNav()">&#9776; MENU</span>
-                </div>
-            </div>
-        </div>*@
+
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
@@ -84,14 +78,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
         <a href="~/Users" class="active"><i class="fa fa-home"></i>Dashboard</a>
-        @*<a href="#"><i class="fa fa-search"></i>Job request/ Job offer</a>
-            <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
-            <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
-            <a href="#"><i class="fa fa-heart"></i>Manage my Favorites</a>
-            <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
-            <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
-            <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
-            <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>*@
+
 
         @if (role == "Candidate")
         {

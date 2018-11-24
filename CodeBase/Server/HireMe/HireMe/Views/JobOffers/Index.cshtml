@@ -73,8 +73,8 @@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                        .Select(c => c.Value);
+                                                                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                            .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -97,9 +97,13 @@
 
             <a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>
 
-            <a href="~/JobOffers" class="active"><i class="fa fa-search"></i> My Job Offers</a>
+            <a href="~/JobOffers" class="active"><i class="fa fa-graduation-cap"></i> My Job Offers</a>
 
             <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
+
+            <a href="#"><i class="fa fa-envelope"></i> Messages & Notifications</a>
+
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Agency")
         {
@@ -163,50 +167,91 @@
                                         <div class="col-md-12">
                                             <div class="isotope cols-3 gutter">
                                                 @if (Model != null)
+                                                {
+                                                    foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
                                                     {
-                                                        foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
-                                                        {
-                                                    <div class="col-md-4 col-sm-6">
-                                                        <div class="profileitems">
-                                                            <div class="left">
-                                                                <img src="~/assets/images/image-18.jpg" />
-                                                                <div class="rating">
+                                                        <div class="col-md-4 col-sm-6">
+                                                            @*<div class="profileitems">
+                                                                    <div class="left">
+                                                                        <img src="~/assets/images/image-18.jpg" />
+                                                                        <div class="rating">
+
+                                                                        </div>
+                                                                        <div class="favorite">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
+                                                                        <h2 class="name">@item.Employer.FirstName</h2>
+                                                                        <h2 class="name">@item.Job.JobName</h2>
+
+                                                                        <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                                    </div>
+                                                                    <div class="profile-footer">
+                                                                        @item.AdditionalDescription
+                                                                    </div>
+                                                                </div>*@
+
+
+                                                            <div class="profileitems searchprofile-section">
+                                                                @if (item.ProfileVerified)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
+                                                               
+                                                                <div class="left">
+                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <div class="rating">
+                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                    </div>
+                                                                    @*<div class="favorite">
+                                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                                                                        </div>*@
+                                                                </div>
+                                                                <div class="right">
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                    <p class="location"><span> @item.Job.JobName</span></p>
+
 
                                                                 </div>
-                                                                <div class="favorite">
-
+                                                                <div class="profile-footer">
+                                                                    @item.AdditionalDescription&nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class="right">
-                                                                <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                                <h2 class="name">@item.Employer.FirstName</h2>
-                                                                <h2 class="name">@item.Job.JobName</h2>
 
-                                                                <div class="published">Published: <span>@item.PublishedDate</span></div>
-                                                            </div>
-                                                            <div class="profile-footer">
-                                                                @item.AdditionalDescription
-                                                            </div>
+
                                                         </div>
-                                                    </div>
-                                                        }
-
-                                                    <div style="    text-align: center;">
-
-                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
-
-                                                    </div>
                                                     }
-                                                    else
-                                                    {
+
+
+                                                }
+                                                else
+                                                {
                                                     <div style="    text-align: center;">
                                                         <div class="col-lg-12">No job offers available</div>
                                                         <div></div>
 
 
                                                     </div>
-                                                         }
 
+                                                }
+                                                <div style="    text-align: center;">
+
+                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                </div>
 
                                             </div>
                                         </div>
@@ -221,7 +266,7 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            @*<div class="profileitems">
                                                                 <div class="left">
                                                                     <img src="~/assets/images/image-18.jpg" />
                                                                     <div class="rating">
@@ -241,15 +286,48 @@
                                                                 <div class="profile-footer">
                                                                     @item.AdditionalDescription
                                                                 </div>
+                                                            </div>*@
+
+                                                            <div class="profileitems searchprofile-section">
+                                                                @if (item.ProfileVerified)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
+
+                                                                <div class="left">
+                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <div class="rating">
+                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                    </div>
+                                                                    @*<div class="favorite">
+                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                </div>*@
+                                                                </div>
+                                                                <div class="right">
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                    <p class="location"><span> @item.Job.JobName</span></p>
+
+
+                                                                </div>
+                                                                <div class="profile-footer">
+                                                                    @item.AdditionalDescription&nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     }
 
-                                                    <div style="    text-align: center;">
 
-                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
-
-                                                    </div>
                                                 }
                                                 else
                                                 {
@@ -259,8 +337,14 @@
 
 
                                                     </div>
-                                                }
 
+
+                                                }
+                                                <div style="    text-align: center;">
+
+                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                </div>
 
                                             </div>
                                         </div>
@@ -276,35 +360,46 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
+                                                                @if (item.ProfileVerified)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
+
                                                                 <div class="left">
                                                                     <img src="~/assets/images/image-18.jpg" />
                                                                     <div class="rating">
-
+                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
+                                                                    @*<div class="favorite">
+                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                    <p class="location"><span> @item.Job.JobName</span></p>
 
-                                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.AdditionalDescription
+                                                                    @item.AdditionalDescription&nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
 
-                                                    <div style="    text-align: center;">
 
-                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
-
-                                                    </div>
                                                 }
                                                 else
                                                 {
@@ -314,8 +409,14 @@
 
 
                                                     </div>
-                                                }
 
+
+                                                }
+                                                <div style="    text-align: center;">
+
+                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                </div>
 
                                             </div>
                                         </div>
@@ -331,35 +432,46 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
+                                                                @if (item.ProfileVerified)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
+
                                                                 <div class="left">
                                                                     <img src="~/assets/images/image-18.jpg" />
                                                                     <div class="rating">
-
+                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
+                                                                    @*<div class="favorite">
+                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                    <p class="location"><span> @item.Job.JobName</span></p>
 
-                                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.AdditionalDescription
+                                                                    @item.AdditionalDescription&nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
 
-                                                    <div style="    text-align: center;">
 
-                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
-
-                                                    </div>
                                                 }
                                                 else
                                                 {
@@ -369,8 +481,13 @@
 
 
                                                     </div>
-                                                }
 
+                                                }
+                                                <div style="    text-align: center;">
+
+                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                </div>
 
                                             </div>
                                         </div>
@@ -386,35 +503,46 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
+                                                                @if (item.ProfileVerified)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
+
                                                                 <div class="left">
                                                                     <img src="~/assets/images/image-18.jpg" />
                                                                     <div class="rating">
-
+                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
+                                                                    @*<div class="favorite">
+                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
+                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                    <p class="location"><span> @item.Job.JobName</span></p>
 
-                                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.AdditionalDescription
+                                                                    @item.AdditionalDescription&nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
 
-                                                    <div style="    text-align: center;">
 
-                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
-
-                                                    </div>
                                                 }
                                                 else
                                                 {
@@ -424,8 +552,14 @@
 
 
                                                     </div>
-                                                }
 
+
+                                                }
+                                                <div style="    text-align: center;">
+
+                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/EmployerJobOffers/Create/1"><i class="fa fa-plus"></i> Create a Job Offer</a></button>
+
+                                                </div>
 
                                             </div>
                                         </div>
