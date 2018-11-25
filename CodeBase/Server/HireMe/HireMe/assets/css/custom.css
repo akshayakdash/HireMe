@@ -11160,3 +11160,82 @@ margin:0;
     font-weight:300;
     color:#fff;
 }
+.default-contact{
+    position: relative;
+    line-height: 30px;
+}
+.sidenav a .badge {
+    font-weight: 400;
+    font-size: 0.9em;
+    padding: 3px 6px;
+    margin: 2px 0 2px 4px;
+    background-color: #fe005a;
+    color: #fff;
+    border-radius: 10px;
+}
+.notification{
+    list-style:none;
+    position: relative;
+    margin-bottom:30px;
+    display: inline-block;
+}
+.notification li{
+
+}
+.notification li a{
+    color: #666;
+    float: left;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    -webkit-transition: all 0.1s ease-out;
+    transition: all 0.1s ease-out;
+}
+.notification li a:hover{
+    background: #fe005a;
+    color: #fff;
+}
+
+.notification li .photo{
+
+}
+.notification li .photo img{
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    float: left;
+    height: 50px;
+    margin-right: 20px;
+    width: 50px;
+}
+.notification li .info{
+    width:20%;
+    float:left;
+    padding-right:20px;
+}
+.notification li .info span{
+    display:block;
+}
+.notification li .info .name{
+    font-size: 16px;
+    font-weight: 600;
+    color:#fe005a;
+}
+.notification li .info .others{
+    font-size: 13px;
+}
+.notification li .subject{
+    width:50%;
+    float:left;
+}
+.notification li .date-time{
+    font-size: 14px;
+    font-style: italic;
+    position: absolute;
+    right: 5px;
+}
+.notification li a:hover .name{
+    color: #fff;
+}
+.note-stars{
+    font-size:25px;
+    margin-bottom:20px;
+}
