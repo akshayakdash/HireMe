@@ -2,6 +2,14 @@
     #footer-container {
         display: none;
     }
+    .switch{
+    width: 300px;
+    right: 0;
+    top: 0;
+    }
+    .quality{
+        width: 48.7%;
+    }
 </style>
 
 <div id="main-container-user" style="margin-left: 280px;">
@@ -411,6 +419,20 @@
                                                         <input type="file" class="form-control" placeholder="Proof of ID" id="id_proof" name="id_proof">
                                                         <span class="input-lable">Proof of ID</span>
                                                     </div>
+                                                    <div class="default-contact">
+                                                        Set Default Contact as: 
+                                                        <div class='switch'>
+                                                            <div class='quality'>
+                                                                <input checked id='q1' name='q' type='radio' value='q1'>
+                                                                <label for='q1'><i class="fa fa-envelope"></i>&nbsp;Email ID</label>
+                                                            </div>
+                                                            <div class='quality'>
+                                                                <input id='q2' name='q' type='radio' value='q2'>
+                                                                <label for='q2'><i class="fa fa-phone"></i>&nbsp;Phone Number</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
                                                 </fieldset>
 
                                             </div>

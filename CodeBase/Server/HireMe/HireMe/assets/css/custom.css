@@ -11160,3 +11160,7 @@ margin:0;
     font-weight:300;
     color:#fff;
 }
+.default-contact{
+    position: relative;
+    line-height: 30px;
+}
