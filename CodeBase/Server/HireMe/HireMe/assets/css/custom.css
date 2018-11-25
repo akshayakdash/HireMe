@@ -11235,3 +11235,7 @@ margin:0;
 .notification li a:hover .name{
     color: #fff;
 }
+.note-stars{
+    font-size:25px;
+    margin-bottom:20px;
+}
