@@ -7,13 +7,13 @@ namespace HireMe.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Profile_Pic_Base64Encode : IMigrationMetadata
+    public sealed partial class City_Country_String_Added : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Profile_Pic_Base64Encode));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(City_Country_String_Added));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811241933355_Profile_Pic_Base64Encode"; }
+            get { return "201811251717371_City_Country_String_Added"; }
         }
         
         string IMigrationMetadata.Source

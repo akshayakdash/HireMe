@@ -254,9 +254,9 @@
     <Compile Include="Migrations\201811121808053_Country_State_District_Added.Designer.cs">
       <DependentUpon>201811121808053_Country_State_District_Added.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811241933355_Profile_Pic_Base64Encode.cs" />
-    <Compile Include="Migrations\201811241933355_Profile_Pic_Base64Encode.Designer.cs">
-      <DependentUpon>201811241933355_Profile_Pic_Base64Encode.cs</DependentUpon>
+    <Compile Include="Migrations\201811251717371_City_Country_String_Added.cs" />
+    <Compile Include="Migrations\201811251717371_City_Country_String_Added.Designer.cs">
+      <DependentUpon>201811251717371_City_Country_String_Added.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -506,12 +506,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811121758451_initial.resx">
       <DependentUpon>201811121758451_initial.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811121808053_Country_State_District_Added.resx">
       <DependentUpon>201811121808053_Country_State_District_Added.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811241933355_Profile_Pic_Base64Encode.resx">
-      <DependentUpon>201811241933355_Profile_Pic_Base64Encode.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811251717371_City_Country_String_Added.resx">
+      <DependentUpon>201811251717371_City_Country_String_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

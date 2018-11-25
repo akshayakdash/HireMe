@@ -126,8 +126,8 @@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                        .Select(c => c.Value);
+                                                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                    .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -588,8 +588,8 @@
                 <div class="header">
                     <i class="fa fa-align-left"></i>
 
-                        <span class="grid-title">Search Results</span>
-                        @*<div class='switch'>
+                    <span class="grid-title">Search Results</span>
+                    @*<div class='switch'>
                             <div class='quality'>
                                 <input checked id='q1' name='q' type='radio' value='q1'>
                                 <label for='q1'>Job Request</label>
@@ -636,162 +636,277 @@
                                     </div>
                                 </div>
                             </div>*@<!-- col -->
-
-
-                       
                         @*@foreach (var item in Model)
-                        {
-                            <div class="col-md-4 col-md-6 col-sm-6">
-                                <div class="profileitems searchprofile-section">
-                                    <div class="left">
-                                        <img src="~/assets/images/image-18.jpg" />
-                                        <div class="rating">
-                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                            {
+                                <div class="col-md-4 col-md-6 col-sm-6">
+                                    <div class="profileitems searchprofile-section">
+                                        <div class="left">
+                                            <img src="~/assets/images/image-18.jpg" />
+                                            <div class="rating">
+                                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                            </div>
+                                            <div class="favorite">
+                                                <a href="#" id="set_favourite_job_req_link" onclick="event.stopPropagation(); setFavouriteJobRequest(@(item.JobRequestId))"><i class="fa fa-heart-o"></i></a>
+                                            </div>
                                         </div>
-                                        <div class="favorite">
-                                            <a href="#" id="set_favourite_job_req_link" onclick="event.stopPropagation(); setFavouriteJobRequest(@(item.JobRequestId))"><i class="fa fa-heart-o"></i></a>
+                                        <div class="right">
+                                            <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
+                                            <h2 class="name">@item.Candidate.UserName</h2>
+                                            <h2 class="name">@item.Job.JobName</h2>
+                                            <p class="location">@item.Candidate.Country</p>
+                                            <div class="published">Published: <span>@item.PublishedDate</span></div>
                                         </div>
-                                    </div>
-                                    <div class="right">
-                                        <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
-                                        <h2 class="name">@item.Candidate.UserName</h2>
-                                        <h2 class="name">@item.Job.JobName</h2>
-                                        <p class="location">@item.Candidate.Country</p>
-                                        <div class="published">Published: <span>@item.PublishedDate</span></div>
-                                    </div>
-                                    <div class="profile-footer">
-                                        @item.JobRequestDescription
+                                        <div class="profile-footer">
+                                            @item.JobRequestDescription
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        }*@
+                            }*@
 
-                        
-                            <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests">
-                                @*<div class="profileitems searchprofile-section">
-                                    <div class="left">
-                                        <img src="~/assets/images/image-18.jpg" />
-                                        <div class="rating">
-                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                        </div>
-                                        <div class="favorite">
-                                            <a href="#" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="right">
-                                        <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
-                                        <h2 class="name" data-ng-bind="jr.Candidate.UserName"></h2>
-                                        <h2 class="name" data-ng-bind="jr.Job.JobName"></h2>
-                                        <p class="location">{{jr.Candidate.Country}}</p>
-                                        <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
-                                    </div>
-                                    <div class="profile-footer">
-                                       {{jr.JobRequestDescription}}
-                                    </div>
-                                </div>*@
 
-                                <div class="profileitems searchprofile-section">
-                                    <span class="validate" data-ng-if="jr.Candidate.ProfileVerified" ><i class="fa fa-check" aria-hidden="true"></i></span>
-                                    <div class="left">
-                                        <img src="~/assets/images/image-18.jpg" />
-                                        <div class="rating">
-                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                        </div>
-                                        @*<div class="favorite">
-                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                        </div>*@
-                                    </div>
-                                    <div class="right">
-                                        <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
-                                        <h2 class="name"><span>{{jr.Candidate.UserName}}</span><span>, {{jr.Candidate.ContactNo}}</span></h2>
-                                        <p class="location"><span data-ng-bind="jr.Job.JobName"></span></p>
-                                        <h3><span class="age"><span>(</span>{{jr.Candidate.Age}} Yrs)</span><span class="experience">Exp: {{jr.Candidate.ExperienceInYears}} Yrs</span></h3>
-                                        <p class="location"><span>{{jr.Candidate.Country}},</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
-                                        <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
-                                    </div>
-                                    <div class="profile-footer" >
-                                        {{jr.Candidate.AdditionalDescription}}&nbsp;
-                                    </div>
-                                    <div class="team-contact-info">
-                                        <ul class="social-icons">
-                                            @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                            <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                            @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                            <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                        </ul>
+                        <div class="tabs style-2">
+                            <ul class="nav nav-tabs job-tab">
+                                <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                            </ul>
+                            <div class="tab-content">
+
+
+
+                                <div class="tab-pane fade show active" id="tab-1-1">
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 1">
+                                            <div class="profileitems searchprofile-section">
+                                                <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
+                                                    <h2 class="name"><span>{{jr.Candidate.FirstName + ' ' + jr.Candidate.LastName}}</span><span>, {{jr.Candidate.ContactNo}}</span></h2>
+                                                    <h2 class="location"><span data-ng-bind="jr.Job.JobName"></span></h2>
+                                                    <h3><span class="age"><span>(</span>{{jr.Candidate.Age}} Yrs)</span><span class="experience">Exp: {{jr.Candidate.ExperienceInYears}} Yrs</span></h3>
+                                                    <p class="location"><span>{{jr.Candidate.Country}},</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                    <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
+                                                    <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility}}</span></div>
+                                                </div>
+                                                <div class="profile-footer">
+                                                    {{jr.Candidate.AdditionalDescription}}&nbsp;
+                                                </div>
+                                                <div class="team-contact-info">
+                                                    <ul class="social-icons">
+                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>s
                                     </div>
                                 </div>
-                            </div>
-                            
-                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-if="jobRequests.length == 0">
+                                <div class="tab-pane" id="tab-1-2">
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 2">
+                                            <div class="profileitems searchprofile-section">
+                                                <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
+                                                    <h2 class="name"><span>{{jr.Candidate.UserName}}</span><span>, {{jr.Candidate.ContactNo}}</span></h2>
+                                                    <p class="location"><span data-ng-bind="jr.Job.JobName"></span></p>
+                                                    <h3><span class="age"><span>(</span>{{jr.Candidate.Age}} Yrs)</span><span class="experience">Exp: {{jr.Candidate.ExperienceInYears}} Yrs</span></h3>
+                                                    <p class="location"><span>{{jr.Candidate.Country}},</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                    <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
+                                                </div>
+                                                <div class="profile-footer">
+                                                    {{jr.Candidate.AdditionalDescription}}&nbsp;
+                                                </div>
+                                                <div class="team-contact-info">
+                                                    <ul class="social-icons">
+                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab-1-3">
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 3">
+                                            <div class="profileitems searchprofile-section">
+                                                <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
+                                                    <h2 class="name"><span>{{jr.Candidate.UserName}}</span><span>, {{jr.Candidate.ContactNo}}</span></h2>
+                                                    <p class="location"><span data-ng-bind="jr.Job.JobName"></span></p>
+                                                    <h3><span class="age"><span>(</span>{{jr.Candidate.Age}} Yrs)</span><span class="experience">Exp: {{jr.Candidate.ExperienceInYears}} Yrs</span></h3>
+                                                    <p class="location"><span>{{jr.Candidate.Country}},</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                    <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
+                                                </div>
+                                                <div class="profile-footer">
+                                                    {{jr.Candidate.AdditionalDescription}}&nbsp;
+                                                </div>
+                                                <div class="team-contact-info">
+                                                    <ul class="social-icons">
+                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="tab-1-4">
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 4">
+                                            <div class="profileitems searchprofile-section">
+                                                <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
+                                                    <h2 class="name"><span>{{jr.Candidate.UserName}}</span><span>, {{jr.Candidate.ContactNo}}</span></h2>
+                                                    <p class="location"><span data-ng-bind="jr.Job.JobName"></span></p>
+                                                    <h3><span class="age"><span>(</span>{{jr.Candidate.Age}} Yrs)</span><span class="experience">Exp: {{jr.Candidate.ExperienceInYears}} Yrs</span></h3>
+                                                    <p class="location"><span>{{jr.Candidate.Country}},</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                    <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
+                                                </div>
+                                                <div class="profile-footer">
+                                                    {{jr.Candidate.AdditionalDescription}}&nbsp;
+                                                </div>
+                                                <div class="team-contact-info">
+                                                    <ul class="social-icons">
+                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>s
+                                <div class="tab-pane fade" id="tab-1-5">
+                                    <div class="row">
+                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 5">
+                                            <div class="profileitems searchprofile-section">
+                                                <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                <div class="left">
+                                                    <img src="~/assets/images/image-18.jpg" />
+                                                    <div class="rating">
+                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                    </div>
+                                                </div>
+                                                <div class="right">
+                                                    <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
+                                                    <h2 class="name"><span>{{jr.Candidate.UserName}}</span><span>, {{jr.Candidate.ContactNo}}</span></h2>
+                                                    <p class="location"><span data-ng-bind="jr.Job.JobName"></span></p>
+                                                    <h3><span class="age"><span>(</span>{{jr.Candidate.Age}} Yrs)</span><span class="experience">Exp: {{jr.Candidate.ExperienceInYears}} Yrs</span></h3>
+                                                    <p class="location"><span>{{jr.Candidate.Country}},</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                    <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
+                                                </div>
+                                                <div class="profile-footer">
+                                                    {{jr.Candidate.AdditionalDescription}}&nbsp;
+                                                </div>
+                                                <div class="team-contact-info">
+                                                    <ul class="social-icons">
+                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <h3>No job request found based on your search criteria.</h3>
+
+                                <div class="col-md-4 col-md-6 col-sm-6" data-ng-if="jobRequests.length == 0">
+
+                                    <h3>No job request found based on your search criteria.</h3>
+                                </div>
+                            </div>
                         </div>
+                    </div>
                 </div>
+
             </div>
         </div>
-    </div>
-
-</div>
-</div>
 
 
-   <!--Modal-->
-<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModal" aria-hidden="true">
-    <div class="modal-wrapper">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel13">Agency Name</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <div class="profile-pic">
-                                <img src="~/assets/images/image-18.jpg" />
+        <!--Modal-->
+        <div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModal" aria-hidden="true">
+            <div class="modal-wrapper">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel13">Agency Name</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-4 text-center">
+                                    <div class="profile-pic">
+                                        <img src="~/assets/images/image-18.jpg" />
+                                    </div>
+                                    @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
+                                </div>
+                                <div class="col-md-8">
+                                    @*<div class="row">
+                                            <div class="col-md-4">Email:</div>
+                                            <div class="col-md-8">agency@gmail.com</div>
+                                        </div>*@
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td>Email:</td>
+                                                <td>agency@gmail.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Phone:</td>
+                                                <td>111111111</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Rating:</td>
+                                                <td><a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Description:</td>
+                                                <td>I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-md-12">
+
+                                </div>
                             </div>
-                            @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
-                        </div>
-                        <div class="col-md-8">
-                            @*<div class="row">
-                                    <div class="col-md-4">Email:</div>
-                                    <div class="col-md-8">agency@gmail.com</div>
-                                </div>*@
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                        <td>Email:</td>
-                                        <td>agency@gmail.com</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Phone:</td>
-                                        <td>111111111</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Rating:</td>
-                                        <td><a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Description:</td>
-                                        <td>I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-md-12">
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!--/Modal-->
     </div>
 </div>
-<!--/Modal-->
-
 
 <script>
     function openNav() {
@@ -852,25 +967,35 @@
     <script src="~/Scripts/angular.min.js"></script>
     <script type="text/javascript">
         var app = angular.module('myApp', []);
+
+        angular.module('myApp').filter('filterByJobCategoryId', [function () {
+            return function (jobRequests, jobCaegoryId) {
+                if (!angular.isUndefined(jobRequests) && !angular.isUndefined(jobCaegoryId) && jobRequests.length > 0) {
+                    return $.grep(jobRequests, function (elem, index) { return elem.Job && elem.Job.JobCategoryId == jobCaegoryId });
+                } else {
+                    return jobRequests;
+                }
+            };
+        }]);
         app.controller('searchJobRequestCtrl', function ($scope, $http) {
             $scope.jobRequests = [];
             $scope.message = "Welcome Angular JS";
             $scope.searchParam = {};
 
 
-            $scope.searchJobRequests = function() {
+            $scope.searchJobRequests = function () {
                 $http.get("/api/jobtekapi/SearchJobRequests", {
                     //params: { page: 1, limit: 100, sort: 'name', direction: 'desc' },
                     //headers: { 'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==' }
                     params: $scope.searchParam
                 })
-                .then(function (response) {
-                    console.log(response.data);
-                    $scope.jobRequests = response.data;
-                });
+                    .then(function (response) {
+                        console.log(response.data);
+                        $scope.jobRequests = response.data;
+                    });
             }
 
-            $scope.setFavouriteJobRequest = function(jobRequestId) {
+            $scope.setFavouriteJobRequest = function (jobRequestId) {
 
                 //alert(jobRequestId);
                 $.ajax

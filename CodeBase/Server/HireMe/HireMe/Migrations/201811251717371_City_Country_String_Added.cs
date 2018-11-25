@@ -3,13 +3,28 @@ namespace HireMe.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Profile_Pic_Base64Encode : DbMigration
+    public partial class City_Country_String_Added : DbMigration
     {
         public override void Up()
         {
+            AddColumn("dbo.Agencies", "Country", c => c.String(unicode: false));
+            AddColumn("dbo.Agencies", "City", c => c.String(unicode: false));
+            AddColumn("dbo.Agencies", "District", c => c.String(unicode: false));
+            AddColumn("dbo.Candidates", "Country", c => c.String(unicode: false));
+            AddColumn("dbo.Candidates", "City", c => c.String(unicode: false));
+            AddColumn("dbo.Candidates", "District", c => c.String(unicode: false));
+            AddColumn("dbo.JobOffers", "Country", c => c.String(unicode: false));
+            AddColumn("dbo.JobOffers", "City", c => c.String(unicode: false));
+            AddColumn("dbo.JobOffers", "District", c => c.String(unicode: false));
+            AddColumn("dbo.Employers", "Country", c => c.String(unicode: false));
+            AddColumn("dbo.Employers", "City", c => c.String(unicode: false));
+            AddColumn("dbo.Employers", "District", c => c.String(unicode: false));
             AddColumn("dbo.Employers", "IdProofDoc", c => c.String(unicode: false));
             AddColumn("dbo.Employers", "IdProofDocDesc", c => c.String(unicode: false));
             AddColumn("dbo.Employers", "ProfilePicUrl", c => c.String(unicode: false));
+            AlterColumn("dbo.JobOffers", "CountryId", c => c.Int());
+            AlterColumn("dbo.JobOffers", "CityId", c => c.Int());
+            AlterColumn("dbo.JobOffers", "DistrictId", c => c.Int());
             AlterColumn("dbo.Employers", "CountryId", c => c.Int());
             AlterColumn("dbo.Employers", "CityId", c => c.Int());
             AlterColumn("dbo.Employers", "DistrictId", c => c.Int());
@@ -60,9 +75,24 @@ namespace HireMe.Migrations
             AlterColumn("dbo.Employers", "DistrictId", c => c.Int(nullable: false));
             AlterColumn("dbo.Employers", "CityId", c => c.Int(nullable: false));
             AlterColumn("dbo.Employers", "CountryId", c => c.Int(nullable: false));
+            AlterColumn("dbo.JobOffers", "DistrictId", c => c.Int(nullable: false));
+            AlterColumn("dbo.JobOffers", "CityId", c => c.Int(nullable: false));
+            AlterColumn("dbo.JobOffers", "CountryId", c => c.Int(nullable: false));
             DropColumn("dbo.Employers", "ProfilePicUrl");
             DropColumn("dbo.Employers", "IdProofDocDesc");
             DropColumn("dbo.Employers", "IdProofDoc");
+            DropColumn("dbo.Employers", "District");
+            DropColumn("dbo.Employers", "City");
+            DropColumn("dbo.Employers", "Country");
+            DropColumn("dbo.JobOffers", "District");
+            DropColumn("dbo.JobOffers", "City");
+            DropColumn("dbo.JobOffers", "Country");
+            DropColumn("dbo.Candidates", "District");
+            DropColumn("dbo.Candidates", "City");
+            DropColumn("dbo.Candidates", "Country");
+            DropColumn("dbo.Agencies", "District");
+            DropColumn("dbo.Agencies", "City");
+            DropColumn("dbo.Agencies", "Country");
         }
     }
 }
