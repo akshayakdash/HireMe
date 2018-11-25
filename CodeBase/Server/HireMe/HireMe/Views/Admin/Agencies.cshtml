@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<HireMe.Models.Agency>
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
 
-@{
-    ViewBag.Title = "Agencies";
-}
-
-<h2>Agencies</h2>
 
 
 <script type="text/javascript">
@@ -138,7 +138,15 @@
         }
         else if (role == "Admin")
         {
-            <a href="~/Admin/Agencies"><i class="fa fa-search"></i> Agencies</a>
+            <a href="~/Admin/Agencies" class="active"><i class="fa fa-search"></i> Verify Agency Profiles</a>
+            <a href="~/Admin/Candidates"><i class="fa fa-search"></i> Verify Candidate Profiles</a>
+            <a href="~/Admin/Employers"><i class="fa fa-search"></i> Verify Employer Profiles</a>
+
+            <a href="~/Admin/ValidateJobRequests"><i class="fa fa-search"></i> Job Requests</a>
+
+            <a href="~/Admin/ValidateJobOffers"><i class="fa fa-search"></i> Job Offers</a>
+
+            <a href="~/Admin/ExportMembers"><i class="fa fa-search"></i> Export</a>
         }
     </div>
 
