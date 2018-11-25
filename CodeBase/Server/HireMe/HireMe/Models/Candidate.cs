@@ -41,7 +41,6 @@ namespace HireMe.Models
 
 
         public int? CountryId { get; set; }
-        [NotMapped]
         public string Country { get; set; }
         [ForeignKey("CountryId")]
         public Country CountryEntity { get; set; }
@@ -49,13 +48,11 @@ namespace HireMe.Models
         public int? CityId { get; set; }
         [ForeignKey("CityId")]
         public City CityEntity { get; set; }
-        [NotMapped]
         public string City { get; set; }
 
         public int? DistrictId { get; set; }
         [ForeignKey("DistrictId")]
         public District DistrictEntity { get; set; }
-        [NotMapped]
         public string District { get; set; }
 
         public SalaryType SalaryType { get; set; }
@@ -120,7 +117,6 @@ namespace HireMe.Models
 
 
         public int? CountryId { get; set; }
-        [NotMapped]
         public string Country { get; set; }
         [ForeignKey("CountryId")]
         public Country CountryEntity { get; set; }
@@ -128,13 +124,11 @@ namespace HireMe.Models
         public int? CityId { get; set; }
         [ForeignKey("CityId")]
         public City CityEntity { get; set; }
-        [NotMapped]
         public string City { get; set; }
 
         public int? DistrictId { get; set; }
         [ForeignKey("DistrictId")]
         public District DistrictEntity { get; set; }
-        [NotMapped]
         public string District { get; set; }
         public bool ProfileVerified { get; set; }
 
@@ -166,7 +160,6 @@ namespace HireMe.Models
         public string GenderDesc { get; set; }
 
         public int? CountryId { get; set; }
-        [NotMapped]
         public string Country { get; set; }
         [ForeignKey("CountryId")]
         public Country CountryEntity { get; set; }
@@ -174,13 +167,11 @@ namespace HireMe.Models
         public int? CityId { get; set; }
         [ForeignKey("CityId")]
         public City CityEntity { get; set; }
-        [NotMapped]
         public string City { get; set; }
 
         public int? DistrictId { get; set; }
         [ForeignKey("DistrictId")]
         public District DistrictEntity { get; set; }
-        [NotMapped]
         public string District { get; set; }
 
         public bool ProfileVerified { get; set; }
@@ -320,6 +311,8 @@ namespace HireMe.Models
         public DateTime ValidTill { get; set; }
         public string JobRequestDescription { get; set; }
         public List<JobRequestJobTask> JobRequestJobTasks { get; set; }
+        [NotMapped]
+        public List<JobTask> MasterJobTasks { get; set; }
     }
 
     public class JobRequestJobTask
@@ -364,16 +357,13 @@ namespace HireMe.Models
         public string StaffTypeDesc { get; set; }
         public DateTime Disponibility { get; set; }
 
-        public int CountryId { get; set; }
-        [NotMapped]
+        public int? CountryId { get; set; }
         public string Country { get; set; }
 
-        public int CityId { get; set; }
-        [NotMapped]
+        public int? CityId { get; set; }
         public string City { get; set; }
 
-        public int DistrictId { get; set; }
-        [NotMapped]
+        public int? DistrictId { get; set; }
         public string District { get; set; }
 
         public SalaryType SalaryType { get; set; }

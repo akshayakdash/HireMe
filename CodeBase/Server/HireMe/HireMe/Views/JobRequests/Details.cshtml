@@ -6,6 +6,68 @@
     }
 </style>
 
+@functions
+{
+    private int count = 0;
+}
+
+<h2>Create</h2>
+
+@helper ShowTaskTree(IEnumerable<HireMe.Models.JobTask> jobTasks)
+{
+for (int i = 0; i < jobTasks.Count(); i++)
+{
+    count = count + 1;
+    var item = jobTasks.ElementAt(i);
+    if (Model.JobRequestJobTasks.Any(p => p.JobTaskId == item.JobTaskId))
+    {
+            <div class="checkbox" style="margin-left:25px;">
+                <label>
+
+                    @*@Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
+                        @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
+                        @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
+                        @item.JobTaskName
+                        @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
+                    @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
+                    @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
+                    <img src="~/assets/images/home-icon.png"/>
+                    @(item.JobTaskName)
+
+                    <div class="toggle-group">
+                        <input type="checkbox" name="on-off-switch" id="on-off-switch" checked="" tabindex="1">
+                        <label for="on-off-switch">
+
+                        </label>
+                        <div class="onoffswitch" aria-hidden="true">
+                            <div class="onoffswitch-label">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
+                    }
+                    @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                    {
+                        <span>@selectedTask.TaskResponseAdditionalDescription</span>
+                    }
+
+
+                    <span></span>
+                </label>
+                @if (item.SubTasks.Any())
+            {
+
+                    @ShowTaskTree(item.SubTasks)
+
+                }
+            </div>
+                            }
+                        }
+}
+
 <script>
     function setFavouriteJobRequest(jobRequestId) {
 
@@ -127,8 +189,8 @@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                            .Select(c => c.Value);
+                                                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                        .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -182,31 +244,31 @@
                     <div class="col-md-12">
                         <div class="tabs style-2">
                             <div class="tab-header">
-                               Details
+                                @(Model.Job.JobName + "(" + Model.Candidate.Age + " yrs)")
                             </div>
                             <div class="tab-content search-criteria" style="margin-top:0;">
 
                                 <div class="row">
                                     <div class="col-md-4 text-center">
                                         <div class="profile-pic">
-                                            <img src="~/assets/images/image-18.jpg" />
+                                            <img src="data:image/jpeg;base64,@Model.Candidate.ProfilePicUrl" />
                                         </div>
                                         @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
                                     </div>
                                     <div class="col-md-8">
                                         @*<div class="row">
-                    <div class="col-md-4">Email:</div>
-                    <div class="col-md-8">agency@gmail.com</div>
-                </div>*@
+                                                <div class="col-md-4">Email:</div>
+                                                <div class="col-md-8">agency@gmail.com</div>
+                                            </div>*@
                                         <table class="table">
                                             <tbody>
                                                 <tr>
                                                     <td>Email:</td>
-                                                    <td>agency@gmail.com</td>
+                                                    <td>@Model.Candidate.EmailId</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Phone:</td>
-                                                    <td>111111111</td>
+                                                    <td>@Model.Candidate.ContactNo</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Rating:</td>
@@ -214,7 +276,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Description:</td>
-                                                    <td>I offer my service for babysitting for long term period. I looking for a job of nanny. I love to take care of children</td>
+                                                    <td>@Model.JobRequestDescription</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -223,108 +285,121 @@
 
                                     </div>
                                 </div>
-                                    <div class="row">
-                                        <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                <div class="row">
+                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
 
-                                            <div class="row">
-                                               
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Gender
-                                                           
-                                                        </div>
+                                        <div class="row">
 
-                                                        <div class="filtersection-body">
-                                                            <div class="radio">
-                                                                <label>
-                                                                    
-                                                                    Female
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label>
-                                                                  
-                                                                    Male
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Gender
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+                                                        @Model.Candidate.Gender.ToString()
                                                     </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Type of Staff
-                                                          
-                                                        </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Type of Staff
 
-                                                        <div class="filtersection-body">
-                                                            <div class="radio">
-                                                                <label>
-                                                                  
-                                                                    Agency
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label>
-                                                                   
-                                                                    Independant
-                                                                    <span></span>
-                                                                </label>
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+                                                        @Model.Candidate.StaffType.ToString()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Age
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.Candidate.Age + " yrs")
+
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Age
-                                                           
-                                                        </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Years of Experience
 
-                                                        <div class="filtersection-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12">
-                                                                   sgssg
-                                                                    @*<select>
-                                                                            <option value="1">1</option>
-                                                                            <option value="2">2</option>
-                                                                            <option value="3">3</option>
-                                                                            <option value="4">4</option>
-                                                                            <option value="5">5</option>
-                                                                            <option value="6">6</option>
-                                                                        </select>
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @Model.Candidate.ExperienceInYears
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Localizations
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @(Model.Candidate.Country + ", " + Model.Candidate.City)
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.Candidate.District
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Salary Between
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                @Model.Candidate.SalaryType.ToString()
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Model.Candidate.ExpectedMinSalary
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6">
-                                                                        <select>
-                                                                            <option value="1">1</option>
-                                                                            <option value="2">2</option>
-                                                                            <option value="3">3</option>
-                                                                            <option value="4">4</option>
-                                                                            <option value="5">5</option>
-                                                                            <option value="6">6</option>
-                                                                        </select>*@
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Years of Experience
-                                                         
-                                                        </div>
+                                                                        @Model.Candidate.ExpectedMaxSalary
+                                                                    </div>
 
-                                                        <div class="filtersection-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12">
-                                                                   szbdnfgh
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -333,264 +408,154 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Localizations
-                                                           
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Read
+                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                            @(Model.Candidate.CanRead ? "Yes" : "No")
                                                         </div>
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        <div class="icon-section">
+                                                            <img src="~/assets/images/eyeglass1.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Write
+                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                            @(Model.Candidate.CanWrite ? "Yes" : "No")
+                                                        </div>
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        <div class="icon-section">
+                                                            <img src="~/assets/images/write1.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Sleep on Site
+                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                            @(Model.Candidate.SleepOnSite ? "Yes" : "No")
+                                                        </div>
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        <div class="icon-section">
+                                                            <img src="~/assets/images/sleep1.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Disponibility
 
-                                                        <div class="filtersection-body">
-                                                          
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6">
-                                                                sdfgv
+                                                    </div>
 
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6">
-                                                                   sdfgvn
-                                                                </div>
+                                                    <div class="filtersection-body">
+                                                        @Model.Candidate.Disponibility
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Number of rooms
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.Candidate.ExpectedMinRooms
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.Candidate.ExpectedMaxRooms
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Number of people
 
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Salary Between
-                                                           
-                                                        </div>
+                                                    </div>
 
-                                                        <div class="filtersection-body">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="radio">
-                                                                        <label>
-                                                                            <input type="radio" name="options" id="option1" value="option1" checked>
-                                                                            Monthly
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="radio">
-                                                                        <label>
-                                                                            <input type="radio" name="options" id="option2" value="option2">
-                                                                            Hourly
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="radio">
-                                                                        <label>
-                                                                            <input type="radio" name="options" id="option2" value="option2">
-                                                                            Other
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6 col-md-6">
-                                                                          asfgh
-                                                                        </div>
-                                                                        <div class="col-lg-6 col-md-6">
-                                                                          serg
-                                                                        </div>
-                                                                      
-                                                                    </div>
-                                                                </div>
+                                                    <div class="filtersection-body">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.Candidate.MinGroupPeople
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.Candidate.MaxGroupPeople
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
 
 
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Candidate Skills
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        @ShowTaskTree(Model.MasterJobTasks.Where(p => p.ParentJobTaskId == null))
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Additional Description
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        @Model.JobRequestDescription
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                </div>
 
-                             
-                                    <div class="row">
-                                        <div class="col-md-6" style="border-right:2px solid #ff6a00;">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Read
-                                                            <div class="switch-area-inner switch-area-inner-cus">
-                                                                <label class="checkbox">
-                                                                   <input type="checkbox" />
-                                                                    <span class=""></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="filtersection-body">
-                                                            <div class="icon-section">
-                                                                <img src="~/assets/images/eyeglass1.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Write
-                                                            <div class="switch-area-inner switch-area-inner-cus">
-                                                                <label class="checkbox">
-                                                                    <input type="checkbox" />
-                                                                    <span class=""></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="filtersection-body">
-                                                            <div class="icon-section">
-                                                                <img src="~/assets/images/write1.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Sleep on Site
-                                                            <div class="switch-area-inner switch-area-inner-cus">
-                                                                <label class="checkbox">
-                                                                    <input type="checkbox" />
-                                                                    <span class=""></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="filtersection-body">
-                                                            <div class="icon-section">
-                                                                <img src="~/assets/images/sleep1.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Disponibility
-                                                           
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            <div class="date">
-                                                                <input type="text" />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Number of rooms
-
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    <input type="text" />
-
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    <input type="text" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Number of people
-
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    <input type="text" />
-
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    <input type="text" />
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-
-
-                                            <div class="row">
-                                                @*@ShowTaskTree(Model.JobTasks.Where(p => p.ParentJobTaskId == null))*@
-                                                
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Additional Description
-                                                            @*<div class="switch-area-inner">
-                                                                <label class="switchsmall">
-                                                                    <input type="checkbox">
-                                                                    <span class="slider1 round"></span>
-                                                                </label>
-                                                            </div>*@
-                                                        </div>
-                                                        <div class="filtersection-body">
-                                                            @*<textarea id="comment" class="form-control" name="comment" rows="2" placeholder="Comment"></textarea>*@
-                                                           <textarea></textarea>
-                                                            @*@Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })*@
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @*<div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="checkbox">
-                                                        @Html.CheckBoxFor(p => p.PublishProfile)
-                                                        <span class=""></span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publish As a Job Request
-                                                    </label>
-                                                </div>
-                                            </div>*@
-                                            @*<div class="row">
-                                                <div class="col-md-12">
-                                                    <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
-                                                </div>
-                                            </div>*@
-                                        </div>
-                                    </div>
-                               
                             </div>
-                            @*<ul class="nav nav-tabs" style="width: 100%;">
-                                <li style="width: 50%;">
-                                    <a style="float:left;" class="active" href="#tab-1-1" data-toggle="tab">Back</a>
-                                </li>
-                                <li style="width: 50%;">
-                                    <a style="float:right;" href="#tab-1-2" data-toggle="tab">Next</a>
-                                </li>
-                            </ul>*@
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
@@ -695,19 +660,19 @@
             $scope.searchParam = {};
 
 
-            $scope.searchJobRequests = function() {
+            $scope.searchJobRequests = function () {
                 $http.get("/api/jobtekapi/SearchJobRequests", {
                     //params: { page: 1, limit: 100, sort: 'name', direction: 'desc' },
                     //headers: { 'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==' }
                     params: $scope.searchParam
                 })
-                .then(function (response) {
-                    console.log(response.data);
-                    $scope.jobRequests = response.data;
-                });
+                    .then(function (response) {
+                        console.log(response.data);
+                        $scope.jobRequests = response.data;
+                    });
             }
 
-            $scope.setFavouriteJobRequest = function(jobRequestId) {
+            $scope.setFavouriteJobRequest = function (jobRequestId) {
 
                 //alert(jobRequestId);
                 $.ajax
@@ -735,60 +700,60 @@
 }
 
 @*<div>
-    <h4>JobRequest</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.CandidateId)
-        </dt>
+        <h4>JobRequest</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CandidateId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CandidateId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.CandidateId)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.JobId)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.JobId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.JobId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.JobId)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPublished)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.IsPublished)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.IsPublished)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.IsPublished)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PublishedDate)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.PublishedDate)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PublishedDate)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.PublishedDate)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ValidTill)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.ValidTill)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ValidTill)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ValidTill)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.JobRequestDescription)
-        </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.JobRequestDescription)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.JobRequestDescription)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.JobRequestDescription)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.JobRequestId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.JobRequestId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@
