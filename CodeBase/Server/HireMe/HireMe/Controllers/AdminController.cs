@@ -181,13 +181,22 @@ namespace HireMe.Controllers
         [HttpGet]
         public ActionResult ValidateJobOffers()
         {
-            return View();
+
+            return View(db.JobOffers
+               .Include(path => path.Job)
+               .Include(t => t.Employer)
+               .OrderByDescending(p => p.JobOfferId)
+               .ToList());
         }
 
         [HttpGet]
         public ActionResult ValidateJobRequests()
         {
-            return View();
+            return View(db.JobRequests
+               .Include(path => path.Job)
+               .Include(t => t.Candidate)
+               .OrderByDescending(p => p.JobRequestId)
+               .ToList());
         }
 
         // POST: Admin/Delete/5
