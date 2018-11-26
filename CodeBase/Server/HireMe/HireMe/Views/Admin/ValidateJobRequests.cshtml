@@ -1,10 +1,5 @@
 ﻿@model IEnumerable<HireMe.Models.JobRequest>
 
-@{
-    ViewBag.Title = "Index";
-}
-
-
 
 <style>
     #footer-container {
@@ -86,8 +81,8 @@
         </div>*@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                        .Select(c => c.Value);
+                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -132,6 +127,18 @@
             <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
 
             <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Admin")
+        {
+            <a href="~/Admin/Agencies"><i class="fa fa-search"></i> Verify Agency Profiles</a>
+            <a href="~/Admin/Candidates"><i class="fa fa-search"></i> Verify Candidate Profiles</a>
+            <a href="~/Admin/Employers"><i class="fa fa-search"></i> Verify Employer Profiles</a>
+
+            <a href="~/Admin/ValidateJobRequests" class="active"><i class="fa fa-search"></i> Job Requests</a>
+
+            <a href="~/Admin/ValidateJobOffers"><i class="fa fa-search"></i> Job Offers</a>
+
+            <a href="~/Admin/ExportMembers"><i class="fa fa-search"></i> Export</a>
         }
     </div>
 
@@ -188,7 +195,34 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 1))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+
+
+
+                                                            @*<div class="profileitems">
+                                                                    <div class="left">
+                                                                        <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                                        <div class="rating">
+                                                                            <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                        </div>
+                                                                        <div class="favorite">
+                                                                            <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="right">
+                                                                        <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
+                                                                        <h2 class="name">@item.Candidate.UserName</h2>
+                                                                        <h2 class="name">@item.Job.JobName</h2>
+                                                                        <p class="location">@item.Candidate.Country</p>
+                                                                        <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                                    </div>
+                                                                    <div class="profile-footer">
+                                                                        @item.JobRequestDescription
+                                                                    </div>
+                                                                </div>*@
+
+
+                                                            <div class="profileitems searchprofile-section">
+                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
@@ -200,24 +234,38 @@
                                                                 </div>
                                                                 <div class="right">
                                                                     <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
-                                                                    <h2 class="name">@item.Candidate.UserName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-                                                                    <p class="location">@item.Candidate.Country</p>
+                                                                    <h2 class="name"><span>@item.Candidate.UserName</span><span>, @item.Candidate.ContactNo</span></h2>
+                                                                    <p class="location"><span>@item.Job.JobName</span></p>
+                                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
+                                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
                                                                     <div class="published">Published: <span>@item.PublishedDate</span></div>
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.JobRequestDescription
+                                                                    @item.Candidate.AdditionalDescription &nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
+
+
+
                                                         </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -230,9 +278,10 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 2))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
+                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
                                                                         <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
@@ -242,24 +291,35 @@
                                                                 </div>
                                                                 <div class="right">
                                                                     <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
-                                                                    <h2 class="name">@item.Candidate.UserName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-                                                                    <p class="location">@item.Candidate.Country</p>
+                                                                    <h2 class="name"><span>@item.Candidate.UserName</span><span>, @item.Candidate.ContactNo</span></h2>
+                                                                    <p class="location"><span>@item.Job.JobName</span></p>
+                                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
+                                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
                                                                     <div class="published">Published: <span>@item.PublishedDate</span></div>
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.JobRequestDescription
+                                                                    @item.Candidate.AdditionalDescription &nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -272,9 +332,10 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 3))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
+                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
                                                                         <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
@@ -284,24 +345,35 @@
                                                                 </div>
                                                                 <div class="right">
                                                                     <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
-                                                                    <h2 class="name">@item.Candidate.UserName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-                                                                    <p class="location">@item.Candidate.Country</p>
+                                                                    <h2 class="name"><span>@item.Candidate.UserName</span><span>, @item.Candidate.ContactNo</span></h2>
+                                                                    <p class="location"><span>@item.Job.JobName</span></p>
+                                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
+                                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
                                                                     <div class="published">Published: <span>@item.PublishedDate</span></div>
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.JobRequestDescription
+                                                                    @item.Candidate.AdditionalDescription &nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -314,9 +386,10 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 4))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
+                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
                                                                         <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
@@ -326,24 +399,35 @@
                                                                 </div>
                                                                 <div class="right">
                                                                     <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
-                                                                    <h2 class="name">@item.Candidate.UserName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-                                                                    <p class="location">@item.Candidate.Country</p>
+                                                                    <h2 class="name"><span>@item.Candidate.UserName</span><span>, @item.Candidate.ContactNo</span></h2>
+                                                                    <p class="location"><span>@item.Job.JobName</span></p>
+                                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
+                                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
                                                                     <div class="published">Published: <span>@item.PublishedDate</span></div>
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.JobRequestDescription
+                                                                    @item.Candidate.AdditionalDescription &nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -356,9 +440,10 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 5))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
+                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
                                                                         <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
@@ -368,30 +453,45 @@
                                                                 </div>
                                                                 <div class="right">
                                                                     <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
-                                                                    <h2 class="name">@item.Candidate.UserName</h2>
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-                                                                    <p class="location">@item.Candidate.Country</p>
+                                                                    <h2 class="name"><span>@item.Candidate.UserName</span><span>, @item.Candidate.ContactNo</span></h2>
+                                                                    <p class="location"><span>@item.Job.JobName</span></p>
+                                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
+                                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
                                                                     <div class="published">Published: <span>@item.PublishedDate</span></div>
                                                                 </div>
                                                                 <div class="profile-footer">
-                                                                    @item.JobRequestDescription
+                                                                    @item.Candidate.AdditionalDescription &nbsp;
+                                                                </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+                                <div style="    text-align: center;">
 
+                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+
+                                </div>
                             </div><!-- tab-content -->
                         </div><!-- tabs -->
                     </div>
@@ -400,7 +500,7 @@
         </div>
 
 
-      
+
     </div>
 
     <!---- Tab Section end-->

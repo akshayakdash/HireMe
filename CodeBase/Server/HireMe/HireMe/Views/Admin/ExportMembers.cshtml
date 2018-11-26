@@ -1,8 +1,8 @@
-﻿
-@{
-    ViewBag.Title = "ExportMembers";
-}
-
+﻿<style>
+    #footer-container {
+        display: none;
+    }
+</style>
 <div id="main-container-user" style="margin-left: 280px;">
     <!-- HEADER -->
     <header id="header">
@@ -140,24 +140,269 @@
         }
         else if (role == "Admin")
         {
-            <a href="~/Admin/Agencies"><i class="fa fa-search"></i> Agencies</a>
+            <a href="~/Admin/Agencies"><i class="fa fa-search"></i> Verify Agency Profiles</a>
+            <a href="~/Admin/Candidates"><i class="fa fa-search"></i> Verify Candidate Profiles</a>
+            <a href="~/Admin/Employers"><i class="fa fa-search"></i> Verify Employer Profiles</a>
 
             <a href="~/Admin/ValidateJobRequests"><i class="fa fa-search"></i> Job Requests</a>
 
-            <a href="~/Admin/ValidateJobOffers"><i class="fa fa-search"></i> Job Offers</a>
+            <a href="~/Admin/ValidateJobOffers" ><i class="fa fa-search"></i> Job Offers</a>
 
-            <a href="~/Admin/ValidateUserProfiles"><i class="fa fa-search"></i>Validate Profile</a>
-
-            <a href="~/Admin/ExportMembers"><i class="fa fa-search"></i> Export</a>
+            <a href="~/Admin/ExportMembers" class="active"><i class="fa fa-search"></i> Export</a>
         }
     </div>
 
 
+    <div class="full-section-container" ng-app="myApp">
+        <div class="jobsearch-section" ng-controller="exportMembersCtrl">
+            <div class="right-section">
+                <div class="header">
+                    <a title="Filter" id="FilterClose1" class="filter-close"><i class="bizhub-icon-close-2"></i></a>
+                    <i class="fa fa-filter"></i>Set all filter to Indifferent
+                    <div class="switch-area">
+                        <label class="switchsmall">
+                            <input type="checkbox">
+                            <span class="slider1 round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="body search-filter-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Select Member
+                                    @*<div class="switch-area-inner">
+                            <label class="switchsmall">
+                                <input type="checkbox">
+                                <span class="slider1 round"></span>
+                            </label>
+                        </div>*@
+                                </div>
+
+                                <div class="filtersection-body">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender">
+                                            Candidate
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender">
+                                            Employer
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Gender
+                                    @*<div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>*@
+                                </div>
+
+                                <div class="filtersection-body">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender" >
+                                            Woman
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender" >
+                                            Man
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Select Job
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="inlineform-filter">
+                                        <div class="row">
+                                            <div class="col-sm-2 text-center">
+                                                <i class="fa fa-plus"></i>
+                                            </div>
+                                            <div class="col-sm-3" style="padding-left: 0;">
+                                                <select class="yrs_of_exp">
+                                                    <option value="">--select--</option>
+                                                    <option>Nanny</option>
+                                                    <option>Cook</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Verification Status
+                                    @*<div class="switch-area-inner">
+                            <label class="switchsmall">
+                                <input type="checkbox">
+                                <span class="slider1 round"></span>
+                            </label>
+                        </div>*@
+                                </div>
+
+                                <div class="filtersection-body">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender" >
+                                            Yes
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="gender" >
+                                            No
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                   
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="filtersection-panel">
+                                <div class="filtersection-header">
+                                    Age
+                                    <div class="switch-area-inner">
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="filtersection-body">
+                                    <div class="inlineform-filter">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <select class="">
+                                                    <option>25</option>
+                                                    <option>30</option>
+                                                    <option>35</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2 text-center">&amp;</div>
+                                            <div class="col-md-5">
+                                                <select class="">
+                                                    <option>35</option>
+                                                    <option>30</option>
+                                                    <option>35</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 
+                   
+                   
+                  
+
+
+                </div>
+                <div class="footer">
+                    <button type="button" class="btn btn-default btn-lg" data-ng-click="searchJobRequests()"><i class="bizhub-icon-search"></i> Search</button>
+                </div>
+            </div>
+            <div class="left-section">
+                <div class="filter-overlay">
+                    <div class="lds-ripple"><div></div><div></div></div>
+                </div>
+                <div class="header">
+                    <i class="fa fa-align-left"></i>
+
+                    <span class="grid-title">Search Results</span>
+    
+                    <a title="Filter" class="Filterjob" id="FilterjobId1"><i class="fa fa-filter"></i></a>
+
+                </div>
+                @*<div class="filter-selected">
+                        <i class="fa fa-filter"></i><span>Agency</span>
+                    </div>*@
+                <div class="body">
+
+                    <table class="table table-responsive table-condensed table-striped">
+                        <tbody>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Type Of Member</th>
+                                <th>Job Sought</th>
+                                <th>Profile Status</th>
+                                <th>Gender</th>
+                                <th>Age</th>
+                            </tr>
+                            <tr data-ng-repeat="member in members">
+                                <td>{{$index + 1}}</td>
+                                <td data-ng-bind="member.Name"></td>
+                                <td data-ng-bind="member.MemberType"></td>
+                                <td data-ng-bind="member.Job"></td>
+                                <td data-ng-bind="member.ProfileStatus ? 'Verified' : 'Not Verified'"></td>
+                                <td data-ng-bind="member.Gender"></td>
+                                <td data-ng-bind="member.Age"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <button type="button" class="btn btn-primary pull-left" ng-click="exportMemebersToExcel()">Export To Excel</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+
     <!--We need to show the chart for admin-->
-    <div class="container" ng-app="myApp">
+    <div class="container" >
         <div class="row">
             <section id="reactive">
-                <div class="row ng-scope" ng-controller="exportMembersCtrl">
+                <div class="row ng-scope" >
                     <div class="col-lg-12 col-sm-12">
 
                         <div class="panel panel-default ng-isolate-scope">
@@ -168,7 +413,7 @@
                             </div>
                             <div class="panel-collapse " collapse="isAdvaceSearch" style="height: auto;">
                                 <div class="panel-body">
-                                    <div class="row">
+                                    @*<div class="row">
                                         <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
                                             <select class="form-control">
                                                 <option value="">--Select Member--</option>
@@ -212,7 +457,7 @@
                                         </div>
 
 
-                                    </div>
+                                    </div>*@
 
                                 </div>
                             </div>
@@ -220,9 +465,9 @@
                     </div>
                     <div class="col-lg-12 col-sm-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Members</div>
+                            @*<div class="panel-heading">Members</div>*@
                             <div class="panel-body">
-                                <table class="table table-responsive table-condensed table-striped">
+                                @*<table class="table table-responsive table-condensed table-striped">
                                     <tbody>
                                         <tr>
                                             <th>#</th>
@@ -244,8 +489,8 @@
                                         </tr>
 
                                     </tbody>
-                                </table>
-                                <button type="button" class="btn btn-primary pull-left" ng-click="exportMemebersToExcel()">Export To Excel</button>
+                                </table>*@
+                                @*<button type="button" class="btn btn-primary pull-left" ng-click="exportMemebersToExcel()">Export To Excel</button>*@
                             </div>
                         </div>
                     </div>
@@ -254,6 +499,9 @@
         </div>
 
     </div>
+
+
+
     @*<script type="text/javascript" src="~/Scripts/ChartJs/Chart.min.js"></script>*@
     <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
     @*<script type="text/javascript" src="~/Scripts/ChartJs/angular-chart.js"></script>
@@ -285,6 +533,8 @@
         });
     </script>
 
+
+
 </div>
 <script>
         function openNav() {
@@ -297,3 +547,27 @@
             document.getElementById("main-container-user").style.marginLeft = "0";
         }
 </script>
+
+@section scripts {
+<script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#FilterjobId1").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '358px');
+                $('.jobsearch-section .right-section').css('right', '0');
+                $('.Filterjob').css('display', 'none');
+                $('.switch').css('right', '10px');
+                $('.filter-overlay').css('display', 'block');
+
+            });
+            $("#FilterClose1").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '0');
+                $('.jobsearch-section .right-section').css('right', '-350px');
+                $('.Filterjob').css('display', 'block');
+                $('.switch').css('right', '50px');
+                $('.filter-overlay').css('display', 'none');
+            });
+        });
+
+</script>
+}
