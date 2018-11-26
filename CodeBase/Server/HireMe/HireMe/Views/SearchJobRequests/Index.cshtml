@@ -688,11 +688,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="right">
-                                                    <h1>{{jr.Candidate.Gender == 1 ? "Man" : "Woman"}}<span>{{jr.Candidate.StaffType == 1 ? "(AGENCY)" : "(INDIVIDUAL)"}}</span></h1>
-                                                    <h2 class="name"><span>{{jr.Candidate.FirstName + ' ' + jr.Candidate.LastName}}</span><span>, {{jr.Candidate.ContactNo}}</span></h2>
+                                                    <h1 data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"><span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span></h1>
+                                                    <h2 class="name"><span data-ng-bind="jr.Candidate.FirstName + ' ' + jr.Candidate.LastName"></span>, <span data-ng-bind="jr.Candidate.ContactNo"></span></h2>
                                                     <h2 class="location"><span data-ng-bind="jr.Job.JobName"></span></h2>
-                                                    <h3><span class="age"><span>(</span>{{jr.Candidate.Age}} Yrs)</span><span class="experience">Exp: {{jr.Candidate.ExperienceInYears}} Yrs</span></h3>
-                                                    <p class="location"><span>{{jr.Candidate.Country}},</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                    <h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>
+                                                    <p class="location"><span data-ng-bind="jr.Candidate.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
                                                     <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
                                                     <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility}}</span></div>
                                                 </div>
@@ -706,7 +706,7 @@
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </div>s
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tab-1-2">

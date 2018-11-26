@@ -7,6 +7,22 @@ namespace HireMe.Migrations
     {
         public override void Up()
         {
+            CreateTable(
+                "dbo.JobRequestNotes",
+                c => new
+                    {
+                        JobRequestNoteId = c.Int(nullable: false, identity: true),
+                        JobRequestId = c.Int(nullable: false),
+                        Note = c.String(unicode: false),
+                        StarRating = c.Int(nullable: false),
+                        EmployerId = c.Int(nullable: false),
+                        CreatedBy = c.String(unicode: false),
+                        CreatedDate = c.String(unicode: false),
+                    })
+                .PrimaryKey(t => t.JobRequestNoteId)
+                .ForeignKey("dbo.JobRequests", t => t.JobRequestId, cascadeDelete: true)
+                .Index(t => t.JobRequestId);
+            
             AddColumn("dbo.Agencies", "Country", c => c.String(unicode: false));
             AddColumn("dbo.Agencies", "City", c => c.String(unicode: false));
             AddColumn("dbo.Agencies", "District", c => c.String(unicode: false));
@@ -59,10 +75,12 @@ namespace HireMe.Migrations
             DropForeignKey("dbo.Candidates", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.Candidates", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Candidates", "AspNetUserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.JobRequestNotes", "JobRequestId", "dbo.JobRequests");
             DropForeignKey("dbo.Employers", "DistrictId", "dbo.Districts");
             DropForeignKey("dbo.Employers", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.Employers", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Employers", "AspNetUserId", "dbo.AspNetUsers");
+            DropIndex("dbo.JobRequestNotes", new[] { "JobRequestId" });
             DropIndex("dbo.Employers", new[] { "DistrictId" });
             DropIndex("dbo.Employers", new[] { "CityId" });
             DropIndex("dbo.Employers", new[] { "CountryId" });
@@ -93,6 +111,7 @@ namespace HireMe.Migrations
             DropColumn("dbo.Agencies", "District");
             DropColumn("dbo.Agencies", "City");
             DropColumn("dbo.Agencies", "Country");
+            DropTable("dbo.JobRequestNotes");
         }
     }
 }

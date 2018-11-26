@@ -132,6 +132,24 @@ namespace HireMe.Controllers
             return RedirectToAction("Index");
         }
 
+
+        [HttpPost]
+        public ActionResult SaveJobRequestNote(JobRequestNote jobRequestNote)
+        {
+            var userId = User.Identity.GetUserId();
+            // get the employer
+            var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
+            jobRequestNote.EmployerId = employer.EmployerId;
+            var jobRequest = db.JobRequests
+                .Include(p => p.JobRequestNotes)
+                .FirstOrDefault(p => p.JobRequestId == jobRequestNote.JobRequestId);
+            if (jobRequest == null)
+                return HttpNotFound();
+            jobRequest.JobRequestNotes.Add(jobRequestNote);
+            db.SaveChanges();
+            return Json("Note added successfully.", JsonRequestBehavior.AllowGet);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

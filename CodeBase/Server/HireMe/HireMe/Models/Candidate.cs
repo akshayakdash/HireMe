@@ -313,6 +313,7 @@ namespace HireMe.Models
         public List<JobRequestJobTask> JobRequestJobTasks { get; set; }
         [NotMapped]
         public List<JobTask> MasterJobTasks { get; set; }
+        public List<JobRequestNote> JobRequestNotes { get; set; }
     }
 
     public class JobRequestJobTask
@@ -452,6 +453,17 @@ namespace HireMe.Models
     //    public List<ApplicationUserSecurityQuestionAnswer> UserSecurityQuestionAnswers { get; set; }
     //}
 
+
+    public class JobRequestNote
+    {
+        public int JobRequestNoteId { get; set; }
+        public int JobRequestId { get; set; }
+        public string Note { get; set; }
+        public int StarRating { get; set; }
+        public int EmployerId { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreatedDate { get; set; }
+    }
     public enum Gender
     {
         Male = 0,

@@ -173,6 +173,20 @@ namespace HireMe.Controllers
             }
             return responseDetails;
         }
+
+        [Route("api/JobTekApi/SaveJobRequestNote")]
+        [HttpPost]
+        public HttpResponseMessage SaveJobRequestNote(JobRequestNote jobRequestNote)
+        {
+            var jobRequest = db.JobRequests
+                .Include(p => p.JobRequestNotes)
+                .FirstOrDefault(p => p.JobRequestId == jobRequestNote.JobRequestId);
+            if (jobRequest == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            jobRequest.JobRequestNotes.Add(jobRequestNote);
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.Created, "Note added successfully.");
+        }
     }
 
     public class JobTekMember
