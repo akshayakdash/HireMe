@@ -81,8 +81,8 @@
         </div>*@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                .Select(c => c.Value);
+                                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                    .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -222,7 +222,10 @@
 
 
                                                             <div class="profileitems searchprofile-section">
-                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                @if (item.VerifiedByAdmin)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
@@ -247,10 +250,10 @@
                                                                     <ul class="social-icons">
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        <li>@*<a href="" title="Favorite" id="set_favourite_job_req_link"><i class="fa fa-heart-o" aria-hidden="true"></i></a>*@</li>
                                                                         @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -263,9 +266,9 @@
                                                 </div>
                                                 @*<div style="    text-align: center;">
 
-                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>*@
+                                                    </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +282,10 @@
                                                     {
                                                         <div class="col-md-4 col-sm-6">
                                                             <div class="profileitems searchprofile-section">
-                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                @if (item.VerifiedByAdmin)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
@@ -304,10 +310,10 @@
                                                                     <ul class="social-icons">
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -317,9 +323,9 @@
                                                 </div>
                                                 @*<div style="    text-align: center;">
 
-                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>*@
+                                                    </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -333,7 +339,10 @@
                                                     {
                                                         <div class="col-md-4 col-sm-6">
                                                             <div class="profileitems searchprofile-section">
-                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                @if (item.VerifiedByAdmin)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
@@ -358,10 +367,10 @@
                                                                     <ul class="social-icons">
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -371,9 +380,9 @@
                                                 </div>
                                                 @*<div style="    text-align: center;">
 
-                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>*@
+                                                    </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -387,7 +396,10 @@
                                                     {
                                                         <div class="col-md-4 col-sm-6">
                                                             <div class="profileitems searchprofile-section">
-                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                @if (item.VerifiedByAdmin)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
@@ -412,10 +424,10 @@
                                                                     <ul class="social-icons">
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -425,9 +437,9 @@
                                                 </div>
                                                 @*<div style="    text-align: center;">
 
-                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>*@
+                                                    </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -441,7 +453,10 @@
                                                     {
                                                         <div class="col-md-4 col-sm-6">
                                                             <div class="profileitems searchprofile-section">
-                                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                @if (item.VerifiedByAdmin)
+                                                                {
+                                                                    <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                                }
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
@@ -466,10 +481,10 @@
                                                                     <ul class="social-icons">
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -479,9 +494,9 @@
                                                 </div>
                                                 @*<div style="    text-align: center;">
 
-                                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+                                                        <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>*@
+                                                    </div>*@
                                             </div>
                                         </div>
                                     </div>

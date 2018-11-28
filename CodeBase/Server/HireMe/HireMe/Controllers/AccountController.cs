@@ -78,7 +78,7 @@ namespace HireMe.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -196,7 +196,9 @@ namespace HireMe.Controllers
 
             if (ModelState.IsValid)
             {
-
+                var countries = context.Countries.ToList();
+                var cities = context.Cities.ToList();
+                var districts = context.Districts.ToList();
                 // now check if it has file associated with it
 
                 #region ProfileImageUpload
@@ -250,7 +252,7 @@ namespace HireMe.Controllers
                 }
                 #endregion
                 var securityQuestionAnswer = new ApplicationUserSecurityQuestionAnswer { SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer };
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
                 user.SecurityQuestionAnswers = new System.Collections.Generic.List<ApplicationUserSecurityQuestionAnswer> { securityQuestionAnswer };
 
                 if (model.UserRoles.Contains("Agency"))
@@ -261,12 +263,17 @@ namespace HireMe.Controllers
                 else if (model.UserRoles.Contains("Candidate"))
                 {
                     var candidate = new Candidate { FirstName = model.FirstName, LastName = model.LastName, Address= model.Address, EmailId = model.Email, ContactNo = model.PhoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath };
+                    candidate.Country = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId).CountryName;
+                    candidate.City = cities.FirstOrDefault(p => p.CityId == candidate.CityId).CityName;
+                    candidate.District = districts.FirstOrDefault(p => p.DistrictId == candidate.DistrictId).DistrictName;
                     user.Candidates = new List<Candidate> { candidate };
                 }
                 else if (model.UserRoles.Contains("Employer"))
                 {
                     var employer = new Employer { FirstName = model.FirstName, LastName = model.LastName, Gender = Gender.Male, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath };
-
+                    employer.Country = countries.FirstOrDefault(p => p.CountryId == employer.CountryId).CountryName;
+                    employer.City = cities.FirstOrDefault(p => p.CityId == employer.CityId).CityName;
+                    employer.District = districts.FirstOrDefault(p => p.DistrictId == employer.DistrictId).DistrictName;
                     // need to add countryid, cityId and districtId to Employer entity
                     user.Employers = new List<Employer> { employer };
                 }
@@ -296,7 +303,13 @@ namespace HireMe.Controllers
                     //Ends Here     
                     return RedirectToAction("Login", "Account");
                 }
+                var country = context.Countries.ToList();
+                var city = context.Cities.ToList();
+                var district = context.Districts.ToList();
 
+                ViewBag.Country = country;
+                ViewBag.City = city;
+                ViewBag.District = district;
                 AddErrors(result);
             }
             ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))

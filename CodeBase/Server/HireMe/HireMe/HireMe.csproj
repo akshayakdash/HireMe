@@ -258,6 +258,22 @@
     <Compile Include="Migrations\201811251717371_City_Country_String_Added.Designer.cs">
       <DependentUpon>201811251717371_City_Country_String_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811261805005_City_Country_String_Added1.cs" />
+    <Compile Include="Migrations\201811261805005_City_Country_String_Added1.Designer.cs">
+      <DependentUpon>201811261805005_City_Country_String_Added1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811271811491_Contact_Option_Consent_Field_Added.cs" />
+    <Compile Include="Migrations\201811271811491_Contact_Option_Consent_Field_Added.Designer.cs">
+      <DependentUpon>201811271811491_Contact_Option_Consent_Field_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811271945280_Country_City_And_District_Added_To_Application_User.cs" />
+    <Compile Include="Migrations\201811271945280_Country_City_And_District_Added_To_Application_User.Designer.cs">
+      <DependentUpon>201811271945280_Country_City_And_District_Added_To_Application_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811272018398_Address_Field_Added_To_Employer.cs" />
+    <Compile Include="Migrations\201811272018398_Address_Field_Added_To_Employer.Designer.cs">
+      <DependentUpon>201811272018398_Address_Field_Added_To_Employer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -513,6 +529,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811251717371_City_Country_String_Added.resx">
       <DependentUpon>201811251717371_City_Country_String_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811261805005_City_Country_String_Added1.resx">
+      <DependentUpon>201811261805005_City_Country_String_Added1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811271811491_Contact_Option_Consent_Field_Added.resx">
+      <DependentUpon>201811271811491_Contact_Option_Consent_Field_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811271945280_Country_City_And_District_Added_To_Application_User.resx">
+      <DependentUpon>201811271945280_Country_City_And_District_Added_To_Application_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811272018398_Address_Field_Added_To_Employer.resx">
+      <DependentUpon>201811272018398_Address_Field_Added_To_Employer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

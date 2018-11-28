@@ -6,6 +6,24 @@
     }
 </style>
 
+<script type="text/javascript">
+    function validateJobRequest(jobRequestId) {
+        if (jobRequestId) {
+            $.ajax
+                ({
+                    url: '/Admin/ValidateJobRequest?jobRequestId=' + jobRequestId,
+                    //data: { "id": jobRequestId },
+                    type: 'get',
+                    success: function (result) {
+                        alert("Job Request validated successfully.");
+                        window.history.back();
+                    }
+                });
+        }
+    }
+</script>
+
+
 @functions
 {
     private int count = 0;
@@ -31,7 +49,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                         @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
                     @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
                     @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
-                    <img src="~/assets/images/home-icon.png"/>
+                    <img src="~/assets/images/home-icon.png" />
                     @(item.JobTaskName)
 
                     <div class="toggle-group">
@@ -189,8 +207,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                                                        .Select(c => c.Value);
+                                                                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                                .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -536,7 +554,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                     </div>
                                                 </div>
                                             </div>
-                                           
+
 
                                         </div>
                                         <div class="row">
@@ -551,6 +569,10 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 </div>
                                             </div>
                                         </div>
+                                        @if (role == "Admin")
+                                        {
+                                            <div class="row"><button class="btn btn-default" onclick="validateJobRequest(@Model.JobRequestId)">Validate</button></div>
+                                        }
                                     </div>
                                 </div>
 
@@ -589,6 +611,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
     </div>
 
     <!---- Tab Section end-->
+
+
 
 </div>
 

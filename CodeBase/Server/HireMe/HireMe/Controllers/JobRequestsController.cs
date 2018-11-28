@@ -150,6 +150,7 @@ namespace HireMe.Controllers
             return Json("Note added successfully.", JsonRequestBehavior.AllowGet);
         }
 
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

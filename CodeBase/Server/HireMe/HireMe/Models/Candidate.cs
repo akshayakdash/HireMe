@@ -91,6 +91,11 @@ namespace HireMe.Models
         public List<JobRequest> JobRequests { get; set; }
 
         public List<JobOffer> FavouriteJobOffers { get; set; }
+
+        // This field is added later to check the consent of the user
+        // if contact option is blank then both email and phone no will be visible
+        public string ContactOption { get; set; } 
+
     }
 
 
@@ -192,6 +197,13 @@ namespace HireMe.Models
         public string IdProofDocDesc { get; set; }
 
          public string ProfilePicUrl { get; set; }
+
+        public string EmailId { get; set; }
+        public string ContactNo { get; set; }
+
+        public string ContactOption { get; set; }
+
+        public string Address { get; set; }
     }
 
     // Master tables
@@ -314,6 +326,10 @@ namespace HireMe.Models
         [NotMapped]
         public List<JobTask> MasterJobTasks { get; set; }
         public List<JobRequestNote> JobRequestNotes { get; set; }
+
+
+        public bool VerifiedByAdmin { get; set; }
+        public DateTime? VerificationDate { get; set; }
     }
 
     public class JobRequestJobTask
@@ -394,6 +410,13 @@ namespace HireMe.Models
         public string AdditionalDescription { get; set; }
 
         public List<JobOfferJobTask> JobOfferJobTasks { get; set; }
+
+
+        public bool VerifiedByAdmin { get; set; }
+        public DateTime? VerificationDate { get; set; }
+
+        [NotMapped]
+        public List<JobTask> MasterJobTasks { get; set; }
     }
 
     public class JobOfferJobTask
