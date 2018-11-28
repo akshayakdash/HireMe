@@ -193,12 +193,12 @@ namespace HireMe.Controllers
 
             //// If we got this far, something failed, redisplay form
             //return View(model);
-
+            var countries = context.Countries.ToList();
+            var cities = context.Cities.ToList();
+            var districts = context.Districts.ToList();
             if (ModelState.IsValid)
             {
-                var countries = context.Countries.ToList();
-                var cities = context.Cities.ToList();
-                var districts = context.Districts.ToList();
+              
                 // now check if it has file associated with it
 
                 #region ProfileImageUpload
@@ -240,7 +240,7 @@ namespace HireMe.Controllers
                 string idProofImagePath = string.Empty;
                 if (model.id_proof != null && model.id_proof.ContentLength > 0)
                 {
-                   
+
 
                     string theFileName = Path.GetFileNameWithoutExtension(model.id_proof.FileName);
                     byte[] thePictureAsBytes = new byte[model.id_proof.ContentLength];
@@ -262,18 +262,30 @@ namespace HireMe.Controllers
                 }
                 else if (model.UserRoles.Contains("Candidate"))
                 {
-                    var candidate = new Candidate { FirstName = model.FirstName, LastName = model.LastName, Address= model.Address, EmailId = model.Email, ContactNo = model.PhoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath };
-                    candidate.Country = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId).CountryName;
-                    candidate.City = cities.FirstOrDefault(p => p.CityId == candidate.CityId).CityName;
-                    candidate.District = districts.FirstOrDefault(p => p.DistrictId == candidate.DistrictId).DistrictName;
+                    var candidate = new Candidate { FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = model.PhoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath };
+                    var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
+                    if (cntry != null)
+                        candidate.Country = cntry.CountryName;
+                    var cty = cities.FirstOrDefault(p => p.CityId == candidate.CityId);
+                    if (cty != null)
+                        candidate.City = cities.FirstOrDefault(p => p.CityId == candidate.CityId).CityName;
+                    var dstrct = districts.FirstOrDefault(p => p.DistrictId == candidate.DistrictId);
+                    if (dstrct != null)
+                        candidate.District = districts.FirstOrDefault(p => p.DistrictId == candidate.DistrictId).DistrictName;
                     user.Candidates = new List<Candidate> { candidate };
                 }
                 else if (model.UserRoles.Contains("Employer"))
                 {
                     var employer = new Employer { FirstName = model.FirstName, LastName = model.LastName, Gender = Gender.Male, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath };
-                    employer.Country = countries.FirstOrDefault(p => p.CountryId == employer.CountryId).CountryName;
-                    employer.City = cities.FirstOrDefault(p => p.CityId == employer.CityId).CityName;
-                    employer.District = districts.FirstOrDefault(p => p.DistrictId == employer.DistrictId).DistrictName;
+                    var cntry = countries.FirstOrDefault(p => p.CountryId == employer.CountryId);
+                    if (cntry != null)
+                        employer.Country = cntry.CountryName;
+                    var cty = cities.FirstOrDefault(p => p.CityId == employer.CityId);
+                    if (cty != null)
+                        employer.City = cities.FirstOrDefault(p => p.CityId == employer.CityId).CityName;
+                    var dstrct = districts.FirstOrDefault(p => p.DistrictId == employer.DistrictId);
+                    if (dstrct != null)
+                        employer.District = districts.FirstOrDefault(p => p.DistrictId == employer.DistrictId).DistrictName;
                     // need to add countryid, cityId and districtId to Employer entity
                     user.Employers = new List<Employer> { employer };
                 }
@@ -303,13 +315,13 @@ namespace HireMe.Controllers
                     //Ends Here     
                     return RedirectToAction("Login", "Account");
                 }
-                var country = context.Countries.ToList();
-                var city = context.Cities.ToList();
-                var district = context.Districts.ToList();
+                //var country = context.Countries.ToList();
+                //var city = context.Cities.ToList();
+                //var district = context.Districts.ToList();
 
-                ViewBag.Country = country;
-                ViewBag.City = city;
-                ViewBag.District = district;
+                ViewBag.Country = countries;
+                ViewBag.City = cities;
+                ViewBag.District = districts;
                 AddErrors(result);
             }
             ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
@@ -317,6 +329,9 @@ namespace HireMe.Controllers
             // If we got this far, something failed, redisplay form   
             ViewBag.SelectedRole = model.UserRoles;
             ViewBag.SecurityQuestions = context.SecurityQuestions.ToList().Take(3);
+            ViewBag.Country = countries;
+            ViewBag.City = cities;
+            ViewBag.District = districts;
             return View(model);
         }
 
