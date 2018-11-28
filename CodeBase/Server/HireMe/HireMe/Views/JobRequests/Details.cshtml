@@ -21,16 +21,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
     var item = jobTasks.ElementAt(i);
     if (Model.JobRequestJobTasks.Any(p => p.JobTaskId == item.JobTaskId))
     {
-            <div class="checkbox" style="margin-left:25px;">
+            @*<div class="checkbox" style="margin-left:25px;">
                 <label>
-
-                    @*@Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
-                        @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
-                        @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
-                        @item.JobTaskName
-                        @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
-                    @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
-                    @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
                     <img src="~/assets/images/home-icon.png"/>
                     @(item.JobTaskName)
 
@@ -63,9 +55,36 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     @ShowTaskTree(item.SubTasks)
 
                 }
-            </div>
-                            }
+            </div>*@
+
+            <div class="row" style="margin-left: 5px;">
+                <div class="col-lg-1 col-md-1">
+                    <img src="~/assets/images/home-icon.png" />
+                </div>
+                <div class="col-lg-11 col-md-11">
+                    <div>
+                        @(item.JobTaskName)
+                    </div>
+                    <div>
+                        @{
+                            var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
                         }
+                        @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                        {
+                            <span>@selectedTask.TaskResponseAdditionalDescription</span>
+                        }
+                    </div>
+                    
+                </div>
+                @if (item.SubTasks.Any())
+            {
+
+                    @ShowTaskTree(item.SubTasks)
+
+                }
+            </div>
+    }
+}
 }
 
 <script>
@@ -421,13 +440,18 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 <div class="filtersection-panel">
                                                     <div class="filtersection-header">
                                                         Read
-                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                        @*<div class="switch-area-inner switch-area-inner-cus">
                                                             @(Model.Candidate.CanRead ? "Yes" : "No")
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                     <div class="filtersection-body">
-                                                        <div class="icon-section">
+                                                        @*<div class="icon-section">
                                                             <img src="~/assets/images/eyeglass1.png" alt="">
+                                                        </div>*@
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.Candidate.CanRead ? "Yes" : "No")
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -436,13 +460,18 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 <div class="filtersection-panel">
                                                     <div class="filtersection-header">
                                                         Write
-                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                        @*<div class="switch-area-inner switch-area-inner-cus">
                                                             @(Model.Candidate.CanWrite ? "Yes" : "No")
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                     <div class="filtersection-body">
-                                                        <div class="icon-section">
+                                                        @*<div class="icon-section">
                                                             <img src="~/assets/images/write1.png" alt="">
+                                                        </div>*@
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.Candidate.CanWrite ? "Yes" : "No")
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -453,13 +482,18 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 <div class="filtersection-panel">
                                                     <div class="filtersection-header">
                                                         Sleep on Site
-                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                        @*<div class="switch-area-inner switch-area-inner-cus">
                                                             @(Model.Candidate.SleepOnSite ? "Yes" : "No")
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                     <div class="filtersection-body">
-                                                        <div class="icon-section">
+                                                        @*<div class="icon-section">
                                                             <img src="~/assets/images/sleep1.png" alt="">
+                                                        </div>*@
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.Candidate.SleepOnSite ? "Yes" : "No")
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
