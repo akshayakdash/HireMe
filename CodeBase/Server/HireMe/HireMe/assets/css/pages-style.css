@@ -5243,3 +5243,163 @@ position: relative;
 .radio + .radio {
     /*margin-left: 10px;*/
 }
+
+
+
+
+.servicebox-section {
+    padding: 50px 0 0 0;
+}
+
+.servicebox-section p.text-center {
+    font-size: 16px;
+    line-height: 30px;
+    margin-bottom: 60px;
+}
+.servicebox-wrapper .team-contact-info p {
+    margin: 0 0 5px;;
+    font-size: 14px;
+    line-height:18px;
+    padding:5px;
+
+}
+
+.servicebox-wrapper .team-column {
+    /*width:320px;
+    height:320px;*/
+    float:left;
+    margin-right:15px;
+}
+
+.servicebox-wrapper figure {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+    .servicebox-wrapper figure img {
+        -webkit-transition: -webkit-transform 0.8s;
+        -moz-transition: -moz-transform 0.8s;
+        transition: transform 0.8s;
+        width: auto;
+        height: auto;
+        border-radius: 50%;
+        border: rgba(202, 202, 202, 0.3) 4px solid;
+        transition: all 0.4s ease-in-out 0s;
+    }
+
+.servicebox-wrapper .team-content-holder {
+    height: 100%;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    padding: 5px;
+    color: #333;
+    text-align: center;
+    overflow: hidden;
+    -webkit-transition: height 0.4s;
+    -moz-transition: height 0.4s;
+    transition: height 0.4s;
+    /*border: #e3f2ff 1px solid;*/
+    border-top: 0;
+}
+
+.servicebox-wrapper .team-content-holder::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 0px;
+    background-color: rgba(39, 125, 199, 0.8);
+    -webkit-transition: height 0.8s;
+    -moz-transition: height 0.8s;
+    transition: height 0.8s;
+    left: 0;
+}
+
+.servicebox-wrapper .team-content-holder a {
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.servicebox-wrapper .team-contact-info {
+    opacity: 0;
+    -webkit-transform: translateY(100%);
+    -moz-transform: translateY(100%);
+    -ms-transform: translateY(100%);
+    transform: translateY(100%);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: -webkit-transform 0.8s, opacity 0.1s;
+    -moz-transition: -moz-transform 0.8s, opacity 0.1s;
+    transition: transform 0.8s, opacity 0.1s;
+}
+
+.servicebox-wrapper .social-icons li {
+    opacity: 0;
+    -moz-transform: translateY(40px);
+    -webkit-transform: translateY(40px);
+    -o-transform: translateY(40px);
+    -ms-transform: translateY(40px);
+    transform: translateY(40px);
+    -webkit-transition: -webkit-transform 0.8s, opacity 0.1s;
+    -moz-transition: -moz-transform 0.8s, opacity 0.1s;
+    transition: transform 0.8s, opacity 0.1s;
+}
+
+.servicebox-wrapper .owl-carousel .owl-item img {
+    display: inherit;
+}
+
+.servicebox-wrapper figure:hover img {
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+    border-radius:0;
+}
+
+.servicebox-wrapper figure:hover .team-content-holder {
+    height: 100%;
+    color: #fff;
+}
+
+.servicebox-wrapper figure:hover .team-content-holder .personal-info a {
+    display: none;
+}
+
+.servicebox-wrapper figure:hover .team-content-holder::before {
+    height: 100%;
+    -webkit-transition: height 0.6s;
+    -moz-transition: height 0.6s;
+    transition: height 0.6s;
+}
+
+.servicebox-wrapper figure:hover .team-content-holder a {
+    color: #fff;
+}
+
+.servicebox-wrapper figure:hover .team-content-holder .personal-info h3 {
+    color: #fff;
+}
+
+.servicebox-wrapper figure:hover .team-contact-info {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -moz-transform: translateY(0px);
+    -ms-transform: translateY(0px);
+    transform: translateY(0px);
+    -webkit-transition: -webkit-transform 0.6s, opacity 0.1s;
+    -moz-transition: -moz-transform 0.6s, opacity 0.1s;
+    transition: transform 0.6s, opacity 0.1s;
+}
+.grid-holder h3{
+    font-size: 16px;
+    text-align: center;
+    /*text-transform: uppercase;*/
+    font-weight:600;
+}
