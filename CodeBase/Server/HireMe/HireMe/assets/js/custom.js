@@ -1038,7 +1038,7 @@
                 autoplayTimeout: 5000,
                 autoplayHoverPause: true,
                 smartSpeed: 1200,
-                loop: false,
+                loop: true,
                 nav: true,
                 navText: ["Prev", "Next"],
                 dots: true,
@@ -1050,10 +1050,10 @@
                         items: 1
                     },
                     480:{
-                        items: 2
+                        items: 3
                     },
                     992:{
-                        items: 3
+                        items: 5
                     }
                 }
             });

@@ -136,6 +136,33 @@
                         </a>
                     </div>
                 </li>
+                <li data-transition="fade">
+                    <img src="~/assets/images/bg-slide-6.jpg" alt="">
+                    <div class="tp-caption title-xl"
+                         data-x="300"
+                         data-y="center"
+                         data-voffset="0"
+                         data-start="1300"
+                         data-speed="300"
+                         data-transform_in="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;"
+                         data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
+                        <span class="text-gradient">Personal Home Management Platform</span>
+                    </div>
+                    <div class="tp-caption"
+                         data-x="750"
+                         data-y="center"
+                         data-voffset="100"
+                         data-start="1450"
+                         data-speed="300"
+                         style="left:100%;"
+                         data-transform_in="o:0;sX:0.75;sY:0.75;s:250;e:Power2.easeInOut;"
+                         data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
+                        @*<a class="btn btn-style-1 waves" href="http://download.blender.org/peach/bigbuckbunny_movies/BigBuckBunny_320x180.mp4" data-fancybox data-small-btn="false"><i style="font-size:28px;" class="bizhub-icon-play-button"></i> <span>Play Video</span></a>*@
+                        <a class="play-but" data-fancybox data-small-btn="false" data-width="640" data-height="360" href="https://youtu.be/3PyO0iOHwH8">
+                            <i style="font-size:28px;" class="bizhub-icon-play-button"></i>
+                        </a>
+                    </div>
+                </li>
             </ul>
         </div><!-- rev_slider -->
     </div><!-- rev_slider_wrapper -->
@@ -160,7 +187,9 @@
                     <nav>
 
                         <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-
+                        <div class="mobile-app">
+                            <a class="btn btn-style-4 waves" href="#"><i class="fa fa-download"></i> Mobile App</a>
+                        </div>
                         <ul class="menu clearfix" id="menu">
                             @*
                             <li class="active"><a href="index.html">HOME</a></li>*@
@@ -202,7 +231,7 @@
     <!-- PAGE CONTENT -->
 
 
-    <div id="page-content" style="padding:0 0 50px 0;">
+    <div id="page-content" style="padding:0 0 30px 0;">
         <div class="hr mt-0 ml-3 mr-3 ml-xl-5 mr-xl-5"></div>
         <div class="container">
             <div class="row">
@@ -223,26 +252,7 @@
                 <div class="container">
                     <div class="team-wrapper  wow fadeInUp">
                         <div class="row">
-                            <div class="col-sm-12 col-lg-4">
-                                <div class="team-column">
-                                    <figure>
-                                        <div class="grid-holder">
-                                            <a href="#"><img src="~/assets/images/candidate.jpg" alt=""></a>
-                                            <div class="team-content-holder">
-                                                <div class="personal-info">
-                                                    <h3>Candidat</h3>
-                                                    <a class="btn btn-style-1 waves" href="#">Start Here</a>
-                                                </div>
-                                                <!-- .awsm-personal-info -->
-                                                <div class="team-contact-info">
-                                                    <p>You are looking for a home job to propose a qualified service for long term service (nanny, Guardian…) or a short term  (School support, ceremony organization…)</p>
-                                                    @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Candidate" }, new { @class = "btn btn-style-1 waves" })
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </figure>
-                                </div>
-                            </div>
+                            
                             <div class="col-sm-12 col-lg-4">
                                 <div class="team-column">
                                     <figure>
@@ -265,6 +275,27 @@
                                 </div>
                             </div>
                             
+                            <div class="col-sm-12 col-lg-4">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <a href="#"><img src="~/assets/images/candidate.jpg" alt=""></a>
+                                            <div class="team-content-holder">
+                                                <div class="personal-info">
+                                                    <h3>Candidat</h3>
+                                                    <a class="btn btn-style-1 waves" href="#">Start Here</a>
+                                                </div>
+                                                <!-- .awsm-personal-info -->
+                                                <div class="team-contact-info">
+                                                    <p>You are looking for a home job to propose a qualified service for long term service (nanny, Guardian…) or a short term  (School support, ceremony organization…)</p>
+                                                    @Html.ActionLink("Start Here", "Register", "Account", new { userRole = "Candidate" }, new { @class = "btn btn-style-1 waves" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+
                             <div class="col-sm-12 col-lg-4">
                                 <div class="team-column">
                                     <figure>
@@ -292,7 +323,6 @@
         </section>
     </div>
     <div id="page-content" style="padding-bottom:0;">
-       
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -358,4 +388,283 @@
             </div><!-- row -->
         </div><!-- container -->
     </div><!-- PAGE CONTENT -->
+
+    <div id="page-content" style="padding-bottom:0;" class="wow fadeInUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="headline text-center wow fadeInDown">
+                        <h2>Long Term Services</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel blog-articles-slider">
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/cook1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    <p>
+                                                        Professionnal Cook to prepare dishes for you from around the world (Africain / European..)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <h3>Cook</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/nanny1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    <p>
+                                                        Professionnal nannies to take care of your children
+                                                    </p>
+                                                    <p>or maid to mantain you home clean</p>
+                                                </div>
+                                            </div>
+                                            <h3>Nanny</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/guardian1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    <p>
+                                                        Guardian (to protect your home)
+                                                    </p>
+                                                    <p>
+                                                        or Bodyguard (to escort and protect you on daily basis)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <h3>Guardian</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/music1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    <p>
+                                                        Professionnal trainers to help you or your children to learn how to play various music instrument
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <h3>Music courses</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/schoolsupport.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    @*<p>
+                                                        Professionnal Cook to prepare dishes for you from around the world (Africain / European..)
+                                                    </p>*@
+                                                </div>
+                                            </div>
+                                            <h3>School support</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-content" style="padding-bottom:0;" class="wow fadeInUp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="headline text-center wow fadeInDown">
+                        <h2>Short Term Services</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel blog-articles-slider">
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/esthetician.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    @*<p>
+                                                        Professionnal Cook to prepare dishes for you from around the world (Africain / European..)
+                                                    </p>*@
+                                                </div>
+                                            </div>
+                                            <h3>Esthetician</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/hairdressing.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    @*<p>
+                                                        Professionnal nannies to take care of your children
+                                                    </p>
+                                                    <p>or maid to mantain you home clean</p>*@
+                                                </div>
+                                            </div>
+                                            <h3>Hairdressing</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/electrician1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    @*<p>
+                                                        Guardian (to protect your home)
+                                                    </p>
+                                                    <p>
+                                                        or Bodyguard (to escort and protect you on daily basis)
+                                                    </p>*@
+                                                </div>
+                                            </div>
+                                            <h3>Electrician</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/plumber1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    @*<p>
+                                                        Professionnal trainers to help you or your children to learn how to play various music instrument
+                                                    </p>*@
+                                                </div>
+                                            </div>
+                                            <h3>Plumber</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/Ceremony1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    @*<p>
+                                                            Professionnal Cook to prepare dishes for you from around the world (Africain / European..)
+                                                        </p>*@
+                                                </div>
+                                            </div>
+                                            <h3>Ceremony</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="servicebox-wrapper">
+                                <div class="team-column">
+                                    <figure>
+                                        <div class="grid-holder">
+                                            <div class="personal-info">
+                                                <img src="~/assets/images/portfolio/catering1.jpg" alt="">
+                                            </div>
+                                            <div class="team-content-holder">
+                                                <div class="team-contact-info">
+                                                    @*<p>
+                                                        Professionnal Cook to prepare dishes for you from around the world (Africain / European..)
+                                                    </p>*@
+                                                </div>
+                                            </div>
+                                            <h3>Home catering</h3>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
