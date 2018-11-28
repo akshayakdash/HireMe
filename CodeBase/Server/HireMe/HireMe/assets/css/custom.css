@@ -11239,3 +11239,26 @@ margin:0;
     font-size:25px;
     margin-bottom:20px;
 }
+.half-circle-image{
+
+}
+.half-circle-image img{
+    width: 100%;
+    border-radius: 0 0 0 100%;
+}
+.info-list{
+    list-style:none;
+    padding:0;
+}
+.info-list span{
+    float: left;
+    width: 50px;
+    margin-right: 20px;
+}
+.info-list span img{
+    width: 100%;
+}
+.info-list li{
+    float: left;
+    margin-bottom: 20px;
+}
