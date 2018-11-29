@@ -10046,7 +10046,9 @@ blockquote {
             line-height: initial;
             margin-bottom: 5px;
         }
-
+        .profileitems .right h1 img {
+                margin-right: 5px;
+            }
             .profileitems .right h1 span {
                 color: forestgreen;
             }

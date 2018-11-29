@@ -672,6 +672,19 @@
 	color: #252525;
 	-webkit-transition: all 0.25s;
 	transition: all 0.25s;
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.sf-with-ul {
+    max-width: 150px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+#header-sticky .sf-with-ul{
+    max-width:inherit;
 }
 
 .menu > li > a {
