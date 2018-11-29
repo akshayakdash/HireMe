@@ -12,6 +12,9 @@
         top: 0;
         position: fixed;
     }
+    #Address {
+    height:100%;
+    }
 </style>
 @model HireMe.Models.RegisterViewModel
 @using System.Linq
@@ -75,23 +78,9 @@
                                             </div>
 
 
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                </div>
-                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">Address</span>
-                                            </div>
+                                            
 
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                </div>
-
-
-                                                @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
-                                                <span class="input-lable">Country</span>
-                                            </div>
+                                           
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
@@ -116,6 +105,22 @@
                                                 @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
                                                 <span class="input-lable">District</span>
                                             </div>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                </div>
+
+
+                                                @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
+                                                <span class="input-lable">Country</span>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                </div>
+                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
+                                                <span class="input-lable">Address</span>
+                                            </div>
                                         </fieldset>
 
                                     </div>
@@ -132,13 +137,7 @@
                                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
                                                 <span class="input-lable">Email</span>
                                             </div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                </div>
-                                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">User name</span>
-                                            </div>
+                                            
 
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
@@ -226,12 +225,18 @@
                                         </div>
                                     }
                                     <div class="form-section">
-                                        <h6 class="text-uppercase">Passwords</h6>
+                                        <h6 class="text-uppercase">User Name & Password</h6>
 
                                         <fieldset>
 
                                             <div id="alert-area"></div>
-
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                                </div>
+                                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "" })
+                                                <span class="input-lable">User name</span>
+                                            </div>
                                             <div class="input-group mb-2">
                                                 <div class="input-group-prepend">
                                                     <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>

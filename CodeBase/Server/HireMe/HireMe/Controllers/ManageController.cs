@@ -15,9 +15,11 @@ namespace HireMe.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext context;
 
         public ManageController()
         {
+            context = new ApplicationDbContext();
         }
 
         public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -32,9 +34,9 @@ namespace HireMe.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -54,25 +56,169 @@ namespace HireMe.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
-                : "";
+            //ViewBag.StatusMessage =
+            //    message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
+            //    : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+            //    : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
+            //    : message == ManageMessageId.Error ? "An error has occurred."
+            //    : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
+            //    : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+            //    : "";
 
-            var userId = User.Identity.GetUserId();
-            var model = new IndexViewModel
+            //var userId = User.Identity.GetUserId();
+            //var model = new IndexViewModel
+            //{
+            //    HasPassword = HasPassword(),
+            //    PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+            //    TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+            //    Logins = await UserManager.GetLoginsAsync(userId),
+            //    BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            //};
+            //return View(model);
+
+            var user = context.Users.Find(User.Identity.GetUserId());
+
+
+            // get the role of the user
+            var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                            .Select(c => c.Value);
+            string role = roles.FirstOrDefault();
+
+            var registrationViewModel = new UpdateProfileViewModel
             {
-                HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                Email = user.Email,
+                Address = user.Address,
+                CityId = user.CityId,
+                CountryId = user.CountryId,
+                DistrictId = user.DistrictId
             };
-            return View(model);
+
+            if (role == "Candidate")
+            {
+                var candidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                registrationViewModel.ContactOption = candidate.ContactOption;
+            }
+            else if (role == "Employer")
+            {
+                var employer = context.Employers.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                registrationViewModel.ContactOption = employer.ContactOption;
+            }
+
+            var country = context.Countries.ToList();
+            var city = context.Cities.ToList();
+            var district = context.Districts.ToList();
+
+            ViewBag.Country = country;
+            ViewBag.City = city;
+            ViewBag.District = district;
+            ViewBag.ProfilePicUrl = user.ProfilePicUrl;
+            return View(registrationViewModel);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateProfile(UpdateProfileViewModel model)
+        {
+            // TODO : need to write the logic for updating the profile
+
+            if (ModelState.IsValid)
+            {
+                var user = context.Users.Find(User.Identity.GetUserId());
+
+                // get the role of the user
+                var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                .Select(c => c.Value);
+                string role = roles.FirstOrDefault();
+
+                //var registrationViewModel = new UpdateProfileViewModel
+                //{
+                //    FirstName = user.FirstName,
+                //    LastName = user.LastName,
+                //    PhoneNumber = user.PhoneNumber,
+                //    Email = user.Email,
+                //    Address = user.Address,
+                //    CityId = user.CityId,
+                //    CountryId = user.CountryId,
+                //    DistrictId = user.DistrictId
+                //};
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.PhoneNumber = model.PhoneNumber;
+                user.Email = model.Email;
+                user.Address = model.Address;
+                user.CityId = model.CityId;
+                user.CountryId = model.CountryId;
+                user.DistrictId = model.DistrictId;
+
+                context.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                var userId = User.Identity.GetUserId();
+                // now if role is candidate
+                if (role == "Candidate")
+                {
+                    var candidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
+                    if (candidate != null)
+                    {
+                        candidate.FirstName = model.FirstName;
+                        candidate.LastName = model.LastName;
+                        candidate.ContactOption = model.ContactOption;
+                        candidate.ContactNo = model.PhoneNumber;
+                        candidate.EmailId = model.Email;
+                        candidate.Address = model.Address;
+                        candidate.CountryId = model.CountryId;
+                        candidate.CityId = model.CityId;
+                        candidate.DistrictId = model.DistrictId;
+                        context.Entry(candidate).State = System.Data.Entity.EntityState.Modified;
+                    }
+
+                }
+                else if (role == "Employer")
+                {
+                    var employer = context.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
+                    if (employer != null)
+                    {
+                        employer.FirstName = model.FirstName;
+                        employer.LastName = model.LastName;
+                        employer.ContactOption = model.ContactOption;
+                        employer.ContactNo = model.PhoneNumber;
+                        employer.EmailId = model.Email;
+                        employer.Address = model.Address;
+                        employer.CountryId = model.CountryId;
+                        employer.CityId = model.CityId;
+                        employer.DistrictId = model.DistrictId;
+                        context.Entry(employer).State = System.Data.Entity.EntityState.Modified;
+                    }
+                }
+
+                context.SaveChanges();
+            }
+
+            var user1 = context.Users.Find(User.Identity.GetUserId());
+            var registrationViewModel = new UpdateProfileViewModel
+            {
+                FirstName = user1.FirstName,
+                LastName = user1.LastName,
+                PhoneNumber = user1.PhoneNumber,
+                Email = user1.Email,
+                Address = user1.Address,
+                CityId = user1.CityId,
+                CountryId = user1.CountryId,
+                DistrictId = user1.DistrictId
+            };
+
+            //var country = context.Countries.ToList();
+            //var city = context.Cities.ToList();
+            //var district = context.Districts.ToList();
+
+            //ViewBag.Country = country;
+            //ViewBag.City = city;
+            //ViewBag.District = district;
+            //ViewBag.ProfilePicUrl = user1.ProfilePicUrl;
+            return RedirectToAction("Index");
         }
 
         //
@@ -333,7 +479,7 @@ namespace HireMe.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +530,6 @@ namespace HireMe.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }

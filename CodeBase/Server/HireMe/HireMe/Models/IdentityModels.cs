@@ -29,6 +29,10 @@ namespace HireMe.Models
 
         public DateTime? ActiveUntil { get; set; }
 
+        public int? CountryId { get; set; }
+        public int? CityId { get; set; }
+        public int? DistrictId { get; set; }
+
         public List<ApplicationUserSecurityQuestionAnswer> SecurityQuestionAnswers { get; set; }
 
         public List<Candidate> Candidates { get; set; }
