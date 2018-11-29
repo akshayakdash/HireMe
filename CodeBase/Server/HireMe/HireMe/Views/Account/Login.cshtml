@@ -40,9 +40,9 @@
             </div><!-- headline -->
         </div>
     </div><!-- row -->
-    <div class="row">
+    <div class="row" >
         <div class="col-md-12 regd-form formreg">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "login" }))
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "loginForm" }))
             {
                 @Html.AntiForgeryToken()
                 <fieldset>
@@ -53,20 +53,25 @@
                                 <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
                             </div>
                             @*<input type="text" class="form-control">
-                            <span class="input-lable">E-mail address</span>*@
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @type = "email", @placeholder = "E-mail address" })
-                            <span class="input-lable">E-mail address</span>
+                                <span class="input-lable">E-mail address</span>*@
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User Name", @name = "userName",  @required="true"  })
+                            <span class="input-lable">User Name</span>
+                            
                             @*@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
                         </div>
-
+                        <div class="row" style="padding-left:17px;">
+                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger  " })
+                        </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
                             </div>
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @name = "password",  @required = "true" })
                             <span class="input-lable">Password</span>
                         </div>
-
+                        <div class="row" style="padding-left:17px;">
+                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger  " })
+                        </div>
                         <div class="checkbox">
                             <label>
                                 @Html.CheckBoxFor(m => m.RememberMe)
@@ -88,8 +93,6 @@
     </div>
 </div>
 <!--/NEW CODE-->
-
-
 
 
 @section Scripts {

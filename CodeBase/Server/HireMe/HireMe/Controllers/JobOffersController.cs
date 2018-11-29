@@ -42,7 +42,16 @@ namespace HireMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobOffer jobOffer = db.JobOffers.Find(id);
+            JobOffer jobOffer = db.JobOffers
+                .Include(t => t.JobOfferJobTasks)
+                .Include(p => p.Employer)
+                .Include(t => t.Job)
+                .FirstOrDefault(c => c.JobOfferId == id);
+
+            jobOffer.MasterJobTasks = db.Jobs
+                .Include(p => p.JobTasks)
+                .FirstOrDefault(p => p.JobId == jobOffer.JobId)
+                .JobTasks;
             if (jobOffer == null)
             {
                 return HttpNotFound();

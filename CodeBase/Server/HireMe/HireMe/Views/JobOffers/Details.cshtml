@@ -1,258 +1,660 @@
 ﻿@model HireMe.Models.JobOffer
 
-@{
-    ViewBag.Title = "Details";
+
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
+
+<script type="text/javascript">
+    function validateJobOffer(jobOfferId) {
+        if (jobRequestId) {
+            $.ajax
+                ({
+                    url: '/Admin/ValidateJobOffer?jobOfferId=' + jobOfferId,
+                    //data: { "id": jobRequestId },
+                    type: 'get',
+                    success: function (result) {
+                        alert("Job Offer validated successfully.");
+                        window.history.back();
+                    }
+                });
+        }
+    }
+</script>
+
+
+@functions
+{
+    private int count = 0;
 }
 
-<h2>Details</h2>
+<h2>Create</h2>
 
-<div>
-    <h4>JobOffer</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.JobId)
-        </dt>
+@helper ShowTaskTree(IEnumerable<HireMe.Models.JobTask> jobTasks)
+{
+for (int i = 0; i < jobTasks.Count(); i++)
+{
+    count = count + 1;
+    var item = jobTasks.ElementAt(i);
+    if (Model.JobOfferJobTasks.Any(p => p.JobTaskId == item.JobTaskId))
+    {
+            <div class="checkbox" style="margin-left:25px;">
+                <label>
 
-        <dd>
-            @Html.DisplayFor(model => model.JobId)
-        </dd>
+                    @*@Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
+                        @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
+                        @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
+                        @item.JobTaskName
+                        @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
+                    @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
+                    @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
+                    <img src="~/assets/images/home-icon.png" />
+                    @(item.JobTaskName)
 
-        <dt>
-            @Html.DisplayNameFor(model => model.EmployerId)
-        </dt>
+                    <div class="toggle-group">
+                        <input type="checkbox" name="on-off-switch" id="on-off-switch" checked="" tabindex="1">
+                        <label for="on-off-switch">
 
-        <dd>
-            @Html.DisplayFor(model => model.EmployerId)
-        </dd>
+                        </label>
+                        <div class="onoffswitch" aria-hidden="true">
+                            <div class="onoffswitch-label">
+                                <div class="onoffswitch-inner"></div>
+                                <div class="onoffswitch-switch"></div>
+                            </div>
+                        </div>
+                    </div>
+                    @{
+                        var selectedTask = Model.JobOfferJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
+                    }
+                    @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                    {
+                        <span>@selectedTask.TaskResponseAdditionalDescription</span>
+                    }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
+                    <span></span>
+                </label>
+                @if (item.SubTasks.Any())
+            {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
+                    @ShowTaskTree(item.SubTasks)
 
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
+                }
+            </div>
+                            }
+                        }
+}
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinAge)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MinAge)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxAge)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxAge)
-        </dd>
+<div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobRequestCtrl">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExperienceInYears)
-        </dt>
+    <header id="header">
 
-        <dd>
-            @Html.DisplayFor(model => model.ExperienceInYears)
-        </dd>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExperienceInMonths)
-        </dt>
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
 
-        <dd>
-            @Html.DisplayFor(model => model.ExperienceInMonths)
-        </dd>
+                </div><!-- col -->
+                <div class="col-sm-10">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProofDoc)
-        </dt>
+                    <!-- MENU -->
+                    <nav>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdProofDoc)
-        </dd>
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProofDocDesc)
-        </dt>
+                        <ul class="menu clearfix" id="menu">
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-        <dd>
-            @Html.DisplayFor(model => model.IdProofDocDesc)
-        </dd>
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfileVerified)
-        </dt>
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li class="dropdown">
+                                <a href="#">AIDE</a>
+                                <ul>
+                                    <li>
+                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                    </li>
+                                    <li>
+                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+                            <li class="secondary-menu-btn">
+                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
+                            </li>
+                        </ul>
 
-        <dd>
-            @Html.DisplayFor(model => model.ProfileVerified)
-        </dd>
+                    </nav>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StaffType)
-        </dt>
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
 
-        <dd>
-            @Html.DisplayFor(model => model.StaffType)
-        </dd>
+    </header>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Disponibility)
-        </dt>
+    <div id="mySidenav" class="sidenav" style="width: 280px;">
 
-        <dd>
-            @Html.DisplayFor(model => model.Disponibility)
-        </dd>
+        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                                                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                                    .Select(c => c.Value);
+            string role = roles.FirstOrDefault();}
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CountryId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CountryId)
-        </dd>
+        <div class="sidenav-header">User Account - @role</div>
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CityId)
-        </dt>
+        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.CityId)
-        </dd>
+        @if (role == "Candidate")
+        {
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DistrictId)
-        </dt>
+            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.DistrictId)
-        </dd>
+            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SalaryType)
-        </dt>
+            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+        else if (role == "Employer")
+        {
+            <a href="~/SearchJobRequests" class="active"><i class="fa fa-search"></i> Search Employee</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.SalaryType)
-        </dd>
+            <a href="~/JobOffers"><i class="fa fa-graduation-cap"></i> My Job Offers</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
-        </dt>
+            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.SalaryTypeOtherDesc)
-        </dd>
+            <a href="#"><i class="fa fa-envelope"></i> Messages & Notifications</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CanRead)
-        </dt>
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
+        }
+        else if (role == "Agency")
+        {
 
-        <dd>
-            @Html.DisplayFor(model => model.CanRead)
-        </dd>
+            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CanWrite)
-        </dt>
+            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
 
-        <dd>
-            @Html.DisplayFor(model => model.CanWrite)
-        </dd>
+            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpectedMinSalary)
-        </dt>
+            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
+        }
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ExpectedMinSalary)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ExpectedMaxSalary)
-        </dd>
+    <!---- Tab Section -->
 
-        <dt>
-            @Html.DisplayNameFor(model => model.SleepOnSite)
-        </dt>
+    <div class="full-section-container wow fadeInUp">
+        <div class="tab-section">
+            <div class="tab-section-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="tabs style-2">
+                            <div class="tab-header">
+                                @(Model.Job.JobName + "(" + Model.Age + " yrs)")
+                            </div>
+                            <div class="tab-content search-criteria" style="margin-top:0;">
 
-        <dd>
-            @Html.DisplayFor(model => model.SleepOnSite)
-        </dd>
+                                <div class="row">
+                                    <div class="col-md-4 text-center">
+                                        <div class="profile-pic">
+                                            <img src="data:image/jpeg;base64,@Model.Employer.ProfilePicUrl" />
+                                        </div>
+                                        @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
+                                    </div>
+                                    <div class="col-md-8">
+                                        @*<div class="row">
+                                                <div class="col-md-4">Email:</div>
+                                                <div class="col-md-8">agency@gmail.com</div>
+                                            </div>*@
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>Email:</td>
+                                                    <td>@Model.Employer.EmailId</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Phone:</td>
+                                                    <td>@Model.Employer.ContactNo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Rating:</td>
+                                                    <td><a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Description:</td>
+                                                    <td>@Model.AdditionalDescription</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="col-md-12">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpectedMinRooms)
-        </dt>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
 
-        <dd>
-            @Html.DisplayFor(model => model.ExpectedMinRooms)
-        </dd>
+                                        <div class="row">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
-        </dt>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Gender
 
-        <dd>
-            @Html.DisplayFor(model => model.ExpectedMaxRooms)
-        </dd>
+                                                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MinGroupPeople)
-        </dt>
+                                                    <div class="filtersection-body">
+                                                        @Model.Gender.ToString()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Type of Staff
 
-        <dd>
-            @Html.DisplayFor(model => model.MinGroupPeople)
-        </dd>
+                                                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MaxGroupPeople)
-        </dt>
+                                                    <div class="filtersection-body">
+                                                        @Model.StaffType.ToString()
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Age
 
-        <dd>
-            @Html.DisplayFor(model => model.MaxGroupPeople)
-        </dd>
+                                                    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPublished)
-        </dt>
+                                                    <div class="filtersection-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.MinAge + " yrs") - @(Model.MaxAge + " yrs")
 
-        <dd>
-            @Html.DisplayFor(model => model.IsPublished)
-        </dd>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Years of Experience
 
-        <dt>
-            @Html.DisplayNameFor(model => model.PublishedDate)
-        </dt>
+                                                    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.PublishedDate)
-        </dd>
+                                                    <div class="filtersection-body">
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @Model.ExperienceInYears
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ValidTill)
-        </dt>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Localizations
 
-        <dd>
-            @Html.DisplayFor(model => model.ValidTill)
-        </dd>
+                                                    </div>
 
-    </dl>
+                                                    <div class="filtersection-body">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @(Model.Country + ", " + Model.City)
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.District
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Salary Between
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                @Model.SalaryType.ToString()
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Model.ExpectedMinSalary
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Model.ExpectedMaxSalary
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Read
+                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                            @(Model.CanRead ? "Yes" : "No")
+                                                        </div>
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        <div class="icon-section">
+                                                            <img src="~/assets/images/eyeglass1.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Write
+                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                            @(Model.CanWrite ? "Yes" : "No")
+                                                        </div>
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        <div class="icon-section">
+                                                            <img src="~/assets/images/write1.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Sleep on Site
+                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                            @(Model.SleepOnSite ? "Yes" : "No")
+                                                        </div>
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        <div class="icon-section">
+                                                            <img src="~/assets/images/sleep1.png" alt="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Disponibility
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+                                                        @Model.Disponibility
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Number of rooms
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.ExpectedMinRooms
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.ExpectedMaxRooms
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Number of people
+
+                                                    </div>
+
+                                                    <div class="filtersection-body">
+
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.MinGroupPeople
+
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.MaxGroupPeople
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
+
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Candidate Skills
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        @ShowTaskTree(Model.MasterJobTasks.Where(p => p.ParentJobTaskId == null))
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filtersection-panel">
+                                                    <div class="filtersection-header">
+                                                        Additional Description
+                                                    </div>
+                                                    <div class="filtersection-body">
+                                                        @Model.AdditionalDescription
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @if (role == "Admin")
+                                        {
+                                            <div class="row"><button class="btn btn-default" onclick="validateJobOffer(@Model.JobOfferId)">Validate</button></div>
+                                        }
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="headline text-center">
+                        <h2>Our Trusted Partners</h2>
+                    </div><!-- headline -->
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="owl-carousel logos-slider">
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
+                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
+                    </div><!-- logos-slider -->
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+    </div>
+
+    <!---- Tab Section end-->
+
+
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.JobOfferId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+
+
+
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("main-container-user").style.marginLeft = "280px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main-container-user").style.marginLeft = "0";
+    }
+</script>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#FilterjobId").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '358px');
+                $('.jobsearch-section .right-section').css('right', '0');
+                $('.Filterjob').css('display', 'none');
+                $('.switch').css('right', '10px');
+                $('.filter-overlay').css('display', 'block');
+
+            });
+            $("#FilterClose").click(function () {
+                $('.jobsearch-section .left-section').css('margin-right', '0');
+                $('.jobsearch-section .right-section').css('right', '-350px');
+                $('.Filterjob').css('display', 'block');
+                $('.switch').css('right', '50px');
+                $('.filter-overlay').css('display', 'none');
+            });
+        });
+
+    </script>
+
+    <script>
+      
+    </script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('myApp', []);
+        app.controller('searchJobRequestCtrl', function ($scope, $http) {
+            $scope.jobRequests = [];
+            $scope.message = "Welcome Angular JS";
+            $scope.searchParam = {};
+
+
+            $scope.searchJobRequests = function () {
+                $http.get("/api/jobtekapi/SearchJobRequests", {
+                    //params: { page: 1, limit: 100, sort: 'name', direction: 'desc' },
+                    //headers: { 'Authorization': 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==' }
+                    params: $scope.searchParam
+                })
+                    .then(function (response) {
+                        console.log(response.data);
+                        $scope.jobRequests = response.data;
+                    });
+            }
+
+            $scope.setFavouriteJobRequest = function (jobRequestId) {
+
+                //alert(jobRequestId);
+                $.ajax
+                    ({
+                        url: '/FavouriteJobRequests/Create?id=' + jobRequestId,
+                        //data: { "id": jobRequestId },
+                        type: 'get',
+                        success: function (result) {
+                            //$('.modal-box').text(result).fadeIn(700, function () {
+                            //    setTimeout(function () {
+                            //        $('.modal-box').fadeOut();
+                            //    }, 2000);
+                            //});
+
+                            alert("Job Request added to your favourite list.");
+                        }
+                    });
+
+            }
+
+            $scope.searchJobRequests();
+        });
+    </script>
+
+}
+

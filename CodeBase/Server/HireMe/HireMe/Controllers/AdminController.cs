@@ -177,7 +177,7 @@ namespace HireMe.Controllers
             return View();
         }
 
-     
+
         [HttpGet]
         public ActionResult ValidateJobOffers()
         {
@@ -197,6 +197,39 @@ namespace HireMe.Controllers
                .Include(t => t.Candidate)
                .OrderByDescending(p => p.JobRequestId)
                .ToList());
+        }
+
+        [HttpGet]
+        public ActionResult ValidateJobRequest(int jobRequestId)
+        {
+            var jobRequest = db.JobRequests.Find(jobRequestId);
+            if (jobRequest == null)
+                return HttpNotFound();
+            // now update two columns of JobRequest
+            jobRequest.VerifiedByAdmin = true;
+            jobRequest.VerificationDate = DateTime.Now;
+            db.SaveChanges();
+
+            // we need to send a notification to the user about the job request verifications
+
+            return Json("Job request verified successfully.", JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpGet]
+        public ActionResult ValidateJobOffer(int jobOfferId)
+        {
+            var jobOffer = db.JobOffers.Find(jobOfferId);
+            if (jobOffer == null)
+                return HttpNotFound();
+            // now update two columns of JobRequest
+            jobOffer.VerifiedByAdmin = true;
+            jobOffer.VerificationDate = DateTime.Now;
+            db.SaveChanges();
+
+            // we need to send a notification to the user about the job request verifications
+
+            return Json("Job offer verified successfully.", JsonRequestBehavior.AllowGet);
         }
 
         // POST: Admin/Delete/5

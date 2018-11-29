@@ -51,12 +51,16 @@ namespace HireMe.Models
 
     public class LoginViewModel
     {
-        [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        //[Required]
+        //[Display(Name = "Email")]
+        //[EmailAddress]
+        //public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "User Name is required.")]
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Password is required.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
@@ -110,8 +114,8 @@ namespace HireMe.Models
         public HttpPostedFileBase profile_pic { get; set; }
         public HttpPostedFileBase id_proof { get; set; }
 
-        [Required(ErrorMessage ="Please agree the terms and conditions")]
-        [Display(Name ="Agree Terms and Conditions")]
+        [Required(ErrorMessage = "Please agree the terms and conditions")]
+        [Display(Name = "Agree Terms and Conditions")]
         public bool AgreeTermsAndConditions { get; set; }
 
         [Required(ErrorMessage = "Please select the security question.")]
@@ -136,7 +140,7 @@ namespace HireMe.Models
         [RequiredIf("UserRoles", "Agency", ErrorMessage = "Comapny name is required")]
         public string CompanyName { get; set; }
 
-        [Display(Name ="Responsible Name")]
+        [Display(Name = "Responsible Name")]
         [RequiredIf("UserRoles", "Agency", ErrorMessage = "Responsible name is required")]
         public string ResponsibleName { get; set; }
 
@@ -150,6 +154,50 @@ namespace HireMe.Models
         public string CompanyActivity { get; set; }
         #endregion
     }
+
+    public class UpdateProfileViewModel
+    {
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+
+        
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Display(Name = "Address")]
+        public string Address { get; set; }
+
+        [Required(ErrorMessage = "You must provide a phone number")]
+        [Display(Name = "Contact Number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        public string PhoneNumber { get; set; }
+
+        
+
+        public HttpPostedFileBase profile_pic { get; set; }
+        public HttpPostedFileBase id_proof { get; set; }
+
+        public int? CountryId { get; set; }
+       
+
+        public int? CityId { get; set; }
+       
+
+        public int? DistrictId { get; set; }
+       
+
+        public string ContactOption { get; set; }
+    }
+
+   
 
     public class ResetPasswordViewModel
     {
