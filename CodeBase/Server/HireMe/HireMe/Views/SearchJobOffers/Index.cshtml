@@ -583,10 +583,9 @@
                     <div class="lds-ripple"><div></div><div></div></div>
                 </div>
                 <div class="header">
-                    @*<i class="fa fa-align-left"></i>
-
+                    <i class="fa fa-align-left"></i>
                         <span class="grid-title">Searching for</span>
-                        <div class='switch'>
+                        @*<div class='switch'>
                             <div class='quality'>
                                 <input checked id='q1' name='q' type='radio' value='q1'>
                                 <label for='q1'>Job Request</label>
@@ -604,7 +603,7 @@
                 <div class="body">
                     <div class="row">
                       
-                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobOffers">
+                        <div class="col-md-4 col-sm-6" data-ng-repeat="jr in jobOffers">
                             <div class="profileitems searchprofile-section">
                                 <div class="left">
                                     <img src="~/assets/images/image-18.jpg" />
@@ -638,6 +637,8 @@
         </div>
 
     </div>
+    
+</div>   
     <script>
     function openNav() {
         document.getElementById("mySidenav").style.width = "280px";

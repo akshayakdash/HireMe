@@ -59,71 +59,71 @@
     }
 </script>
 
-<div id="main-container-user" style="margin-left: 280px;">
-    <header id="header">
+    <div id="main-container-user" style="margin-left: 280px;">
+        <header id="header">
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-2">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2">
 
-                    <!-- LOGO -->
-                    <div id="logo">
-                        <a href="index.html">
-                            <img src="~/assets/images/logo.png" alt="">
-                        </a>
-                    </div><!-- LOGO -->
+                        <!-- LOGO -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img src="~/assets/images/logo.png" alt="">
+                            </a>
+                        </div><!-- LOGO -->
 
-                </div><!-- col -->
-                <div class="col-sm-10">
+                    </div><!-- col -->
+                    <div class="col-sm-10">
 
-                    <!-- MENU -->
-                    <nav>
+                        <!-- MENU -->
+                        <nav>
 
-                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+                            <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
 
-                        <ul class="menu clearfix" id="menu">
-                            @*
+                            <ul class="menu clearfix" id="menu">
+                                @*
                                 <li class="active"><a href="index.html">HOME</a></li>*@
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
 
-                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                            {
-                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                            }
+                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                                }
 
-                            @*
+                                @*
                                 <li><a href="#">ADMIN</a></li>
                                 <li><a href="#">LOGIN</a></li>*@
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li class="dropdown">
-                                <a href="#">AIDE</a>
-                                <ul>
-                                    <li>
-                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
-                                    </li>
-                                    <li>
-                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="waves" href="#">Post a Job</a>
-                            </li>
-                            @Html.Partial("_LoginPartial")
-                            <li class="secondary-menu-btn">
-                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
-                            </li>
-                        </ul>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                                <li class="dropdown">
+                                    <a href="#">AIDE</a>
+                                    <ul>
+                                        <li>
+                                            <a class="waves" href="about-us.html">REPORT A BUG</a>
+                                        </li>
+                                        <li>
+                                            <a class="waves" href="services.html">SHARE YOUR OPINION</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a class="waves" href="#">Post a Job</a>
+                                </li>
+                                @Html.Partial("_LoginPartial")
+                                <li class="secondary-menu-btn">
+                                    <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
+                                </li>
+                            </ul>
 
-                    </nav>
+                        </nav>
 
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container-fluid -->
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container-fluid -->
 
-    </header>
-    <div id="mySidenav" class="sidenav" style="width: 280px;">
+        </header>
+        <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
                                             .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
@@ -131,21 +131,21 @@
             string role = roles.FirstOrDefault();}
 
 
-        <div class="sidenav-header">User Account - @role</div>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="sidenav-header">User Account - @role</div>
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
-        @if (role == "Candidate")
-        {
+            <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
+            @if (role == "Candidate")
+            {
 
             <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
 
             <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
 
             <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
-        }
-        else if (role == "Employer")
-        {
+            }
+            else if (role == "Employer")
+            {
 
             <a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>
 
@@ -156,9 +156,9 @@
             <a href="#"><i class="fa fa-envelope"></i> Messages & Notifications</a>
 
             <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
-        }
-        else if (role == "Agency")
-        {
+            }
+            else if (role == "Agency")
+            {
 
             <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
 
@@ -167,50 +167,50 @@
             <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
 
             <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
-        }
-    </div>
+            }
+        </div>
 
 
-    <!---- Tab Section -->
+        <!---- Tab Section -->
 
-    <div class="full-section-container wow fadeInUp">
-        <div class="tab-section">
-            <div class="tab-section-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                            @*@if (role == "Candidate")
+        <div class="full-section-container wow fadeInUp">
+            <div class="tab-section">
+                <div class="tab-section-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                                @*@if (role == "Candidate")
                                 {
-                                    <h2>Select your Job</h2>
+                                <h2>Select your Job</h2>
                                 }
                                 else if (role == "Employer")
                                 {
-                                    <h2>What you are looking for ?</h2>
+                                <h2>What you are looking for ?</h2>
                                 }
                                 else if (role == "Agency")
                                 {
-                                    <h2>Select Job for candidate</h2>
+                                <h2>Select Job for candidate</h2>
                                 }*@
                             <h2>My Favourite Job Requests</h2>
                         </div>
                         <div class="tabs style-2">
 
-                            @*<ul class="nav nav-tabs job-tab">
+                                @*<ul class="nav nav-tabs job-tab">
                                     @for (int i = 0; i < Model.Count(); i++)
                                     {
-                                        var item = Model.ElementAt(i);
-                                        <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
+                                    var item = Model.ElementAt(i);
+                                    <li><a class="@(i == 0 ? " active" : "" )" href="@(" #tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
                                     }
                                 </ul>*@
-                            <ul class="nav nav-tabs job-tab">
-                                <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
-                                <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                                <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
-                                <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                                <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
-                            </ul>
+                                <ul class="nav nav-tabs job-tab">
+                                    <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                    <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                    <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                    <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                    <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                                </ul>
 
-                            <div class="tab-content">
+                                <div class="tab-content">
 
 
 
@@ -661,32 +661,32 @@
         </div>
 
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="headline text-center">
-                        <h2>Our Trusted Partners</h2>
-                    </div><!-- headline -->
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="owl-carousel logos-slider">
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
-                    </div><!-- logos-slider -->
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container -->
-    </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center">
+                            <h2>Our Trusted Partners</h2>
+                        </div><!-- headline -->
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="owl-carousel logos-slider">
+                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
+                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
+                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
+                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
+                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
+                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
+                        </div><!-- logos-slider -->
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container -->
+        </div>
 
-    <!---- Tab Section end-->
+        <!---- Tab Section end-->
 
 
     <div class="modal fade" id="modalnote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
