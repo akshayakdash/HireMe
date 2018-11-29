@@ -234,7 +234,8 @@
                                                             <div class="profileitems searchprofile-section">
                                                                 <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                                 <div class="left">
-                                                                    <img src="@Url.Content(item.ApplicationUser.ProfilePicUrl)" />
+                                                                    @*<img src="@Url.Content(item.ApplicationUser.ProfilePicUrl)" />*@
+                                                                    <img src="data:image/jpeg;base64,@item.ProfilePicUrl" />
                                                                     <div class="rating">
                                                                         <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>

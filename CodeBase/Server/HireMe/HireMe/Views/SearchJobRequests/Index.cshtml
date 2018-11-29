@@ -126,8 +126,8 @@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                                        .Select(c => c.Value);
+                                                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -180,7 +180,7 @@
                     <i class="fa fa-filter"></i>Set all filter to Indifferent
                     <div class="switch-area">
                         <label class="switchsmall">
-                            <input type="checkbox">
+                            <input type="checkbox" data-ng-model="searchParam.enableFilter">
                             <span class="slider1 round"></span>
                         </label>
                     </div>
@@ -193,23 +193,23 @@
                                     Gender
                                     <div class="switch-area-inner">
                                         <label class="switchsmall">
-                                            <input type="checkbox">
+                                            <input type="checkbox" data-ng-model="searchParam.enableGenderFilter" data-ng-change="searchParam.enableGenderFilter ? searchParam.gender = searchParam.gender : searchParam.gender = ''">
                                             <span class="slider1 round"></span>
                                         </label>
                                     </div>
                                 </div>
 
-                                <div class="filtersection-body">
+                                <div class="filtersection-body" data-ng-if="searchParam.enableGenderFilter">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="gender" ng-value="1" data-ng-model="searchParam.Gender">
+                                            <input type="radio" name="gender" ng-value="1" data-ng-model="searchParam.gender">
                                             Woman
                                             <span></span>
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="gender" ng-value="0" data-ng-model="searchParam.Gender">
+                                            <input type="radio" name="gender" ng-value="0" data-ng-model="searchParam.gender">
                                             Man
                                             <span></span>
                                         </label>
@@ -225,22 +225,22 @@
                                     ID Card Checked
                                     <div class="switch-area-inner">
                                         <label class="switchsmall">
-                                            <input type="checkbox">
+                                            <input type="checkbox" data-ng-model="searchParam.enableProfileVerifiedFilter" data-ng-change="searchParam.enableProfileVerifiedFilter ? searchParam.profileVerified = searchParam.profileVerified : searchParam.profileVerified = ''">
                                             <span class="slider1 round"></span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="filtersection-body">
+                                <div class="filtersection-body" data-ng-if="searchParam.enableProfileVerifiedFilter">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="options" id="option1" value="option1" checked>
+                                            <input type="radio" name="options" value="option1" data-ng-model="searchParam.profileVerified">
                                             Yes
                                             <span></span>
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="options" id="option2" value="option2">
+                                            <input type="radio" name="options" value="option2" data-ng-model="searchParam.profileVerified">
                                             No
                                             <span></span>
                                         </label>
@@ -256,16 +256,16 @@
                                     Age
                                     <div class="switch-area-inner">
                                         <label class="switchsmall">
-                                            <input type="checkbox">
+                                            <input type="checkbox" data-ng-model="searchParam.enableAgeFilter" data-ng-change="resetAgeFilter()">
                                             <span class="slider1 round"></span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="filtersection-body">
+                                <div class="filtersection-body" data-ng-if="searchParam.enableAgeFilter">
                                     <div class="inlineform-filter">
                                         <div class="row">
                                             <div class="col-md-5">
-                                                <select class="">
+                                                <select class="" data-ng-model="searchParam.minAge">
                                                     <option>25</option>
                                                     <option>30</option>
                                                     <option>35</option>
@@ -273,7 +273,7 @@
                                             </div>
                                             <div class="col-md-2 text-center">&amp;</div>
                                             <div class="col-md-5">
-                                                <select class="">
+                                                <select class="" data-ng-model="searchParam.maxAge">
                                                     <option>35</option>
                                                     <option>30</option>
                                                     <option>35</option>
@@ -292,20 +292,29 @@
                                     Years of Experiences
                                     <div class="switch-area-inner">
                                         <label class="switchsmall">
-                                            <input type="checkbox">
+                                            <input type="checkbox" data-ng-model="searchParam.enableExperienceFilter">
                                             <span class="slider1 round"></span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="filtersection-body">
+                                <div class="filtersection-body" data-ng-if="searchParam.enableExperienceFilter">
                                     <div class="inlineform-filter">
                                         <div class="row">
                                             <div class="col-sm-2 text-center">
                                                 <i class="fa fa-plus"></i>
                                             </div>
                                             <div class="col-sm-3" style="padding-left: 0;">
-                                                <select class="yrs_of_exp">
-                                                    <option value="">--select--</option>
+                                                <select class="yrs_of_exp" data-ng-model="searchParam.minYearsOfExperience">
+                                                    <option value="">--min--</option>
+                                                    <option>2</option>
+                                                    <option>3</option>
+                                                    <option>4</option>
+                                                    <option>5</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-3" style="padding-left: 0;">
+                                                <select class="yrs_of_exp" data-ng-model="searchParam.maxYearsOfExperience">
+                                                    <option value="">--max--</option>
                                                     <option>2</option>
                                                     <option>3</option>
                                                     <option>4</option>
@@ -325,22 +334,22 @@
                                     Type of Staff
                                     <div class="switch-area-inner">
                                         <label class="switchsmall">
-                                            <input type="checkbox">
+                                            <input type="checkbox" data-ng-model="searchParam.enableStaffTypeFilter">
                                             <span class="slider1 round"></span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="filtersection-body">
+                                <div class="filtersection-body" data-ng-if="searchParam.enableStaffTypeFilter">
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="options" id="option1" value="option1" checked>
+                                            <input type="radio" name="options" value="1" data-ng-model="searchParam.staffType">
                                             Agency
                                             <span></span>
                                         </label>
                                     </div>
                                     <div class="radio">
                                         <label>
-                                            <input type="radio" name="options" id="option2" value="option2">
+                                            <input type="radio" name="options" value="2" data-ng-model="searchParam.staffType">
                                             Independant
                                             <span></span>
                                         </label>
@@ -356,59 +365,59 @@
                                     Disponibility
                                     <div class="switch-area-inner">
                                         <label class="switchsmall">
-                                            <input type="checkbox">
+                                            <input type="checkbox" data-ng-model="searchParam.enableDisponibilityFilter">
                                             <span class="slider1 round"></span>
                                         </label>
                                     </div>
                                 </div>
-                                <div class="filtersection-body">
+                                <div class="filtersection-body" data-ng-if="searchParam.enableDisponibilityFilter">
                                     <div class="widget widget-calendar">
-                                        <input type="date" />
+                                        <input type="date" data-ng-model="searchParam.disponibility" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    @*<div class="row">
                         <div class="col-md-12">
                             <div class="filtersection-panel">
                                 <div class="filtersection-header">
                                     Localizations
                                     <div class="switch-area-inner">
                                         <label class="switchsmall">
-                                            <input type="checkbox">
+                                            <input type="checkbox" data-ng-model="searchParam.enableLocalizationFilter">
                                             <span class="slider1 round"></span>
                                         </label>
                                     </div>
                                 </div>
-                                @*<div class="filtersection-body">
-                                        <div class="inlineform-filter">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div>City</div>
-                                                    <select multiple="">
-                                                        <option>Option one</option>
-                                                        <option>Option two</option>
-                                                        <option>Option three</option>
-                                                        <option>Option four</option>
-                                                        <option>Option five</option>
-                                                        <option>Option six</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div>District</div>
-                                                    <select multiple="">
-                                                        <option>Option one</option>
-                                                        <option>Option two</option>
-                                                        <option>Option three</option>
-                                                        <option>Option four</option>
-                                                        <option>Option five</option>
-                                                        <option>Option six</option>
-                                                    </select>
-                                                </div>
+                                <div class="filtersection-body" data-ng-if="searchParam.enableLocalizationFilter">
+                                    <div class="inlineform-filter">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div>City</div>
+                                                <select multiple="">
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                    <option>Option five</option>
+                                                    <option>Option six</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div>District</div>
+                                                <select multiple="">
+                                                    <option>Option one</option>
+                                                    <option>Option two</option>
+                                                    <option>Option three</option>
+                                                    <option>Option four</option>
+                                                    <option>Option five</option>
+                                                    <option>Option six</option>
+                                                </select>
                                             </div>
                                         </div>
-                                    </div>*@
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -573,7 +582,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
 
 
                 </div>
