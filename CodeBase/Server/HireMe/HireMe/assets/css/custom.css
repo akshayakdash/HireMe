@@ -1001,7 +1001,7 @@ dl {
     border-radius: 30px;
     font: 700 12px/24px "Raleway", sans-serif;
     letter-spacing: 1.2px;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     cursor: pointer;
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
@@ -1021,7 +1021,7 @@ dl {
     }
 
 .btn-xs {
-    padding: 12px 30px;
+    padding: 5px 10px;
     font-size: 11px;
 }
 
@@ -10025,6 +10025,7 @@ blockquote {
             border-radius: 50%;
             height: 100px;
             border: 2px solid #eee;
+            margin-bottom:5px;
         }
 
         .profileitems .left .rating {
@@ -10068,6 +10069,14 @@ blockquote {
         .profileitems .right .location {
             font-size: 13px;
             font-weight: 600;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin-bottom: 5px;
+        }
+        .profileitems .right .url {
+            font-size: 13px;
+            font-weight: 400;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
