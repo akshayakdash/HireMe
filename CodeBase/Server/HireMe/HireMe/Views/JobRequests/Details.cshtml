@@ -40,14 +40,14 @@ for (int i = 0; i < jobTasks.Count(); i++)
             @*<div class="checkbox" style="margin-left:25px;">
                 <label>
 
-                    @*@Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
+                    @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
                         @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
                         @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
                         @item.JobTaskName
                         @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
                     @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
                     @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
-                    <img src="~/assets/images/home-icon.png" />
+                    @*@<img src="~/assets/images/home-icon.png" />
                     @(item.JobTaskName)
 
                     <div class="toggle-group">
@@ -245,11 +245,15 @@ for (int i = 0; i < jobTasks.Count(); i++)
         @if (role == "Candidate")
         {
 
-            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
+            <a href="~/SearchJobOffers/CheckCandidateProfileExists" class="active"><i class="fa fa-search"></i> Search Employer</a>
 
-            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
+            <a href="~/JobRequests"><i class="fa fa-graduation-cap"></i> Job Requests</a>
 
-            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+            <a href="~/FavouriteJobOffers" ><i class="fa fa-heart"></i> Manage my favorites</a>
+
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
+
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Employer")
         {

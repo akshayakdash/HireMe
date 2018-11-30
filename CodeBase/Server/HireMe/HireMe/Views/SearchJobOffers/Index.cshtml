@@ -139,11 +139,21 @@
         @if (role == "Candidate")
         {
 
-            <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
+            @*<a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
 
             <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
 
+            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>*@
+
+            <a href="~/SearchJobOffers/CheckCandidateProfileExists" class="active"><i class="fa fa-search"></i> Search Employer</a>
+
+            <a href="~/JobRequests"><i class="fa fa-graduation-cap"></i> Job Requests</a>
+
             <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
+
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Employer")
         {
@@ -623,6 +633,12 @@
                                 </div>
                                 <div class="profile-footer">
                                     {{jr.JobRequestDescription}}
+                                </div>
+                                <div class="team-contact-info">
+                                    <ul class="social-icons">
+                                        <li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobOffer(jr.JobOfferId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                        <li><a href="/JobOffers/Details/{{jr.JobOfferId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
