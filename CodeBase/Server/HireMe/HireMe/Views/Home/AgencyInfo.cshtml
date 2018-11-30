@@ -1,0 +1,134 @@
+﻿
+<div id="main-container">
+    <!-- HEADER -->
+    <header id="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+
+                    <!-- LOGO -->
+                    <div id="logo">
+                        <a href="index.html">
+                            <img src="~/assets/images/logo.png" alt="">
+                        </a>
+                    </div><!-- LOGO -->
+
+                </div><!-- col -->
+                <div class="col-sm-10">
+
+                    <!-- MENU -->
+                    <nav>
+
+                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+                        <div class="mobile-app">
+                            <a class="btn btn-style-4 waves" href="#"><i class="fa fa-download"></i> Mobile App</a>
+                        </div>
+
+                        <ul class="menu clearfix" id="menu">
+
+                            @*
+                                <li class="active"><a href="index.html">HOME</a></li>*@
+                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+
+                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                            {
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            }
+
+                            @*
+                                <li><a href="#">ADMIN</a></li>
+                                <li><a href="#">LOGIN</a></li>*@
+                            <li>@Html.ActionLink("About", "About", "Home")</li>
+                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                            <li>
+                                <a class="waves" href="#">Post a Job</a>
+                            </li>
+                            @Html.Partial("_LoginPartial")
+
+                        </ul>
+
+                    </nav>
+
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container-fluid -->
+
+    </header><!-- HEADER -->
+    <!-- PAGE CONTENT -->
+    <!-- PAGE CONTENT -->
+    <div id="page-content">
+        <div id="page-header">
+            <div class="ken-burns" style="background-image:url(../images/backgrounds/page-header-1.jpg);"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1>Agency</h1>
+                        @*<ol class="breadcrumb">
+                                <li><a href="#">Home</a></li>
+                                <li class="active">About us</li>
+                            </ol>*@
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container -->
+        </div><!-- page-header -->
+
+        <section class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="headline text-center wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                        <h2>SOME INFO BEFORE REGISTERING</h2>
+                        <h5>What is the purpose of the inscription?</h5>
+                    </div><!-- headline -->
+                </div>
+                <div class="col-md-7">
+                    <ul class="info-list wow fadeInLeft">
+                        <li>
+                            <span class="icon">
+                                <img src="~/assets/images/register-icon.png" alt="">
+                            </span>
+                            Registration will allow you to register as a new member on the platform
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <img src="~/assets/images/search-icon.png" alt="">
+                            </span>
+                            This will also allow you to create your personal account where you can do your research or create your job applications
+                            <div><a href="#">Once registered?</a></div>
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <img src="~/assets/images/user-icon.png" alt="">
+                            </span>
+                            We advise the agencies to put at least one profile photo for each of their "candidate" profiles in order to reassure the employers who are looking for you
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <img src="~/assets/images/IDcard-icon.png" alt="">
+                            </span>
+                            We also advise agencies recording a valid ID for each of their candidates which will allow them to be differentiated from the other candidates with the "profile verified" logo
+                            that their sear assigned once Amin has verified that the information of Their account correspond well to their piece of tooth
+                        </li>
+                        <li>
+                            <span class="icon">
+                                <img src="~/assets/images/filter-icon.png" alt="">
+                            </span>
+                            This platform works through filters that identify your defined criteria (localization, age, experience..) and makes
+                            you appear in the search results of employers who are looking for profiles like your
+                            <br />
+                            <strong><i class="fa fa-arrow-right"></i>&nbsp;the quality and precision of your created job applications will make your success</strong>
+                        </li>
+                    </ul>
+                    <a href="/Account/Register?userRole=Agency"><button type="button" class="btn btn-style-1 btn-lg waves wow fadeInDown">Start registration&nbsp;<i class="fa fa-arrow-right"></i></button></a>
+</div>
+                <div class="col-md-5">
+                    <div class="half-circle-image wow fadeInRight">
+                        <img src="~/assets/images/portfolio/agency-half.jpg" alt="Agency">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+    </div><!-- PAGE CONTENT -->
+</div>
