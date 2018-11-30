@@ -181,91 +181,63 @@
         <div class="tab-section">
             <div class="tab-section-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                            <h2>Manage my Profile</h2>
+                    <div class="col-md-12 regd-form">
+                        <div class="headline text-center wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                            <h2><i class="fa fa-cogs"></i>&nbsp;Manage my Profile</h2>
                         </div>
-                        <div class="tabs style-2">
+                        <div class="row">
+                            <div class="col-md-3 col-sm-4 text-center">
+                                <div class="profile-pic">
+                                    <img src="data:image/jpeg;base64,@ViewBag.ProfilePicUrl">
+                                </div>
+                            </div>
+                            <div class="col-md-9 col-sm-8">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td>@Model.Email</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:</td>
+                                            <td>@Model.PhoneNumber</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
 
-                            <ul class="nav nav-tabs">
-                                <li><a href="#tab-basic" data-toggle="tab">Basic</a></li>
-                                <li><a class="active" href="#tab-advance" data-toggle="tab">Advance</a></li>
-                            </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                @*<h5>Advance Profiles</h5>*@
+                            </div>
 
-                            <div class="tab-content">
-                                <div class="tab-pane fade" id="tab-basic">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h5>Basic Profiles</h5>
-                                        </div>
-                                        <div class="col-md-4">
-                                            dsdsd
-                                        </div>
-                                    </div>
-                                </div><!-- tab-pane -->
-
-                                <div class="tab-pane fade show active regd-form" id="tab-advance">
-                                    <div class="row">
-                                        <div class="col-md-4 text-center">
-                                            <div class="profile-pic">
-                                                <img src="data:image/jpeg;base64,@ViewBag.ProfilePicUrl">
+                            <div class="col-md-6">
+                                <div class="form-section">
+                                    <fieldset>
+                                        <div id="alert-area"></div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                             </div>
-
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">First Name</span>
                                         </div>
-                                        <div class="col-md-8">
-
-                                            <table class="table">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Email:</td>
-                                                        <td>@Model.Email</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Phone:</td>
-                                                        <td>@Model.PhoneNumber</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div class="col-md-12">
-
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            @*<h5>Advance Profiles</h5>*@
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Last Name</span>
                                         </div>
 
-                                        <div class="col-md-6">
-                                            <div class="form-section">
-
-                                                <fieldset>
-
-                                                    <div id="alert-area"></div>
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                        </div>
-                                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
-                                                        <span class="input-lable">First Name</span>
-                                                    </div>
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                        </div>
-                                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
-                                                        <span class="input-lable">Last Name</span>
-                                                    </div>
-
-
-
-
-
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                        </div>
-                                                        @Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                            </div>
+                                            @Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
                                                                     {
                                                        new SelectListItem{ Text="Choose City", Value = "" },
                                                                         new SelectListItem{ Text="Abidjan (Capitale Eco)", Value = "1" },
@@ -274,85 +246,81 @@
                                                                         new SelectListItem{ Text="Anyama", Value = "4" },
                                                                         new SelectListItem{ Text="Agnibilékrou", Value = "5" },
                                                                      }, htmlAttributes: new { @class = "form-control", id = "City" })
-                                                        @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
-                                                        <span class="input-lable">City</span>
-                                                    </div>
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                        </div>
-                                                        <select id="District" name="DistrictId" class="form-control"></select>
-                                                        @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
-                                                        <span class="input-lable">District</span>
-                                                    </div>
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                        </div>
+                                            @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
+                                            <span class="input-lable">City</span>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                            </div>
+                                            <select id="District" name="DistrictId" class="form-control"></select>
+                                            @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
+                                            <span class="input-lable">District</span>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                            </div>
 
 
-                                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
-                                                        <span class="input-lable">Country</span>
-                                                    </div>
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                        </div>
-                                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
-                                                        <span class="input-lable">Address</span>
-                                                    </div>
-                                                </fieldset>
+                                            @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
+                                            <span class="input-lable">Country</span>
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                            </div>
+                                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
+                                            <span class="input-lable">Address</span>
+                                        </div>
+                                    </fieldset>
 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-section">
+
+                                    <fieldset>
+
+                                        <div id="alert-area"></div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Email</span>
+                                        </div>
+
+
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Contact number</span>
+                                        </div>
+
+                                        <div class="input-group mb-2">
+                                            Set your contact option
+                                            <div class='switch' style="right:0;top:0;">
+                                                <div class='quality'>
+                                                    <input checked="@(Model.ContactOption == "Email")" id="contact_option1" name='ContactOption' type='radio' value='Email'>
+                                                    <label for="contact_option1">Email</label>
+                                                </div><div class='quality'>
+                                                    <input checked="@(Model.ContactOption == "Phone")" id="contact_option2" name='ContactOption' type='radio' value='Phone'>
+                                                    <label for="contact_option2">Phone Number</label>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <div class="form-section">
 
-                                                <fieldset>
+                                    </fieldset>
 
-                                                    <div id="alert-area"></div>
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
-                                                        </div>
-                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
-                                                        <span class="input-lable">Email</span>
-                                                    </div>
-
-
-                                                    <div class="input-group mb-2">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
-                                                        </div>
-                                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
-                                                        <span class="input-lable">Contact number</span>
-                                                    </div>
-
-                                                    <div class="input-group mb-2">
-                                                        Set your contact option
-                                                        <div class='switch'>
-                                                            <div class='quality'>
-                                                                <input checked="@(Model.ContactOption == "Email")" id="contact_option1" name='ContactOption' type='radio' value='Email'>
-                                                                <label for="contact_option1">Email</label>
-                                                            </div><div class='quality'>
-                                                                <input checked="@(Model.ContactOption == "Phone")" id="contact_option2" name='ContactOption' type='radio' value='Phone'>
-                                                                <label for="contact_option2">Phone Number</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                </fieldset>
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12 text-center">
-                                            <button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Update Profile</button>
-                                        </div>
-                                    </div>
-                                </div><!-- tab-pane -->
-
-                            </div><!-- tab-content -->
-                        </div><!-- tabs -->
+                                </div>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Update Profile</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

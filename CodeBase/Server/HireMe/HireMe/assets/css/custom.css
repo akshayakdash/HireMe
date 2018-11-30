@@ -2166,6 +2166,8 @@ dl {
 
 .tab-content {
     margin: 20px 0;
+    position: relative;
+    min-height: 400px;
 }
 
 .tab-pane > *:last-child {
@@ -10060,6 +10062,9 @@ blockquote {
             text-overflow: ellipsis;
             white-space: nowrap;
         }
+        .profileitems .right .contact-num {
+            font-size: 13px;
+        }
         .profileitems .right .location {
             font-size: 13px;
             font-weight: 600;
@@ -10136,27 +10141,27 @@ blockquote {
 
     .searchprofile-section .team-contact-info {
         opacity: 0;
-        -webkit-transform: translateY(100%);
+        /*-webkit-transform: translateY(100%);
         -moz-transform: translateY(100%);
         -ms-transform: translateY(100%);
         transform: translateY(100%);
         -webkit-backface-visibility: hidden;
         -moz-backface-visibility: hidden;
-        backface-visibility: hidden;
+        backface-visibility: hidden;*/
         -webkit-transition: -webkit-transform 0.4s, opacity 0.1s;
         -moz-transition: -moz-transform 0.4s, opacity 0.1s;
         transition: transform 0.4s, opacity 0.1s;
         position: absolute;
         width: 100%;
         margin-left: -10px;
-        top: 0;
-        height: 100%;
+        bottom: 0;
+        /*height: 100%;*/
         background: #f51179;
         text-align: center;
     }
 
         .searchprofile-section .team-contact-info::before {
-            height: 100%;
+            /*height: 100%;*/
             -webkit-transition: height 0.2s;
             -moz-transition: height 0.2s;
             transition: height 0.2s;
@@ -10165,7 +10170,7 @@ blockquote {
             bottom: 0;
             width: 100%;
             height: 1px;
-            background: #f51179;
+            /*background: #f51179;*/
             -webkit-transition: height 0.4s;
             -moz-transition: height 0.4s;
             transition: height 0.4s;
@@ -10249,7 +10254,7 @@ blockquote {
 .social-icons {
     list-style: none;
     padding: 0;
-    margin: 20% 0;
+    margin: 10px 0;
 }
 
     .social-icons li {
@@ -11141,7 +11146,7 @@ margin:0;
     display:none;
 }
 .profile-pic{
-    border: 1px solid #ccc;
+    border: 2px solid #fe005a;
     padding: 2px;
     border-radius: 5px;
     margin-bottom:10px;
@@ -11263,4 +11268,21 @@ margin:0;
 .info-list li{
     float: left;
     margin-bottom: 20px;
+}
+.Nodatafound {
+    text-align: center;
+    margin-top: 10%;
+    width:100%;
+}
+.Nodatafound i{
+    font-size:50px;
+}
+    .Nodatafound h3 {
+        font-size: 40px;
+        margin: 20px 0;
+        color: #fe005a;
+        font-weight: 300;
+    }
+.Nodatafound .datacontent{
+
 }
