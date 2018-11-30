@@ -89,6 +89,20 @@ namespace HireMe.Controllers
             //    role.Name = "Agency";
             //    roleManager.Create(role);
             //}
+
+            
+        }
+        public ActionResult EmployerInfo()
+        {
+            return View();
+        }
+        public ActionResult CandidatInfo()
+        {
+            return View();
+        }
+        public ActionResult AgencyInfo()
+        {
+            return View();
         }
     }
 }
