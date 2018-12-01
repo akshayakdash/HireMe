@@ -331,6 +331,8 @@ namespace HireMe.Models
         public string SkillPic2 { get; set; }
         public string SkillPic3 { get; set; }
 
+        public int StarRating { get; set; } // This field will hold the average star ratings from the job request notes
+
 
         public bool VerifiedByAdmin { get; set; }
         public DateTime? VerificationDate { get; set; }
@@ -419,6 +421,8 @@ namespace HireMe.Models
         public bool VerifiedByAdmin { get; set; }
         public DateTime? VerificationDate { get; set; }
 
+        public int StarRating { get; set; }
+
         [NotMapped]
         public List<JobTask> MasterJobTasks { get; set; }
     }
@@ -492,15 +496,28 @@ namespace HireMe.Models
         public string CreatedDate { get; set; }
     }
 
+    public class JobOfferNote
+    {
+        public int JobOfferNoteId { get; set; }
+        public int JobOfferId { get; set; }
+        public string Note { get; set; }
+        public int StarRating { get; set; }
+        public int CandidateId { get; set; }
+        public string CreatedBy { get; set; }
+        public string CreatedDate { get; set; }
+    }
+
     public class JobTekNotification
     {
         public int JobTekNotificationId { get; set; }
         public string Content { get; set; }
         public string SenderId { get; set; }
-        [ForeignKey("SenderId")]
+        //[ForeignKey("SenderId")]
+        [NotMapped]
         public ApplicationUser Sender { get; set; }
         public string ReceiverId { get; set; }
-        [ForeignKey("ReceiverId")]
+        //[ForeignKey("ReceiverId")]
+        [NotMapped]
         public ApplicationUser Receiver { get; set; }
         public int Category { get; set; }
         public DateTime CreatedDate { get; set; }

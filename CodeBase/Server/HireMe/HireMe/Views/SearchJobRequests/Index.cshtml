@@ -7,6 +7,34 @@
     #footer-container {
         display: none;
     }
+
+    .rating {
+        color: #a9a9a9;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.rating {
+        display: inline-block;
+    }
+
+    .rating li {
+        list-style-type: none;
+        display: inline-block;
+        padding: 1px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .rating .filled {
+        color: #ff0052;
+    }
+
+    .clear {
+        margin-top: 20px;
+    }
 </style>
 
 <script>
@@ -130,8 +158,8 @@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                                                                .Select(c => c.Value);
+                                                                                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                                    .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -371,7 +399,7 @@
                                                         <div class="radio">
                                                             <label>
                                                                 <input type="radio" ng-value="2" data-ng-model="searchParam.staffType">
-                                                                 Agency
+                                                                Agency
                                                                 <span></span>
                                                             </label>
                                                         </div>
@@ -590,7 +618,14 @@
                                     <div class="left">
                                         <img ng-src="data:image/jpeg;base64, {{jr.Candidate.ProfilePicUrl}}" />
                                         <div class="rating">
-                                            <a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                            @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </a>*@
+                                            <div star-rating rating-value="jr.StarRating" max="'5'"></div>
                                         </div>
                                     </div>
                                     <div class="right">
@@ -702,59 +737,59 @@
                         <div class="col-md-12">
                             <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                                 @if (role == "Candidate")
-                                                {
-                                                <h2>Select your Job</h2>
-                                                }
-                                                else if (role == "Employer")
-                                                {
-                                                <h2>What you are looking for ?</h2>
-                                                }
-                                                else if (role == "Agency")
-                                                {
-                                                <h2>Select Job for candidate</h2>
-                                                }
+                                {
+                                    <h2>Select your Job</h2>
+                                }
+                                else if (role == "Employer")
+                                {
+                                    <h2>What you are looking for ?</h2>
+                                }
+                                else if (role == "Agency")
+                                {
+                                    <h2>Select Job for candidate</h2>
+                                }
 
                             </div>
                             <div class="tabs style-2">
 
                                 <ul class="nav nav-tabs job-tab">
                                     @for (int i = 0; i < Model.Count(); i++)
-                                                    {
-                                                        var item = Model.ElementAt(i);
-                                                    <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
-                                                    }
+                                    {
+                                        var item = Model.ElementAt(i);
+                                        <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
+                                    }
                                 </ul>
                                 <div class="tab-content">
 
                                     @for (int i = 0; i < Model.Count(); i++)
-                                                    {
-                                                        var item = Model.ElementAt(i);
-                                                <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-1-"+i)">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="isotope cols-3 gutter">
-                                                                @foreach (var job in item.Jobs)
-                                                                        {
-                                                                        <div class="isotope-item categ-1 categ-2">
-                                                                            <div class="portfolio-item">
-                                                                                <div class="portfolio-item-thumbnail">
-                                                                                    <img src="@(job.IconImage)" alt="">
-                                                                                    <div class="portfolio-item-hover"></div>
-                                                                                    <div class="portfolio-item-description">
-                                                                                        <h5><a href='~/@("SearchJobRequests?id="+job.JobId)'>@job.JobName</a></h5>
-                                                                                    </div><!-- portfolio-item-description -->
-                                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href='~/@("SearchJobRequests?id="+job.JobId)'><i class="bizhub-icon-search"></i></a>
-                                                                                </div><!-- portfolio-item-thumbnail -->
-                                                                            </div><!-- portfolio-item -->
-                                                                        </div>
-                                                                        }
-
-
+                                    {
+                                        var item = Model.ElementAt(i);
+                                        <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-1-"+i)">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        @foreach (var job in item.Jobs)
+                                                        {
+                                                            <div class="isotope-item categ-1 categ-2">
+                                                                <div class="portfolio-item">
+                                                                    <div class="portfolio-item-thumbnail">
+                                                                        <img src="@(job.IconImage)" alt="">
+                                                                        <div class="portfolio-item-hover"></div>
+                                                                        <div class="portfolio-item-description">
+                                                                            <h5><a href='~/@("SearchJobRequests?id="+job.JobId)'>@job.JobName</a></h5>
+                                                                        </div><!-- portfolio-item-description -->
+                                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href='~/@("SearchJobRequests?id="+job.JobId)'><i class="bizhub-icon-search"></i></a>
+                                                                    </div><!-- portfolio-item-thumbnail -->
+                                                                </div><!-- portfolio-item -->
                                                             </div>
-                                                        </div>
+                                                        }
+
+
                                                     </div>
                                                 </div>
-                                                    }
+                                            </div>
+                                        </div>
+                                    }
 
                                 </div><!-- tab-content -->
                             </div><!-- tabs -->
@@ -862,6 +897,46 @@
                 }
             };
         }]);
+
+        angular.module('myApp').directive('starRating', function () {
+            return {
+                restrict: 'A',
+                template: '<ul class="rating">' +
+                '<li ng-repeat="star in stars" ng-class="star">' +
+                '\u2605' +
+                '</li>' +
+                '</ul>',
+                scope: {
+                    ratingValue: '=',
+                    max: '=',
+                    onRatingSelected: '&'
+                },
+                link: function (scope, elem, attrs) {
+
+                    var updateStars = function () {
+                        scope.stars = [];
+                        for (var i = 0; i < scope.max; i++) {
+                            scope.stars.push({
+                                filled: i < scope.ratingValue
+                            });
+                        }
+                    };
+
+                    scope.toggle = function (index) {
+                        scope.ratingValue = index + 1;
+                        scope.onRatingSelected({
+                            rating: index + 1
+                        });
+                    };
+
+                    scope.$watch('ratingValue', function (oldVal, newVal) {
+                        if (newVal) {
+                            updateStars();
+                        }
+                    });
+                }
+            }
+        });
         app.controller('searchJobRequestCtrl', function ($scope, $http) {
             $scope.jobRequests = [];
             $scope.cities = [];
