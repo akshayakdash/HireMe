@@ -485,417 +485,290 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
 
     <div class="full-section-container wow fadeInUp">
-        @using (Html.BeginForm())
+        @using (Html.BeginForm("Create", "CandidateProfiles", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
             {
-        @Html.AntiForgeryToken()
-        <div class="tab-section">
-            <div class="tab-section-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tabs style-2">
-                            <div class="tab-header">
-                                My Job Profile
-                            </div>
-                            <div class="tab-content search-criteria" style="margin-top:0;">
+            @Html.AntiForgeryToken()
+            <div class="tab-section">
+                <div class="tab-section-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="tabs style-2">
+                                <div class="tab-header">
+                                    My Job Profile
+                                </div>
+                                <div class="tab-content search-criteria" style="margin-top:0;">
 
-                                <div class="tab-pane fade show active" id="tab-1-1">
-                                    <div class="row">
-                                        <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                    <div class="tab-pane fade show active" id="tab-1-1">
+                                        <div class="row">
+                                            <div class="col-md-6" style="border-right:2px solid #ff6a00;">
 
-                                            <div class="row">
-                                                @*<div class="col-md-12">
-                                                        <div class="common-header mb-2">
-                                                            Set all filters to “inactive”
-                                                            <div class="switch-area">
-                                                                <label class="switchsmall">
-                                                                    <input type="checkbox">
-                                                                    <span class="slider1 round"></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>*@
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Gender
-                                                            @*<div class="switch-area-inner">
+                                                <div class="row">
+                                                    @*<div class="col-md-12">
+                                                            <div class="common-header mb-2">
+                                                                Set all filters to “inactive”
+                                                                <div class="switch-area">
                                                                     <label class="switchsmall">
                                                                         <input type="checkbox">
                                                                         <span class="slider1 round"></span>
                                                                     </label>
-                                                                </div>*@
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            <div class="radio">
-                                                                <label>
-                                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
-                                                                    Female
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label>
-                                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
-                                                                    Male
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Type of Staff
-                                                            @*<div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>*@
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            <div class="radio">
-                                                                <label>
-                                                                    @Html.RadioButtonFor(p => p.StaffType, StaffType.Agency, new { @value = StaffType.Agency })
-                                                                    Agency
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                            <div class="radio">
-                                                                <label>
-                                                                    @Html.RadioButtonFor(p => p.StaffType, StaffType.Independent, new { @value = StaffType.Independent })
-                                                                    Independant
-                                                                    <span></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Age
-                                                            @*<div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>*@
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12">
-                                                                    @Html.TextBoxFor(p => p.Age, new { @class = "form-control" })
-                                                                    @*<select>
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-lg-6 col-md-6">
-                                                                            <select>
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                            </select>*@
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Years of Experience
-                                                            @*<div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>*@
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 col-md-12">
-                                                                    @Html.TextBoxFor(p => p.ExperienceInYears, new { @class = "form-control" })
-                                                                    @*<select>
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                            </select>
-                                                                        </div>
-                                                                        <div class="col-lg-6 col-md-6">
-                                                                            <select>
-                                                                                <option value="1">1</option>
-                                                                                <option value="2">2</option>
-                                                                                <option value="3">3</option>
-                                                                                <option value="4">4</option>
-                                                                                <option value="5">5</option>
-                                                                                <option value="6">6</option>
-                                                                            </select>*@
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Localizations
-                                                            @*<div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>*@
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            @Html.HiddenFor(p => p.Country, new { @value = "Ivory" })
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
-
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(DistrictEnum))), "Select District", new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Salary Between
-                                                            @*<div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>*@
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="radio">
-                                                                        <label>
-                                                                            <input type="radio" name="options" id="option1" value="option1" checked>
-                                                                            Monthly
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="radio">
-                                                                        <label>
-                                                                            <input type="radio" name="options" id="option2" value="option2">
-                                                                            Hourly
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                    <div class="radio">
-                                                                        <label>
-                                                                            <input type="radio" name="options" id="option2" value="option2">
-                                                                            Other
-                                                                            <span></span>
-                                                                        </label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="row">
-                                                                        <div class="col-lg-6 col-md-6">
-                                                                            @Html.TextBoxFor(p => p.ExpectedMinSalary, new { @class = "form-control" })
-                                                                        </div>
-                                                                        <div class="col-lg-6 col-md-6">
-                                                                            @Html.TextBoxFor(p => p.ExpectedMaxSalary, new { @class = "form-control" })
-                                                                        </div>
-                                                                        @*<div class="col-md-12">
-                                                                                <input type="text" class="form-control" placeholder="Additional Description" />
-                                                                            </div>*@
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-
-
-                                        </div>
-                                    </div>
-
-                                </div><!-- tab-pane -->
-                                <div class="tab-pane fade show active" id="tab-1-2">
-                                    <div class="row">
-                                        <div class="col-md-6" style="border-right:2px solid #ff6a00;">
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Read
-                                                            <div class="switch-area-inner switch-area-inner-cus">
-                                                                <label class="checkbox">
-                                                                    @Html.CheckBoxFor(p => p.CanRead)
-                                                                    <span class=""></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="filtersection-body">
-                                                            <div class="icon-section">
-                                                                <img src="~/assets/images/eyeglass1.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Write
-                                                            <div class="switch-area-inner switch-area-inner-cus">
-                                                                <label class="checkbox">
-                                                                    @Html.CheckBoxFor(p => p.CanWrite)
-                                                                    <span class=""></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="filtersection-body">
-                                                            <div class="icon-section">
-                                                                <img src="~/assets/images/write1.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Sleep on Site
-                                                            <div class="switch-area-inner switch-area-inner-cus">
-                                                                <label class="checkbox">
-                                                                    @Html.CheckBoxFor(p => p.SleepOnSite)
-                                                                    <span class=""></span>
-                                                                </label>
-                                                            </div>
-
-                                                        </div>
-                                                        <div class="filtersection-body">
-                                                            <div class="icon-section">
-                                                                <img src="~/assets/images/sleep1.png" alt="">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Disponibility
-                                                            @*<div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>*@
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-                                                            <div class="date">
-                                                                @Html.TextBoxFor(p => p.Disponibility, new { @type = "date" })
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Number of rooms
-
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    @Html.TextBoxFor(p => p.ExpectedMinRooms, new { @class = "form-control" })
-
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    @Html.TextBoxFor(p => p.ExpectedMaxRooms, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Number of people
-
-                                                        </div>
-
-                                                        <div class="filtersection-body">
-
-                                                            <div class="row">
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    @Html.TextBoxFor(p => p.MinGroupPeople, new { @class = "form-control" })
-
-                                                                </div>
-                                                                <div class="col-lg-6 col-md-6">
-                                                                    @Html.TextBoxFor(p => p.MaxGroupPeople, new { @class = "form-control" })
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div class="col-md-6">
-
-
-                                            <div class="row">
-                                                @ShowTaskTree(Model.JobTasks.Where(p => p.ParentJobTaskId == null))
-                                                @*<div class="col-sm-12">
+                                                        </div>*@
+                                                    <div class="col-sm-6">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
-                                                                Cooking
-                                                                <div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
+                                                                Gender
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
+
+                                                            <div class="filtersection-body">
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
+                                                                        Female
+                                                                        <span></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
+                                                                        Male
+                                                                        <span></span>
                                                                     </label>
                                                                 </div>
                                                             </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Type of Staff
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
 
+                                                            <div class="filtersection-body">
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        @Html.RadioButtonFor(p => p.StaffType, StaffType.Agency, new { @value = StaffType.Agency })
+                                                                        Agency
+                                                                        <span></span>
+                                                                    </label>
+                                                                </div>
+                                                                <div class="radio">
+                                                                    <label>
+                                                                        @Html.RadioButtonFor(p => p.StaffType, StaffType.Independent, new { @value = StaffType.Independent })
+                                                                        Independant
+                                                                        <span></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Age
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
+
+                                                            <div class="filtersection-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 col-md-12">
+                                                                        @Html.TextBoxFor(p => p.Age, new { @class = "form-control" })
+                                                                        @*<select>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-md-6">
+                                                                                <select>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                </select>*@
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Years of Experience
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
+
+                                                            <div class="filtersection-body">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 col-md-12">
+                                                                        @Html.TextBoxFor(p => p.ExperienceInYears, new { @class = "form-control" })
+                                                                        @*<select>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-md-6">
+                                                                                <select>
+                                                                                    <option value="1">1</option>
+                                                                                    <option value="2">2</option>
+                                                                                    <option value="3">3</option>
+                                                                                    <option value="4">4</option>
+                                                                                    <option value="5">5</option>
+                                                                                    <option value="6">6</option>
+                                                                                </select>*@
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Localizations
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
+
+                                                            <div class="filtersection-body">
+                                                                @Html.HiddenFor(p => p.Country, new { @value = "Ivory" })
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
+
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(DistrictEnum))), "Select District", new { @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Salary Between
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
+
+                                                            <div class="filtersection-body">
+                                                                <div class="row">
+                                                                    <div class="col-sm-6">
+                                                                        <div class="radio">
+                                                                            <label>
+                                                                                <input type="radio" name="options" id="option1" value="option1" checked>
+                                                                                Monthly
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="radio">
+                                                                            <label>
+                                                                                <input type="radio" name="options" id="option2" value="option2">
+                                                                                Hourly
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="radio">
+                                                                            <label>
+                                                                                <input type="radio" name="options" id="option2" value="option2">
+                                                                                Other
+                                                                                <span></span>
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <div class="row">
+                                                                            <div class="col-lg-6 col-md-6">
+                                                                                @Html.TextBoxFor(p => p.ExpectedMinSalary, new { @class = "form-control" })
+                                                                            </div>
+                                                                            <div class="col-lg-6 col-md-6">
+                                                                                @Html.TextBoxFor(p => p.ExpectedMaxSalary, new { @class = "form-control" })
+                                                                            </div>
+                                                                            @*<div class="col-md-12">
+                                                                                    <input type="text" class="form-control" placeholder="Additional Description" />
+                                                                                </div>*@
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+
+                                    </div><!-- tab-pane -->
+                                    <div class="tab-pane fade show active" id="tab-1-2">
+                                        <div class="row">
+                                            <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Read
+                                                                <div class="switch-area-inner switch-area-inner-cus">
+                                                                    <label class="checkbox">
+                                                                        @Html.CheckBoxFor(p => p.CanRead)
+                                                                        <span class=""></span>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
                                                             <div class="filtersection-body">
                                                                 <div class="icon-section">
-                                                                    <img src="~/assets/images/cooking1.png" alt="">
+                                                                    <img src="~/assets/images/eyeglass1.png" alt="">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -903,119 +776,268 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                     <div class="col-sm-6">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
-                                                                Africaine Food
-                                                                <div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
+                                                                Write
+                                                                <div class="switch-area-inner switch-area-inner-cus">
+                                                                    <label class="checkbox">
+                                                                        @Html.CheckBoxFor(p => p.CanWrite)
+                                                                        <span class=""></span>
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                             <div class="filtersection-body">
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input type="checkbox" name="options" id="option2" value="option2">
-                                                                        Souces
-                                                                        <span></span>
+                                                                <div class="icon-section">
+                                                                    <img src="~/assets/images/write1.png" alt="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Sleep on Site
+                                                                <div class="switch-area-inner switch-area-inner-cus">
+                                                                    <label class="checkbox">
+                                                                        @Html.CheckBoxFor(p => p.SleepOnSite)
+                                                                        <span class=""></span>
                                                                     </label>
                                                                 </div>
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input type="checkbox" name="options" id="option2" value="option2">
-                                                                        Grilling
-                                                                        <span></span>
-                                                                    </label>
+
+                                                            </div>
+                                                            <div class="filtersection-body">
+                                                                <div class="icon-section">
+                                                                    <img src="~/assets/images/sleep1.png" alt="">
                                                                 </div>
-                                                                <textarea id="comment" class="form-control" name="comment" rows="1" placeholder="Comment"></textarea>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
-                                                                European Food
-                                                                <div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>
+                                                                Disponibility
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
                                                             </div>
+
                                                             <div class="filtersection-body">
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input type="checkbox" name="options" id="option2" value="option2">
-                                                                        Souces
-                                                                        <span></span>
-                                                                    </label>
+                                                                <div class="date">
+                                                                    @Html.TextBoxFor(p => p.Disponibility, new { @type = "date" })
                                                                 </div>
-                                                                <div class="checkbox">
-                                                                    <label>
-                                                                        <input type="checkbox" name="options" id="option2" value="option2">
-                                                                        Grilling
-                                                                        <span></span>
-                                                                    </label>
-                                                                </div>
-                                                                <textarea id="comment" class="form-control" name="comment" rows="1" placeholder="Comment"></textarea>
                                                             </div>
                                                         </div>
-                                                    </div>*@
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <div class="filtersection-panel">
-                                                        <div class="filtersection-header">
-                                                            Additional Description
-                                                            @*<div class="switch-area-inner">
-                                                                    <label class="switchsmall">
-                                                                        <input type="checkbox">
-                                                                        <span class="slider1 round"></span>
-                                                                    </label>
-                                                                </div>*@
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Number of rooms
+
+                                                            </div>
+
+                                                            <div class="filtersection-body">
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.TextBoxFor(p => p.ExpectedMinRooms, new { @class = "form-control" })
+
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.TextBoxFor(p => p.ExpectedMaxRooms, new { @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="filtersection-body">
-                                                            @*<textarea id="comment" class="form-control" name="comment" rows="2" placeholder="Comment"></textarea>*@
-                                                            @Html.TextAreaFor(p => p.AdditionalDescription, new { @class = "form-control" , @placeholder = "Comment" })
-                                                            @Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Number of people
+
+                                                            </div>
+
+                                                            <div class="filtersection-body">
+
+                                                                <div class="row">
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.TextBoxFor(p => p.MinGroupPeople, new { @class = "form-control" })
+
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.TextBoxFor(p => p.MaxGroupPeople, new { @class = "form-control" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label class="checkbox">
-                                                        @Html.CheckBoxFor(p => p.PublishProfile)
-                                                        <span class=""></span>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publish As a Job Request
-                                                    </label>
+                                            <div class="col-md-6">
+
+
+                                                <div class="row">
+                                                    @ShowTaskTree(Model.JobTasks.Where(p => p.ParentJobTaskId == null))
+                                                    @*<div class="col-sm-12">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Cooking
+                                                                    <div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="filtersection-body">
+                                                                    <div class="icon-section">
+                                                                        <img src="~/assets/images/cooking1.png" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Africaine Food
+                                                                    <div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="filtersection-body">
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            <input type="checkbox" name="options" id="option2" value="option2">
+                                                                            Souces
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            <input type="checkbox" name="options" id="option2" value="option2">
+                                                                            Grilling
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <textarea id="comment" class="form-control" name="comment" rows="1" placeholder="Comment"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    European Food
+                                                                    <div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="filtersection-body">
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            <input type="checkbox" name="options" id="option2" value="option2">
+                                                                            Souces
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="checkbox">
+                                                                        <label>
+                                                                            <input type="checkbox" name="options" id="option2" value="option2">
+                                                                            Grilling
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <textarea id="comment" class="form-control" name="comment" rows="1" placeholder="Comment"></textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>*@
                                                 </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Additional Description
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
+                                                            <div class="filtersection-body">
+                                                                @*<textarea id="comment" class="form-control" name="comment" rows="2" placeholder="Comment"></textarea>*@
+                                                                @Html.TextAreaFor(p => p.AdditionalDescription, new { @class = "form-control", @placeholder = "Comment" })
+                                                                @Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class="filtersection-panel">
+                                                            <div class="filtersection-header">
+                                                                Upload Pictures
+                                                                @*<div class="switch-area-inner">
+                                                                        <label class="switchsmall">
+                                                                            <input type="checkbox">
+                                                                            <span class="slider1 round"></span>
+                                                                        </label>
+                                                                    </div>*@
+                                                            </div>
+                                                            <div class="filtersection-body">
+                                                  
+                                                                <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic1" name="JobRequestSkillPic1" accept="image/png, image/jpeg,image/jpg">
+                                                                <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic2" name="JobRequestSkillPic2" accept="image/png, image/jpeg,image/jpg">
+                                                                <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic3" name="JobRequestSkillPic3" accept="image/png, image/jpeg,image/jpg">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label class="checkbox">
+                                                            @Html.CheckBoxFor(p => p.PublishProfile)
+                                                            <span class=""></span>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publish As a Job Request
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div><!-- tab-pane -->
+                                    </div><!-- tab-pane -->
+                                </div>
+                                <ul class="nav nav-tabs" style="width: 100%;">
+                                    <li style="width: 50%;">
+                                        <a style="float:left;" class="backbtn active" href="#tab-1-1" data-toggle="tab">Back</a>
+                                    </li>
+                                    <li style="width: 50%;">
+                                        <a style="float:right;" class="nextbtn active" href="#tab-1-2" data-toggle="tab">Next</a>
+                                    </li>
+                                </ul>
                             </div>
-                            <ul class="nav nav-tabs" style="width: 100%;">
-                                <li style="width: 50%;">
-                                    <a style="float:left;" class="backbtn active" href="#tab-1-1" data-toggle="tab">Back</a>
-                                </li>
-                                <li style="width: 50%;">
-                                    <a style="float:right;" class="nextbtn active" href="#tab-1-2" data-toggle="tab">Next</a>
-                                </li>
-                            </ul>
+
+
+
+
                         </div>
-
-
-
-
                     </div>
                 </div>
             </div>
-        </div>
 
         }
 
@@ -1033,24 +1055,24 @@ for (int i = 0; i < jobTasks.Count(); i++)
 </div>
 
 <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "280px";
-            document.getElementById("main-container-user").style.marginLeft = "280px";
-        }
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("main-container-user").style.marginLeft = "280px";
+    }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main-container-user").style.marginLeft = "0";
-        }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main-container-user").style.marginLeft = "0";
+    }
 </script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
+    <script type="text/javascript">
 
 
         //alert(jobRequestId);
         $(document).ready(function () {
-           // alert("s")
+            // alert("s")
             $(".backbtn").hide();
             $("#tab-1-2").hide();
             $("#tab-1-1").show();
@@ -1071,9 +1093,31 @@ for (int i = 0; i < jobTasks.Count(); i++)
                 $("#tab-1-1").hide();
                 $("#tab-1-2").show();
             })
+
+            //var uploadField = document.getElementByName("JobRequestSkillPic1");
+
+            document.getElementById("JobRequestSkillPic1").onchange = function () {
+                if (this.files[0].size > 307200) {
+                    alert("File is too big!");
+                    this.value = "";
+                };
+            };
+            document.getElementById("JobRequestSkillPic2").onchange = function () {
+                if (this.files[0].size > 307200) {
+                    alert("File is too big!");
+                    this.value = "";
+                };
+            };
+            document.getElementById("JobRequestSkillPic3").onchange = function () {
+                console.log(this.files[0].size);
+                if (this.files[0].size > 307200) {
+                    alert("File is too big!");
+                    this.value = "";
+                };
+            };
         })
 
-</script>
+    </script>
 }
 
 @*@section Scripts {
