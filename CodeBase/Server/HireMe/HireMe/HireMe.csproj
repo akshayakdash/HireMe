@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201811272018398_Address_Field_Added_To_Employer.Designer.cs">
       <DependentUpon>201811272018398_Address_Field_Added_To_Employer.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812010538400_Job_Request_Profile_PicUpload_Option_Added.cs" />
+    <Compile Include="Migrations\201812010538400_Job_Request_Profile_PicUpload_Option_Added.Designer.cs">
+      <DependentUpon>201812010538400_Job_Request_Profile_PicUpload_Option_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -551,6 +555,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811272018398_Address_Field_Added_To_Employer.resx">
       <DependentUpon>201811272018398_Address_Field_Added_To_Employer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812010538400_Job_Request_Profile_PicUpload_Option_Added.resx">
+      <DependentUpon>201812010538400_Job_Request_Profile_PicUpload_Option_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
