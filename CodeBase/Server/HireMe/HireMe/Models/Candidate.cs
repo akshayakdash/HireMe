@@ -94,7 +94,7 @@ namespace HireMe.Models
 
         // This field is added later to check the consent of the user
         // if contact option is blank then both email and phone no will be visible
-        public string ContactOption { get; set; } 
+        public string ContactOption { get; set; }
 
     }
 
@@ -196,7 +196,7 @@ namespace HireMe.Models
         public string IdProofDoc { get; set; }
         public string IdProofDocDesc { get; set; }
 
-         public string ProfilePicUrl { get; set; }
+        public string ProfilePicUrl { get; set; }
 
         public string EmailId { get; set; }
         public string ContactNo { get; set; }
@@ -227,7 +227,7 @@ namespace HireMe.Models
         public string JobGroup { get; set; }
 
         public string JobDesc { get; set; }
-        
+
         public string IconImage { get; set; }
 
         public List<JobTask> JobTasks { get; set; }
@@ -490,6 +490,21 @@ namespace HireMe.Models
         public int EmployerId { get; set; }
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
+    }
+
+    public class JobTekNotification
+    {
+        public int JobTekNotificationId { get; set; }
+        public string Content { get; set; }
+        public string SenderId { get; set; }
+        //[ForeignKey("SenderId")]
+        //public ApplicationUser Sender { get; set; }
+        public string ReceiverId { get; set; }
+        //[ForeignKey("ReceiverId")]
+        //public ApplicationUser Receiver { get; set; }
+        public int Category { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public bool SeenByReceiver { get; set; }
     }
     public enum Gender
     {
