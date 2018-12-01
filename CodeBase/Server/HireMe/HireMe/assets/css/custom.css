@@ -9975,7 +9975,7 @@ blockquote {
     z-index: 1;
     padding: 10px;
     margin-bottom: 30px;
-    background-color: #f7f7f7;
+    /*background-color: #f7f7f7;*/
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
@@ -9985,11 +9985,22 @@ blockquote {
     /*display:table;
     width:100%;*/
     min-height: 185px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffd7d7));
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -moz-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -ms-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -o-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: linear-gradient(to bottom, #ffffff, #ffd7d7);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffd7d7);
 }
 
     .profileitems:hover {
         background-color: transparent;
         border: 1px solid rgba(0,0,0,0);
+        box-shadow: 4px 5px 7px rgba(0, 0, 0, 0.4);
     }
 
         .profileitems:hover:after {
@@ -10009,6 +10020,7 @@ blockquote {
             content: "";
             -webkit-transition: all 0.25s;
             transition: all 0.25s;
+            border-radius: 0 0 8px 8px;
         }
 
         .profileitems:hover:after {
@@ -10024,8 +10036,8 @@ blockquote {
             width: 100px;
             border-radius: 50%;
             height: 100px;
-            border: 2px solid #eee;
-            margin-bottom:5px;
+            border: 2px solid #fe005a;
+            margin-bottom: 5px;
         }
 
         .profileitems .left .rating {
@@ -10077,6 +10089,14 @@ blockquote {
             text-overflow: ellipsis;
             white-space: nowrap;
             margin-bottom: 5px;
+        }
+        .profileitems .right .jobname {
+            text-align: center;
+            background: #fe005a;
+            color: #fff;
+            padding: 2px 5px;
+            font-weight: 400;
+            border-radius: 25px;
         }
         .profileitems .right .url {
             font-size: 13px;
@@ -10143,7 +10163,7 @@ blockquote {
     .profileitems .profile-footer {
         font-size: 13px;
         /*float: left;*/
-        background: rgba(0, 0, 0, 0.09);
+        background: rgba(0, 0, 0, 0.2);
         width: 100%;
         padding: 5px 10px;
         border-radius: 5px;
@@ -10151,6 +10171,7 @@ blockquote {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color:#000;
     }
 
         .profileitems .profile-footer p {
@@ -10187,6 +10208,7 @@ blockquote {
         /*height: 100%;*/
         background: #f51179;
         text-align: center;
+        border-radius:0 0 8px 8px;
     }
 
         .searchprofile-section .team-contact-info::before {
@@ -10513,7 +10535,13 @@ blockquote {
             font-size: 1.5em;
             float: left;
         }
-
+            .jobsearch-section .left-section .grid-title strong {
+                font-weight: 600;
+                color: #fe005a;
+            }
+        .jobsearch-section .left-section .grid-title-small {
+            font-weight: 600;
+        }
         .jobsearch-section .left-section .header .fa {
             display: inline-block;
             margin: 0;
