@@ -51,7 +51,7 @@
                             <li>
                                 <a class="waves" href="#">Post a Job</a>
                             </li>
-                           
+
                             @Html.Partial("_LoginPartial")
                             <li class="secondary-menu-btn">
                                 <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
@@ -69,8 +69,8 @@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                .Select(c => c.Value);
+                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                        .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -78,19 +78,19 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
         <a href="~/Users" class="active"><i class="fa fa-home"></i>Dashboard</a>
-     
+
         @if (role == "Candidate")
         {
 
             <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
 
-            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
+            <a href="~/JobRequests"><i class="fa fa-graduation-cap"></i> Job Requests</a>
 
             <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-            <a href="~/Notification"><i class="fa fa-heart"></i> Messages &Aacute; Notifications</a>
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
 
-            <a href="~/Manage"><i class="fa fa-heart"></i> Manage my settings</a>
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Employer")
         {
@@ -220,23 +220,44 @@
     }
     else
     {
-        <!--We need to show the chart for admin-->
-        <div class="container" ng-app="admindashboard">
-            <div class="row">
-                <section id="reactive">
-                    @*<div class="page-header">
-                        <h1>Dashboard Members</h1>
-                    </div>*@
-                    <div class="row ng-scope" ng-controller="DataTablesCtrl">
-                        <div class="col-lg-12 col-sm-12">
-                            <div class="panel panel-default">
-                                @*<div class="panel-heading">Reactive Chart</div>*@
-                                <div class="panel-body">
-                                    <canvas id="tables" class="chart chart-line ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" chart-colors="colors" height="327" width="755" style="display: block; width: 100%; height: 262px;"></canvas>
-                                </div>
+
+        <div class="full-section-container" ng-app="admindashboard">
+            <div class="jobsearch-section">
+                <div class="left-section">
+                    <div class="filter-overlay">
+                        <div class="lds-ripple"><div></div><div></div></div>
+                    </div>
+                    <div class="header">
+                        <i class="fa fa-align-left"></i>
+
+                        <span class="grid-title">Graphs</span>
+                        <div class='switch'>
+                            <div class='quality'>
+                                <input checked id='q1' name='q' type='radio' value='q1'>
+                                <label for='q1'>Job Request</label>
+                            </div><div class='quality'>
+                                <input id='q2' name='q' type='radio' value='q2'>
+                                <label for='q2'>Job Offer</label>
                             </div>
                         </div>
-                        @*<div class="col-lg-6 col-sm-12">
+                        @*<a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>*@
+                        <div class="body">
+                            <div class="container">
+                                <div class="row">
+                                    <section id="reactive">
+                                        @*<div class="page-header">
+                        <h1>Dashboard Members</h1>
+                    </div>*@
+                                        <div class="row ng-scope" ng-controller="DataTablesCtrl">
+                                            <div class="col-lg-12 col-sm-12">
+                                                <div class="panel panel-default">
+                                                    @*<div class="panel-heading">Reactive Chart</div>*@
+                                                    <div class="panel-body">
+                                                        <canvas id="tables" class="chart chart-line ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" chart-colors="colors" height="327" width="755" style="display: block; width: 100%; height: 262px;"></canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @*<div class="col-lg-6 col-sm-12">
                             <div class="panel panel-default">
                                 <div class="panel-heading">Chart Data</div>
                                 <div class="panel-body">
@@ -279,26 +300,37 @@
                                 </div>
                             </div>
                         </div>*@
-                    </div>
-                </section>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-sm-12 ng-scope" id="doughnut-chart" ng-controller="DoughnutCtrl">
-                    <div class="panel panel-default">
-                        @*<div class="panel-heading">Our Members</div>*@
-                        <div class="panel-body">
-                            <canvas id="doughnut" class="chart chart-doughnut chart-xs ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" height="327" width="655" style="display: block; width: 524px; height: 262px;"></canvas>
-                        </div>
-                    </div>
-                </div>
+                                        </div>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-sm-12 ng-scope" id="doughnut-chart" ng-controller="DoughnutCtrl">
+                                        <div class="panel panel-default">
+                                            @*<div class="panel-heading">Our Members</div>*@
+                                            <div class="panel-body">
+                                                <canvas id="doughnut" class="chart chart-doughnut chart-xs ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" height="327" width="655" style="display: block; width: 524px; height: 262px;"></canvas>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <script type="text/javascript" src="~/Scripts/ChartJs/Chart.min.js"></script>
+                        <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
+                        <script type="text/javascript" src="~/Scripts/ChartJs/angular-chart.js"></script>
+                        <script type="text/javascript" src="~/Scripts/ChartJs/app.js"></script>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <script type="text/javascript" src="~/Scripts/ChartJs/Chart.min.js"></script>
-        <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
-        <script type="text/javascript" src="~/Scripts/ChartJs/angular-chart.js"></script>
-        <script type="text/javascript" src="~/Scripts/ChartJs/app.js"></script>
-        
+
+
+            <!--We need to show the chart for admin-->
+
+
     }
 </div>
 <script>
