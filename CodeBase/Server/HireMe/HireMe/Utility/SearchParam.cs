@@ -55,6 +55,13 @@ namespace HireMe.Utility
                 paramCount++;
             }
 
+            if (Job != 0)
+            {
+                queryString.Append(" and Job.JobId = @" + paramCount);
+                paramList.Add(Job);
+                paramCount++;
+            }
+
 
             if (!string.IsNullOrWhiteSpace(Age))
             {

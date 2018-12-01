@@ -89,6 +89,12 @@ namespace HireMe.Models
         public int JobId { get; set; }
 
         //public List<JobRequest> JobRequests { get; set; }
+
+        public List<HttpPostedFileBase> JobRequestSkillPics { get; set; }
+
+        public HttpPostedFileBase JobRequestSkillPic1 { get; set; }
+        public HttpPostedFileBase JobRequestSkillPic2 { get; set; }
+        public HttpPostedFileBase JobRequestSkillPic3 { get; set; }
     }
 
     public class EmployerJobOfferViewModel

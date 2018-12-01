@@ -868,7 +868,7 @@
             $scope.districts = [];
             $scope.jobTasks = [];
             $scope.message = "Welcome Angular JS";
-            $scope.searchParam = {tasks:[]};
+            $scope.searchParam = {tasks:[], job: @Request.QueryString["id"]};
 
 
             $scope.searchJobRequests = function () {
