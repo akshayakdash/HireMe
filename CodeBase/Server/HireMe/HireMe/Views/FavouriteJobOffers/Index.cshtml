@@ -1,10 +1,77 @@
 ﻿@model IEnumerable<HireMe.Models.JobOffer>
 
-    <style>
-        #footer-container {
-            display: none;
+<style>
+    #footer-container {
+        display: none;
+    }
+
+    #stars > i.selected {
+        color: #FF912C;
+    }
+</style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    var jobOfferId = 0;
+    var ratingValue = 0;
+    $(document).ready(function () {
+        $('#stars i').on('click', function () {
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('i');
+
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }
+
+            // JUST RESPONSE (Not needed)
+            ratingValue = parseInt($('#stars i.selected').last().data('value'), 10);
+
+
+        });
+    })
+
+
+    function setJobOfferId(jrId) {
+        jobOfferId = jrId;
+    }
+
+    function saveJobOfferNote() {
+
+
+
+
+
+
+
+        var note = $("#jobOfferNote").val();
+        var rating = ratingValue//$("#rating").val();
+        console.log(rating);
+        console.log(note);
+        console.log(jobOfferId);
+        if (jobOfferId && note && rating) {
+            //$.ajax
+            //    ({
+            //        url: '/JobRequests/SaveJobRequestNote',
+            //        data: { "JobRequestId": jobOfferId, "Note": note, "StarRating": rating },
+            //        type: 'post',
+            //        success: function (result) {
+            //            $("#jobOfferNote").val("");
+            //            $("#rating").val("");
+            //            $("#modalnote1").modal("hide");
+            //            alert("Job Request note added successfully.");
+            //        }
+            //    });
+        } else {
+            // give error message
+            alert("Please fill up the fields")
         }
-    </style>
+    }
+</script>
+
+
 
     <script type="text/javascript">
         function deleteFavouriteJobOffer(jobOfferId) {
@@ -223,6 +290,8 @@
                                                                 </div>
                                                                 <div class="team-contact-info">
                                                                     <ul class="social-icons">
+
+                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                                                         <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 
                                                                     </ul>
@@ -280,6 +349,7 @@
                                                                 </div>
                                                                 <div class="team-contact-info">
                                                                     <ul class="social-icons">
+                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                                                         <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 
                                                                     </ul>
@@ -337,6 +407,7 @@
                                                                 </div>
                                                                 <div class="team-contact-info">
                                                                     <ul class="social-icons">
+                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                                                         <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 
                                                                     </ul>
@@ -394,6 +465,7 @@
                                                                 </div>
                                                                 <div class="team-contact-info">
                                                                     <ul class="social-icons">
+                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                                                         <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 
                                                                     </ul>
@@ -451,6 +523,7 @@
                                                                 </div>
                                                                 <div class="team-contact-info">
                                                                     <ul class="social-icons">
+                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                                                         <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
 
                                                                     </ul>
@@ -476,6 +549,35 @@
 
 
                             </div><!-- tabs -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="modalnote1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
+            <div class="modal-wrapper">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel13">Give a Note</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="note-stars">
+                                        <a id="stars"><i class="fa fa-star" data-value='1'></i><i class="fa fa-star" data-value='2'></i><i class="fa fa-star" data-value='3'></i><i class="fa fa-star" data-value='4'></i><i class="fa fa-star" data-value='5'></i></a>
+                                        @*<input type="text" id="rating" />*@
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea id="jobOfferNote" class="form-control" rows="2"></textarea>
+                                    </div>
+                                    <button type="button" onclick="saveJobOfferNote()" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Submit</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
