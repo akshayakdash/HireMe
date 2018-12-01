@@ -239,6 +239,7 @@
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\JobTekApiController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationContoller.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SearchJobOffersController.cs" />
     <Compile Include="Controllers\SearchJobRequestsController.cs" />
@@ -501,6 +502,15 @@
     <Content Include="Views\Admin\ValidateJobRequests.cshtml" />
     <Content Include="Views\Admin\Candidates.cshtml" />
     <Content Include="Views\Admin\Employers.cshtml" />
+    <Content Include="Views\Home\EmployerInfo.cshtml" />
+    <Content Include="Views\Home\CandidatInfo.cshtml" />
+    <Content Include="Views\Home\AgencyInfo.cshtml" />
+    <Content Include="Views\Notification\Create.cshtml" />
+    <Content Include="Views\Notification\Delete.cshtml" />
+    <Content Include="Views\Notification\Details.cshtml" />
+    <Content Include="Views\Notification\Edit.cshtml" />
+    <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\NotificationContoller\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

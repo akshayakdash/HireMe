@@ -150,52 +150,61 @@
         }
     </div>
 
-    @if (Model != null)
-    {
-        foreach (var item in Model)
-        {
-            <div class="col-md-4 col-sm-6">
-                <div class="profileitems">
-                    <div class="left">
-                        <img src="@Url.Content(item.AgencyLogo)" />
-                        <div class="rating">
+    <div class="full-section-container wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+        <div class="tab-section">
+            <div class="tab-section-body">
+                <div class="row">
 
-                        </div>
-                        <div class="favorite">
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+                        {
 
-                        </div>
-                    </div>s
-                    <div class="right">
-                        <h1>@(item.AgencyName)<span></span></h1>
+                            <div class="col-md-4 col-sm-6">
+                                <div class="profileitems">
+                                    <div class="left">
+                                        <img src="@Url.Content(item.AgencyLogo)" />
+                                        <div class="rating">
 
-                        <h2 class="name">Responsible Name: @item.ManagerFirstName</h2>
-                        <h2 class="name">Contact No: </h2>
-                        @*<h3 class="name">Email</h3>*@
-                        <h2 class="name">Company Website Url : @item.AgencyWebsiteURL</h2>
+                                        </div>
+                                        <div class="favorite">
 
-                        <div class="published">Published: <span>@item.CreatedDate</span></div>
-                    </div>
-                    <div class="profile-footer">
-                        @item.CompanyActivityDesc
-                        <div class="row">
-                            @if (!item.ProfileVerified)
-                            {
-                                <button class="btn-default" type="button" onclick="activateAgencyAccount(@item.AgencyId)">Verify</button>
-                            }
-                            else
-                            {
-                                <p>Verified</p>
-                            }
-                        </div>
-                    </div>
+                                        </div>
+                                        <button class="btn btn-default btn-xs btn-block" type="button"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
+                                        @if (!item.ProfileVerified)
+                                        {
+                                            <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)">Verify</button>
+                                        }
+                                        else
+                                        {
+                                            @*<p>Verified</p>*@
+                                            <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                        }
+                                    </div>
+                                    <div class="right">
+                                        <h1>@(item.AgencyName)<span></span></h1>
 
+                                        <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
+                                        <h2 class="contact-num"><i class="fa fa-phone"></i> </h2>
+                                        @*<h3 class="name">Email</h3>*@
+                                        <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
+                                        <div class="published">Published: <span>@item.CreatedDate</span></div>
+                                    </div>
+                                    <div class="profile-footer">
+                                        @item.CompanyActivityDesc
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="row"><h2>No Agency registered yet.</h2></div>
+                    }
                 </div>
-
             </div>
-        }
-    }
-    else
-    {
-        <div class="row"><h2>No Agency registered yet.</h2></div>
-    }
+        </div>
+    </div>
 </div>

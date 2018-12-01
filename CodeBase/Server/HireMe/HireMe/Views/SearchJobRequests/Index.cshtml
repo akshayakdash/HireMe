@@ -153,7 +153,7 @@
 
             <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-            <a href="#"><i class="fa fa-envelope"></i> Messages & Notifications</a>
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages & Notifications</a>
 
             <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
@@ -614,7 +614,6 @@
                         <i class="fa fa-filter"></i><span>Agency</span>
                     </div>*@
                 <div class="body">
-                    <div class="row">
                         @*<div class="col-lg-4 col-md-6 col-sm-6">
                                 <div class="profileitems searchprofile-section">
                                     <div class="left">
@@ -682,12 +681,9 @@
                                 <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
                             </ul>
                             <div class="tab-content">
-
-
-
                                 <div class="tab-pane fade show active" id="tab-1-1">
                                     <div class="row">
-                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 1">
+                                        <div class="col-md-4 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 1">
                                             <div class="profileitems searchprofile-section">
                                                 <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                 <div class="left">
@@ -697,17 +693,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="right">
-                                                    <h1 data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"><span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span></h1>
+                                                    <h1 data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"><img src="/assets/images/woman-user.png"> <span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span></h1>
                                                     <h2 class="name">
                                                         <span data-ng-bind="jr.Candidate.FirstName + ' ' + jr.Candidate.LastName"></span>
                                                     </h2>
-                                                    <h2>
-                                                        <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span>,
-                                                        <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Email'" data-ng-bind="jr.Candidate.EmailId"></span>
-                                                    </h2>
+                                                    
                                                     <h2 class="location"><span data-ng-bind="jr.Job.JobName"></span></h2>
                                                     <h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>
                                                     <p class="location"><span data-ng-bind="jr.Candidate.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                    <h2 class="contact-num">
+                                                        <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span>,
+                                                        <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Email'" data-ng-bind="jr.Candidate.EmailId"></span>
+                                                    </h2>
                                                     <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
                                                     <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility}}</span></div>
                                                 </div>
@@ -726,7 +723,7 @@
                                 </div>
                                 <div class="tab-pane" id="tab-1-2">
                                     <div class="row">
-                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 2">
+                                        <div class="col-md-4 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 2">
                                             <div class="profileitems searchprofile-section">
                                                 <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                 <div class="left">
@@ -761,11 +758,17 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="Nodatafound">
+                                            <i class="bizhub-icon-search"></i>
+                                            <h3>
+                                                No Data Found
+                                            </h3>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-1-3">
                                     <div class="row">
-                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 3">
+                                        <div class="col-md-4 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 3">
                                             <div class="profileitems searchprofile-section">
                                                 <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                 <div class="left">
@@ -804,7 +807,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="tab-1-4">
                                     <div class="row">
-                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 4">
+                                        <div class="col-md-4 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 4">
                                             <div class="profileitems searchprofile-section">
                                                 <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                 <div class="left">
@@ -843,7 +846,7 @@
                                 </div>
                                 <div class="tab-pane fade" id="tab-1-5">
                                     <div class="row">
-                                        <div class="col-md-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 5">
+                                        <div class="col-md-4 col-sm-6" data-ng-repeat="jr in jobRequests | filterByJobCategoryId : 5">
                                             <div class="profileitems searchprofile-section">
                                                 <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><i class="fa fa-check" aria-hidden="true"></i></span>
                                                 <div class="left">
@@ -853,16 +856,18 @@
                                                     </div>
                                                 </div>
                                                 <div class="right">
-                                                    <h1 data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"><span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span></h1>
+                                                    <h1 data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"><span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span>
+                                                    </h1>
                                                     <h2 class="name">
                                                         <span data-ng-bind="jr.Candidate.FirstName + ' ' + jr.Candidate.LastName"></span>
                                                     </h2>
+                                                    <h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>
+                                                    
+                                                    <h2 class="location"><span data-ng-bind="jr.Job.JobName"></span></h2>
                                                     <h2>
                                                         <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span>,
                                                         <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Email'" data-ng-bind="jr.Candidate.EmailId"></span>
                                                     </h2>
-                                                    <h2 class="location"><span data-ng-bind="jr.Job.JobName"></span></h2>
-                                                    <h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>
                                                     <p class="location"><span data-ng-bind="jr.Candidate.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
                                                     <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
                                                     <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility}}</span></div>
@@ -882,13 +887,18 @@
                                 </div>
 
 
-                                <div class="col-md-4 col-md-6 col-sm-6" data-ng-if="jobRequests.length == 0">
-
-                                    <h3>No job request found based on your search criteria.</h3>
+                                <div class="filter-overlay" style="display:block;" data-ng-if="jobRequests.length == 0">@*data-ng-if="jobRequests.length == 0"*@
+                                    <div class="lds-ripple"><div></div><div></div></div>
                                 </div>
+                                @*<div class="Nodatafound">
+                                    <i class="bizhub-icon-search"></i>
+                                    <h3>
+                                        No Data Found
+                                    </h3>
+                                </div>*@
                             </div>
                         </div>
-                    </div>
+
                 </div>
 
             </div>
