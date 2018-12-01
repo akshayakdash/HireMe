@@ -107,11 +107,15 @@
         @if (role == "Candidate")
         {
 
-            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
+            <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
 
-            <a href="~/JobRequests" class="active"><i class="fa fa-search"></i> Job Requests</a>
+            <a href="~/JobRequests" class="active"><i class="fa fa-graduation-cap"></i> Job Requests</a>
 
             <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
+
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Employer")
         {
@@ -188,15 +192,15 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 1))
                                                         {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
                                                                         <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                     </div>
-                                                                    <div class="favorite">
+                                                                    @*<div class="favorite">
                                                                         <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
-                                                                    </div>
+                                                                    </div>*@
                                                                 </div>
                                                                 <div class="right">
                                                                     <h1>@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>@(item.Candidate.StaffType == HireMe.Models.StaffType.Agency ? "(AGENCY)" : "(INDIVIDUAL)")</span></h1>
@@ -208,16 +212,22 @@
                                                                 <div class="profile-footer">
                                                                     @item.JobRequestDescription
                                                                 </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        <li><a href="" title="Delete" ><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -230,7 +240,7 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 2))
                                                     {
                                                     <div class="col-md-4 col-sm-6">
-                                                        <div class="profileitems">
+                                                        <div class="profileitems searchprofile-section">
                                                             <div class="left">
                                                                 <img src="~/assets/images/image-18.jpg" />
                                                                 <div class="rating">
@@ -250,16 +260,22 @@
                                                             <div class="profile-footer">
                                                                 @item.JobRequestDescription
                                                             </div>
+                                                            <div class="team-contact-info">
+                                                                <ul class="social-icons">
+                                                                    <li><a href="" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                    <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -272,7 +288,7 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 3))
                                                     {
                                                     <div class="col-md-4 col-sm-6">
-                                                        <div class="profileitems">
+                                                        <div class="profileitems searchprofile-section">
                                                             <div class="left">
                                                                 <img src="~/assets/images/image-18.jpg" />
                                                                 <div class="rating">
@@ -292,16 +308,22 @@
                                                             <div class="profile-footer">
                                                                 @item.JobRequestDescription
                                                             </div>
+                                                            <div class="team-contact-info">
+                                                                <ul class="social-icons">
+                                                                    <li><a href="" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                    <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -314,7 +336,7 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 4))
                                                     {
                                                     <div class="col-md-4 col-sm-6">
-                                                        <div class="profileitems">
+                                                        <div class="profileitems searchprofile-section">
                                                             <div class="left">
                                                                 <img src="~/assets/images/image-18.jpg" />
                                                                 <div class="rating">
@@ -334,16 +356,22 @@
                                                             <div class="profile-footer">
                                                                 @item.JobRequestDescription
                                                             </div>
+                                                            <div class="team-contact-info">
+                                                                <ul class="social-icons">
+                                                                    <li><a href="" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                    <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
@@ -356,7 +384,7 @@
                                                     @foreach (var item in Model.Where(p => p.JobId == 5))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems">
+                                                            <div class="profileitems searchprofile-section">
                                                                 <div class="left">
                                                                     <img src="~/assets/images/image-18.jpg" />
                                                                     <div class="rating">
@@ -376,21 +404,31 @@
                                                                 <div class="profile-footer">
                                                                     @item.JobRequestDescription
                                                                 </div>
+                                                                <div class="team-contact-info">
+                                                                    <ul class="social-icons">
+                                                                        <li><a href="" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     }
 
                                                 </div>
-                                                <div style="    text-align: center;">
+                                                @*<div style="    text-align: center;">
 
                                                     <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                                </div>
+                                                </div>*@
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div style="    text-align: center;">
 
+                                    <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+
+                                </div>
 
                             </div><!-- tab-content -->
                         </div><!-- tabs -->

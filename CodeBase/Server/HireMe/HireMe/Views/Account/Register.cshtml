@@ -151,7 +151,7 @@
 
                                     </div>
                                 </div><!-- tab-pane -->
-                                <div class="tab-pane fade" id="tab-1-2">
+                                <div class="tab-pane fade show active" id="tab-1-2">
                                     <div class="form-section">
                                         <h6 class="text-uppercase">Document to Upload</h6>
 
@@ -295,10 +295,10 @@
                             @*<span style="float:right;"><a href="/Account/ForgotPassword">Forgotten password?</a></span>*@
                             <ul class="nav nav-tabs" style="width: 100%;">
                                 <li style="width: 50%;">
-                                    <a style="float:left;" class="active" href="#tab-1-1" data-toggle="tab">Back</a>
+                                    <a style="float:left;" class="active backbtn" href="#tab-1-1" data-toggle="tab">Back</a>
                                 </li>
                                 <li style="width: 50%;">
-                                    <a style="float:right;" href="#tab-1-2" data-toggle="tab">Next</a>
+                                    <a style="float:right;" class="active nextbtn" href="#tab-1-2" data-toggle="tab">Next</a>
                                 </li>
                             </ul>
                         </div>
@@ -345,5 +345,37 @@
         });
     });
 </script>
+<script type="text/javascript">
+
+
+    //alert(jobRequestId);
+    $(document).ready(function () {
+        // alert("s")
+        $(".backbtn").hide();
+        $("#tab-1-2").hide();
+        $("#tab-1-1").show();
+        $(".backbtn").click(function () {
+            //alert("s")
+            $(this).hide();
+            $(".nextbtn").show();
+            $(".nextbtn").addClass("active");
+            $("#tab-1-2").hide();
+            $("#tab-1-1").show();
+            //$(".backbtn").click();
+        })
+        $(".nextbtn").click(function () {
+            $(this).hide();
+            $(".backbtn").show();
+            $(".backbtn").addClass("active");
+            // $(".nextbtn").click();
+            $("#tab-1-1").hide();
+            $("#tab-1-2").show();
+        })
+    })
+
+</script>
+
+
+
 
 

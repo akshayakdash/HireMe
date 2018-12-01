@@ -18,36 +18,47 @@ namespace HireMe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: SearchJobRequests
-        public ActionResult Index(Gender? gender = null, string yearsOfExperience = "")
+        public ActionResult Index(int? id)
         {
-            JobRequestSearchParam searchParam = null;//Session["JobRequestSearchParam"] as JobRequestSearchParam;
+            //JobRequestSearchParam searchParam = null;//Session["JobRequestSearchParam"] as JobRequestSearchParam;
 
-            if (gender != null || !string.IsNullOrWhiteSpace(yearsOfExperience))
-            {
-                searchParam = new JobRequestSearchParam { };
-                searchParam.Gender = gender.Value;
-                if (!string.IsNullOrWhiteSpace(yearsOfExperience))
-                    searchParam.YearsOfExperience = yearsOfExperience;
-            }
+            //if (gender != null || !string.IsNullOrWhiteSpace(yearsOfExperience))
+            //{
+            //    searchParam = new JobRequestSearchParam { };
+            //    searchParam.Gender = gender.Value;
+            //    if (!string.IsNullOrWhiteSpace(yearsOfExperience))
+            //        searchParam.YearsOfExperience = yearsOfExperience;
+            //}
 
-            if (searchParam == null)
+            //if (searchParam == null)
+            //{
+            //    var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
+            //    return View(jobRequests.ToList());
+            //}
+            //else
+            //{
+            //    object[] queryString = searchParam.GetSearchQuery();
+            //    ArrayList searchArgs = (ArrayList)queryString[1];
+            //    var jobRequests = db.JobRequests
+            //        .Include(j => j.Candidate)
+            //        .Include(j => j.Job)
+            //        .AsQueryable()
+            //        .Where(queryString[0].ToString(), searchArgs.ToArray());
+
+
+            //    //var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
+            //    return View(jobRequests.ToList());
+            //}
+
+            if (id != null && id.HasValue)
             {
-                var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
-                return View(jobRequests.ToList());
+                return View();
             }
             else
             {
-                object[] queryString = searchParam.GetSearchQuery();
-                ArrayList searchArgs = (ArrayList)queryString[1];
-                var jobRequests = db.JobRequests
-                    .Include(j => j.Candidate)
-                    .Include(j => j.Job)
-                    .AsQueryable()
-                    .Where(queryString[0].ToString(), searchArgs.ToArray());
-
-
-                //var jobRequests = db.JobRequests.Include(j => j.Candidate).Include(j => j.Job);
-                return View(jobRequests.ToList());
+                var categories = db.JobCategories.Include(p => p.Jobs).ToList();
+                var jobs = db.Jobs.ToList();
+                return View(categories);
             }
         }
 

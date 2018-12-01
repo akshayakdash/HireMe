@@ -3,9 +3,34 @@
     #footer-container {
         display: none;
     }
+    #stars > i.selected {
+        color: #FF912C;
+    }
 </style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
     var jobRequestId = 0;
+    var ratingValue = 0;
+    $(document).ready(function () {
+        $('#stars i').on('click', function () {
+            var onStar = parseInt($(this).data('value'), 10); // The star currently selected
+            var stars = $(this).parent().children('i');
+
+            for (i = 0; i < stars.length; i++) {
+                $(stars[i]).removeClass('selected');
+            }
+
+            for (i = 0; i < onStar; i++) {
+                $(stars[i]).addClass('selected');
+            }
+
+            // JUST RESPONSE (Not needed)
+            ratingValue = parseInt($('#stars i.selected').last().data('value'), 10);
+            
+
+        });
+    })
+
     function deleteFavouriteJobRequest(jobRequestId) {
         var prompt = confirm("Are you sure ?")
         //alert(jobRequestId);
@@ -22,8 +47,8 @@
                         //    }, 2000);
                         //});
 
-                        $("#modalnote").modal("hide");
-
+                       
+                        
                         alert("Job Request deleted from your favourite list.");
                         window.location.reload();
                     }
@@ -37,8 +62,16 @@
     }
 
     function saveJobRequestNote() {
+
+
+        
+
+
+
+
         var note = $("#jobRequestNote").val();
-        var rating = $("#rating").val();
+        var rating = ratingValue//$("#rating").val();
+        console.log(rating);
         if (jobRequestId && note && rating) {
             $.ajax
                 ({
@@ -48,7 +81,7 @@
                     success: function (result) {
                         $("#jobRequestNote").val("");
                         $("#rating").val("");
-
+                        $("#modalnote").modal("hide");
                         alert("Job Request note added successfully.");
                     }
                 });
@@ -230,7 +263,7 @@
                                                         <div class="left">
                                                             <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                             <div class="rating">
-                                                                <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                <a href=""><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                             </div>
                                                             @*<div class="favorite">
                                                                     <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
@@ -626,7 +659,7 @@
                                                                 @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                     <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                 @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                                <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.Job.JobId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Unfavorites" onclick="deleteFavouriteJobRequest(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
                                                                 <li><a href="#" title="Note" onclick="setJobRequestId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
                                                                 <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                             </ul>
@@ -701,8 +734,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="note-stars">
-                                    <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
-                                    <input type="text" id="rating" />
+                                    <a id="stars"><i class="fa fa-star" data-value='1'></i><i class="fa fa-star" data-value='2'></i><i class="fa fa-star" data-value='3'></i><i class="fa fa-star" data-value='4'></i><i class="fa fa-star" data-value='5'></i></a>
+                                    @*<input type="text" id="rating" />*@
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>

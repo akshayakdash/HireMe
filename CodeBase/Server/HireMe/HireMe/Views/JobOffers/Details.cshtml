@@ -40,8 +40,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
     var item = jobTasks.ElementAt(i);
     if (Model.JobOfferJobTasks.Any(p => p.JobTaskId == item.JobTaskId))
     {
-            <div class="checkbox" style="margin-left:25px;">
-                <label>
+            @*<div class="checkbox" style="margin-left:25px;">
+                <label>*@
 
                     @*@Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
                         @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
@@ -50,7 +50,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                         @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
                     @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
                     @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
-                    <img src="~/assets/images/home-icon.png" />
+                    @*<img src="~/assets/images/home-icon.png" />
                     @(item.JobTaskName)
 
                     <div class="toggle-group">
@@ -82,9 +82,37 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     @ShowTaskTree(item.SubTasks)
 
                 }
-            </div>
-                            }
+            </div>*@
+
+
+            <div class="row" style="margin-left: 5px;">
+                <div class="col-lg-1 col-md-1">
+                    <img src="~/assets/images/home-icon.png" />
+                </div>
+                <div class="col-lg-11 col-md-11">
+                    <div>
+                        @(item.JobTaskName)
+                    </div>
+                    <div>
+                        @{
+                            var selectedTask = Model.JobOfferJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
                         }
+                        @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                        {
+                            <span>@selectedTask.TaskResponseAdditionalDescription</span>
+                        }
+                    </div>
+
+                </div>
+                @if (item.SubTasks.Any())
+            {
+
+                    @ShowTaskTree(item.SubTasks)
+
+                }
+            </div>
+                                }
+                            }
 }
 
 
@@ -172,11 +200,15 @@ for (int i = 0; i < jobTasks.Count(); i++)
         @if (role == "Candidate")
         {
 
-            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
+            <a href="~/SearchJobOffers/CheckCandidateProfileExists" class="active"><i class="fa fa-search"></i> Search Employer</a>
 
-            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
+            <a href="~/JobRequests"><i class="fa fa-graduation-cap"></i> Job Requests</a>
 
             <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
+
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Employer")
         {
@@ -391,13 +423,18 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 <div class="filtersection-panel">
                                                     <div class="filtersection-header">
                                                         Read
-                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                        @*<div class="switch-area-inner switch-area-inner-cus">
                                                             @(Model.CanRead ? "Yes" : "No")
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                     <div class="filtersection-body">
-                                                        <div class="icon-section">
+                                                        @*<div class="icon-section">
                                                             <img src="~/assets/images/eyeglass1.png" alt="">
+                                                        </div>*@
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.CanRead ? "Yes" : "No")
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -406,13 +443,18 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 <div class="filtersection-panel">
                                                     <div class="filtersection-header">
                                                         Write
-                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                        @*<div class="switch-area-inner switch-area-inner-cus">
                                                             @(Model.CanWrite ? "Yes" : "No")
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                     <div class="filtersection-body">
-                                                        <div class="icon-section">
+                                                        @*<div class="icon-section">
                                                             <img src="~/assets/images/write1.png" alt="">
+                                                        </div>*@
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.CanWrite ? "Yes" : "No")
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -423,13 +465,18 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 <div class="filtersection-panel">
                                                     <div class="filtersection-header">
                                                         Sleep on Site
-                                                        <div class="switch-area-inner switch-area-inner-cus">
+                                                        @*<div class="switch-area-inner switch-area-inner-cus">
                                                             @(Model.SleepOnSite ? "Yes" : "No")
-                                                        </div>
+                                                        </div>*@
                                                     </div>
                                                     <div class="filtersection-body">
-                                                        <div class="icon-section">
+                                                        @*<div class="icon-section">
                                                             <img src="~/assets/images/sleep1.png" alt="">
+                                                        </div>*@
+                                                        <div class="row">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                @(Model.SleepOnSite ? "Yes" : "No")
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

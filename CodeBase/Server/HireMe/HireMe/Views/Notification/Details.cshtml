@@ -1,4 +1,4 @@
-﻿@model HireMe.Models.Employer
+﻿@model HireMe.Models.JobTekNotification
 
 @{
     ViewBag.Title = "Details";
@@ -7,87 +7,39 @@
 <h2>Details</h2>
 
 <div>
-    <h4>Employer</h4>
+    <h4>JobTekNotification</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ApplicationUser.FirstName)
+            @Html.DisplayNameFor(model => model.Content)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ApplicationUser.FirstName)
+            @Html.DisplayFor(model => model.Content)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CityEntity.CityName)
+            @Html.DisplayNameFor(model => model.SenderId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CityEntity.CityName)
+            @Html.DisplayFor(model => model.SenderId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CountryEntity.CountryName)
+            @Html.DisplayNameFor(model => model.ReceiverId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CountryEntity.CountryName)
+            @Html.DisplayFor(model => model.ReceiverId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DistrictEntity.DistrictName)
+            @Html.DisplayNameFor(model => model.Category)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DistrictEntity.DistrictName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gender)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Country)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Country)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.District)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.District)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfileVerified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProfileVerified)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatedBy)
+            @Html.DisplayFor(model => model.Category)
         </dd>
 
         <dt>
@@ -99,96 +51,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.UpdatedBy)
+            @Html.DisplayNameFor(model => model.SeenByReceiver)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UpdatedBy)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdatedDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdatedDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProofDoc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdProofDoc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdProofDocDesc)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdProofDocDesc)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ProfilePicUrl)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ProfilePicUrl)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EmailId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EmailId)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactNo)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContactNo)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.ContactOption)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ContactOption)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Address)
+            @Html.DisplayFor(model => model.SeenByReceiver)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployerId }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JobTekNotificationId }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

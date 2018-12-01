@@ -94,7 +94,7 @@ namespace HireMe.Models
 
         // This field is added later to check the consent of the user
         // if contact option is blank then both email and phone no will be visible
-        public string ContactOption { get; set; } 
+        public string ContactOption { get; set; }
 
     }
 
@@ -196,7 +196,7 @@ namespace HireMe.Models
         public string IdProofDoc { get; set; }
         public string IdProofDocDesc { get; set; }
 
-         public string ProfilePicUrl { get; set; }
+        public string ProfilePicUrl { get; set; }
 
         public string EmailId { get; set; }
         public string ContactNo { get; set; }
@@ -227,7 +227,7 @@ namespace HireMe.Models
         public string JobGroup { get; set; }
 
         public string JobDesc { get; set; }
-        
+
         public string IconImage { get; set; }
 
         public List<JobTask> JobTasks { get; set; }
@@ -326,6 +326,10 @@ namespace HireMe.Models
         [NotMapped]
         public List<JobTask> MasterJobTasks { get; set; }
         public List<JobRequestNote> JobRequestNotes { get; set; }
+
+        public string SkillPic1 { get; set; }
+        public string SkillPic2 { get; set; }
+        public string SkillPic3 { get; set; }
 
 
         public bool VerifiedByAdmin { get; set; }
@@ -487,32 +491,47 @@ namespace HireMe.Models
         public string CreatedBy { get; set; }
         public string CreatedDate { get; set; }
     }
+
+    public class JobTekNotification
+    {
+        public int JobTekNotificationId { get; set; }
+        public string Content { get; set; }
+        public string SenderId { get; set; }
+        [ForeignKey("SenderId")]
+        public ApplicationUser Sender { get; set; }
+        public string ReceiverId { get; set; }
+        [ForeignKey("ReceiverId")]
+        public ApplicationUser Receiver { get; set; }
+        public int Category { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public bool SeenByReceiver { get; set; }
+    }
     public enum Gender
     {
-        Male = 0,
-        Female = 1
+        Male = 1,
+        Female = 2
     }
 
     public enum StaffType
     {
-        Independent = 0,
-        Agency = 1
+        Independent = 1,
+        Agency = 2
     }
 
     public enum SalaryType
     {
-        Monthly = 0,
-        Hourly = 1,
-        Others = 2
+        Monthly = 1,
+        Hourly = 2,
+        Others = 3
     }
 
     public enum ParamType
     {
-        Text = 0,
-        CheckBox = 1,
-        DatePicker = 2,
-        Number = 3,
-        SelectBox = 4
+        Text = 1,
+        CheckBox = 2,
+        DatePicker = 3,
+        Number = 4,
+        SelectBox = 5
     }
 
     public enum CountryEnum

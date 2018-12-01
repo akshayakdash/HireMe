@@ -239,7 +239,7 @@
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\JobTekApiController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NotificationContoller.cs" />
+    <Compile Include="Controllers\NotificationController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SearchJobOffersController.cs" />
     <Compile Include="Controllers\SearchJobRequestsController.cs" />
@@ -274,6 +274,14 @@
     <Compile Include="Migrations\201811272018398_Address_Field_Added_To_Employer.cs" />
     <Compile Include="Migrations\201811272018398_Address_Field_Added_To_Employer.Designer.cs">
       <DependentUpon>201811272018398_Address_Field_Added_To_Employer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812010538400_Job_Request_Profile_PicUpload_Option_Added.cs" />
+    <Compile Include="Migrations\201812010538400_Job_Request_Profile_PicUpload_Option_Added.Designer.cs">
+      <DependentUpon>201812010538400_Job_Request_Profile_PicUpload_Option_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812010642542_Notification_Entity_Added.cs" />
+    <Compile Include="Migrations\201812010642542_Notification_Entity_Added.Designer.cs">
+      <DependentUpon>201812010642542_Notification_Entity_Added.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -510,7 +518,6 @@
     <Content Include="Views\Notification\Details.cshtml" />
     <Content Include="Views\Notification\Edit.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
-    <Content Include="Views\NotificationContoller\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -551,6 +558,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811272018398_Address_Field_Added_To_Employer.resx">
       <DependentUpon>201811272018398_Address_Field_Added_To_Employer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812010538400_Job_Request_Profile_PicUpload_Option_Added.resx">
+      <DependentUpon>201812010538400_Job_Request_Profile_PicUpload_Option_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812010642542_Notification_Entity_Added.resx">
+      <DependentUpon>201812010642542_Notification_Entity_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
