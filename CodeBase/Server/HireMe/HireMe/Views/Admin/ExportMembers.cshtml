@@ -173,11 +173,11 @@
                                 <div class="filtersection-header">
                                     Select Member
                                     @*<div class="switch-area-inner">
-                            <label class="switchsmall">
-                                <input type="checkbox">
-                                <span class="slider1 round"></span>
-                            </label>
-                        </div>*@
+                                        <label class="switchsmall">
+                                            <input type="checkbox">
+                                            <span class="slider1 round"></span>
+                                        </label>
+                                    </div>*@
                                 </div>
 
                                 <div class="filtersection-body">
@@ -351,42 +351,50 @@
                 </div>
                 <div class="header">
                     <i class="fa fa-align-left"></i>
-
                     <span class="grid-title">Search Results</span>
-    
                     <a title="Filter" class="Filterjob" id="FilterjobId1"><i class="fa fa-filter"></i></a>
-
                 </div>
                 @*<div class="filter-selected">
                         <i class="fa fa-filter"></i><span>Agency</span>
                     </div>*@
                 <div class="body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered">
+                                    <thead class="bg-pink">
+                                        <tr>
+                                            @*<th>#</th>*@
+                                            <th>Name</th>
+                                            <th>Type Of Member</th>
+                                            <th>Job Sought</th>
+                                            <th>Profile Status</th>
+                                            <th>Gender</th>
+                                            <th>Age</th>
+                                        </tr>
+                                    </thead>
+                                        
+                                    <tbody>
+                                        <tr data-ng-repeat="member in members">
+                                            @*<td>{{$index + 1}}</td>*@
+                                            <td data-ng-bind="member.Name"></td>
+                                            <td data-ng-bind="member.MemberType"></td>
+                                            <td data-ng-bind="member.Job"></td>
+                                            <td data-ng-bind="member.ProfileStatus ? 'Verified' : 'Not Verified'"></td>
+                                            <td data-ng-bind="member.Gender"></td>
+                                            <td data-ng-bind="member.Age"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-md-12 text-right">
+                            <button type="button" class="btn btn-success" ng-click="exportMemebersToExcel()"><i class="fa fa-file-excel-o"></i>&nbsp;Export To Excel</button>
+                        </div>
+                    </div>
+                   
 
-                    <table class="table table-responsive table-condensed table-striped">
-                        <tbody>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Type Of Member</th>
-                                <th>Job Sought</th>
-                                <th>Profile Status</th>
-                                <th>Gender</th>
-                                <th>Age</th>
-                            </tr>
-                            <tr data-ng-repeat="member in members">
-                                <td>{{$index + 1}}</td>
-                                <td data-ng-bind="member.Name"></td>
-                                <td data-ng-bind="member.MemberType"></td>
-                                <td data-ng-bind="member.Job"></td>
-                                <td data-ng-bind="member.ProfileStatus ? 'Verified' : 'Not Verified'"></td>
-                                <td data-ng-bind="member.Gender"></td>
-                                <td data-ng-bind="member.Age"></td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-
-                    <button type="button" class="btn btn-primary pull-left" ng-click="exportMemebersToExcel()">Export To Excel</button>
+                    
                 </div>
             </div>
         </div>

@@ -154,13 +154,17 @@
         <div class="tab-section">
             <div class="tab-section-body">
                 <div class="row">
-
+                    <div class="col-md-12">
+                        <div class="headline text-center mb-1">
+                            <h2>Verify Agency Profiles</h2>
+                        </div>
+                    </div>
                     @if (Model != null)
                     {
                         foreach (var item in Model)
                         {
 
-                            <div class="col-md-4 col-sm-6">
+                            <div class="col-sm-6">
                                 <div class="profileitems">
                                     <div class="left">
                                         <img src="@Url.Content(item.AgencyLogo)" />
@@ -170,10 +174,9 @@
                                         <div class="favorite">
 
                                         </div>
-                                        <button class="btn btn-default btn-xs btn-block" type="button"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
                                         @if (!item.ProfileVerified)
                                         {
-                                            <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)">Verify</button>
+                                            <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
                                         }
                                         else
                                         {
@@ -182,13 +185,17 @@
                                         }
                                     </div>
                                     <div class="right">
-                                        <h1>@(item.AgencyName)<span></span></h1>
-
-                                        <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
-                                        <h2 class="contact-num"><i class="fa fa-phone"></i> </h2>
-                                        @*<h3 class="name">Email</h3>*@
-                                        <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
-                                        <div class="published">Published: <span>@item.CreatedDate</span></div>
+                                        <div class="right-left">
+                                            <h1>@(item.AgencyName)<span></span></h1>
+                                            <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
+                                            <h2 class="contact-num"><i class="fa fa-phone"></i> +225 07-02-54-69</h2>
+                                            <h2 class="email"><i class="fa fa-envelope"></i> jk@gmail.com</h2>
+                                            <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
+                                            <div class="published">Published: <span>@item.CreatedDate</span></div>
+                                        </div>
+                                        <div class="idcard">
+                                            <img src="~/assets/images/idcard.jpg" />
+                                        </div>
                                     </div>
                                     <div class="profile-footer">
                                         @item.CompanyActivityDesc

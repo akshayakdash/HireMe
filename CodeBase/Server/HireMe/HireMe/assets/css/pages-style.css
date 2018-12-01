@@ -672,7 +672,7 @@
 	color: #252525;
 	-webkit-transition: all 0.25s;
 	transition: all 0.25s;
-    max-width: 150px;
+    /*max-width: 150px;*/
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;

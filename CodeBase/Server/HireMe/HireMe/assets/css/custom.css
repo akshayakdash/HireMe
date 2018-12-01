@@ -346,10 +346,10 @@ input[type="button"] {
 }
 
 /* TABLES */
-table th {
+/*table th {
     text-transform: uppercase;
     color: #252525;
-}
+}*/
 
 table td {
     padding: 0 20px;
@@ -10063,8 +10063,12 @@ blockquote {
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .profileitems .right .contact-num {
+        .profileitems .right .contact-num, .profileitems .right .email {
             font-size: 13px;
+        }
+        .profileitems .right .fa {
+            font-size: 14px;
+            margin-right:10px;
         }
         .profileitems .right .location {
             font-size: 13px;
@@ -10106,6 +10110,23 @@ blockquote {
                 font-size: 12px;
                 font-weight: 400;
             }
+        .profileitems .right > .right-left {
+            float: left;
+            padding-right: 20px;
+        }
+        .profileitems .right > .idcard {
+            float: right;
+            width: 120px;
+            margin-bottom: 10px;
+        }
+            .profileitems .right > .idcard img {
+                width: 100%;
+                max-height: 100%;
+                border: 1px solid #666;
+                border-radius: 5px;
+                padding: 3px;
+                background: #fff;
+            }
         .profileitems .validate {
             font-size: 13px;
             position: absolute;
@@ -10117,7 +10138,6 @@ blockquote {
         }
         .profileitems .validate .fa{
             padding: 10px;
-            /* border-radius: 50%; */
             font-size: 18px;
         }
     .profileitems .profile-footer {
@@ -11294,4 +11314,11 @@ margin:0;
     }
 .Nodatafound .datacontent{
 
+}
+.table td, .table th{
+    padding:5px 8px;
+}
+.bg-pink {
+    background: #fe005a;
+    color:#fff!important;
 }
