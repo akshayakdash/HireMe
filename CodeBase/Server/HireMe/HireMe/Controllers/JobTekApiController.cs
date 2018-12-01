@@ -34,14 +34,14 @@ namespace HireMe.Controllers
                     .Include(j => j.Job)
                     .Include(j => j.JobRequestJobTasks)
                     .AsQueryable()
-                    .Where(queryString[0].ToString(), searchArgs.ToArray());
+                    .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
                 if (searchParam != null && searchParam.Tasks != null && searchParam.Tasks.Count > 0)
                 {
                     jobRequests = jobRequests
-                        .Where(p => p.JobRequestJobTasks.Select(t => t.JobTaskId).Any(c => searchParam.Tasks.Contains(c)));
+                        .Where(p => p.JobRequestJobTasks.Select(t => t.JobTaskId).Any(c => searchParam.Tasks.Contains(c))).ToList();
                 }
-                return Request.CreateResponse(HttpStatusCode.OK, jobRequests.ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, jobRequests);
             }
             else
             {

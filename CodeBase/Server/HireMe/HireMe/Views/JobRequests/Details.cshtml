@@ -260,8 +260,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                                                                    .Select(c => c.Value);
+                                                                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                                        .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -347,7 +347,32 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 </tr>
                                                 <tr>
                                                     <td>Rating:</td>
-                                                    <td><a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
+                                                    <td>
+                                                        <a href="#">
+                                                            @if (Model.StarRating != null)
+                                                            {
+                                                                <ul class="rating">
+                                                                    @for (int i = 0; i < Model.StarRating; i++)
+                                                                    {
+                                                                        <li><i class="fa fa-star"></i></li>
+                                                                    }
+                                                                    @if (5 - Model.StarRating > 0)
+                                                                    {
+                                                                        for (int i = 0; i < (5 - Model.StarRating); i++)
+                                                                        {
+                                                                            <li><i class="fa fa-star-o"></i></li>
+                                                                        }
+                                                                    }
+                                                                    
+                                                                </ul>
+                                                            }
+                                                            @*<i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"> </i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star-o"></i>
+                                                                <i class="fa fa-star-o"></i>*@
+                                                        </a>
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Description:</td>
@@ -644,9 +669,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="row">
                                             @if (!string.IsNullOrWhiteSpace(Model.SkillPic1))
                                             {
-                                            <div class="col-lg-4">
-                                                <img src="data:image/jpeg;base64,@Model.SkillPic1" />
-                                            </div>
+                                                <div class="col-lg-4">
+                                                    <img src="data:image/jpeg;base64,@Model.SkillPic1" />
+                                                </div>
                                             }
                                             @if (!string.IsNullOrWhiteSpace(Model.SkillPic2))
                                             {

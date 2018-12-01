@@ -287,6 +287,10 @@
     <Compile Include="Migrations\201812010848100_Average_Star_Rating_For_JobRequest.Designer.cs">
       <DependentUpon>201812010848100_Average_Star_Rating_For_JobRequest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812011538585_Job_Task_Image_Icon_Added.cs" />
+    <Compile Include="Migrations\201812011538585_Job_Task_Image_Icon_Added.Designer.cs">
+      <DependentUpon>201812011538585_Job_Task_Image_Icon_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -571,6 +575,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812010848100_Average_Star_Rating_For_JobRequest.resx">
       <DependentUpon>201812010848100_Average_Star_Rating_For_JobRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812011538585_Job_Task_Image_Icon_Added.resx">
+      <DependentUpon>201812011538585_Job_Task_Image_Icon_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -283,6 +283,8 @@ namespace HireMe.Models
         public ParamType TaskParamValueType { get; set; }
         public string ParamAvailableOptions { get; set; }
 
+        public string IconImage { get; set; }
+
         public int? ParentJobTaskId { get; set; }
         [ForeignKey("ParentJobTaskId")]
         public virtual ICollection<JobTask> SubTasks { get; set; }
