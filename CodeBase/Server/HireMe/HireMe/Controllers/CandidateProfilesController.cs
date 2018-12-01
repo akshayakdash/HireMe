@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using HireMe.Models;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
+using System.IO;
 
 namespace HireMe.Controllers
 {
@@ -75,7 +76,7 @@ namespace HireMe.Controllers
 
                 // first check if a candidate exists with the aspnet userid or not
                 var userId = User.Identity.GetUserId();
-               
+
                 var existingCandidate = db.Candidates.Include(path => path.JobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
                 if (existingCandidate == null)
                 {
@@ -106,6 +107,69 @@ namespace HireMe.Controllers
 
                     var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
 
+                    // iterate the skill pictures
+                    //if (candidateProfile.JobRequestSkillPics != null && candidateProfile.JobRequestSkillPics.Count > 0)
+                    //{
+                    //    for (int i = 0; i < candidateProfile.JobRequestSkillPics.Count; i++)
+                    //    {
+                    //        var skillPic = candidateProfile.JobRequestSkillPics[i];
+                    //        if (skillPic != null && skillPic.ContentLength > 0)
+                    //        {
+
+                    //            string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    //            byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                    //            using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                    //            {
+                    //                thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                    //            }
+
+                    //            //profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    //        }
+                    //    }
+
+                    //}
+
+                    if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
+                    {
+                        var skillPic = candidateProfile.JobRequestSkillPic1;
+                        string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                        byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                        {
+                            thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                        }
+
+                        jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+                    }
+
+                    if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
+                    {
+                        var skillPic = candidateProfile.JobRequestSkillPic2;
+                        string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                        byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                        {
+                            thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                        }
+
+                        jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+                    }
+
+                    if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
+                    {
+                        var skillPic = candidateProfile.JobRequestSkillPic3;
+                        string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                        byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                        {
+                            thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                        }
+
+                        jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+                    }
+
+
+
                     candidateProfile.JobTasks.ForEach(task =>
                     {
                         if (task.Selected)
@@ -119,7 +183,7 @@ namespace HireMe.Controllers
                 }
 
                 // check the role and navigate to the myjobrequests page or naviget to SearchJobOffers?jobId = jobId
-                return RedirectToAction("Index","JobRequests");
+                return RedirectToAction("Index", "JobRequests");
             }
             Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == candidateProfile.JobId);
             candidateProfile.JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks);

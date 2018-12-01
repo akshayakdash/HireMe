@@ -327,6 +327,10 @@ namespace HireMe.Models
         public List<JobTask> MasterJobTasks { get; set; }
         public List<JobRequestNote> JobRequestNotes { get; set; }
 
+        public string SkillPic1 { get; set; }
+        public string SkillPic2 { get; set; }
+        public string SkillPic3 { get; set; }
+
 
         public bool VerifiedByAdmin { get; set; }
         public DateTime? VerificationDate { get; set; }
