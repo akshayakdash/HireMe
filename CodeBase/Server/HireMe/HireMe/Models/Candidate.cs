@@ -489,30 +489,30 @@ namespace HireMe.Models
     }
     public enum Gender
     {
-        Male = 0,
-        Female = 1
+        Male = 1,
+        Female = 2
     }
 
     public enum StaffType
     {
-        Independent = 0,
-        Agency = 1
+        Independent = 1,
+        Agency = 2
     }
 
     public enum SalaryType
     {
-        Monthly = 0,
-        Hourly = 1,
-        Others = 2
+        Monthly = 1,
+        Hourly = 2,
+        Others = 3
     }
 
     public enum ParamType
     {
-        Text = 0,
-        CheckBox = 1,
-        DatePicker = 2,
-        Number = 3,
-        SelectBox = 4
+        Text = 1,
+        CheckBox = 2,
+        DatePicker = 3,
+        Number = 4,
+        SelectBox = 5
     }
 
     public enum CountryEnum

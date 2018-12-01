@@ -32,8 +32,15 @@ namespace HireMe.Controllers
                 var jobRequests = db.JobRequests
                     .Include(j => j.Candidate)
                     .Include(j => j.Job)
+                    .Include(j => j.JobRequestJobTasks)
                     .AsQueryable()
                     .Where(queryString[0].ToString(), searchArgs.ToArray());
+
+                if (searchParam != null && searchParam.Tasks != null && searchParam.Tasks.Count > 0)
+                {
+                    jobRequests = jobRequests
+                        .Where(p => p.JobRequestJobTasks.Select(t => t.JobTaskId).Any(c => searchParam.Tasks.Contains(c)));
+                }
                 return Request.CreateResponse(HttpStatusCode.OK, jobRequests.ToList());
             }
             else
@@ -168,7 +175,7 @@ namespace HireMe.Controllers
                 contentType.CharSet = "UTF-8";
 
                 responseDetails.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-                responseDetails.Content.Headers.ContentDisposition.FileName = "members"+DateTime.Now.Date.ToString("ddMMMyyyy")+".xlsx";
+                responseDetails.Content.Headers.ContentDisposition.FileName = "members" + DateTime.Now.Date.ToString("ddMMMyyyy") + ".xlsx";
                 responseDetails.StatusCode = System.Net.HttpStatusCode.OK;
             }
             return responseDetails;
@@ -186,6 +193,58 @@ namespace HireMe.Controllers
             jobRequest.JobRequestNotes.Add(jobRequestNote);
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.Created, "Note added successfully.");
+        }
+
+        [Route("api/JobTekApi/GetCountries")]
+        [HttpGet]
+        public HttpResponseMessage GetCountries()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, db.Countries);
+        }
+
+
+        [Route("api/JobTekApi/GetCities")]
+        [HttpGet]
+        public HttpResponseMessage GetCities(int countryId = 0)
+        {
+            if (countryId == 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, db.Cities);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, db.Cities.Where(p => p.CountryId == countryId));
+            }
+        }
+
+        [Route("api/JobTekApi/GetDistricts")]
+        [HttpGet]
+        public HttpResponseMessage GetDistricts(int cityId = 0)
+        {
+            if (cityId == 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, db.Districts);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, db.Districts.Where(p => p.CityId == cityId));
+            }
+        }
+        [Route("api/JobTekApi/GetJobTasks")]
+        [HttpGet]
+        public HttpResponseMessage GetJobTasks(int jobId)
+        {
+            var job = db.Jobs.Include(path => path.JobTasks).FirstOrDefault(p => p.JobId == jobId);
+            return Request.CreateResponse(HttpStatusCode.OK, job);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 
