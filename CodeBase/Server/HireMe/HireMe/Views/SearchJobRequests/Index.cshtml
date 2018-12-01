@@ -601,8 +601,8 @@
                     <div class="header">
                         <i class="fa fa-align-left"></i>
 
-                        <span class="grid-title">Search Results - {{job ? job.JobName : ''}}</span>
-                        <span data-ng-bind="jobRequests ? '(' + jobRequests.length + ' profiles found.)' : ''"></span>
+                        <span class="grid-title">Search Results - <strong>{{job ? job.JobName : ''}}</strong> </span>
+                        <span class="grid-title-small" data-ng-bind="jobRequests ? '(' + jobRequests.length + ' profiles found.)' : ''"></span>
 
                         <a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>
 
@@ -635,20 +635,17 @@
                                             <span data-ng-if="jr.Candidate.Gender == 1"><i class="fa fa-male"></i></span>
                                             <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>
                                         </h1>
-                                        <h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'">
+                                        @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
                                             @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
-                                        </h1>
+                                        
                                         <h2 class="name">
                                             <span data-ng-bind="jr.Candidate.FirstName + ' ' + jr.Candidate.LastName"></span>
                                         </h2>
+                                        <h2 class="jobname"><span data-ng-bind="jr.Job.JobName"></span></h2>
                                         <h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>
-
-                                        <h2 class="location"><span data-ng-bind="jr.Job.JobName"></span></h2>
-                                        <h2>
-                                            <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span>,
-                                            <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Email'" data-ng-bind="jr.Candidate.EmailId"></span>
-                                        </h2>
-                                        <p class="location"><span data-ng-bind="jr.Candidate.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                        <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>
+                                        <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Email'" data-ng-bind="jr.Candidate.EmailId"></span></h2>
+                                        <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Candidate.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
                                         <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
                                         <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility}}</span></div>
                                     </div>
@@ -762,27 +759,27 @@
                                 <div class="tab-content">
 
                                     @for (int i = 0; i < Model.Count(); i++)
-                                    {
-                                        var item = Model.ElementAt(i);
-                                        <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-1-"+i)">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="isotope cols-3 gutter">
-                                                        @foreach (var job in item.Jobs)
-                                                        {
-                                                            <div class="isotope-item categ-1 categ-2">
-                                                                <div class="portfolio-item">
-                                                                    <div class="portfolio-item-thumbnail">
-                                                                        <img src="@(job.IconImage)" alt="">
-                                                                        <div class="portfolio-item-hover"></div>
-                                                                        <div class="portfolio-item-description">
-                                                                            <h5><a href='~/@("SearchJobRequests?id="+job.JobId)'>@job.JobName</a></h5>
-                                                                        </div><!-- portfolio-item-description -->
-                                                                        <a class="fancybox zoom-action" data-fancybox="portfolio" href='~/@("SearchJobRequests?id="+job.JobId)'><i class="bizhub-icon-search"></i></a>
-                                                                    </div><!-- portfolio-item-thumbnail -->
-                                                                </div><!-- portfolio-item -->
-                                                            </div>
-                                                        }
+                                                    {
+                                                        var item = Model.ElementAt(i);
+                                                <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-1-"+i)">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="isotope cols-3 gutter">
+                                                                @foreach (var job in item.Jobs)
+                                                                        {
+                                                                        <div class="isotope-item categ-1 categ-2">
+                                                                            <div class="portfolio-item">
+                                                                                <div class="portfolio-item-thumbnail">
+                                                                                    <img src="@(job.IconImage)" alt="">
+                                                                                    <div class="portfolio-item-hover"></div>
+                                                                                    <div class="portfolio-item-description">
+                                                                                        <h5><a href='~/@("SearchJobRequests?id="+job.JobId)'>@job.JobName</a></h5>
+                                                                                    </div><!-- portfolio-item-description -->
+                                                                                    <a class="zoom-action" href='~/@("SearchJobRequests?id="+job.JobId)'><i class="bizhub-icon-search"></i></a>
+                                                                                </div><!-- portfolio-item-thumbnail -->
+                                                                            </div><!-- portfolio-item -->
+                                                                        </div>
+                                                                        }
 
 
                                                     </div>
