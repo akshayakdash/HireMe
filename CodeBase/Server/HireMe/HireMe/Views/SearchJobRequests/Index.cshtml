@@ -648,8 +648,8 @@
                                         @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
                                         <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Email'" data-ng-bind="jr.Candidate.EmailId"></span></h2>
                                         <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Candidate.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
-                                        <div class="published">Published: <span>{{jr.PublishedDate}}</span></div>
-                                        <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility}}</span></div>
+                                        <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
+                                        <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
                                     </div>
                                     <div class="profile-footer">
                                         {{jr.Candidate.AdditionalDescription}}&nbsp;

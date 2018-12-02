@@ -161,33 +161,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
     }
 
-    function setJobRequestSearchParam() {
-        var gender = $('input[name="options"]').val();
-        var yearsOfExp = $(".yrs_of_exp").val();
-
-        console.log("Gender" + gender);
-        console.log("years of exp = " + yearsOfExp);
-        //SetJobRequestSearchParam
-
-        //$.ajax
-        //    ({
-        //        url: '/SearchJobRequests/SetJobRequestSearchParam?Gender=' + gender + "&YearsOfExperience=" + yearsOfExp,
-        //        data: { "Gender": gender, "YearsOfExperience": yearsOfExp },
-        //        contentType: "json",
-        //        type: 'get',
-        //        success: function (result) {
-        //            //$('.modal-box').text(result).fadeIn(700, function () {
-        //            //    setTimeout(function () {
-        //            //        $('.modal-box').fadeOut();
-        //            //    }, 2000);
-        //            //});
-
-        //            alert("Job Request added to your favourite list.");
-        //        }
-        //    });
-
-        // window.location.href = "SearchJobRequests?gender=" + gender + "&yearsOfExperience=" + yearsOfExp;
-    }
 </script>
 
 
@@ -345,12 +318,20 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                 <table class="table">
                                     <tbody>
                                         <tr>
+                                            <td>Name:</td>
+                                            <td>@(Model.Candidate.FirstName + " " + Model.Candidate.LastName) </td>
+                                        </tr>
+                                        <tr>
                                             <td>Email:</td>
                                             <td>@Model.Candidate.EmailId</td>
                                         </tr>
                                         <tr>
                                             <td>Phone:</td>
                                             <td>@Model.Candidate.ContactNo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address:</td>
+                                            <td>@(Model.Candidate.Country + " " + (Model.Candidate.City ?? "") + (Model.Candidate.District ?? "") )</td>
                                         </tr>
                                         <tr>
                                             <td>Rating:</td>
