@@ -346,10 +346,10 @@ input[type="button"] {
 }
 
 /* TABLES */
-table th {
+/*table th {
     text-transform: uppercase;
     color: #252525;
-}
+}*/
 
 table td {
     padding: 0 20px;
@@ -9975,7 +9975,7 @@ blockquote {
     z-index: 1;
     padding: 10px;
     margin-bottom: 30px;
-    background-color: #f7f7f7;
+    /*background-color: #f7f7f7;*/
     -webkit-transform: translateZ(0);
     -ms-transform: translateZ(0);
     transform: translateZ(0);
@@ -9985,11 +9985,22 @@ blockquote {
     /*display:table;
     width:100%;*/
     min-height: 185px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffd7d7));
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -moz-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -ms-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -o-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: linear-gradient(to bottom, #ffffff, #ffd7d7);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffd7d7);
 }
 
     .profileitems:hover {
         background-color: transparent;
         border: 1px solid rgba(0,0,0,0);
+        box-shadow: 4px 5px 7px rgba(0, 0, 0, 0.4);
     }
 
         .profileitems:hover:after {
@@ -10009,6 +10020,7 @@ blockquote {
             content: "";
             -webkit-transition: all 0.25s;
             transition: all 0.25s;
+            border-radius:8px;
         }
 
         .profileitems:hover:after {
@@ -10016,16 +10028,17 @@ blockquote {
         }
 
     .profileitems .left {
-        max-width: 100px;
+        max-width: 120px;
         float: left;
+        text-align:center;
     }
 
         .profileitems .left img {
             width: 100px;
             border-radius: 50%;
             height: 100px;
-            border: 2px solid #eee;
-            margin-bottom:5px;
+            border: 2px solid #fe005a;
+            margin-bottom: 5px;
         }
 
         .profileitems .left .rating {
@@ -10041,10 +10054,10 @@ blockquote {
     }
 
     .profileitems .right {
-        margin-left: 120px;
+        margin-left: 130px;
     }
 
-        .profileitems .right h1, .profileitems .right h2, .profileitems .right h3 {
+        .profileitems .right h1, .profileitems .right h2, .profileitems .right h3, .profileitems .left h3 {
             font-size: 16px;
             line-height: initial;
             margin-bottom: 5px;
@@ -10055,16 +10068,23 @@ blockquote {
             .profileitems .right h1 span {
                 color: forestgreen;
             }
-        .profileitems .right h2{
-            font-size: 16px;
+        .profileitems .right h2, .profileitems .left h2 {
+            font-size: 14px;
             line-height: initial;
             margin-bottom: 5px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
-        .profileitems .right .contact-num {
+        .profileitems .right .contact-num, .profileitems .right .email {
             font-size: 13px;
+        }
+    .profileitems .left .contact-num, .profileitems .left .email {
+        font-size: 13px;
+    }
+        .profileitems .right .fa {
+            font-size: 14px;
+            margin-right:10px;
         }
         .profileitems .right .location {
             font-size: 13px;
@@ -10073,6 +10093,14 @@ blockquote {
             text-overflow: ellipsis;
             white-space: nowrap;
             margin-bottom: 5px;
+        }
+        .profileitems .right .jobname {
+            text-align: center;
+            background: #fe005a;
+            color: #fff;
+            padding: 2px 5px;
+            font-weight: 400;
+            border-radius: 25px;
         }
         .profileitems .right .url {
             font-size: 13px;
@@ -10090,13 +10118,13 @@ blockquote {
             font-size: 12px;
             font-weight: 700;
         }
-        .profileitems .right .age {
+        .profileitems .right .age, .profileitems .left .age {
             font-size: 14px;
             font-weight: 400;
             padding-right: 10px;
             border-right: 1px solid #ccc;
         }
-        .profileitems .right .experience {
+        .profileitems .right .experience, .profileitems .left .experience {
             font-size: 14px;
             font-weight: 400;
             padding-left: 10px;
@@ -10106,24 +10134,45 @@ blockquote {
                 font-size: 12px;
                 font-weight: 400;
             }
-        .profileitems .validate {
-            font-size: 13px;
+        .profileitems .right > .right-left {
+            float: left;
+            padding-right: 20px;
+        }
+        .profileitems .right > .idcard {
+            float: right;
+            width: 120px;
+            margin-bottom: 10px;
+        }
+            .profileitems .right > .idcard img {
+                width: 100%;
+                max-height: 100%;
+                border: 1px solid #666;
+                border-radius: 5px;
+                padding: 3px;
+                background: #fff;
+            }
+    .profileitems .validate {
+        /*font-size: 13px;
             position: absolute;
             background: #2f922f;
             border-radius: 50%;
             top: 2px;
             left: 1px;
-            color: #fff;
-        }
+            color: #fff;*/
+
+            position: absolute;
+            top: 2px;
+            left: 1px;
+            width: 35px;
+    }
         .profileitems .validate .fa{
             padding: 10px;
-            /* border-radius: 50%; */
             font-size: 18px;
         }
     .profileitems .profile-footer {
         font-size: 13px;
         /*float: left;*/
-        background: rgba(0, 0, 0, 0.09);
+        background: rgba(0, 0, 0, 0.2);
         width: 100%;
         padding: 5px 10px;
         border-radius: 5px;
@@ -10131,6 +10180,7 @@ blockquote {
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        color:#000;
     }
 
         .profileitems .profile-footer p {
@@ -10167,6 +10217,7 @@ blockquote {
         /*height: 100%;*/
         background: #f51179;
         text-align: center;
+        border-radius:0 0 8px 8px;
     }
 
         .searchprofile-section .team-contact-info::before {
@@ -10493,7 +10544,13 @@ blockquote {
             font-size: 1.5em;
             float: left;
         }
-
+            .jobsearch-section .left-section .grid-title strong {
+                font-weight: 600;
+                color: #fe005a;
+            }
+        .jobsearch-section .left-section .grid-title-small {
+            font-weight: 600;
+        }
         .jobsearch-section .left-section .header .fa {
             display: inline-block;
             margin: 0;
@@ -10883,6 +10940,15 @@ input:checked + .slider1:before {
     border-radius: 10px 10px 0 0;
 }
 
+.tabs .tab-header .tab-header-back {
+    float:right;
+}
+.tabs .tab-header .tab-header-back a{
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+}
+
 .search-criteria .filter-header {
     position: relative;
     background: #eee;
@@ -11154,11 +11220,12 @@ margin:0;
 .modal-backdrop{
     display:none;
 }
-.profile-pic{
+.profile-pic {
     border: 2px solid #fe005a;
     padding: 2px;
     border-radius: 5px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
+    min-height: 200px;
 }
 .profile-info{
 
@@ -11294,4 +11361,11 @@ margin:0;
     }
 .Nodatafound .datacontent{
 
+}
+.table td, .table th{
+    padding:5px 8px;
+}
+.bg-pink {
+    background: #fe005a;
+    color:#fff!important;
 }

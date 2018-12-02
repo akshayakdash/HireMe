@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
@@ -17,7 +18,13 @@ namespace HireMe.Controllers
         // GET: Notification
         public ActionResult Index()
         {
-            return View(db.Notifications.ToList());
+            var userId = User.Identity.GetUserId();
+            var notifications = db.Notifications
+                .Include(path => path.Sender)
+                .Include(t => t.Receiver)
+                .Where(p => p.ReceiverId == userId)
+                .OrderByDescending(r => r.CreatedDate);
+            return View(notifications.ToList());
         }
 
         // GET: Notification/Details/5
