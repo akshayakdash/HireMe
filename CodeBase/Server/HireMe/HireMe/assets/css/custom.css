@@ -10028,8 +10028,9 @@ blockquote {
         }
 
     .profileitems .left {
-        max-width: 100px;
+        max-width: 120px;
         float: left;
+        text-align:center;
     }
 
         .profileitems .left img {
@@ -10053,10 +10054,10 @@ blockquote {
     }
 
     .profileitems .right {
-        margin-left: 120px;
+        margin-left: 130px;
     }
 
-        .profileitems .right h1, .profileitems .right h2, .profileitems .right h3 {
+        .profileitems .right h1, .profileitems .right h2, .profileitems .right h3, .profileitems .left h3 {
             font-size: 16px;
             line-height: initial;
             margin-bottom: 5px;
@@ -10067,8 +10068,8 @@ blockquote {
             .profileitems .right h1 span {
                 color: forestgreen;
             }
-        .profileitems .right h2{
-            font-size: 16px;
+        .profileitems .right h2, .profileitems .left h2 {
+            font-size: 14px;
             line-height: initial;
             margin-bottom: 5px;
             overflow: hidden;
@@ -10078,6 +10079,9 @@ blockquote {
         .profileitems .right .contact-num, .profileitems .right .email {
             font-size: 13px;
         }
+    .profileitems .left .contact-num, .profileitems .left .email {
+        font-size: 13px;
+    }
         .profileitems .right .fa {
             font-size: 14px;
             margin-right:10px;
@@ -10114,13 +10118,13 @@ blockquote {
             font-size: 12px;
             font-weight: 700;
         }
-        .profileitems .right .age {
+        .profileitems .right .age, .profileitems .left .age {
             font-size: 14px;
             font-weight: 400;
             padding-right: 10px;
             border-right: 1px solid #ccc;
         }
-        .profileitems .right .experience {
+        .profileitems .right .experience, .profileitems .left .experience {
             font-size: 14px;
             font-weight: 400;
             padding-left: 10px;
@@ -10147,15 +10151,20 @@ blockquote {
                 padding: 3px;
                 background: #fff;
             }
-        .profileitems .validate {
-            font-size: 13px;
+    .profileitems .validate {
+        /*font-size: 13px;
             position: absolute;
             background: #2f922f;
             border-radius: 50%;
             top: 2px;
             left: 1px;
-            color: #fff;
-        }
+            color: #fff;*/
+
+            position: absolute;
+            top: 2px;
+            left: 1px;
+            width: 35px;
+    }
         .profileitems .validate .fa{
             padding: 10px;
             font-size: 18px;
