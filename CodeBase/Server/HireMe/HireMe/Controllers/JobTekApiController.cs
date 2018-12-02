@@ -41,7 +41,7 @@ namespace HireMe.Controllers
                     jobRequests = jobRequests
                         .Where(p => p.JobRequestJobTasks.Select(t => t.JobTaskId).Any(c => searchParam.Tasks.Contains(c))).ToList();
                 }
-                return Request.CreateResponse(HttpStatusCode.OK, jobRequests);
+                return Request.CreateResponse(HttpStatusCode.OK, jobRequests.OrderByDescending(p => p.JobRequestId).ToList());
             }
             else
             {

@@ -20,7 +20,7 @@ namespace HireMe.Models
         //[ForeignKey("AspNetUserId")]
         //public AppUser ApplicationUser { get; set; }
         public int? AgencyId { get; set; }
-
+        [Required]
         public Gender Gender { get; set; }
         public string GenderDesc
         {
@@ -36,7 +36,9 @@ namespace HireMe.Models
                 }
             }
         }
+        [Required]
         public int? Age { get; set; }
+        [Required]
         public int? ExperienceInYears { get; set; }
         public int? ExperienceInMonths { get; set; }
 
@@ -44,19 +46,21 @@ namespace HireMe.Models
         public string IdProofDocDesc { get; set; }
 
         public bool ProfileVerified { get; set; }
+        [Required]
         public StaffType StaffType { get; set; }
         public string StaffTypeDesc { get; set; }
+        [Required]
         public DateTime Disponibility { get; set; }
 
         public int? CountryId { get; set; }
         public string Country { get; set; }
-
+        [Required]
         public int? CityId { get; set; }
         public string City { get; set; }
-
+        [Required]
         public int? DistrictId { get; set; }
         public string District { get; set; }
-
+        [Required]
         public SalaryType SalaryType { get; set; }
         public string SalaryTypeDesc { get; set; }
         public string SalaryTypeOtherDesc { get; set; }
@@ -64,7 +68,9 @@ namespace HireMe.Models
         public bool CanRead { get; set; }
         public bool CanWrite { get; set; }
 
+        [Required]
         public decimal ExpectedMinSalary { get; set; }
+        [Required]
         public decimal ExpectedMaxSalary { get; set; }
 
         public bool SleepOnSite { get; set; }
