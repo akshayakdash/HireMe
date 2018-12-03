@@ -30,7 +30,7 @@
     private int count = 0;
 }
 
-<h2>Create</h2>
+@*<h2>Create</h2>*@
 
 @helper ShowTaskTree(IEnumerable<HireMe.Models.JobTask> jobTasks)
 {
@@ -206,7 +206,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
             <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
+            <a href="~/Notification"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
 
             <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
@@ -218,7 +218,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
             <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-            <a href="#"><i class="fa fa-envelope"></i> Messages & Notifications</a>
+            <a href="#"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
 
             <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
@@ -239,348 +239,355 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
     <!---- Tab Section -->
 
-    <div class="full-section-container wow fadeInUp">
-        <div class="tab-section">
-            <div class="tab-section-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tabs style-2">
-                            <div class="tab-header">
-                                @(Model.Job.JobName + "(" + Model.Age + " yrs)")
+    <div class="full-section-container pl-3 pr-3 wow fadeInUp">
+        <!--<div class="tab-section">
+            <div class="tab-section-body"></div>
+        </div>-->
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="headline text-center mb-3">
+                    <h2>Employer Details</h2>
+                </div>
+                <div class="tabs style-2">
+                    <div class="tab-header">
+                        @(Model.Job.JobName + "(" + Model.Age + " yrs)")
+                        <div class="tab-header-back">
+                            <a href="/" class="back-btn"><i class="fa fa-arrow-left"></i>&nbsp;Back</a>
+                        </div>
+                    </div>
+                    <div class="tab-content search-criteria" style="margin-top:0;">
+
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <div class="profile-pic">
+                                    <img src="data:image/jpeg;base64,@Model.Employer.ProfilePicUrl" />
+                                </div>
+                                @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
                             </div>
-                            <div class="tab-content search-criteria" style="margin-top:0;">
-
-                                <div class="row">
-                                    <div class="col-md-4 text-center">
-                                        <div class="profile-pic">
-                                            <img src="data:image/jpeg;base64,@Model.Employer.ProfilePicUrl" />
-                                        </div>
-                                        @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
-                                    </div>
-                                    <div class="col-md-8">
-                                        @*<div class="row">
-                                                <div class="col-md-4">Email:</div>
-                                                <div class="col-md-8">agency@gmail.com</div>
-                                            </div>*@
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Email:</td>
-                                                    <td>@Model.Employer.EmailId</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Phone:</td>
-                                                    <td>@Model.Employer.ContactNo</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Rating:</td>
-                                                    <td><a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Description:</td>
-                                                    <td>@Model.AdditionalDescription</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-md-12">
-
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
-
-                                        <div class="row">
-
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Gender
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-                                                        @Model.Gender.ToString()
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Type of Staff
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-                                                        @Model.StaffType.ToString()
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Age
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-md-12">
-                                                                @(Model.MinAge + " yrs") - @(Model.MaxAge + " yrs")
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Years of Experience
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-md-12">
-                                                                @Model.ExperienceInYears
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Localizations
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6">
-                                                                @(Model.Country + ", " + Model.City)
-
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6">
-                                                                @Model.District
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Salary Between
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-                                                        <div class="row">
-                                                            <div class="col-sm-6">
-                                                                @Model.SalaryType.ToString()
-                                                            </div>
-                                                            <div class="col-sm-6">
-                                                                <div class="row">
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        @Model.ExpectedMinSalary
-                                                                    </div>
-                                                                    <div class="col-lg-6 col-md-6">
-                                                                        @Model.ExpectedMaxSalary
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
-
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6" style="border-right:2px solid #ff6a00;">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Read
-                                                        @*<div class="switch-area-inner switch-area-inner-cus">
-                                                            @(Model.CanRead ? "Yes" : "No")
-                                                        </div>*@
-                                                    </div>
-                                                    <div class="filtersection-body">
-                                                        @*<div class="icon-section">
-                                                            <img src="~/assets/images/eyeglass1.png" alt="">
-                                                        </div>*@
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-md-12">
-                                                                @(Model.CanRead ? "Yes" : "No")
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Write
-                                                        @*<div class="switch-area-inner switch-area-inner-cus">
-                                                            @(Model.CanWrite ? "Yes" : "No")
-                                                        </div>*@
-                                                    </div>
-                                                    <div class="filtersection-body">
-                                                        @*<div class="icon-section">
-                                                            <img src="~/assets/images/write1.png" alt="">
-                                                        </div>*@
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-md-12">
-                                                                @(Model.CanWrite ? "Yes" : "No")
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Sleep on Site
-                                                        @*<div class="switch-area-inner switch-area-inner-cus">
-                                                            @(Model.SleepOnSite ? "Yes" : "No")
-                                                        </div>*@
-                                                    </div>
-                                                    <div class="filtersection-body">
-                                                        @*<div class="icon-section">
-                                                            <img src="~/assets/images/sleep1.png" alt="">
-                                                        </div>*@
-                                                        <div class="row">
-                                                            <div class="col-lg-12 col-md-12">
-                                                                @(Model.SleepOnSite ? "Yes" : "No")
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Disponibility
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-                                                        @Model.Disponibility
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Number of rooms
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6">
-                                                                @Model.ExpectedMinRooms
-
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6">
-                                                                @Model.ExpectedMaxRooms
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Number of people
-
-                                                    </div>
-
-                                                    <div class="filtersection-body">
-
-                                                        <div class="row">
-                                                            <div class="col-lg-6 col-md-6">
-                                                                @Model.MinGroupPeople
-
-                                                            </div>
-                                                            <div class="col-lg-6 col-md-6">
-                                                                @Model.MaxGroupPeople
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6">
-
-
-                                        <div class="row">
-
-                                            <div class="col-sm-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Candidate Skills
-                                                    </div>
-                                                    <div class="filtersection-body">
-                                                        @ShowTaskTree(Model.MasterJobTasks.Where(p => p.ParentJobTaskId == null))
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Additional Description
-                                                    </div>
-                                                    <div class="filtersection-body">
-                                                        @Model.AdditionalDescription
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @if (role == "Admin")
-                                        {
-                                            <div class="row"><button class="btn btn-default" onclick="validateJobOffer(@Model.JobOfferId)">Validate</button></div>
-                                        }
-                                    </div>
-                                </div>
+                            <div class="col-md-8">
+                                @*<div class="row">
+                                        <div class="col-md-4">Email:</div>
+                                        <div class="col-md-8">agency@gmail.com</div>
+                                    </div>*@
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td>@Model.Employer.EmailId</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:</td>
+                                            <td>@Model.Employer.ContactNo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rating:</td>
+                                            <td><a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Description:</td>
+                                            <td>@Model.AdditionalDescription</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12">
 
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+
+                                <div class="row">
+
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Gender
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+                                                @Model.Gender.ToString()
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Type of Staff
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+                                                @Model.StaffType.ToString()
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Age
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        @(Model.MinAge + " yrs") - @(Model.MaxAge + " yrs")
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Years of Experience
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        @Model.ExperienceInYears
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Localizations
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @(Model.Country + ", " + Model.City)
+
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @Model.District
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Salary Between
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        @Model.SalaryType.ToString()
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="row">
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.ExpectedMinSalary
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6">
+                                                                @Model.ExpectedMaxSalary
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Read
+                                                @*<div class="switch-area-inner switch-area-inner-cus">
+                                                        @(Model.CanRead ? "Yes" : "No")
+                                                    </div>*@
+                                            </div>
+                                            <div class="filtersection-body">
+                                                @*<div class="icon-section">
+                                                        <img src="~/assets/images/eyeglass1.png" alt="">
+                                                    </div>*@
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        @(Model.CanRead ? "Yes" : "No")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Write
+                                                @*<div class="switch-area-inner switch-area-inner-cus">
+                                                        @(Model.CanWrite ? "Yes" : "No")
+                                                    </div>*@
+                                            </div>
+                                            <div class="filtersection-body">
+                                                @*<div class="icon-section">
+                                                        <img src="~/assets/images/write1.png" alt="">
+                                                    </div>*@
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        @(Model.CanWrite ? "Yes" : "No")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Sleep on Site
+                                                @*<div class="switch-area-inner switch-area-inner-cus">
+                                                        @(Model.SleepOnSite ? "Yes" : "No")
+                                                    </div>*@
+                                            </div>
+                                            <div class="filtersection-body">
+                                                @*<div class="icon-section">
+                                                        <img src="~/assets/images/sleep1.png" alt="">
+                                                    </div>*@
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-md-12">
+                                                        @(Model.SleepOnSite ? "Yes" : "No")
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Disponibility
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+                                                @Model.Disponibility
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Number of rooms
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @Model.ExpectedMinRooms
+
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @Model.ExpectedMaxRooms
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Number of people
+
+                                            </div>
+
+                                            <div class="filtersection-body">
+
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @Model.MinGroupPeople
+
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6">
+                                                        @Model.MaxGroupPeople
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+
+
+                                <div class="row">
+
+                                    <div class="col-sm-12">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Candidate Skills
+                                            </div>
+                                            <div class="filtersection-body">
+                                                @ShowTaskTree(Model.MasterJobTasks.Where(p => p.ParentJobTaskId == null))
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="filtersection-panel">
+                                            <div class="filtersection-header">
+                                                Additional Description
+                                            </div>
+                                            <div class="filtersection-body">
+                                                @Model.AdditionalDescription
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if (role == "Admin")
+                                        {
+                                        <div class="row"><button class="btn btn-default" onclick="validateJobOffer(@Model.JobOfferId)">Validate</button></div>
+                                        }
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
 
 
 
