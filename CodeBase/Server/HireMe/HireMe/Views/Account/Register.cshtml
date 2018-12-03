@@ -86,6 +86,18 @@
                                         @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
                                     </div>
 
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">Age</span>
+
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger", @placeholder = "Age in yrs" })
+                                    </div>
+
 
 
 
@@ -444,8 +456,9 @@
 
             // first check if the form is valid
             //alert();
+
             if ($('#FirstName').valid()
-                //&& $('#LastName').valid()
+                && $('#Age').valid()
                 && $('#City').valid()
                 && $('#District').valid()
                 && $('#Country').valid()

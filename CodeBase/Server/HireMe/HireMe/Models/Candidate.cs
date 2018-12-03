@@ -204,6 +204,8 @@ namespace HireMe.Models
         public string ContactOption { get; set; }
 
         public string Address { get; set; }
+
+        public int Age { get; set; }
     }
 
     // Master tables
@@ -514,12 +516,12 @@ namespace HireMe.Models
         public int JobTekNotificationId { get; set; }
         public string Content { get; set; }
         public string SenderId { get; set; }
-        [ForeignKey("SenderId")]
-        //[NotMapped]
+        //[ForeignKey("SenderId")]
+        [NotMapped]
         public ApplicationUser Sender { get; set; }
         public string ReceiverId { get; set; }
-        [ForeignKey("ReceiverId")]
-        //[NotMapped]
+        //[ForeignKey("ReceiverId")]
+        [NotMapped]
         public ApplicationUser Receiver { get; set; }
         public int Category { get; set; }
         public DateTime CreatedDate { get; set; }

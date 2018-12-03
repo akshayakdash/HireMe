@@ -207,6 +207,10 @@
                                             <td>Phone:</td>
                                             <td>@Model.PhoneNumber</td>
                                         </tr>
+                                        <tr>
+                                            <td>Profile Verified:</td>
+                                            <td>@(Model.ProfileVerified ? "Yes" : "No")</td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -227,17 +231,23 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                             </div>
-                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "", @disabled = Model.ProfileVerified })
                                             <span class="input-lable">First Name</span>
                                         </div>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                             </div>
-                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "", @disabled = Model.ProfileVerified })
                                             <span class="input-lable">Last Name</span>
                                         </div>
-
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "", @disabled = Model.ProfileVerified })
+                                            <span class="input-lable">Age</span>
+                                        </div>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>

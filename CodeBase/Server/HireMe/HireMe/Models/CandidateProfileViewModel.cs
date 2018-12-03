@@ -36,8 +36,8 @@ namespace HireMe.Models
                 }
             }
         }
-        [Required]
-        public int? Age { get; set; }
+        //[Required]
+        //public int? Age { get; set; }
         [Required]
         public int? ExperienceInYears { get; set; }
         public int? ExperienceInMonths { get; set; }

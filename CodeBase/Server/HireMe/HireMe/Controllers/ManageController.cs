@@ -85,7 +85,7 @@ namespace HireMe.Controllers
                             .Select(c => c.Value);
             string role = roles.FirstOrDefault();
 
-            var registrationViewModel = new UpdateProfileViewModel
+            var updateProfileViewModel = new UpdateProfileViewModel
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
@@ -100,12 +100,24 @@ namespace HireMe.Controllers
             if (role == "Candidate")
             {
                 var candidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == user.Id);
-                registrationViewModel.ContactOption = candidate.ContactOption;
+                updateProfileViewModel.ContactOption = candidate.ContactOption;
+                updateProfileViewModel.ProfileVerified = candidate.ProfileVerified;
+                updateProfileViewModel.Age = candidate.Age.HasValue? candidate.Age.Value : 0;
+
             }
             else if (role == "Employer")
             {
                 var employer = context.Employers.FirstOrDefault(p => p.AspNetUserId == user.Id);
-                registrationViewModel.ContactOption = employer.ContactOption;
+                updateProfileViewModel.ContactOption = employer.ContactOption;
+                updateProfileViewModel.ProfileVerified = employer.ProfileVerified;
+                updateProfileViewModel.Age = employer.Age;
+            }
+            else if (role == "Agency")
+            {
+                var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                //updateProfileViewModel.ContactOption = agency.ContactOption;
+                updateProfileViewModel.ProfileVerified = agency.ProfileVerified;
+               // updateProfileViewModel.Age = int.Parse(agency.ManagerAge);
             }
 
             var country = context.Countries.ToList();
@@ -116,7 +128,7 @@ namespace HireMe.Controllers
             ViewBag.City = city;
             ViewBag.District = district;
             ViewBag.ProfilePicUrl = user.ProfilePicUrl;
-            return View(registrationViewModel);
+            return View(updateProfileViewModel);
         }
 
         [HttpPost]
@@ -165,6 +177,7 @@ namespace HireMe.Controllers
                     {
                         candidate.FirstName = model.FirstName;
                         candidate.LastName = model.LastName;
+                        candidate.Age = model.Age;
                         candidate.ContactOption = model.ContactOption;
                         candidate.ContactNo = model.PhoneNumber;
                         candidate.EmailId = model.Email;
@@ -183,6 +196,7 @@ namespace HireMe.Controllers
                     {
                         employer.FirstName = model.FirstName;
                         employer.LastName = model.LastName;
+                        employer.Age = model.Age;
                         employer.ContactOption = model.ContactOption;
                         employer.ContactNo = model.PhoneNumber;
                         employer.EmailId = model.Email;

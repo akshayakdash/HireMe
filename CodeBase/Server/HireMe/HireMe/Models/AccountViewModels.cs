@@ -87,6 +87,9 @@ namespace HireMe.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Required]
+        public int Age { get; set; }
+
         [Display(Name = "Address")]
         [Required]
         public string Address { get; set; }
@@ -199,6 +202,12 @@ namespace HireMe.Models
        
 
         public string ContactOption { get; set; }
+
+        public bool ProfileVerified { get; set; }
+
+        public int Age { get; set; }
+
+        // TO Do: Agency Section TO Be added
     }
 
    

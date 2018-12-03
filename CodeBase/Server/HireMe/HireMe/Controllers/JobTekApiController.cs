@@ -51,23 +51,61 @@ namespace HireMe.Controllers
 
         [HttpGet]
         [Route("api/JobTekApi/SearchJobOffers")]
-        public HttpResponseMessage SearchJobOffers([FromUri]JobRequestSearchParam searchParam = null)
+        public HttpResponseMessage SearchJobOffers([FromUri]JobOfferSearchParam searchParam = null)
         {
-            //searchParam = new JobRequestSearchParam { };
-            //searchParam.Gender = Gender.Male;
-            //searchParam.YearsOfExperience = 3;
+            if (searchParam != null)
+            {
+                object[] queryString = searchParam.GetSearchQuery();
+                ArrayList searchArgs = (ArrayList)queryString[1];
+                var jobOffers = db.JobOffers
+                    .Include(j => j.Employer)
+                    .Include(j => j.Job)
+                    .Include(j => j.JobOfferJobTasks)
+                    .AsQueryable()
+                    .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
-            //object[] queryString = searchParam.GetSearchQuery();
-            //ArrayList searchArgs = (ArrayList)queryString[1];
-            //var jobRequests = db.JobRequests
-            //    .Include(j => j.Candidate)
-            //    .Include(j => j.Job)
-            //    .AsQueryable()
-            //    .Where(queryString[0].ToString(), searchArgs.ToArray());
+                if (searchParam != null && searchParam.Tasks != null && searchParam.Tasks.Count > 0)
+                {
+                    jobOffers = jobOffers
+                        .Where(p => p.JobOfferJobTasks.Select(t => t.JobTaskId).Any(c => searchParam.Tasks.Contains(c))).ToList();
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, jobOffers.OrderByDescending(p => p.JobOfferId).ToList());
 
-            var jobOffers = db.JobOffers.Include(p => p.Job).Include(t => t.Employer).ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, jobOffers);
+                //return Request.CreateResponse(HttpStatusCode.OK, db.JobOffers
+                //      .Include(j => j.Employer)
+                //      .Include(j => j.Job)
+                //      .Include(j => j.JobOfferJobTasks)
+                //      .OrderByDescending(p => p.JobOfferId).ToList());
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, db.JobOffers
+                    .Include(j => j.Employer)
+                    .Include(j => j.Job)
+                    .Include(j => j.JobOfferJobTasks)
+                    .OrderByDescending(p => p.JobOfferId).ToList());
+            }
         }
+
+        //[HttpGet]
+        //[Route("api/JobTekApi/SearchJobOffers")]
+        //public HttpResponseMessage SearchJobOffers([FromUri]JobRequestSearchParam searchParam = null)
+        //{
+        //    //searchParam = new JobRequestSearchParam { };
+        //    //searchParam.Gender = Gender.Male;
+        //    //searchParam.YearsOfExperience = 3;
+
+        //    //object[] queryString = searchParam.GetSearchQuery();
+        //    //ArrayList searchArgs = (ArrayList)queryString[1];
+        //    //var jobRequests = db.JobRequests
+        //    //    .Include(j => j.Candidate)
+        //    //    .Include(j => j.Job)
+        //    //    .AsQueryable()
+        //    //    .Where(queryString[0].ToString(), searchArgs.ToArray());
+
+        //    var jobOffers = db.JobOffers.Include(p => p.Job).Include(t => t.Employer).ToList();
+        //    return Request.CreateResponse(HttpStatusCode.OK, jobOffers);
+        //}
 
         [HttpGet]
         [Route("api/JobTekApi/SearchMembers")]
