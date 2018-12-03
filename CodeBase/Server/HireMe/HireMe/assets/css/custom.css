@@ -10062,8 +10062,9 @@ blockquote {
             line-height: initial;
             margin-bottom: 5px;
         }
-        .profileitems .right h1 img {
+            .profileitems .right h1 img {
                 margin-right: 5px;
+                width: 16px;
             }
             .profileitems .right h1 span {
                 color: forestgreen;
@@ -10135,7 +10136,7 @@ blockquote {
                 font-weight: 400;
             }
         .profileitems .right > .right-left {
-            float: left;
+            /*float: left;*/
             padding-right: 20px;
         }
         .profileitems .right > .idcard {
