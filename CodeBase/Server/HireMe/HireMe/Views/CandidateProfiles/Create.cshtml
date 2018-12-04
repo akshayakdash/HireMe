@@ -456,7 +456,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
             <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages & Notifications</a>
 
             <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
@@ -809,7 +809,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                 Sleep on Site
                                                                 <div class="switch-area-inner switch-area-inner-cus">
                                                                     <label class="checkbox">
-                                                                        @Html.CheckBoxFor(p => p.SleepOnSite)
+                                                                        @Html.CheckBoxFor(p => p.SleepOnSite, new { })
                                                                         <span class=""></span>
                                                                     </label>
                                                                 </div>
@@ -844,7 +844,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-12 room-section" style="display:none;">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
                                                                 Number of rooms
@@ -865,7 +865,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-sm-12">
+                                                    <div class="col-sm-12 room-section" style="display:none;">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
                                                                 Number of people
@@ -1120,7 +1120,14 @@ for (int i = 0; i < jobTasks.Count(); i++)
                 }
             });
 
-           
+            $("#SleepOnSite").click(function (event) {
+                console.log($(event.target).prop("checked"));
+                if ($(event.target).prop("checked")) {
+                    $(".room-section").show();
+                } else {
+                    $(".room-section").hide();
+                }
+            });
 
             //var uploadField = document.getElementByName("JobRequestSkillPic1");
 
