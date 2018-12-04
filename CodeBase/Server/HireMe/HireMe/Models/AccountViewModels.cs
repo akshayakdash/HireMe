@@ -87,11 +87,15 @@ namespace HireMe.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Required]
+        public int Age { get; set; }
+
         [Display(Name = "Address")]
+        [Required]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "You must provide a phone number")]
-        [Display(Name = "Contact Number")]
+        [Required(ErrorMessage = "You must provide a valid phone number")]
+        //[Display(Name = "Contact Number")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
@@ -103,7 +107,7 @@ namespace HireMe.Models
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
+        //[Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
@@ -123,14 +127,17 @@ namespace HireMe.Models
         [Required(ErrorMessage = "Please enter the security question's answer.")]
         public string SecurityQuestionAnswer { get; set; }
 
+        [Required]
         public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
 
+        [Required]
         public int? CityId { get; set; }
         [NotMapped]
         public string City { get; set; }
 
+        [Required]
         public int? DistrictId { get; set; }
         [NotMapped]
         public string District { get; set; }
@@ -195,6 +202,12 @@ namespace HireMe.Models
        
 
         public string ContactOption { get; set; }
+
+        public bool ProfileVerified { get; set; }
+
+        public int Age { get; set; }
+
+        // TO Do: Agency Section TO Be added
     }
 
    

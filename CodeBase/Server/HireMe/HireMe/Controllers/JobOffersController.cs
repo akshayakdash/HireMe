@@ -18,19 +18,38 @@ namespace HireMe.Controllers
         // GET: JobOffers
         public ActionResult Index()
         {
+            // first check if the employer is logged in or not
             var userId = User.Identity.GetUserId();
-            // get the agencyid
-            var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
+            //if (!string.IsNullOrWhiteSpace(userId))
+            //{
+                // get the agencyid
+                var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
 
-            if (employer != null)
-            {
-                var jobOffers = db.JobOffers.Include(path => path.Job).Include(t => t.Employer).Where(p => p.EmployerId == employer.EmployerId).ToList();
-                return View(jobOffers);
-            }
-            else
-            {
-                return View();
-            }
+                if (employer != null)
+                {
+                    var jobOffers = db.JobOffers
+                        .Include(path => path.Job)
+                        .Include(t => t.Employer)
+                        .Where(p => p.EmployerId == employer.EmployerId)
+                        .ToList();
+                    return View(jobOffers);
+                }
+                else
+                {
+                    return View();
+                }
+            //}
+            //else
+            //{
+            //    // a anonymous user may be interested to see the job offers of the portal
+
+            //    var jobOffers = db.JobOffers
+            //           .Include(path => path.Job)
+            //           .Include(t => t.Employer)
+            //           .OrderByDescending(p => p.JobOfferId)
+            //           .ToList();
+            //    return View(jobOffers);
+            //}
 
 
         }

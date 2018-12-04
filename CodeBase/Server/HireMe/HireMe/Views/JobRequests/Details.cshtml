@@ -4,6 +4,34 @@
     #footer-container {
         display: none;
     }
+
+    .rating {
+        color: #a9a9a9;
+        margin: 0;
+        padding: 0;
+    }
+
+    ul.rating {
+        display: inline-block;
+    }
+
+    .rating li {
+        list-style-type: none;
+        display: inline-block;
+        padding: 1px;
+        text-align: center;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 20px;
+    }
+
+    .rating .filled {
+        color: orangered;
+    }
+
+    .clear {
+        margin-top: 20px;
+    }
 </style>
 
 <script type="text/javascript">
@@ -133,33 +161,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
     }
 
-    function setJobRequestSearchParam() {
-        var gender = $('input[name="options"]').val();
-        var yearsOfExp = $(".yrs_of_exp").val();
-
-        console.log("Gender" + gender);
-        console.log("years of exp = " + yearsOfExp);
-        //SetJobRequestSearchParam
-
-        //$.ajax
-        //    ({
-        //        url: '/SearchJobRequests/SetJobRequestSearchParam?Gender=' + gender + "&YearsOfExperience=" + yearsOfExp,
-        //        data: { "Gender": gender, "YearsOfExperience": yearsOfExp },
-        //        contentType: "json",
-        //        type: 'get',
-        //        success: function (result) {
-        //            //$('.modal-box').text(result).fadeIn(700, function () {
-        //            //    setTimeout(function () {
-        //            //        $('.modal-box').fadeOut();
-        //            //    }, 2000);
-        //            //});
-
-        //            alert("Job Request added to your favourite list.");
-        //        }
-        //    });
-
-        // window.location.href = "SearchJobRequests?gender=" + gender + "&yearsOfExperience=" + yearsOfExp;
-    }
 </script>
 
 
@@ -232,8 +233,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                                                                    .Select(c => c.Value);
+                                                                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                                        .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -317,12 +318,20 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                 <table class="table">
                                     <tbody>
                                         <tr>
+                                            <td>Name:</td>
+                                            <td>@(Model.Candidate.FirstName + " " + Model.Candidate.LastName) </td>
+                                        </tr>
+                                        <tr>
                                             <td>Email:</td>
                                             <td>@Model.Candidate.EmailId</td>
                                         </tr>
                                         <tr>
                                             <td>Phone:</td>
                                             <td>@Model.Candidate.ContactNo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address:</td>
+                                            <td>@(Model.Candidate.Country + " " + (Model.Candidate.City ?? "") + (Model.Candidate.District ?? "") )</td>
                                         </tr>
                                         <tr>
                                             <td>Rating:</td>
@@ -623,9 +632,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                 <div class="row">
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic1))
                                             {
-                                            <div class="col-lg-4">
-                                                <img src="data:image/jpeg;base64,@Model.SkillPic1" />
-                                            </div>
+                                                <div class="col-lg-4">
+                                                    <img src="data:image/jpeg;base64,@Model.SkillPic1" />
+                                                </div>
                                             }
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic2))
                                             {

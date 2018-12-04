@@ -240,6 +240,7 @@
     <Compile Include="Controllers\JobTekApiController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NotificationController.cs" />
+    <Compile Include="Controllers\PublishedJobsController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\SearchJobOffersController.cs" />
     <Compile Include="Controllers\SearchJobRequestsController.cs" />
@@ -282,6 +283,18 @@
     <Compile Include="Migrations\201812010642542_Notification_Entity_Added.cs" />
     <Compile Include="Migrations\201812010642542_Notification_Entity_Added.Designer.cs">
       <DependentUpon>201812010642542_Notification_Entity_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812010848100_Average_Star_Rating_For_JobRequest.cs" />
+    <Compile Include="Migrations\201812010848100_Average_Star_Rating_For_JobRequest.Designer.cs">
+      <DependentUpon>201812010848100_Average_Star_Rating_For_JobRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812011538585_Job_Task_Image_Icon_Added.cs" />
+    <Compile Include="Migrations\201812011538585_Job_Task_Image_Icon_Added.Designer.cs">
+      <DependentUpon>201812011538585_Job_Task_Image_Icon_Added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201812031907341_Employer_Age_Added.cs" />
+    <Compile Include="Migrations\201812031907341_Employer_Age_Added.Designer.cs">
+      <DependentUpon>201812031907341_Employer_Age_Added.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -518,6 +531,7 @@
     <Content Include="Views\Notification\Details.cshtml" />
     <Content Include="Views\Notification\Edit.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
+    <Content Include="Views\PublishedJobs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -564,6 +578,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812010642542_Notification_Entity_Added.resx">
       <DependentUpon>201812010642542_Notification_Entity_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812010848100_Average_Star_Rating_For_JobRequest.resx">
+      <DependentUpon>201812010848100_Average_Star_Rating_For_JobRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812011538585_Job_Task_Image_Icon_Added.resx">
+      <DependentUpon>201812011538585_Job_Task_Image_Icon_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812031907341_Employer_Age_Added.resx">
+      <DependentUpon>201812031907341_Employer_Age_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
