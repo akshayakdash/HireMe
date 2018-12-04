@@ -144,110 +144,33 @@
             <div class="row">
                 <div class="col-md-12">
                     <ul class="notification">
-                        <li>
-                            <a href="#" class="notification-link">
-                                <span class="photo">
-                                    <img src="/assets/images/portfolio/nanny.jpg" alt="" />
-                                </span>
-                                <div class="info">
-                                    <span class="name">Larry Gardner</span>
-                                    <span class="others">Lorem ipsum dolor sit</span>
-                                </div>
-                                <div class="subject">
-                                    It is perfect to use for any business, from a financial to an artistic or a personal one. The beautiful colors will make your website look outstanding. It comes with
-                                </div>
-                                <span class="date-time">12/11/2018 10:00am</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="notification-link">
-                                <span class="photo">
-                                    <img src="/assets/images/portfolio/nanny.jpg" alt="" />
-                                </span>
-                                <div class="info">
-                                    <span class="name">Larry Gardner</span>
-                                    <span class="others">Lorem ipsum dolor sit</span>
-                                </div>
-                                <div class="subject">
-                                    It is perfect to use for any business, from a financial to an artistic or a personal one. The beautiful colors will make your website look outstanding. It comes with
-                                </div>
-                                <span class="date-time">12/11/2018 10:00am</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="notification-link">
-                                <span class="photo">
-                                    <img src="/assets/images/portfolio/nanny.jpg" alt="" />
-                                </span>
-                                <div class="info">
-                                    <span class="name">Larry Gardner</span>
-                                    <span class="others">Lorem ipsum dolor sit</span>
-                                </div>
-                                <div class="subject">
-                                    It is perfect to use for any business, from a financial to an artistic or a personal one. The beautiful colors will make your website look outstanding. It comes with
-                                </div>
-                                <span class="date-time">12/11/2018 10:00am</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="notification-link">
-                                <span class="photo">
-                                    <img src="/assets/images/portfolio/nanny.jpg" alt="" />
-                                </span>
-                                <div class="info">
-                                    <span class="name">Larry Gardner</span>
-                                    <span class="others">Lorem ipsum dolor sit</span>
-                                </div>
-                                <div class="subject">
-                                    It is perfect to use for any business, from a financial to an artistic or a personal one. The beautiful colors will make your website look outstanding. It comes with
-                                </div>
-                                <span class="date-time">12/11/2018 10:00am</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" class="notification-link">
-                                <span class="photo">
-                                    <img src="/assets/images/portfolio/nanny.jpg" alt="" />
-                                </span>
-                                <div class="info">
-                                    <span class="name">Larry Gardner</span>
-                                    <span class="others">Lorem ipsum dolor sit</span>
-                                </div>
-                                <div class="subject">
-                                    It is perfect to use for any business, from a financial to an artistic or a personal one. The beautiful colors will make your website look outstanding. It comes with
-                                </div>
-                                <span class="date-time">12/11/2018 10:00am</span>
-                            </a>
-                        </li>
-                    </ul>
+                        @if (Model != null && Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <li>
+                                    <a href="#" class="notification-link">
+                                        <span class="photo">
+                                            <img src="data:image/jpeg;base64,@item.Sender.ProfilePicUrl" />
+                                        </span>
+                                        <div class="info">
+                                            <span class="name">@item.Sender.FirstName</span>
+                                            <span class="others">Lorem ipsum dolor sit</span>
+                                        </div>
+                                        <div class="subject">
+                                            @item.Content
+                                        </div>
+                                        <span class="date-time">@item.CreatedDate.ToString("dd-MMM-yyyy")</span>
+                                    </a>
+                                </li>
+                            }
+
+                        }
+                        else {
+                            <li>No Notification available.</li>
+                        }</ul>
                 </div>
             </div>
-        </div><!-- container -->
-
-
-
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="headline text-center">
-                        <h2>Our Trusted Partners</h2>
-                    </div><!-- headline -->
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container -->
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="owl-carousel logos-slider">
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
-                        <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
-                    </div><!-- logos-slider -->
-                </div><!-- col -->
-            </div><!-- row -->
         </div><!-- container -->
     </div>
 

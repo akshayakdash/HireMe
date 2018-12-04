@@ -171,12 +171,9 @@
                                     </span>
                                     <div class="left">
                                         <img src="@Url.Content(item.AgencyLogo)" />
-                                        <div class="rating">
-
-                                        </div>
-                                        <div class="favorite">
-
-                                        </div>
+                                        <div class="rating">&nbsp;</div>
+                                        <div class="favorite"></div>
+                                        <h2 class="contact-num"><i class="fa fa-phone"></i> +225 07-02-54-69</h2>
                                         @if (!item.ProfileVerified)
                                         {
                                             <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
@@ -194,7 +191,7 @@
                                         <div class="right-left">
                                             <h1>@(item.AgencyName)<span></span></h1>
                                             <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
-                                            <h2 class="contact-num"><i class="fa fa-phone"></i> +225 07-02-54-69</h2>
+                                            
                                             <h2 class="email"><i class="fa fa-envelope"></i> jk@gmail.com</h2>
                                             <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
                                             <div class="published">Published: <span>@item.CreatedDate</span></div>

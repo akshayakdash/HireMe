@@ -128,7 +128,7 @@ namespace HireMe.Controllers
 
                 var existingCandidate = db.Candidates.Include(path => path.JobRequests).FirstOrDefault(p => p.CandidateId == candidateProfile.CandidateId);
                 existingCandidate.AdditionalDescription = candidateProfile.AdditionalDescription;
-                existingCandidate.Age = candidateProfile.Age;
+                //existingCandidate.Age = candidateProfile.Age;
                 existingCandidate.CanRead = candidateProfile.CanRead;
                 existingCandidate.CanWrite = candidateProfile.CanWrite;
                 existingCandidate.Disponibility = candidateProfile.Disponibility;

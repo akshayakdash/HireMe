@@ -12,8 +12,9 @@
         top: 0;
         position: fixed;
     }
+
     #Address {
-    height:100%;
+        height: 100%;
     }
 </style>
 @model HireMe.Models.RegisterViewModel
@@ -30,62 +31,81 @@
 
     @*<div id="page-content" style="background: #f3f8fb;">*@
     <div class="background"></div>
-            @*<div class="outer"> </div>*@
-                    <div class="form-box">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="home">
-                                    <a href="/" class="">
-                                        <i class="fa fa-home"></i>&nbsp;Home
-                                    </a>
-                                </div>
-                                <div class="headline text-center">
-                                    <div class="form-logo">
-                                        <img src="~/assets/images/logo.png" alt="JOBtek"/>
+    @*<div class="outer"> </div>*@
+    <div class="form-box">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="home">
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i>&nbsp;Home
+                    </a>
+                </div>
+                <div class="headline text-center">
+                    <div class="form-logo">
+                        <img src="~/assets/images/logo.png" alt="JOBtek" />
+                    </div>
+                    <h2>Registration form</h2>
+
+                    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
+                </div><!-- headline -->
+            </div>
+        </div><!-- row -->
+
+
+        <div class="row">
+            <div class="col-md-12 formreg">
+                <div class="tabs style-2">
+                    <div class="tab-content regd-form" style="margin-top:0;">
+                        <div class="tab-pane fade show active" id="tab-1-1">
+                            <div class="form-section">
+                                <h6 class="text-uppercase">Name & Address</h6>
+
+                                <fieldset>
+
+                                    <div id="alert-area"></div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">First Name</span>
+                                        
                                     </div>
-                                    <h2>Registration form</h2>
-                                   
-                                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                                </div><!-- headline -->
-                            </div>
-                        </div><!-- row -->
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">Last Name</span>
+                                        
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">Age</span>
+
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger", @placeholder = "Age in yrs" })
+                                    </div>
 
 
-                <div class="row">
-                    <div class="col-md-12 formreg">
-                        <div class="tabs style-2">
-                            <div class="tab-content regd-form" style="margin-top:0;">
-                                <div class="tab-pane fade show active" id="tab-1-1">
-                                    <div class="form-section">
-                                        <h6 class="text-uppercase">Name & Address</h6>
-
-                                        <fieldset>
-
-                                            <div id="alert-area"></div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                </div>
-                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">First Name</span>
-                                            </div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                </div>
-                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">Last Name</span>
-                                            </div>
 
 
-                                            
-
-                                           
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                </div>
-                                                @Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
+                                        @Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
                                                                     {
                                                        new SelectListItem{ Text="Choose City", Value = "" },
                                                                         new SelectListItem{ Text="Abidjan (Capitale Eco)", Value = "1" },
@@ -94,184 +114,220 @@
                                                                         new SelectListItem{ Text="Anyama", Value = "4" },
                                                                         new SelectListItem{ Text="Agnibilékrou", Value = "5" },
                                                                      }, htmlAttributes: new { @class = "form-control", id = "City" })
-                                                @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
-                                                <span class="input-lable">City</span>
-                                            </div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                </div>
-                                                <select id="District" name="DistrictId" class="form-control"></select>
-                                                @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
-                                                <span class="input-lable">District</span>
-                                            </div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                </div>
-
-
-                                                @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
-                                                <span class="input-lable">Country</span>
-                                            </div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                </div>
-                                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
-                                                <span class="input-lable">Address</span>
-                                            </div>
-                                        </fieldset>
-
+                                        @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
+                                        <span class="input-lable">City</span>
                                     </div>
-                                    <div class="form-section">
-                                        <h6 class="text-uppercase">Email & Phone</h6>
-
-                                        <fieldset>
-
-                                            <div id="alert-area"></div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
-                                                </div>
-                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">Email</span>
-                                            </div>
-                                            
-
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
-                                                </div>
-                                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">Contact number</span>
-                                            </div>
-
-                                        </fieldset>
-
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
                                     </div>
-                                </div><!-- tab-pane -->
-                                <div class="tab-pane fade show active" id="tab-1-2">
-                                    <div class="form-section">
-                                        <h6 class="text-uppercase">Document to Upload</h6>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
+                                        <select id="District" name="DistrictId" class="form-control"></select>
+                                        @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
+                                        <span class="input-lable">District</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
 
-                                        <fieldset>
 
-                                            <div id="alert-area"></div>
+                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
+                                        <span class="input-lable">Country</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
+                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
+                                        <span class="input-lable">Address</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                    </div>
+                                </fieldset>
 
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                </div>
-                                                <input type="file" class="form-control" placeholder="Profile Picture" id="profile_pic" name="profile_pic">
-                                                <span class="input-lable">Profile Picture</span>
-                                            </div>
-                                            <div class="input-group mb-3">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
-                                                </div>
-                                                <input type="file" class="form-control" placeholder="Proof of ID" id="id_proof" name="id_proof">
-                                                <span class="input-lable">Proof of ID</span>
-                                            </div>
-                                            <div class="input-group mb-3" style="display:none;">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                </div>
-                                                @Html.DropDownList("UserRoles", (SelectList)ViewBag.UserRolesViewBag, "--select role--", new { @class = "form-control", @style = "display:none;" })
-                                                <span class="input-lable">User Roles</span>
-                                            </div>
+                            </div>
+                            <div class="form-section">
+                                <h6 class="text-uppercase">Email & Phone</h6>
 
-                                        </fieldset>
+                                <fieldset>
+
+                                    <div id="alert-area"></div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">Email</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                     </div>
 
-                                    @if (ViewBag.SelectedRole == "Agency")
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">Contact number</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </fieldset>
+
+                            </div>
+                        </div><!-- tab-pane -->
+                        <div class="tab-pane fade show active" id="tab-1-2">
+                            <div class="form-section">
+                                <h6 class="text-uppercase">Document to Upload</h6>
+
+                                <fieldset>
+
+                                    <div id="alert-area"></div>
+
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        </div>
+                                        <input type="file" class="form-control" placeholder="Profile Picture" id="profile_pic" name="profile_pic">
+                                        <span class="input-lable">Profile Picture</span>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                        </div>
+                                        <input type="file" class="form-control" placeholder="Proof of ID" id="id_proof" name="id_proof">
+                                        <span class="input-lable">Proof of ID</span>
+                                    </div>
+                                    <div class="input-group mb-3" style="display:none;">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        </div>
+                                        @Html.DropDownList("UserRoles", (SelectList)ViewBag.UserRolesViewBag, "--select role--", new { @class = "form-control", @style = "display:none;" })
+                                        <span class="input-lable">User Roles</span>
+                                    </div>
+
+                                </fieldset>
+                            </div>
+
+                            @if (ViewBag.SelectedRole == "Agency")
+                            {
+                                <div class="form-section">
+                                    <h6 class="text-uppercase">Agency Section</h6>
+
+                                    <fieldset>
+
+                                        <div id="alert-area"></div>
+
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Company Name</span>
+                                        </div>
+                                        <div class="row">
+                                            @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Responsible Name</span>
+                                        </div>
+                                        <div class="row">
+                                            @Html.ValidationMessageFor(m => m.ResponsibleName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Website URL</span>
+                                        </div>
+                                        <div class="row">
+                                            @Html.ValidationMessageFor(m => m.WebSiteUrl, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                            </div>
+                                            @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Description</span>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            }
+                            <div class="form-section">
+                                <h6 class="text-uppercase">User Name & Password</h6>
+
+                                <fieldset>
+
+                                    <div id="alert-area"></div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">User name</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
+                                        </div>
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">Password</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
+                                        </div>
+                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "" })
+                                        <span class="input-lable">Confirm password</span>
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    @if (ViewBag.SecurityQuestions != null)
                                     {
-                                        <div class="form-section">
-                                            <h6 class="text-uppercase">Agency Section</h6>
 
-                                            <fieldset>
+                                        <div class="input-group mb-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
+                                            </div>
+                                            @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control" })
+                                            <span class="input-lable">Security Question</span>
+                                        </div>
 
-                                                <div id="alert-area"></div>
+                                        @*<div class="row">
+                                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                        </div>*@
 
-                                                <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                    </div>
-                                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "" })
-                                                    <span class="input-lable">Company Name</span>
-                                                </div>
-                                                <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
-                                                    </div>
-                                                    @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "" })
-                                                    <span class="input-lable">Responsible Name</span>
-                                                </div>
-                                                <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
-                                                    </div>
-                                                    @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "" })
-                                                    <span class="input-lable">Website URL</span>
-                                                </div>
                                                 <div class="input-group">
                                                     <div class="input-group-prepend">
-                                                        <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                                        <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
                                                     </div>
-                                                    @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "" })
-                                                    <span class="input-lable">Description</span>
+                                                    @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
+                                                    <span class="input-lable">Security Answer</span>
                                                 </div>
-                                            </fieldset>
-                                        </div>
-                                    }
-                                    <div class="form-section">
-                                        <h6 class="text-uppercase">User Name & Password</h6>
-
-                                        <fieldset>
-
-                                            <div id="alert-area"></div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                                </div>
-                                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">User name</span>
-                                            </div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
-                                                </div>
-                                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">Password</span>
-                                            </div>
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
-                                                </div>
-                                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">Confirm password</span>
-                                            </div>
-
-                                            @if (ViewBag.SecurityQuestions != null)
-                                            {
-
-                                                <div class="input-group mb-2">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
-                                                    </div>
-                                                    @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control" })
-                                                    <span class="input-lable">Security Question</span>
-                                                </div>
-
-
-
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
-                                                        </div>
-                                                        @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
-                                                        <span class="input-lable">Security Answer</span>
-                                                    </div>
                                                     <div class="checkbox">
                                                         <label>
                                                             @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
@@ -279,39 +335,44 @@
                                                             <span></span>
                                                         </label>
                                                     </div>
-                                            }
+                                                    <div class="row">
+                                                        @Html.ValidationMessageFor(m => m.AgreeTermsAndConditions, "", new { @class = "text-danger" })
+                                                    </div>
+                                    }
 
-                                        </fieldset>
+                                </fieldset>
 
-                                    </div>
-
-                                    <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
-                                    @*<input type="submit" class="btn btn-style-1 btn-lg waves" value="Register" />*@
-                                </div><!-- tab-pane -->
                             </div>
-                            <span>
-                                @Html.ActionLink("Have an account?", "Login")
-                            </span>
-                            @*<span style="float:right;"><a href="/Account/ForgotPassword">Forgotten password?</a></span>*@
-                            <ul class="nav nav-tabs" style="width: 100%;">
-                                <li style="width: 50%;">
-                                    <a style="float:left;" class="active backbtn" href="#tab-1-1" data-toggle="tab">Back</a>
-                                </li>
-                                <li style="width: 50%;">
-                                    <a style="float:right;" class="active nextbtn" href="#tab-1-2" data-toggle="tab">Next</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
 
+                            <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                            @*<input type="submit" class="btn btn-style-1 btn-lg waves" value="Register" />*@
+                        </div><!-- tab-pane -->
+                    </div>
+                    <span>
+                        @Html.ActionLink("Have an account?", "Login")
+                    </span>
+                    @*<span style="float:right;"><a href="/Account/ForgotPassword">Forgotten password?</a></span>*@
+                    <ul class="nav nav-tabs" style="width: 100%;">
+                        <li style="width: 50%;">
+                            <a style="float:left;" class="active backbtn" href="#tab-1-1" data-toggle="tab">Back</a>
+                        </li>
+                        <li style="width: 50%;">
+                            <a style="float:right;" class="active nextbtn" href="#tab-1-2" data-toggle="tab">Next</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </div>
+
+    </div>
 
 
 }
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 @section Scripts {
-    @Scripts.Render("~/bundles/jquery")}
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+}
 <script>
     $(document).ready(function () {
         var locations = {
@@ -349,6 +410,34 @@
 
 
     //alert(jobRequestId);
+    //$(document).ready(function () {
+    //    // alert("s")
+    //    $(".backbtn").hide();
+    //    $("#tab-1-2").hide();
+    //    $("#tab-1-1").show();
+    //    $(".backbtn").click(function () {
+    //        //alert("s")
+    //        $(this).hide();
+    //        $(".nextbtn").show();
+    //        $(".nextbtn").addClass("active");
+    //        $("#tab-1-2").hide();
+    //        $("#tab-1-1").show();
+    //        //$(".backbtn").click();
+    //    })
+    //    $(".nextbtn").click(function () {
+    //        $(this).hide();
+    //        $(".backbtn").show();
+    //        $(".backbtn").addClass("active");
+    //        // $(".nextbtn").click();
+    //        $("#tab-1-1").hide();
+    //        $("#tab-1-2").show();
+    //    })
+    //})
+
+
+
+
+    //alert(jobRequestId);
     $(document).ready(function () {
         // alert("s")
         $(".backbtn").hide();
@@ -364,14 +453,39 @@
             //$(".backbtn").click();
         })
         $(".nextbtn").click(function () {
-            $(this).hide();
-            $(".backbtn").show();
-            $(".backbtn").addClass("active");
-            // $(".nextbtn").click();
-            $("#tab-1-1").hide();
-            $("#tab-1-2").show();
+
+            // first check if the form is valid
+            //alert();
+
+            if ($('#FirstName').valid()
+                && $('#Age').valid()
+                && $('#City').valid()
+                && $('#District').valid()
+                && $('#Country').valid()
+                //&& $('input[name="ExperienceInMonths"]').valid()
+                && $('#Address').valid()
+                && $('#Email').valid()
+                && $('#PhoneNumber').valid()) {
+
+                $(this).hide();
+                $(".backbtn").show();
+                $(".backbtn").addClass("active");
+                // $(".nextbtn").click();
+                $("#tab-1-1").hide();
+                $("#tab-1-2").show();
+            }
+            //$("#job-creation-form-container form").valid();
+
+            //$(this).hide();
+            //$(".backbtn").show();
+            //$(".backbtn").addClass("active");
+            //// $(".nextbtn").click();
+            //$("#tab-1-1").hide();
+            //$("#tab-1-2").show();
         })
+
     })
+
 
 </script>
 

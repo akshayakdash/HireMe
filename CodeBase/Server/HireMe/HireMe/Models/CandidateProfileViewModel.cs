@@ -20,7 +20,7 @@ namespace HireMe.Models
         //[ForeignKey("AspNetUserId")]
         //public AppUser ApplicationUser { get; set; }
         public int? AgencyId { get; set; }
-
+        [Required]
         public Gender Gender { get; set; }
         public string GenderDesc
         {
@@ -36,7 +36,9 @@ namespace HireMe.Models
                 }
             }
         }
-        public int? Age { get; set; }
+        //[Required]
+        //public int? Age { get; set; }
+        [Required]
         public int? ExperienceInYears { get; set; }
         public int? ExperienceInMonths { get; set; }
 
@@ -44,19 +46,21 @@ namespace HireMe.Models
         public string IdProofDocDesc { get; set; }
 
         public bool ProfileVerified { get; set; }
+        [Required]
         public StaffType StaffType { get; set; }
         public string StaffTypeDesc { get; set; }
+        [Required]
         public DateTime Disponibility { get; set; }
 
         public int? CountryId { get; set; }
         public string Country { get; set; }
-
+        [Required]
         public int? CityId { get; set; }
         public string City { get; set; }
-
+        [Required]
         public int? DistrictId { get; set; }
         public string District { get; set; }
-
+        [Required]
         public SalaryType SalaryType { get; set; }
         public string SalaryTypeDesc { get; set; }
         public string SalaryTypeOtherDesc { get; set; }
@@ -64,7 +68,9 @@ namespace HireMe.Models
         public bool CanRead { get; set; }
         public bool CanWrite { get; set; }
 
+        [Required]
         public decimal ExpectedMinSalary { get; set; }
+        [Required]
         public decimal ExpectedMaxSalary { get; set; }
 
         public bool SleepOnSite { get; set; }
@@ -110,7 +116,7 @@ namespace HireMe.Models
         //[ForeignKey("AspNetUserId")]
         //public AppUser ApplicationUser { get; set; }
         public int? AgencyId { get; set; }
-
+        [Required]
         public Gender Gender { get; set; }
         public string GenderDesc
         {
@@ -126,10 +132,15 @@ namespace HireMe.Models
                 }
             }
         }
+       
         public int? Age { get; set; }
+        [Required]
         public int MinAge { get; set; }
+        [Required]
         public int MaxAge { get; set; }
+        [Required]
         public int? ExperienceInYears { get; set; }
+        [Required]
         public int? ExperienceInMonths { get; set; }
 
         public string IdProofDoc { get; set; }
@@ -138,19 +149,24 @@ namespace HireMe.Models
         public bool ProfileVerified { get; set; }
         public StaffType StaffType { get; set; }
         public string StaffTypeDesc { get; set; }
+        [Required]
         public DateTime Disponibility { get; set; }
 
         public int? CountryId { get; set; }
         public string Country { get; set; }
 
+        [Required]
         public int? CityId { get; set; }
         public string City { get; set; }
 
+        [Required]
         public int? DistrictId { get; set; }
         public string District { get; set; }
 
+        [Required]
         public SalaryType SalaryType { get; set; }
         public string SalaryTypeDesc { get; set; }
+        [RequiredIf("SalaryType", SalaryType.Others)]
         public string SalaryTypeOtherDesc { get; set; }
 
         public bool CanRead { get; set; }
@@ -197,6 +213,7 @@ namespace HireMe.Models
         public ParamType TaskParamType { get; set; }
         public ParamType TaskParamValueType { get; set; }
         public string ParamAvailableOptions { get; set; }
+        public string IconImage { get; set; }
 
         public int? ParentJobTaskId { get; set; }
         public virtual ICollection<JobTaskViewModel> SubTasks { get; set; }

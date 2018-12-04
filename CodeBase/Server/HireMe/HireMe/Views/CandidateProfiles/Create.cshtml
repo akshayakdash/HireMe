@@ -385,7 +385,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                             {
-                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
                             }
 
                             @*
@@ -429,8 +429,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
         </div>*@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                .Select(c => c.Value);
+                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                    .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -450,35 +450,35 @@ for (int i = 0; i < jobTasks.Count(); i++)
         @if (role == "Candidate")
         {
 
-        <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
+            <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
 
-        <a href="~/JobRequests" class="active"><i class="fa fa-graduation-cap"></i> Job Requests</a>
+            <a href="~/JobRequests" class="active"><i class="fa fa-graduation-cap"></i> Job Requests</a>
 
-        <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-        <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
+            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages &Aacute; Notifications</a>
 
-        <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
+            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Employer")
         {
 
-        <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employee</a>
+            <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employee</a>
 
-        <a href="~/JobOffers"><i class="fa fa-search"></i> My Job Offers</a>
+            <a href="~/JobOffers"><i class="fa fa-search"></i> My Job Offers</a>
 
-        <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
+            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
         }
         else if (role == "Agency")
         {
 
-        <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employer</a>
+            <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employer</a>
 
-        <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
+            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
 
-        <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
+            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
 
-        <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
+            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
         }
     </div>
 
@@ -541,6 +541,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                         <span></span>
                                                                     </label>
                                                                 </div>
+                                                                <div class="row">
+                                                                    @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -571,50 +574,33 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                         <span></span>
                                                                     </label>
                                                                 </div>
+                                                                <div class="row">
+                                                                    @Html.ValidationMessageFor(m => m.StaffType, "", new { @class = "text-danger" })
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-sm-6">
+                                                    @*<div class="col-sm-6">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
                                                                 Age
-                                                                @*<div class="switch-area-inner">
-                                                                        <label class="switchsmall">
-                                                                            <input type="checkbox">
-                                                                            <span class="slider1 round"></span>
-                                                                        </label>
-                                                                    </div>*@
+                                                               
                                                             </div>
 
                                                             <div class="filtersection-body">
                                                                 <div class="row">
                                                                     <div class="col-lg-12 col-md-12">
                                                                         @Html.TextBoxFor(p => p.Age, new { @class = "form-control" })
-                                                                        @*<select>
-                                                                                    <option value="1">1</option>
-                                                                                    <option value="2">2</option>
-                                                                                    <option value="3">3</option>
-                                                                                    <option value="4">4</option>
-                                                                                    <option value="5">5</option>
-                                                                                    <option value="6">6</option>
-                                                                                </select>
-                                                                            </div>
-                                                                            <div class="col-lg-6 col-md-6">
-                                                                                <select>
-                                                                                    <option value="1">1</option>
-                                                                                    <option value="2">2</option>
-                                                                                    <option value="3">3</option>
-                                                                                    <option value="4">4</option>
-                                                                                    <option value="5">5</option>
-                                                                                    <option value="6">6</option>
-                                                                                </select>*@
                                                                     </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div>*@
                                                     <div class="col-sm-6">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
@@ -629,8 +615,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                                                             <div class="filtersection-body">
                                                                 <div class="row">
-                                                                    <div class="col-lg-12 col-md-12">
-                                                                        @Html.TextBoxFor(p => p.ExperienceInYears, new { @class = "form-control" })
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.TextBoxFor(p => p.ExperienceInYears, new { @class = "form-control", @placeholder="in yrs" })
                                                                         @*<select>
                                                                                     <option value="1">1</option>
                                                                                     <option value="2">2</option>
@@ -650,6 +636,12 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                                     <option value="6">6</option>
                                                                                 </select>*@
                                                                     </div>
+                                                                    <div class="col-lg-6 col-md-6">
+                                                                        @Html.TextBoxFor(p => p.ExperienceInMonths, new { @class = "form-control", @placeholder="in months" })
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    @Html.ValidationMessageFor(m => m.ExperienceInYears, "", new { @class = "text-danger" })
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -675,13 +667,19 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                 @Html.HiddenFor(p => p.Country, new { @value = "Ivory" })
                                                                 <div class="row">
                                                                     <div class="col-lg-6 col-md-6">
-                                                                        @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(CityEnum))), "Select City", new { @class = "form-control" })
+                                                                        @Html.DropDownListFor(model => model.CityId, ViewBag.Cities as IEnumerable<SelectListItem>, "Select City", new { @class = "form-control" })
 
                                                                     </div>
                                                                     <div class="col-lg-6 col-md-6">
-                                                                        @Html.DropDownListFor(p => p.Country, new SelectList(Enum.GetValues(typeof(DistrictEnum))), "Select District", new { @class = "form-control" })
+                                                                        @Html.DropDownListFor(p => p.DistrictId, ViewBag.Districts as IEnumerable<SelectListItem>, "Select District", new { @class = "form-control" })
                                                                     </div>
                                                                 </div>
+
+                                                                <div class="row">
+                                                                    @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
+                                                                    @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
+                                                                </div>
+                                                               
                                                             </div>
                                                         </div>
                                                     </div>
@@ -706,37 +704,49 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                     <div class="col-sm-6">
                                                                         <div class="radio">
                                                                             <label>
-                                                                                <input type="radio" name="options" id="option1" value="option1" checked>
+                                                                                @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Monthly, new { @value = SalaryType.Monthly })
                                                                                 Monthly
                                                                                 <span></span>
                                                                             </label>
                                                                         </div>
                                                                         <div class="radio">
                                                                             <label>
-                                                                                <input type="radio" name="options" id="option2" value="option2">
+                                                                                @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Hourly, new { @value = SalaryType.Hourly })
                                                                                 Hourly
                                                                                 <span></span>
                                                                             </label>
                                                                         </div>
                                                                         <div class="radio">
                                                                             <label>
-                                                                                <input type="radio" name="options" id="option2" value="option2">
-                                                                                Other
+                                                                                @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Hourly, new { @value = SalaryType.Others })
+                                                                                Others
                                                                                 <span></span>
                                                                             </label>
+                                                                        </div>
+                                                                        <div class="salary-type-other" style="display:none">
+                                                                            @Html.TextBoxFor(p => p.SalaryTypeOtherDesc, new { @class = "form-control", @placeholder = "Salary type" })
+                                                                        </div>
+                                                                        <div class="row">
+                                                                            @Html.ValidationMessageFor(m => m.SalaryType, "", new { @class = "text-danger" })
+                                                                            @Html.ValidationMessageFor(m => m.SalaryTypeOtherDesc, "", new { @class = "text-danger" })
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <div class="row">
                                                                             <div class="col-lg-6 col-md-6">
-                                                                                @Html.TextBoxFor(p => p.ExpectedMinSalary, new { @class = "form-control" })
+                                                                                @Html.TextBoxFor(p => p.ExpectedMinSalary, "{0:#.#}", new { @class = "form-control", @placeholder = "Min Salary", @value = "", @type = "number" })
                                                                             </div>
                                                                             <div class="col-lg-6 col-md-6">
-                                                                                @Html.TextBoxFor(p => p.ExpectedMaxSalary, new { @class = "form-control" })
+                                                                                @Html.TextBoxFor(p => p.ExpectedMaxSalary, "{0:#.#}", new { @class = "form-control", @placeholder = "Max Salary", @value = "", @type = "number" })
                                                                             </div>
                                                                             @*<div class="col-md-12">
-                                                                                    <input type="text" class="form-control" placeholder="Additional Description" />
-                                                                                </div>*@
+                        <input type="text" class="form-control" placeholder="Additional Description" />
+                    </div>*@
+
+                                                                            <div class="row">
+                                                                                @Html.ValidationMessageFor(m => m.ExpectedMinSalary, "", new { @class = "text-danger" })
+                                                                                @Html.ValidationMessageFor(m => m.ExpectedMaxSalary, "", new { @class = "text-danger" })
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -827,6 +837,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             <div class="filtersection-body">
                                                                 <div class="date">
                                                                     @Html.TextBoxFor(p => p.Disponibility, new { @type = "date" })
+                                                                </div>
+                                                                <div class="row">
+                                                                    @Html.ValidationMessageFor(m => m.Disponibility, "", new { @class = "text-danger" })
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -994,7 +1007,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                     </div>*@
                                                             </div>
                                                             <div class="filtersection-body">
-                                                  
+
                                                                 <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic1" name="JobRequestSkillPic1" accept="image/png, image/jpeg,image/jpg">
                                                                 <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic2" name="JobRequestSkillPic2" accept="image/png, image/jpeg,image/jpg">
                                                                 <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic3" name="JobRequestSkillPic3" accept="image/png, image/jpeg,image/jpg">
@@ -1086,13 +1099,28 @@ for (int i = 0; i < jobTasks.Count(); i++)
                 //$(".backbtn").click();
             })
             $(".nextbtn").click(function () {
-                $(this).hide();
-                $(".backbtn").show();
-                $(".backbtn").addClass("active");
-                // $(".nextbtn").click();
-                $("#tab-1-1").hide();
-                $("#tab-1-2").show();
-            })
+                if ($('#Gender').valid()
+                    && $('#StaffType').valid()
+                    //&& $('#Age').valid()
+                    && $('#ExperienceInYears').valid()
+                    //&& $('input[name="ExperienceInMonths"]').valid()
+                    && $('#CityId').valid()
+                    && $('#DistrictId').valid()
+                    && $('#SalaryType').valid()
+                    && $('#ExpectedMinSalary').valid()
+                    && $('#ExpectedMaxSalary').valid()
+                ) {
+
+                    $(this).hide();
+                    $(".backbtn").show();
+                    $(".backbtn").addClass("active");
+                    // $(".nextbtn").click();
+                    $("#tab-1-1").hide();
+                    $("#tab-1-2").show();
+                }
+            });
+
+           
 
             //var uploadField = document.getElementByName("JobRequestSkillPic1");
 

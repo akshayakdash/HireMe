@@ -36,20 +36,29 @@ namespace HireMe.Controllers
             return View(jobOffer);
         }
 
-        // GET: EmployerJobOffers/Create
-        public ActionResult Create(int id)
+        // GET: EmployerJobOffers/Create here Id is the JobId e.g Nanny
+        public ActionResult Create(int? id)
         {
-            if (id != 0)
+            if (id.HasValue)
             {
                 Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == id);
 
-                var employerJobOfferViewModel = new EmployerJobOfferViewModel { JobId = id, JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks) };
+                var employerJobOfferViewModel = new EmployerJobOfferViewModel { JobId = id.Value, JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks) };
+
+                ViewBag.Cities = db.Cities.Select(p => new SelectListItem { Text = p.CityName, Value = p.CityId.ToString() }).ToList();
+                ViewBag.Districts = db.Districts.Select(p => new SelectListItem { Text = p.DistrictName, Value = p.DistrictId.ToString() }).ToList();
 
                 return View(employerJobOfferViewModel);
             }
             else
             {
+                var jobCategories = db.JobCategories
+                    .Include(p => p.Jobs)
+                    .ToList();
+                ViewBag.JobCategories = jobCategories;
                 return View(new EmployerJobOfferViewModel { });
+
+                //return RedirectToAction("", "JobCategories");
             }
         }
 
@@ -85,6 +94,9 @@ namespace HireMe.Controllers
                     jobOffer.IsPublished = true;
                     jobOffer.JobOfferJobTasks = new List<JobOfferJobTask> { };
                     jobOffer.AdditionalDescription = employerJobOffer.AdditionalDescription;
+                    jobOffer.CountryId = 1; // TO Do _Hard coded for Ivory
+                    jobOffer.CityId = employerJobOffer.CityId;
+                    jobOffer.DistrictId = employerJobOffer.DistrictId;
                     employerJobOffer.JobTasks.ForEach(task =>
                     {
                         if (task.Selected)
@@ -111,6 +123,10 @@ namespace HireMe.Controllers
                     jobOffer.JobId = employerJobOffer.JobId;
                     jobOffer.JobOfferJobTasks = new List<JobOfferJobTask> { };
                     jobOffer.AdditionalDescription = employerJobOffer.AdditionalDescription;
+
+                    jobOffer.CountryId = 1; // TO Do _Hard coded for Ivory
+                    jobOffer.CityId = employerJobOffer.CityId;
+                    jobOffer.DistrictId = employerJobOffer.DistrictId;
 
                     employerJobOffer.JobTasks.ForEach(task =>
                     {
