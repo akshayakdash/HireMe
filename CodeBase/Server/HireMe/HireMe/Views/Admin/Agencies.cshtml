@@ -166,6 +166,9 @@
 
                             <div class="col-sm-6">
                                 <div class="profileitems">
+                                    <span class="validate">
+                                        <img src="~/assets/images/verified.png" />
+                                    </span>
                                     <div class="left">
                                         <img src="@Url.Content(item.AgencyLogo)" />
                                         <div class="rating">
@@ -181,10 +184,13 @@
                                         else
                                         {
                                             @*<p>Verified</p>*@
-                                            <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                            
                                         }
                                     </div>
                                     <div class="right">
+                                        <div class="idcard">
+                                            <img src="~/assets/images/idcard.jpg" />
+                                        </div>
                                         <div class="right-left">
                                             <h1>@(item.AgencyName)<span></span></h1>
                                             <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
@@ -192,9 +198,6 @@
                                             <h2 class="email"><i class="fa fa-envelope"></i> jk@gmail.com</h2>
                                             <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
                                             <div class="published">Published: <span>@item.CreatedDate</span></div>
-                                        </div>
-                                        <div class="idcard">
-                                            <img src="~/assets/images/idcard.jpg" />
                                         </div>
                                     </div>
                                     <div class="profile-footer">
