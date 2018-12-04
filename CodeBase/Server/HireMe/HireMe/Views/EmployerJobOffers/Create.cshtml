@@ -182,15 +182,16 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
     <!---- Tab Section -->
 
-    <div class="full-section-container wow fadeInUp">
+    <div class="full-section-container wow fadeInUp pl-3 pr-3">
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
 
-            <div class="tab-section">
-                <div class="tab-section-body">
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="headline text-center mb-3">
+                                <h2>My Job Offers</h2>
+                            </div>
                             <div class="tabs style-2">
                                 <div class="tab-header">
                                     My Criterias
@@ -568,8 +569,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                                                                     </div>
                                                                     @*<div class="col-lg-6 col-md-6">
-                                                                        @Html.TextBoxFor(p => p.MaxGroupPeople, new { @class = "form-control" })
-                                                                    </div>*@
+                                                                            @Html.TextBoxFor(p => p.MaxGroupPeople, new { @class = "form-control" })
+                                                                        </div>*@
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -637,11 +638,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                         </div>
                     </div>
-                </div>
-            </div>
-
-
-
+               
         }
     </div>
 
