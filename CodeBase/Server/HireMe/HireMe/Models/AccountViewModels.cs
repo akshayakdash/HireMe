@@ -90,6 +90,9 @@ namespace HireMe.Models
         [Required]
         public int Age { get; set; }
 
+        [Required]
+        public Gender Gender { get; set; }
+
         [Display(Name = "Address")]
         [Required]
         public string Address { get; set; }
@@ -97,6 +100,7 @@ namespace HireMe.Models
         [Required(ErrorMessage = "You must provide a valid phone number")]
         //[Display(Name = "Contact Number")]
         [DataType(DataType.PhoneNumber)]
+        //[Phone()]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
 
