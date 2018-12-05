@@ -10982,7 +10982,7 @@ input:checked + .slider1:before {
 }
 
 .search-criteria .filtersection-panel .icon-section {
-    float: left;
+    /*float: left;*/
     margin-right: 10px;
     max-width: 50px;
 }

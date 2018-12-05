@@ -221,9 +221,21 @@
                                                                         </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
-                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
-                                                                    <p class="location"><span> @item.Job.JobName</span></p>
+                                                                    @*<h1>
+                                                                    @(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")
+                                                                      </h1>*@
+                                                                    <h2 class="name">
+                                                                        @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
+                                                                        }
+                                                                    <span>&nbsp;@item.Employer.FirstName</span>
+                                                                    </h2>
+                                                                    <p class="location"><span>@item.Job.JobName</span></p>
 
 
                                                                 </div>
