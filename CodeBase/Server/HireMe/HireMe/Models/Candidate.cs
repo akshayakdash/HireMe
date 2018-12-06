@@ -552,6 +552,7 @@ namespace HireMe.Models
 
     public enum StaffType
     {
+        DoesNotMatter = 0,
         Independent = 1,
         Agency = 2
     }
@@ -560,7 +561,7 @@ namespace HireMe.Models
     {
         Monthly = 1,
         Hourly = 2,
-        Others = 3
+        PriceOfService = 3
     }
 
     public enum ParamType

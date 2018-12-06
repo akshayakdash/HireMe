@@ -90,7 +90,26 @@ namespace HireMe.Models
         public string LastName { get; set; }
 
         //[Required]
-        public int Age { get; set; }
+        public int Age
+        {
+            get
+            {
+                if (DOB != null && DOB != default(DateTime) && DOB <= DateTime.Today)
+                {
+                    // Save today's date.
+                    var today = DateTime.Today;
+                    // Calculate the age.
+                    var age = today.Year - DOB.Year;
+                    // Go back to the year the person was born in case of a leap year
+                    if (DOB > today.AddYears(-age)) age--;
+                    return age;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         [Required]
         public DateTime DOB { get; set; }
@@ -178,7 +197,7 @@ namespace HireMe.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        
+
 
         [Required]
         [Display(Name = "First Name")]
@@ -196,19 +215,19 @@ namespace HireMe.Models
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
 
-        
+
 
         public HttpPostedFileBase profile_pic { get; set; }
         public HttpPostedFileBase id_proof { get; set; }
 
         public int? CountryId { get; set; }
-       
+
 
         public int? CityId { get; set; }
-       
+
 
         public int? DistrictId { get; set; }
-       
+
 
         public string ContactOption { get; set; }
 
@@ -219,7 +238,7 @@ namespace HireMe.Models
         // TO Do: Agency Section TO Be added
     }
 
-   
+
 
     public class ResetPasswordViewModel
     {
