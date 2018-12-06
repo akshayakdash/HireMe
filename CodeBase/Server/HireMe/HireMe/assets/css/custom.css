@@ -9984,7 +9984,7 @@ blockquote {
     border: 1px solid #ccc;
     /*display:table;
     width:100%;*/
-    min-height: 185px;
+    min-height: 210px;
     border-radius: 8px;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
@@ -10032,6 +10032,9 @@ blockquote {
         float: left;
         text-align:center;
     }
+    .profileitems .left .btn{
+        margin-bottom:0;
+    }
 
         .profileitems .left img {
             width: 100px;
@@ -10062,7 +10065,7 @@ blockquote {
             line-height: initial;
             margin-bottom: 5px;
         }
-            .profileitems .right h1 img {
+            .profileitems .right h1 img, .profileitems .right h2 img {
                 margin-right: 5px;
                 width: 16px;
             }
@@ -10195,6 +10198,8 @@ blockquote {
 ***/
 
 .searchprofile-section {
+    display: table;
+    width: 100%;
 }
 
 
@@ -11228,6 +11233,9 @@ margin:0;
     margin-bottom: 10px;
     min-height: 200px;
 }
+.profile-pic img{
+    max-height:200px;
+}
 .profile-info{
 
 }
@@ -11369,4 +11377,9 @@ margin:0;
 .bg-pink {
     background: #fe005a;
     color:#fff!important;
+}
+.right-side {
+    background-color: #e9f1f5;
+    color: #666666;
+    overflow: hidden;
 }
