@@ -11228,6 +11228,9 @@ margin:0;
     margin-bottom: 10px;
     min-height: 200px;
 }
+.profile-pic img{
+    max-height:200px;
+}
 .profile-info{
 
 }
