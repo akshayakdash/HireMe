@@ -140,110 +140,112 @@
         }
     </div>
 
-    @if (role != "Admin")
-    {
+    <section class="right-side">
+        @if (role != "Admin")
+        {
 
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                        <h2>Dashboard</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                            <h2>Dashboard</h2>
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-6 wow fadeInLeft">
-                    <div class="image-box style-2 text-left">
-                        <div class="image-box-thumbnail">
-                            <a href="#"><img src="~/assets/images/tuto-image.jpg" alt=""></a>
-                        </div><!-- image-box-thumbnail -->
-                        <h4><a href="#">All the Tuto in Video</a></h4>
-                        <ul class="video-list">
-                            <li><a href="#">How to search a profile?</a></li>
-                            <li><a href="#">How to manage favorite?</a></li>
-                            <li><a href="#">How to give a Note & Recommandation?</a></li>
-                            <li><a href="#">How to publish a Job offer/ Job request?</a></li>
-                        </ul>
-                    </div><!-- text-box -->
-                </div>
+                    <div class="col-md-6 wow fadeInLeft">
+                        <div class="image-box style-2 text-left">
+                            <div class="image-box-thumbnail">
+                                <a href="#"><img src="~/assets/images/tuto-image.jpg" alt=""></a>
+                            </div><!-- image-box-thumbnail -->
+                            <h4><a href="#">All the Tuto in Video</a></h4>
+                            <ul class="video-list">
+                                <li><a href="#">How to search a profile?</a></li>
+                                <li><a href="#">How to manage favorite?</a></li>
+                                <li><a href="#">How to give a Note & Recommandation?</a></li>
+                                <li><a href="#">How to publish a Job offer/ Job request?</a></li>
+                            </ul>
+                        </div><!-- text-box -->
+                    </div>
 
-                <div class="col-md-6 wow fadeInRight">
-                    <div class="image-box style-2 text-left">
-                        <div class="image-box-thumbnail">
-                            <a href="#"><img src="~/assets/images/rules1.jpg" alt=""></a>
-                        </div><!-- image-box-thumbnail -->
-                        <h4><a href="#">What are the rules follow in our communauty?</a></h4>
-                        <strong>Respect each other:</strong>
-                        <ul class="bullet-list">
-                            <li>Once you find a profile and you want to contact him, please be polite, no racism terms, and don’t insist if the user is not interested</li>
-                        </ul>
-                        <strong>Give note & recommendations:</strong>
-                        <ul class="bullet-list">
-                            <li>After hiring a profile, don’t forget to let a note & comment to ...</li>
-                        </ul>
-                    </div><!-- text-box -->
-                </div>
+                    <div class="col-md-6 wow fadeInRight">
+                        <div class="image-box style-2 text-left">
+                            <div class="image-box-thumbnail">
+                                <a href="#"><img src="~/assets/images/rules1.jpg" alt=""></a>
+                            </div><!-- image-box-thumbnail -->
+                            <h4><a href="#">What are the rules follow in our communauty?</a></h4>
+                            <strong>Respect each other:</strong>
+                            <ul class="bullet-list">
+                                <li>Once you find a profile and you want to contact him, please be polite, no racism terms, and don’t insist if the user is not interested</li>
+                            </ul>
+                            <strong>Give note & recommendations:</strong>
+                            <ul class="bullet-list">
+                                <li>After hiring a profile, don’t forget to let a note & comment to ...</li>
+                            </ul>
+                        </div><!-- text-box -->
+                    </div>
 
-                <div class="col-md-6 wow fadeInLeft">
-                    <div class="image-box style-2 text-left">
-                        <div class="image-box-thumbnail">
-                            <a href="#"><img src="~/assets/images/search-profile.jpg" alt=""></a>
-                        </div><!-- image-box-thumbnail -->
-                        <h4><a href="#">How to search a profil?</a></h4>
-                        <strong>Define your search criterias:</strong>
-                        <ul class="bullet-list">
-                            <li>Go to the section « Search a Job request/Job offer »</li>
-                            <li>Define your search criterias from the panoply of customized criterias</li>
-                            <li>Launch the search command</li>
-                        </ul>
-                        <strong>Check the profile details:</strong>
-                        <ul class="bullet-list">
-                            <li>Check all the profil detail (profile picture, age,  localisation,ID checked logo…)</li>
-                        </ul>
-                    </div><!-- text-box -->
-                </div>
+                    <div class="col-md-6 wow fadeInLeft">
+                        <div class="image-box style-2 text-left">
+                            <div class="image-box-thumbnail">
+                                <a href="#"><img src="~/assets/images/search-profile.jpg" alt=""></a>
+                            </div><!-- image-box-thumbnail -->
+                            <h4><a href="#">How to search a profil?</a></h4>
+                            <strong>Define your search criterias:</strong>
+                            <ul class="bullet-list">
+                                <li>Go to the section « Search a Job request/Job offer »</li>
+                                <li>Define your search criterias from the panoply of customized criterias</li>
+                                <li>Launch the search command</li>
+                            </ul>
+                            <strong>Check the profile details:</strong>
+                            <ul class="bullet-list">
+                                <li>Check all the profil detail (profile picture, age,  localisation,ID checked logo…)</li>
+                            </ul>
+                        </div><!-- text-box -->
+                    </div>
 
-                <div class="col-md-6 wow fadeInRight">
-                    <div class="image-box style-2 text-left">
-                        <div class="image-box-thumbnail">
-                            <a href="#"><img src="~/assets/images/publish.jpg" alt=""></a>
-                        </div><!-- image-box-thumbnail -->
-                        <h4><a href="#">How to publish a Job offer or a Job request?</a></h4>
-                        <strong>From your user account:</strong>
-                        <ul class="bullet-list">
-                            <li>Go to the section « Publish a job offer » or « Job request »</li>
-                            <li>Fill a short form to define your profile criterias & expectations</li>
-                            <li>Submit the form</li>
-                        </ul>
-                        <strong>Admin validation:</strong>
-                        <ul class="bullet-list">
-                            <li>Once the form is submitted, an admin will check you form (text & pictures) and validate it to make it visible by the othter members</li>
-                        </ul>
-                    </div><!-- text-box -->
-                </div>
+                    <div class="col-md-6 wow fadeInRight">
+                        <div class="image-box style-2 text-left">
+                            <div class="image-box-thumbnail">
+                                <a href="#"><img src="~/assets/images/publish.jpg" alt=""></a>
+                            </div><!-- image-box-thumbnail -->
+                            <h4><a href="#">How to publish a Job offer or a Job request?</a></h4>
+                            <strong>From your user account:</strong>
+                            <ul class="bullet-list">
+                                <li>Go to the section « Publish a job offer » or « Job request »</li>
+                                <li>Fill a short form to define your profile criterias & expectations</li>
+                                <li>Submit the form</li>
+                            </ul>
+                            <strong>Admin validation:</strong>
+                            <ul class="bullet-list">
+                                <li>Once the form is submitted, an admin will check you form (text & pictures) and validate it to make it visible by the othter members</li>
+                            </ul>
+                        </div><!-- text-box -->
+                    </div>
 
+                </div>
             </div>
-        </div>
-    }
-    else
-    {
+        }
+        else
+        {
 
-        <div class="full-section-container" ng-app="admindashboard">
-            <div class="jobsearch-section">
-                <div class="left-section">
-                    <div class="filter-overlay">
-                        <div class="lds-ripple"><div></div><div></div></div>
-                    </div>
-                    <div class="header">
-                        <i class="fa fa-align-left"></i>
+            <div class="full-section-container" ng-app="admindashboard">
+                <div class="jobsearch-section">
+                    <div class="left-section">
+                        <div class="filter-overlay">
+                            <div class="lds-ripple"><div></div><div></div></div>
+                        </div>
+                        <div class="header">
+                            <i class="fa fa-align-left"></i>
 
-                        <span class="grid-title">Graphs</span>
-                        <div class='switch'>
-                            <div class='quality'>
-                                <input checked id='q1' name='q' type='radio' value='q1'>
-                                <label for='q1'>Job Request</label>
-                            </div><div class='quality'>
-                                <input id='q2' name='q' type='radio' value='q2'>
-                                <label for='q2'>Job Offer</label>
+                            <span class="grid-title">Graphs</span>
+                            <div class='switch' style="right:10px;">
+                                <div class='quality'>
+                                    <input checked id='q1' name='q' type='radio' value='q1'>
+                                    <label for='q1'>Job Request</label>
+                                </div><div class='quality'>
+                                    <input id='q2' name='q' type='radio' value='q2'>
+                                    <label for='q2'>Job Offer</label>
+                                </div>
                             </div>
                         </div>
                         @*<a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>*@
@@ -252,92 +254,82 @@
                                 <div class="row">
                                     <section id="reactive">
                                         @*<div class="page-header">
-                        <h1>Dashboard Members</h1>
-                    </div>*@
-                                        <div class="row ng-scope" ng-controller="DataTablesCtrl">
+                                                <h1>Dashboard Members</h1>
+                                            </div>*@
+                                        <div class="row mb-5" ng-controller="DataTablesCtrl">
                                             <div class="col-lg-12 col-sm-12">
-                                                <div class="panel panel-default">
-                                                    @*<div class="panel-heading">Reactive Chart</div>*@
-                                                    <div class="panel-body">
-                                                        <canvas id="tables" class="chart chart-line ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" chart-colors="colors" height="327" width="755" style="display: block; width: 100%; height: 262px;"></canvas>
-                                                    </div>
-                                                </div>
+                                                <canvas id="tables" class="chart chart-line ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" chart-colors="colors" height="327" width="1000" style="display: block; width: 100%; height: 262px;"></canvas>
                                             </div>
                                             @*<div class="col-lg-6 col-sm-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">Chart Data</div>
-                                <div class="panel-body">
-                                    <table class="table table-responsive table-condensed table-striped">
-                                        <tbody>
-                                            <tr>
-                                                <!-- ngRepeat: label in labels -->
-                                                <th ng-repeat="label in labels" class="ng-binding ng-scope">January</th><!-- end ngRepeat: label in labels -->
-                                                <th ng-repeat="label in labels" class="ng-binding ng-scope">February</th><!-- end ngRepeat: label in labels -->
-                                                <th ng-repeat="label in labels" class="ng-binding ng-scope">March</th><!-- end ngRepeat: label in labels -->
-                                                <th ng-repeat="label in labels" class="ng-binding ng-scope">April</th><!-- end ngRepeat: label in labels -->
-                                                <th ng-repeat="label in labels" class="ng-binding ng-scope">May</th><!-- end ngRepeat: label in labels -->
-                                                <th ng-repeat="label in labels" class="ng-binding ng-scope">June</th><!-- end ngRepeat: label in labels -->
-                                                <th ng-repeat="label in labels" class="ng-binding ng-scope">July</th><!-- end ngRepeat: label in labels -->
-                                            </tr>
-                                            <!-- ngRepeat: dataSet in data -->
-                                            <tr ng-repeat="dataSet in data" class="ng-scope">
-                                                <!-- ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">66</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">55</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">64</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">86</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">49</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">50</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">34</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                            </tr><!-- end ngRepeat: dataSet in data -->
-                                            <tr ng-repeat="dataSet in data" class="ng-scope">
-                                                <!-- ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">28</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">54</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">39</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">13</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">79</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">23</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">94</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                            </tr><!-- end ngRepeat: dataSet in data -->
-                                        </tbody>
-                                    </table>
-                                    <button type="button" class="btn btn-primary pull-right" ng-click="randomize()">Randomize</button>
-                                </div>
-                            </div>
-                        </div>*@
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">Chart Data</div>
+                                                        <div class="panel-body">
+                                                            <table class="table table-responsive table-condensed table-striped">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <!-- ngRepeat: label in labels -->
+                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">January</th><!-- end ngRepeat: label in labels -->
+                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">February</th><!-- end ngRepeat: label in labels -->
+                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">March</th><!-- end ngRepeat: label in labels -->
+                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">April</th><!-- end ngRepeat: label in labels -->
+                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">May</th><!-- end ngRepeat: label in labels -->
+                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">June</th><!-- end ngRepeat: label in labels -->
+                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">July</th><!-- end ngRepeat: label in labels -->
+                                                                    </tr>
+                                                                    <!-- ngRepeat: dataSet in data -->
+                                                                    <tr ng-repeat="dataSet in data" class="ng-scope">
+                                                                        <!-- ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">66</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">55</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">64</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">86</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">49</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">50</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">34</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                    </tr><!-- end ngRepeat: dataSet in data -->
+                                                                    <tr ng-repeat="dataSet in data" class="ng-scope">
+                                                                        <!-- ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">28</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">54</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">39</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">13</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">79</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">23</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">94</span></td><!-- end ngRepeat: set in dataSet track by $index -->
+                                                                    </tr><!-- end ngRepeat: dataSet in data -->
+                                                                </tbody>
+                                                            </table>
+                                                            <button type="button" class="btn btn-primary pull-right" ng-click="randomize()">Randomize</button>
+                                                        </div>
+                                                    </div>
+                                                </div>*@
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12" id="doughnut-chart" ng-controller="DoughnutCtrl">
+                                                <div class="panel panel-default">
+                                                    <canvas id="doughnut" class="chart chart-doughnut chart-xs ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" height="227" width="655" style="display: block; width: 524px; height: 262px;"></canvas>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </section>
                                 </div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-sm-12 ng-scope" id="doughnut-chart" ng-controller="DoughnutCtrl">
-                                        <div class="panel panel-default">
-                                            @*<div class="panel-heading">Our Members</div>*@
-                                            <div class="panel-body">
-                                                <canvas id="doughnut" class="chart chart-doughnut chart-xs ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" height="327" width="655" style="display: block; width: 524px; height: 262px;"></canvas>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
+                                
                             </div>
                         </div>
-                       
+
                         <script type="text/javascript" src="~/Scripts/ChartJs/Chart.min.js"></script>
                         <script type="text/javascript" src="~/Scripts/angular.min.js"></script>
                         <script type="text/javascript" src="~/Scripts/ChartJs/angular-chart.js"></script>
                         <script type="text/javascript" src="~/Scripts/ChartJs/app.js"></script>
-                    </div>
 
+
+                    </div>
                 </div>
             </div>
-        </div>
 
-
-            <!--We need to show the chart for admin-->
-
-
-    }
+        }
+    </section>
 </div>
 <script>
     function openNav() {
