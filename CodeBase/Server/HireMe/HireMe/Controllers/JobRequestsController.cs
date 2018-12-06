@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
 using Microsoft.AspNet.Identity;
+using HireMe.Utility;
 
 namespace HireMe.Controllers
 {
@@ -147,6 +148,15 @@ namespace HireMe.Controllers
                 return HttpNotFound();
             jobRequest.JobRequestNotes.Add(jobRequestNote);
             db.SaveChanges();
+
+
+            // get the userid who has created the job request
+            var candidate = db.Candidates.Find(jobRequest.CandidateId);
+            if (candidate != null)
+            {
+                NotificationFramework.SendNotification(userId, employer.AspNetUserId, "Job Request Note", jobRequestNote.Note, 0, true);
+            }
+
             return Json("Note added successfully.", JsonRequestBehavior.AllowGet);
         }
 

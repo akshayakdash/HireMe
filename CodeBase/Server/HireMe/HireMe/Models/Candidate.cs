@@ -27,6 +27,7 @@ namespace HireMe.Models
         [NotMapped]
         public string GenderDesc { get; set; }
         public int? Age { get; set; }
+        public DateTime DOB { get; set; }
         public int? ExperienceInYears { get; set; }
         public int? ExperienceInMonths { get; set; }
 
@@ -117,6 +118,7 @@ namespace HireMe.Models
         public string ManagerFirstName { get; set; }
         public string ManagerLastName { get; set; }
         public string ManagerAge { get; set; }
+        public DateTime ManagerDOB { get; set; }
 
         public string CompanyActivityDesc { get; set; }
 
@@ -206,6 +208,7 @@ namespace HireMe.Models
         public string Address { get; set; }
 
         public int Age { get; set; }
+        public DateTime DOB { get; set; }
     }
 
     // Master tables
@@ -429,6 +432,8 @@ namespace HireMe.Models
 
         [NotMapped]
         public List<JobTask> MasterJobTasks { get; set; }
+
+        public List<JobOfferNote> JobOfferNotes { get; set; }
     }
 
     public class JobOfferJobTask
@@ -514,6 +519,7 @@ namespace HireMe.Models
     public class JobTekNotification
     {
         public int JobTekNotificationId { get; set; }
+        public string Subject { get; set; }
         public string Content { get; set; }
         public string SenderId { get; set; }
         [ForeignKey("SenderId")]
@@ -526,6 +532,17 @@ namespace HireMe.Models
         public int Category { get; set; }
         public DateTime CreatedDate { get; set; }
         public bool SeenByReceiver { get; set; }
+    }
+
+    public class SignalRUserConnection
+    {
+        public int Id { get; set; }
+        public string AspNetUserId { get; set; }
+        [ForeignKey("AspNetUserId")]
+        public ApplicationUser User { get; set; }
+        public string ConnectionId { get; set; }
+        public string UserAgent { get; set; }
+        public bool Connected { get; set; }
     }
     public enum Gender
     {

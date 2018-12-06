@@ -20,6 +20,7 @@
 @model HireMe.Models.RegisterViewModel
 @using System.Linq
 @using Newtonsoft.Json
+@using HireMe.Models
 
 <script type="text/javascript">
     var districts = ["", ""]
@@ -90,12 +91,40 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                         </div>
-                                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "" })
-                                        <span class="input-lable">Age</span>
+                                        @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "", @type="date" })
+                                        <span class="input-lable">Date of birth</span>
 
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger", @placeholder = "Age in yrs" })
+                                        @Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger", @placeholder = "Date of birth" })
+                                    </div>
+
+                                    <div class="input-group mb-2">
+                                        <div class="">
+                                            <label class="label">Gender</label>
+                                        </div>
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
+                                                    Female
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
+                                                    Male
+                                                    <span></span>
+                                                </label>
+                                            </div>
+                                            <div class="row">
+                                                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                                            </div>
+                                        @*<span class="input-lable">Gender</span>*@
+
+                                    </div>
+                                    <div class="row">
+                                        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
                                     </div>
 
 
@@ -117,6 +146,15 @@
                                         @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
                                         <span class="input-lable">City</span>
                                     </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
+
+
+                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
+                                        <span class="input-lable">Country</span>
+                                    </div>
                                     <div class="row">
                                         @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
                                     </div>
@@ -131,15 +169,7 @@
                                     <div class="row">
                                         @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
                                     </div>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                        </div>
-
-
-                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
-                                        <span class="input-lable">Country</span>
-                                    </div>
+                                  
                                     <div class="row">
                                         @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
                                     </div>
@@ -458,10 +488,12 @@
             //alert();
 
             if ($('#FirstName').valid()
-                && $('#Age').valid()
+                && $('#LastName').valid()
+                && $('#DOB').valid()
+                && $('#Gender').valid()
+                && $('#Country').valid()
                 && $('#City').valid()
                 && $('#District').valid()
-                && $('#Country').valid()
                 //&& $('input[name="ExperienceInMonths"]').valid()
                 && $('#Address').valid()
                 && $('#Email').valid()

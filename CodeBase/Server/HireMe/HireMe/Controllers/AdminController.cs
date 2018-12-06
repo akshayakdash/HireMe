@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using HireMe.Utility;
+using System.Threading.Tasks;
 
 namespace HireMe.Controllers
 {
@@ -29,6 +31,8 @@ namespace HireMe.Controllers
                 throw new Exception("Agency Not Found.");
             agency.ProfileVerified = true;
             db.SaveChanges();
+
+            NotificationFramework.SendNotification("", agency.AspNetUserId, "Agency Account Activation - JOBTek", "Your Agency Account " + agency.AgencyName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Agency profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
@@ -40,7 +44,7 @@ namespace HireMe.Controllers
             return View(candidates);
         }
 
-        public ActionResult ActivateCandidate(int id)
+        public async Task<ActionResult> ActivateCandidate(int id)
         {
             // first get the candidate by Id
             var candidate = db.Candidates.Find(id);
@@ -49,6 +53,8 @@ namespace HireMe.Controllers
                 throw new Exception("Candidate Not Found.");
             candidate.ProfileVerified = true;
             db.SaveChanges();
+
+            await NotificationFramework.SendNotification("", candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
@@ -69,6 +75,8 @@ namespace HireMe.Controllers
                 throw new Exception("Employer Not Found.");
             employer.ProfileVerified = true;
             db.SaveChanges();
+
+            NotificationFramework.SendNotification("", employer.AspNetUserId, "Account Activation - JOBTek", "Your candidate Account " + employer.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Employer profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
@@ -210,6 +218,12 @@ namespace HireMe.Controllers
             jobRequest.VerificationDate = DateTime.Now;
             db.SaveChanges();
 
+            var candidate = db.Candidates.Find(jobRequest.CandidateId);
+            if (candidate != null)
+            {
+                var job = db.Jobs.Find(jobRequest.JobId);
+                NotificationFramework.SendNotification("", candidate.AspNetUserId, "Job Request Verified - JOBTek", "Your job requrest for " + job.JobName + " was verified by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            }
             // we need to send a notification to the user about the job request verifications
 
             return Json("Job request verified successfully.", JsonRequestBehavior.AllowGet);
@@ -228,6 +242,12 @@ namespace HireMe.Controllers
             db.SaveChanges();
 
             // we need to send a notification to the user about the job request verifications
+            var employer = db.Employers.Find(jobOffer.EmployerId);
+            if (employer != null)
+            {
+                var job = db.Jobs.Find(jobOffer.JobId);
+                NotificationFramework.SendNotification("", employer.AspNetUserId, "Job Offer Verified - JOBTek", "Your job requrest for " + job.JobName + " was verified by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            }
 
             return Json("Job offer verified successfully.", JsonRequestBehavior.AllowGet);
         }

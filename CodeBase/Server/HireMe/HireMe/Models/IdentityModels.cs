@@ -38,6 +38,8 @@ namespace HireMe.Models
         public List<Candidate> Candidates { get; set; }
         public List<Agency> Agencies { get; set; }
         public List<Employer> Employers { get; set; }
+
+        public List<SignalRUserConnection> SignalRConnections { get; set; }
     }
 
    

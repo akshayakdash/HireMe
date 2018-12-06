@@ -1,4 +1,5 @@
 ﻿using HireMe.Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -85,10 +86,14 @@ namespace HireMe.Models
         public string FirstName { get; set; }
 
         [Display(Name = "Last Name")]
+        [Required]
         public string LastName { get; set; }
 
-        [Required]
+        //[Required]
         public int Age { get; set; }
+
+        [Required]
+        public DateTime DOB { get; set; }
 
         [Required]
         public Gender Gender { get; set; }
