@@ -10030,7 +10030,8 @@ blockquote {
     .profileitems .left {
         max-width: 120px;
         float: left;
-        text-align:center;
+        text-align: center;
+        margin-bottom: 10px;
     }
     .profileitems .left .btn{
         margin-bottom:0;

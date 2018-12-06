@@ -263,11 +263,13 @@
                                                                     <div class="idcard">
                                                                         <img src="~/assets/images/idcard.jpg" />
                                                                     </div>
-                                                                    <h2 class="name"><img src="~/assets/images/man-user.png" /> @(item.FirstName)</h2>
-                                                                    <h2 class="email"><i class="fa fa-envelope"></i> @item.ApplicationUser.Email</h2>
-                                                                    @*<h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
-                <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>*@
-                                                                    <div class="published">Published: <span>@item.CreatedDate</span></div>
+                                                                    <div class="right-left">
+                                                                        <h2 class="name"><img src="~/assets/images/man-user.png" /> @(item.FirstName)</h2>
+                                                                        <h2 class="email"><i class="fa fa-envelope"></i> @item.ApplicationUser.Email</h2>
+                                                                        @*<h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
+                                                                        <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>*@
+                                                                        <div class="published">Published: <span>@item.CreatedDate</span></div>
+                                                                    </div>
                                                                 </div>
                                                                 @*<div class="profile-footer">
                 @item.Candidate.AdditionalDescription &nbsp;

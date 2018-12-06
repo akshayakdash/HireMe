@@ -195,15 +195,12 @@
                             </ul>
 
                             <div class="tab-content">
-
-
-
                                 <div class="tab-pane fade show active" id="tab-1-1">
                                     
                                                 <div class="row">
                                                     @foreach (var item in Model)
                                                     {
-                                                        <div class="col-md-4 col-sm-6">
+                                                        <div class="col-sm-6">
 
 
 
@@ -243,31 +240,43 @@
                                                                         <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>
                                                                     </div>
                                                                     <h2 class="contact-num"><i class="fa fa-phone"></i> @item.ApplicationUser.PhoneNumber</h2>
+
+                                                                    @if (!item.ProfileVerified)
+                                                                    {
+                                                                        <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateEmployerAccount(@item.EmployerId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        @*<p>Verified</p>*@
+
+                                                                    }
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h2 class="name"><img src="~/assets/images/man-user.png" /> @(item.FirstName)</h2>
-                                                                    <h2 class="email"><i class="fa fa-envelope"></i> @item.ApplicationUser.Email</h2>
-                                                                    @*<h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
-                                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>*@
-                                                                    <div class="published">Published: <span>@item.CreatedDate</span></div>
+                                                                    <div class="idcard">
+                                                                        <img src="~/assets/images/idcard.jpg" />
+                                                                    </div>
+                                                                    <div class="right-left">
+                                                                        <h2 class="name"><img src="~/assets/images/man-user.png" /> @(item.FirstName)</h2>
+                                                                        <h2 class="email"><i class="fa fa-envelope"></i> @item.ApplicationUser.Email</h2>
+                                                                        @*<h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
+                                                                        <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>*@
+                                                                        <div class="published">Published: <span>@item.CreatedDate</span></div>
+                                                                    </div>
                                                                 </div>
                                                                 @*<div class="profile-footer">
-                                                                    @item.Candidate.AdditionalDescription &nbsp;
+                @item.Candidate.AdditionalDescription &nbsp;
+            </div>*@
+                                                                @*<div class="team-contact-info">
+                                                                    <ul class="social-icons"></ul>
                                                                 </div>*@
-                                                                <div class="team-contact-info">
-                                                                    <ul class="social-icons">
-                                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="" title="Verify" id="set_favourite_job_req_link" onclick="activateEmployerAccount(@item.EmployerId)"><i class="fa fa-check" aria-hidden="true"></i></a></li>
-                                                                        @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                                            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        @*<li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>*@
-                                                                    </ul>
-                                                                </div>
+                                                                @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                @*<li><a href="" title="Verify" id="set_favourite_job_req_link" onclick="activateEmployerAccount(@item.EmployerId)"><i class="fa fa-check" aria-hidden="true"></i></a></li>*@
+                                                                @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+            <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                                                @*<li><a href="" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>*@
+
                                                             </div>
-
-
-
                                                         </div>
                                                     }
 
