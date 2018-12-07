@@ -625,9 +625,9 @@
                         <div class="row" data-ng-if="searchParam.jobType == 1">
                             <div class="col-lg-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests">
                                 <div class="profileitems searchprofile-section">
-                                    <span class="validate" data-ng-if="jr.Candidate.ProfileVerified"><img src="~/assets/images/verified.png" alt="Varified"></span>
+                                    <span class="validate" data-ng-if="jr.ProfileVerified"><img src="~/assets/images/verified.png" alt="Varified"></span>
                                     <div class="left">
-                                        <img ng-src="data:image/jpeg;base64, {{jr.Candidate.ProfilePicUrl}}" />
+                                        <img ng-src="data:image/jpeg;base64, {{jr.ProfilePicUrl}}" />
                                         <div class="rating">
                                             @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
                                                     <i class="fa fa-star"></i>
@@ -637,36 +637,49 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </a>*@
                                             <div star-rating rating-value="jr.StarRating" max="'5'"></div>
+                                            <ul class="rating" data-ng-if="!jr.StarRating">
+                                                @*<li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>*@
+
+                                                <li class="star">★</li>
+                                                <li class="star">★</li>
+                                                <li class="star">★</li>
+                                                <li class="star">★</li>
+                                                <li class="star">★</li>
+                                            </ul>
                                         </div>
-                                        <h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>
-                                        <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>
+                                        <h3><span class="age"><span data-ng-bind="jr.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.ExperienceInYears + 'yrs'"></span></h3>
+                                        <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Phone'" data-ng-bind="jr.ContactNo"></span></h2>
                                     </div>
                                     <div class="right">
                                         <h1>
                                             @*<span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span>*@
-                                            <span data-ng-if="jr.Candidate.Gender == 2"><i class="fa fa-female"></i></span>
-                                            <span data-ng-if="jr.Candidate.Gender == 1"><i class="fa fa-male"></i></span>
-                                            <span data-ng-if="jr.Candidate.StaffType == 1">Individual</span>
-                                            <span data-ng-if="jr.Candidate.StaffType == 2">Agency <i title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.Candidate.AgencyId)"></i></span>
-                                            @*<span>{{jr.Candidate.StaffType == 1 ? "Individual" : '<span ng-click="">Agency <i class="fa fa-info"></i></span>'}}</span>
+                                            <span data-ng-if="jr.Gender == 2"><i class="fa fa-female"></i></span>
+                                            <span data-ng-if="jr.Gender == 1"><i class="fa fa-male"></i></span>
+                                            <span data-ng-if="jr.StaffType == 1">Individual</span>
+                                            <span data-ng-if="jr.StaffType == 2">Agency <i title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.AgencyId)"></i></span>
+                                            @*<span>{{jr.StaffType == 1 ? "Individual" : '<span ng-click="">Agency <i class="fa fa-info"></i></span>'}}</span>
                                             <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
                                         </h1>
                                         @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
                                         @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
 
                                         <h2 class="name">
-                                            <span data-ng-bind="jr.Candidate.FirstName + ' ' + jr.Candidate.LastName"></span>
+                                            <span data-ng-bind="jr.FirstName + ' ' + jr.LastName"></span>
                                         </h2>
-                                        <h2 class="jobname"><span data-ng-bind="jr.Job.JobName"></span></h2>
+                                        <h2 class="jobname"><span data-ng-bind="jr.JobName"></span></h2>
                                         @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
                                         @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
-                                        <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Email'" data-ng-bind="jr.Candidate.EmailId"></span></h2>
-                                        <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Candidate.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                        <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Email'" data-ng-bind="jr.EmailId"></span></h2>
+                                        <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Country">,</span><span> {{jr.City}},</span><span> {{jr.District}}</span></p>
                                         <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
-                                        <div class="published">Disponibility: <span>{{jr.Candidate.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
+                                        <div class="published">Disponibility: <span>{{jr.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
                                     </div>
                                     <div class="profile-footer">
-                                        {{jr.Candidate.AdditionalDescription}}&nbsp;
+                                        {{jr.AdditionalDescription}}&nbsp;
                                     </div>
                                     <div class="team-contact-info">
                                         <ul class="social-icons">
