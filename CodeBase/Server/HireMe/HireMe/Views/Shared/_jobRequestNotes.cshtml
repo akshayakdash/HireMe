@@ -1,42 +1,45 @@
 ﻿@model IEnumerable<HireMe.Models.JobRequestNote>
 
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
 
-<table class="table table-responsive">
-    <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+        </tr>
 
-        <th>
-            @Html.DisplayNameFor(model => model.Note)
-        </th>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
 
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </th>
-        <th></th>
-    </tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
 
-    @if (Model != null)
-    {
-        foreach (var item in Model)
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Note)
+                    </td>
+
+                </tr>
+            }
+        }
+
+        @if (Model == null || Model.Count() == 0)
         {
             <tr>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Note)
+                <td colspan="2">
+                    <h4 class="text-danger text-center">
+                        You have not given any note for this job request.
+                    </h4>
                 </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-
             </tr>
         }
-    }
 
-    @if (Model == null || Model.Count() == 0)
-    {
-        <tr>
-            <td colspan="2">You have not given any note for this job request.</td>
-        </tr>
-    }
-
-</table>
+    </table>
+</div>
