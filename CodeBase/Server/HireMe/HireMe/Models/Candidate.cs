@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -544,6 +545,57 @@ namespace HireMe.Models
         public string UserAgent { get; set; }
         public bool Connected { get; set; }
     }
+
+    #region DB Views
+    public class v_SearchJobRequest
+    {
+        [Key]
+        public int JobRequestId { get; set; }
+        public int CandidateId { get; set; }
+        public int JobId { get; set; }
+        public bool IsPublished { get; set; }
+        public DateTime? PublishedDate { get; set; }
+        public string JobRequestDescription { get; set; }
+        public int StarRating { get; set; }
+        public bool VerifiedByAdmin { get; set; }
+        public string AspNetUserId { get; set; }
+        public int? AgencyId { get; set; }
+        public string ProfilePicUrl { get; set; }
+        public Gender Gender { get; set; }
+        public int? Age { get; set; }
+        public DateTime DOB { get; set; }
+        public int? ExperienceInYears { get; set; }
+        public int? ExperienceInMonths { get; set; }
+        public string IdProofDoc { get; set; }
+        public string IdProofDocDesc { get; set; }
+        public bool ProfileVerified { get; set; }
+        public StaffType StaffType { get; set; }
+        public DateTime? Disponibility { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string District { get; set; }
+        public SalaryType SalaryType { get; set; }
+        public string SalaryTypeOtherDesc { get; set; }
+        public bool CanRead { get; set; }
+        public bool CanWrite { get; set; }
+        public decimal ExpectedMinSalary { get; set; }
+        public decimal ExpectedMaxSalary { get; set; }
+        public bool SleepOnSite { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ContactNo { get; set; }
+        public string EmailId { get; set; }
+        public string Address { get; set; }
+        public string ContactOption { get; set; }
+        public string JobName { get; set; }
+        public int JobCategoryId { get; set; }
+        public string IconImage { get; set; }
+        public string AdditionalDescription { get; set; }
+        public List<JobRequestJobTask> JobRequestJobTasks { get; set; }
+    }
+    #endregion
+
+
     public enum Gender
     {
         Male = 1,
