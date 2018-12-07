@@ -192,13 +192,28 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 col-sm-4 text-center">
+                                <div>Profile Pic</div>
                                 <div class="profile-pic">
                                     <img src="data:image/jpeg;base64,@ViewBag.ProfilePicUrl">
                                 </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        
+                                        <input class="form-control" id="profilepic" name="profilepic" placeholder="" type="file" style="height:inherit;">
+                                    </div>
+                                    <div class="col-sm-6">
+                                      
+                                        <button type="submit" class="btn btn-style-1 waves mb-0"><i class="fa fa-check"></i>&nbsp;Save</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-9 col-sm-8">
+                            <div class="col-md-6 col-sm-6">
                                 <table class="table">
                                     <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>@(Model.FirstName + " " + Model.LastName)</td>
+                                        </tr>
                                         <tr>
                                             <td>Email:</td>
                                             <td>@Model.Email</td>
@@ -213,19 +228,23 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                               
+                            </div>
+                            <div class="col-md-3 col-sm-4 text-center">
+                                <div>Identity</div>
+                                <div class="profile-pic">
+                                    <img src="data:image/jpeg;base64,@ViewBag.IdProofDoc">
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-6">
-                                        <label class=""><strong>Change your Profile Picture</strong></label>
-                                        <input class="form-control" id="profilepic" name="profilepic" placeholder="" type="file" style="height:inherit;">
+                                      
+                                        <input class="form-control" id="IdProofDoc" name="IdProofDoc" placeholder="" type="file" style="height:inherit;">
                                     </div>
                                     <div class="col-sm-6">
-                                        <label class="" style="display:block;">&nbsp;</label>
+                                       
                                         <button type="submit" class="btn btn-style-1 waves mb-0"><i class="fa fa-check"></i>&nbsp;Save</button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-12">
-
                             </div>
                         </div>
                         <div class="row">
