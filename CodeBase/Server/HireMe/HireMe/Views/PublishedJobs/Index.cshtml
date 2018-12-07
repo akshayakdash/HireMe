@@ -38,26 +38,8 @@
 </style>
 
 <script>
-    function setFavouriteJobRequest(jobRequestId) {
 
-        //alert(jobRequestId);
-        $.ajax
-            ({
-                url: '/FavouriteJobRequests/Create?id=' + jobRequestId,
-                //data: { "id": jobRequestId },
-                type: 'get',
-                success: function (result) {
-                    //$('.modal-box').text(result).fadeIn(700, function () {
-                    //    setTimeout(function () {
-                    //        $('.modal-box').fadeOut();
-                    //    }, 2000);
-                    //});
 
-                    alert("Job Request added to your favourite list.");
-                }
-            });
-
-    }
 
     function setJobRequestSearchParam() {
         var gender = $('input[name="options"]').val();
@@ -158,8 +140,8 @@
     <div id="mySidenav" class="sidenav" style="width: 280px;">
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                                                                                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                                                                                            .Select(c => c.Value);
+                                                                                                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                                                                                .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
 
 
@@ -211,12 +193,12 @@
                         <a title="Filter" id="FilterClose" class="filter-close"><i class="bizhub-icon-close-2"></i></a>
                         <i class="fa fa-filter"></i>Set all filter to Indifferent
                         @*<div class="switch-area">
-                            <label class="switchsmall">
-                                <input type="checkbox" data-ng-model="searchParam.noFilter" data-ng-change="setAllFilterToIndifferent()">
-                               
-                                <span class="slider1 round"></span>
-                            </label>
-                        </div>*@
+                                <label class="switchsmall">
+                                    <input type="checkbox" data-ng-model="searchParam.noFilter" data-ng-change="setAllFilterToIndifferent()">
+
+                                    <span class="slider1 round"></span>
+                                </label>
+                            </div>*@
                         <button type="button" data-ng-click="setAllFilterToIndifferent()">Reset</button>
                     </div>
                     <div class="body search-filter-section">
@@ -639,10 +621,10 @@
                                             <div star-rating rating-value="jr.StarRating" max="'5'"></div>
                                             <ul class="rating" data-ng-if="!jr.StarRating">
                                                 @*<li class="star"><i class="fa fa-star-o"></i></li>
-                                                <li class="star"><i class="fa fa-star-o"></i></li>
-                                                <li class="star"><i class="fa fa-star-o"></i></li>
-                                                <li class="star"><i class="fa fa-star-o"></i></li>
-                                                <li class="star"><i class="fa fa-star-o"></i></li>*@
+                                                    <li class="star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="star"><i class="fa fa-star-o"></i></li>
+                                                    <li class="star"><i class="fa fa-star-o"></i></li>*@
 
                                                 <li class="star">★</li>
                                                 <li class="star">★</li>
@@ -662,7 +644,7 @@
                                             <span data-ng-if="jr.StaffType == 1">Individual</span>
                                             <span data-ng-if="jr.StaffType == 2">Agency <i title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.AgencyId)"></i></span>
                                             @*<span>{{jr.StaffType == 1 ? "Individual" : '<span ng-click="">Agency <i class="fa fa-info"></i></span>'}}</span>
-                                            <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
+                                                <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
                                         </h1>
                                         @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
                                         @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
@@ -683,7 +665,11 @@
                                     </div>
                                     <div class="team-contact-info">
                                         <ul class="social-icons">
-                                            @*<li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                            @if (role == "Employer")
+                                            {
+                                                <li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                            }
+
                                             <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                         </ul>
                                     </div>
@@ -759,6 +745,10 @@
                                     </div>
                                     <div class="team-contact-info">
                                         <ul class="social-icons">
+@if (role == "Candidate")
+{
+    <li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobOffer(jr.JobOfferId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+}
                                             @*<li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
                                             <li><a href="/JobOffers/Details/{{jr.JobOfferId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                         </ul>
@@ -1124,13 +1114,13 @@
                            // alert("Job Request added to your favourite list.");
                             $("#agency-info").html("");
                             $("#agency-info").html(result);
-                            $('#agency-info-modal').modal('show'); 
+                            $('#agency-info-modal').modal('show');
                         }
                     });
             }
 
             $scope.setFavouriteJobRequest = function (jobRequestId) {
-               
+
                 //alert(jobRequestId);
                 $.ajax
                     ({
@@ -1145,7 +1135,28 @@
                             //});
 
                             alert("Job Request added to your favourite list.");
-                          
+
+                        }
+                    });
+
+            }
+
+            $scope.setFavouriteJobOffer = function (jobOfferid) {
+
+                //alert(jobRequestId);
+                $.ajax
+                    ({
+                        url: '/FavouritejobOffers/Create?id=' + jobOfferid,
+                        //data: { "id": jobRequestId },
+                        type: 'get',
+                        success: function (result) {
+                            //$('.modal-box').text(result).fadeIn(700, function () {
+                            //    setTimeout(function () {
+                            //        $('.modal-box').fadeOut();
+                            //    }, 2000);
+                            //});
+
+                            alert("Job Offer added to your favourite list.");
                         }
                     });
 
