@@ -262,7 +262,7 @@ namespace HireMe.Controllers
                 }
                 else if (model.UserRoles.Contains("Candidate"))
                 {
-                    var candidate = new Candidate { FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = model.PhoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
+                    var candidate = new Candidate { StaffType = StaffType.Independent, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = model.PhoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
                     var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                     if (cntry != null)
                         candidate.Country = cntry.CountryName;

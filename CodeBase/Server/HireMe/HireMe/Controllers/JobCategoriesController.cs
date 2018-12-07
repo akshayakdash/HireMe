@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
-
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace HireMe.Controllers
 {
@@ -21,6 +22,31 @@ namespace HireMe.Controllers
             var categories = db.JobCategories.Include(p => p.Jobs).ToList();
 
             var jobs = db.Jobs.Include(path => path.JobTasks).ToList();
+            //if (id != 0)
+            //{
+            //    // that means we are forcing the candidate to fill his/her profile and showing the categories
+            //    ViewBag.ProfileUpdated = false;
+            //}
+            //else
+            //{
+            //    ViewBag.ProfileUpdated = true;
+            //}
+            ViewBag.ProfileUpdated = true;
+            var userId = User.Identity.GetUserId();
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            if (userManager.IsInRole(userId, "Candidate"))
+            {
+                var existingCandidate = db.Candidates.Include(path => path.JobRequests).FirstOrDefault(p => p.AspNetUserId == userId);
+
+                if (existingCandidate != null && existingCandidate.JobRequests != null && existingCandidate.JobRequests.Count > 0)
+                {
+                    ViewBag.ProfileUpdated = true;
+                }
+                else {
+                    ViewBag.ProfileUpdated = false;
+                }
+            }
+
             return View(categories);
         }
 

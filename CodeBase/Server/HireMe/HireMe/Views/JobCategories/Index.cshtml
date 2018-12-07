@@ -38,7 +38,7 @@
 
                             @if (HttpContext.Current.User.Identity.IsAuthenticated)
                             {
-                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
+                            <li>@Html.ActionLink("Users", "Index", "Users")</li>
                             }
 
                             @*
@@ -90,49 +90,49 @@
         <div class="sidenav-header">User Account - @role</div>
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
-        <a href="~/Users" ><i class="fa fa-home"></i>Dashboard</a>
+        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
         @*<a href="#"><i class="fa fa-search"></i>Job request/ Job offer</a>
-        <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
-        <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
-        <a href="#"><i class="fa fa-heart"></i>Manage my Favorites</a>
-        <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
-        <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
-        <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
-        <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>*@
+            <a href="#"><i class="fa fa-send"></i>Publish a Job offer</a>
+            <a href="#"><i class="fa fa-send"></i>Publish a Job request</a>
+            <a href="#"><i class="fa fa-heart"></i>Manage my Favorites</a>
+            <a href="#"><i class="fa fa-envelope"></i>Messagerie & Notifications</a>
+            <a href="#"><i class="fa fa-cogs"></i>Manage my Settings</a>
+            <a href="#"><i class="fa fa-share"></i>Share my Feedbacks</a>
+            <a href="#"><i class="fa fa-exclamation-triangle"></i>Rise a Bug/ Issue</a>*@
 
         @if (role == "Candidate")
         {
 
 
-            <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
+        <a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer</a>
 
-            <a href="~/JobRequests" class="active"><i class="fa fa-graduation-cap"></i> Job Requests</a>
+        <a href="~/JobRequests" class="active"><i class="fa fa-graduation-cap"></i> Job Requests</a>
 
-            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+        <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages & Notifications</a>
+        <a href="~/Notification"><i class="fa fa-envelope"></i> Messages & Notifications</a>
 
-            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
+        <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
         }
         else if (role == "Employer")
         {
 
-            <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employee</a>
+        <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employee</a>
 
-            <a href="~/JobOffers"><i class="fa fa-search"></i> My Job Offers</a>
+        <a href="~/JobOffers"><i class="fa fa-search"></i> My Job Offers</a>
 
-            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
+        <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
         }
         else if (role == "Agency")
         {
 
-            <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employer</a>
+        <a href="~/JobCategories" class="active"><i class="fa fa-search"></i> Search Employer</a>
 
-            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
+        <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
 
-            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
+        <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
 
-            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
+        <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
         }
     </div>
 
@@ -148,15 +148,19 @@
                         <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                             @if (role == "Candidate")
                             {
-                                <h2 >Select your Job</h2>
+                                if (!ViewBag.ProfileUpdated)
+                                {
+                                    <h2>Please add your skills in order to search a job offer (for first time users)</h2>
+                                }
+                                <h2>Select your Job</h2>
                             }
                             else if (role == "Employer")
                             {
-                                <h2 >What you are looking for ?</h2>
+                                <h2>What you are looking for ?</h2>
                             }
                             else if (role == "Agency")
                             {
-                                <h2 >Select Job for candidate</h2>
+                                <h2>Select Job for candidate</h2>
                             }
 
                         </div>
@@ -170,15 +174,15 @@
                                 }
                             </ul>
                             @*<ul class="nav nav-tabs">
-                                <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
-                                <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                                <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
-                                <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                                <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
-                            </ul>*@
+                                    <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                    <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                    <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                    <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                    <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                                </ul>*@
 
                             <div class="tab-content">
-                               
+
                                 @for (int i = 0; i < Model.Count(); i++)
                                 {
                                     var item = Model.ElementAt(i);
@@ -265,13 +269,13 @@
 
 </div>
 <script>
-     function openNav() {
-         document.getElementById("mySidenav").style.width = "280px";
-         document.getElementById("main-container-user").style.marginLeft = "280px";
-     }
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("main-container-user").style.marginLeft = "280px";
+    }
 
-     function closeNav() {
-         document.getElementById("mySidenav").style.width = "0";
-         document.getElementById("main-container-user").style.marginLeft = "0";
-     }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main-container-user").style.marginLeft = "0";
+    }
 </script>

@@ -526,7 +526,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                     </div>*@
                                                             </div>
 
-                                                            <div class="filtersection-body">
+                                                            @*<div class="filtersection-body">
                                                                 <div class="radio">
                                                                     <label>
                                                                         @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
@@ -544,7 +544,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                 <div class="row">
                                                                     @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
                                                                 </div>
-                                                            </div>
+                                                            </div>*@
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-6">
@@ -718,8 +718,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                         </div>
                                                                         <div class="radio">
                                                                             <label>
-                                                                                @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Hourly, new { @value = SalaryType.Others })
-                                                                                Others
+                                                                                @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Hourly, new { @value = SalaryType.PriceOfService })
+                                                                                Price Of Service
                                                                                 <span></span>
                                                                             </label>
                                                                         </div>
@@ -768,7 +768,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                     <div class="col-sm-6">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
-                                                                Read
+                                                                Do you know how to read ?
                                                                 <div class="switch-area-inner switch-area-inner-cus">
                                                                     <label class="checkbox">
                                                                         @Html.CheckBoxFor(p => p.CanRead)
@@ -786,7 +786,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                     <div class="col-sm-6">
                                                         <div class="filtersection-panel">
                                                             <div class="filtersection-header">
-                                                                Write
+                                                                Do you know how to write ?
                                                                 <div class="switch-area-inner switch-area-inner-cus">
                                                                     <label class="checkbox">
                                                                         @Html.CheckBoxFor(p => p.CanWrite)
@@ -1016,7 +1016,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                     </div>
                                                 </div>
 
-                                                <div class="row">
+                                                @*<div class="row">
                                                     <div class="col-md-12">
                                                         <label class="checkbox">
                                                             @Html.CheckBoxFor(p => p.PublishProfile)
@@ -1024,7 +1024,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Publish As a Job Request
                                                         </label>
                                                     </div>
-                                                </div>
+                                                </div>*@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
@@ -1099,10 +1099,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                 //$(".backbtn").click();
             })
             $(".nextbtn").click(function () {
-                if ($('#Gender').valid()
-                    && $('#StaffType').valid()
-                    //&& $('#Age').valid()
-                    && $('#ExperienceInYears').valid()
+                if ($('#ExperienceInYears').valid()
                     //&& $('input[name="ExperienceInMonths"]').valid()
                     && $('#CityId').valid()
                     && $('#DistrictId').valid()

@@ -52,18 +52,18 @@
         console.log(note);
         console.log(jobOfferId);
         if (jobOfferId && note && rating) {
-            //$.ajax
-            //    ({
-            //        url: '/JobRequests/SaveJobRequestNote',
-            //        data: { "JobRequestId": jobOfferId, "Note": note, "StarRating": rating },
-            //        type: 'post',
-            //        success: function (result) {
-            //            $("#jobOfferNote").val("");
-            //            $("#rating").val("");
-            //            $("#modalnote1").modal("hide");
-            //            alert("Job Request note added successfully.");
-            //        }
-            //    });
+            $.ajax
+                ({
+                    url: '/JobOffers/SaveJobOfferNote',
+                    data: { "JobOfferId": jobOfferId, "Note": note, "StarRating": rating },
+                    type: 'post',
+                    success: function (result) {
+                        $("#jobOfferNote").val("");
+                        $("#rating").val("");
+                        $("#modalnote1").modal("hide");
+                        alert("Job Request note added successfully.");
+                    }
+                });
         } else {
             // give error message
             alert("Please fill up the fields")
