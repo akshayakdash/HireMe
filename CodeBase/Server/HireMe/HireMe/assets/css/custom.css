@@ -6521,7 +6521,7 @@ blockquote {
  ***********************************************************************************/
 
 .pagination {
-    margin: 30px 0 50px 0;
+    margin: 2px 0;
 }
 
     .pagination li {
@@ -6534,29 +6534,35 @@ blockquote {
 
         .pagination li a {
             display: block;
-            width: 40px;
-            height: 40px;
-            border: 2px solid transparent;
+            /* width: 40px; */
+            /* height: 40px; */
+            border: 1px solid transparent;
             border-radius: 5px;
             color: #636363;
-            line-height: 36px;
+            /* line-height: 36px; */
             font-weight: 600;
+            padding: 3px 12px;
             text-align: center;
             text-decoration: none;
             -webkit-transition: all 0.25s;
             transition: all 0.25s;
         }
 
-            .pagination li.active a,
-            .pagination li a:hover {
+            .pagination li.active a
+             {
                 border-color: #fe005a;
-                color: #fe005a;
+                color: #fff;
+                background: #fe005a;
             }
-
-/* DARK SECTION */
-.full-section.dark-section .pagination li a {
-    color: inherit;
-}
+        .pagination li a:hover {
+            border-color: #ccc;
+            color: #333;
+            background: #eee;
+        }
+        /* DARK SECTION */
+        .full-section.dark-section .pagination li a {
+            color: inherit;
+        }
 
     .full-section.dark-section .pagination li.active a,
     .full-section.dark-section .pagination li a:hover {
@@ -9984,7 +9990,7 @@ blockquote {
     border: 1px solid #ccc;
     /*display:table;
     width:100%;*/
-    min-height: 185px;
+    min-height: 210px;
     border-radius: 8px;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
     background-color: #ffffff;
@@ -10030,7 +10036,11 @@ blockquote {
     .profileitems .left {
         max-width: 120px;
         float: left;
-        text-align:center;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .profileitems .left .btn{
+        margin-bottom:0;
     }
 
         .profileitems .left img {
@@ -10062,7 +10072,7 @@ blockquote {
             line-height: initial;
             margin-bottom: 5px;
         }
-            .profileitems .right h1 img {
+            .profileitems .right h1 img, .profileitems .right h2 img {
                 margin-right: 5px;
                 width: 16px;
             }
@@ -10195,6 +10205,8 @@ blockquote {
 ***/
 
 .searchprofile-section {
+    display: table;
+    width: 100%;
 }
 
 
@@ -11228,6 +11240,9 @@ margin:0;
     margin-bottom: 10px;
     min-height: 200px;
 }
+.profile-pic img{
+    max-height:200px;
+}
 .profile-info{
 
 }
@@ -11369,4 +11384,13 @@ margin:0;
 .bg-pink {
     background: #fe005a;
     color:#fff!important;
+}
+.right-side {
+    background-color: #e9f1f5;
+    color: #666666;
+    overflow: hidden;
+}
+div.dataTables_paginate {
+    float: right;
+    margin: 0;
 }
