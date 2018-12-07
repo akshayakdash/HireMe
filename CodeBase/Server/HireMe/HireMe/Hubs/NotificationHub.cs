@@ -54,9 +54,9 @@ namespace HireMe.Hubs
         public override Task OnConnected()
         {
             var name = Context.User.Identity.Name;
-            using (var db = new ApplicationDbContext())
+            using (var db = ApplicationDbContext.Create())
             {
-                var user = db.Users
+                var user = db.Users.AsNoTracking()
                     .Include(u => u.SignalRConnections)
                     .SingleOrDefault(u => u.UserName == name);
 
@@ -85,8 +85,11 @@ namespace HireMe.Hubs
 
                 // now we can remove the connections which are not active
                 var inActiveConnections = db.SignalRConnections.Where(p => !p.Connected);
-                db.SignalRConnections.RemoveRange(inActiveConnections);
-                db.SaveChanges();
+                lock (inActiveConnections)
+                {
+                    db.SignalRConnections.RemoveRange(inActiveConnections);
+                    db.SaveChanges();
+                }
             }
             return base.OnDisconnected(stopCalled);
         }

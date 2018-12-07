@@ -20,7 +20,7 @@ namespace HireMe.Controllers
 
         [HttpGet]
         [Route("api/JobTekApi/SearchJobRequests")]
-        public HttpResponseMessage SearchJobRequests([FromUri]JobRequestSearchParam searchParam = null)
+        public HttpResponseMessage SearchJobRequests([FromUri]V_JobRequestSearchParam searchParam = null)
         {
             //searchParam = new JobRequestSearchParam { };
             //searchParam.Gender = Gender.Male;
@@ -29,12 +29,25 @@ namespace HireMe.Controllers
             {
                 object[] queryString = searchParam.GetSearchQuery();
                 ArrayList searchArgs = (ArrayList)queryString[1];
-                var jobRequests = db.JobRequests
-                    .Include(j => j.Candidate)
-                    .Include(j => j.Job)
-                    .Include(j => j.JobRequestJobTasks)
+                //var jobRequests = db.JobRequests
+                //    .Include(j => j.Candidate)
+                //    .Include(j => j.Job)
+                //    .Include(j => j.JobRequestJobTasks)
+                //    .AsQueryable()
+                //    .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
+
+                //var query = from JobRequest in db.JobRequests.Where(p => p.JobId == searchParam.Job)
+                //            from Candidate in db.Candidates.Where(p => p.CandidateId == JobRequest.CandidateId)
+                //            from Job in db.Jobs.Where(p => p.JobId == JobRequest.JobId)
+                //            from JobRequestJobTasks in db.JobRequestJobTasks.Where(p => p.JobRequestId == JobRequest.JobId)
+                //            select new { JobRequest, Candidate, Job, JobRequestJobTasks };
+
+                var jobRequests = db.v_JobRequests
+                    .Include(p => p.JobRequestJobTasks)
+                    .Where(p => p.JobId == searchParam.Job)
                     .AsQueryable()
                     .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
+
 
                 if (searchParam != null && searchParam.Tasks != null && searchParam.Tasks.Count > 0)
                 {

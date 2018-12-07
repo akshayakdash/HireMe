@@ -95,5 +95,8 @@ namespace HireMe.Models
 
         public DbSet<JobTekNotification> Notifications { get; set; }
         public DbSet<SignalRUserConnection> SignalRConnections { get; set; }
+        public DbSet<JobRequestJobTask> JobRequestJobTasks { get; set; }
+
+        public DbSet<v_SearchJobRequest> v_JobRequests { get; set; }
     }
 }
