@@ -274,11 +274,11 @@
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
                                             {
-                                        <div class="col-md-4 col-sm-6">
+                                        <div class="col-sm-6">
                                             <div class="profileitems searchprofile-section">
                                                 @if (item.Candidate.ProfileVerified)
                                                         {
-                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                        <span class="validate"><img src="~/assets/images/verified.png" /></span>
                                                         }
 
                                                 <div class="left">
@@ -289,40 +289,53 @@
                                                     @*<div class="favorite">
                                                             <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
                                                         </div>*@
+                                                    <h3>
+                                                        <span class="age">@item.Candidate.Age Yrs</span>
+                                                        <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
+                                                    </h3>
+                                                    <h2 class="contact-num">
+                                                        <i class="fa fa-phone"></i> @item.Candidate.ContactNo
+                                                    </h2>
                                                 </div>
                                                 <div class="right">
-                                                    <h1>
-                                                        @(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>
-                                                            @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
-                                                                    {
-                                                        <span>(AGENCY)</span>
-                                                                    }
-                                                                    else
-                                                                    { <span>
-                                                            (INDIVIDUAL)
-                                                        </span> }
+                                                    <div class="idcard">
+                                                        <img src="~/assets/images/idcard.jpg" />
+                                                    </div>
+                                                    <div class="right-left">
+                                                        <h1>
+                                                            @(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")
+                                                            <span>
+                                                                @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
+                                                                {
+                                                                    <span>(AGENCY)</span>
+                                                                }
+                                                                else
+                                                                { <span>
+                                                                (INDIVIDUAL)
+                                                                </span> }
+                                                            </span>
+                                                        </h1>
+                                                        <h2 class="name"><span>@item.Candidate.UserName</span></h2>
 
-                                                        </span>
-                                                    </h1>
-                                                    <h2 class="name"><span>@item.Candidate.UserName</span></h2>
-                                                    @if (string.IsNullOrWhiteSpace(item.Candidate.ContactOption))
-                                                            {
-                                                    <span> @item.Candidate.ContactNo</span>
-                                                    <span> @item.Candidate.EmailId</span>
-                                                            }
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Phone")
-                                                            {
-                                                    <span> @item.Candidate.ContactNo</span>
-                                                            }
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Email")
-                                                            {
-                                                    <span> @item.Candidate.EmailId</span>
-                                                            }
-                                                    <p class="location"><span>@item.Job.JobName</span></p>
-                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
-                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
-                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                        @*@if (string.IsNullOrWhiteSpace(item.Candidate.ContactOption))
+                                                        {
+                                                            <span> @item.Candidate.ContactNo</span>
+                                                            <span> @item.Candidate.EmailId</span>
+                                                        }
+                                                        @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Phone")
+                                                        {
+                                                            <span> @item.Candidate.ContactNo</span>
+                                                        }
+                                                        @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Email")
+                                                        {
+                                                            <span> @item.Candidate.EmailId</span>
+                                                        }*@
+                                                        <h2 class="jobname">@item.Job.JobName</h2>
+                                                        <h2 class="email"><i class="fa fa-envelope"></i> @item.Candidate.EmailId</h2>
+                                                        <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
+                                                        <div class="published">Published: <span>@item.PublishedDate</span></div>
 
+                                                    </div>
 
                                                 </div>
                                                 <div class="profile-footer">
@@ -745,7 +758,7 @@
 
     <div class="modal fade" id="modalnote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
         <div class="modal-wrapper">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -753,34 +766,35 @@
                     </div>
                     <div class="modal-body">
                         <div class="row">
+                            <div class="col-sm-12">
+                                <div class="tabs style-2">
+                                    <ul class="nav nav-tabs">
+                                        <li><a class="active" href="#note-tab-2" data-toggle="tab">My Notes</a></li>
+                                        <li><a href="#note-tab-1" data-toggle="tab">Add Note</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="note-tab-1">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="note-stars">
+                                                        <a id="stars"><i class="fa fa-star" data-value='1'></i><i class="fa fa-star" data-value='2'></i><i class="fa fa-star" data-value='3'></i><i class="fa fa-star" data-value='4'></i><i class="fa fa-star" data-value='5'></i></a>
+                                                        @*<input type="text" id="rating" />*@
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <textarea id="jobRequestNote" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                    <button type="button" onclick="saveJobRequestNote()" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Submit</button>
+                                                </div>
+                                            </div>
 
-                            <div class="tabs style-2">
-                                <ul class="nav nav-tabs">
-                                    <li><a class="active" href="#note-tab-2" data-toggle="tab">My Notes</a></li>
-                                    <li><a href="#note-tab-1" data-toggle="tab">Add Note</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div class="tab-pane" id="note-tab-1">
-                                        <div class="col-md-12">
-                                            <div class="note-stars">
-                                                <a id="stars"><i class="fa fa-star" data-value='1'></i><i class="fa fa-star" data-value='2'></i><i class="fa fa-star" data-value='3'></i><i class="fa fa-star" data-value='4'></i><i class="fa fa-star" data-value='5'></i></a>
-                                                @*<input type="text" id="rating" />*@
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Description</label>
-                                                <textarea id="jobRequestNote" class="form-control" rows="2"></textarea>
-                                            </div>
-                                            <button type="button" onclick="saveJobRequestNote()" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Submit</button>
                                         </div>
-                                    </div>
-                                    <div class="tab-pane active" id="note-tab-2">
-                                        <div class="col-md-12" id="note-list">
-
+                                        <div class="tab-pane active" id="note-tab-2">
+                                            <div class="col-md-12" id="note-list"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
