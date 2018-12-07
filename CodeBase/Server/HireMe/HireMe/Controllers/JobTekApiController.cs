@@ -159,7 +159,7 @@ namespace HireMe.Controllers
                     Job = p.JobRequests.Select(c => c.Job.JobName),
                     ProfileStatus = p.ProfileVerified,
                     Gender = p.Gender == Gender.Female ? "Female" : "Male",
-                    Age = p.Age.Value
+                    Age = p.Age.HasValue ? p.Age.Value : 0
                 }).ToList();
             }
             else
@@ -201,7 +201,7 @@ namespace HireMe.Controllers
                     worksheet.Cells[index + 2, 1].Value = index + 1;
                     worksheet.Cells[index + 2, 2].Value = jobTekMembers[index].Name;
                     worksheet.Cells[index + 2, 3].Value = jobTekMembers[index].MemberType;
-                    worksheet.Cells[index + 2, 4].Value = jobTekMembers[index].Job.First();//String.Join(",",jobTekMembers[index].Job);
+                    worksheet.Cells[index + 2, 4].Value = jobTekMembers[index].Job != null && jobTekMembers[index].Job.Count() > 0 ? jobTekMembers[index].Job.First() : "NA";//String.Join(",",jobTekMembers[index].Job);
                     worksheet.Cells[index + 2, 5].Value = jobTekMembers[index].ProfileStatus ? "Verified" : "Not Verified";
                     worksheet.Cells[index + 2, 6].Value = jobTekMembers[index].Gender;
                     worksheet.Cells[index + 2, 7].Value = jobTekMembers[index].Age;

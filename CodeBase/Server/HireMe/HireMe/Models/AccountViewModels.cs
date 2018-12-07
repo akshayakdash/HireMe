@@ -192,14 +192,14 @@ namespace HireMe.Models
 
     public class UpdateProfileViewModel
     {
-        [Required]
+        //[Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
 
 
-        [Required]
+        //[Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
@@ -209,7 +209,7 @@ namespace HireMe.Models
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "You must provide a phone number")]
+        //[Required(ErrorMessage = "You must provide a phone number")]
         [Display(Name = "Contact Number")]
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
@@ -229,7 +229,7 @@ namespace HireMe.Models
         public int? DistrictId { get; set; }
 
 
-        public string ContactOption { get; set; }
+        public string[] ContactOption { get; set; }
 
         public bool ProfileVerified { get; set; }
 

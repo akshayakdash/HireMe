@@ -146,6 +146,7 @@ namespace HireMe.Controllers
                 .FirstOrDefault(p => p.JobRequestId == jobRequestNote.JobRequestId);
             if (jobRequest == null)
                 return HttpNotFound();
+            jobRequestNote.CreatedDate = DateTime.Now.ToString("dd-MMM-yyyy");
             jobRequest.JobRequestNotes.Add(jobRequestNote);
             db.SaveChanges();
 
@@ -154,10 +155,28 @@ namespace HireMe.Controllers
             var candidate = db.Candidates.Find(jobRequest.CandidateId);
             if (candidate != null)
             {
-                NotificationFramework.SendNotification(userId, employer.AspNetUserId, "Job Request Note", jobRequestNote.Note, 0, true);
+                NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Job Request Note", jobRequestNote.Note, 0, true);
             }
 
             return Json("Note added successfully.", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetJobRequestNotePartialView(int jobRequestId)
+        {
+            var userId = User.Identity.GetUserId();
+            // get the employer
+            var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
+            if (employer != null)
+            {
+                var jobRequest = db.JobRequests
+                    .FirstOrDefault(p => p.JobRequestId == jobRequestId);
+                if (jobRequest == null)
+                    return HttpNotFound();
+                db.Entry(jobRequest).Collection(p => p.JobRequestNotes).Query().Where(p => p.EmployerId == employer.EmployerId).Load();
+                return PartialView("_jobRequestNotes", jobRequest.JobRequestNotes);
+            }
+            return PartialView("_jobRequestNotes");
         }
 
 

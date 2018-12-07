@@ -550,6 +550,9 @@
     <Content Include="Views\Notification\Edit.cshtml" />
     <Content Include="Views\Notification\Index.cshtml" />
     <Content Include="Views\PublishedJobs\Index.cshtml" />
+    <Content Include="Views\Shared\_jobRequestNotes.cshtml" />
+    <Content Include="Views\Shared\_jobOfferNotes.cshtml" />
+    <Content Include="Views\Shared\_agencyDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

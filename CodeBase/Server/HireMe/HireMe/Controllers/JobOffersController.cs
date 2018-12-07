@@ -185,6 +185,24 @@ namespace HireMe.Controllers
             return Json("Note added successfully.", JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult GetJobOfferNotePartialView(int jobOfferId)
+        {
+            var userId = User.Identity.GetUserId();
+            // get the employer
+            var candidate = db.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
+            if (candidate != null)
+            {
+                var jobOffer = db.JobOffers
+                    .FirstOrDefault(p => p.JobOfferId == jobOfferId);
+                if (jobOffer == null)
+                    return HttpNotFound();
+                db.Entry(jobOffer).Collection(p => p.JobOfferNotes).Query().Where(p => p.CandidateId == candidate.CandidateId).Load();
+                return PartialView("_jobOfferNotes", jobOffer.JobOfferNotes);
+            }
+            return PartialView("_jobOfferNotes");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

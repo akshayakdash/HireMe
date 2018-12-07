@@ -646,7 +646,10 @@
                                             @*<span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span>*@
                                             <span data-ng-if="jr.Candidate.Gender == 2"><i class="fa fa-female"></i></span>
                                             <span data-ng-if="jr.Candidate.Gender == 1"><i class="fa fa-male"></i></span>
-                                            <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>
+                                            <span data-ng-if="jr.Candidate.StaffType == 1">Individual</span>
+                                            <span data-ng-if="jr.Candidate.StaffType == 2">Agency <i title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.Candidate.AgencyId)"></i></span>
+                                            @*<span>{{jr.Candidate.StaffType == 1 ? "Individual" : '<span ng-click="">Agency <i class="fa fa-info"></i></span>'}}</span>
+                                            <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
                                         </h1>
                                         @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
                                         @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
@@ -675,6 +678,26 @@
                             </div>
                             <div class="filter-overlay" style="display:block;" data-ng-if="jobRequests.length == 0">
                                 <div class="lds-ripple"><div></div><div></div></div>
+                            </div>
+
+                            <div class="modal fade" id="agency-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
+                                <div class="modal-wrapper">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                <h4 class="modal-title" id="myModalLabel13">Agency Details</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+
+                                                    <div id="agency-info"></div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -1071,8 +1094,30 @@
                 console.log($scope.searchParam);
             };
 
-            $scope.setFavouriteJobRequest = function (jobRequestId) {
+            $scope.showAgencyInfo = function (agencyId) {
+                $("#agency-info").html("");
+                $.ajax
+                    ({
+                        url: '/Agency/GetAgencyDetailsPartialView?agencyId=' + agencyId,
+                        //data: { "id": jobRequestId },
+                        type: 'get',
+                        success: function (result) {
+                            //$('.modal-box').text(result).fadeIn(700, function () {
+                            //    setTimeout(function () {
+                            //        $('.modal-box').fadeOut();
+                            //    }, 2000);
+                            //});
 
+                           // alert("Job Request added to your favourite list.");
+                            $("#agency-info").html("");
+                            $("#agency-info").html(result);
+                            $('#agency-info-modal').modal('show'); 
+                        }
+                    });
+            }
+
+            $scope.setFavouriteJobRequest = function (jobRequestId) {
+               
                 //alert(jobRequestId);
                 $.ajax
                     ({
@@ -1087,6 +1132,7 @@
                             //});
 
                             alert("Job Request added to your favourite list.");
+                          
                         }
                     });
 

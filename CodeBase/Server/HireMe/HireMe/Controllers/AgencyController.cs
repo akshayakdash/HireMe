@@ -193,5 +193,14 @@ namespace HireMe.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult GetAgencyDetailsPartialView(int agencyId)
+        {
+            var agency = db.Agencies.Find(agencyId);
+            if (agency == null)
+                return HttpNotFound();
+            return PartialView("_agencyDetails", agency);
+        }
     }
 }

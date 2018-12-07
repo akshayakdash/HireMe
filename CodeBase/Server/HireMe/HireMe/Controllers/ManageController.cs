@@ -100,7 +100,7 @@ namespace HireMe.Controllers
             if (role == "Candidate")
             {
                 var candidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == user.Id);
-                updateProfileViewModel.ContactOption = candidate.ContactOption;
+                updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(candidate.ContactOption) ? candidate.ContactOption.Split(',') : new string[0];
                 updateProfileViewModel.ProfileVerified = candidate.ProfileVerified;
                 updateProfileViewModel.Age = candidate.Age.HasValue? candidate.Age.Value : 0;
 
@@ -108,7 +108,7 @@ namespace HireMe.Controllers
             else if (role == "Employer")
             {
                 var employer = context.Employers.FirstOrDefault(p => p.AspNetUserId == user.Id);
-                updateProfileViewModel.ContactOption = employer.ContactOption;
+                updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(employer.ContactOption) ? employer.ContactOption.Split(',') : new string[0];
                 updateProfileViewModel.ProfileVerified = employer.ProfileVerified;
                 updateProfileViewModel.Age = employer.Age;
             }
@@ -178,7 +178,7 @@ namespace HireMe.Controllers
                         candidate.FirstName = model.FirstName;
                         candidate.LastName = model.LastName;
                         candidate.Age = model.Age;
-                        candidate.ContactOption = model.ContactOption;
+                        candidate.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                         candidate.ContactNo = model.PhoneNumber;
                         candidate.EmailId = model.Email;
                         candidate.Address = model.Address;
@@ -197,7 +197,7 @@ namespace HireMe.Controllers
                         employer.FirstName = model.FirstName;
                         employer.LastName = model.LastName;
                         employer.Age = model.Age;
-                        employer.ContactOption = model.ContactOption;
+                        employer.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                         employer.ContactNo = model.PhoneNumber;
                         employer.EmailId = model.Email;
                         employer.Address = model.Address;
