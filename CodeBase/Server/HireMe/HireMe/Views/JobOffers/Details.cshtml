@@ -22,6 +22,9 @@
                 });
         }
     }
+    function goBack() {
+        window.history.back();
+    }
 </script>
 
 
@@ -102,14 +105,14 @@ for (int i = 0; i < jobTasks.Count(); i++)
                             <span>@selectedTask.TaskResponseAdditionalDescription</span>
                         }
                     </div>
-
-                </div>
-                @if (item.SubTasks.Any())
+                    @if (item.SubTasks.Any())
             {
 
-                    @ShowTaskTree(item.SubTasks)
+                        @ShowTaskTree(item.SubTasks)
 
-                }
+                    }
+                </div>
+        
             </div>
                                 }
                             }
@@ -265,7 +268,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     <div class="tab-header">
                         @(Model.Job.JobName + "(" + Model.Age + " yrs)")
                         <div class="tab-header-back">
-                            <a href="/" class="back-btn"><i class="fa fa-arrow-left"></i>&nbsp;Back</a>
+                            <a href="" onclick="goBack()" class="back-btn"><i class="fa fa-arrow-left"></i>&nbsp;Back</a>
                         </div>
                     </div>
                     <div class="tab-content search-criteria" style="margin-top:0;">
@@ -290,7 +293,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 </tr>
                                                 <tr>
                                                     <td>Address:</td>
-                                                    <td>@(Model.Employer.Country + " " + (Model.Employer.City ?? "") + " " + (Model.Employer.District ?? ""))</td>
+                                                    <td>@(Model.Employer.Country + ", " + (Model.Employer.City ?? "") + ", " + (Model.Employer.District ?? ""))</td>
                                                 </tr>
                                                 <tr>
                                                     <td>Email:</td>
@@ -302,7 +305,17 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 </tr>
                                                 <tr>
                                                     <td>Rating:</td>
-                                                    <td><a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
+                                                    <td>
+                                                        @for (int i = 0; i < Model.StarRating; i++)
+                                                        {
+                                                            <i class="fa fa-star"></i>
+                                                        }
+                                                        @for (int i = 0; i < (5 - Model.StarRating); i++)
+                                                        {
+                                                            <i class="fa fa-star-o"></i>
+                                                        }
+
+                                                    </td>
                                                 </tr>
                                                 <tr>
                                                     <td>Description:</td>
@@ -395,7 +408,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
-                                                        @(Model.Country + ", " + Model.City)
+                                                        @*@(Model.Country + ", " + Model.City)*@
+                                                        @(Model.Country + ", " + (Model.City ?? "") + ", " + (Model.District ?? ""))
 
                                                     </div>
                                                     <div class="col-lg-6 col-md-6">

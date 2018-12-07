@@ -106,14 +106,14 @@
                                             <div class="radio">
                                                 <label>
                                                     @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
-                                                    Female
+                                                    Woman
                                                     <span></span>
                                                 </label>
                                             </div>
                                             <div class="radio">
                                                 <label>
                                                     @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
-                                                    Male
+                                                    Man
                                                     <span></span>
                                                 </label>
                                             </div>
@@ -127,7 +127,15 @@
                                         @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
                                     </div>
 
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
 
+
+                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
+                                        <span class="input-lable">Country</span>
+                                    </div>
 
 
                                     <div class="input-group mb-2">
@@ -146,15 +154,7 @@
                                         @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
                                         <span class="input-lable">City</span>
                                     </div>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                        </div>
-
-
-                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
-                                        <span class="input-lable">Country</span>
-                                    </div>
+                                    
                                     <div class="row">
                                         @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
                                     </div>
