@@ -166,7 +166,7 @@ namespace HireMe.Models
         [Required]
         public SalaryType SalaryType { get; set; }
         public string SalaryTypeDesc { get; set; }
-        [RequiredIf("SalaryType", SalaryType.Others)]
+        [RequiredIf("SalaryType", SalaryType.PriceOfService)]
         public string SalaryTypeOtherDesc { get; set; }
 
         public bool CanRead { get; set; }

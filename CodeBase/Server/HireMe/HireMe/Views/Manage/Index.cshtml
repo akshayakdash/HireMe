@@ -317,15 +317,37 @@
 
                                         <div class="input-group mb-2">
                                             Set your contact option
-                                            <div class='switch' style="right:0;top:0;">
+                                          <!--  <div class='switch' style="right:0;top:0;">
                                                 <div class='quality'>
-                                                    <input checked="@(Model.ContactOption == "Email")" id="contact_option1" name='ContactOption' type='radio' value='Email'>
+                                                    <input checked="@(Model.ContactOption.Contains("Email"))" id="contact_option1" name='ContactOption' type='checkbox' value='Email'>
                                                     <label for="contact_option1">Email</label>
                                                 </div><div class='quality'>
-                                                    <input checked="@(Model.ContactOption == "Phone")" id="contact_option2" name='ContactOption' type='radio' value='Phone'>
+                                                    <input checked="@(Model.ContactOption.Contains("Phone"))" id="contact_option2" name='ContactOption' type='checkbox' value='Phone'>
                                                     <label for="contact_option2">Phone Number</label>
                                                 </div>
+                                            </div>-->
+
+                                            <div class="filtersection-header">
+                                                Email
+                                                <div class="switch-area-inner switch-area-inner-cus">
+                                                    <label class="checkbox">
+                                                        <input checked="@(Model.ContactOption.Contains("Email"))" name='ContactOption' type="checkbox" value="Email">
+                                                        <span class=""></span>
+                                                    </label>
+                                                </div>
                                             </div>
+
+                                            <div class="filtersection-header">
+                                                Phone
+                                                <div class="switch-area-inner switch-area-inner-cus">
+                                                    <label class="checkbox">
+                                                        <input checked="@(Model.ContactOption.Contains("Phone"))" name='ContactOption' type="checkbox" value="Phone">
+                                                        <span class=""></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                            
                                         </div>
 
                                     </fieldset>

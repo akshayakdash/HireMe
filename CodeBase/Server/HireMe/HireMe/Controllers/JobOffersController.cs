@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
 using Microsoft.AspNet.Identity;
+using HireMe.Utility;
 
 namespace HireMe.Controllers
 {
@@ -157,6 +158,51 @@ namespace HireMe.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult SaveJobOfferNote(JobOfferNote jobOfferNote)
+        {
+            var userId = User.Identity.GetUserId();
+            // get the employer
+            var candidate = db.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
+            jobOfferNote.CandidateId = candidate.CandidateId;
+            var jobOffer = db.JobOffers
+                .Include(p => p.JobOfferNotes)
+                .FirstOrDefault(p => p.JobOfferId == jobOfferNote.JobOfferId);
+            if (jobOffer == null)
+                return HttpNotFound();
+            jobOffer.JobOfferNotes.Add(jobOfferNote);
+            db.SaveChanges();
+
+
+            // get the userid who has created the job request
+            var employer = db.Employers.Find(jobOffer.EmployerId);
+            if (candidate != null)
+            {
+                NotificationFramework.SendNotification(userId, employer.AspNetUserId, "Job Offer Note", jobOfferNote.Note, 0, true);
+            }
+
+            return Json("Note added successfully.", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetJobOfferNotePartialView(int jobOfferId)
+        {
+            var userId = User.Identity.GetUserId();
+            // get the employer
+            var candidate = db.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
+            if (candidate != null)
+            {
+                var jobOffer = db.JobOffers
+                    .FirstOrDefault(p => p.JobOfferId == jobOfferId);
+                if (jobOffer == null)
+                    return HttpNotFound();
+                db.Entry(jobOffer).Collection(p => p.JobOfferNotes).Query().Where(p => p.CandidateId == candidate.CandidateId).Load();
+                return PartialView("_jobOfferNotes", jobOffer.JobOfferNotes);
+            }
+            return PartialView("_jobOfferNotes");
+        }
+
 
         protected override void Dispose(bool disposing)
         {
