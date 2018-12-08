@@ -10887,7 +10887,7 @@ input:checked + .slider1:before {
 
         .regd-form .input-group .input-lable {
             position: absolute;
-            right: 0;
+            right: 15px;
             z-index: 1;
             font-size: 12px;
             font-style: italic;
@@ -11393,4 +11393,12 @@ margin:0;
 div.dataTables_paginate {
     float: right;
     margin: 0;
+}
+.changepassword-box {
+    width: 50%;
+    padding: 30px;
+    background-color: #f8f9fb;
+    color: #636363;
+    margin: 0 auto 50px auto;
+    text-align: center;
 }

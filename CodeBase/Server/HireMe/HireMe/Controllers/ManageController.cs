@@ -103,6 +103,7 @@ namespace HireMe.Controllers
                 updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(candidate.ContactOption) ? candidate.ContactOption.Split(',') : new string[0];
                 updateProfileViewModel.ProfileVerified = candidate.ProfileVerified;
                 updateProfileViewModel.Age = candidate.Age.HasValue? candidate.Age.Value : 0;
+                ViewBag.IdProofDoc = candidate.IdProofDoc;
 
             }
             else if (role == "Employer")
@@ -111,13 +112,15 @@ namespace HireMe.Controllers
                 updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(employer.ContactOption) ? employer.ContactOption.Split(',') : new string[0];
                 updateProfileViewModel.ProfileVerified = employer.ProfileVerified;
                 updateProfileViewModel.Age = employer.Age;
+                ViewBag.IdProofDoc = employer.IdProofDoc;
             }
             else if (role == "Agency")
             {
                 var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == user.Id);
                 //updateProfileViewModel.ContactOption = agency.ContactOption;
                 updateProfileViewModel.ProfileVerified = agency.ProfileVerified;
-               // updateProfileViewModel.Age = int.Parse(agency.ManagerAge);
+                // updateProfileViewModel.Age = int.Parse(agency.ManagerAge);
+                ViewBag.IdProofDoc = agency.AgencyLogo;
             }
 
             var country = context.Countries.ToList();
@@ -128,6 +131,7 @@ namespace HireMe.Controllers
             ViewBag.City = city;
             ViewBag.District = district;
             ViewBag.ProfilePicUrl = user.ProfilePicUrl;
+            
             return View(updateProfileViewModel);
         }
 

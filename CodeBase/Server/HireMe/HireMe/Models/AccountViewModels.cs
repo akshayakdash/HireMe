@@ -123,10 +123,13 @@ namespace HireMe.Models
 
         [Required(ErrorMessage = "You must provide a valid phone number")]
         //[Display(Name = "Contact Number")]
-        [DataType(DataType.PhoneNumber)]
+        //[DataType(DataType.PhoneNumber)]
         //[Phone()]
-        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
+        //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
+
+        //[Required]
+        public string CountryCode { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

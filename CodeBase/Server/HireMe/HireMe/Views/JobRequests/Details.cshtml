@@ -49,6 +49,9 @@
                 });
         }
     }
+    function goBack() {
+        window.history.back();
+    }
 </script>
 
 
@@ -111,7 +114,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
             <div class="row" style="margin-left: 5px;">
                 <div class="col-lg-1 col-md-1">
-                    <img src="~/assets/images/home-icon.png" />
+                    <img style="width:20px" src="@item.IconImage" />
+                    @*<img src="~/assets/images/home-icon.png" />*@
                 </div>
                 <div class="col-lg-11 col-md-11">
                     <div>
@@ -126,14 +130,14 @@ for (int i = 0; i < jobTasks.Count(); i++)
                             <span>@selectedTask.TaskResponseAdditionalDescription</span>
                         }
                     </div>
-
-                </div>
-                @if (item.SubTasks.Any())
+                    @if (item.SubTasks.Any())
             {
 
-                    @ShowTaskTree(item.SubTasks)
+                        @ShowTaskTree(item.SubTasks)
 
-                }
+                    }
+                </div>
+     
             </div>
                                 }
                             }
@@ -310,7 +314,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     <div class="tab-header">
                         @(Model.Job.JobName + "(" + Model.Candidate.Age + " yrs)")
                         <div class="tab-header-back">
-                            <a href="/" class="back-btn"><i class="fa fa-arrow-left"></i>&nbsp;Back</a>
+                            <a href="" onclick="goBack()" class="back-btn"><i class="fa fa-arrow-left"></i>&nbsp;Back</a>
                         </div>
                     </div>
                     <div class="tab-content search-criteria" style="margin-top:0;">
@@ -343,11 +347,21 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         </tr>
                                         <tr>
                                             <td>Address:</td>
-                                            <td>@(Model.Candidate.Country + " " + (Model.Candidate.City ?? "") + (Model.Candidate.District ?? "") )</td>
+                                            <td>@(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "")+ ", " + (Model.Candidate.District ?? "") )</td>
                                         </tr>
                                         <tr>
                                             <td>Rating:</td>
-                                            <td><a><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a></td>
+                                            <td>
+                                                @for (int i = 0; i < Model.StarRating; i++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                @for (int i = 0; i < (5 - Model.StarRating); i++)
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                         
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Description:</td>
@@ -439,15 +453,15 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                             <div class="filtersection-body">
 
                                                 <div class="row">
-                                                    <div class="col-lg-6 col-md-6">
-                                                        @(Model.Candidate.Country + ", " + Model.Candidate.City)
+                                                    <div class="col-lg-12 col-md-12">
+                                                        @(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "")+", " + (Model.Candidate.District ?? ""))
 
-                                                        <td>@*@(Model.Candidate.Country + " " + (Model.Candidate.City ?? "") + (Model.Candidate.District ?? "") )*@</td>
+                                                        
 
                                                     </div>
-                                                    <div class="col-lg-6 col-md-6">
+                                                    @*<div class="col-lg-6 col-md-6">
                                                         @Model.Candidate.District
-                                                    </div>
+                                                    </div>*@
                                                 </div>
                                             </div>
                                         </div>
