@@ -110,8 +110,8 @@ namespace HireMe.Models
         public int AgencyId { get; set; }
 
         public string AspNetUserId { get; set; }
-        //[ForeignKey("AspNetUserId")]
-        //public AppUser ApplicationUser { get; set; }
+        [ForeignKey("AspNetUserId")]
+        public ApplicationUser ApplicationUser { get; set; }
         public string AgencyName { get; set; }
         public string AgencyLogo { get; set; }
         public string AgencyWebsiteURL { get; set; }
@@ -146,6 +146,44 @@ namespace HireMe.Models
         public string CreatedDate { get; set; }
         public string UpdatedBy { get; set; }
         public string UpdatedDate { get; set; }
+
+        [NotMapped]
+        public string PhoneNo
+        {
+            get
+            {
+                if (ApplicationUser != null)
+                {
+                    return ApplicationUser.PhoneNumber;
+                }
+                return "";
+            }
+        }
+        [NotMapped]
+        public string EmailId
+        {
+            get
+            {
+                if (ApplicationUser != null)
+                {
+                    return ApplicationUser.Email;
+                }
+                return "";
+            }
+        }
+
+        [NotMapped]
+        public string ProfilePicUrl
+        {
+            get
+            {
+                if (ApplicationUser != null)
+                {
+                    return ApplicationUser.ProfilePicUrl;
+                }
+                return "";
+            }
+        }
 
     }
 

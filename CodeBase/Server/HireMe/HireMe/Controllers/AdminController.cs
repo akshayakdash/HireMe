@@ -19,7 +19,7 @@ namespace HireMe.Controllers
         [HttpGet]
         public ActionResult Agencies()
         {
-            return View(db.Agencies.OrderByDescending(p => p.AgencyId).ToList());
+            return View(db.Agencies.Include(p => p.ApplicationUser).OrderByDescending(p => p.AgencyId).ToList());
         }
 
         public ActionResult ActivateAgency(int id)
@@ -40,7 +40,11 @@ namespace HireMe.Controllers
         [HttpGet]
         public ActionResult Candidates()
         {
-            var candidates = db.Candidates.Include(p => p.ApplicationUser).OrderByDescending(p => p.CandidateId).ToList();
+            var candidates = db.Candidates
+                .Include(p => p.ApplicationUser)
+                .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                .OrderByDescending(p => p.CandidateId)
+                .ToList();
             return View(candidates);
         }
 
