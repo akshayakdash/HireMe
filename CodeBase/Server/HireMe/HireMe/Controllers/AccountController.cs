@@ -259,11 +259,13 @@ namespace HireMe.Controllers
                 {
                     
                     var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = model.Age.ToString() };
+                    agency.CreatedDate = DateTime.Now.ToString();
                     user.Agencies = new System.Collections.Generic.List<Agency> { agency };
                 }
                 else if (model.UserRoles.Contains("Candidate"))
                 {
                     var candidate = new Candidate { StaffType = StaffType.Independent, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
+                    candidate.CreatedDate = DateTime.Now.ToString();
                     var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                     if (cntry != null)
                         candidate.Country = cntry.CountryName;
@@ -278,6 +280,7 @@ namespace HireMe.Controllers
                 else if (model.UserRoles.Contains("Employer"))
                 {
                     var employer = new Employer { FirstName = model.FirstName, LastName = model.LastName, ContactNo = phoneNumber,  Gender = Gender.Male, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
+                    employer.CreatedDate = DateTime.Now.ToString();
                     var cntry = countries.FirstOrDefault(p => p.CountryId == employer.CountryId);
                     if (cntry != null)
                         employer.Country = cntry.CountryName;

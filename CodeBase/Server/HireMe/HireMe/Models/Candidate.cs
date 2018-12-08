@@ -631,6 +631,51 @@ namespace HireMe.Models
         public string AdditionalDescription { get; set; }
         public List<JobRequestJobTask> JobRequestJobTasks { get; set; }
     }
+
+    public class v_ExportJobRequest
+    {
+        [Key]
+        public int JobRequestId { get; set; }
+        public string Name { get; set; }
+        public string EmailId { get; set; }
+        public string ContactNo { get; set; }
+        public string Gender { get; set; }
+        public string Age { get; set; }
+        public string ProfileVerified { get; set; }
+        public string JobSought { get; set; }
+        public string PublishedDate { get; set; }
+    }
+
+    public class v_ExportJobOffer
+    {
+        [Key]
+        public int JobOfferId { get; set; }
+        public string Name { get; set; }
+        public string EmailId { get; set; }
+        public string ContactNo { get; set; }
+        public string Gender { get; set; }
+        public string Age { get; set; }
+        public string ProfileVerified { get; set; }
+        public string JobSought { get; set; }
+        public string PublishedDate { get; set; }
+    }
+
+    [Table("v_categorywisejobcount")]
+    public class v_JobCount
+    {
+        [Key]
+        public string JobName { get; set; }
+        public string TotalRequests { get; set; }
+    }
+    [Table("v_jobRequests")]
+    public class v_JobRequest_Count
+    {
+        [Key]
+        public string PK { get; set; }
+        public string Month { get; set; }
+        public string JobName { get; set; }
+        public int TotalRequests { get; set; }
+    }
     #endregion
 
 

@@ -589,11 +589,83 @@ namespace HireMe.Utility
     public class MemberSearchParam
     {
         public MemberType MemberType { get; set; }
-        public Gender Gender { get; set; }
-        public int Job { get; set; }
-        public bool VerificationStatus { get; set; }
+        //public Gender Gender { get; set; }
+        public string Gender { get; set; }
+        public string Job { get; set; }
+        public string ProfileVerified { get; set; }
         public int MinAge { get; set; }
         public int MaxAge { get; set; }
+
+        ArrayList paramList = new ArrayList();
+        int paramCount = 0;
+        StringBuilder queryString = new StringBuilder();
+        public object[] GetSearchQuery()
+        {
+            ArrayList paramList = new ArrayList();
+            int paramCount = 0;
+            StringBuilder queryString = new StringBuilder();
+            if (!string.IsNullOrWhiteSpace(Gender))
+            {
+                queryString.Append(" and Gender = @" + paramCount);
+                paramList.Add(Gender);
+                paramCount++;
+            }
+
+            if (!string.IsNullOrEmpty(Job))
+            {
+                queryString.Append(" and JobSought = @" + paramCount);
+                paramList.Add(Job);
+                paramCount++;
+            }
+
+            if (!string.IsNullOrWhiteSpace(ProfileVerified))
+            {
+                queryString.Append(" and ProfileVerified= @" + paramCount);
+                paramList.Add(ProfileVerified);
+                paramCount++;
+            }
+
+            //if (EnableAgeFilter)
+            //{
+            //    if (MinAge > 0 && MaxAge > 0 && MinAge <= MaxAge)
+            //    {
+            //        queryString.Append(" and Candidate.Age >= @" + paramCount);
+            //        paramList.Add(MinAge);
+            //        paramCount++;
+
+            //        queryString.Append(" and Candidate.Age <= @" + paramCount);
+            //        paramList.Add(MaxAge);
+            //        paramCount++;
+            //    }
+            //}
+
+
+            if (MemberType == MemberType.Candidate)
+            {
+                queryString.Append(" and JobRequestId > @" + paramCount);
+                paramList.Add(0);
+                paramCount++;
+            }
+            else {
+                queryString.Append(" and JobOfferId > @" + paramCount);
+                paramList.Add(0);
+                paramCount++;
+            }
+
+            //Create the array
+            object[] queryObject = new object[2];
+            if (queryString.Length == 0)
+            {
+                queryObject = null;
+            }
+            else
+            {
+                //Remove the first 5 characters
+                queryObject[0] = queryString.ToString().Substring(5);
+                queryObject[1] = paramList;
+            }
+            return queryObject;
+        }
     }
 
     public enum MemberType
