@@ -245,7 +245,7 @@
         }
         
 
-        @if (HttpContext.Current.User.Identity.IsAuthenticated)
+        @if (HttpContext.Current.User.Identity.IsAuthenticated && !((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
         {
             <div id="mySidenav" class="sidenav" style="width: 280px;">
 
