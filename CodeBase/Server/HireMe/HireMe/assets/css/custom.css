@@ -209,7 +209,7 @@ textarea {
 
 select {
     width: 100%;
-    height: 34px;
+    height: 38px;
     border-radius: 0;
     background: #fff url(../images/arrow.png) no-repeat center right;
     -webkit-appearance: none;
@@ -9858,7 +9858,7 @@ blockquote {
 .form-section {
     border-radius: 8px;
     background-color: #ffffff;
-    padding: 15px;
+    padding: 5px 15px;
     border: #ebebeb 1px solid;
     margin-bottom: 15px;
 }
@@ -11588,3 +11588,33 @@ label.tree_label:after {
     padding: 1em;
     border-radius: 0.3em;
 }
+.field-validation-error {
+    padding: 5px 15px;
+    background: #dc3545;
+    color: #fff!important;
+    position: absolute;
+    z-index: 3;
+    border-radius: 5px;
+}
+
+
+.field-validation-error:after, .field-validation-error:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+    .field-validation-error:before {
+        border-width: 11px;
+        top: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-top-width: 0;
+        border-bottom-color: #999;
+        border-bottom-color: #dc3545;
+    }
