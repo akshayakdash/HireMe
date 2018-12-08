@@ -137,19 +137,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="headline text-center">
-                        <h2>Messages & Notifications</h2>
+                        <h2><i class="fa fa-bell"></i>&nbsp;Messages & Notifications</h2>
                     </div><!-- headline -->
                 </div><!-- col -->
             </div><!-- row -->
             <div class="row">
-                <div class="col-md-12 col-lg-12">
+                <div class="col-md-12">
                     <ul class="notification">
                         @if (Model != null && Model.Count() > 0)
                         {
                             foreach (var item in Model)
                             {
                                 <li>
-                                    <a href="#" class="notification-link">
+                                    <a href="#" class="notification-link text-box round mb-2">
                                         <span class="photo">
                                             <img src="data:image/jpeg;base64,@item.Sender.ProfilePicUrl" />
                                         </span>
