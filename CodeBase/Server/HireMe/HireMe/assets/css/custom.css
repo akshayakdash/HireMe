@@ -1353,7 +1353,7 @@ dl {
     margin-bottom: 50px;
     background-color: #f8f9fb;
     color: #636363;
-    text-align: center;
+    /*text-align: center;*/
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
 }
@@ -11272,23 +11272,25 @@ margin:0;
     color: #fff;
     border-radius: 10px;
 }
-.notification{
-    list-style:none;
+.notification {
+    list-style: none;
     position: relative;
-    margin-bottom:30px;
+    margin-bottom: 30px;
     display: inline-block;
+    width: 100%;
 }
 .notification li{
 
 }
-.notification li a{
-    color: #666;
-    float: left;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    -webkit-transition: all 0.1s ease-out;
-    transition: all 0.1s ease-out;
-}
+    .notification li a {
+        color: #666;
+        float: left;
+        padding: 10px;
+        border-bottom: 2px solid #fe005a;
+        -webkit-transition: all 0.1s ease-out;
+        transition: all 0.1s ease-out;
+        width: 100%;
+    }
 .notification li a:hover{
     background: #fe005a;
     color: #fff;
@@ -11297,14 +11299,14 @@ margin:0;
 .notification li .photo{
 
 }
-.notification li .photo img{
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    float: left;
-    height: 50px;
-    margin-right: 20px;
-    width: 50px;
-}
+    .notification li .photo img {
+        border-radius: 50%;
+        border: 2px solid #fe005a;
+        float: left;
+        height: 50px;
+        margin-right: 20px;
+        width: 50px;
+    }
 .notification li .info{
     width:20%;
     float:left;
@@ -11326,10 +11328,11 @@ margin:0;
     float:left;
 }
 .notification li .date-time{
-    font-size: 14px;
+    font-size: 13px;
     font-style: italic;
     position: absolute;
-    right: 5px;
+    right: 15px;
+    font-weight:600;
 }
 .notification li a:hover .name{
     color: #fff;
