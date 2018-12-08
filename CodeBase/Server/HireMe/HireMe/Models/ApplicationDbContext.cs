@@ -61,7 +61,13 @@ namespace HireMe.Models
           .WithOptional()
           .HasForeignKey(agncy => agncy.AspNetUserId);
 
-
+            // uncomment it when we want to create db migration
+            //modelBuilder.Ignore<JobTekNotification>();
+            //modelBuilder.Ignore<v_SearchJobRequest>();
+            //modelBuilder.Ignore<v_ExportJobRequest>();
+            //modelBuilder.Ignore<v_ExportJobOffer>();
+            //modelBuilder.Ignore<v_JobCount>();
+            //modelBuilder.Ignore<v_JobRequest_Count>();
         }
 
         //public DbSet<Candidate> Candidates { get; set; }
@@ -99,5 +105,9 @@ namespace HireMe.Models
         public DbSet<JobRequestJobTask> JobRequestJobTasks { get; set; }
 
         public DbSet<v_SearchJobRequest> v_JobRequests { get; set; }
+        public DbSet<v_ExportJobRequest> v_ExportJobRequests { get; set; }
+        public DbSet<v_ExportJobOffer> v_ExportJobOffers { get; set; }
+        public DbSet<v_JobCount> v_JobCounts { get; set; }
+        public DbSet<v_JobRequest_Count> v_JobRequestCount { get; set; }
     }
 }

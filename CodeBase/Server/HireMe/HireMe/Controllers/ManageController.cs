@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HireMe.Models;
+using System.IO;
 
 namespace HireMe.Controllers
 {
@@ -102,7 +103,7 @@ namespace HireMe.Controllers
                 var candidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == user.Id);
                 updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(candidate.ContactOption) ? candidate.ContactOption.Split(',') : new string[0];
                 updateProfileViewModel.ProfileVerified = candidate.ProfileVerified;
-                updateProfileViewModel.Age = candidate.Age.HasValue? candidate.Age.Value : 0;
+                updateProfileViewModel.Age = candidate.Age.HasValue ? candidate.Age.Value : 0;
                 ViewBag.IdProofDoc = candidate.IdProofDoc;
 
             }
@@ -131,7 +132,7 @@ namespace HireMe.Controllers
             ViewBag.City = city;
             ViewBag.District = district;
             ViewBag.ProfilePicUrl = user.ProfilePicUrl;
-            
+
             return View(updateProfileViewModel);
         }
 
@@ -237,6 +238,106 @@ namespace HireMe.Controllers
             //ViewBag.District = district;
             //ViewBag.ProfilePicUrl = user1.ProfilePicUrl;
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateProfilePic()
+        {
+            #region ProfileImageUpload
+            string profileImagePath = string.Empty;
+            try
+            {
+                if (Request.Files != null && Request.Files.Count > 0)
+                {
+                    ////To copy and save file into server.  
+                    //model.profile_pic.SaveAs(imagePath);
+                    var file = Request.Files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string theFileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        byte[] thePictureAsBytes = new byte[file.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(file.InputStream))
+                        {
+                            thePictureAsBytes = theReader.ReadBytes(file.ContentLength);
+                        }
+                        profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    }
+                }
+                var userId = User.Identity.GetUserId();
+                var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                // now get the application user 
+                var user = context.Users.Find(userId);
+                user.ProfilePicUrl = profileImagePath;
+                context.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
+                if (userManager.IsInRole(userId, "Candidate"))
+                {
+                    var existingCandidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
+                    existingCandidate.ProfilePicUrl = profileImagePath;
+                    context.Entry(existingCandidate).Property(p => p.ProfilePicUrl).IsModified = true;
+                }
+                if (userManager.IsInRole(userId, "Employer"))
+                {
+                    var existingEmployer = context.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
+                    existingEmployer.ProfilePicUrl = profileImagePath;
+                    context.Entry(existingEmployer).Property(p => p.ProfilePicUrl).IsModified = true;
+                }
+                context.SaveChanges();
+
+            }
+            finally
+            {
+
+            }
+            return Json("Success", JsonRequestBehavior.AllowGet);
+            #endregion
+        }
+
+        [HttpPost]
+        public ActionResult UpdateIdCard()
+        {
+            #region ProfileImageUpload
+            string profileImagePath = string.Empty;
+            try
+            {
+                if (Request.Files != null && Request.Files.Count > 0)
+                {
+                    ////To copy and save file into server.  
+                    //model.profile_pic.SaveAs(imagePath);
+                    var file = Request.Files[0];
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        string theFileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        byte[] thePictureAsBytes = new byte[file.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(file.InputStream))
+                        {
+                            thePictureAsBytes = theReader.ReadBytes(file.ContentLength);
+                        }
+                        profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    }
+                }
+                var userId = User.Identity.GetUserId();
+                var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                if (userManager.IsInRole(userId, "Candidate"))
+                {
+                    var existingCandidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
+                    existingCandidate.IdProofDoc = profileImagePath;
+                    context.Entry(existingCandidate).Property(p => p.IdProofDoc).IsModified = true;
+                }
+                if (userManager.IsInRole(userId, "Employer"))
+                {
+                    var existingEmployer = context.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
+                    existingEmployer.IdProofDoc = profileImagePath;
+                    context.Entry(existingEmployer).Property(p => p.IdProofDoc).IsModified = true;
+                }
+                context.SaveChanges();
+
+            }
+            finally
+            {
+
+            }
+            return Json("Success", JsonRequestBehavior.AllowGet);
+            #endregion
         }
 
         //
