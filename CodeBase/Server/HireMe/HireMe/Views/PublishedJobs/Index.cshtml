@@ -81,373 +81,131 @@
     {
 
         <div class="full-section-container" id="job-list" ng-app="myApp" ng-controller="searchJobCtrl">
-            <div class="jobsearch-section">
-                <div class="right-section">
-                    <div class="header">
-                        <a title="Filter" id="FilterClose" class="filter-close"><i class="bizhub-icon-close-2"></i></a>
-                        <i class="fa fa-filter"></i>Set all filter to Indifferent
-                        @*<div class="switch-area">
-                                <label class="switchsmall">
-                                    <input type="checkbox" data-ng-model="searchParam.noFilter" data-ng-change="setAllFilterToIndifferent()">
+            <section class="right-side">
+                <div class="jobsearch-section">
+                    <div class="right-section">
+                        <div class="header">
+                            <a title="Filter" id="FilterClose" class="filter-close"><i class="bizhub-icon-close-2"></i></a>
+                            <i class="fa fa-filter"></i>Set all filter to Indifferent
+                            @*<div class="switch-area">
+                            <label class="switchsmall">
+                                <input type="checkbox" data-ng-model="searchParam.noFilter" data-ng-change="setAllFilterToIndifferent()">
 
-                                    <span class="slider1 round"></span>
-                                </label>
-                            </div>*@
-                        <button type="button" data-ng-click="setAllFilterToIndifferent()">Reset</button>
-                    </div>
-                    <div class="body search-filter-section">
-
-
-
-
-                        <div class="row">
-                            <div class="col-md-12">
-
-
-                                <div class="filtersection-panel">
-                                    <div class="filtersection-header">
-                                        Standard Criterias
-                                    </div>
-                                    <div class="filtersection-body">
-
-
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Gender
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableGenderFilter" data-ng-change="searchParam.enableGenderFilter ? searchParam.gender = searchParam.gender : searchParam.gender = ''">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableGenderFilter">
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" name="gender" ng-value="2" data-ng-model="searchParam.gender">
-                                                                Woman
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" name="gender" ng-value="1" data-ng-model="searchParam.gender">
-                                                                Man
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        ID Card Checked
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableProfileVerifiedFilter" data-ng-change="searchParam.enableProfileVerifiedFilter ? searchParam.profileVerified = searchParam.profileVerified : searchParam.profileVerified = ''">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableProfileVerifiedFilter">
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" ng-value="true" data-ng-model="searchParam.profileVerified">
-                                                                Yes
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" ng-value="false" data-ng-model="searchParam.profileVerified">
-                                                                No
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Age
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableAgeFilter" data-ng-change="resetAgeFilter()">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableAgeFilter">
-                                                        <div class="inlineform-filter">
-                                                            <div class="row">
-                                                                <div class="col-md-5">
-                                                                    <select class="" data-ng-model="searchParam.minAge">
-                                                                        <option value="">--select--</option>
-                                                                        <option>25</option>
-                                                                        <option>30</option>
-                                                                        <option>35</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-2 text-center">&amp;</div>
-                                                                <div class="col-md-5">
-                                                                    <select class="" data-ng-model="searchParam.maxAge">
-                                                                        <option value="">--select--</option>
-                                                                        <option>35</option>
-                                                                        <option>30</option>
-                                                                        <option>35</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Years of Experiences
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableExperienceFilter" data-ng-change="resetExperienceFilter()">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableExperienceFilter">
-                                                        <div class="inlineform-filter">
-                                                            <div class="row">
-                                                                <div class="col-sm-2 text-center">
-                                                                    <i class="fa fa-plus"></i>
-                                                                </div>
-                                                                <div class="col-sm-3" style="padding-left: 0;">
-                                                                    <select class="yrs_of_exp" data-ng-model="searchParam.minYearsOfExperience">
-                                                                        <option value="">--min--</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                        <option>4</option>
-                                                                        <option>5</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-sm-3" style="padding-left: 0;">
-                                                                    <select class="yrs_of_exp" data-ng-model="searchParam.maxYearsOfExperience">
-                                                                        <option value="">--max--</option>
-                                                                        <option>2</option>
-                                                                        <option>3</option>
-                                                                        <option>4</option>
-                                                                        <option>5</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Type of Staff
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableStaffTypeFilter" data-ng-change="searchParam.enableStaffTypeFilter ? searchParam.staffType = searchParam.staffType : searchParam.staffType = ''">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableStaffTypeFilter">
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" ng-value="1" data-ng-model="searchParam.staffType">
-                                                                Independant
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                        <div class="radio">
-                                                            <label>
-                                                                <input type="radio" ng-value="2" data-ng-model="searchParam.staffType">
-                                                                Agency
-                                                                <span></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Disponibility
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableDisponibilityFilter" data-ng-change="searchParam.enableDisponibilityFilter ? searchParam.disponibility = searchParam.disponibility : searchParam.disponibility = ''">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableDisponibilityFilter">
-                                                        <div class="widget widget-calendar">
-                                                            <input type="date" data-ng-model="searchParam.disponibility" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Localizations
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableLocalizationFilter" data-ng-change="resetLocalizationFilter()">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableLocalizationFilter">
-                                                        <div class="inlineform-filter">
-                                                            <div class="row">
-                                                                <div class="col-md-6">
-                                                                    <div>City</div>
-                                                                    <select data-ng-model="searchParam.city" data-ng-options="item.CityId as item.CityName for item in cities" data-ng-change="getDistricts()">
-                                                                        <option value="">--select--</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div>District</div>
-                                                                    <select data-ng-model="searchParam.district" data-ng-options="item.DistrictId as item.DistrictName for item in districts">
-                                                                        <option value="">--select--</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        Salary Between
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                <input type="checkbox" data-ng-model="searchParam.enableSalaryFilter" data-ng-change="resetSalaryFilter()">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                    <div class="filtersection-body" data-ng-if="searchParam.enableSalaryFilter">
-                                                        <div class="inlineform-filter">
-                                                            <div class="row">
-                                                                @*<div class="col-md-12 mb-2">
-                                                                        <div class="radio inline mr-2">
-                                                                            <label>
-                                                                                <input type="radio" name="options" id="option2" value="option2">
-                                                                                Monthly
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </div>
-                                                                        <div class="radio inline">
-                                                                            <label>
-                                                                                <input type="radio" name="options" id="option2" value="option2">
-                                                                                Hourly
-                                                                                <span></span>
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>*@
-                                                                <div class="col-md-5">
-                                                                    <select data-ng-model="searchParam.minSalary">
-                                                                        <option value="">--select--</option>
-                                                                        <option>25</option>
-                                                                        <option>30</option>
-                                                                        <option>35</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="col-md-2 text-center">&amp;</div>
-                                                                <div class="col-md-5">
-                                                                    <select data-ng-model="searchParam.maxSalary">
-                                                                        <option value="">--select--</option>
-                                                                        <option>35</option>
-                                                                        <option>30</option>
-                                                                        <option>35</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
+                                <span class="slider1 round"></span>
+                            </label>
+                        </div>*@
+                            <button type="button" data-ng-click="setAllFilterToIndifferent()">Reset</button>
                         </div>
-
-                        <div class="row" data-ng-if="job">
-                            <div class="col-md-12">
+                        <div class="body search-filter-section">
 
 
-                                <div class="filtersection-panel">
-                                    <div class="filtersection-header">
-                                        Specific Criterias ({{job.JobName}})
-                                    </div>
-                                    <div class="filtersection-body" data-ng-init="counter = 0">
 
-                                        <div class="row" data-ng-if="job">
-                                            <div class="col-md-12" data-ng-repeat="task in job.JobTasks | filter : {'ParentJobTaskId': null}">
-                                                <div class="filtersection-panel">
-                                                    <div class="filtersection-header">
-                                                        <img style="width: 15px;" ng-src="{{task.IconImage}}" alt=""> {{task.JobTaskName}}
-                                                        <div class="switch-area-inner">
-                                                            <label class="switchsmall">
-                                                                @*<input type="checkbox" data-ng-model="searchParam.tasks[$index]">*@
-                                                                <input type="checkbox"
-                                                                       name="selectedTasks[]"
-                                                                       value="{{task.JobTaskId}}"
-                                                                       ng-checked="searchParam.tasks.indexOf(task.JobTaskId) > -1"
-                                                                       ng-click="toggleSelection(task.JobTaskId)">
-                                                                <span class="slider1 round"></span>
-                                                            </label>
+
+                            <div class="row">
+                                <div class="col-md-12">
+
+
+                                    <div class="filtersection-panel">
+                                        <div class="filtersection-header">
+                                            Standard Criterias
+                                        </div>
+                                        <div class="filtersection-body">
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Gender
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableGenderFilter" data-ng-change="searchParam.enableGenderFilter ? searchParam.gender = searchParam.gender : searchParam.gender = ''">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
                                                         </div>
 
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableGenderFilter">
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" name="gender" ng-value="2" data-ng-model="searchParam.gender">
+                                                                    Woman
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" name="gender" ng-value="1" data-ng-model="searchParam.gender">
+                                                                    Man
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="filtersection-body">
-                                                        @*<img src="~/assets/images/write.png" alt="">*@
-                                                        {{task.JobTaskDescription}}
-                                                        <div class="row">
-                                                            <div class="col-md-12" data-ng-if="task.SubTasks && task.SubTasks.length > 0">
-                                                                <div class="filtersection-panel" data-ng-repeat="subTask in task.SubTasks">
-                                                                    <div class="filtersection-header">
-                                                                        <img style="width: 15px;" ng-src="{{subTask.IconImage}}" alt=""> {{subTask.JobTaskName}}
-                                                                        <div class="switch-area-inner">
-                                                                            <label class="switchsmall">
-                                                                                @*<input type="checkbox" data-ng-model="searchParam.tasks[$index]">*@
-                                                                                <input type="checkbox"
-                                                                                       name="selectedTasks[]"
-                                                                                       value="{{subTask.JobTaskId}}"
-                                                                                       ng-checked="searchParam.tasks.indexOf(subTask.JobTaskId) > -1"
-                                                                                       ng-click="toggleSelection(subTask.JobTaskId)">
-                                                                                <span class="slider1 round"></span>
-                                                                            </label>
-                                                                        </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            ID Card Checked
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableProfileVerifiedFilter" data-ng-change="searchParam.enableProfileVerifiedFilter ? searchParam.profileVerified = searchParam.profileVerified : searchParam.profileVerified = ''">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableProfileVerifiedFilter">
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" ng-value="true" data-ng-model="searchParam.profileVerified">
+                                                                    Yes
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" ng-value="false" data-ng-model="searchParam.profileVerified">
+                                                                    No
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Age
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableAgeFilter" data-ng-change="resetAgeFilter()">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableAgeFilter">
+                                                            <div class="inlineform-filter">
+                                                                <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <select class="" data-ng-model="searchParam.minAge">
+                                                                            <option value="">--select--</option>
+                                                                            <option>25</option>
+                                                                            <option>30</option>
+                                                                            <option>35</option>
+                                                                        </select>
                                                                     </div>
-                                                                    <div class="filtersection-body">
-                                                                        {{subTask.JobTaskDescription}}
+                                                                    <div class="col-md-2 text-center">&amp;</div>
+                                                                    <div class="col-md-5">
+                                                                        <select class="" data-ng-model="searchParam.maxAge">
+                                                                            <option value="">--select--</option>
+                                                                            <option>35</option>
+                                                                            <option>30</option>
+                                                                            <option>35</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -455,296 +213,549 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Years of Experiences
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableExperienceFilter" data-ng-change="resetExperienceFilter()">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableExperienceFilter">
+                                                            <div class="inlineform-filter">
+                                                                <div class="row">
+                                                                    <div class="col-sm-2 text-center">
+                                                                        <i class="fa fa-plus"></i>
+                                                                    </div>
+                                                                    <div class="col-sm-3" style="padding-left: 0;">
+                                                                        <select class="yrs_of_exp" data-ng-model="searchParam.minYearsOfExperience">
+                                                                            <option value="">--min--</option>
+                                                                            <option>2</option>
+                                                                            <option>3</option>
+                                                                            <option>4</option>
+                                                                            <option>5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-sm-3" style="padding-left: 0;">
+                                                                        <select class="yrs_of_exp" data-ng-model="searchParam.maxYearsOfExperience">
+                                                                            <option value="">--max--</option>
+                                                                            <option>2</option>
+                                                                            <option>3</option>
+                                                                            <option>4</option>
+                                                                            <option>5</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Type of Staff
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableStaffTypeFilter" data-ng-change="searchParam.enableStaffTypeFilter ? searchParam.staffType = searchParam.staffType : searchParam.staffType = ''">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableStaffTypeFilter">
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" ng-value="1" data-ng-model="searchParam.staffType">
+                                                                    Independant
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio">
+                                                                <label>
+                                                                    <input type="radio" ng-value="2" data-ng-model="searchParam.staffType">
+                                                                    Agency
+                                                                    <span></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Disponibility
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableDisponibilityFilter" data-ng-change="searchParam.enableDisponibilityFilter ? searchParam.disponibility = searchParam.disponibility : searchParam.disponibility = ''">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableDisponibilityFilter">
+                                                            <div class="widget widget-calendar">
+                                                                <input type="date" data-ng-model="searchParam.disponibility" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Localizations
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableLocalizationFilter" data-ng-change="resetLocalizationFilter()">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableLocalizationFilter">
+                                                            <div class="inlineform-filter">
+                                                                <div class="row">
+                                                                    <div class="col-md-6">
+                                                                        <div>City</div>
+                                                                        <select data-ng-model="searchParam.city" data-ng-options="item.CityId as item.CityName for item in cities" data-ng-change="getDistricts()">
+                                                                            <option value="">--select--</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div>District</div>
+                                                                        <select data-ng-model="searchParam.district" data-ng-options="item.DistrictId as item.DistrictName for item in districts">
+                                                                            <option value="">--select--</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            Salary Between
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    <input type="checkbox" data-ng-model="searchParam.enableSalaryFilter" data-ng-change="resetSalaryFilter()">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="filtersection-body" data-ng-if="searchParam.enableSalaryFilter">
+                                                            <div class="inlineform-filter">
+                                                                <div class="row">
+                                                                    @*<div class="col-md-12 mb-2">
+                                                                    <div class="radio inline mr-2">
+                                                                        <label>
+                                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                                            Monthly
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio inline">
+                                                                        <label>
+                                                                            <input type="radio" name="options" id="option2" value="option2">
+                                                                            Hourly
+                                                                            <span></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>*@
+                                                                    <div class="col-md-5">
+                                                                        <select data-ng-model="searchParam.minSalary">
+                                                                            <option value="">--select--</option>
+                                                                            <option>25</option>
+                                                                            <option>30</option>
+                                                                            <option>35</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-2 text-center">&amp;</div>
+                                                                    <div class="col-md-5">
+                                                                        <select data-ng-model="searchParam.maxSalary">
+                                                                            <option value="">--select--</option>
+                                                                            <option>35</option>
+                                                                            <option>30</option>
+                                                                            <option>35</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
+                                        </div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
-                        </div>
+
+                            <div class="row" data-ng-if="job">
+                                <div class="col-md-12">
 
 
-                    </div>
-                    <div class="footer">
-                        <button type="button" class="btn btn-default btn-lg" data-ng-click="searchParam.jobType == 1 ? searchJobRequests() : searchJobOffers()"><i class="bizhub-icon-search"></i> Search</button>
-                    </div>
-                </div>
-                <div class="left-section">
-                    <div class="filter-overlay">
-                        <div class="lds-ripple"><div></div><div></div></div>
-                    </div>
-                    <div class="header">
-                        <i class="fa fa-align-left"></i>
-
-                        <span class="grid-title">Search Results - <strong></strong></span>
-                        <span class="grid-title-small" data-ng-if="searchParam.jobType == 1" data-ng-bind="jobRequests ? '(' + jobRequests.length + ' profiles found)' : ''"></span>
-                        <span class="grid-title-small" data-ng-if="searchParam.jobType == 2" data-ng-bind="jobOffers ? '(' + jobOffers.length + ' profiles found)' : ''"></span>
-                        <div class='switch' style="right:0;top:8px">
-                            <div class='quality'>
-                                <input id="job_type_request" checked name='JobType' type='radio' ng-value="1" data-ng-model="searchParam.jobType" data-ng-change="searchJobRequests()">
-                                <label for="job_type_request">Job Request</label>
-                            </div><div class='quality'>
-                                <input id="job_type_offer" name='JobType' type='radio' ng-value="2" data-ng-model="searchParam.jobType" data-ng-change="searchJobOffers()">
-                                <label for="job_type_offer">Job Offer</label>
-                            </div>
-                        </div>
-                        <a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>
-
-                    </div>
-
-                    <div class="body">
-
-
-                        <div class="row" data-ng-if="searchParam.jobType == 1">
-                            <div class="col-lg-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobRequests">
-                                <div class="profileitems searchprofile-section">
-                                    <span class="validate" data-ng-if="jr.ProfileVerified"><img src="~/assets/images/verified.png" alt="Varified"></span>
-                                    <div class="left">
-                                        <img ng-src="data:image/jpeg;base64, {{jr.ProfilePicUrl}}" />
-                                        <div class="rating">
-                                            @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </a>*@
-                                            <div star-rating rating-value="jr.StarRating" max="'5'"></div>
-                                            <ul class="rating" data-ng-if="!jr.StarRating">
-                                                @*<li class="star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="star"><i class="fa fa-star-o"></i></li>
-                                                    <li class="star"><i class="fa fa-star-o"></i></li>*@
-
-                                                <li class="star">★</li>
-                                                <li class="star">★</li>
-                                                <li class="star">★</li>
-                                                <li class="star">★</li>
-                                                <li class="star">★</li>
-                                            </ul>
+                                    <div class="filtersection-panel">
+                                        <div class="filtersection-header">
+                                            Specific Criterias ({{job.JobName}})
                                         </div>
-                                        <h3><span class="age"><span data-ng-bind="jr.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.ExperienceInYears + 'yrs'"></span></h3>
-                                        <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Phone'" data-ng-bind="jr.ContactNo"></span></h2>
-                                    </div>
-                                    <div class="right">
-                                        <h1>
-                                            @*<span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span>*@
-                                            <span data-ng-if="jr.Gender == 2"><i class="fa fa-female"></i></span>
-                                            <span data-ng-if="jr.Gender == 1"><i class="fa fa-male"></i></span>
-                                            <span data-ng-if="jr.StaffType == 1">Individual</span>
-                                            <span data-ng-if="jr.StaffType == 2">Agency <i title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.AgencyId)"></i></span>
-                                            @*<span>{{jr.StaffType == 1 ? "Individual" : '<span ng-click="">Agency <i class="fa fa-info"></i></span>'}}</span>
-                                                <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
-                                        </h1>
-                                        @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
-                                        @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
+                                        <div class="filtersection-body" data-ng-init="counter = 0">
 
-                                        <h2 class="name">
-                                            <span data-ng-bind="jr.FirstName + ' ' + jr.LastName"></span>
-                                        </h2>
-                                        <h2 class="jobname"><span data-ng-bind="jr.JobName"></span></h2>
-                                        @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
-                                        @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
-                                        <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Email'" data-ng-bind="jr.EmailId"></span></h2>
-                                        <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Country">,</span><span> {{jr.City}},</span><span> {{jr.District}}</span></p>
-                                        <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
-                                        <div class="published">Disponibility: <span>{{jr.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
+                                            <div class="row" data-ng-if="job">
+                                                <div class="col-md-12" data-ng-repeat="task in job.JobTasks | filter : {'ParentJobTaskId': null}">
+                                                    <div class="filtersection-panel">
+                                                        <div class="filtersection-header">
+                                                            <img style="width: 15px;" ng-src="{{task.IconImage}}" alt=""> {{task.JobTaskName}}
+                                                            <div class="switch-area-inner">
+                                                                <label class="switchsmall">
+                                                                    @*<input type="checkbox" data-ng-model="searchParam.tasks[$index]">*@
+                                                                    <input type="checkbox"
+                                                                           name="selectedTasks[]"
+                                                                           value="{{task.JobTaskId}}"
+                                                                           ng-checked="searchParam.tasks.indexOf(task.JobTaskId) > -1"
+                                                                           ng-click="toggleSelection(task.JobTaskId)">
+                                                                    <span class="slider1 round"></span>
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="filtersection-body">
+                                                            @*<img src="~/assets/images/write.png" alt="">*@
+                                                            {{task.JobTaskDescription}}
+                                                            <div class="row">
+                                                                <div class="col-md-12" data-ng-if="task.SubTasks && task.SubTasks.length > 0">
+                                                                    <div class="filtersection-panel" data-ng-repeat="subTask in task.SubTasks">
+                                                                        <div class="filtersection-header">
+                                                                            <img style="width: 15px;" ng-src="{{subTask.IconImage}}" alt=""> {{subTask.JobTaskName}}
+                                                                            <div class="switch-area-inner">
+                                                                                <label class="switchsmall">
+                                                                                    @*<input type="checkbox" data-ng-model="searchParam.tasks[$index]">*@
+                                                                                    <input type="checkbox"
+                                                                                           name="selectedTasks[]"
+                                                                                           value="{{subTask.JobTaskId}}"
+                                                                                           ng-checked="searchParam.tasks.indexOf(subTask.JobTaskId) > -1"
+                                                                                           ng-click="toggleSelection(subTask.JobTaskId)">
+                                                                                    <span class="slider1 round"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="filtersection-body">
+                                                                            {{subTask.JobTaskDescription}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </div>
-                                    <div class="profile-footer">
-                                        {{jr.AdditionalDescription}}&nbsp;
-                                    </div>
-                                    <div class="team-contact-info">
-                                        <ul class="social-icons">
-                                            @if (role == "Employer")
+
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="footer">
+                            <button type="button" class="btn btn-default btn-lg" data-ng-click="searchParam.jobType == 1 ? searchJobRequests() : searchJobOffers()"><i class="bizhub-icon-search"></i> Search</button>
+                        </div>
+                    </div>
+                    <div class="left-section">
+                        <div class="filter-overlay">
+                            <div class="lds-ripple"><div></div><div></div></div>
+                        </div>
+                        <div class="header">
+                            <i class="fa fa-align-left"></i>
+
+                            <span class="grid-title">Search Results - <strong></strong></span>
+                            <span class="grid-title-small" data-ng-if="searchParam.jobType == 1" data-ng-bind="jobRequests ? '(' + jobRequests.length + ' profiles found)' : ''"></span>
+                            <span class="grid-title-small" data-ng-if="searchParam.jobType == 2" data-ng-bind="jobOffers ? '(' + jobOffers.length + ' profiles found)' : ''"></span>
+                            <div class='switch' style="right:0;top:8px">
+                                <div class='quality'>
+                                    <input id="job_type_request" checked name='JobType' type='radio' ng-value="1" data-ng-model="searchParam.jobType" data-ng-change="searchJobRequests()">
+                                    <label for="job_type_request">Job Request</label>
+                                </div><div class='quality'>
+                                    <input id="job_type_offer" name='JobType' type='radio' ng-value="2" data-ng-model="searchParam.jobType" data-ng-change="searchJobOffers()">
+                                    <label for="job_type_offer">Job Offer</label>
+                                </div>
+                            </div>
+                            <a title="Filter" class="Filterjob" id="FilterjobId"><i class="fa fa-filter"></i></a>
+
+                        </div>
+
+                        <div class="body">
+
+
+                            <div class="row" data-ng-if="searchParam.jobType == 1">
+                                <div class="col-sm-6 col-md-4" data-ng-repeat="jr in jobRequests">
+                                    <div class="profileitems searchprofile-section">
+                                        <span class="validate" data-ng-if="jr.ProfileVerified"><img src="~/assets/images/verified.png" alt="Varified"></span>
+                                        <div class="left">
+
+                                            <img ng-src="data:image/jpeg;base64, {{jr.ProfilePicUrl}}" />
+                                            <div class="rating">
+                                                @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </a>*@
+                                                <div ng-if="jr.StarRating" star-rating rating-value="jr.StarRating" max="'5'"></div>
+                                                <ul class="rating" data-ng-if="!jr.StarRating">
+                                                    @*<li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>
+                                                <li class="star"><i class="fa fa-star-o"></i></li>*@
+
+                                                    <li class="star">★</li>
+                                                    <li class="star">★</li>
+                                                    <li class="star">★</li>
+                                                    <li class="star">★</li>
+                                                    <li class="star">★</li>
+                                                </ul>
+                                            </div>
+                                            <h3><span class="age"><span data-ng-bind="jr.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.ExperienceInYears + 'yrs'"></span></h3>
+                                            <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Phone'" data-ng-bind="jr.ContactNo"></span></h2>
+                                        </div>
+                                        <div class="right">
+                                            @*<div class="idcard">
+                                                <img src="~/assets/images/idcard.jpg" />
+                                            </div>*@
+                                            @*<div class="right-left"></div>*@
+                                                <h1>
+                                                    @*<span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span>*@
+                                                    <span data-ng-if="jr.Gender == 2"><i class="fa fa-female"></i></span>
+                                                    <span data-ng-if="jr.Gender == 1"><i class="fa fa-male"></i></span>
+                                                    <span data-ng-if="jr.StaffType == 1">Individual</span>
+                                                    <span data-ng-if="jr.StaffType == 2">Agency <i title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.AgencyId)"></i></span>
+                                                    @*<span>{{jr.StaffType == 1 ? "Individual" : '<span ng-click="">Agency <i class="fa fa-info"></i></span>'}}</span>
+                <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
+                                                </h1>
+                                                @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
+                                                @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
+
+                                                <h2 class="name">
+                                                    <span data-ng-bind="jr.FirstName + ' ' + jr.LastName"></span>
+                                                </h2>
+                                                <h2 class="jobname"><span data-ng-bind="jr.JobName"></span></h2>
+                                                @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
+                                                @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
+                                                <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Email'" data-ng-bind="jr.EmailId"></span></h2>
+                                                <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Country">,</span><span> {{jr.City}},</span><span> {{jr.District}}</span></p>
+                                                <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
+                                                <div class="published">Disponibility: <span>{{jr.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
+                                            
+                                        </div>
+                                        <div class="profile-footer">
+                                            {{jr.AdditionalDescription}}&nbsp;
+                                        </div>
+                                        <div class="team-contact-info">
+                                            <ul class="social-icons">
+                                                @if (role == "Employer")
                                             {
-                                                <li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
                                             }
 
-                                            <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                        </ul>
+                                                <li><a href="/JobRequests/Details/{{jr.JobRequestId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="filter-overlay" style="display:block;" data-ng-if="jobRequests.length == 0">
-                                <div class="lds-ripple"><div></div><div></div></div>
-                            </div>
+                                <div class="filter-overlay" style="display:block;" data-ng-if="jobRequests.length == 0">
+                                    <div class="lds-ripple"><div></div><div></div></div>
+                                </div>
 
-                            <div class="modal fade" id="agency-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
-                                <div class="modal-wrapper">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                <h4 class="modal-title" id="myModalLabel13">Agency Details</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="row">
+                                <div class="modal fade" id="agency-info-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
+                                    <div class="modal-wrapper">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                                    <h4 class="modal-title" id="myModalLabel13">Agency Details</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="row">
 
-                                                    <div id="agency-info"></div>
+                                                        <div id="agency-info"></div>
 
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row" data-ng-if="searchParam.jobType == 2">
-                            <div class="col-lg-4 col-md-6 col-sm-6" data-ng-repeat="jr in jobOffers">
-                                <div class="profileitems searchprofile-section">
-                                    <span class="validate" data-ng-if="jr.Employer.ProfileVerified"><img src="~/assets/images/verified.png" alt="Verified"></span>
-                                    <div class="left">
-                                        <img ng-src="data:image/jpeg;base64, {{jr.Employer.ProfilePicUrl}}" />
-                                        <div class="rating">
-                                            @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                </a>*@
-                                            <div star-rating rating-value="jr.StarRating" max="'5'"></div>
+                            <div class="row" data-ng-if="searchParam.jobType == 2">
+                                <div class="col-sm-6 col-md-4" data-ng-repeat="jr in jobOffers">
+                                    <div class="profileitems searchprofile-section">
+                                        <span class="validate" data-ng-if="jr.Employer.ProfileVerified"><img src="~/assets/images/verified.png" alt="Verified"></span>
+                                        <div class="left">
+                                            <img ng-src="data:image/jpeg;base64, {{jr.Employer.ProfilePicUrl}}" />
+                                            <div class="rating">
+                                                @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </a>*@
+                                            <div ng-if="jr.StarRating" star-rating rating-value="jr.StarRating" max="'5'"></div>
+                                            </div>
+                                            <h3><span class="age"><span data-ng-bind="jr.Employer.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.ExperienceInYears + 'yrs'"></span></h3>
+                                            <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Employer.ContactOption || jr.Employer.ContactOption == 'Phone'" data-ng-bind="jr.Employer.ContactNo"></span></h2>
                                         </div>
-                                        <h3><span class="age"><span data-ng-bind="jr.Employer.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.ExperienceInYears + 'yrs'"></span></h3>
-                                        <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Employer.ContactOption || jr.Employer.ContactOption == 'Phone'" data-ng-bind="jr.Employer.ContactNo"></span></h2>
-                                    </div>
-                                    <div class="right">
-                                        <h1>
-                                            @*<span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span>*@
-                                            <span data-ng-if="jr.Employer.Gender == 2"><i class="fa fa-female"></i></span>
-                                            <span data-ng-if="jr.Employer.Gender == 1"><i class="fa fa-male"></i></span>
-                                            <span data-ng-bind="jr.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>
-                                        </h1>
-                                        @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
-                                        @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
+                                        <div class="right">
+                                            @*<div class="idcard">
+                                                <img src="~/assets/images/idcard.jpg" />
+                                            </div>*@
+                                            @*<div class="right-left"> </div>*@
+                                                <h1>
+                                                    @*<span data-ng-bind="jr.Candidate.Gender == 1 ? 'Man' : 'Woman'"></span>*@
+                                                    <span data-ng-if="jr.Employer.Gender == 2"><i class="fa fa-female"></i></span>
+                                                    <span data-ng-if="jr.Employer.Gender == 1"><i class="fa fa-male"></i></span>
+                                                    <span data-ng-bind="jr.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>
+                                                </h1>
+                                                @*<h1 data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></h1>*@
+                                                @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
 
-                                        <h2 class="name">
-                                            <span data-ng-bind="jr.Employer.FirstName + ' ' + jr.Employer.LastName"></span>
-                                        </h2>
-                                        <h2 class="jobname"><span data-ng-bind="jr.Job.JobName"></span></h2>
-                                        @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
-                                        @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
-                                        <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.Employer.ContactOption || jr.Employer.ContactOption == 'Email'" data-ng-bind="jr.Employer.EmailId"></span></h2>
-                                        <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Employer.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
-                                        <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
-                                        <div class="published">Disponibility: <span>{{jr.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
-                                    </div>
-                                    <div class="profile-footer">
-                                        {{jr.AdditionalDescription}}&nbsp;
-                                    </div>
-                                    <div class="team-contact-info">
-                                        <ul class="social-icons">
-@if (role == "Candidate")
+                                                <h2 class="name">
+                                                    <span data-ng-bind="jr.Employer.FirstName + ' ' + jr.Employer.LastName"></span>
+                                                </h2>
+                                                <h2 class="jobname"><span data-ng-bind="jr.Job.JobName"></span></h2>
+                                                @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
+                                                @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
+                                                <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.Employer.ContactOption || jr.Employer.ContactOption == 'Email'" data-ng-bind="jr.Employer.EmailId"></span></h2>
+                                                <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Employer.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
+                                                <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
+                                                <div class="published">Disponibility: <span>{{jr.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
+                                           
+                                        </div>
+                                        <div class="profile-footer">
+                                            {{jr.AdditionalDescription}}&nbsp;
+                                        </div>
+                                        <div class="team-contact-info">
+                                            <ul class="social-icons">
+                                                @if (role == "Candidate")
 {
-    <li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobOffer(jr.JobOfferId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                    <li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobOffer(jr.JobOfferId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
 }
-                                            @*<li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                            <li><a href="/JobOffers/Details/{{jr.JobOfferId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                        </ul>
+                                                @*<li><a href="#" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                <li><a href="/JobOffers/Details/{{jr.JobOfferId}}" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="filter-overlay" style="display:block;" data-ng-if="jobOffers.length == 0">
-                                <div class="lds-ripple"><div></div><div></div></div>
+                                <div class="filter-overlay" style="display:block;" data-ng-if="jobOffers.length == 0">
+                                    <div class="lds-ripple"><div></div><div></div></div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-
                 </div>
-            </div>
-
+            </section>
         </div>
     }
     else
     {
         <div class="full-section-container wow fadeInUp">
-            <div class="tab-section">
-                <div class="tab-section-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+            <section class="right-side">
+                <div class="tab-section">
+                    <div class="tab-section-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                                    <h2>What you are looking for ?</h2>
+                                </div>
+                                <div class="tabs style-2">
 
-                                <h2>What you are looking for ?</h2>
-
-
-                            </div>
-                            <div class="tabs style-2">
-
-                                <ul class="nav nav-tabs job-tab">
-                                    @for (int i = 0; i < Model.Count(); i++)
+                                    <ul class="nav nav-tabs job-tab">
+                                        @for (int i = 0; i < Model.Count(); i++)
                                     {
                                         var item = Model.ElementAt(i);
-                                        <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-published-jobs-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
+                                            <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-published-jobs-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
                                     }
-                                </ul>
-                                <div class="tab-content">
+                                    </ul>
+                                    <div class="tab-content">
 
-                                    @for (int i = 0; i < Model.Count(); i++)
+                                        @for (int i = 0; i < Model.Count(); i++)
                                     {
                                         var item = Model.ElementAt(i);
-                                        <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-published-jobs-"+i)">
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <div class="isotope cols-3 gutter">
-                                                        @foreach (var job in item.Jobs)
+                                            <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-published-jobs-"+i)">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="isotope cols-3 gutter">
+                                                            @foreach (var job in item.Jobs)
                                                         {
-                                                            <div class="isotope-item categ-1 categ-2">
-                                                                <div class="portfolio-item">
-                                                                    <div class="portfolio-item-thumbnail">
-                                                                        <img src="@(job.IconImage)" alt="">
-                                                                        <div class="portfolio-item-hover"></div>
-                                                                        <div class="portfolio-item-description">
-                                                                            <h5><a href='~/@("PublishedJobs?id="+job.JobId)'>@job.JobName</a></h5>
-                                                                        </div><!-- portfolio-item-description -->
-                                                                        <a class="zoom-action" href='~/@("PublishedJobs?id="+job.JobId)'><i class="bizhub-icon-search"></i></a>
-                                                                    </div><!-- portfolio-item-thumbnail -->
-                                                                </div><!-- portfolio-item -->
-                                                            </div>
+                                                                <div class="isotope-item categ-1 categ-2">
+                                                                    <div class="portfolio-item">
+                                                                        <div class="portfolio-item-thumbnail">
+                                                                            <img src="@(job.IconImage)" alt="">
+                                                                            <div class="portfolio-item-hover"></div>
+                                                                            <div class="portfolio-item-description">
+                                                                                <h5><a href='~/@("PublishedJobs?id="+job.JobId)'>@job.JobName</a></h5>
+                                                                            </div><!-- portfolio-item-description -->
+                                                                            <a class="zoom-action" href='~/@("PublishedJobs?id="+job.JobId)'><i class="bizhub-icon-search"></i></a>
+                                                                        </div><!-- portfolio-item-thumbnail -->
+                                                                    </div><!-- portfolio-item -->
+                                                                </div>
                                                         }
 
 
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
                                     }
 
-                                </div><!-- tab-content -->
-                            </div><!-- tabs -->
+                                    </div><!-- tab-content -->
+                                </div><!-- tabs -->
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="headline text-center">
-                            <h2>Our Trusted Partners</h2>
-                        </div><!-- headline -->
-                    </div><!-- col -->
-                </div><!-- row -->
-            </div><!-- container -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="owl-carousel logos-slider">
-                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
-                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
-                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
-                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
-                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
-                            <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
-                        </div><!-- logos-slider -->
-                    </div><!-- col -->
-                </div><!-- row -->
-            </div><!-- container -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="headline text-center">
+                                <h2>Our Trusted Partners</h2>
+                            </div><!-- headline -->
+                        </div><!-- col -->
+                    </div><!-- row -->
+                </div><!-- container -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="owl-carousel logos-slider">
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
+                            </div><!-- logos-slider -->
+                        </div><!-- col -->
+                    </div><!-- row -->
+                </div><!-- container -->
+            </section>
         </div>
     }
 
