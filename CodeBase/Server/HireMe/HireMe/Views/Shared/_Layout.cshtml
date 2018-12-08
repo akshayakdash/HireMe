@@ -257,6 +257,28 @@
                 <div class="sidenav-header">User Account - @role</div>
                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
+
+                <div class="user-panel">
+                    <a href="#" class="dropdown-toggle userdropdown" data-toggle="dropdown">
+                        <i class="fa fa-cog"></i>
+                    </a>
+                    <ul class="dropdown-menu box userpanel">
+                        
+                        <li class="">
+                            <a href="#"><i class="fa fa-cogs"></i>Manage Account</a>
+                        </li>
+                        <li>
+                            <a href="#" class="border-top"><i class="fa fa-power-off"></i>Log Out</a>
+                        </li>
+                    </ul>
+                    <div class="profile-image">
+                        <img src="~/assets/images/photo.png" alt="">
+                    </div>
+                    <div class="userid">
+                        employee1@gmail.com
+                    </div>
+                </div>
+
                 <a href="~/Users" class="active"><i class="fa fa-home"></i>Dashboard</a>
 
                 @if (role == "Candidate")

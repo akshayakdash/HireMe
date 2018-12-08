@@ -11248,7 +11248,7 @@ margin:0;
     padding-right: 10px;
 }
 .dropdown-menu.box li a {
-    border-bottom: 1px solid #ebebeb !important;
+    /*border-bottom: 1px solid #ebebeb !important;*/
     font-size: 0.9em;
     list-style: none;
     padding: 10px 10px !important;
@@ -11618,3 +11618,63 @@ label.tree_label:after {
         border-bottom-color: #999;
         border-bottom-color: #dc3545;
     }
+.user-panel {
+    padding: 8px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    position:relative;
+}
+.user-panel:before, .user-panel:after {
+    display: table;
+    content: " ";
+}
+.user-panel .profile-image{
+    text-align:center;
+}
+.user-panel .profile-image img {
+    float: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.user-panel .userid {
+    color: #eee;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.user-panel .userdropdown {
+    border: 0;
+    position: absolute;
+    padding: 0;
+    right:10px;
+}
+.user-panel .userdropdown .fa{
+    width:auto;
+}
+.userdropdown::after {
+    border:0;
+}
+.dropdown-menu.userpanel {
+    padding: 0;
+    border: 0;
+}
+    .dropdown-menu.userpanel li a {
+        border-bottom: 0;
+        padding: 7px 10px !important;
+        color: #333;
+        transition: all 0.25s;
+    }
+.dropdown-menu.userpanel li a:hover {
+    background: #fe005a;
+    color:#fff;
+}
+ 
+.dropdown-menu.userpanel li a:last-child {
+    border: 0;
+}
+.border-top{
+    border-top:1px solid #ddd;
+}
