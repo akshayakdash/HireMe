@@ -11213,7 +11213,7 @@ margin:0;
 .home {
     position: absolute;
 }
-.home a{
+/*.home a{
     color: #666;
     text-decoration: none;
 }
@@ -11223,7 +11223,44 @@ margin:0;
 }
 .home a .fa {
     font-size: 18px;
+}*/
+
+    .home a span {
+        display: inline-block;
+        width: 43px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: #fe005a;
+        background: -webkit-linear-gradient(left, #fe005a, #310068);
+        background: -ms-linear-gradient(left, #fe005a, #310068);
+        background: linear-gradient(left, #fe005a, #310068);
+        text-align: center;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
+    .home a span i {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 2px;
+        font-size: 25px;
+        line-height: 38px;
+        background-color: #fff;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
+.home a:hover span {
+    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 3px 12px 0 rgba(0, 0, 0, 0.12);
 }
+.home a:hover span i {
+    background-color: transparent;
+}
+    .home a:hover span i:before {
+        -webkit-text-fill-color: #fff;
+    }
+
+
 .profile-menu .caret {
     border-bottom-color: #555555;
     border-top-color: #555555;
