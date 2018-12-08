@@ -62,11 +62,40 @@
                     <div class="tab-content regd-form" style="margin-top:0;">
                         <div class="tab-pane fade show active" id="tab-1-1">
                             <div class="form-section">
-                                <h6 class="text-uppercase">Name & Address</h6>
+                                <h6 class="text-uppercase">Personal Details</h6>
 
                                 <fieldset>
 
                                     <div id="alert-area"></div>
+                                    <div class="input-group">
+                                        <div class="mr-3">
+                                            <label class="label">Gender</label>
+                                        </div>
+                                        <div class="radio mr-3">
+                                            <label>
+                                                @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
+                                                Man
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        <div class="radio">
+                                            <label>
+                                                @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
+                                                Woman
+                                                <span></span>
+                                            </label>
+                                        </div>
+                                        @*<div class="row">
+                                            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
+                                        </div>*@
+                                        @*<span class="input-lable">Gender</span>*@
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "" })
+                                        </div>
+                                    </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
@@ -76,7 +105,9 @@
                                         
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
@@ -87,55 +118,34 @@
                                         
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
-
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                            <span class="input-group-text"><img src="~/assets/images/calendar.png" alt=""></span>
                                         </div>
                                         @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "", @type="date" })
                                         <span class="input-lable">Date of birth</span>
 
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger", @placeholder = "Date of birth" })
-                                    </div>
-
-                                    <div class="input-group mb-2">
-                                        <div class="">
-                                            <label class="label">Gender</label>
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.DOB, "", new { @class = "text-danger", @placeholder = "Date of birth" })
                                         </div>
-                                            <div class="radio">
-                                                <label>
-                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
-                                                    Woman
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
-                                                    Man
-                                                    <span></span>
-                                                </label>
-                                            </div>
-                                            <div class="row">
-                                                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
-                                            </div>
-                                        @*<span class="input-lable">Gender</span>*@
-
                                     </div>
-                                    <div class="row">
-                                        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
-                                    </div>
+                                </fieldset>
 
+                            </div>
+                            <div class="form-section">
+                                <h6 class="text-uppercase">Address Details</h6>
+                                <fieldset>
+                                    <div id="alert-area"></div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                         </div>
-
-
                                         @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
                                         <span class="input-lable">Country</span>
                                     </div>
@@ -154,46 +164,50 @@
                                                                         new SelectListItem{ Text="Anyama", Value = "4" },
                                                                         new SelectListItem{ Text="Agnibilékrou", Value = "5" },
                                                                      }, htmlAttributes: new { @class = "form-control", id = "City" })
-                                        @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
-                                        <span class="input-lable">City</span>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                        </div>
-                                        <select id="District" name="DistrictId" class="form-control"></select>
-                                        @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
-                                        <span class="input-lable">District</span>
-                                    </div>
-                                    <div class="row">
-                                        @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
-                                    </div>
-                                  
-                                    <div class="row">
-                                        @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
-                                    </div>
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                        </div>
-                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
-                                        <span class="input-lable">Address</span>
-                                    </div>
-                                    <div class="row">
-                                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
-                                    </div>
-                                </fieldset>
+                                                                    @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
+                                                                    <span class="input-lable">City</span>
+                                                                </div>
 
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 error-arrow">
+                                                                        @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                                    </div>
+                                                                    <select id="District" name="DistrictId" class="form-control"></select>
+                                                                    @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
+                                                                    <span class="input-lable">District</span>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 error-arrow">
+                                                                        @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 error-arrow">
+                                                                        @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                    </div>
+                                                                <div class="input-group mb-2">
+                                                                    <div class="input-group-prepend">
+                                                                        <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                                    </div>
+                                                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
+                                                                    <span class="input-lable">Address</span>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <div class="col-sm-12 error-arrow">
+                                                                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                    </div>
+                                </fieldset>
                             </div>
                             <div class="form-section">
-                                <h6 class="text-uppercase">Email & Phone</h6>
-
+                                <h6 class="text-uppercase">Email & Contact</h6>
                                 <fieldset>
-
                                     <div id="alert-area"></div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
@@ -203,23 +217,36 @@
                                         <span class="input-lable">Email</span>
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                                    </div>
-
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                        </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">@Html.DropDownListFor(m => m.CountryCode, new List<SelectListItem>
-                                                                    {
-                                                                        new SelectListItem{ Text="(+235)", Value = "+235" }, 
-                                                                     }, htmlAttributes: new { @class = "form-control", @style = "margin:0;", id = "country_code" })</span>
+                                            <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
+                                            @*<span class="input-group-text">
+                                                @Html.DropDownListFor(m => m.CountryCode, new List
+                                                <SelectListItem>
+                                                    {
+                                                        new SelectListItem{ Text="(+235)", Value = "+235" }, 
+                                                        }, htmlAttributes: new { @class = "form-control", @style = "margin:0;", id = "country_code" })
+                                                </span>*@
+                                        </div>
+                                        <div style="width:100px;">
+                                            @Html.DropDownListFor(m => m.CountryCode, new List
+                                                <SelectListItem>
+                                                {
+                                                new SelectListItem{ Text="(+235)", Value = "+235" },
+                                                }, htmlAttributes: new { @class = "", @style = "margin:0;", id = "country_code" })
                                         </div>
                                         @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
                                         <span class="input-lable">Contact number</span>
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                        </div>
                                     </div>
-                                    
                                 </fieldset>
 
                             </div>
@@ -274,8 +301,10 @@
                                             <span class="input-lable">Company Name</span>
                                         </div>
                                         <div class="row">
-                                            @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
-                                        </div>
+                                            <div class="col-sm-12 error-arrow">
+                                                @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
+                                            </div>
+                                            </div>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
@@ -284,8 +313,10 @@
                                             <span class="input-lable">Responsible Name</span>
                                         </div>
                                         <div class="row">
-                                            @Html.ValidationMessageFor(m => m.ResponsibleName, "", new { @class = "text-danger" })
-                                        </div>
+                                            <div class="col-sm-12 error-arrow">
+                                                @Html.ValidationMessageFor(m => m.ResponsibleName, "", new { @class = "text-danger" })
+                                            </div>
+                                            </div>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
@@ -294,8 +325,10 @@
                                             <span class="input-lable">Website URL</span>
                                         </div>
                                         <div class="row">
-                                            @Html.ValidationMessageFor(m => m.WebSiteUrl, "", new { @class = "text-danger" })
-                                        </div>
+                                            <div class="col-sm-12 error-arrow">
+                                                @Html.ValidationMessageFor(m => m.WebSiteUrl, "", new { @class = "text-danger" })
+                                            </div>
+                                            </div>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
@@ -320,8 +353,10 @@
                                         <span class="input-lable">User name</span>
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
-                                    </div>
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                        </div>
+                                        </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
@@ -330,8 +365,10 @@
                                         <span class="input-lable">Password</span>
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                                    </div>
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        </div>
+                                        </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
@@ -340,8 +377,10 @@
                                         <span class="input-lable">Confirm password</span>
                                     </div>
                                     <div class="row">
-                                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
-                                    </div>
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                                        </div>
+                                        </div>
 
                                     @if (ViewBag.SecurityQuestions != null)
                                     {
@@ -373,8 +412,10 @@
                                                         </label>
                                                     </div>
                                                     <div class="row">
-                                                        @Html.ValidationMessageFor(m => m.AgreeTermsAndConditions, "", new { @class = "text-danger" })
-                                                    </div>
+                                                        <div class="col-sm-12 error-arrow">
+                                                            @Html.ValidationMessageFor(m => m.AgreeTermsAndConditions, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        </div>
                                     }
 
                                 </fieldset>
@@ -495,10 +536,10 @@
             // first check if the form is valid
             //alert();
 
-            if ($('#FirstName').valid()
+            if ($('#Gender').valid()
+                && $('#FirstName').valid()
                 && $('#LastName').valid()
                 && $('#DOB').valid()
-                && $('#Gender').valid()
                 && $('#Country').valid()
                 && $('#City').valid()
                 && $('#District').valid()

@@ -59,9 +59,11 @@
                             
                             @*@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
                         </div>
-                        <div class="row" style="padding-left:17px;">
-                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger  " })
-                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 error-arrow">
+                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger  " })
+                            </div>
+                            </div>
                         <div class="input-group mb-2">
                             <div class="input-group-prepend">
                                 <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
@@ -69,9 +71,11 @@
                             @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @name = "password",  @required = "true" })
                             <span class="input-lable">Password</span>
                         </div>
-                        <div class="row" style="padding-left:17px;">
-                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger  " })
-                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 error-arrow">
+                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger  " })
+                            </div>
+                            </div>
                         <div class="checkbox">
                             <label>
                                 @Html.CheckBoxFor(m => m.RememberMe)
