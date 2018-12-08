@@ -13,6 +13,7 @@ namespace HireMe.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
             Database.SetInitializer<ApplicationDbContext>(null);
+            Database.CommandTimeout = 10000;
         }
 
         public static ApplicationDbContext Create()
