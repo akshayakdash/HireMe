@@ -1,59 +1,7 @@
 ﻿
 <div id="main-container">
     <!-- HEADER -->
-    <header id="header">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-2">
-
-                    <!-- LOGO -->
-                    <div id="logo">
-                        <a href="index.html">
-                            <img src="~/assets/images/logo.png" alt="">
-                        </a>
-                    </div><!-- LOGO -->
-
-                </div><!-- col -->
-                <div class="col-sm-10">
-
-                    <!-- MENU -->
-                    <nav>
-
-                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-                        <div class="mobile-app">
-                            <a class="btn btn-style-4 waves" href="#"><i class="fa fa-download"></i> Mobile App</a>
-                        </div>
-
-                        <ul class="menu clearfix" id="menu">
-
-                            @*
-                                <li class="active"><a href="index.html">HOME</a></li>*@
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                            {
-                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                            }
-
-                            @*
-                                <li><a href="#">ADMIN</a></li>
-                                <li><a href="#">LOGIN</a></li>*@
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li>
-                                <a class="waves" href="#">Post a Job</a>
-                            </li>
-                            @Html.Partial("_LoginPartial")
-
-                        </ul>
-
-                    </nav>
-
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container-fluid -->
-
-    </header><!-- HEADER -->
+    <!-- HEADER -->
     <!-- PAGE CONTENT -->
     <!-- PAGE CONTENT -->
     <div id="page-content">

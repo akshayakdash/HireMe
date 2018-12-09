@@ -209,7 +209,7 @@ textarea {
 
 select {
     width: 100%;
-    height: 34px;
+    height: 38px;
     border-radius: 0;
     background: #fff url(../images/arrow.png) no-repeat center right;
     -webkit-appearance: none;
@@ -1353,7 +1353,7 @@ dl {
     margin-bottom: 50px;
     background-color: #f8f9fb;
     color: #636363;
-    text-align: center;
+    /*text-align: center;*/
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
 }
@@ -9858,7 +9858,7 @@ blockquote {
 .form-section {
     border-radius: 8px;
     background-color: #ffffff;
-    padding: 15px;
+    padding: 5px 15px;
     border: #ebebeb 1px solid;
     margin-bottom: 15px;
 }
@@ -10205,7 +10205,7 @@ blockquote {
 ***/
 
 .searchprofile-section {
-    display: table;
+    display: block;
     width: 100%;
 }
 
@@ -10784,8 +10784,21 @@ input:checked + .slider1:before {
 
 .filtersection-body {
     padding: 5px 10px;
+    display: table;
+    width: 100%;
 }
-
+    .filtersection-body .body-item {
+        float: left;
+        text-align: center;
+        margin-right: 10px;
+    }
+    .filtersection-body .body-item img{
+        width:50px;
+    }
+        .filtersection-body .body-item span {
+            display: block;
+            font-size: 13px;
+        }
 .inlineform-filter {
     display: block;
 }
@@ -10994,11 +11007,34 @@ input:checked + .slider1:before {
 }
 
 .search-criteria .filtersection-panel .icon-section {
-    /*float: left;*/
-    margin-right: 10px;
-    max-width: 50px;
+   display:flex;
+   margin-bottom:5px;
 }
-
+.search-criteria .filtersection-panel .icon-section .icon-section-main {
+    float: left;
+    margin-right: 10px;
+    /* max-width: 50px; */
+    background: #fe005a;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 13px;
+}
+    .icon-section-main::before {
+        clear:both;
+    }
+    .icon-section-main::after {
+        clear: both;
+    }
+.search-criteria .filtersection-panel .icon-section > .icon-section {
+}
+    .search-criteria .filtersection-panel .icon-section img {
+        width: 50px;
+    }
+.search-criteria .filtersection-panel .icon-section span{
+    display:block;
+}
 .favo-card-header {
     background-color: #E91E63;
     border-bottom: 1px solid #E91E63;
@@ -11177,7 +11213,7 @@ margin:0;
 .home {
     position: absolute;
 }
-.home a{
+/*.home a{
     color: #666;
     text-decoration: none;
 }
@@ -11187,7 +11223,44 @@ margin:0;
 }
 .home a .fa {
     font-size: 18px;
+}*/
+
+    .home a span {
+        display: inline-block;
+        width: 43px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: #fe005a;
+        background: -webkit-linear-gradient(left, #fe005a, #310068);
+        background: -ms-linear-gradient(left, #fe005a, #310068);
+        background: linear-gradient(left, #fe005a, #310068);
+        text-align: center;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
+    .home a span i {
+        display: block;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 2px;
+        font-size: 25px;
+        line-height: 38px;
+        background-color: #fff;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
+.home a:hover span {
+    box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 3px 12px 0 rgba(0, 0, 0, 0.12);
 }
+.home a:hover span i {
+    background-color: transparent;
+}
+    .home a:hover span i:before {
+        -webkit-text-fill-color: #fff;
+    }
+
+
 .profile-menu .caret {
     border-bottom-color: #555555;
     border-top-color: #555555;
@@ -11212,7 +11285,7 @@ margin:0;
     padding-right: 10px;
 }
 .dropdown-menu.box li a {
-    border-bottom: 1px solid #ebebeb !important;
+    /*border-bottom: 1px solid #ebebeb !important;*/
     font-size: 0.9em;
     list-style: none;
     padding: 10px 10px !important;
@@ -11239,7 +11312,18 @@ margin:0;
     border-radius: 5px;
     margin-bottom: 10px;
     min-height: 200px;
+    position:relative;
 }
+    .profile-pic .title {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        background: rgba(254, 0, 90, 0.64);
+        left: 0;
+        padding: 5px 0;
+        font-size: 17px;
+        color: #fff;
+    }
 .profile-pic img{
     max-height:200px;
 }
@@ -11272,23 +11356,25 @@ margin:0;
     color: #fff;
     border-radius: 10px;
 }
-.notification{
-    list-style:none;
+.notification {
+    list-style: none;
     position: relative;
-    margin-bottom:30px;
+    margin-bottom: 30px;
     display: inline-block;
+    width: 100%;
 }
 .notification li{
 
 }
-.notification li a{
-    color: #666;
-    float: left;
-    padding: 10px;
-    border-bottom: 1px solid #ccc;
-    -webkit-transition: all 0.1s ease-out;
-    transition: all 0.1s ease-out;
-}
+    .notification li a {
+        color: #666;
+        float: left;
+        padding: 10px;
+        border-bottom: 2px solid #fe005a;
+        -webkit-transition: all 0.1s ease-out;
+        transition: all 0.1s ease-out;
+        width: 100%;
+    }
 .notification li a:hover{
     background: #fe005a;
     color: #fff;
@@ -11297,14 +11383,14 @@ margin:0;
 .notification li .photo{
 
 }
-.notification li .photo img{
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    float: left;
-    height: 50px;
-    margin-right: 20px;
-    width: 50px;
-}
+    .notification li .photo img {
+        border-radius: 50%;
+        border: 2px solid #fe005a;
+        float: left;
+        height: 50px;
+        margin-right: 20px;
+        width: 50px;
+    }
 .notification li .info{
     width:20%;
     float:left;
@@ -11326,10 +11412,11 @@ margin:0;
     float:left;
 }
 .notification li .date-time{
-    font-size: 14px;
+    font-size: 13px;
     font-style: italic;
     position: absolute;
-    right: 5px;
+    right: 15px;
+    font-weight:600;
 }
 .notification li a:hover .name{
     color: #fff;
@@ -11401,4 +11488,230 @@ div.dataTables_paginate {
     color: #636363;
     margin: 0 auto 50px auto;
     text-align: center;
+}
+
+/*--------------Tree Structure-----------------*/
+
+/* ————————————————————–
+  Tree core styles
+*/
+.tree {
+    margin: 1em;
+}
+
+    .tree input {
+        position: absolute;
+        clip: rect(0, 0, 0, 0);
+    }
+
+        .tree input ~ ul {
+            display: none;
+        }
+
+        .tree input:checked ~ ul {
+            display: block;
+        }
+
+    /* ————————————————————–
+  Tree rows
+*/
+    .tree li {
+        line-height: 1.2;
+        position: relative;
+        padding: 0 0 1em 1em;
+    }
+
+    .tree ul li {
+        padding: 1em 0 0 1em;
+    }
+
+    .tree > li:last-child {
+        padding-bottom: 0;
+    }
+
+/* ————————————————————–
+  Tree labels
+*/
+.tree_label {
+    position: relative;
+    display: inline-block;
+    background: #fff;
+}
+
+label.tree_label {
+    cursor: pointer;
+}
+
+    label.tree_label:hover {
+        color: #666;
+    }
+
+    /* ————————————————————–
+  Tree expanded icon
+*/
+    label.tree_label:before {
+        background: #000;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+        float: left;
+        margin: 0 1em 0 -2em;
+        width: 1em;
+        height: 1em;
+        border-radius: 1em;
+        content: '+';
+        text-align: center;
+        line-height: .9em;
+    }
+
+:checked ~ label.tree_label:before {
+    content: '–';
+}
+
+/* ————————————————————–
+  Tree branches
+*/
+.tree li::before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: -.5em;
+    display: block;
+    width: 0;
+    border-left: 1px solid #777;
+    content: "";
+}
+
+.tree_label::after {
+    position: absolute;
+    top: 0;
+    left: -1.5em;
+    display: block;
+    height: 0.5em;
+    width: 1em;
+    border-bottom: 1px solid #777;
+    border-left: 1px solid #777;
+    border-radius: 0 0 0 .3em;
+    content: '';
+}
+
+label.tree_label:after {
+    border-bottom: 0;
+}
+
+:checked ~ label.tree_label:after {
+    border-radius: 0 .3em 0 0;
+    border-top: 1px solid #777;
+    border-right: 1px solid #777;
+    border-bottom: 0;
+    border-left: 0;
+    bottom: 0;
+    top: 0.5em;
+    height: auto;
+}
+
+.tree li:last-child:before {
+    height: 1em;
+    bottom: auto;
+}
+
+.tree > li:last-child:before {
+    display: none;
+}
+
+.tree_custom {
+    display: block;
+    background: #eee;
+    padding: 1em;
+    border-radius: 0.3em;
+}
+.field-validation-error {
+    padding: 5px 15px;
+    background: #dc3545;
+    color: #fff!important;
+    position: absolute;
+    z-index: 3;
+    border-radius: 5px;
+}
+
+
+.field-validation-error:after, .field-validation-error:before {
+    bottom: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+    .field-validation-error:before {
+        border-width: 11px;
+        top: -11px;
+        left: 50%;
+        margin-left: -11px;
+        border-top-width: 0;
+        border-bottom-color: #999;
+        border-bottom-color: #dc3545;
+    }
+.user-panel {
+    padding: 8px 25px;
+    background: rgba(255, 255, 255, 0.1);
+    text-align: center;
+    position:relative;
+}
+.user-panel:before, .user-panel:after {
+    display: table;
+    content: " ";
+}
+.user-panel .profile-image{
+    text-align:center;
+}
+.user-panel .profile-image img {
+    float: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+.user-panel .userid {
+    color: #eee;
+    font-size: 14px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.user-panel .userdropdown {
+    border: 0;
+    position: absolute;
+    padding: 0;
+    right:10px;
+}
+.user-panel .userdropdown .fa{
+    width:auto;
+}
+.userdropdown::after {
+    border:0;
+}
+.dropdown-menu.userpanel {
+    padding: 0;
+    border: 0;
+}
+    .dropdown-menu.userpanel li a {
+        border-bottom: 0;
+        padding: 7px 10px !important;
+        color: #333;
+        transition: all 0.25s;
+    }
+.dropdown-menu.userpanel li a:hover {
+    background: #fe005a;
+    color:#fff;
+}
+ 
+.dropdown-menu.userpanel li a:last-child {
+    border: 0;
+}
+.border-top{
+    border-top:1px solid #ddd;
 }

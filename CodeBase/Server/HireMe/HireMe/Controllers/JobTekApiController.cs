@@ -126,29 +126,57 @@ namespace HireMe.Controllers
         {
             if (searchParam == null)
                 searchParam = new MemberSearchParam { MemberType = MemberType.Candidate };
+
+            object[] queryString = searchParam.GetSearchQuery();
+            ArrayList searchArgs = (ArrayList)queryString[1];
+
             if (searchParam.MemberType == MemberType.Candidate)
             {
-                var candidates = db.Candidates.Include(path => path.JobRequests.Select(p => p.Job)).Select(p => new
+                //var candidates = db.Candidates.Include(path => path.JobRequests.Select(p => p.Job)).Select(p => new
+                //{
+                //    Name = p.FirstName + " " + p.LastName,
+                //    MemberType = "Candidate",
+                //    Job = p.JobRequests.Select(c => c.Job.JobName),
+                //    ProfileStatus = p.ProfileVerified,
+                //    Gender = p.Gender == Gender.Female ? "Female" : "Male",
+                //    Age = p.Age
+                //});
+
+                var candidates = db.v_ExportJobRequests.Where(queryString[0].ToString(), searchArgs.ToArray()).Select(p => new JobTekMember
                 {
-                    Name = p.FirstName + " " + p.LastName,
-                    MemberType = "Candidate",
-                    Job = p.JobRequests.Select(c => c.Job.JobName),
-                    ProfileStatus = p.ProfileVerified,
-                    Gender = p.Gender == Gender.Female ? "Female" : "Male",
-                    Age = p.Age
-                });
+                    Name = p.Name,
+                    EmailId = p.EmailId,
+                    ContactNo = p.ContactNo,
+                    Gender = p.Gender,
+                    Age = p.Age,
+                    ProfileVerified = p.ProfileVerified,
+                    JobSought = p.JobSought,
+                    PublishedDate = p.PublishedDate
+                }).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, candidates);
             }
             else
             {
-                var employers = db.Employers.Include(path => path.JobOffers.Select(p => p.Job)).Select(p => new
+                //var employers = db.Employers.Include(path => path.JobOffers.Select(p => p.Job)).Select(p => new
+                //{
+                //    Name = p.FirstName + " " + p.LastName,
+                //    MemberType = "Employer",
+                //    Job = p.JobOffers.Select(c => c.Job.JobName),
+                //    ProfileStatus = p.ProfileVerified,
+                //    Gender = p.Gender == Gender.Female ? "Female" : "Male",
+                //    Age = 30
+                //}).ToList();
+
+                var employers = db.v_ExportJobOffers.Where(queryString[0].ToString(), searchArgs.ToArray()).Select(p => new JobTekMember
                 {
-                    Name = p.FirstName + " " + p.LastName,
-                    MemberType = "Employer",
-                    Job = p.JobOffers.Select(c => c.Job.JobName),
-                    ProfileStatus = p.ProfileVerified,
-                    Gender = p.Gender == Gender.Female ? "Female" : "Male",
-                    Age = 30
+                    Name = p.Name,
+                    EmailId = p.EmailId,
+                    ContactNo = p.ContactNo,
+                    Gender = p.Gender,
+                    Age = p.Age,
+                    ProfileVerified = p.ProfileVerified,
+                    JobSought = p.JobSought,
+                    PublishedDate = p.PublishedDate
                 }).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, employers);
             }
@@ -165,26 +193,50 @@ namespace HireMe.Controllers
                 searchParam = new MemberSearchParam { MemberType = MemberType.Candidate };
             if (searchParam.MemberType == MemberType.Candidate)
             {
-                jobTekMembers = db.Candidates.Include(path => path.JobRequests.Select(p => p.Job)).Select(p => new JobTekMember
+                //jobTekMembers = db.Candidates.Include(path => path.JobRequests.Select(p => p.Job)).Select(p => new JobTekMember
+                //{
+                //    Name = p.FirstName + " " + p.LastName,
+                //    MemberType = "Candidate",
+                //    Job = p.JobRequests.Select(c => c.Job.JobName),
+                //    ProfileStatus = p.ProfileVerified,
+                //    Gender = p.Gender == Gender.Female ? "Female" : "Male",
+                //    Age = p.Age.HasValue ? p.Age.Value : 0
+                //}).ToList();
+
+                jobTekMembers = db.v_ExportJobRequests.Select(p => new JobTekMember
                 {
-                    Name = p.FirstName + " " + p.LastName,
-                    MemberType = "Candidate",
-                    Job = p.JobRequests.Select(c => c.Job.JobName),
-                    ProfileStatus = p.ProfileVerified,
-                    Gender = p.Gender == Gender.Female ? "Female" : "Male",
-                    Age = p.Age.HasValue ? p.Age.Value : 0
+                    Name = p.Name,
+                    EmailId = p.EmailId,
+                    ContactNo = p.ContactNo,
+                    Gender = p.Gender,
+                    Age = p.Age,
+                    ProfileVerified = p.ProfileVerified,
+                    JobSought = p.JobSought,
+                    PublishedDate = p.PublishedDate
                 }).ToList();
             }
             else
             {
-                jobTekMembers = db.Employers.Include(path => path.JobOffers.Select(p => p.Job)).Select(p => new JobTekMember
+                //jobTekMembers = db.Employers.Include(path => path.JobOffers.Select(p => p.Job)).Select(p => new JobTekMember
+                //{
+                //    Name = p.FirstName + " " + p.LastName,
+                //    MemberType = "Employer",
+                //    Job = p.JobOffers.Select(c => c.Job.JobName),
+                //    ProfileStatus = p.ProfileVerified,
+                //    Gender = p.Gender == Gender.Female ? "Female" : "Male",
+                //    Age = 30
+                //}).ToList();
+
+                jobTekMembers = db.v_ExportJobOffers.Select(p => new JobTekMember
                 {
-                    Name = p.FirstName + " " + p.LastName,
-                    MemberType = "Employer",
-                    Job = p.JobOffers.Select(c => c.Job.JobName),
-                    ProfileStatus = p.ProfileVerified,
-                    Gender = p.Gender == Gender.Female ? "Female" : "Male",
-                    Age = 30
+                    Name = p.Name,
+                    EmailId = p.EmailId,
+                    ContactNo = p.ContactNo,
+                    Gender = p.Gender,
+                    Age = p.Age,
+                    ProfileVerified = p.ProfileVerified,
+                    JobSought = p.JobSought,
+                    PublishedDate = p.PublishedDate
                 }).ToList();
             }
 
@@ -193,31 +245,35 @@ namespace HireMe.Controllers
             {
                 var worksheet = excelFile.Workbook.Worksheets.Add("Sheet1");
                 worksheet.DefaultColWidth = 25;
-                worksheet.Cells.Style.WrapText = true;
-                worksheet.Cells[1, 1].Value = "SlNo.";
+
+                worksheet.Cells[1, 1].Value = "Name";
                 worksheet.Cells[1, 1].Style.Font.Bold = true;
-                worksheet.Cells[1, 2].Value = "Name";
+                worksheet.Cells[1, 2].Value = "Email";
                 worksheet.Cells[1, 2].Style.Font.Bold = true;
-                worksheet.Cells[1, 3].Value = "Member Type";
+                worksheet.Cells[1, 3].Value = "Contact No";
                 worksheet.Cells[1, 3].Style.Font.Bold = true;
-                worksheet.Cells[1, 4].Value = "Member Type";
+                worksheet.Cells[1, 4].Value = "Gender";
                 worksheet.Cells[1, 4].Style.Font.Bold = true;
-                worksheet.Cells[1, 5].Value = "Profile Status";
+                worksheet.Cells[1, 5].Value = "Age(in yrs)";
                 worksheet.Cells[1, 5].Style.Font.Bold = true;
-                worksheet.Cells[1, 6].Value = "Gender";
+                worksheet.Cells[1, 6].Value = "ProfileVerified";
                 worksheet.Cells[1, 6].Style.Font.Bold = true;
-                worksheet.Cells[1, 7].Value = "Age";
+                worksheet.Cells[1, 7].Value = "Job Request";
                 worksheet.Cells[1, 7].Style.Font.Bold = true;
+                worksheet.Cells[1, 8].Value = "Published Date";
+                worksheet.Cells[1, 8].Style.Font.Bold = true;
                 for (int index = 0; index < jobTekMembers.Count; index++)
                 {
                     //  var currentRecord = response.Consumers[index];
-                    worksheet.Cells[index + 2, 1].Value = index + 1;
-                    worksheet.Cells[index + 2, 2].Value = jobTekMembers[index].Name;
-                    worksheet.Cells[index + 2, 3].Value = jobTekMembers[index].MemberType;
-                    worksheet.Cells[index + 2, 4].Value = jobTekMembers[index].Job != null && jobTekMembers[index].Job.Count() > 0 ? jobTekMembers[index].Job.First() : "NA";//String.Join(",",jobTekMembers[index].Job);
-                    worksheet.Cells[index + 2, 5].Value = jobTekMembers[index].ProfileStatus ? "Verified" : "Not Verified";
-                    worksheet.Cells[index + 2, 6].Value = jobTekMembers[index].Gender;
-                    worksheet.Cells[index + 2, 7].Value = jobTekMembers[index].Age;
+
+                    worksheet.Cells[index + 2, 1].Value = jobTekMembers[index].Name;
+                    worksheet.Cells[index + 2, 2].Value = jobTekMembers[index].EmailId;
+                    worksheet.Cells[index + 2, 3].Value = jobTekMembers[index].ContactNo;
+                    worksheet.Cells[index + 2, 4].Value = jobTekMembers[index].Gender;
+                    worksheet.Cells[index + 2, 5].Value = jobTekMembers[index].Age;
+                    worksheet.Cells[index + 2, 6].Value = jobTekMembers[index].ProfileVerified;
+                    worksheet.Cells[index + 2, 7].Value = jobTekMembers[index].JobSought;
+                    worksheet.Cells[index + 2, 8].Value = jobTekMembers[index].PublishedDate;
                 }
 
                 responseDetails.Content = new ByteArrayContent(excelFile.GetAsByteArray());
@@ -296,6 +352,36 @@ namespace HireMe.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, job);
         }
 
+        [Route("api/JobTekApi/GetJobs")]
+        [HttpGet]
+        public HttpResponseMessage GetJobs()
+        {
+            var job = db.Jobs;
+            return Request.CreateResponse(HttpStatusCode.OK, job);
+        }
+        [Route("api/JobTekApi/GetJobCounts")]
+        [HttpGet]
+        public HttpResponseMessage GetJobCounts()
+        {
+            var jobCounts = db.v_JobCounts;
+            return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
+        }
+
+
+        [Route("api/JobTekApi/GetJobRequestCounts")]
+        [HttpGet]
+        public HttpResponseMessage GetJobRequestCounts()
+        {
+            var jobCounts = db.v_JobRequestCount.Where(p => p.TotalRequests > 0)
+                .GroupBy(p => p.JobName)
+                .Select(g => new
+                 {
+                     JobName = g.Key,
+                     Items = g.ToList()
+                 }).ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -309,10 +395,17 @@ namespace HireMe.Controllers
     public class JobTekMember
     {
         public string Name { get; set; }
+        public string EmailId { get; set; }
+        public string ContactNo { get; set; }
+        public string Gender { get; set; }
+        public string ProfileVerified { get; set; }
+        public string JobSought { get; set; }
+        public string PublishedDate { get; set; }
+
         public string MemberType { get; set; }
         public IEnumerable<string> Job { get; set; }
         public bool ProfileStatus { get; set; }
-        public string Gender { get; set; }
-        public int Age { get; set; }
+
+        public string Age { get; set; }
     }
 }

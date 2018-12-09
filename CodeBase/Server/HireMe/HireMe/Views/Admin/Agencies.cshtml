@@ -32,123 +32,11 @@
 </script>
 
 <div id="main-container-user" style="margin-left: 280px;">
-    <header id="header">
+    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+        .Select(c => c.Value);
+        string role = roles.FirstOrDefault();}
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-2">
-
-                    <!-- LOGO -->
-                    <div id="logo">
-                        <a href="index.html">
-                            <img src="~/assets/images/logo.png" alt="">
-                        </a>
-                    </div><!-- LOGO -->
-
-                </div><!-- col -->
-                <div class="col-sm-10">
-
-                    <!-- MENU -->
-                    <nav>
-
-                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-
-                        <ul class="menu clearfix" id="menu">
-                            @*
-                                <li class="active"><a href="index.html">HOME</a></li>*@
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                            {
-                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                            }
-
-                            @*
-                                <li><a href="#">ADMIN</a></li>
-                                <li><a href="#">LOGIN</a></li>*@
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li class="dropdown">
-                                <a href="#">AIDE</a>
-                                <ul>
-                                    <li>
-                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
-                                    </li>
-                                    <li>
-                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="waves" href="#">Post a Job</a>
-                            </li>
-                            @Html.Partial("_LoginPartial")
-                            <li class="secondary-menu-btn">
-                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
-                            </li>
-                        </ul>
-
-                    </nav>
-
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container-fluid -->
-
-    </header>
-    <div id="mySidenav" class="sidenav" style="width: 280px;">
-
-        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                        .Select(c => c.Value);
-            string role = roles.FirstOrDefault();}
-
-
-        <div class="sidenav-header">User Account - @role</div>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
-        @if (role == "Candidate")
-        {
-
-            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
-
-            <a href="~/JobRequests"><i class="fa fa-search"></i> Job Requests</a>
-
-            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
-        }
-        else if (role == "Employer")
-        {
-
-            <a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>
-
-            <a href="~/JobOffers" class="active"><i class="fa fa-search"></i> My Job Offers</a>
-
-            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
-        }
-        else if (role == "Agency")
-        {
-
-            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
-
-            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
-
-            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
-
-            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
-        }
-        else if (role == "Admin")
-        {
-            <a href="~/Admin/Agencies" class="active"><i class="fa fa-search"></i> Verify Agency Profiles</a>
-            <a href="~/Admin/Candidates"><i class="fa fa-search"></i> Verify Candidate Profiles</a>
-            <a href="~/Admin/Employers"><i class="fa fa-search"></i> Verify Employer Profiles</a>
-
-            <a href="~/Admin/ValidateJobRequests"><i class="fa fa-search"></i> Job Requests</a>
-
-            <a href="~/Admin/ValidateJobOffers"><i class="fa fa-search"></i> Job Offers</a>
-
-            <a href="~/Admin/ExportMembers"><i class="fa fa-search"></i> Export</a>
-        }
-    </div>
     <section class="right-side">
         <div class="full-section-container wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
             <div class="tab-section">
@@ -160,56 +48,60 @@
                             </div>
                         </div>
                         @if (Model != null)
-                    {
-                        foreach (var item in Model)
                         {
+                            foreach (var item in Model)
+                            {
 
-                    <div class="col-sm-6">
-                        <div class="profileitems">
-                            <span class="validate">
-                                <img src="~/assets/images/verified.png" />
-                            </span>
-                            <div class="left">
-                                <img src="@Url.Content(item.AgencyLogo)" />
-                                <div class="rating">&nbsp;</div>
-                                <div class="favorite"></div>
-                                <h2 class="contact-num"><i class="fa fa-phone"></i> +225 07-02-54-69</h2>
-                                @if (!item.ProfileVerified)
+                                <div class="col-sm-6">
+                                    <div class="profileitems">
+                                        @if (item.ProfileVerified)
                                         {
-                                        <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
+                                            <span class="validate">
+                                                <img src="~/assets/images/verified.png" />
+                                            </span>
                                         }
-                                        else
-                                        {
-                                        @*<p>Verified</p>*@
+                                        <div class="left">
+                                            <img src="data:image/jpeg;base64,@item.ProfilePicUrl" />
+                                            @*<div class="rating">&nbsp;</div>
+                                            <div class="favorite"></div>*@
+                                            <h2 class="contact-num"><i class="fa fa-phone"></i> @item.PhoneNo</h2>
+                                            @if (!item.ProfileVerified)
+                                            {
+                                                <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
+                                            }
+                                            else
+                                            {
+                                                @*<p>Verified</p>*@
 
-                                        }
-                            </div>
-                            <div class="right">
-                                <div class="idcard">
-                                    <img src="~/assets/images/idcard.jpg" />
+                                            }
+                                        </div>
+                                        <div class="right">
+                                            <div class="idcard">
+                                                <img src="data:image/jpeg;base64,@item.AgencyLogo" />
+                                            </div>
+                                            <div class="right-left">
+                                                <h1>@(item.AgencyName)<span></span></h1>
+                                                <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
+
+                                                <h2 class="email"><i class="fa fa-envelope"></i>@item.EmailId</h2>
+                                                <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
+                                                <div class="published">Registered on: <span>@item.CreatedDate</span></div>
+                                                @*<div class="published">Candidates Registered: 5 </div>*@
+                                            </div>
+                                        </div>
+                                        <div class="profile-footer">
+                                            @item.CompanyActivityDesc
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                                <div class="right-left">
-                                    <h1>@(item.AgencyName)<span></span></h1>
-                                    <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
-
-                                    <h2 class="email"><i class="fa fa-envelope"></i> jk@gmail.com</h2>
-                                    <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
-                                    <div class="published">Published: <span>@item.CreatedDate</span></div>
-                                </div>
-                            </div>
-                            <div class="profile-footer">
-                                @item.CompanyActivityDesc
-                            </div>
-
-                        </div>
-
-                    </div>
+                            }
                         }
-                    }
-                    else
-                    {
-                    <div class="row"><h2>No Agency registered yet.</h2></div>
-                    }
+                        else
+                        {
+                            <div class="row"><h2>No Agency registered yet.</h2></div>
+                        }
                     </div>
                 </div>
             </div>

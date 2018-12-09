@@ -10,7 +10,8 @@
             @Html.ActionLink(User.Identity.GetUserName() + "", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fade fa-signout glyphicon glyphicon-off"></i>Log Off</a></li>*@
-        <li class="dropdown profile-menu">
+        
+        <!--<li style="list-style:none;" class="dropdown profile-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i class="fa fa-user fa-lg"></i>
                 <span class="username">@User.Identity.GetUserName()</span>
@@ -24,7 +25,29 @@
                     <a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i> Log Off</a>
                 </li>
             </ul>
-        </li>
+        </li>-->
+
+        <div class="user-panel">
+        <a href="#" class="dropdown-toggle userdropdown" data-toggle="dropdown">
+            <i class="fa fa-cog"></i>
+        </a>
+        <ul class="dropdown-menu box userpanel">
+            <li class="">
+                <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
+            </li>
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="border-top"><i class="fa fa-power-off"></i>Log Out</a>
+            </li>
+        </ul>
+        <div class="profile-image">
+            <img src="~/assets/images/photo.png" alt="">
+        </div>
+        <div class="userid">
+            @User.Identity.GetUserName()
+        </div>
+    </div>
+
+
     @*</ul>*@
     }
 }

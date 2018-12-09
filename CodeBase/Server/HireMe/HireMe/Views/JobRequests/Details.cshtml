@@ -112,35 +112,67 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     }
                 </div>*@
 
-            <div class="row" style="margin-left: 5px;">
-                <div class="col-lg-1 col-md-1">
-                    <img style="width:20px" src="@item.IconImage" />
-                    @*<img src="~/assets/images/home-icon.png" />*@
+
+
+
+            @*<div class="icon-section">
+                <div class="icon-section-main">
+                    <img style="" src="@item.IconImage" />
+                    <span>@(item.JobTaskName)</span>
                 </div>
-                <div class="col-lg-11 col-md-11">
-                    <div>
-                        @(item.JobTaskName)
-                    </div>
-                    <div>
-                        @{
-                            var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
-                        }
-                        @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
-                        {
-                            <span>@selectedTask.TaskResponseAdditionalDescription</span>
-                        }
-                    </div>
-                    @if (item.SubTasks.Any())
-            {
 
-                        @ShowTaskTree(item.SubTasks)
-
+                <div>
+                    @{
+                        var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
+                    }
+                    @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                    {
+                    <span>@selectedTask.TaskResponseAdditionalDescription</span>
                     }
                 </div>
-     
-            </div>
-                                }
+                @if (item.SubTasks.Any())
+                {
+
+                @ShowTaskTree(item.SubTasks)
+
+                }
+            </div>*@
+
+
+
+
+            <ul class="tree">
+                <li>
+                    <input type="checkbox" checked="checked" id="@("tree-task"+count)"/>
+                    <label class="tree_label" for="@("tree-task"+count)"><img style="" src="@item.IconImage" />@(item.JobTaskName)</label>
+                    @if (item.SubTasks.Any())
+                    {
+                        
+                            @ShowTaskTree(item.SubTasks)
+                        
+                    }
+                </li>
+            </ul>
+
+
+
+
+            @*<div class="row" style="margin-left: 5px;">
+                    <div class="col-lg-1 col-md-1">
+                        <img style="width:20px" src="@item.IconImage" />
+                    </div>
+                    <div class="col-lg-11 col-md-11">
+                        <div>
+                            @(item.JobTaskName)
+                        </div>
+
+                    </div>
+
+                </div>*@
+
+
                             }
+                        }
 }
 
 <script>
@@ -169,142 +201,18 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
 
 <div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobRequestCtrl">
-
-    <header id="header">
-
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-sm-2">
-
-                    <!-- LOGO -->
-                    <div id="logo">
-                        <a href="index.html">
-                            <img src="~/assets/images/logo.png" alt="">
-                        </a>
-                    </div><!-- LOGO -->
-
-                </div><!-- col -->
-                <div class="col-sm-10">
-
-                    <!-- MENU -->
-                    <nav>
-
-                        <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-
-                        <ul class="menu clearfix" id="menu">
-                            @*
-                                <li class="active"><a href="index.html">HOME</a></li>*@
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-
-                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                            {
-                                <li>@Html.ActionLink("Users", "Index", "Users")</li>
-                            }
-
-                            @*
-                                <li><a href="#">ADMIN</a></li>
-                                <li><a href="#">LOGIN</a></li>*@
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                            <li class="dropdown">
-                                <a href="#">AIDE</a>
-                                <ul>
-                                    <li>
-                                        <a class="waves" href="about-us.html">REPORT A BUG</a>
-                                    </li>
-                                    <li>
-                                        <a class="waves" href="services.html">SHARE YOUR OPINION</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="waves" href="#">Post a Job</a>
-                            </li>
-                            @Html.Partial("_LoginPartial")
-                            <li class="secondary-menu-btn">
-                                <a href="#" onclick="openNav()"><i class="bizhub-icon-menu-bars"></i></a>
-                            </li>
-                        </ul>
-
-                    </nav>
-
-                </div><!-- col -->
-            </div><!-- row -->
-        </div><!-- container-fluid -->
-
-    </header>
-
-    <div id="mySidenav" class="sidenav" style="width: 280px;">
-
-        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                                                                        .Select(c => c.Value);
-            string role = roles.FirstOrDefault();}
-
-
-        <div class="sidenav-header">User Account - @role</div>
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-
-        <a href="~/Users"><i class="fa fa-home"></i>Dashboard</a>
-
-        @if (role == "Candidate")
-        {
-
-            <a href="~/SearchJobOffers/CheckCandidateProfileExists" class="active"><i class="fa fa-search"></i> Search Employer</a>
-
-            <a href="~/JobRequests"><i class="fa fa-graduation-cap"></i> Job Requests</a>
-
-            <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
-
-            <a href="~/Notification"><i class="fa fa-envelope"></i> Messages & Notifications</a>
-
-            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
-        }
-        else if (role == "Employer")
-        {
-            <a href="~/SearchJobRequests" class="active"><i class="fa fa-search"></i> Search Employee</a>
-
-            <a href="~/JobOffers"><i class="fa fa-graduation-cap"></i> My Job Offers</a>
-
-            <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
-
-            <a href="#"><i class="fa fa-envelope"></i> Messages & Notifications</a>
-
-            <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
-        }
-        else if (role == "Agency")
-        {
-
-            <a href="~/JobCategories"><i class="fa fa-search"></i> Search Employer</a>
-
-            <a href="~/Agency/RegisterCandidate"><i class="fa fa-search"></i> Create a Job Request</a>
-
-            <a href="~/Agency/GetJobRequests"><i class="fa fa-search"></i> My Job Requests</a>
-
-            <a href="#"><i class="fa fa-heart"></i> Manage my favorites</a>
-        }
-        else if (role == "Admin")
-        {
-            <a href="~/Admin/Agencies"><i class="fa fa-search"></i> Verify Agency Profiles</a>
-            <a href="~/Admin/Candidates"><i class="fa fa-search"></i> Verify Candidate Profiles</a>
-            <a href="~/Admin/Employers"><i class="fa fa-search"></i> Verify Employer Profiles</a>
-
-            <a href="~/Admin/ValidateJobRequests" class="active"><i class="fa fa-search"></i> Job Requests</a>
-
-            <a href="~/Admin/ValidateJobOffers"><i class="fa fa-search"></i> Job Offers</a>
-
-            <a href="~/Admin/ExportMembers"><i class="fa fa-search"></i> Export</a>
-        }
-    </div>
-
+    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                            .Select(c => c.Value);
+        string role = roles.FirstOrDefault();}
 
 
     <!---- Tab Section -->
 
     <div class="full-section-container pl-3 pr-3 wow fadeInUp">
         @*<div class="tab-section">
-            <div class="tab-section-body"></div>
-        </div>*@
+                <div class="tab-section-body"></div>
+            </div>*@
         <div class="row">
             <div class="col-md-12">
                 <div class="headline text-center mb-3">
@@ -347,7 +255,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         </tr>
                                         <tr>
                                             <td>Address:</td>
-                                            <td>@(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "")+ ", " + (Model.Candidate.District ?? "") )</td>
+                                            <td>@(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "") + ", " + (Model.Candidate.District ?? "") )</td>
                                         </tr>
                                         <tr>
                                             <td>Rating:</td>
@@ -360,7 +268,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 {
                                                     <i class="fa fa-star-o"></i>
                                                 }
-                                         
+
                                             </td>
                                         </tr>
                                         <tr>
@@ -383,11 +291,24 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Gender
-
                                             </div>
 
                                             <div class="filtersection-body">
-                                                @Model.Candidate.Gender.ToString()
+                                                @if (Model.Candidate.Gender == HireMe.Models.Gender.Male)
+                                                {
+                                                    <div class="body-item">
+                                                        <img src="~/assets/images/user.png" alt="">
+                                                        <span>Man</span>
+                                                    </div>
+
+                                                }
+                                                else
+                                                {
+                                                    <div class="body-item">
+                                                        <img src="~/assets/images/woman-user.png" alt="">
+                                                        <span>Woman</span>
+                                                    </div>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -395,7 +316,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Type of Staff
-
                                             </div>
 
                                             <div class="filtersection-body">
@@ -409,14 +329,12 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Age
-
                                             </div>
 
                                             <div class="filtersection-body">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
                                                         @(Model.Candidate.Age + " yrs")
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -426,13 +344,13 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Years of Experience
-
                                             </div>
 
                                             <div class="filtersection-body">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
-                                                        @Model.Candidate.ExperienceInYears
+                                                        @Model.Candidate.ExperienceInYears Yrs &nbsp;&nbsp;
+                                                        @Model.Candidate.ExperienceInMonths Mth
                                                     </div>
                                                 </div>
                                             </div>
@@ -454,14 +372,14 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
-                                                        @(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "")+", " + (Model.Candidate.District ?? ""))
+                                                        @(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "") + ", " + (Model.Candidate.District ?? ""))
 
-                                                        
+
 
                                                     </div>
                                                     @*<div class="col-lg-6 col-md-6">
-                                                        @Model.Candidate.District
-                                                    </div>*@
+                                                            @Model.Candidate.District
+                                                        </div>*@
                                                 </div>
                                             </div>
                                         </div>
@@ -474,7 +392,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Salary Between
-
                                             </div>
 
                                             <div class="filtersection-body">
@@ -586,20 +503,11 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Number of rooms
-
                                             </div>
 
                                             <div class="filtersection-body">
-
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6">
-                                                        @Model.Candidate.ExpectedMinRooms
-
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        @Model.Candidate.ExpectedMaxRooms
-                                                    </div>
-                                                </div>
+                                                Min: @Model.Candidate.ExpectedMinRooms &nbsp;&nbsp;
+                                                Max: @Model.Candidate.ExpectedMaxRooms
                                             </div>
                                         </div>
                                     </div>
@@ -607,11 +515,10 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Number of people
-
                                             </div>
 
                                             <div class="filtersection-body">
-
+                                                Min:
                                                 <div class="row">
                                                     <div class="col-lg-6 col-md-6">
                                                         @Model.Candidate.MinGroupPeople
@@ -639,6 +546,67 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                             </div>
                                             <div class="filtersection-body">
                                                 @ShowTaskTree(Model.MasterJobTasks.Where(p => p.ParentJobTaskId == null))
+
+                                                
+                                                <ul class="tree">
+                                                    <li>
+                                                        <input type="checkbox" checked="checked" id="c1" />
+                                                        <label class="tree_label" for="c1">Level 0</label>
+                                                        <ul>
+                                                            <li>
+                                                                <input type="checkbox" checked="checked" id="c2" />
+                                                                <label for="c2" class="tree_label">Level 1</label>
+                                                                <ul>
+                                                                    <li><span class="tree_label">Level 2</span></li>
+                                                                    <li><span class="tree_label">Level 2</span></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" id="c3" />
+                                                                <label for="c3" class="tree_label">Looong level 1 <br />label text <br />with line-breaks</label>
+                                                                <ul>
+                                                                    <li><span class="tree_label">Level 2</span></li>
+                                                                    <li>
+                                                                        <input type="checkbox" id="c4" />
+                                                                        <label for="c4" class="tree_label"><span class="tree_custom">Specified tree item view</span></label>
+                                                                        <ul>
+                                                                            <li><span class="tree_label">Level 3</span></li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+
+
+                                                    <li>
+                                                        <input type="checkbox" id="c5" />
+                                                        <label class="tree_label" for="c5">Level 0</label>
+                                                        <ul>
+                                                            <li>
+                                                                <input type="checkbox" id="c6" />
+                                                                <label for="c6" class="tree_label">Level 1</label>
+                                                                <ul>
+                                                                    <li><span class="tree_label">Level 2</span></li>
+                                                                </ul>
+                                                            </li>
+                                                            <li>
+                                                                <input type="checkbox" id="c7" />
+                                                                <label for="c7" class="tree_label">Level 1</label>
+                                                                <ul>
+                                                                    <li><span class="tree_label">Level 2</span></li>
+                                                                    <li>
+                                                                        <input type="checkbox" id="c8" />
+                                                                        <label for="c8" class="tree_label">Level 2</label>
+                                                                        <ul>
+                                                                            <li><span class="tree_label">Level 3</span></li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
@@ -659,28 +627,28 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                 </div>
                                 <div class="row">
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic1))
-                                            {
-                                                <div class="col-lg-4">
-                                                    <img src="data:image/jpeg;base64,@Model.SkillPic1" />
-                                                </div>
-                                            }
+                                    {
+                                        <div class="col-lg-4">
+                                            <img src="data:image/jpeg;base64,@Model.SkillPic1" />
+                                        </div>
+                                    }
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic2))
-                                            {
-                                            <div class="col-lg-4">
-                                                <img src="data:image/jpeg;base64,@Model.SkillPic2" />
-                                            </div>
-                                            }
+                                    {
+                                        <div class="col-lg-4">
+                                            <img src="data:image/jpeg;base64,@Model.SkillPic2" />
+                                        </div>
+                                    }
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic3))
-                                            {
-                                            <div class="col-lg-4">
-                                                <img src="data:image/jpeg;base64,@Model.SkillPic3" />
-                                            </div>
-                                            }
+                                    {
+                                        <div class="col-lg-4">
+                                            <img src="data:image/jpeg;base64,@Model.SkillPic3" />
+                                        </div>
+                                    }
                                 </div>
                                 @if (role == "Admin")
-                                        {
-                                        <div class="row"><button class="btn btn-default" onclick="validateJobRequest(@Model.JobRequestId)">Validate</button></div>
-                                        }
+                                {
+                                    <div class="row"><button class="btn btn-default" onclick="validateJobRequest(@Model.JobRequestId)">Validate</button></div>
+                                }
                             </div>
                         </div>
 
