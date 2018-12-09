@@ -642,15 +642,17 @@ namespace HireMe.Utility
 
             if (MemberType == MemberType.Candidate)
             {
-                queryString.Append(" and JobRequestId > @" + paramCount);
-                paramList.Add(0);
+                queryString.Append(" and Profile = @" + paramCount);
+                paramList.Add("Candidate");
                 paramCount++;
             }
-            else {
-                queryString.Append(" and JobOfferId > @" + paramCount);
-                paramList.Add(0);
+            if (MemberType == MemberType.Employer)
+            {
+                queryString.Append(" and Profile = @" + paramCount);
+                paramList.Add("Employer");
                 paramCount++;
             }
+            
 
             //Create the array
             object[] queryObject = new object[2];

@@ -130,8 +130,8 @@ namespace HireMe.Controllers
             object[] queryString = searchParam.GetSearchQuery();
             ArrayList searchArgs = (ArrayList)queryString[1];
 
-            if (searchParam.MemberType == MemberType.Candidate)
-            {
+            //if (searchParam.MemberType == MemberType.Candidate)
+            //{
                 //var candidates = db.Candidates.Include(path => path.JobRequests.Select(p => p.Job)).Select(p => new
                 //{
                 //    Name = p.FirstName + " " + p.LastName,
@@ -154,9 +154,9 @@ namespace HireMe.Controllers
                     PublishedDate = p.PublishedDate
                 }).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, candidates);
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 //var employers = db.Employers.Include(path => path.JobOffers.Select(p => p.Job)).Select(p => new
                 //{
                 //    Name = p.FirstName + " " + p.LastName,
@@ -167,19 +167,19 @@ namespace HireMe.Controllers
                 //    Age = 30
                 //}).ToList();
 
-                var employers = db.v_ExportJobOffers.Where(queryString[0].ToString(), searchArgs.ToArray()).Select(p => new JobTekMember
-                {
-                    Name = p.Name,
-                    EmailId = p.EmailId,
-                    ContactNo = p.ContactNo,
-                    Gender = p.Gender,
-                    Age = p.Age,
-                    ProfileVerified = p.ProfileVerified,
-                    JobSought = p.JobSought,
-                    PublishedDate = p.PublishedDate
-                }).ToList();
-                return Request.CreateResponse(HttpStatusCode.OK, employers);
-            }
+                //var employers = db.v_ExportJobOffers.Where(queryString[0].ToString(), searchArgs.ToArray()).Select(p => new JobTekMember
+                //{
+                //    Name = p.Name,
+                //    EmailId = p.EmailId,
+                //    ContactNo = p.ContactNo,
+                //    Gender = p.Gender,
+                //    Age = p.Age,
+                //    ProfileVerified = p.ProfileVerified,
+                //    JobSought = p.JobSought,
+                //    PublishedDate = p.PublishedDate
+                //}).ToList();
+                //return Request.CreateResponse(HttpStatusCode.OK, employers);
+            //}
 
         }
 

@@ -10161,6 +10161,8 @@ blockquote {
                 border-radius: 5px;
                 padding: 3px;
                 background: #fff;
+                min-height: 150px;
+                min-width: 120px;
             }
     .profileitems .validate {
         /*font-size: 13px;
