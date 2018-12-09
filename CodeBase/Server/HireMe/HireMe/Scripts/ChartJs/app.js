@@ -34,7 +34,7 @@
                     //$scope.members = response.data;
                     if (response && response.data) {
                         $scope.labels = jQuery.map(response.data, function (n, i) {
-                            return (n.JobName);
+                            return (n.JobName + " - " + n.TotalRequests );
                         });
                         $scope.data = jQuery.map(response.data, function (n, i) {
                             return (n.TotalRequests);
@@ -44,7 +44,7 @@
         }, 500);
 
         $scope.options = {
-            legend: { display: true }, responsive: true, title: {
+            legend: { display: true, position: 'left' }, responsive: true, title: {
                 display: true,
                 text: 'Our Members'
             }
