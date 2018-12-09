@@ -635,7 +635,7 @@ namespace HireMe.Models
     public class v_ExportJobRequest
     {
         [Key]
-        public int JobRequestId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string EmailId { get; set; }
         public string ContactNo { get; set; }
@@ -649,7 +649,7 @@ namespace HireMe.Models
     public class v_ExportJobOffer
     {
         [Key]
-        public int JobOfferId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string EmailId { get; set; }
         public string ContactNo { get; set; }

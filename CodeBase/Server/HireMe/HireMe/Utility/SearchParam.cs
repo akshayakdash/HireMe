@@ -639,18 +639,20 @@ namespace HireMe.Utility
             //    }
             //}
 
-
-            if (MemberType == MemberType.Candidate)
-            {
-                queryString.Append(" and JobRequestId > @" + paramCount);
-                paramList.Add(0);
-                paramCount++;
-            }
-            else {
-                queryString.Append(" and JobOfferId > @" + paramCount);
-                paramList.Add(0);
-                paramCount++;
-            }
+            queryString.Append(" and Id > @" + paramCount);
+            paramList.Add(0);
+            paramCount++;
+            //if (MemberType == MemberType.Candidate)
+            //{
+            //    queryString.Append(" and JobRequestId > @" + paramCount);
+            //    paramList.Add(0);
+            //    paramCount++;
+            //}
+            //else {
+            //    queryString.Append(" and JobOfferId > @" + paramCount);
+            //    paramList.Add(0);
+            //    paramCount++;
+            //}
 
             //Create the array
             object[] queryObject = new object[2];
