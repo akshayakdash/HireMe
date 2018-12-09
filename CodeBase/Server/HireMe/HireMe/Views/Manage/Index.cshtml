@@ -62,8 +62,8 @@
 <div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobRequestCtrl">
 
     @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                .Select(c => c.Value);
+                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                        .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
 
@@ -147,21 +147,40 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                     </div>
-                                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "", @disabled = Model.ProfileVerified })
-                                                    <span class="input-lable">First Name</span>
+                                                    @if (Model.ProfileVerified)
+                                                    {
+                                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "", @disabled = "disabled" })
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
+                                                    }<span class="input-lable">First Name</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                     </div>
-                                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "", @disabled = Model.ProfileVerified })
-                                                    <span class="input-lable">Last Name</span>
+                                                    @if (Model.ProfileVerified)
+                                                    {
+                                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "", @disabled = "disabled" })
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
+                                                    }<span class="input-lable">Last Name</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
                                                     </div>
-                                                    @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "", @disabled = Model.ProfileVerified })
+                                                    @if (Model.ProfileVerified)
+                                                    {
+                                                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "", @disabled = "disabled" })
+                                                    }
+                                                    else
+                                                    {
+                                                        @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "" })
+                                                    }
                                                     <span class="input-lable">Age</span>
                                                 </div>
                                                 <div class="input-group mb-2">

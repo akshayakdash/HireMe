@@ -168,7 +168,7 @@ namespace HireMe.Models
         [NotMapped]
         public string City { get; set; }
 
-        [Required]
+        //[Required]
         public int? DistrictId { get; set; }
         [NotMapped]
         public string District { get; set; }

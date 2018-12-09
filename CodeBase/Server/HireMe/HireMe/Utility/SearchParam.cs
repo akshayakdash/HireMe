@@ -673,7 +673,9 @@ namespace HireMe.Utility
     public enum MemberType
     {
         Candidate = 1,
-        Employer = 2
+        Employer = 2,
+        All = 3
+
     }
 
 
