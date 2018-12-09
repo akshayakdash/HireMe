@@ -162,6 +162,8 @@ namespace HireMe.Controllers
             ViewBag.Country = country;
             ViewBag.City = city;
             ViewBag.District = district;
+
+            ViewData["Country"] = context.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
             return View();
         }
 
@@ -326,7 +328,7 @@ namespace HireMe.Controllers
                 //var country = context.Countries.ToList();
                 //var city = context.Cities.ToList();
                 //var district = context.Districts.ToList();
-
+                ViewData["Country"] = context.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
                 ViewBag.Country = countries;
                 ViewBag.City = cities;
                 ViewBag.District = districts;
@@ -334,6 +336,8 @@ namespace HireMe.Controllers
             }
             ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                          .ToList(), "Name", "Name");
+
+            ViewData["Country"] = context.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
             // If we got this far, something failed, redisplay form   
             ViewBag.SelectedRole = model.UserRoles;
             ViewBag.SecurityQuestions = context.SecurityQuestions.ToList().Take(3);
@@ -592,6 +596,28 @@ namespace HireMe.Controllers
             }
 
             base.Dispose(disposing);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public JsonResult GetCities(int id)
+        {
+            
+            List<SelectListItem> cities = new List<SelectListItem>();
+            cities = context.Cities.Where(t => t.CountryId == id).Select(p => new SelectListItem { Text = p.CityName, Value = p.CityId.ToString() }).ToList();
+            
+            return Json(new SelectList(cities, "Value", "Text"),JsonRequestBehavior.AllowGet);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public JsonResult GetDistricts(int id)
+        {
+
+            List<SelectListItem> districts = new List<SelectListItem>();
+            districts = context.Districts.Where(t => t.CityId == id).Select(p => new SelectListItem { Text = p.DistrictName, Value = p.DistrictId.ToString() }).ToList();
+
+            return Json(new SelectList(districts, "Value", "Text"), JsonRequestBehavior.AllowGet);
         }
 
         #region Helpers
