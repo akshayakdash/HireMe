@@ -36,6 +36,26 @@
 
     function setJobOfferId(jrId) {
         jobOfferId = jrId;
+        $("#note-list").html("");
+        // get the partial view for list of jobRequestNotes
+        $.ajax
+            ({
+                url: '/JobOffers/GetJobOfferNotePartialView?jobOfferId=' + jobOfferId,
+                //data: { "id": jobRequestId },
+                type: 'get',
+                success: function (result) {
+                    console.log(result);
+                    //$('.modal-box').text(result).fadeIn(700, function () {
+                    //    setTimeout(function () {
+                    //        $('.modal-box').fadeOut();
+                    //    }, 2000);
+                    //});
+
+                    $("#note-list").html("");
+                    $("#note-list").html(result);
+
+                }
+            });
     }
 
     function saveJobOfferNote() {
@@ -73,44 +93,44 @@
 
 
 
-    <script type="text/javascript">
-        function deleteFavouriteJobOffer(jobOfferId) {
+<script type="text/javascript">
+    function deleteFavouriteJobOffer(jobOfferId) {
 
-            //alert(jobRequestId);
-            $.ajax
-                ({
-                    url: '/FavouriteJobOffers/Delete?id=' + jobOfferId,
-                    //data: { "id": jobRequestId },
-                    type: 'get',
-                    success: function (result) {
-                        //$('.modal-box').text(result).fadeIn(700, function () {
-                        //    setTimeout(function () {
-                        //        $('.modal-box').fadeOut();
-                        //    }, 2000);
-                        //});
+        //alert(jobRequestId);
+        $.ajax
+            ({
+                url: '/FavouriteJobOffers/Delete?id=' + jobOfferId,
+                //data: { "id": jobRequestId },
+                type: 'get',
+                success: function (result) {
+                    //$('.modal-box').text(result).fadeIn(700, function () {
+                    //    setTimeout(function () {
+                    //        $('.modal-box').fadeOut();
+                    //    }, 2000);
+                    //});
 
-                        alert("Job Offer deleted from your favourite list.");
-                        window.location.reload();
-                    }
-                });
+                    alert("Job Offer deleted from your favourite list.");
+                    window.location.reload();
+                }
+            });
 
-        }
-    </script>
+    }
+</script>
 
-    <div id="main-container-user" style="margin-left: 280px;">
+<div id="main-container-user" style="margin-left: 280px;">
 
-        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                .Select(c => c.Value);
-            string role = roles.FirstOrDefault();}
-        <!---- Tab Section -->
+    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                        .Select(c => c.Value);
+        string role = roles.FirstOrDefault();}
+    <!---- Tab Section -->
 
-        <div class="full-section-container wow fadeInUp">
-            <div class="tab-section">
-                <div class="tab-section-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            @*<div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+    <div class="full-section-container wow fadeInUp">
+        <div class="tab-section">
+            <div class="tab-section-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @*<div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
                                 @if (role == "Candidate")
                                 {
                                 <h2>Select your Job</h2>
@@ -125,346 +145,518 @@
                                 }
 
                             </div>*@
-                            <div class="tabs style-2">
+                        <div class="tabs style-2">
 
-                                @*<ul class="nav nav-tabs job-tab">
+                            @*<ul class="nav nav-tabs job-tab">
                                     @for (int i = 0; i < Model.Count(); i++)
                                     {
                                     var item = Model.ElementAt(i);
                                     <li><a class="@(i == 0 ? " active" : "" )" href="@(" #tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
                                     }
                                 </ul>*@
-                                <ul class="nav nav-tabs job-tab">
-                                    <li><a class="active" href="#tab-fav-job-offer-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
-                                    <li><a href="#tab-fav-job-offer-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                                    <li><a href="#tab-fav-job-offer-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
-                                    <li><a href="#tab-fav-job-offer-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                                    <li><a href="#tab-fav-job-offer-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
-                                </ul>
+                            <ul class="nav nav-tabs job-tab">
+                                <li><a class="active" href="#tab-fav-job-offer-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                <li><a href="#tab-fav-job-offer-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                <li><a href="#tab-fav-job-offer-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                <li><a href="#tab-fav-job-offer-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                <li><a href="#tab-fav-job-offer-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                            </ul>
 
 
-                                <div class="tab-content">
+                            <div class="tab-content">
 
 
 
-                                    <div class="tab-pane fade show active" id="tab-fav-job-offer-1">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="isotope cols-3 gutter">
-                                                    <div class="row">
-                                                        @if (Model != null)
+                                <div class="tab-pane fade show active" id="tab-fav-job-offer-1">
+
+                                    <div class="row">
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
+                                            {
+                                                <div class="col-md-6 ">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Employer.ProfileVerified)
                                                         {
-                                                        foreach (var item in Model.Where(p => p.JobId == 1))
-                                                        {
-                                                        <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems searchprofile-section">
-                                                                <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
-                                                                    <div class="rating">
-
-                                                                    </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    @*<h2 class="name">@item.Employer.UserName</h2>*@
-                                                                    @*<h3 class="name">@item.Employer.ContactNo</h3>*@
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-
-                                                                    <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
-                                                                </div>
-                                                                <div class="profile-footer">
-                                                                    @item.AdditionalDescription
-                                                                    @*<div class="row">
-                                                                        <button class="btn-default" type="button">Delete</button>
-                                                                    </div>*@
-                                                                </div>
-                                                                <div class="team-contact-info">
-                                                                    <ul class="social-icons">
-
-                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-
-                                                                    </ul>
-                                                                </div>
-
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
+                                                        }
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
                                                             </div>
-
+                                                            <h3>
+                                                                @*<span class="age">@item.Employer.Age Yrs</span>*@
+                                                                <span class="experience">@item.Employer.Age Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Employer.ContactNo
+                                                            </h2>
                                                         </div>
-                                                        }
-                                                        }
-                                                        else
-                                                        {
-                                                        <div class="row"><h2>You do not have any favourite job offer.</h2></div>
-                                                        }
+                                                        <div class="right">
+                                                            <div class="idcard">
+                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
+                                                            </div>
+                                                            <h1>
+                                                                @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                            {
+                                                                <span><img src="~/assets/images/woman-user.png" /></span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span><img src="~/assets/images/user.png" /></span>
+                                                            }
+
+
+                                                        </h1>
+
+                                                        <h2 class="name">@item.Employer.FirstName</h2>
+                                                        @*<h2 class="name">@item.Employer.UserName</h2>*@
+                                                        @*<h3 class="name">@item.Employer.ContactNo</h3>*@
+                                                        <h2 class="jobname">@item.Job.JobName</h2>
+                                                        <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
+                                                        <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                        <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                        <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                        <p class="location"><span>Staff Type:  @item.StaffType</span></p>
+                                                        <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
                                                     </div>
+                                                    <div class="profile-footer">
+                                                        @item.AdditionalDescription
+                                                        @*<div class="row">
+                                                                <button class="btn-default" type="button">Delete</button>
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="team-contact-info">
+                                                        <ul class="social-icons">
+                                                            <li><a href="" title="Delete" onclick="deleteFavouriteJobOffer(@item.JobOfferId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                            <li><a href="#" title="Note" onclick="setJobOfferId(@item.JobOfferId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                            <li><a href="/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+
+                                                        </ul>
+                                                    </div>
+
                                                 </div>
+
                                             </div>
-                                        </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12 text-center"><h4>You do not have any favourite job offer.</h4></div>
+                                        }
                                     </div>
-                                    <div class="tab-pane fade show active" id="tab-fav-job-offer-2">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="isotope cols-3 gutter">
-                                                    <div class="row">
-                                                        @if (Model != null)
+
+                                </div>
+                                <div class="tab-pane fade show active" id="tab-fav-job-offer-2">
+                                    <div class="row">
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
+                                            {
+                                                <div class="col-md-6 ">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Employer.ProfileVerified)
                                                         {
-                                                        foreach (var item in Model.Where(p => p.JobId == 2))
-                                                        {
-                                                        <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems searchprofile-section">
-                                                                <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
-                                                                    <div class="rating">
-
-                                                                    </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    @*<h2 class="name">@item.Employer.UserName</h2>*@
-                                                                    @*<h3 class="name">@item.Employer.ContactNo</h3>*@
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-
-                                                                    <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
-                                                                </div>
-                                                                <div class="profile-footer">
-                                                                    @item.AdditionalDescription
-                                                                    @*<div class="row">
-                                                                        <button class="btn-default" type="button">Delete</button>
-                                                                    </div>*@
-                                                                </div>
-                                                                <div class="team-contact-info">
-                                                                    <ul class="social-icons">
-                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-
-                                                                    </ul>
-                                                                </div>
-
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
+                                                        }
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
                                                             </div>
-
+                                                            <h3>
+                                                                @*<span class="age">@item.Employer.Age Yrs</span>*@
+                                                                <span class="experience">@item.Employer.Age Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Employer.ContactNo
+                                                            </h2>
                                                         </div>
-                                                        }
-                                                        }
-                                                        else
-                                                        {
-                                                        <div class="row"><h2>You do not have any favourite job offer.</h2></div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade show active" id="tab-fav-job-offer-3">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="isotope cols-3 gutter">
-                                                    <div class="row">
-                                                        @if (Model != null)
-                                                        {
-                                                        foreach (var item in Model.Where(p => p.JobId == 3))
-                                                        {
-                                                        <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems searchprofile-section">
-                                                                <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
-                                                                    <div class="rating">
-
-                                                                    </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    @*<h2 class="name">@item.Employer.UserName</h2>*@
-                                                                    @*<h3 class="name">@item.Employer.ContactNo</h3>*@
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-
-                                                                    <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
-                                                                </div>
-                                                                <div class="profile-footer">
-                                                                    @item.AdditionalDescription
-                                                                    @*<div class="row">
-                                                                        <button class="btn-default" type="button">Delete</button>
-                                                                    </div>*@
-                                                                </div>
-                                                                <div class="team-contact-info">
-                                                                    <ul class="social-icons">
-                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-
-                                                                    </ul>
-                                                                </div>
-
+                                                        <div class="right">
+                                                            <div class="idcard">
+                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
                                                             </div>
+                                                            <h1>
+                                                                @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
 
+
+                                                            </h1>
+
+                                                            <h2 class="name">@item.Employer.FirstName</h2>
+                                                            @*<h2 class="name">@item.Employer.UserName</h2>*@
+                                                            @*<h3 class="name">@item.Employer.ContactNo</h3>*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                            <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                            <p class="location"><span>Staff Type:  @item.StaffType</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
                                                         </div>
-                                                        }
-                                                        }
-                                                        else
-                                                        {
-                                                        <div class="row"><h2>You do not have any favourite job offer.</h2></div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade show active" id="tab-fav-job-offer-4">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="isotope cols-3 gutter">
-                                                    <div class="row">
-                                                        @if (Model != null)
-                                                        {
-                                                        foreach (var item in Model.Where(p => p.JobId == 4))
-                                                        {
-                                                        <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems searchprofile-section">
-                                                                <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
-                                                                    <div class="rating">
-
-                                                                    </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    @*<h2 class="name">@item.Employer.UserName</h2>*@
-                                                                    @*<h3 class="name">@item.Employer.ContactNo</h3>*@
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-
-                                                                    <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
-                                                                </div>
-                                                                <div class="profile-footer">
-                                                                    @item.AdditionalDescription
-                                                                    @*<div class="row">
-                                                                        <button class="btn-default" type="button">Delete</button>
-                                                                    </div>*@
-                                                                </div>
-                                                                <div class="team-contact-info">
-                                                                    <ul class="social-icons">
-                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-
-                                                                    </ul>
-                                                                </div>
-
-                                                            </div>
-
+                                                        <div class="profile-footer">
+                                                            @item.AdditionalDescription
+                                                            @*<div class="row">
+                                    <button class="btn-default" type="button">Delete</button>
+                                </div>*@
                                                         </div>
-                                                        }
-                                                        }
-                                                        else
-                                                        {
-                                                        <div class="row"><h2>You do not have any favourite job offer.</h2></div>
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade show active" id="tab-fav-job-offer-5">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="isotope cols-3 gutter">
-                                                    <div class="row">
-                                                        @if (Model != null)
-                                                        {
-                                                        foreach (var item in Model.Where(p => p.JobId == 5))
-                                                        {
-                                                        <div class="col-md-4 col-sm-6">
-                                                            <div class="profileitems searchprofile-section">
-                                                                <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
-                                                                    <div class="rating">
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                <li><a href="" title="Delete" onclick="deleteFavouriteJobOffer(@item.JobOfferId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobOfferId(@item.JobOfferId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
 
-                                                                    </div>
-                                                                    <div class="favorite">
-
-                                                                    </div>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-
-                                                                    <h2 class="name">@item.Employer.FirstName</h2>
-                                                                    @*<h2 class="name">@item.Employer.UserName</h2>*@
-                                                                    @*<h3 class="name">@item.Employer.ContactNo</h3>*@
-                                                                    <h2 class="name">@item.Job.JobName</h2>
-
-                                                                    <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
-                                                                </div>
-                                                                <div class="profile-footer">
-                                                                    @item.AdditionalDescription
-                                                                    @*<div class="row">
-                                                                        <button class="btn-default" type="button">Delete</button>
-                                                                    </div>*@
-                                                                </div>
-                                                                <div class="team-contact-info">
-                                                                    <ul class="social-icons">
-                                                                        <li><a href="#" title="Note" onclick="setJobOfferId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                                        <li><a href="" title="Unfavorites" onclick="deleteFavouriteJobOffer(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-
-                                                                    </ul>
-                                                                </div>
-
-                                                            </div>
-
+                                                            </ul>
                                                         </div>
-                                                        }
-                                                        }
-                                                        else
-                                                        {
-                                                        <div class="row"><h2>You do not have any favourite job offer.</h2></div>
-                                                        }
+
                                                     </div>
+
                                                 </div>
-                                            </div>
-                                        </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12 text-center"><h4>You do not have any favourite job offer.</h4></div>
+                                        }
                                     </div>
                                 </div>
+                                <div class="tab-pane fade show active" id="tab-fav-job-offer-3">
+                                    <div class="row">
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
+                                            {
+                                                <div class="col-md-6 ">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Employer.ProfileVerified)
+                                                        {
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
+                                                        }
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
+                                                            </div>
+                                                            <h3>
+                                                                @*<span class="age">@item.Employer.Age Yrs</span>*@
+                                                                <span class="experience">@item.Employer.Age Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Employer.ContactNo
+                                                            </h2>
+                                                        </div>
+                                                        <div class="right">
+                                                            <div class="idcard">
+                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
+                                                            </div>
+                                                            <h1>
+                                                                @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
+
+
+                                                            </h1>
+
+                                                            <h2 class="name">@item.Employer.FirstName</h2>
+                                                            @*<h2 class="name">@item.Employer.UserName</h2>*@
+                                                            @*<h3 class="name">@item.Employer.ContactNo</h3>*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                            <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                            <p class="location"><span>Staff Type:  @item.StaffType</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
+                                                        </div>
+                                                        <div class="profile-footer">
+                                                            @item.AdditionalDescription
+                                                            @*<div class="row">
+                                    <button class="btn-default" type="button">Delete</button>
+                                </div>*@
+                                                        </div>
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                <li><a href="" title="Delete" onclick="deleteFavouriteJobOffer(@item.JobOfferId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobOfferId(@item.JobOfferId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12 text-center"><h4>You do not have any favourite job offer.</h4></div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show active" id="tab-fav-job-offer-4">
+                                    <div class="row">
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
+                                            {
+                                                <div class="col-md-6 ">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Employer.ProfileVerified)
+                                                        {
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
+                                                        }
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
+                                                            </div>
+                                                            <h3>
+                                                                @*<span class="age">@item.Employer.Age Yrs</span>*@
+                                                                <span class="experience">@item.Employer.Age Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Employer.ContactNo
+                                                            </h2>
+                                                        </div>
+                                                        <div class="right">
+                                                            <div class="idcard">
+                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
+                                                            </div>
+                                                            <h1>
+                                                                @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
+
+
+                                                            </h1>
+
+                                                            <h2 class="name">@item.Employer.FirstName</h2>
+                                                            @*<h2 class="name">@item.Employer.UserName</h2>*@
+                                                            @*<h3 class="name">@item.Employer.ContactNo</h3>*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                            <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                            <p class="location"><span>Staff Type:  @item.StaffType</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
+                                                        </div>
+                                                        <div class="profile-footer">
+                                                            @item.AdditionalDescription
+                                                            @*<div class="row">
+                                    <button class="btn-default" type="button">Delete</button>
+                                </div>*@
+                                                        </div>
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                <li><a href="" title="Delete" onclick="deleteFavouriteJobOffer(@item.JobOfferId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobOfferId(@item.JobOfferId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12 text-center"><h4>You do not have any favourite job offer.</h4></div>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade show active" id="tab-fav-job-offer-5">
+                                    <div class="row">
+                                        @if (Model != null)
+                                        {
+                                            foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
+                                            {
+                                                <div class="col-md-6 ">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Employer.ProfileVerified)
+                                                        {
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
+                                                        }
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
+                                                            </div>
+                                                            <h3>
+                                                                @*<span class="age">@item.Employer.Age Yrs</span>*@
+                                                                <span class="experience">@item.Employer.Age Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Employer.ContactNo
+                                                            </h2>
+                                                        </div>
+                                                        <div class="right">
+                                                            <div class="idcard">
+                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
+                                                            </div>
+                                                            <h1>
+                                                                @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
+
+
+                                                            </h1>
+
+                                                            <h2 class="name">@item.Employer.FirstName</h2>
+                                                            @*<h2 class="name">@item.Employer.UserName</h2>*@
+                                                            @*<h3 class="name">@item.Employer.ContactNo</h3>*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                            <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                            <p class="location"><span>Staff Type:  @item.StaffType</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
+                                                        </div>
+                                                        <div class="profile-footer">
+                                                            @item.AdditionalDescription
+                                                            @*<div class="row">
+                                    <button class="btn-default" type="button">Delete</button>
+                                </div>*@
+                                                        </div>
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                <li><a href="" title="Delete" onclick="deleteFavouriteJobOffer(@item.JobOfferId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobOfferId(@item.JobOfferId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+
+                                                            </ul>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-12 text-center"><h4>You do not have any favourite job offer.</h4></div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
 
 
 
 
-                            </div><!-- tabs -->
-                        </div>
+                        </div><!-- tabs -->
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="modal fade" id="modalnote1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
-            <div class="modal-wrapper">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="myModalLabel13">Give a Note</h4>
+    <div class="modal fade" id="modalnote1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel13" aria-hidden="true">
+        <div class="modal-wrapper">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalLabel13">Give a Note</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="tabs style-2">
+                                    <ul class="nav nav-tabs">
+                                        <li><a class="active" href="#note-tab-2" data-toggle="tab">My Notes</a></li>
+                                        <li><a href="#note-tab-1" data-toggle="tab">Add Note</a></li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane" id="note-tab-1">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="note-stars">
+                                                        <a id="stars"><i class="fa fa-star" data-value='1'></i><i class="fa fa-star" data-value='2'></i><i class="fa fa-star" data-value='3'></i><i class="fa fa-star" data-value='4'></i><i class="fa fa-star" data-value='5'></i></a>
+                                                        @*<input type="text" id="rating" />*@
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Description</label>
+                                                        <textarea id="jobOfferNote" class="form-control" rows="2"></textarea>
+                                                    </div>
+                                                    <button type="button" onclick="saveJobOfferNote()" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Submit</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="tab-pane active" id="note-tab-2">
+                                            <div class="col-md-12" id="note-list"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <div class="row">
+                        @*<div class="row">
                                 <div class="col-md-12">
                                     <div class="note-stars">
                                         <a id="stars"><i class="fa fa-star" data-value='1'></i><i class="fa fa-star" data-value='2'></i><i class="fa fa-star" data-value='3'></i><i class="fa fa-star" data-value='4'></i><i class="fa fa-star" data-value='5'></i></a>
-                                        @*<input type="text" id="rating" />*@
+
                                     </div>
                                     <div class="form-group">
                                         <label>Description</label>
@@ -472,10 +664,10 @@
                                     </div>
                                     <button type="button" onclick="saveJobOfferNote()" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Submit</button>
                                 </div>
-                            </div>
-                        </div>
+                            </div>*@
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>

@@ -70,7 +70,14 @@
                                                                 <div class="left">
                                                                     <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
                                                                     <div class="rating">
-                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                        @for (int i = 0; i < item.StarRating; i++)
+                                                                        {
+                                                                            <i class="fa fa-star"></i>
+                                                                        }
+                                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                        {
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        }
                                                                     </div>
                                                                     @*<div class="favorite">
                                                                             <a href="javascropt(0);"><i class="fa fa-heart-o"></i></a>

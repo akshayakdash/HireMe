@@ -24,9 +24,109 @@
 @using System.Linq
 @using Newtonsoft.Json
 @using HireMe.Models
-
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script type="text/javascript">
-    var districts = ["", ""]
+    $(document).ready(function () {
+
+
+        var districts = ["", ""]
+
+        @*var CountryList = @Html.Raw(Json.Encode(ViewBag.Country));
+        var CityList = @Html.Raw(Json.Encode(ViewBag.City));
+        var DistrictList = @Html.Raw(Json.Encode(ViewBag.District));
+
+        //var FilteredCountryList = @Html.Raw(Json.Encode(ViewBag.Country));
+        var FilteredCityList = [];
+        var FilteredCityListOptions = '<option value=""><strong>Select City</strong></option>';
+        for (var i = 0; i < CityList.length; i++) {
+            if (CityList[i].CountryId == CountryList[0].CountryId) {
+                FilteredCityList.push(CityList[i]);
+                FilteredCityListOptions += '<option value="' + CityList[i].CityId + '">' + CityList[i].CityName + '</option>';
+
+            }
+        }
+        $('#City').html(FilteredCityListOptions);
+
+
+        var FilteredDistrictList = [];
+        var FilteredDistrictListOptions = '<option value=""><strong>Select District</strong></option>';
+        for (var i = 0; i < DistrictList.length; i++) {
+            if (DistrictList[i].CityId == FilteredCityList[0].CityId) {
+                FilteredDistrictList.push(DistrictList[i]);
+                FilteredDistrictListOptions += '<option value="' + DistrictList[i].DistrictId + '">' + DistrictList[i].DistrictName + '</option>';
+            }
+        }
+        $('#District').html(FilteredDistrictListOptions);
+        console.log(CountryList);
+        console.log(FilteredCityList);
+        console.log(FilteredDistrictList);
+
+        $("#CountryId").change(function () {
+            var CountryId = $("#CountryId").val();
+            var options = '<option value=""><strong>Products</strong></option>';
+            var FilteredCityListOptions = '<option value=""><strong>Select City</strong></option>';
+            for (var i = 0; i < CityList.length; i++) {
+                if (CityList[i].CountryId == CountryId) {
+                    FilteredCityList.push(CityList[i]);
+                    FilteredCityListOptions += '<option value="' + CityList[i].CityId + '">' + CityList[i].CityName + '</option>';
+
+                }
+
+                $('#City').html(FilteredCityListOptions);
+            }
+        })*@
+
+        $("#CountryId").change(function () {
+            $("#CityId").empty();
+            $.ajax({
+                type: 'GET',
+                url: '/Account/GetCities?id=' + $("#CountryId").val(), // we are calling json method
+
+                dataType: 'json',
+
+               // data: { id: $("#CountryId").val() },
+               // here we are get value of selected country and passing same value
+                //  as inputto json method GetStates.
+
+                success: function (cities) {
+                    // states contains the JSON formatted list
+                    // of states passed from the controller
+                    $("#CityId").append('<option value="0">' + ' --Select City--' + '</option>');
+                    $.each(cities, function (i, city) {
+                        $("#CityId").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                    // here we are adding option for States
+
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+        $("#CityId").change(function () {
+            $("#DistrictId").empty();
+            $.ajax({
+               type: 'GET',
+               url: '/Account/GetDistricts?id=' + $("#CityId").val(), // we are calling json method
+
+                dataType: 'json',
+                success: function (districts) {
+                    // states contains the JSON formatted list
+                    // of states passed from the controller
+                    $("#DistrictId").append('<option value="0">' + ' --Select District--'+ '</option>');
+                    $.each(districts, function (i, district) {
+                        $("#DistrictId").append('<option value="' + district.Value + '">' + district.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    });
 </script>
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
@@ -89,8 +189,8 @@
                                             </label>
                                         </div>
                                         @*<div class="row">
-                                            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
-                                        </div>*@
+                                                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
+                                            </div>*@
                                         @*<span class="input-lable">Gender</span>*@
 
                                     </div>
@@ -105,7 +205,7 @@
                                         </div>
                                         @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
                                         <span class="input-lable">First Name</span>
-                                        
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 error-arrow">
@@ -118,7 +218,7 @@
                                         </div>
                                         @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
                                         <span class="input-lable">Last Name</span>
-                                        
+
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12 error-arrow">
@@ -129,7 +229,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/calendar.png" alt=""></span>
                                         </div>
-                                        @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "", @type="date" })
+                                        @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "", @type = "date" })
                                         <span class="input-lable">Date of birth</span>
 
                                     </div>
@@ -149,7 +249,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                         </div>
-                                        @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
+                                        @Html.DropDownList("CountryId", ViewData["Country"] as List<SelectListItem>, "--Select Country--", new { @class = "form-control" })
+
+                                        @*@Html.DropDownListFor(m => m.CountryId, ViewData["Country"] as List<SelectListItem>, htmlAttributes: new { @class = "form-control", id = "Country" })*@
                                         <span class="input-lable">Country</span>
                                     </div>
 
@@ -158,54 +260,58 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                         </div>
-                                        @Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
-                                                                    {
-                                                       new SelectListItem{ Text="Choose City", Value = "" },
-                                                                        new SelectListItem{ Text="Abidjan (Capitale Eco)", Value = "1" },
-                                                                        new SelectListItem{ Text="Yamoussoukro (Capitale Pol)", Value = "2" },
-                                                                        new SelectListItem{ Text="Abengourou", Value = "3" },
-                                                                        new SelectListItem{ Text="Anyama", Value = "4" },
-                                                                        new SelectListItem{ Text="Agnibilékrou", Value = "5" },
-                                                                     }, htmlAttributes: new { @class = "form-control", id = "City" })
-                                                                    @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
-                                                                    <span class="input-lable">City</span>
-                                                                </div>
+                                        @Html.DropDownList("CityId", new SelectList(string.Empty, "Value", "Text"), "--Select City --", new { @class = "form-control" })
 
-                                                                <div class="row">
-                                                                    <div class="col-sm-12 error-arrow">
-                                                                        @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
-                                                                    </div>
-                                                                </div>
-                                                                <div class="input-group mb-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                                    </div>
-                                                                    <select id="District" name="DistrictId" class="form-control"></select>
-                                                                    @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
-                                                                    <span class="input-lable">District</span>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-12 error-arrow">
-                                                                        @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-12 error-arrow">
-                                                                        @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
-                                                                    </div>
-                                                                    </div>
-                                                                <div class="input-group mb-2">
-                                                                    <div class="input-group-prepend">
-                                                                        <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                                    </div>
-                                                                    @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
-                                                                    <span class="input-lable">Address</span>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-sm-12 error-arrow">
-                                                                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
-                                                                    </div>
-                                                                    </div>
+                                        @*<select id="City" name="CityId" class="form-control"></select>*@
+                                        @*@Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
+                                                         {
+                                            new SelectListItem{ Text="Choose City", Value = "" },
+                                                             new SelectListItem{ Text="Abidjan (Capitale Eco)", Value = "1" },
+                                                             new SelectListItem{ Text="Yamoussoukro (Capitale Pol)", Value = "2" },
+                                                             new SelectListItem{ Text="Abengourou", Value = "3" },
+                                                             new SelectListItem{ Text="Anyama", Value = "4" },
+                                                             new SelectListItem{ Text="Agnibilékrou", Value = "5" },
+                                                          }, htmlAttributes: new { @class = "form-control", id = "City" })*@
+                                        @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
+                                        <span class="input-lable">City</span>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
+                                        @Html.DropDownList("DistrictId", new SelectList(string.Empty, "Value", "Text"), "--Select District--", new { @class = "form-control" })
+                                        @*<select id="District" name="DistrictId" class="form-control"></select>*@
+                                        @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
+                                        <span class="input-lable">District</span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                        </div>
+                                        @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
+                                        <span class="input-lable">Address</span>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 error-arrow">
+                                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
                                 </fieldset>
                             </div>
                             <div class="form-section">
@@ -223,7 +329,7 @@
                                         <div class="col-sm-12 error-arrow">
                                             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                                         </div>
-                                        </div>
+                                    </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
@@ -231,7 +337,7 @@
                                                 @Html.DropDownListFor(m => m.CountryCode, new List
                                                 <SelectListItem>
                                                     {
-                                                        new SelectListItem{ Text="(+235)", Value = "+235" }, 
+                                                        new SelectListItem{ Text="(+235)", Value = "+235" },
                                                         }, htmlAttributes: new { @class = "form-control", @style = "margin:0;", id = "country_code" })
                                                 </span>*@
                                         </div>
@@ -307,7 +413,7 @@
                                             <div class="col-sm-12 error-arrow">
                                                 @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
                                             </div>
-                                            </div>
+                                        </div>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
@@ -319,7 +425,7 @@
                                             <div class="col-sm-12 error-arrow">
                                                 @Html.ValidationMessageFor(m => m.ResponsibleName, "", new { @class = "text-danger" })
                                             </div>
-                                            </div>
+                                        </div>
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
@@ -331,7 +437,7 @@
                                             <div class="col-sm-12 error-arrow">
                                                 @Html.ValidationMessageFor(m => m.WebSiteUrl, "", new { @class = "text-danger" })
                                             </div>
-                                            </div>
+                                        </div>
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
@@ -359,7 +465,7 @@
                                         <div class="col-sm-12 error-arrow">
                                             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                                         </div>
-                                        </div>
+                                    </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
@@ -371,7 +477,7 @@
                                         <div class="col-sm-12 error-arrow">
                                             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                                         </div>
-                                        </div>
+                                    </div>
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
@@ -383,7 +489,7 @@
                                         <div class="col-sm-12 error-arrow">
                                             @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
                                         </div>
-                                        </div>
+                                    </div>
 
                                     @if (ViewBag.SecurityQuestions != null)
                                     {
@@ -397,28 +503,28 @@
                                         </div>
 
                                         @*<div class="row">
-                                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
-                                        </div>*@
+                                                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                                            </div>*@
 
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
-                                                    </div>
-                                                    @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
-                                                    <span class="input-lable">Security Answer</span>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
+                                            </div>
+                                            @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable">Security Answer</span>
+                                        </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
+                                                        @Html.ActionLink("I agree terms and conditions", "actionname", "controllername")
+                                                        <span></span>
+                                                    </label>
                                                 </div>
-                                                    <div class="checkbox">
-                                                        <label>
-                                                            @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
-                                                            @Html.ActionLink("I agree terms and conditions", "actionname", "controllername")
-                                                            <span></span>
-                                                        </label>
-                                                    </div>
                                                     <div class="row">
                                                         <div class="col-sm-12 error-arrow">
                                                             @Html.ValidationMessageFor(m => m.AgreeTermsAndConditions, "", new { @class = "text-danger" })
                                                         </div>
-                                                        </div>
+                                                    </div>
                                     }
 
                                 </fieldset>
@@ -568,8 +674,8 @@
             //$("#tab-1-2").show();
         })
 
-                alert();
-       
+
+
 
     })
 
