@@ -644,6 +644,7 @@ namespace HireMe.Models
         public string ProfileVerified { get; set; }
         public string JobSought { get; set; }
         public string PublishedDate { get; set; }
+        public string Profile { get; set; }
     }
 
     public class v_ExportJobOffer
