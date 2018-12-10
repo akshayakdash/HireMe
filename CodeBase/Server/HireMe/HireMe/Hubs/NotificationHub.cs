@@ -32,7 +32,7 @@ namespace HireMe.Hubs
                     db.Entry(user)
                         .Collection(u => u.SignalRConnections)
                         .Query()
-                        .Where(c => c.Connected == true)
+                        .Where(c => c.Connected)
                         .Load();
 
                     if (user.SignalRConnections == null)
@@ -41,7 +41,7 @@ namespace HireMe.Hubs
                     }
                     else
                     {
-                        foreach (var connection in user.SignalRConnections)
+                        foreach (var connection in user.SignalRConnections.Where(p => p.Connected))
                         {
                             Clients.Client(connection.ConnectionId)
                                 .showNotification(name + ": " + message);
@@ -56,7 +56,7 @@ namespace HireMe.Hubs
             var name = Context.User.Identity.Name;
             using (var db = ApplicationDbContext.Create())
             {
-                var user = db.Users.AsNoTracking()
+                var user = db.Users
                     .Include(u => u.SignalRConnections)
                     .SingleOrDefault(u => u.UserName == name);
 
@@ -83,13 +83,14 @@ namespace HireMe.Hubs
                     db.SaveChanges();
                 }
 
-                // now we can remove the connections which are not active
-                var inActiveConnections = db.SignalRConnections.Where(p => !p.Connected);
-                lock (inActiveConnections)
-                {
-                    db.SignalRConnections.RemoveRange(inActiveConnections);
-                    db.SaveChanges();
-                }
+                //// now we can remove the connections which are not active
+                // we will run a batch job to clean the inactive connection to be in the safer side
+                //var inActiveConnections = db.SignalRConnections.Where(p => !p.Connected);
+                //lock (inActiveConnections)
+                //{
+                //    db.SignalRConnections.RemoveRange(inActiveConnections);
+                //    db.SaveChanges();
+                //}
             }
             return base.OnDisconnected(stopCalled);
         }
