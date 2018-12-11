@@ -89,9 +89,9 @@ else
             @*@Html.ActionLink("REGISTER", "Register", "Account", routeValues: new { userRole = "Candidate" }, htmlAttributes: new { id = "registerLink" })*@
             <a href="#" class="waves">Register1</a>
             <ul>
-                <li><a class="waves" href="Home/CandidatInfo?Length=4">CANDIDATE</a></li>
-                <li><a class="waves" href="Home/EmployerInfo?Length=4">EMPLOYER</a></li>
-                <li><a class="waves" href="Home/AgencyInfo?Length=4">AGENCY</a></li>
+                <li><a class="waves" href="~/Home/CandidatInfo?Length=4">CANDIDATE</a></li>
+                <li><a class="waves" href="~/Home/EmployerInfo?Length=4">EMPLOYER</a></li>
+                <li><a class="waves" href="~/Home/AgencyInfo?Length=4">AGENCY</a></li>
             </ul>
     </li>
     <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
