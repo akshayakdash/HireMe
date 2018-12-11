@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNet.Identity
-
+@using HireMe.Utility
 <!DOCTYPE html>
 <html>
 <head>
@@ -337,56 +337,56 @@
 
                 @Html.Partial("_LoginPartial")
 
-                <a href="~/Users" class="active"><i class="fa fa-home"></i>Dashboard</a>
+                <a href="~/Users" class="@Html.IsSelected(controllers: "Users", cssClass:"active")"><i class="fa fa-home"></i>Dashboard</a>
 
                 @if (role == "Candidate")
                 {
-                    <a href="~/PublishedJobs"><i class="fa fa-search"></i> Search Jobs</a>
+                    <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a>
 
                     @*<a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
 
-                    <a href="~/JobRequests"><i class="fa fa-graduation-cap"></i>Manage My Job Requests</a>
+                    <a href="~/JobRequests" class="@Html.IsSelected(controllers: "JobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i>Manage My Job Requests</a>
 
-                    <a href="~/FavouriteJobOffers"><i class="fa fa-heart"></i> Manage my favorites</a>
+                    <a href="~/FavouriteJobOffers" class="@Html.IsSelected(controllers: "FavouriteJobOffers", cssClass: "active")"><i class="fa fa-heart"></i> Manage my favorites</a>
 
-                    <a href="~/Notification"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
+                    <a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
 
-                    <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
+                    <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
                 }
                 else if (role == "Employer")
                 {
 
                     @*<a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>*@
-                    <a href="~/PublishedJobs"><i class="fa fa-search"></i> Search Jobs</a>
-                    <a href="~/JobOffers"><i class="fa fa-graduation-cap"></i> My Job Offers</a>
-                    <a href="~/FavouriteJobRequests"><i class="fa fa-heart"></i> Manage my favorites</a>
-                    <a href="~/Notification"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
-                    <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
+                    <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a>
+                    <a href="~/JobOffers" class="@Html.IsSelected(controllers: "JobOffers", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Offers</a>
+                    <a href="~/FavouriteJobRequests" class="@Html.IsSelected(controllers: "FavouriteJobRequests", cssClass: "active")"><i class="fa fa-heart"></i> Manage my favorites</a>
+                    <a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
+                    <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
                 }
                 else if (role == "Agency")
                 {
 
-                    <a href="~/PublishedJobs"><i class="fa fa-search"></i> Search Jobs</a>
+                    <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a>
 
                     @*<a href="~/SearchJobOffers"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
 
-                    <a href="~/Agency/RegisterCandidate"><i class="fa fa-plus"></i> Create a Job Request</a>
+                    <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-plus"></i> Create a Job Request</a>
 
-                    <a href="~/Agency/GetJobRequests"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
+                    <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
 
-                    <a href="~/Notification"><i class="fa fa-heart"></i> Messages & Notifications</a>
+                    <a href="~/Notification"  class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-heart"></i> Messages & Notifications</a>
 
-                    <a href="~/Manage"><i class="fa fa-cog"></i> Manage my settings</a>
+                    <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
 
                 }
                 else if (role == "Admin")
                 {
-                    <a href="~/Admin/Agencies"><i class="fa fa-check-square"></i> Verify Agency Profiles</a>
-                    <a href="~/Admin/Candidates"><i class="fa fa-check-square"></i> Verify Candidate Profiles</a>
-                    <a href="~/Admin/Employers"><i class="fa fa-check-square"></i> Verify Employer Profiles</a>
-                    <a href="~/Admin/ValidateJobRequests"><i class="fa fa-graduation-cap"></i> Job Requests</a>
-                    <a href="~/Admin/ValidateJobOffers"><i class="fa fa-graduation-cap"></i> Job Offers</a>
-                    <a href="~/Admin/ExportMembers"><i class="fa fa-upload"></i> Export</a>
+                    <a href="~/Admin/Agencies" class="@Html.IsSelected(controllers: "Admin", actions: "Agencies", cssClass: "active")"><i class="fa fa-check-square"></i> Verify Agency Profiles</a>
+                    <a href="~/Admin/Candidates" class="@Html.IsSelected(controllers: "Admin", actions: "Candidates", cssClass: "active")"><i class="fa fa-check-square"></i> Verify Candidate Profiles</a>
+                    <a href="~/Admin/Employers" class="@Html.IsSelected(controllers: "Admin", actions: "Employers", cssClass: "active")"><i class="fa fa-check-square"></i> Verify Employer Profiles</a>
+                    <a href="~/Admin/ValidateJobRequests" class="@Html.IsSelected(controllers: "Admin", actions: "ValidateJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> Job Requests</a>
+                    <a href="~/Admin/ValidateJobOffers" class="@Html.IsSelected(controllers: "Admin", actions: "ValidateJobOffers", cssClass: "active")"><i class="fa fa-graduation-cap"></i> Job Offers</a>
+                    <a href="~/Admin/ExportMembers" class="@Html.IsSelected(controllers: "Admin", actions: "ExportMembers", cssClass: "active")"><i class="fa fa-upload"></i> Export</a>
                 }
                 
             </div>
