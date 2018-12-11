@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -189,6 +191,8 @@
                     </ul>
                 </div><!-- rev_slider -->
             </div>
+
+        }
             <header id="header">
 
                 <div class="container-fluid">
@@ -209,9 +213,13 @@
                             <nav>
 
                                 <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+                                @if (((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
+                                //if(!Request.IsAuthenticated)
+                                {
                                 <div class="mobile-app">
                                     <a class="btn btn-style-4 waves" href="#"><i class="fa fa-download"></i> Mobile App</a>
                                 </div>
+                                }
                                 <ul class="menu clearfix" id="menu">
                                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
@@ -223,7 +231,69 @@
 
 
 
-                                    @Html.Partial("_LoginPartial")
+                                    @*@Html.Partial("_LoginPartial")*@
+
+
+
+                                    @if (Request.IsAuthenticated)
+                                    {
+                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            @*if (!((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index" || Request.RawUrl.ToString() == "/Home/EmployerInfo?Length=4"
+                                                || Request.RawUrl.ToString() == "/Home/CandidatInfo?Length=4" || Request.RawUrl.ToString() == "/Home/AgencyInfo?Length=4" || Request.RawUrl.ToString() == "/Home/About" || Request.RawUrl.ToString() == "/Account/Login"
+                                                || Request.RawUrl.ToString() == "/Account/Register?userRole=Employer" || Request.RawUrl.ToString() == "/Account/Register?userRole=Candidate" || Request.RawUrl.ToString() == "/Account/Register?userRole=Agency")))
+                                            //if(!Request.IsAuthenticated)
+                                            {
+                                                <div class="user-panel">
+                                                    <a href="#" class="dropdown-toggle userdropdown" data-toggle="dropdown">
+                                                        <i class="fa fa-cog"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu box userpanel">
+                                                        <li class="">
+                                                            <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="profile-image">
+                                                        <img src="~/assets/images/photo.png" alt="">
+                                                    </div>
+                                                    <div class="userid">
+                                                        @User.Identity.GetUserName()
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {*@
+                                                <li>
+                                                    <a href="javascript:document.getElementById('logoutForm1').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                                </li>
+                                            //}
+
+
+                                            @*</ul>*@
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @*<ul class="menu clearfix pull-right login-partial">*@
+                                        <li>@Html.ActionLink("REGISTER", "Register", "Account", routeValues: new { userRole = "Candidate" }, htmlAttributes: new { id = "registerLink" })</li>
+                                        <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                        @*</ul>*@
+                                    }
+
+
+
+
+
+
+
+
+
+
                                     @*<li class="secondary-menu-btn">
                                             <ul class="secondary-menu">
                                                 <li><a class="waves" href="index.html">Home</a></li>
@@ -242,7 +312,7 @@
                 </div><!-- container-fluid -->
 
             </header>
-        }
+        
         
 
         @if (HttpContext.Current.User.Identity.IsAuthenticated && !((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
@@ -303,11 +373,11 @@
                 }
                 else if (role == "Admin")
                 {
-                    <a href="~/Admin/Agencies"><i class="fa fa-search"></i> Verify Agency Profiles</a>
-                    <a href="~/Admin/Candidates"><i class="fa fa-search"></i> Verify Candidate Profiles</a>
-                    <a href="~/Admin/Employers"><i class="fa fa-search"></i> Verify Employer Profiles</a>
-                    <a href="~/Admin/ValidateJobRequests"><i class="fa fa-search"></i> Job Requests</a>
-                    <a href="~/Admin/ValidateJobOffers"><i class="fa fa-search"></i> Job Offers</a>
+                    <a href="~/Admin/Agencies"><i class="fa fa-check-square"></i> Verify Agency Profiles</a>
+                    <a href="~/Admin/Candidates"><i class="fa fa-check-square"></i> Verify Candidate Profiles</a>
+                    <a href="~/Admin/Employers"><i class="fa fa-check-square"></i> Verify Employer Profiles</a>
+                    <a href="~/Admin/ValidateJobRequests"><i class="fa fa-graduation-cap"></i> Job Requests</a>
+                    <a href="~/Admin/ValidateJobOffers"><i class="fa fa-graduation-cap"></i> Job Offers</a>
                     <a href="~/Admin/ExportMembers"><i class="fa fa-upload"></i> Export</a>
                 }
                 
