@@ -163,8 +163,8 @@ namespace HireMe.Controllers
                 //    DistrictId = user.DistrictId
                 //};
 
-                user.FirstName = model.FirstName;
-                user.LastName = model.LastName;
+               // user.FirstName = model.FirstName;
+               // user.LastName = model.LastName;
                 user.PhoneNumber = model.PhoneNumber;
                 user.Email = model.Email;
                 user.Address = model.Address;
@@ -180,9 +180,9 @@ namespace HireMe.Controllers
                     var candidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
                     if (candidate != null)
                     {
-                        candidate.FirstName = model.FirstName;
-                        candidate.LastName = model.LastName;
-                        candidate.Age = model.Age;
+                       // candidate.FirstName = model.FirstName;
+                       // candidate.LastName = model.LastName;
+                       // candidate.Age = model.Age;
                         candidate.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                         candidate.ContactNo = model.PhoneNumber;
                         candidate.EmailId = model.Email;
@@ -199,9 +199,9 @@ namespace HireMe.Controllers
                     var employer = context.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
                     if (employer != null)
                     {
-                        employer.FirstName = model.FirstName;
-                        employer.LastName = model.LastName;
-                        employer.Age = model.Age;
+                      //  employer.FirstName = model.FirstName;
+                       // employer.LastName = model.LastName;
+                       // employer.Age = model.Age;
                         employer.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                         employer.ContactNo = model.PhoneNumber;
                         employer.EmailId = model.Email;

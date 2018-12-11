@@ -90,7 +90,7 @@
 
                     });
 
-                    $("#mobile-menu").prepend("<li class='logo'><img src='assets/images/logo.png' alt=''></li>");
+                    $("#mobile-menu").prepend("<li class='logo'><img src='../assets/images/logo.png' alt=''></li>");
 
                 }
 
@@ -194,7 +194,7 @@
             class: ""
         }).insertAfter("header");
 
-        $("#header-sticky #logo img").attr("src", "assets/images/logo.png");
+        $("#header-sticky #logo img").attr("src", "../assets/images/logo.png");
 
         $(window).scroll(function(){
 

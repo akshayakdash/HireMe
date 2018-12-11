@@ -165,14 +165,14 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                     <div class="radio">
                                                                         <label>
                                                                             @Html.RadioButtonFor(p => p.Gender, Gender.Female, new { @value = Gender.Female })
-                                                                            Female
+                                                                            Woman
                                                                             <span></span>
                                                                         </label>
                                                                     </div>
                                                                     <div class="radio">
                                                                         <label>
                                                                             @Html.RadioButtonFor(p => p.Gender, Gender.Male, new { @value = Gender.Male })
-                                                                            Male
+                                                                            Man
                                                                             <span></span>
                                                                         </label>
                                                                     </div>
@@ -241,22 +241,24 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                         <div class="col-lg-6 col-md-6">
 
 
-                                                                            @Html.DropDownListFor(p => p.MinAge, new List<SelectListItem>
+                                                                            @*@Html.DropDownListFor(p => p.MinAge, new List<SelectListItem>
                                                                     {
                                                                         new SelectListItem{ Text="25", Value = "25" },
                                                                         new SelectListItem{ Text="30", Value = "30" },
                                                                         new SelectListItem{ Text="35", Value = "35" },
                                                                         new SelectListItem{ Text="40", Value = "40" },
-                                                                     }, "--select--")
+                                                                     }, "--select--")*@
+                                                                            @Html.TextBoxFor(p => p.MinAge, "{0:#.#}", new { @class = "form-control", @placeholder = "Min Age", @value = "", @type = "number" })
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6">
-                                                                            @Html.DropDownListFor(p => p.MaxAge, new List<SelectListItem>
+                                                                            @*@Html.DropDownListFor(p => p.MaxAge, new List<SelectListItem>
                                                                     {
                                                                         new SelectListItem{ Text="25", Value = "25" },
                                                                         new SelectListItem{ Text="30", Value = "30" },
                                                                         new SelectListItem{ Text="35", Value = "35" },
                                                                         new SelectListItem{ Text="40", Value = "40" },
-                                                                     },"--select--")
+                                                                     },"--select--")*@
+                                                                            @Html.TextBoxFor(p => p.MaxAge, "{0:#.#}", new { @class = "form-control", @placeholder = "Min Age", @value = "", @type = "number" })
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
@@ -292,7 +294,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                             new SelectListItem{ Text="6", Value = "6" },
                                                                             new SelectListItem{ Text="7", Value = "7" },
                                                                             new SelectListItem{ Text="8", Value = "8" },
-                                                                         }, "--select--")
+                                                                            new SelectListItem{ Text="1", Value = "9" },
+                                                                            new SelectListItem{ Text="2", Value = "10" }
+                                                                         }, "--years--")
                                                                         </div>
                                                                         <div class="col-lg-6 col-md-6">
                                                                             @*@Html.TextBoxFor(p => p.ExperienceInMonths, new { @class = "form-control" })*@
@@ -306,7 +310,10 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                             new SelectListItem{ Text="6", Value = "6" },
                                                                             new SelectListItem{ Text="7", Value = "7" },
                                                                             new SelectListItem{ Text="8", Value = "8" },
-                                                                         }, "--select--")
+                                                                            new SelectListItem{ Text="7", Value = "9" },
+                                                                            new SelectListItem{ Text="8", Value = "10" },
+                                                                            new SelectListItem{ Text="8", Value = "12" }
+                                                                         }, "--months--")
                                                                         </div>
                                                                     </div>
 
@@ -581,7 +588,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
+                                                    @*<div class="row">
                                                         <div class="col-md-12">
 
                                                             <label class="checkbox">
@@ -592,7 +599,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             &nbsp; &nbsp; Publish as a job offer
 
                                                         </div>
-                                                    </div>
+                                                    </div>*@
                                                     <div class="row">
                                                         <div class="col-md-12">
                                                             <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
