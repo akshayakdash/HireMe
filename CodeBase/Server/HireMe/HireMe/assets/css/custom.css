@@ -9889,7 +9889,7 @@ blockquote {
 
 .sidenav {
     height: 100%;
-    width: 0;
+    width: 280px;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -9900,58 +9900,49 @@ blockquote {
     padding-top: 0;
 }
 
-    .sidenav a {
-        /*padding:8px;
-        text-decoration: none;
-        font-size: 18px;
-        color: #818181;
-        display: block;
-        font-weight: 600;
-        transition: 0.3s;
-        line-height: 20px;
-        margin-bottom: 30px;
-        height: 40px;*/
-        padding: 12px 10px 12px 5px;
-        display: block;
-        color: #a1a1a1;
-        border-top: 1px solid #252525;
-        border-bottom: 1px solid #000000;
-        text-decoration: none;
-    }
+.sidenav a {
+    padding: 12px 10px 12px 5px;
+    display: block;
+    color: #a1a1a1;
+    border-top: 1px solid #252525;
+    border-bottom: 1px solid #000000;
+    text-decoration: none;
+}
 
-        .sidenav a:hover {
-            color: #f1f1f1;
-        }
+.sidenav a:hover {
+    color: #f1f1f1;
+}
 
-        .sidenav a.active {
-            color: #f1f1f1;
-            border-left: 2px solid #fe005a;
-        }
+.sidenav a.active {
+    color: #f1f1f1;
+    border-left: 2px solid #fe005a;
+}
 
-        .sidenav a .fa {
-            display: inline-block;
-            width: 2.5em;
-            text-align: center;
-        }
+.sidenav a .fa {
+    display: inline-block;
+    width: 2.5em;
+    text-align: center;
+}
 
-    .sidenav .closebtn {
-        position: absolute;
-        top: 9px;
-        right: -1px;
-        font-size: 36px;
-        /* margin-left: 50px; */
-        margin: 0;
-        border: 0;
-        padding-top: 0;
-    }
+.sidenav .closebtn {
+    position: absolute;
+    top: 9px;
+    right: -1px;
+    font-size: 36px;
+    /* margin-left: 50px; */
+    margin: 0;
+    border: 0;
+    padding-top: 0;
+}
 
-    .sidenav img {
-        float: left;
-        margin-right: 10px;
-    }
+.sidenav img {
+    float: left;
+    margin-right: 10px;
+}
 
 #main-container-user {
     transition: margin-left .5s;
+    margin-left:280px;
 }
 
 @media screen and (max-height: 450px) {
@@ -10590,7 +10581,7 @@ blockquote {
 .switch {
     position: absolute;
     /* margin: -7px auto; */
-    width: 250px;
+    width: 300px;
     height: 35px;
     border: 2px solid #E91E63;
     color: #333;
@@ -10626,6 +10617,9 @@ blockquote {
         cursor: pointer;
         text-align: center;
         transition: transform 0.4s, color 0.4s, background-color 0.4s;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .quality input[type="radio"] {
@@ -10694,6 +10688,19 @@ blockquote {
         position: relative;
         right: 0;
     }
+    .mobile-view{
+        padding:10px;
+    }
+    .sidenav{
+        left:-280px;
+    }
+    #main-container-user {
+        margin-left: 0;
+    }
+    .responsive-header{
+        display:block!important;
+    }
+    
 }
 
 /*Small Switch*/
@@ -11716,4 +11723,11 @@ label.tree_label:after {
 }
 .border-top{
     border-top:1px solid #ddd;
+}
+.table-hover tbody tr:hover {
+    background-color: rgba(254, 0, 90, 0.2);
+    color: #000;
+}
+.responsive-header{
+    display:none;
 }
