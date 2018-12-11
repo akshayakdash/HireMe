@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using Microsoft.AspNet.Identity.Owin;
+@using Microsoft.Owin.Security;
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -26,7 +28,10 @@
                 </li>
             </ul>
         </li>-->
-        if (!((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
+        if (!((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index"  || Request.RawUrl.ToString() ==  "/Home/EmployerInfo?Length=4"
+            || Request.RawUrl.ToString() == "/Home/CandidatInfo?Length=4" || Request.RawUrl.ToString() == "/Home/AgencyInfo?Length=4" || Request.RawUrl.ToString() == "/Home/About" || Request.RawUrl.ToString() == "/Account/Login"
+            || Request.RawUrl.ToString() == "/Account/Register?userRole=Employer" || Request.RawUrl.ToString() == "/Account/Register?userRole=Candidate" || Request.RawUrl.ToString() == "/Account/Register?userRole=Agency")))
+        //if(!Request.IsAuthenticated)
         {
         <div class="user-panel">
         <a href="#" class="dropdown-toggle userdropdown" data-toggle="dropdown">
@@ -37,11 +42,29 @@
                 <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
             </li>
             <li>
-                <a href="javascript:document.getElementById('logoutForm').submit()" class="border-top"><i class="fa fa-power-off"></i>Log Out</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
             </li>
         </ul>
         <div class="profile-image">
-            <img src="~/assets/images/photo.png" alt="">
+            @*<img src="~/assets/images/photo.png" alt="">*@
+            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+            {
+                var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var profilePicUrl = userManager.FindByName(@User.Identity.GetUserName()).ProfilePicUrl;
+                if (!string.IsNullOrWhiteSpace(profilePicUrl))
+                {
+                    <img src="data:image/jpeg;base64, @profilePicUrl" alt="">
+                }
+                else
+                {
+                    <img src="~/assets/images/photo.png" alt="">
+                }
+
+            }
+            else
+            {
+                <img src="~/assets/images/photo.png" alt="">
+            }
         </div>
         <div class="userid">
             @User.Identity.GetUserName()
@@ -51,7 +74,7 @@
         else
         {
             <li>
-                <a href="javascript:document.getElementById('logoutForm').submit()" class="border-top"><i class="fa fa-power-off"></i>Log Out</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
             </li>
         }
 
@@ -61,10 +84,18 @@
 }
 else
 {
-    @*<ul class="menu clearfix pull-right login-partial">*@
-        <li>@Html.ActionLink("REGISTER", "Register", "Account", routeValues: new { userRole = "Candidate" }, htmlAttributes: new { id = "registerLink" })</li>
+    @*<ul class=""></ul>*@
+        <li class="dropdown">
+            @*@Html.ActionLink("REGISTER", "Register", "Account", routeValues: new { userRole = "Candidate" }, htmlAttributes: new { id = "registerLink" })*@
+            <a href="#">Register</a>
+            <ul>
+                <li><a class="waves" href="Home/CandidatInfo?Length=4">CANDIDATE</a></li>
+                <li><a class="waves" href="Home/EmployerInfo?Length=4">EMPLOYER</a></li>
+                <li><a class="waves" href="Home/AgencyInfo?Length=4">AGENCY</a></li>
+            </ul>
+    </li>
         <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    @*</ul>*@
+    
 }
 
 
