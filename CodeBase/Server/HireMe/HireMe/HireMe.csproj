@@ -327,6 +327,7 @@
     <Compile Include="Utility\EnumExtension.cs" />
     <Compile Include="Utility\MySqlMigrationGenerator.cs" />
     <Compile Include="Utility\NotificationFramework.cs" />
+    <Compile Include="Utility\RazorViewHtmlHelpers.cs" />
     <Compile Include="Utility\SearchParam.cs" />
   </ItemGroup>
   <ItemGroup>

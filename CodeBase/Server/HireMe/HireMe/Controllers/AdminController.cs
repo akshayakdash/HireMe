@@ -58,7 +58,7 @@ namespace HireMe.Controllers
             candidate.ProfileVerified = true;
             db.SaveChanges();
 
-            await NotificationFramework.SendNotification("", candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+             NotificationFramework.SendNotification("", candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
@@ -70,7 +70,7 @@ namespace HireMe.Controllers
             return View(employers);
         }
 
-        public ActionResult ActivateEmployer(int id)
+        public async Task<ActionResult> ActivateEmployer(int id)
         {
             // first get the candidate by Id
             var employer = db.Employers.Find(id);
@@ -80,7 +80,7 @@ namespace HireMe.Controllers
             employer.ProfileVerified = true;
             db.SaveChanges();
 
-            NotificationFramework.SendNotification("", employer.AspNetUserId, "Account Activation - JOBTek", "Your candidate Account " + employer.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            await NotificationFramework.SendNotification("", employer.AspNetUserId, "Account Activation - JOBTek", "Your employer Account " + employer.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Employer profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
