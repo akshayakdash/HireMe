@@ -10496,7 +10496,7 @@ blockquote {
         right: 8px;
         color: #fff;
         right: -350px;
-        z-index: 2;
+        z-index: 3;
         -webkit-transition: all 0.25s;
         transition: all 0.25s;
     }
@@ -10540,7 +10540,7 @@ blockquote {
             background: #fff;
             padding: 10px 16px;
             display: block;
-            height: 100%;
+            min-height: 400px;
         }
 
         .jobsearch-section .left-section .grid-title {
@@ -10700,7 +10700,12 @@ blockquote {
     .responsive-header{
         display:block!important;
     }
-    
+    .switch {
+        position: initial;
+    }
+    .Filterjob{
+        top:6px;
+    }
 }
 
 /*Small Switch*/
