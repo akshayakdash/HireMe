@@ -226,7 +226,7 @@
                                     {
                                         <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
                                     }
-                                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
                                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 
 
@@ -370,7 +370,7 @@
 
                     @*<a href="~/SearchJobOffers"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
 
-                    <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-plus"></i> Create a Job Request</a>
+                    <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-plus"></i> Register candidate</a>
 
                     <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
 
