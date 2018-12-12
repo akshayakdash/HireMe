@@ -907,7 +907,9 @@
                 sliderLayout: "auto",
                 delay: 2500,
                 spinner: 'none',
+                onHoverStop: 'off',
                 navigation: {
+                    
                     arrows:{
                         style: "custom",
                         enable: true,

@@ -226,7 +226,7 @@
                                     {
                                         <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
                                     }
-                                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                                    <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
                                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 
 
@@ -284,9 +284,9 @@
                                             @*@Html.ActionLink("REGISTER", "Register", "Account", routeValues: new { userRole = "Candidate" }, htmlAttributes: new { id = "registerLink" })*@
                                             <a href="#" class="waves">REGISTER</a>
                                             <ul>
-                                                <li><a class="waves" href="Home/CandidatInfo?Length=4">CANDIDATE</a></li>
-                                                <li><a class="waves" href="Home/EmployerInfo?Length=4">EMPLOYER</a></li>
-                                                <li><a class="waves" href="Home/AgencyInfo?Length=4">AGENCY</a></li>
+                                                <li><a class="waves" href="~/Home/CandidatInfo?Length=4">CANDIDATE</a></li>
+                                                <li><a class="waves" href="~/Home/EmployerInfo?Length=4">EMPLOYER</a></li>
+                                                <li><a class="waves" href="~/Home/AgencyInfo?Length=4">AGENCY</a></li>
                                             </ul>
                                         </li>
                                         <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
@@ -370,7 +370,7 @@
 
                     @*<a href="~/SearchJobOffers"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
 
-                    <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-plus"></i> Create a Job Request</a>
+                    <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-plus"></i> Register candidate</a>
 
                     <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
 
