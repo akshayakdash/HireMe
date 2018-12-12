@@ -30,7 +30,7 @@ namespace HireMe.Controllers
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
 
             ViewBag.AgencyProfileVerfied = agency.ProfileVerified;
-
+            ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
             return View();
         }
         [HttpPost]
@@ -171,6 +171,7 @@ namespace HireMe.Controllers
                     db.SaveChanges();
                     //Ends Here     
                     //return RedirectToAction("Login", "Account");
+                    return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
                 }
                 //var country = context.Countries.ToList();
                 //var city = context.Cities.ToList();
@@ -182,6 +183,7 @@ namespace HireMe.Controllers
                 //AddErrors(result);
             }
             // If we got this far, something failed, redisplay form   
+            ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
             ViewBag.Country = countries;
             ViewBag.City = cities;
             ViewBag.District = districts;
