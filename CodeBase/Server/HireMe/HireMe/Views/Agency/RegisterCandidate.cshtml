@@ -30,11 +30,11 @@
                 <div class="form-box">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="home">
+                            @*<div class="home">
                                 <a href="/" class="">
                                     <i class="fa fa-home"></i>&nbsp;Home
                                 </a>
-                            </div>
+                            </div>*@
                             <div class="headline text-center">
                                <br />
                                 <h2>Register Candidate</h2>
@@ -72,6 +72,15 @@
                                                             <span></span>
                                                         </label>
                                                     </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12 error-arrow">
+                                                            @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "" })
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="row">
+                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
+            </div>*@
+                                                    @*<span class="input-lable">Gender</span>*@
 
                                                 </div>
                                                 <div class="row">
@@ -129,11 +138,13 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                     </div>
-                                                    @if (ViewBag.Country != null)
+                                                    @*@if (ViewBag.Country != null)
                                                     {
                                                         @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
 
-                                                    }<span class="input-lable">Country</span>
+                                                    }*@
+                                                    @Html.DropDownList("CountryId", ViewData["Country"] as List<SelectListItem>, "--Select Country--", new { @class = "form-control" })
+                                                    <span class="input-lable">Country</span>
                                                 </div>
 
 
@@ -141,7 +152,8 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                     </div>
-                                                    @Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
+                                                    @Html.DropDownList("CityId", new SelectList("", "Value", "Text"), "--Select City --", new { @class = "form-control" })
+                                                    @*@Html.DropDownListFor(m => m.CityId, new List<SelectListItem>
                                                                     {
                                                        new SelectListItem{ Text="Choose City", Value = "" },
                                                                         new SelectListItem{ Text="Abidjan (Capitale Eco)", Value = "1" },
@@ -149,7 +161,7 @@
                                                                         new SelectListItem{ Text="Abengourou", Value = "3" },
                                                                         new SelectListItem{ Text="Anyama", Value = "4" },
                                                                         new SelectListItem{ Text="Agnibilékrou", Value = "5" },
-                                                                     }, htmlAttributes: new { @class = "form-control", id = "City" })
+                                                                     }, htmlAttributes: new { @class = "form-control", id = "City" })*@
                                                     @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
                                                     <span class="input-lable">City</span>
                                                 </div>
@@ -163,7 +175,8 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                     </div>
-                                                    <select id="District" name="DistrictId" class="form-control"></select>
+                                                    @Html.DropDownList("DistrictId", new SelectList("", "Value", "Text"), "--Select District--", new { @class = "form-control" })
+                                                    @*<select id="District" name="DistrictId" class="form-control"></select>*@
                                                     @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
                                                     <span class="input-lable">District</span>
                                                 </div>
@@ -222,7 +235,7 @@
                                                         @Html.DropDownListFor(m => m.CountryCode, new List
                                                 <SelectListItem>
                                                 {
-                                                new SelectListItem{ Text="(+235)", Value = "+235" },
+                                                new SelectListItem{ Text="(+225)", Value = "+225" },
                                                 }, htmlAttributes: new { @class = "", @style = "margin:0;", id = "country_code" })
                                                     </div>
                                                     @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
@@ -294,6 +307,55 @@
 
 <script src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.inputmask.bundle.js"></script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        var districts = ["", ""]
+
+        $("#CountryId").change(function () {
+            $("#CityId").empty();
+            $.ajax({
+                type: 'GET',
+                url: '/Account/GetCities?id=' + $("#CountryId").val(), // we are calling json method
+                dataType: 'json',
+                success: function (cities) {
+                    $("#CityId").append('<option value="">' + ' --Select City--' + '</option>');
+                    $.each(cities, function (i, city) {
+                        $("#CityId").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+
+        $("#CityId").change(function () {
+            $("#DistrictId").empty();
+            $.ajax({
+                type: 'GET',
+                url: '/Account/GetDistricts?id=' + $("#CityId").val(), // we are calling json method
+
+                dataType: 'json',
+                success: function (districts) {
+                    $("#DistrictId").append('<option value="">' + ' --Select District--' + '</option>');
+                    $.each(districts, function (i, district) {
+                        $("#DistrictId").append('<option value="' + district.Value + '">' + district.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>
 <script type="text/javascript">
 
 
@@ -345,13 +407,33 @@
             // first check if the form is valid
             //alert();
 
+            //if ($('#Gender').valid()
+            //    && $('#FirstName').valid()
+            //    && $('#LastName').valid()
+            //    && $('#DOB').valid()
+            //    && $('#Country').valid()
+            //    && $('#City').valid()
+            //    && $('#District').valid()
+            //    //&& $('input[name="ExperienceInMonths"]').valid()
+            //    && $('#Address').valid()
+            //    && $('#Email').valid()
+            //    && $('#PhoneNumber').valid()) {
+
+            //    $(this).hide();
+            //    $(".backbtn").show();
+            //    $(".backbtn").addClass("active");
+            //    // $(".nextbtn").click();
+            //    $("#tab-1-1").hide();
+            //    $("#tab-1-2").show();
+            //}
+
             if ($('#Gender').valid()
                 && $('#FirstName').valid()
                 && $('#LastName').valid()
                 && $('#DOB').valid()
-                && $('#Country').valid()
-                && $('#City').valid()
-                && $('#District').valid()
+                && $('#CountryId').valid()
+                && $('#CityId').valid()
+                //&& $('#District').valid()
                 //&& $('input[name="ExperienceInMonths"]').valid()
                 && $('#Address').valid()
                 && $('#Email').valid()
@@ -364,6 +446,7 @@
                 $("#tab-1-1").hide();
                 $("#tab-1-2").show();
             }
+
             //$("#job-creation-form-container form").valid();
 
             //$(this).hide();
