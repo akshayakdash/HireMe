@@ -120,8 +120,8 @@ namespace HireMe.Controllers
                 var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == user.Id);
                 //updateProfileViewModel.ContactOption = agency.ContactOption;
                 updateProfileViewModel.ProfileVerified = agency.ProfileVerified;
-                // updateProfileViewModel.Age = int.Parse(agency.ManagerAge);
-                ViewBag.IdProofDoc = agency.AgencyLogo;
+                updateProfileViewModel.Age = agency.ManagerAge != null ? int.Parse(agency.ManagerAge) : 0;
+                ViewBag.IdProofDoc = agency.IdProofDoc;
             }
 
             var country = context.Countries.ToList();
@@ -180,9 +180,9 @@ namespace HireMe.Controllers
                     var candidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
                     if (candidate != null)
                     {
-                       // candidate.FirstName = model.FirstName;
-                       // candidate.LastName = model.LastName;
-                       // candidate.Age = model.Age;
+                        candidate.FirstName = model.FirstName;
+                        candidate.LastName = model.LastName;
+                        candidate.Age = model.Age;
                         candidate.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                         candidate.ContactNo = model.PhoneNumber;
                         candidate.EmailId = model.Email;
@@ -199,9 +199,9 @@ namespace HireMe.Controllers
                     var employer = context.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
                     if (employer != null)
                     {
-                      //  employer.FirstName = model.FirstName;
-                       // employer.LastName = model.LastName;
-                       // employer.Age = model.Age;
+                        employer.FirstName = model.FirstName;
+                        employer.LastName = model.LastName;
+                        employer.Age = model.Age;
                         employer.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                         employer.ContactNo = model.PhoneNumber;
                         employer.EmailId = model.Email;
@@ -212,22 +212,36 @@ namespace HireMe.Controllers
                         context.Entry(employer).State = System.Data.Entity.EntityState.Modified;
                     }
                 }
+                else if (role == "Agency")
+                {
+                    var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
+                    if (agency != null)
+                    {
+                        agency.ManagerFirstName = model.FirstName;
+                        agency.ManagerLastName = model.LastName;
+                         agency.ManagerAge = model.Age.ToString();
+                        agency.CountryId = model.CountryId;
+                        agency.CityId = model.CityId;
+                        agency.DistrictId = model.DistrictId;
+                        context.Entry(agency).State = System.Data.Entity.EntityState.Modified;
+                    }
+                }
 
                 context.SaveChanges();
             }
 
-            var user1 = context.Users.Find(User.Identity.GetUserId());
-            var registrationViewModel = new UpdateProfileViewModel
-            {
-                FirstName = user1.FirstName,
-                LastName = user1.LastName,
-                PhoneNumber = user1.PhoneNumber,
-                Email = user1.Email,
-                Address = user1.Address,
-                CityId = user1.CityId,
-                CountryId = user1.CountryId,
-                DistrictId = user1.DistrictId
-            };
+            //var user1 = context.Users.Find(User.Identity.GetUserId());
+            //var registrationViewModel = new UpdateProfileViewModel
+            //{
+            //    FirstName = user1.FirstName,
+            //    LastName = user1.LastName,
+            //    PhoneNumber = user1.PhoneNumber,
+            //    Email = user1.Email,
+            //    Address = user1.Address,
+            //    CityId = user1.CityId,
+            //    CountryId = user1.CountryId,
+            //    DistrictId = user1.DistrictId
+            //};
 
             //var country = context.Countries.ToList();
             //var city = context.Cities.ToList();
@@ -281,6 +295,13 @@ namespace HireMe.Controllers
                     existingEmployer.ProfilePicUrl = profileImagePath;
                     context.Entry(existingEmployer).Property(p => p.ProfilePicUrl).IsModified = true;
                 }
+
+                if (userManager.IsInRole(userId, "Agency"))
+                {
+                    var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
+                    agency.AgencyLogo = profileImagePath;
+                    context.Entry(agency).Property(p => p.AgencyLogo).IsModified = true;
+                }
                 context.SaveChanges();
 
             }
@@ -328,6 +349,12 @@ namespace HireMe.Controllers
                     var existingEmployer = context.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
                     existingEmployer.IdProofDoc = profileImagePath;
                     context.Entry(existingEmployer).Property(p => p.IdProofDoc).IsModified = true;
+                }
+                if (userManager.IsInRole(userId, "Agency"))
+                {
+                    var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
+                    agency.IdProofDoc = profileImagePath;
+                    context.Entry(agency).Property(p => p.IdProofDoc).IsModified = true;
                 }
                 context.SaveChanges();
 
