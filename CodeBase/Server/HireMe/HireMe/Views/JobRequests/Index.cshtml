@@ -10,7 +10,7 @@
     }
 </style>
 
-<div id="main-container-user" style="margin-left: 280px;">
+<div id="main-container-user">
     @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
                 .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
                 .Select(c => c.Value);
@@ -62,7 +62,7 @@
                                         <div class="col-md-12">
                                             <div class="isotope cols-3 gutter">
                                                 <div class="row">
-                                                    @foreach (var item in Model.Where(p => p.JobId == 1))
+                                                    @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
                                                         {
 
                                                         <div class="col-md-4 col-sm-6">
@@ -134,7 +134,7 @@
                                             <div class="col-md-12">
                                                 <div class="isotope cols-3 gutter">
                                                     <div class="row">
-                                                        @foreach (var item in Model.Where(p => p.JobId == 2))
+                                                        @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
                                                         {
 
                                                             <div class="col-md-4 col-sm-6">
@@ -191,7 +191,7 @@
                                         <div class="col-md-12">
                                             <div class="isotope cols-3 gutter">
                                                 <div class="row">
-                                                    @foreach (var item in Model.Where(p => p.JobId == 3))
+                                                    @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
                                                     {
 
                                                         <div class="col-md-4 col-sm-6">
@@ -249,7 +249,7 @@
                                         <div class="col-md-12">
                                             <div class="isotope cols-3 gutter">
                                                 <div class="row">
-                                                    @foreach (var item in Model.Where(p => p.JobId == 4))
+                                                    @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
                                                     {
 
                                                         <div class="col-md-4 col-sm-6">
@@ -307,7 +307,7 @@
                                         <div class="col-md-12">
                                             <div class="isotope cols-3 gutter">
                                                 <div class="row">
-                                                    @foreach (var item in Model.Where(p => p.JobId == 5))
+                                                    @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
                                                     {
 
                                                         <div class="col-md-4 col-sm-6">

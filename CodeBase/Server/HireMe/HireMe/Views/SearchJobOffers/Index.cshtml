@@ -57,7 +57,7 @@
 </script>
 
 
-<div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobOfferCtrl">
+<div id="main-container-user" ng-app="myApp" ng-controller="searchJobOfferCtrl">
     @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
                     .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
                     .Select(c => c.Value);

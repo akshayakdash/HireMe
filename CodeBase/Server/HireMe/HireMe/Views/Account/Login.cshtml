@@ -29,79 +29,81 @@
 }
 <div class="background"></div>
 <!--NEW CODE-->
-<div class="form-box wow zoomInUp">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="home">
-                <a href="/" class="">
-                    <span>
-                        <i class="bizhub-icon-home"></i>
-                    </span>
-                    @*<i class="fa fa-home"></i>&nbsp;Home*@
-                </a>
-            </div>
-            <div class="headline text-center">
-                <div class="form-logo">
-                    <img src="~/assets/images/logo.png" alt="JOBtek" />
-                </div>
-                <h2>Login</h2>
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            </div><!-- headline -->
-        </div>
-    </div><!-- row -->
-    <div class="row" >
-        <div class="col-md-12 regd-form formreg">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "loginForm" }))
-            {
-                @Html.AntiForgeryToken()
-                <fieldset>
-                    <div class="form-section">
-
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                            </div>
-                            @*<input type="text" class="form-control">
-                                <span class="input-lable">E-mail address</span>*@
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User Name", @name = "userName",  @required="true"  })
-                            <span class="input-lable">User Name</span>
-                            
-                            @*@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 error-arrow">
-                                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger  " })
-                            </div>
-                            </div>
-                        <div class="input-group mb-2">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
-                            </div>
-                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @name = "password",  @required = "true" })
-                            <span class="input-lable">Password</span>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-12 error-arrow">
-                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger  " })
-                            </div>
-                            </div>
-                        <div class="checkbox">
-                            <label>
-                                @Html.CheckBoxFor(m => m.RememberMe)
-                                Remember me
-                                <span></span>
-                            </label>
-                        </div>
-                        <div class="col-md-12 text-center">
-                            <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
-                        </div>
+<div class="mobile-view">
+    <div class="form-box wow zoomInUp">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="home">
+                    <a href="/" class="">
                         <span>
-                            @Html.ActionLink("Don't have an account?", "Register")
+                            <i class="bizhub-icon-home"></i>
                         </span>
-                        <span style="float:right;"><a href="/Account/ForgotPassword">Forgotten password?</a></span>
+                        @*<i class="fa fa-home"></i>&nbsp;Home*@
+                    </a>
+                </div>
+                <div class="headline text-center">
+                    <div class="form-logo">
+                        <img src="~/assets/images/logo.png" alt="JOBtek" />
                     </div>
-                </fieldset>
+                    <h2>Login</h2>
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                </div><!-- headline -->
+            </div>
+        </div><!-- row -->
+        <div class="row">
+            <div class="col-md-12 regd-form formreg">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "login-form", role = "form", name = "loginForm" }))
+            {
+                    @Html.AntiForgeryToken()
+                    <fieldset>
+                        <div class="form-section">
+
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                </div>
+                                @*<input type="text" class="form-control">
+                                    <span class="input-lable">E-mail address</span>*@
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User Name", @name = "userName",  @required="true"  })
+                                <span class="input-lable">User Name</span>
+
+                                @*@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 error-arrow">
+                                    @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger  " })
+                                </div>
+                            </div>
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
+                                </div>
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @name = "password",  @required = "true" })
+                                <span class="input-lable">Password</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 error-arrow">
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger  " })
+                                </div>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(m => m.RememberMe)
+                                    Remember me
+                                    <span></span>
+                                </label>
+                            </div>
+                            <div class="col-md-12 text-center">
+                                <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
+                            </div>
+                            <span>
+                                @Html.ActionLink("Don't have an account?", "Register")
+                            </span>
+                            <span style="float:right;"><a href="/Account/ForgotPassword">Forgotten password?</a></span>
+                        </div>
+                    </fieldset>
             }
+            </div>
         </div>
     </div>
 </div>
