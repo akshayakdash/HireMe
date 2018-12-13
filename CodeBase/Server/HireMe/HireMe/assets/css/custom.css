@@ -11736,3 +11736,17 @@ label.tree_label:after {
 .responsive-header{
     display:none;
 }
+.avatar {
+    width: 37px;
+    height: 37px;
+    position: relative;
+    margin-top: -13px;
+    margin-bottom: -11px;
+    margin-right: 10px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.navprofile {
+    position: relative;
+}

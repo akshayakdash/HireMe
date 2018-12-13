@@ -4045,10 +4045,11 @@
 	overflow: hidden;
 }
 
-.portfolio-item-thumbnail img {
-	width: 100%;
-	display: block;
-}
+    .portfolio-item-thumbnail img {
+        width: 100%;
+        display: block;
+        height: 270px;
+    }
 
 .portfolio-item-hover {
 	position: absolute;
