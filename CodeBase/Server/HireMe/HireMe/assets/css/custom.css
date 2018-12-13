@@ -1747,6 +1747,7 @@ dl {
     text-align: center;
     -webkit-transition: all 0.25s;
     transition: all 0.25s;
+    min-height: 605px;
 }
 
     .image-box .image-box-thumbnail {
@@ -10705,6 +10706,10 @@ blockquote {
     }
     .Filterjob{
         top:6px;
+    }
+
+    #desktop-menu{
+        display:none;
     }
 }
 
