@@ -11750,3 +11750,13 @@ label.tree_label:after {
 .navprofile {
     position: relative;
 }
+.regd-bg {
+    background: #e9f1f5;
+    padding:30px;
+}
+.agency-form-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
