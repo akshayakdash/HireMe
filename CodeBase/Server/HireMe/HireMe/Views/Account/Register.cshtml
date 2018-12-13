@@ -112,7 +112,7 @@
                                         <div id="alert-area"></div>
                                         <div class="input-group">
                                             <div class="mr-3">
-                                                <label class="label">Gender</label>
+                                                <label class="label pr-2">Gender<span class="required-field"></span></label>
                                             </div>
                                             <div class="radio mr-3">
                                                 <label>
@@ -147,6 +147,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">First Name</span>
@@ -160,6 +161,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Last Name</span>
@@ -173,6 +175,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/calendar.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.DOB, new { @class = "form-control", @placeholder = "", @type = "date" })
                                             <span class="input-lable">Date of birth</span>
@@ -193,6 +196,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.DropDownList("CountryId", ViewData["Country"] as List<SelectListItem>, "--Select Country--", new { @class = "form-control" })
 
@@ -208,6 +212,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.DropDownList("CityId", new SelectList("", "Value", "Text"), "--Select City --", new { @class = "form-control" })
 
@@ -233,6 +238,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.DropDownList("DistrictId", new SelectList("", "Value", "Text"), "--Select District--", new { @class = "form-control" })
                                             @*<select id="District" name="DistrictId" class="form-control"></select>*@
@@ -248,6 +254,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
                                             <span class="input-lable">Address</span>
@@ -266,6 +273,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/email.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Email</span>
@@ -278,6 +286,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
+                                                <span class="required-field"></span>
                                                 @*<span class="input-group-text">
                                                     @Html.DropDownListFor(m => m.CountryCode, new List
                                                     <SelectListItem>
@@ -350,6 +359,7 @@
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                        <span class="required-field"></span>
                                     </div>
                                     @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "" })
                                     <span class="input-lable">Company Name</span>
@@ -362,6 +372,7 @@
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                        <span class="required-field"></span>
                                     </div>
                                     @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "" })
                                     <span class="input-lable">Responsible Name</span>
@@ -374,6 +385,7 @@
                                 <div class="input-group mb-2">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                        <span class="required-field"></span>
                                     </div>
                                     @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "" })
                                     <span class="input-lable">Website URL</span>
@@ -386,6 +398,7 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                        <span class="required-field"></span>
                                     </div>
                                     @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "" })
                                     <span class="input-lable">Description</span>
@@ -402,6 +415,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">User name</span>
@@ -414,6 +428,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Password</span>
@@ -426,6 +441,7 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/key.png" alt=""></span>
+                                                <span class="required-field"></span>
                                             </div>
                                             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable">Confirm password</span>
@@ -442,6 +458,7 @@
                                     <div class="input-group mb-2">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
+                                            <span class="required-field"></span>
                                         </div>
                                         @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control" })
                                         <span class="input-lable">Security Question</span>
@@ -454,6 +471,7 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
+                                            <span class="required-field"></span>
                                         </div>
                                         @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
                                         <span class="input-lable">Security Answer</span>

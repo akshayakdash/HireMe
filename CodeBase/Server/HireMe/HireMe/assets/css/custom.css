@@ -1388,18 +1388,18 @@ dl {
         color: #b4b4b4;
     }
 
-        .text-box:hover h6 {
-            color: #fff;
-        }
+    .text-box:hover h6 {
+        color: #fff;
+    }
 
-        .text-box:hover h4,
-        .text-box:hover h4 a {
-            color: #fe005a;
-        }
+    .text-box:hover h4,
+    .text-box:hover h4 a {
+        color: #fe005a;
+    }
 
-            .text-box:hover h4 a:hover {
-                color: #fff;
-            }
+    .text-box:hover h4 a:hover {
+        color: #fff;
+    }
 
     .text-box > *:last-child {
         margin-bottom: 0;
@@ -1410,23 +1410,23 @@ dl {
         color: #fff;
     }
 
-        .text-box.dark a,
-        .text-box.dark h1,
-        .text-box.dark h2,
-        .text-box.dark h3,
-        .text-box.dark h4,
-        .text-box.dark h5,
-        .text-box.dark h6 {
-            color: inherit;
-        }
+    .text-box.dark a,
+    .text-box.dark h1,
+    .text-box.dark h2,
+    .text-box.dark h3,
+    .text-box.dark h4,
+    .text-box.dark h5,
+    .text-box.dark h6 {
+        color: inherit;
+    }
 
-            .text-box.dark a:hover {
-                color: #fe005a;
-            }
+    .text-box.dark a:hover {
+        color: #fe005a;
+    }
 
-        .text-box.dark .service-box.style-4 > i:before {
-            -webkit-text-fill-color: #fff;
-        }
+    .text-box.dark .service-box.style-4 > i:before {
+        -webkit-text-fill-color: #fff;
+    }
 
 /* STYLE 2 */
 .text-box-2 {
@@ -1472,40 +1472,40 @@ dl {
         color: #fff;
     }
 
-        .text-box-2.default a,
-        .text-box-2.default h1,
-        .text-box-2.default h2,
-        .text-box-2.default h3,
-        .text-box-2.default h4,
-        .text-box-2.default h5,
-        .text-box-2.default h6,
-        .text-box-2.dark a,
-        .text-box-2.dark h1,
-        .text-box-2.dark h2,
-        .text-box-2.dark h3,
-        .text-box-2.dark h4,
-        .text-box-2.dark h5,
-        .text-box-2.dark h6 {
-            color: inherit;
+    .text-box-2.default a,
+    .text-box-2.default h1,
+    .text-box-2.default h2,
+    .text-box-2.default h3,
+    .text-box-2.default h4,
+    .text-box-2.default h5,
+    .text-box-2.default h6,
+    .text-box-2.dark a,
+    .text-box-2.dark h1,
+    .text-box-2.dark h2,
+    .text-box-2.dark h3,
+    .text-box-2.dark h4,
+    .text-box-2.dark h5,
+    .text-box-2.dark h6 {
+        color: inherit;
+    }
+
+        .text-box-2.dark a:not(.btn):hover,
+        .text-box-2.default a:not(.btn):hover {
+            color: #fe005a;
         }
 
-            .text-box-2.dark a:not(.btn):hover,
-            .text-box-2.default a:not(.btn):hover {
-                color: #fe005a;
-            }
+    .text-box-2.dark input,
+    .text-box-2.default input,
+    .text-box-2.dark textarea,
+    .text-box-2.default textarea {
+        background-color: transparent;
+        color: inherit;
+    }
 
-        .text-box-2.dark input,
-        .text-box-2.default input,
-        .text-box-2.dark textarea,
-        .text-box-2.default textarea {
-            background-color: transparent;
-            color: inherit;
-        }
-
-        .text-box-2.dark .plus-list-3 li,
-        .text-box-2.default .plus-list-3 li {
-            color: inherit;
-        }
+    .text-box-2.dark .plus-list-3 li,
+    .text-box-2.default .plus-list-3 li {
+        color: inherit;
+    }
 
     /* DARK SECTION */
     .text-box-2 .testimonial {
@@ -1600,10 +1600,10 @@ dl {
         flex-direction: column;
     }
 
-        .text-boxes-list li {
-            display: block;
-            flex-basis: 100%;
-        }
+    .text-boxes-list li {
+        display: block;
+        flex-basis: 100%;
+    }
 }
 
 /***********************************************************************************
@@ -1646,9 +1646,9 @@ dl {
         flex-direction: column;
     }
 
-        .number-box:nth-child(even) {
-            margin-left: 0;
-        }
+    .number-box:nth-child(even) {
+        margin-left: 0;
+    }
 }
 
 /***********************************************************************************
@@ -1714,9 +1714,9 @@ dl {
         align-items: stretch;
     }
 
-        .menu-box .menu-box-details .price:before {
-            width: 65%;
-        }
+    .menu-box .menu-box-details .price:before {
+        width: 65%;
+    }
 }
 
 @media (max-width: 991px) {
@@ -1726,15 +1726,15 @@ dl {
         align-items: flex-start;
     }
 
-        .menu-box .menu-box-details {
-            flex-basis: 100%;
-            padding-left: 0;
-            margin-top: 30px;
-        }
+    .menu-box .menu-box-details {
+        flex-basis: 100%;
+        padding-left: 0;
+        margin-top: 30px;
+    }
 
-            .menu-box .menu-box-details .price:before {
-                width: 65%;
-            }
+    .menu-box .menu-box-details .price:before {
+        width: 65%;
+    }
 }
 
 /***********************************************************************************
@@ -11759,4 +11759,17 @@ label.tree_label:after {
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.required-field {
+    width: 0;
+    height: 0;
+    border-top: 7px solid #dc3545;
+    border-left: 7px solid transparent;
+    float: left;
+    position: absolute;
+    right: 1px;
+    top: 0px;
+}
+.input-group-prepend {
+    position: relative;
 }
