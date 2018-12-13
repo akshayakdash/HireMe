@@ -909,7 +909,7 @@
                 spinner: 'none',
                 onHoverStop: 'off',
                 navigation: {
-                    
+                    onHoverStop: 'off',
                     arrows:{
                         style: "custom",
                         enable: true,

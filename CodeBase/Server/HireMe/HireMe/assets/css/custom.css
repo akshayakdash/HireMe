@@ -1351,7 +1351,7 @@ dl {
     width: 100%;
     padding: 45px 30px;
     margin-bottom: 50px;
-    background-color: #f8f9fb;
+    background-color: #e1e9f9;
     color: #636363;
     /*text-align: center;*/
     -webkit-transition: all 0.25s;
@@ -11735,4 +11735,28 @@ label.tree_label:after {
 }
 .responsive-header{
     display:none;
+}
+.avatar {
+    width: 37px;
+    height: 37px;
+    position: relative;
+    margin-top: -13px;
+    margin-bottom: -11px;
+    margin-right: 10px;
+}
+.img-circle {
+    border-radius: 50%;
+}
+.navprofile {
+    position: relative;
+}
+.regd-bg {
+    background: #e9f1f5;
+    padding:30px;
+}
+.agency-form-box {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
