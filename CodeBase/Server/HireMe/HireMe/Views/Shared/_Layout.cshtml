@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using HireMe.Utility
+@using Microsoft.AspNet.Identity.Owin;
 <!DOCTYPE html>
 <html>
 <head>
@@ -193,162 +194,201 @@
             </div>
 
         }
-            <header id="header">
 
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-sm-2">
+        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                    .Select(c => c.Value);
+            string role = roles.FirstOrDefault();}
+        <header id="header">
 
-                            <!-- LOGO -->
-                            <div id="logo">
-                                <a href="index.html">
-                                    <img src="~/assets/images/logo.png" alt="">
-                                </a>
-                            </div><!-- LOGO -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-2">
 
-                        </div><!-- col -->
-                        <div class="col-sm-10">
+                        <!-- LOGO -->
+                        <div id="logo">
+                            <a href="index.html">
+                                <img src="~/assets/images/logo.png" alt="">
+                            </a>
+                        </div><!-- LOGO -->
 
-                            <!-- MENU -->
-                            <nav>
+                    </div><!-- col -->
+                    <div class="col-sm-10">
 
-                                <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
-                                @if (((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
-                                //if(!Request.IsAuthenticated)
-                                {
+                        <!-- MENU -->
+                        <nav>
+
+                            <a class="mobile-menu-button" href="#"><i class="bizhub-icon-menu-5"></i></a>
+                            @if (((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
+                            {
                                 <div class="mobile-app">
                                     <a class="btn btn-style-4 waves" href="#"><i class="fa fa-download"></i> Mobile App</a>
                                 </div>
+                            }
+
+                            <ul class="menu clearfix" id="menu desktop-menu">
+                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
                                 }
-
-                                <ul class="menu clearfix" id="menu desktop-menu">
-                                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                                    @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
+                             
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
                                     {
-                                        <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
-                                    }
-                                    <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
-                                    @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                                        @Html.AntiForgeryToken()
 
-                                    @*@Html.Partial("_LoginPartial")*@
-
-                                    @if (Request.IsAuthenticated)
-                                    {
-                                        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
-                                        {
-                                            @Html.AntiForgeryToken()
-
-                                            @*if (!((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index" || Request.RawUrl.ToString() == "/Home/EmployerInfo?Length=4"
-                                                || Request.RawUrl.ToString() == "/Home/CandidatInfo?Length=4" || Request.RawUrl.ToString() == "/Home/AgencyInfo?Length=4" || Request.RawUrl.ToString() == "/Home/About" || Request.RawUrl.ToString() == "/Account/Login"
-                                                || Request.RawUrl.ToString() == "/Account/Register?userRole=Employer" || Request.RawUrl.ToString() == "/Account/Register?userRole=Candidate" || Request.RawUrl.ToString() == "/Account/Register?userRole=Agency")))
-                                            //if(!Request.IsAuthenticated)
-                                            {
-                                                
-                                                <div class="user-panel">
-                                                    <a href="#" class="dropdown-toggle userdropdown" data-toggle="dropdown">
-                                                        <i class="fa fa-cog"></i>
-                                                    </a>
-                                                    
-                                                    <ul class="dropdown-menu box userpanel">
-                                                        <li class="">
-                                                            <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="profile-image">
-                                                        <img src="~/assets/images/photo.png" alt="">
-                                                    </div>
-                                                    <div class="userid">
-                                                        @User.Identity.GetUserName()
-                                                    </div>
-                                                </div>
-                                            }
-                                            else
-                                            {*@
-                                            @*<li>
-                                                <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
-                                            </li>*@
-
-                                                <li class="navprofile dropdown">
-                                                    <a href="" class="waves dropdown-toggle userdropdown" data-toggle="dropdown">
+                                        <li class="navprofile dropdown">
+                                            <a href="" class="waves dropdown-toggle userdropdown" data-toggle="dropdown">
+                                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                                {
+                                                    var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                                                    var profilePicUrl = userManager.FindByName(@User.Identity.GetUserName()).ProfilePicUrl;
+                                                    if (!string.IsNullOrWhiteSpace(profilePicUrl))
+                                                    {
+                                                        <img src="data:image/jpeg;base64, @profilePicUrl" class="avatar img-circle" alt="Avatar">
+                                                    }
+                                                    else
+                                                    {
                                                         <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
-                                                        employee1@gmail.com
-                                                    </a>
-                                                    <ul>
-                                                        <li class="">
-                                                            <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
-                                                        </li>
-                                                    </ul>
-                                                </li>
+                                                    }
 
-                                            //}
-
-
-                                            @*</ul>*@
-                                        }
-                                    }
-                                    else
-                                    {
-                                        @*<ul class="menu clearfix pull-right login-partial">*@
-                                        <li class="dropdown">
-                                            @*@Html.ActionLink("REGISTER", "Register", "Account", routeValues: new { userRole = "Candidate" }, htmlAttributes: new { id = "registerLink" })*@
-                                            <a href="#" class="waves">REGISTER</a>
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
+                                                }
+                                                @User.Identity.GetUserName()
+                                            </a>
                                             <ul>
-                                                <li><a class="waves" href="~/Home/CandidatInfo?Length=4">CANDIDATE</a></li>
-                                                <li><a class="waves" href="~/Home/EmployerInfo?Length=4">EMPLOYER</a></li>
-                                                <li><a class="waves" href="~/Home/AgencyInfo?Length=4">AGENCY</a></li>
+                                                <li class="">
+                                                    <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                                </li>
                                             </ul>
                                         </li>
-                                        <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                                        @*</ul>*@
                                     }
-
-
-                                    @*<li class="secondary-menu-btn">
-                                        <ul class="secondary-menu">
-                                            <li><a class="waves" href="index.html">Home</a></li>
-                                            <li><a class="waves" href="#">ADMIN</a></li>
-                                            <li><a class="waves" href="#">LOGIN</a></li>
-                                            <li><a class="waves" href="#">CONTACT</a></li>
-                                            <li><a class="waves" href="#">AIDE</a></li>
+                                }
+                                else
+                                {
+                                    <li class="dropdown">
+                                        <a href="#" class="waves">REGISTER</a>
+                                        <ul>
+                                            <li><a class="waves" href="~/Home/CandidatInfo?Length=4">CANDIDATE</a></li>
+                                            <li><a class="waves" href="~/Home/EmployerInfo?Length=4">EMPLOYER</a></li>
+                                            <li><a class="waves" href="~/Home/AgencyInfo?Length=4">AGENCY</a></li>
                                         </ul>
-                                    </li>*@
-                                </ul>
+                                    </li>
+                                    <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                }
+                            </ul>
 
 
 
-                                @*<ul class="menu clearfix" id="menu mobile-menu">
-                                    <li><a class="waves" href="#">Home</a></li>
+                            <ul class="menu clearfix" id="menu mobile-menu">
+                                @*<li><a class="waves" href="#">Home</a></li>
                                     <li><a class="waves" href="#">Dashboard</a></li>
-                                    <li><a class="waves" href="#">Search Jobs</a></li>
-                                </ul>*@
-                                
-                            
-                            
-                            </nav>
+                                    <li><a class="waves" href="#">Search Jobs</a></li>*@
+                                @*<li>@Html.ActionLink("Home", "Index", "Home", new { @class = "waves" })</li>*@
+                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+                                    <li>@Html.ActionLink("Dashboard", "Index", "Users", new { @class = "waves" })</li>
+                                }
+                                @if (role == "Candidate")
+                                {
+                                    <li>
+                                        <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a>
+                                    </li>
 
-                        </div><!-- col -->
-                    </div><!-- row -->
-                </div><!-- container-fluid -->
+                                    @*<a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
 
-            </header>
-        
-        
+                                    <li>
+                                        <a href="~/JobRequests" class="@Html.IsSelected(controllers: "JobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i>Manage My Job Requests</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="~/FavouriteJobOffers" class="@Html.IsSelected(controllers: "FavouriteJobOffers", cssClass: "active")"><i class="fa fa-heart"></i> Manage my favorites</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
+                                    </li>
+
+                                                                                <li>
+                                                                                    <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
+                                                                                </li>
+                                }
+                                else if (role == "Employer")
+                                {
+
+                                    @*<a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>*@
+                                    <li>
+                                        <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a>
+                                    </li>
+                                    <li><a href="~/JobOffers" class="@Html.IsSelected(controllers: "JobOffers", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Offers</a></li>
+                                    <li><a href="~/FavouriteJobRequests" class="@Html.IsSelected(controllers: "FavouriteJobRequests", cssClass: "active")"><i class="fa fa-heart"></i> Manage my favorites</a></li>
+                                    <li><a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages &amp; Notifications</a></li>
+                                    <li>
+                                        <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
+                                    </li>
+                                }
+                                else if (role == "Agency")
+                                {
+
+                                    <li><a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a></li>
+
+
+                                    <li> <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-pencil-square-o"></i> Register candidate</a></li>
+
+                                    <li>
+                                        <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages & Notifications</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
+                                    </li>
+
+                                }
+                                else if (role == "Admin")
+                                {
+                                    <li><a href="~/Admin/Agencies" class="@Html.IsSelected(controllers: "Admin", actions: "Agencies", cssClass: "active")"><i class="fa fa-check-square"></i> Verify Agency Profiles</a></li>
+                                    <li><a href="~/Admin/Candidates" class="@Html.IsSelected(controllers: "Admin", actions: "Candidates", cssClass: "active")"><i class="fa fa-check-square"></i> Verify Candidate Profiles</a></li>
+                                    <li><a href="~/Admin/Employers" class="@Html.IsSelected(controllers: "Admin", actions: "Employers", cssClass: "active")"><i class="fa fa-check-square"></i> Verify Employer Profiles</a></li>
+                                    <li><a href="~/Admin/ValidateJobRequests" class="@Html.IsSelected(controllers: "Admin", actions: "ValidateJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> Job Requests</a></li>
+                                    <li><a href="~/Admin/ValidateJobOffers" class="@Html.IsSelected(controllers: "Admin", actions: "ValidateJobOffers", cssClass: "active")"><i class="fa fa-graduation-cap"></i> Job Offers</a></li>
+                                    <li>
+                                        <a href="~/Admin/ExportMembers" class="@Html.IsSelected(controllers: "Admin", actions: "ExportMembers", cssClass: "active")"><i class="fa fa-upload"></i> Export</a>
+                                    </li>
+                                }
+
+
+                            </ul>
+
+
+
+                        </nav>
+
+                    </div><!-- col -->
+                </div><!-- row -->
+            </div><!-- container-fluid -->
+
+        </header>
+
+
 
         @if (HttpContext.Current.User.Identity.IsAuthenticated && !((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
         {
             <div id="mySidenav" class="sidenav">
 
-                @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                    .Select(c => c.Value);
-                    string role = roles.FirstOrDefault();}
+
 
                 <div class="sidenav-header">User Account - @role</div>
                 @*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*@
@@ -392,7 +432,7 @@
 
                     <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
 
-                    <a href="~/Notification"  class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages & Notifications</a>
+                    <a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages & Notifications</a>
 
                     <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
 
@@ -406,7 +446,7 @@
                     <a href="~/Admin/ValidateJobOffers" class="@Html.IsSelected(controllers: "Admin", actions: "ValidateJobOffers", cssClass: "active")"><i class="fa fa-graduation-cap"></i> Job Offers</a>
                     <a href="~/Admin/ExportMembers" class="@Html.IsSelected(controllers: "Admin", actions: "ExportMembers", cssClass: "active")"><i class="fa fa-upload"></i> Export</a>
                 }
-                
+
             </div>
         }
 
@@ -414,8 +454,8 @@
     </div>
     @*<h1>@Request.Url.ToString()</h1>
 
-    <h1>@Request.RawUrl.ToString()</h1>
-    <h1>@Request.Url.AbsoluteUri</h1>*@
+        <h1>@Request.RawUrl.ToString()</h1>
+        <h1>@Request.Url.AbsoluteUri</h1>*@
     <footer id="footer-container">
         <div id="footer-bottom">
             <div class="container">
@@ -496,13 +536,13 @@
     }
     <!-- Start of LiveChat (www.livechatinc.com) code -->
     <script type="text/javascript">
-                window.__lc = window.__lc || {};
-                window.__lc.license = 10397537;
-                (function () {
-                    var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
-                    lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-                    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-                })();
+            window.__lc = window.__lc || {};
+            window.__lc.license = 10397537;
+            (function () {
+                var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+                lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+            })();
     </script>
     <noscript>
         <a href="https://www.livechatinc.com/chat-with/10397537/">Chat with us</a>,
