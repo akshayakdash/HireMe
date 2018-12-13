@@ -99,7 +99,7 @@
         //alert(jobRequestId);
         $.ajax
             ({
-                url: '/FavouriteJobOffers/Delete?id=' + jobOfferId,
+                url: '/JobRequests/Delete?id=' + jobOfferId,
                 //data: { "id": jobRequestId },
                 type: 'get',
                 success: function (result) {
@@ -157,9 +157,10 @@
                             <ul class="nav nav-tabs job-tab">
                                 <li><a class="active" href="#tab-fav-job-offer-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
                                 <li><a href="#tab-fav-job-offer-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                                <li><a href="#tab-fav-job-offer-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
-                                <li><a href="#tab-fav-job-offer-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                                <li><a href="#tab-fav-job-offer-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                               
+                                <li><a href="#tab-fav-job-offer-3" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                <li><a href="#tab-fav-job-offer-4" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                                <li><a href="#tab-fav-job-offer-5" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
                             </ul>
 
 
@@ -201,9 +202,9 @@
                                                             </h2>
                                                         </div>
                                                         <div class="right">
-                                                            <div class="idcard">
+                                                            @*<div class="idcard">
                                                                 <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>
+                                                            </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                             {
@@ -288,9 +289,9 @@
                                                             </h2>
                                                         </div>
                                                         <div class="right">
-                                                            <div class="idcard">
+                                                            @*<div class="idcard">
                                                                 <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>
+                                                            </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                 {
@@ -374,9 +375,9 @@
                                                             </h2>
                                                         </div>
                                                         <div class="right">
-                                                            <div class="idcard">
+                                                            @*<div class="idcard">
                                                                 <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>
+                                                            </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                 {
@@ -460,9 +461,9 @@
                                                             </h2>
                                                         </div>
                                                         <div class="right">
-                                                            <div class="idcard">
+                                                            @*<div class="idcard">
                                                                 <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>
+                                                            </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                 {
@@ -546,9 +547,9 @@
                                                             </h2>
                                                         </div>
                                                         <div class="right">
-                                                            <div class="idcard">
+                                                            @*<div class="idcard">
                                                                 <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>
+                                                            </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                 {

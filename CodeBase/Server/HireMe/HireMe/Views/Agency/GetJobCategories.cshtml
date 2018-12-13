@@ -8,77 +8,89 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
+
+<div id="main-container-user">
 
 
-<div id="main-container">
-    
+    <div class="full-section-container wow fadeInUp">
+        <div class="tab-section">
+            <div class="tab-section-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
 
-    <div class="container wow fadeInUp">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="tabs style-2 mt-lg-5 pt-lg-5">
-                    <ul class="nav nav-tabs job-tab">
-                        @for (int i = 0; i < Model.Count(); i++)
-                        {
-                            var item = Model.ElementAt(i);
-                            <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
-                        }
-                    </ul>
+                            <h2>My Job Offers</h2>
+                        </div>
+                        <div class="tabs style-2">
+                            <ul class="nav nav-tabs job-tab">
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    var item = Model.ElementAt(i);
+                                    <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
+                                }
+                            </ul>
 
-                    <div class="tab-content">
-                        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                            <div class="tab-content">
+                                @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
   .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
   .Select(c => c.Value);
-                            string role = roles.FirstOrDefault();}
+                                    string role = roles.FirstOrDefault();}
 
-                        @for (int i = 0; i < Model.Count(); i++)
-                        {
-                            var item = Model.ElementAt(i);
-                            <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-1-"+i)">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="isotope cols-3 gutter">
-                                            @foreach (var job in item.Jobs)
-                                            {
-                                                <div class="isotope-item categ-1 categ-2">
-                                                    <div class="portfolio-item">
-                                                        <div class="portfolio-item-thumbnail">
-                                                            <img src="~/assets/images/portfolio/cook.jpg" alt="">
-                                                            <div class="portfolio-item-hover"></div>
-                                                            <div class="portfolio-item-description">
-                                                                @if (role == "Candidate")
-                                                                {
-                                                                    <h5><a href="~/CandidateProfiles/Create/@(job.JobId)">@job.JobName</a></h5>
-                                                                }
-                                                                else if (role == "Employer")
-                                                                {
-                                                                    <h5><a href="~/EmployerJobOffers/Create/@(job.JobId)">@job.JobName</a></h5>
-                                                                }
-                                                                else if (role == "Agency")
-                                                                {
-                                                                    @*<h5><a href="~/Agency/CreateCandidateProfile/@(job.JobId)">@job.JobName</a></h5>*@
-                                                                    <h5>@Html.ActionLink(job.JobName, "CreateCandidateProfile", "Agency", new { candidateId = ViewBag.CandidateId, jobId = job.JobId }, null) </h5>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <h5><a href="~/Jobs/Details/@(job.JobId)">@job.JobName</a></h5>
-                                                                }
-                                                            </div><!-- portfolio-item-description -->
-                                                            <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
-                                                        </div><!-- portfolio-item-thumbnail -->
-                                                    </div><!-- portfolio-item -->
+                                @for (int i = 0; i < Model.Count(); i++)
+                                {
+                                    var item = Model.ElementAt(i);
+                                    <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-1-"+i)">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="isotope cols-3 gutter">
+                                                    @foreach (var job in item.Jobs)
+                                                    {
+                                                        <div class="isotope-item categ-1 categ-2">
+                                                            <div class="portfolio-item">
+                                                                <div class="portfolio-item-thumbnail">
+                                                                    <img src="@(job.IconImage)" alt="">
+                                                                    <div class="portfolio-item-hover"></div>
+                                                                    <div class="portfolio-item-description">
+                                                                        @if (role == "Candidate")
+                                                                        {
+                                                                            <h5><a href="~/CandidateProfiles/Create/@(job.JobId)">@job.JobName</a></h5>
+                                                                        }
+                                                                        else if (role == "Employer")
+                                                                        {
+                                                                            <h5><a href="~/EmployerJobOffers/Create/@(job.JobId)">@job.JobName</a></h5>
+                                                                        }
+                                                                        else if (role == "Agency")
+                                                                        {
+                                                                            @*<h5><a href="~/Agency/CreateCandidateProfile/@(job.JobId)">@job.JobName</a></h5>*@
+                                                                            <h5>@Html.ActionLink(job.JobName, "CreateCandidateProfile", "Agency", new { candidateId = ViewBag.CandidateId, jobId = job.JobId }, null) </h5>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <h5><a href="~/Jobs/Details/@(job.JobId)">@job.JobName</a></h5>
+                                                                        }
+                                                                    </div><!-- portfolio-item-description -->
+                                                                    <a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>
+                                                                </div><!-- portfolio-item-thumbnail -->
+                                                            </div><!-- portfolio-item -->
+                                                        </div>
+                                                    }
+
+
                                                 </div>
-                                            }
-
-
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        }
+                                }
 
-                    </div><!-- tab-content -->
-                </div><!-- tabs -->
+                            </div><!-- tab-content -->
+                        </div><!-- tabs -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
