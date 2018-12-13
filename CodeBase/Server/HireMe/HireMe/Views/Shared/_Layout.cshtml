@@ -220,7 +220,8 @@
                                     <a class="btn btn-style-4 waves" href="#"><i class="fa fa-download"></i> Mobile App</a>
                                 </div>
                                 }
-                                <ul class="menu clearfix" id="menu">
+
+                                <ul class="menu clearfix" id="menu desktop-menu">
                                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                     @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                     {
@@ -229,11 +230,7 @@
                                     <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
                                     @*<li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
 
-
-
                                     @*@Html.Partial("_LoginPartial")*@
-
-
 
                                     @if (Request.IsAuthenticated)
                                     {
@@ -246,10 +243,12 @@
                                                 || Request.RawUrl.ToString() == "/Account/Register?userRole=Employer" || Request.RawUrl.ToString() == "/Account/Register?userRole=Candidate" || Request.RawUrl.ToString() == "/Account/Register?userRole=Agency")))
                                             //if(!Request.IsAuthenticated)
                                             {
+                                                
                                                 <div class="user-panel">
                                                     <a href="#" class="dropdown-toggle userdropdown" data-toggle="dropdown">
                                                         <i class="fa fa-cog"></i>
                                                     </a>
+                                                    
                                                     <ul class="dropdown-menu box userpanel">
                                                         <li class="">
                                                             <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
@@ -258,6 +257,7 @@
                                                             <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
                                                         </li>
                                                     </ul>
+
                                                     <div class="profile-image">
                                                         <img src="~/assets/images/photo.png" alt="">
                                                     </div>
@@ -268,9 +268,25 @@
                                             }
                                             else
                                             {*@
-                                                <li>
-                                                    <a href="javascript:document.getElementById('logoutForm1').submit()" class="waves"><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                            @*<li>
+                                                <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                            </li>*@
+
+                                                <li class="navprofile dropdown">
+                                                    <a href="" class="waves dropdown-toggle userdropdown" data-toggle="dropdown">
+                                                        <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
+                                                        employee1@gmail.com
+                                                    </a>
+                                                    <ul>
+                                                        <li class="">
+                                                            <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                                        </li>
+                                                    </ul>
                                                 </li>
+
                                             //}
 
 
@@ -294,14 +310,6 @@
                                     }
 
 
-
-
-
-
-
-
-
-
                                     @*<li class="secondary-menu-btn">
                                         <ul class="secondary-menu">
                                             <li><a class="waves" href="index.html">Home</a></li>
@@ -313,6 +321,16 @@
                                     </li>*@
                                 </ul>
 
+
+
+                                @*<ul class="menu clearfix" id="menu mobile-menu">
+                                    <li><a class="waves" href="#">Home</a></li>
+                                    <li><a class="waves" href="#">Dashboard</a></li>
+                                    <li><a class="waves" href="#">Search Jobs</a></li>
+                                </ul>*@
+                                
+                            
+                            
                             </nav>
 
                         </div><!-- col -->
@@ -370,7 +388,7 @@
 
                     @*<a href="~/SearchJobOffers"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
 
-                    <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-plus"></i> Register candidate</a>
+                    <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-pencil-square-o"></i> Register candidate</a>
 
                     <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
 
