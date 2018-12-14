@@ -226,7 +226,7 @@
                                 </div>
                             }
 
-                            <ul class="menu clearfix" id="menu desktopview-menu">
+                            <ul class="menu clearfix" id="menu desktop-menu">
                                 <li>@Html.ActionLink("Home", "Index", "Home")</li>
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
@@ -287,49 +287,13 @@
                                 }
                             </ul>
 
-                            @*<ul class="menu mobileview-menu clearfix" id="menu">
-                                <li><a class="waves" href="#">Home</a></li>
-                                <li><a class="waves" href="#">Dashboard</a></li>
-                                <li><a class="waves" href="#">Search Jobs</a></li>
-                            </ul>*@
-
-                               <ul class="menu mobileview-menu clearfix" id="menu">
 
 
-                                   <li class="navprofile dropdown">
-                                       <a href="" class="waves username">
-                                           @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                           {
-                                               var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                                               var profilePicUrl = userManager.FindByName(@User.Identity.GetUserName()).ProfilePicUrl;
-                                               if (!string.IsNullOrWhiteSpace(profilePicUrl))
-                                               {
-                                                   <img src="data:image/jpeg;base64, @profilePicUrl" class="avatar img-circle" alt="Avatar">
-                                               }
-                                               else
-                                               {
-                                                   <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
-                                               }
-
-                                           }
-                                           else
-                                           {
-                                               <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
-                                           }
-                                           @User.Identity.GetUserName()
-                                       </a>
-                                       <ul>
-                                           <li class="">
-                                               <a href="/Manage" class="waves"><i class="fa fa-cogs"></i>Manage Account</a>
-                                           </li>
-                                           <li>
-                                               <a href="javascript:document.getElementById('logoutForm').submit()" class="waves"><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
-                                           </li>
-                                       </ul>
-                                   </li>
-
-
-
+                            <ul class="menu clearfix" id="menu mobile-menu">
+                                @*<li><a class="waves" href="#">Home</a></li>
+                                    <li><a class="waves" href="#">Dashboard</a></li>
+                                    <li><a class="waves" href="#">Search Jobs</a></li>*@
+                                @*<li>@Html.ActionLink("Home", "Index", "Home", new { @class = "waves" })</li>*@
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
                                     <li>@Html.ActionLink("Dashboard", "Index", "Users", new { @class = "waves" })</li>
@@ -337,27 +301,31 @@
                                 @if (role == "Candidate")
                                 {
                                     <li>
-                                        <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "waves active")"><i class="fa fa-search"></i> Search Jobs</a>
+                                        <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a>
+                                    </li>
+
+                                    @*<a href="~/SearchJobOffers/CheckCandidateProfileExists"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
+
+                                    <li>
+                                        <a href="~/JobRequests" class="@Html.IsSelected(controllers: "JobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i>Manage My Job Requests</a>
                                     </li>
 
                                     <li>
-                                        <a href="~/JobRequests" class="@Html.IsSelected(controllers: "JobRequests", cssClass: "waves active")"><i class="fa fa-graduation-cap"></i>Manage My Job Requests</a>
+                                        <a href="~/FavouriteJobOffers" class="@Html.IsSelected(controllers: "FavouriteJobOffers", cssClass: "active")"><i class="fa fa-heart"></i> Manage my favorites</a>
                                     </li>
 
                                     <li>
-                                        <a href="~/FavouriteJobOffers" class="@Html.IsSelected(controllers: "FavouriteJobOffers", cssClass: "waves active")"><i class="fa fa-heart"></i> Manage my favorites</a>
+                                        <a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "active")"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
                                     </li>
 
-                                    <li>
-                                        <a href="~/Notification" class="@Html.IsSelected(controllers: "Notification", cssClass: "waves active")"><i class="fa fa-bell"></i> Messages &amp; Notifications</a>
-                                    </li>
-
-                                    <li>
-                                        <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "waves active")"><i class="fa fa-cog"></i> Manage my settings</a>
-                                    </li>
+                                                                                <li>
+                                                                                    <a href="~/Manage" class="@Html.IsSelected(controllers: "Manage", cssClass: "active")"><i class="fa fa-cog"></i> Manage my settings</a>
+                                                                                </li>
                                 }
                                 else if (role == "Employer")
                                 {
+
+                                    @*<a href="~/SearchJobRequests"><i class="fa fa-search"></i> Search Employee</a>*@
                                     <li>
                                         <a href="~/PublishedJobs" class="@Html.IsSelected(controllers: "PublishedJobs", cssClass: "active")"><i class="fa fa-search"></i> Search Jobs</a>
                                     </li>
@@ -408,7 +376,7 @@
 
 
 
-</nav>
+                        </nav>
 
                     </div><!-- col -->
                 </div><!-- row -->
