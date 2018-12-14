@@ -262,7 +262,7 @@ namespace HireMe.Controllers
                 if (model.UserRoles.Contains("Agency"))
                 {
                     
-                    var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = model.Age.ToString() };
+                    var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = model.Age.ToString(), IdProofDoc = idProofImagePath};
                     agency.CreatedDate = DateTime.Now.ToString();
                     user.Agencies = new System.Collections.Generic.List<Agency> { agency };
                 }
