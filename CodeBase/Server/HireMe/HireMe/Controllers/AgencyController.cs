@@ -11,6 +11,7 @@ using AutoMapper;
 using System.Threading.Tasks;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
+using HireMe.Utility;
 
 namespace HireMe.Controllers
 {
@@ -128,7 +129,7 @@ namespace HireMe.Controllers
                 string phoneNumber = model.PhoneNumber.Replace("-", "");
 
 
-                var candidate = new Candidate { StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
+                var candidate = new Candidate {AgencyId = agency.AgencyId, StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
                 candidate.CreatedDate = DateTime.Now.ToString();
                 var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                 if (cntry != null)
@@ -169,6 +170,8 @@ namespace HireMe.Controllers
                     // insert a welcome notification
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
                     db.SaveChanges();
+
+                    NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + randomPassword, 0, true);
                     //Ends Here     
                     //return RedirectToAction("Login", "Account");
                     return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
@@ -195,8 +198,26 @@ namespace HireMe.Controllers
             var userId = User.Identity.GetUserId();
             // get the agencyid
             var agency = db.Agencies.First(p => p.AspNetUserId == userId);
-            var candidates = db.Candidates.Where(p => p.AgencyId == agency.AgencyId).ToList();
+            var candidates = db.Candidates.Include(path => path.ApplicationUser).Where(p => p.AgencyId == agency.AgencyId && p.StaffType == StaffType.Agency).ToList();
             return View(candidates);
+        }
+
+        public async Task<ActionResult> ActivateCandidate(int id)
+        {
+            var userId = User.Identity.GetUserId();
+            var agency = db.Agencies.First(p => p.AspNetUserId == userId);
+            // get the agencyid
+            // first get the candidate by Id
+            var candidate = db.Candidates.Find(id);
+            // if candidate is null throw an exception
+            if (candidate == null)
+                throw new Exception("Candidate Not Found.");
+            candidate.ProfileVerified = true;
+            db.SaveChanges();
+
+            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency"+ agency.AgencyName + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            // else return success message
+            return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
