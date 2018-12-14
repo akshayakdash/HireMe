@@ -171,35 +171,36 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     </div>
 
                 </div>*@
+            <div class="col-md-12">
+                <div class="row">
 
-                    <div class="row" style="margin-left: 5px;">
-                        <div class="col-lg-1 col-md-1" >
-                            <img style="max-width:20px;background-color:#ff055a;" src="@item.IconImage" />
-                        </div>
-                        <div class="col-lg-11 col-md-11">
-                            <div>
-                                @(item.JobTaskName)
-                            </div>
-                            <div>
-                                @{
-                                    var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
-                                }
-                                @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
-                                {
-                                    <span>@selectedTask.TaskResponseAdditionalDescription</span>
-                                }
-                            </div>
-                            @if (item.SubTasks.Any())
-            {
-
-                                @ShowTaskTree(item.SubTasks)
-
-                            }
-                        </div>
-
+                    <div class="col-md-1 pl-0 pr-0">
+                        @*<img style="max-width:20px;background-color:#ff055a;" src="@item.IconImage" />*@
+                        <img class="tree-img" src="@item.IconImage" />
                     </div>
+                    <div class=" col-md-11 pl-0 pr-0">
+                        <div class="tree-title">
+                            @(item.JobTaskName)
+                        </div>
+                        <div>
+                            @{
+                                    var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
                             }
-                        }
+                            @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                                {
+                                <span>@selectedTask.TaskResponseAdditionalDescription</span>
+                                }
+                        </div>
+                        @if (item.SubTasks.Any())
+                                {
+                            @ShowTaskTree(item.SubTasks)
+                                }
+                    </div>
+
+                </div>
+            </div>
+                                    }
+                                }
 }
 
 <script>
@@ -227,7 +228,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 </script>
 
 
-<div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobRequestCtrl">
+<div id="main-container-user" ng-app="myApp" ng-controller="searchJobRequestCtrl">
     @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
                             .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
                             .Select(c => c.Value);

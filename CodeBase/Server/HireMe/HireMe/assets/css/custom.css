@@ -10812,7 +10812,7 @@ text-align: center;
 margin-right: 10px;
 }
 .filtersection-body .body-item img{
-width:50px;
+width:30px;
 }
 .filtersection-body .body-item span {
     display: block;
@@ -11786,4 +11786,22 @@ label.tree_label:after {
     overflow: hidden;
     background-color: #eee;
     border-bottom: 1px solid #ffffff;
+}
+.tree-img {
+    max-width: 40px;
+    background-color: #ff055a;
+    /* width: 40px; */
+    height: 40px;
+    border-radius: 50%;
+    
+    padding: 5px;
+}
+.tree-title {
+    line-height: 40px;
+    padding-left: 10px;
+    border-bottom: 1px dotted #ccc;
+    margin-bottom: 10px;
+}
+.border-bottom{
+    
 }
