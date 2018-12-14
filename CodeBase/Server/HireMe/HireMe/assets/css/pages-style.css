@@ -678,7 +678,7 @@
     white-space: nowrap;
 }
 .sf-with-ul {
-    max-width: 150px;
+    /*max-width: 150px;*/
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
@@ -833,13 +833,14 @@
 	background-color: #fe005a;
 	color: #fff;
 }
-
+.mobileview-menu {
+    display:none;
+}
 @media (min-width: 768px) and (max-width: 1199px) {
-
-	.menu {
+    .menu {
 		display: none;
 	}
-
+    
 }
 
 @media (max-width: 767px) {
@@ -847,7 +848,6 @@
 	.menu {
 		display: none;
 	}
-
 }
 
 /* SECONDARY MENU */
@@ -1138,8 +1138,8 @@
 	z-index: 99999;
 	top: 0;
 	bottom: 0;
-	left: -260px;
-	width: 240px;
+	left: -300px;
+	width: 280px;
 	overflow-y: auto;
 	padding-top: 30px;
 	box-shadow: 5px 0 5px 0 rgba(0, 0, 0, 0.06);
@@ -1156,27 +1156,35 @@
 }
 
 #mobile-menu li.logo {
-	margin: 0 0 20px 30px;
+	margin: 0 0 20px 20px;
 }
 
 #mobile-menu li a {
 	display: block;
-	padding: 5px 20px 5px 30px;
+	padding: 5px 20px 5px 20px;
 	color: #252525;
 	font-size: 14px;
 	line-height: 20px;
 	text-decoration: none;
 }
 
-#mobile-menu li a {
-	padding: 7px 20px 7px 30px;
-	font-family: "Raleway", sans-serif;
+#mobile-menu > li > a {
+	padding: 7px 20px 7px 20px;
+	/*font-family: "Raleway", sans-serif;*/
 	font-size: 13px;
 	font-weight: 700;
 	letter-spacing: 1px;
 	text-transform: uppercase;
 }
 
+.username {
+    text-transform: initial !important;
+    max-width: inherit;
+}
+#mobile-menu li a.active {
+    color: #fff;
+    background: #fe005a;
+}
 #mobile-menu ul a {
 	padding-left: 40px;
 }
@@ -1253,6 +1261,13 @@
 	}
     .mobile-app{
             margin-top: 15px;
+    }
+
+    .sidenav{
+        left:-280px;
+    }
+    #main-container-user{
+        margin-left:0;
     }
 
 }
