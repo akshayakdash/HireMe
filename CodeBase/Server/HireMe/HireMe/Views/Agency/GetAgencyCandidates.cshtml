@@ -1,262 +1,265 @@
 ﻿@model IEnumerable<HireMe.Models.Candidate>
 
-@{
-    ViewBag.Title = "GetAgencyCandidates";
-}
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
 
 
 
+<script type="text/javascript">
+    function activateCandidateAccount(candidateId) {
 
-@{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                                                .Select(c => c.Value);
-    string role = roles.FirstOrDefault();}
+        //alert(jobRequestId);
+        $.ajax
+            ({
+                url: '/Agency/ActivateCandidate?id=' + candidateId,
+                //data: { "id": jobRequestId },
+                type: 'get',
+                success: function (result) {
+                    //$('.modal-box').text(result).fadeIn(700, function () {
+                    //    setTimeout(function () {
+                    //        $('.modal-box').fadeOut();
+                    //    }, 2000);
+                    //});
 
+                    alert("Candidate Profile verified successfully.");
+                    window.location.reload();
+                }
+            });
 
+    }
+</script>
 
-<div id="main-container">
+<div id="main-container-user">
+    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                .Select(c => c.Value);
+        string role = roles.FirstOrDefault();}
 
-    <div class="container">
-        
+    <section class="right-side">
         <!---- Tab Section -->
-        <div class="container wow fadeInUp">
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table">
-                        <tr>
+
+        <div class="full-section-container wow fadeInUp">
+            <div class="tab-section">
+                <div class="tab-section-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="headline text-center mb-1">
+                                <h2>Verify Candidate Profiles</h2>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="tabs style-2">
+
+                                @*<ul class="nav nav-tabs job-tab">
+                                        @for (int i = 0; i < Model.Count(); i++)
+                                        {
+                                        var item = Model.ElementAt(i);
+                                        <li><a class="@(i == 0 ? " active"
+                                               "" )" href="@(" #tab-1-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
+                                        }
+                                    </ul>*@
+                                <ul class="nav nav-tabs job-tab">
+                                    <li><a class="active" href="#tab-agency-candidate-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                    <li><a href="#tab-agency-candidate-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                    <li><a href="#tab-agency-candidate-3" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                    <li><a href="#tab-agency-candidate-4" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                                    <li><a href="#tab-agency-candidate-5" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                    
+                                </ul>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tab-agency-candidate-1">
+                                        <div class="row">
+
+                                            @foreach (var item in Model)
+                                            {
+                                                <div class="col-sm-6">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.ProfileVerified)
+                                                        {
+                                                            <span class="validate">
+                                                                <img src="~/assets/images/verified.png" />
+                                                            </span>
+                                                        }
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.ProfilePicUrl" />
+
+                                                            <h2 class="contact-num"><i class="fa fa-phone"></i> <span>@item.ContactNo</span></h2>
+
+                                                            @if (!item.ProfileVerified)
+                                                            {
+                                                                <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateCandidateAccount(@item.CandidateId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
+                                                            }
+                                                        </div>
+                                                        <div class="right">
+                                                            <div class="idcard">
+                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
+                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="right-left">
+                                                                <h2 class="name">
+                                                                    @if (item.Gender == HireMe.Models.Gender.Male)
+                                                                    {<img src="~/assets/images/man-user.png" />  }
+                                                                    else
+                                                                    {<img src="~/assets/images/woman-user.png" />  }
+
+                                                                    @(item.FirstName + " " + item.LastName)
+                                                                </h2>
+                                                                <h2 class="email"><i class="fa fa-envelope"></i> @item.ApplicationUser.Email</h2>
+                                                                <h3 class="location"><i class="fa fa-birthday-cake"></i> @item.Age Yrs</h3>
+                                                                @*<h3><span class="age"><span>(</span>@item.Age Yrs)</span><span class="experience">Exp: @item.ExperienceInYears Yrs</span></h3>*@
+                                                                <p class="location">@item.Address</p>
+                                                                <p class="location"><span>@item.Country,</span><span> @item.City,</span><span> @item.District</span></p>
+                                                                <div class="published">Registered on: <span>@item.CreatedDate</span></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
 
 
-                            <th>
-                                @Html.DisplayNameFor(model => model.Gender)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Age)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ExperienceInYears)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ExperienceInMonths)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IdProofDoc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.IdProofDocDesc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ProfileVerified)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.StaffType)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Disponibility)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CountryId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CityId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.DistrictId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.SalaryType)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.SalaryTypeOtherDesc)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CanRead)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CanWrite)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ExpectedMinSalary)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ExpectedMaxSalary)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.SleepOnSite)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ExpectedMinRooms)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ExpectedMaxRooms)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.MinGroupPeople)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.MaxGroupPeople)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CreatedDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.CreatedBy)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UpdatedDate)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.UpdatedBy)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.FirstName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.LastName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ContactNo)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.EmailId)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Address)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.AdditionalDescription)
-                            </th>
-                            <th></th>
-                        </tr>
 
-                        @foreach (var item in Model)
-                        {
-                            <tr>
+                                                </div>
+                                            }
 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Gender)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Age)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ExperienceInYears)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ExperienceInMonths)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IdProofDoc)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.IdProofDocDesc)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ProfileVerified)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.StaffType)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Disponibility)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CountryId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CityId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.DistrictId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SalaryType)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SalaryTypeOtherDesc)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CanRead)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CanWrite)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ExpectedMinSalary)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ExpectedMaxSalary)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.SleepOnSite)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ExpectedMinRooms)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ExpectedMaxRooms)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MinGroupPeople)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MaxGroupPeople)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.CreatedBy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UpdatedDate)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UpdatedBy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.FirstName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.LastName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ContactNo)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.EmailId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Address)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.AdditionalDescription)
-                                </td>
-                                <td>
+                                        </div>
+                                        @*<div style=" text-align center;">
 
-                                    @Html.ActionLink("Details", "Details", new { id = item.CandidateId }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.CandidateId })
-                                </td>
-                            </tr>
-                        }
+                                                <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                    </table>
+                                            </div>*@
+
+                                    </div>
+                                    <div class="tab-pane fade show active" id="tab-agency-candidate-2">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="isotope cols-3 gutter">
+                                                    <div class="row">
+
+
+                                                    </div>
+                                                    @*<div style=" text-align center;">
+
+                                                            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade show active" id="tab-agency-candidate-3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="isotope cols-3 gutter">
+                                                    <div class="row">
+
+
+                                                    </div>
+                                                    @*<div style=" text-align center;">
+
+                                                            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade show active" id="tab-agency-candidate-4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="isotope cols-3 gutter">
+                                                    <div class="row">
+
+
+                                                    </div>
+                                                    @*<div style=" text-align center;">
+
+                                                            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade show active" id="tab-agency-candidate-5">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="isotope cols-3 gutter">
+                                                    <div class="row">
+
+                                                    </div>
+                                                    @*<div style=" text-align center;">
+
+                                                            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+
+                                                        </div>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div><!-- tab-content -->
+                            </div><!-- tabs -->
+                        </div>
+                    </div>
                 </div>
             </div>
+
+
+
         </div>
+
         <!---- Tab Section end-->
+        @*@if (Model != null)
+            {
+            foreach (var item in Model)
+            {
+            <div class="col-md-4 col-sm-6">
+                <div class="profileitems">
+                    <div class="left">
+                        <img src="@Url.Content(item.ApplicationUser.ProfilePicUrl)" />
+                        <div class="rating">
 
-    </div>
+                        </div>
+                        <div class="favorite">
 
+                        </div>
+                    </div>s
+                    <div class="right">
+                        <h1>@(item.FirstName)<span></span></h1>
+
+
+                        <h2 class="name">Contact No: @item.ApplicationUser.PhoneNumber </h2>
+                        <h2 class="name">Email : @item.ApplicationUser.Email</h2>
+
+                        <div class="published">Published: <span>@item.CreatedDate</span></div>
+                    </div>
+                    <div class="profile-footer">
+
+                        <div class="row">
+                            @if (!item.ProfileVerified)
+                            {
+                            <button class="btn-default" type="button" onclick="activateCandidateAccount(@item.CandidateId)">Verify</button>
+                            }
+                            else
+                            {
+                            <p>Verified</p>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            }
+            }
+            else
+            {
+            <div class="row"><h2>No Employer registered yet.</h2></div>
+            }*@
+    </section>
 </div>
-
-<script>
-     function openNav() {
-         document.getElementById("mySidenav").style.width = "280px";
-         document.getElementById("main-container-user").style.marginLeft = "280px";
-     }
-
-     function closeNav() {
-         document.getElementById("mySidenav").style.width = "0";
-         document.getElementById("main-container-user").style.marginLeft = "0";
-     }
-</script>

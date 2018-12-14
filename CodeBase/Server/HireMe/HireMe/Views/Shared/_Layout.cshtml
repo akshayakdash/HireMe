@@ -196,8 +196,8 @@
         }
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                    .Select(c => c.Value);
+                                                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                            .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
         <header id="header">
 
@@ -234,7 +234,7 @@
                                     <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
                                 }
                                 <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
-                             
+
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
@@ -268,7 +268,7 @@
                                                     <a href="/Manage"><i class="fa fa-cogs"></i>Manage Account</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:document.getElementById('logoutForm').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                                    <a href="javascript:document.getElementById('logoutForm1').submit()" class=""><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -289,46 +289,68 @@
                             </ul>
 
 
-                               <ul class="menu mobileview-menu clearfix" id="menu">
-
-
-                                   <li class="navprofile dropdown">
-                                       <a href="" class="waves username">
-                                           @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                                           {
-                                               var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                                               var profilePicUrl = userManager.FindByName(@User.Identity.GetUserName()).ProfilePicUrl;
-                                               if (!string.IsNullOrWhiteSpace(profilePicUrl))
-                                               {
-                                                   <img src="data:image/jpeg;base64, @profilePicUrl" class="avatar img-circle" alt="Avatar">
-                                               }
-                                               else
-                                               {
-                                                   <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
-                                               }
-
-                                           }
-                                           else
-                                           {
-                                               <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
-                                           }
-                                           @User.Identity.GetUserName()
-                                       </a>
-                                       <ul>
-                                           <li class="">
-                                               <a href="/Manage" class="waves"><i class="fa fa-cogs"></i>Manage Account</a>
-                                           </li>
-                                           <li>
-                                               <a href="javascript:document.getElementById('logoutForm').submit()" class="waves"><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
-                                           </li>
-                                       </ul>
-                                   </li>
-
-
+                            <ul class="menu mobileview-menu clearfix" id="menu">
 
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
-                                    <li>@Html.ActionLink("Dashboard", "Index", "Users", new { @class = "waves" })</li>
+                                    <li class="navprofile dropdown">
+                                        <a href="#" class="waves username">
+                                            @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                            {
+                                                var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                                                var profilePicUrl = userManager.FindByName(@User.Identity.GetUserName()).ProfilePicUrl;
+                                                if (!string.IsNullOrWhiteSpace(profilePicUrl))
+                                                {
+                                                    <img src="data:image/jpeg;base64, @profilePicUrl" class="avatar img-circle" alt="Avatar">
+                                                }
+                                                else
+                                                {
+                                                    <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <img src="~/assets/images/photo.png" class="avatar img-circle" alt="Avatar">
+                                            }
+                                            @User.Identity.GetUserName()
+                                        </a>
+                                        <ul>
+                                            <li class="">
+                                                <a href="/Manage" class="waves"><i class="fa fa-cogs"></i>Manage Account</a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:document.getElementById('logoutForm1').submit()" class="waves"><i class="fa fa-power-off"></i>&nbsp;Log Out</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                }
+                                else
+                                {
+                                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class= Html.IsSelected(controllers: "Home", cssClass: "waves active") })</li>
+                                    <li>@Html.ActionLink("Offers & Services", "About", "Home",new { @class = Html.IsSelected(controllers: "Home", actions:"About", cssClass: "waves active") })</li>
+                                    <li class="dropdown">
+                                        <a href="#" class="waves">REGISTER</a>
+                                        <ul>
+                                            <li><a class="waves" href="~/Home/CandidatInfo?Length=4">CANDIDATE</a></li>
+                                            <li><a class="waves" href="~/Home/EmployerInfo?Length=4">EMPLOYER</a></li>
+                                            <li><a class="waves" href="~/Home/AgencyInfo?Length=4">AGENCY</a></li>
+                                        </ul>
+                                    </li>
+                                    <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                }
+
+                                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                                {
+                                    @*<li>@Html.ActionLink("Dashboard", "Index", "Users", new { @class = "waves" })</li>*@
+                                    <li class="divider"></li>
+                                    <li class="">
+                                        <a href="~/Home" class="@Html.IsSelected(controllers: "Home", cssClass: "waves active")"><i class="fa fa-home"></i> Home</a>
+                                    </li>
+                                    <li class="">
+                                        <a href="~/Users" class="@Html.IsSelected(controllers: "Users", cssClass: "waves active")"><i class="fa fa-dashboard"></i> Dashboard</a>
+                                    </li>
                                 }
                                 @if (role == "Candidate")
                                 {
@@ -402,7 +424,7 @@
 
 
 
-</nav>
+                        </nav>
 
                     </div><!-- col -->
                 </div><!-- row -->
