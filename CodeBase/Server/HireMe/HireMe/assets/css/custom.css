@@ -11779,3 +11779,11 @@ label.tree_label:after {
 .input-group-prepend {
     position: relative;
 }
+.divider {
+    height: 1px;
+    margin: 9px 1px;
+    margin: 7px 0 8px;
+    overflow: hidden;
+    background-color: #eee;
+    border-bottom: 1px solid #ffffff;
+}
