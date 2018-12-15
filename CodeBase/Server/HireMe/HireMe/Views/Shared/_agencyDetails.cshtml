@@ -1,5 +1,11 @@
 ﻿@model HireMe.Models.Agency
 
+
+@{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                        .Select(c => c.Value);
+    string role = roles.FirstOrDefault();}
+
 <div>
     <h4>Agency</h4>
     <hr />
@@ -22,6 +28,18 @@
             <img src="data:image/jpeg;base64, @(Model.AgencyLogo)"/>
         </dd>
 
+@if (role == "Admin")
+{
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IdProofDoc)
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.AgencyLogo)*@
+            <img src="data:image/jpeg;base64, @(Model.IdProofDoc)" />
+        </dd>
+}
         <dt>
             @Html.DisplayNameFor(model => model.AgencyWebsiteURL)
         </dt>
