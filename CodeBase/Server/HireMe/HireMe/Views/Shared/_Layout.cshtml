@@ -328,7 +328,7 @@
                                 }
                                 else
                                 {
-                                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class= Html.IsSelected(controllers: "Home", cssClass: "waves active") })</li>
+                                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class= Html.IsSelected(controllers: "Home", actions: "Index", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("Offers & Services", "About", "Home",new { @class = Html.IsSelected(controllers: "Home", actions:"About", cssClass: "waves active") })</li>
                                     <li class="dropdown">
                                         <a href="#" class="waves">REGISTER</a>
@@ -393,6 +393,8 @@
 
 
                                     <li> <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-pencil-square-o"></i> Register candidate</a></li>
+
+                                    <li> <a href="~/Agency/GetAgencyCandidates" class="@Html.IsSelected(controllers: "Agency", actions: "GetAgencyCandidates", cssClass: "active")"> <i class="fa fa-pencil-square-o"></i> Register candidate</a></li>
 
                                     <li>
                                         <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
@@ -479,6 +481,8 @@
                     @*<a href="~/SearchJobOffers"><i class="fa fa-search"></i> Search Employer (Not fixed)</a>*@
 
                     <a href="~/Agency/RegisterCandidate" class="@Html.IsSelected(controllers: "Agency", actions: "RegisterCandidate", cssClass: "active")"> <i class="fa fa-pencil-square-o"></i> Register candidate</a>
+
+                    <a href="~/Agency/GetAgencyCandidates" class="@Html.IsSelected(controllers: "Agency", actions: "GetAgencyCandidates", cssClass: "active")"><i class="fa fa-check-square"></i> Verify Candidate Profiles</a>
 
                     <a href="~/Agency/GetJobRequests" class="@Html.IsSelected(controllers: "Agency", actions: "GetJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> My Job Requests</a>
 

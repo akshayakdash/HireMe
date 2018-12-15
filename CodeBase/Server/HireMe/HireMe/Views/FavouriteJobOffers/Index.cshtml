@@ -175,7 +175,7 @@
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
                                             {
-                                                <div class="col-md-6 ">
+                                                <div class="col-md-4 ">
                                                     <div class="profileitems searchprofile-section">
                                                         @if (item.Employer.ProfileVerified)
                                                         {
@@ -249,20 +249,20 @@
                                             </div>
                                             }
                                         }
-                                        @*else
+                                        else
                                         {
                                             <div class="col-md-12 text-center"><h4>You do not have any favourite job offer.</h4></div>
-                                        }*@
+                                        }
                                     </div>
 
                                 </div>
-                                <div class="tab-pane fade show active" id="tab-fav-job-offer-2">
+                                <div class="tab-pane fade show " id="tab-fav-job-offer-2">
                                     <div class="row">
                                         @if (Model != null)
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
                                             {
-                                                <div class="col-md-6 ">
+                                                <div class="col-md-4 ">
                                                     <div class="profileitems searchprofile-section">
                                                         @if (item.Employer.ProfileVerified)
                                                         {
@@ -290,8 +290,8 @@
                                                         </div>
                                                         <div class="right">
                                                             @*<div class="idcard">
-                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>*@
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
+                                                                </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                 {
@@ -319,8 +319,8 @@
                                                         <div class="profile-footer">
                                                             @item.AdditionalDescription
                                                             @*<div class="row">
-                                    <button class="btn-default" type="button">Delete</button>
-                                </div>*@
+                                                                    <button class="btn-default" type="button">Delete</button>
+                                                                </div>*@
                                                         </div>
                                                         <div class="team-contact-info">
                                                             <ul class="social-icons">
@@ -342,13 +342,13 @@
                                         }
                                     </div>
                                 </div>
-                                <div class="tab-pane fade show active" id="tab-fav-job-offer-3">
+                                <div class="tab-pane fade show " id="tab-fav-job-offer-3">
                                     <div class="row">
                                         @if (Model != null)
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
                                             {
-                                                <div class="col-md-6 ">
+                                                <div class="col-md-4 ">
                                                     <div class="profileitems searchprofile-section">
                                                         @if (item.Employer.ProfileVerified)
                                                         {
@@ -376,8 +376,8 @@
                                                         </div>
                                                         <div class="right">
                                                             @*<div class="idcard">
-                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>*@
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
+                                                                </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                 {
@@ -405,8 +405,8 @@
                                                         <div class="profile-footer">
                                                             @item.AdditionalDescription
                                                             @*<div class="row">
-                                    <button class="btn-default" type="button">Delete</button>
-                                </div>*@
+                                                                    <button class="btn-default" type="button">Delete</button>
+                                                                </div>*@
                                                         </div>
                                                         <div class="team-contact-info">
                                                             <ul class="social-icons">
@@ -428,13 +428,13 @@
                                         }
                                     </div>
                                 </div>
-                                <div class="tab-pane fade show active" id="tab-fav-job-offer-4">
+                                <div class="tab-pane fade show " id="tab-fav-job-offer-4">
                                     <div class="row">
                                         @if (Model != null)
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
                                             {
-                                                <div class="col-md-6 ">
+                                                <div class="col-md-4 ">
                                                     <div class="profileitems searchprofile-section">
                                                         @if (item.Employer.ProfileVerified)
                                                         {
@@ -462,8 +462,8 @@
                                                         </div>
                                                         <div class="right">
                                                             @*<div class="idcard">
-                                                                <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
-                                                            </div>*@
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.IdProofDoc" />
+                                                                </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                 {
@@ -491,8 +491,8 @@
                                                         <div class="profile-footer">
                                                             @item.AdditionalDescription
                                                             @*<div class="row">
-                                    <button class="btn-default" type="button">Delete</button>
-                                </div>*@
+                                                                    <button class="btn-default" type="button">Delete</button>
+                                                                </div>*@
                                                         </div>
                                                         <div class="team-contact-info">
                                                             <ul class="social-icons">
@@ -514,13 +514,13 @@
                                         }
                                     </div>
                                 </div>
-                                <div class="tab-pane fade show active" id="tab-fav-job-offer-5">
+                                <div class="tab-pane fade show " id="tab-fav-job-offer-5">
                                     <div class="row">
                                         @if (Model != null)
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
                                             {
-                                                <div class="col-md-6 ">
+                                                 <div class="col-md-4 ">
                                                     <div class="profileitems searchprofile-section">
                                                         @if (item.Employer.ProfileVerified)
                                                         {
@@ -552,46 +552,46 @@
                                                             </div>*@
                                                             <h1>
                                                                 @if (item.Employer.Gender == HireMe.Models.Gender.Female)
-                                                                {
-                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <span><img src="~/assets/images/user.png" /></span>
-                                                                }
+                                                            {
+                                                                <span><img src="~/assets/images/woman-user.png" /></span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span><img src="~/assets/images/user.png" /></span>
+                                                            }
 
 
-                                                            </h1>
+                                                        </h1>
 
-                                                            <h2 class="name">@item.Employer.FirstName</h2>
-                                                            @*<h2 class="name">@item.Employer.UserName</h2>*@
-                                                            @*<h3 class="name">@item.Employer.ContactNo</h3>*@
-                                                            <h2 class="jobname">@item.Job.JobName</h2>
-                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
-                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
-                                                            <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
-                                                            <p class="location"><span>Staff Type:  @item.StaffType</span></p>
-                                                            <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
-                                                        </div>
-                                                        <div class="profile-footer">
-                                                            @item.AdditionalDescription
-                                                            @*<div class="row">
-                                    <button class="btn-default" type="button">Delete</button>
-                                </div>*@
-                                                        </div>
-                                                        <div class="team-contact-info">
-                                                            <ul class="social-icons">
-                                                                <li><a href="" title="Delete" onclick="deleteFavouriteJobOffer(@item.JobOfferId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                                <li><a href="#" title="Note" onclick="setJobOfferId(@item.JobOfferId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                                <li><a href="/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                        <h2 class="name">@item.Employer.FirstName</h2>
+                                                        @*<h2 class="name">@item.Employer.UserName</h2>*@
+                                                        @*<h3 class="name">@item.Employer.ContactNo</h3>*@
+                                                        <h2 class="jobname">@item.Job.JobName</h2>
+                                                        <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
+                                                        <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                        <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                        <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                        <p class="location"><span>Staff Type:  @item.StaffType</span></p>
+                                                        <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
+                                                    </div>
+                                                    <div class="profile-footer">
+                                                        @item.AdditionalDescription
+                                                        @*<div class="row">
+                                                                <button class="btn-default" type="button">Delete</button>
+                                                            </div>*@
+                                                    </div>
+                                                    <div class="team-contact-info">
+                                                        <ul class="social-icons">
+                                                            <li><a href="" title="Delete" onclick="deleteFavouriteJobOffer(@item.JobOfferId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                            <li><a href="#" title="Note" onclick="setJobOfferId(@item.JobOfferId)" data-toggle="modal" data-target="#modalnote1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                            <li><a href="/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
 
-                                                            </ul>
-                                                        </div>
-
+                                                        </ul>
                                                     </div>
 
                                                 </div>
+
+                                            </div>
                                             }
                                         }
                                         else

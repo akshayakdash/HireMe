@@ -163,7 +163,7 @@
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
                                             {
-                                        <div class="col-sm-6">
+                                        <div class="col-sm-4">
                                             <div class="profileitems searchprofile-section">
                                                 @if (item.Candidate.ProfileVerified)
                                                         {
@@ -194,12 +194,12 @@
                                                     </h2>
                                                 </div>
                                                 <div class="right">
-                                                    <div class="idcard">
+                                                    @*<div class="idcard">
                                                         <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
                                                             <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
                                                         </a>
-                                                    </div>
-                                                    <div class="right-left">
+                                                    </div>*@
+                                                    @*<div class="right-left">*@
                                                         <h1>
                                                             @if (item.Candidate.Gender == HireMe.Models.Gender.Female)
                                                             {
@@ -241,7 +241,7 @@
                                                         <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
                                                         <div class="published">Published: <span>@item.PublishedDate</span></div>
 
-                                                    </div>
+                                                    @*</div>*@
 
                                                 </div>
                                                 <div class="profile-footer">
@@ -284,76 +284,104 @@
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
                                             {
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="profileitems searchprofile-section">
-                                                @if (item.Candidate.ProfileVerified)
+                                                <div class="col-sm-4">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Candidate.ProfileVerified)
                                                         {
-                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
                                                         }
 
-                                                <div class="left">
-                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
-                                                    <div class="rating">
-                                                        @for (int i = 0; i < item.StarRating; i++)
-                                                        {
-                                                            <i class="fa fa-star"></i>
-                                                        }
-                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
-                                                        {
-                                                            <i class="fa fa-star-o"></i>
-                                                        }
-                                                    </div>
-                                                    @*<div class="favorite">
-                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                        </div>*@
-                                                </div>
-                                                <div class="right">
-                                                    <h1>
-                                                        @(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>
-                                                            @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
+                                                            </div>
+                                                            @*<div class="favorite">
+                                                                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                                                                </div>*@
+                                                            <h3>
+                                                                <span class="age">@item.Candidate.Age Yrs</span>
+                                                                <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Candidate.ContactNo
+                                                            </h2>
+                                                        </div>
+                                                        <div class="right">
+                                                            @*<div class="idcard">
+                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    </a>
+                                                                </div>*@
+                                                            @*<div class="right-left">*@
+                                                            <h1>
+                                                                @if (item.Candidate.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
+                                                                @*@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")*@
+                                                                <span>
+                                                                    @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
                                                                     {
-                                                        <span>(AGENCY)</span>
+                                                                        <span>(AGENCY)</span>
                                                                     }
                                                                     else
                                                                     { <span>
-                                                            (INDIVIDUAL)
-                                                        </span> }
+                                                                    (INDIVIDUAL)
+                                                                </span> }
+                                                                </span>
+                                                            </h1>
+                                                            <h2 class="name"><span>@item.Candidate.UserName</span></h2>
 
-                                                        </span>
-                                                    </h1>
-                                                    <h2 class="name"><span>@item.Candidate.UserName</span></h2>
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Phone")
-                                                            {
-                                                    <span> @item.Candidate.ContactNo</span>
-                                                            }
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Email")
-                                                            {
-                                                    <span> @item.Candidate.EmailId</span>
-                                                            }
-                                                    <p class="location"><span>@item.Job.JobName</span></p>
-                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
-                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
-                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                            @*@if (string.IsNullOrWhiteSpace(item.Candidate.ContactOption))
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Phone")
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Email")
+                                                                {
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Candidate.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate</span></div>
+
+                                                            @*</div>*@
+
+                                                        </div>
+                                                        <div class="profile-footer">
+                                                            @item.JobRequestDescription&nbsp;
+                                                        </div>
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.JobRequestId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobRequestId(@item.JobRequestId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
 
                                                 </div>
-                                                <div class="profile-footer">
-                                                    @item.JobRequestDescription&nbsp;
-                                                </div>
-                                                <div class="team-contact-info">
-                                                    <ul class="social-icons">
-                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                        <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.Job.JobId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                        <li><a href="#" title="Note" onclick="setJobRequestId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                        <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
                                             }
 
 
@@ -378,76 +406,104 @@
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
                                             {
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="profileitems searchprofile-section">
-                                                @if (item.Candidate.ProfileVerified)
+                                                <div class="col-sm-4">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Candidate.ProfileVerified)
                                                         {
-                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
                                                         }
 
-                                                <div class="left">
-                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
-                                                    <div class="rating">
-                                                        @for (int i = 0; i < item.StarRating; i++)
-                                                        {
-                                                            <i class="fa fa-star"></i>
-                                                        }
-                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
-                                                        {
-                                                            <i class="fa fa-star-o"></i>
-                                                        }
-                                                    </div>
-                                                    @*<div class="favorite">
-                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                        </div>*@
-                                                </div>
-                                                <div class="right">
-                                                    <h1>
-                                                        @(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>
-                                                            @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
+                                                            </div>
+                                                            @*<div class="favorite">
+                                                                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                                                                </div>*@
+                                                            <h3>
+                                                                <span class="age">@item.Candidate.Age Yrs</span>
+                                                                <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Candidate.ContactNo
+                                                            </h2>
+                                                        </div>
+                                                        <div class="right">
+                                                            @*<div class="idcard">
+                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    </a>
+                                                                </div>*@
+                                                            @*<div class="right-left">*@
+                                                            <h1>
+                                                                @if (item.Candidate.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
+                                                                @*@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")*@
+                                                                <span>
+                                                                    @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
                                                                     {
-                                                        <span>(AGENCY)</span>
+                                                                        <span>(AGENCY)</span>
                                                                     }
                                                                     else
                                                                     { <span>
-                                                            (INDIVIDUAL)
-                                                        </span> }
+                                                                    (INDIVIDUAL)
+                                                                </span> }
+                                                                </span>
+                                                            </h1>
+                                                            <h2 class="name"><span>@item.Candidate.UserName</span></h2>
 
-                                                        </span>
-                                                    </h1>
-                                                    <h2 class="name"><span>@item.Candidate.UserName</span></h2>
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Phone")
-                                                            {
-                                                    <span> @item.Candidate.ContactNo</span>
-                                                            }
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Email")
-                                                            {
-                                                    <span> @item.Candidate.EmailId</span>
-                                                            }
-                                                    <p class="location"><span>@item.Job.JobName</span></p>
-                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
-                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
-                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                            @*@if (string.IsNullOrWhiteSpace(item.Candidate.ContactOption))
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Phone")
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Email")
+                                                                {
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Candidate.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate</span></div>
+
+                                                            @*</div>*@
+
+                                                        </div>
+                                                        <div class="profile-footer">
+                                                            @item.JobRequestDescription&nbsp;
+                                                        </div>
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.JobRequestId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobRequestId(@item.JobRequestId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
 
                                                 </div>
-                                                <div class="profile-footer">
-                                                    @item.JobRequestDescription&nbsp;
-                                                </div>
-                                                <div class="team-contact-info">
-                                                    <ul class="social-icons">
-                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                        <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.Job.JobId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                        <li><a href="#" title="Note" onclick="setJobRequestId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                        <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
                                             }
 
 
@@ -472,76 +528,104 @@
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
                                             {
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="profileitems searchprofile-section">
-                                                @if (item.Candidate.ProfileVerified)
+                                                <div class="col-sm-4">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Candidate.ProfileVerified)
                                                         {
-                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
                                                         }
 
-                                                <div class="left">
-                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
-                                                    <div class="rating">
-                                                        @for (int i = 0; i < item.StarRating; i++)
-                                                        {
-                                                            <i class="fa fa-star"></i>
-                                                        }
-                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
-                                                        {
-                                                            <i class="fa fa-star-o"></i>
-                                                        }
-                                                    </div>
-                                                    @*<div class="favorite">
-                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                        </div>*@
-                                                </div>
-                                                <div class="right">
-                                                    <h1>
-                                                        @(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>
-                                                            @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
+                                                            </div>
+                                                            @*<div class="favorite">
+                                                                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                                                                </div>*@
+                                                            <h3>
+                                                                <span class="age">@item.Candidate.Age Yrs</span>
+                                                                <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Candidate.ContactNo
+                                                            </h2>
+                                                        </div>
+                                                        <div class="right">
+                                                            @*<div class="idcard">
+                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    </a>
+                                                                </div>*@
+                                                            @*<div class="right-left">*@
+                                                            <h1>
+                                                                @if (item.Candidate.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
+                                                                @*@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")*@
+                                                                <span>
+                                                                    @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
                                                                     {
-                                                        <span>(AGENCY)</span>
+                                                                        <span>(AGENCY)</span>
                                                                     }
                                                                     else
                                                                     { <span>
-                                                            (INDIVIDUAL)
-                                                        </span> }
+                                                                    (INDIVIDUAL)
+                                                                </span> }
+                                                                </span>
+                                                            </h1>
+                                                            <h2 class="name"><span>@item.Candidate.UserName</span></h2>
 
-                                                        </span>
-                                                    </h1>
-                                                    <h2 class="name"><span>@item.Candidate.UserName</span></h2>
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Phone")
-                                                            {
-                                                    <span> @item.Candidate.ContactNo</span>
-                                                            }
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Email")
-                                                            {
-                                                    <span> @item.Candidate.EmailId</span>
-                                                            }
-                                                    <p class="location"><span>@item.Job.JobName</span></p>
-                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
-                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
-                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                            @*@if (string.IsNullOrWhiteSpace(item.Candidate.ContactOption))
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Phone")
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Email")
+                                                                {
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Candidate.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate</span></div>
+
+                                                            @*</div>*@
+
+                                                        </div>
+                                                        <div class="profile-footer">
+                                                            @item.JobRequestDescription&nbsp;
+                                                        </div>
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.JobRequestId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobRequestId(@item.JobRequestId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
 
                                                 </div>
-                                                <div class="profile-footer">
-                                                    @item.JobRequestDescription&nbsp;
-                                                </div>
-                                                <div class="team-contact-info">
-                                                    <ul class="social-icons">
-                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                        <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.Job.JobId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                        <li><a href="#" title="Note" onclick="setJobRequestId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                        <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
                                             }
 
 
@@ -566,76 +650,104 @@
                                         {
                                             foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
                                             {
-                                        <div class="col-md-4 col-sm-6">
-                                            <div class="profileitems searchprofile-section">
-                                                @if (item.Candidate.ProfileVerified)
+                                                <div class="col-sm-4">
+                                                    <div class="profileitems searchprofile-section">
+                                                        @if (item.Candidate.ProfileVerified)
                                                         {
-                                                <span class="validate"><i class="fa fa-check" aria-hidden="true"></i></span>
+                                                            <span class="validate"><img src="~/assets/images/verified.png" /></span>
                                                         }
 
-                                                <div class="left">
-                                                    <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
-                                                    <div class="rating">
-                                                        @for (int i = 0; i < item.StarRating; i++)
-                                                        {
-                                                            <i class="fa fa-star"></i>
-                                                        }
-                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
-                                                        {
-                                                            <i class="fa fa-star-o"></i>
-                                                        }
-                                                    </div>
-                                                    @*<div class="favorite">
-                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                        </div>*@
-                                                </div>
-                                                <div class="right">
-                                                    <h1>
-                                                        @(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span>
-                                                            @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
+                                                        <div class="left">
+                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                            <div class="rating">
+                                                                @for (int i = 0; i < item.StarRating; i++)
+                                                                {
+                                                                    <i class="fa fa-star"></i>
+                                                                }
+                                                                @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                {
+                                                                    <i class="fa fa-star-o"></i>
+                                                                }
+                                                            </div>
+                                                            @*<div class="favorite">
+                                                                    <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
+                                                                </div>*@
+                                                            <h3>
+                                                                <span class="age">@item.Candidate.Age Yrs</span>
+                                                                <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
+                                                            </h3>
+                                                            <h2 class="contact-num">
+                                                                <i class="fa fa-phone"></i> @item.Candidate.ContactNo
+                                                            </h2>
+                                                        </div>
+                                                        <div class="right">
+                                                            @*<div class="idcard">
+                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    </a>
+                                                                </div>*@
+                                                            @*<div class="right-left">*@
+                                                            <h1>
+                                                                @if (item.Candidate.Gender == HireMe.Models.Gender.Female)
+                                                                {
+                                                                    <span><img src="~/assets/images/woman-user.png" /></span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span><img src="~/assets/images/user.png" /></span>
+                                                                }
+                                                                @*@(item.Candidate.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")*@
+                                                                <span>
+                                                                    @if (item.Candidate.StaffType == HireMe.Models.StaffType.Agency)
                                                                     {
-                                                        <span>(AGENCY)</span>
+                                                                        <span>(AGENCY)</span>
                                                                     }
                                                                     else
                                                                     { <span>
-                                                            (INDIVIDUAL)
-                                                        </span> }
+                                                                    (INDIVIDUAL)
+                                                                </span> }
+                                                                </span>
+                                                            </h1>
+                                                            <h2 class="name"><span>@item.Candidate.UserName</span></h2>
 
-                                                        </span>
-                                                    </h1>
-                                                    <h2 class="name"><span>@item.Candidate.UserName</span></h2>
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Phone")
-                                                            {
-                                                    <span> @item.Candidate.ContactNo</span>
-                                                            }
-                                                    @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) || item.Candidate.ContactOption == "Email")
-                                                            {
-                                                    <span> @item.Candidate.EmailId</span>
-                                                            }
-                                                    <p class="location"><span>@item.Job.JobName</span></p>
-                                                    <h3><span class="age"><span>(</span>@item.Candidate.Age Yrs)</span><span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span></h3>
-                                                    <p class="location"><span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
-                                                    <div class="published">Published: <span>@item.PublishedDate</span></div>
+                                                            @*@if (string.IsNullOrWhiteSpace(item.Candidate.ContactOption))
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Phone")
+                                                                {
+                                                                    <span> @item.Candidate.ContactNo</span>
+                                                                }
+                                                                @if (!string.IsNullOrWhiteSpace(item.Candidate.ContactOption) && item.Candidate.ContactOption == "Email")
+                                                                {
+                                                                    <span> @item.Candidate.EmailId</span>
+                                                                }*@
+                                                            <h2 class="jobname">@item.Job.JobName</h2>
+                                                            <h2 class="email"><i class="fa fa-envelope"></i> @item.Candidate.EmailId</h2>
+                                                            <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Candidate.Country,</span><span> @item.Candidate.City,</span><span> @item.Candidate.District</span></p>
+                                                            <div class="published">Published: <span>@item.PublishedDate</span></div>
+
+                                                            @*</div>*@
+
+                                                        </div>
+                                                        <div class="profile-footer">
+                                                            @item.JobRequestDescription&nbsp;
+                                                        </div>
+                                                        <div class="team-contact-info">
+                                                            <ul class="social-icons">
+                                                                @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
+                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                                                @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
+                                                                <li><a href="#" title="Delete" onclick="deleteFavouriteJobRequest(@item.JobRequestId)"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="#" title="Note" onclick="setJobRequestId(@item.JobRequestId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
 
 
                                                 </div>
-                                                <div class="profile-footer">
-                                                    @item.JobRequestDescription&nbsp;
-                                                </div>
-                                                <div class="team-contact-info">
-                                                    <ul class="social-icons">
-                                                        @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                            <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
-                                                        @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                        <li><a href="#" title="Unfavorites" onclick="deleteFavouriteJobRequest(@item.Job.JobId)"><i class="fa fa-heart" aria-hidden="true"></i></a></li>
-                                                        <li><a href="#" title="Note" onclick="setJobRequestId(@item.Job.JobId)" data-toggle="modal" data-target="#modalnote"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>
-                                                        <li><a href="/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
                                             }
 
 
