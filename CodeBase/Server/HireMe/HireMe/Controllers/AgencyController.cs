@@ -29,7 +29,7 @@ namespace HireMe.Controllers
             var userId = User.Identity.GetUserId();
             // get the agencyid
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
-
+            ViewBag.NewCandidateRegistered = false;
             ViewBag.AgencyProfileVerfied = agency.ProfileVerified;
             ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
             return View();
@@ -90,6 +90,12 @@ namespace HireMe.Controllers
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
             var districts = db.Districts.ToList();
+
+            ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
+            ViewBag.Country = countries;
+            ViewBag.City = cities;
+            ViewBag.District = districts;
+
             if (ModelState.IsValid)
             {
                 var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -174,22 +180,27 @@ namespace HireMe.Controllers
                     NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + randomPassword, 0, true);
                     //Ends Here     
                     //return RedirectToAction("Login", "Account");
-                    return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
+                    //return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
+                    ViewBag.NewCandidateUserName = randomUserName;
+                    ViewBag.NewCandidatePassword = randomPassword;
+                    ViewBag.NewCandidateRegistered = true;
+                    ViewBag.AgencyProfileVerfied = true;
+                    return RedirectToAction("RegisterCandidate");
                 }
                 //var country = context.Countries.ToList();
                 //var city = context.Cities.ToList();
                 //var district = context.Districts.ToList();
-
+                ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
                 ViewBag.Country = countries;
                 ViewBag.City = cities;
                 ViewBag.District = districts;
-                //AddErrors(result);
+                //model.CountryId = ViewData["Country"] as List<SelectListItem>();
+                AddErrors(result);
             }
             // If we got this far, something failed, redisplay form   
-            ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
-            ViewBag.Country = countries;
-            ViewBag.City = cities;
-            ViewBag.District = districts;
+          
+            ViewBag.NewCandidateRegistered = false;
+            ViewBag.AgencyProfileVerfied = true;
             return View(model);
         }
         [HttpGet]
@@ -335,5 +346,14 @@ namespace HireMe.Controllers
                 return HttpNotFound();
             return PartialView("_agencyDetails", agency);
         }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+
     }
 }
