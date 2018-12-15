@@ -212,30 +212,54 @@ namespace HireMe.Controllers
             List<JobTekMember> jobTekMembers = new List<JobTekMember> { };
             if (searchParam == null)
                 searchParam = new MemberSearchParam { MemberType = MemberType.Candidate };
-            //if (searchParam.MemberType == MemberType.Candidate)
-            //{
-            //jobTekMembers = db.Candidates.Include(path => path.JobRequests.Select(p => p.Job)).Select(p => new JobTekMember
-            //{
-            //    Name = p.FirstName + " " + p.LastName,
-            //    MemberType = "Candidate",
-            //    Job = p.JobRequests.Select(c => c.Job.JobName),
-            //    ProfileStatus = p.ProfileVerified,
-            //    Gender = p.Gender == Gender.Female ? "Female" : "Male",
-            //    Age = p.Age.HasValue ? p.Age.Value : 0
-            //}).ToList();
+            object[] queryString = searchParam.GetSearchQuery();
 
-            jobTekMembers = db.v_ExportJobRequests.Select(p => new JobTekMember
+            if (queryString != null)
             {
-                Name = p.Name,
-                EmailId = p.EmailId,
-                ContactNo = p.ContactNo,
-                Gender = p.Gender,
-                Age = p.Age,
-                MemberType = p.Profile,
-                ProfileVerified = p.ProfileVerified,
-                JobSought = p.JobSought,
-                PublishedDate = p.PublishedDate
-            }).ToList();
+                ArrayList searchArgs = (ArrayList)queryString[1];
+
+
+                jobTekMembers = db.v_ExportJobRequests.Where(queryString[0].ToString(), searchArgs.ToArray()).Select(p => new JobTekMember
+                {
+                    Name = p.Name,
+                    EmailId = p.EmailId,
+                    ContactNo = p.ContactNo,
+                    Gender = p.Gender,
+                    Age = p.Age,
+                    MemberType = p.Profile,
+                    ProfileVerified = p.ProfileVerified,
+                    JobSought = p.JobSought,
+                    PublishedDate = p.PublishedDate
+                }).ToList();
+            }
+            else
+            {
+                jobTekMembers = db.v_ExportJobRequests.Select(p => new JobTekMember
+                {
+                    Name = p.Name,
+                    EmailId = p.EmailId,
+                    ContactNo = p.ContactNo,
+                    Gender = p.Gender,
+                    Age = p.Age,
+                    MemberType = p.Profile,
+                    ProfileVerified = p.ProfileVerified,
+                    JobSought = p.JobSought,
+                    PublishedDate = p.PublishedDate
+                }).ToList();
+            }
+
+            //jobTekMembers = db.v_ExportJobRequests.Select(p => new JobTekMember
+            //{
+            //    Name = p.Name,
+            //    EmailId = p.EmailId,
+            //    ContactNo = p.ContactNo,
+            //    Gender = p.Gender,
+            //    Age = p.Age,
+            //    MemberType = p.Profile,
+            //    ProfileVerified = p.ProfileVerified,
+            //    JobSought = p.JobSought,
+            //    PublishedDate = p.PublishedDate
+            //}).ToList();
             //}
             //else
             //{

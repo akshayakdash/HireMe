@@ -47,6 +47,7 @@
                                 </label>
                             </div>*@
                         @*<button type="button" class="btn btn-link" data-ng-click="resetFilter()">Reset</button>*@
+                        <a title="Reset Filter" id="" class="filter-close pull-right" data-ng-click="resetFilter()" style="float:right;"><i class="fa fa-undo fa-lg"></i></a>
                     </div>
                     <div class="body search-filter-section">
                         <div class="row">
@@ -59,21 +60,21 @@
                                     <div class="filtersection-body">
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="memberType" ng-value="1" data-ng-model="searchParam.memberType">
+                                                <input type="radio" name="memberType" ng-value="0" data-ng-model="searchParam.memberType">
                                                 All
                                                 <span></span>
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="memberType" ng-value="2" data-ng-model="searchParam.memberType">
+                                                <input type="radio" name="memberType" ng-value="1" data-ng-model="searchParam.memberType">
                                                 Candidate
                                                 <span></span>
                                             </label>
                                         </div>
                                         <div class="radio">
                                             <label>
-                                                <input type="radio" name="memberType" ng-value="3" data-ng-model="searchParam.memberType">
+                                                <input type="radio" name="memberType" ng-value="2" data-ng-model="searchParam.memberType">
                                                 Employer
                                                 <span></span>
                                             </label>
@@ -394,7 +395,7 @@
         app.controller('exportMembersCtrl', function ($scope, $http) {
             $scope.members = [];
             $scope.message = "Welcome Angular JS";
-            $scope.searchParam = {memberType:1};
+            $scope.searchParam = {memberType:0};
             $scope.jobs = [];
 
             $scope.searchMembers = function () {
@@ -419,11 +420,20 @@
             }
 
             $scope.resetFilter = function () {
-                $scope.searchParam = { memberType: 1 };
+                $scope.searchParam = { memberType: 0 };
             }
 
-            $scope.exportMemebersToExcel = function(){
-                window.open('/api/JobTekApi/ExportMembersToExcel');
+            $scope.exportMemebersToExcel = function () {
+                //var url = '/api/JobTekApi/ExportMembersToExcel?';
+                //if ($scope.searchParam) {
+                //    if ($scope.searchParam.memberType) {
+                //        url += ""
+                //    }
+                //}
+                console.log($scope.searchParam);
+                console.log($.param($scope.searchParam))
+
+                window.open('/api/JobTekApi/ExportMembersToExcel?' + $.param($scope.searchParam));
             }
 
             $scope.getJobs();
