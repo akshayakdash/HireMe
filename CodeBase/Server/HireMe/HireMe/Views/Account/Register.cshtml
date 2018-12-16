@@ -128,11 +128,11 @@
                                                     <span></span>
                                                 </label>
                                             </div>
-                                            <div class="row">
+                                            @*<div class="row">
                                                 <div class="col-sm-12 error-arrow">
                                                     @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "" })
                                                 </div>
-                                            </div>
+                                            </div>*@
                                             @*<div class="row">
                                                     @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger", @placeholder = "Gender" })
                                                 </div>*@
@@ -254,16 +254,15 @@
                                         <div class="input-group mb-2">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
-                                                <span class="required-field"></span>
                                             </div>
                                             @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
                                             <span class="input-lable">Address</span>
                                         </div>
-                                        <div class="row">
+                                        @*<div class="row">
                                             <div class="col-sm-12 error-arrow">
                                                 @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
                                             </div>
-                                        </div>
+                                        </div>*@
                                     </fieldset>
                                 </div>
                                 <div class="form-section">
@@ -303,7 +302,7 @@
                                                 }, htmlAttributes: new { @class = "", @style = "margin:0;", id = "country_code" })
                                             </div>
                                             @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @placeholder = "" })
-                                            <span class="input-lable">Contact number</span>
+                                            <span class="input-lable contact-lable">Contact number</span>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12 error-arrow">
@@ -630,9 +629,9 @@
                 && $('#DOB').valid()
                 && $('#CountryId').valid()
                 && $('#CityId').valid()
-                //&& $('#District').valid()
+                && $('#District').valid()
                 //&& $('input[name="ExperienceInMonths"]').valid()
-                && $('#Address').valid()
+                //&& $('#Address').valid()
                 && $('#Email').valid()
                 && $('#PhoneNumber').valid()) {
 
