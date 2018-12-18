@@ -2903,11 +2903,16 @@
 }
 
 .service-box.style-5 .service-box-content h5 {
-	margin-bottom: 25px;
+	/*margin-bottom: 25px;*/
 	font-weight: 700;
 	text-transform: uppercase;
 }
-
+    .service-box.style-5 .service-box-content p {
+        text-align: justify;
+    }
+.service-box.style-5 .service-box-content img {
+    width:50px;
+}
 .service-box.style-5:hover > span {
 	box-shadow: 0 4px 7px 0 rgba(0, 0, 0, 0.16), 0 3px 12px 0 rgba(0, 0, 0, 0.12);
 }
