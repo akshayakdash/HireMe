@@ -587,6 +587,20 @@ namespace HireMe.Models
         public bool Connected { get; set; }
     }
 
+    public class ApplicationUserComment
+    {
+        public int Id { get; set; }
+        public string SenderId { get; set; }
+        public string ReceiverId { get; set; }
+        //[ForeignKey("SenderId")]
+        //public ApplicationUser Sender { get; set; }
+        //[ForeignKey("ReceiverId")]
+        //public ApplicationUser Receiver { get; set; }
+        public string Comments { get; set; }
+        public string JobName { get; set; }
+
+    }
+
     #region DB Views
     public class v_SearchJobRequest
     {
