@@ -118,7 +118,7 @@ namespace HireMe.Models
         public Gender Gender { get; set; }
 
         [Display(Name = "Address")]
-        [Required]
+        //[Required]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "You must provide a valid phone number")]
