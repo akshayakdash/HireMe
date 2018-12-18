@@ -346,7 +346,12 @@
     <Content Include="assets\fonts\bizhub-icons\css\bizhub-icons.min.css" />
     <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.svg" />
     <Content Include="assets\fonts\fontawesome\css\font-awesome.min.css" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.eot" />
     <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="assets\images\age.png" />
     <Content Include="assets\images\agency.jpg" />
     <Content Include="assets\images\agency1.jpg" />
@@ -529,7 +534,10 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular.min.js" />
@@ -541,11 +549,6 @@
     <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.eot" />
     <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.ttf" />
     <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.woff" />
-    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.eot" />
-    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.ttf" />
-    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff" />
-    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff2" />
-    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.eot" />
     <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.ttf" />
     <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.woff" />
@@ -703,15 +706,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\CandidateJobRequests\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
