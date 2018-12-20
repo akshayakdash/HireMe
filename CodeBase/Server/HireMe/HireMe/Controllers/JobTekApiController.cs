@@ -11,6 +11,7 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using OfficeOpenXml;
 using System.Net.Http.Headers;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
@@ -343,6 +344,7 @@ namespace HireMe.Controllers
         public HttpResponseMessage SaveJobRequestNote(JobRequestNote jobRequestNote)
         {
             var jobRequest = db.JobRequests
+                .Include(t => t.Job)
                 .Include(p => p.JobRequestNotes)
                 .FirstOrDefault(p => p.JobRequestId == jobRequestNote.JobRequestId);
             if (jobRequest == null)
@@ -354,6 +356,14 @@ namespace HireMe.Controllers
             var averageRating = (int)Math.Ceiling(db.JobRequestNotes.Average(p => p.StarRating));
             jobRequest.StarRating = averageRating;
             db.Entry(jobRequest).Property(p => p.StarRating).IsModified = true;
+
+            // now we need to make an entry to the user feed back
+            var userId = User.Identity.GetUserId();
+            var candidate = db.Candidates.Find(jobRequest.CandidateId);
+            // if userId is null then probably we need to get the user id from the employerid from jobrequestnote
+            var userFeedback = new UserFeedback { SenderId = userId, ReceiverId = candidate.AspNetUserId, CreatedDate = DateTime.Now, Comments = jobRequestNote.Note, JobName = jobRequest.Job.JobName, Rating = jobRequestNote.StarRating };
+
+            db.UserFeedbacks.Add(userFeedback);
 
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.Created, "Note added successfully.");
