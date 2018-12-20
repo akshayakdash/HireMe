@@ -592,8 +592,8 @@ namespace HireMe.Models
         public int Id { get; set; }
         public string SenderId { get; set; }
         public string ReceiverId { get; set; }
-        //[ForeignKey("SenderId")]
-        //public ApplicationUser Sender { get; set; }
+        [ForeignKey("SenderId")]
+        public ApplicationUser Sender { get; set; }
         //[ForeignKey("ReceiverId")]
         //public ApplicationUser Receiver { get; set; }
         public string Comments { get; set; }

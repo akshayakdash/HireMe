@@ -46,6 +46,13 @@ namespace HireMe.Controllers
                 .Include(p => p.JobTasks)
                 .FirstOrDefault(p => p.JobId == jobRequest.JobId)
                 .JobTasks;
+
+            // get the user feedbacks
+            // first get the candidateId for the JobRequest
+            var userId = jobRequest.Candidate.AspNetUserId;
+            // get all the feedbacks given to the user
+            var userFeedbacks = db.UserFeedbacks.Include(p => p.Sender).Where(p => p.ReceiverId == userId);
+            ViewBag.UserFeedbacks = userFeedbacks.ToList();
             if (jobRequest == null)
             {
                 return HttpNotFound();

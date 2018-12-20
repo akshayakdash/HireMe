@@ -72,6 +72,12 @@ namespace HireMe.Controllers
                 .Include(p => p.JobTasks)
                 .FirstOrDefault(p => p.JobId == jobOffer.JobId)
                 .JobTasks;
+
+            var userId = jobOffer.Employer.AspNetUserId;
+            // get all the feedbacks given to the user
+            var userFeedbacks = db.UserFeedbacks.Include(p => p.Sender).Where(p => p.ReceiverId == userId);
+            ViewBag.UserFeedbacks = userFeedbacks.ToList();
+
             if (jobOffer == null)
             {
                 return HttpNotFound();
@@ -179,7 +185,7 @@ namespace HireMe.Controllers
             var employer = db.Employers.Find(jobOffer.EmployerId);
             // if userId is null then probably we need to get the user id from the employerid from jobrequestnote
             var userFeedback = new UserFeedback { SenderId = userId, ReceiverId = employer.AspNetUserId, CreatedDate = DateTime.Now, Comments = jobOfferNote.Note, JobName = jobOffer.Job.JobName, Rating = jobOfferNote.StarRating };
-
+            db.UserFeedbacks.Add(userFeedback);
             db.SaveChanges();
 
 
