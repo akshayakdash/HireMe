@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201812121839576_Id_proof_for_Agency.Designer.cs">
       <DependentUpon>201812121839576_Id_proof_for_Agency.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812201554492_User_Feedback_Added.cs" />
+    <Compile Include="Migrations\201812201554492_User_Feedback_Added.Designer.cs">
+      <DependentUpon>201812201554492_User_Feedback_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -757,6 +761,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812121839576_Id_proof_for_Agency.resx">
       <DependentUpon>201812121839576_Id_proof_for_Agency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812201554492_User_Feedback_Added.resx">
+      <DependentUpon>201812201554492_User_Feedback_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

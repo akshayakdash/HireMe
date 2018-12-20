@@ -587,7 +587,7 @@ namespace HireMe.Models
         public bool Connected { get; set; }
     }
 
-    public class ApplicationUserComment
+    public class UserFeedback
     {
         public int Id { get; set; }
         public string SenderId { get; set; }
@@ -598,6 +598,8 @@ namespace HireMe.Models
         //public ApplicationUser Receiver { get; set; }
         public string Comments { get; set; }
         public string JobName { get; set; }
+        public int Rating { get; set; }
+        public DateTime CreatedDate { get; set; }
 
     }
 
@@ -726,35 +728,35 @@ namespace HireMe.Models
         SelectBox = 5
     }
 
-    public enum CountryEnum
-    {
-        Country1,
-        Country2,
-        Country3,
-        Country4
-    }
+    //public enum CountryEnum
+    //{
+    //    Country1,
+    //    Country2,
+    //    Country3,
+    //    Country4
+    //}
 
-    public enum CityEnum
-    {
-        Abidjan,
-        Yamoussoukro
-    }
+    //public enum CityEnum
+    //{
+    //    Abidjan,
+    //    Yamoussoukro
+    //}
 
-    public enum DistrictEnum
-    {
-        Abobo,
-        Adjamé,
-        Anyama,
-        Attécoubé,
-        Bingerville,
-        Cocody,
-        Koumassi,
-        Marcory,
-        Plateau,
-        Portbouët,
-        Treichville,
-        Songon,
-        Yopougon
+    //public enum DistrictEnum
+    //{
+    //    Abobo,
+    //    Adjamé,
+    //    Anyama,
+    //    Attécoubé,
+    //    Bingerville,
+    //    Cocody,
+    //    Koumassi,
+    //    Marcory,
+    //    Plateau,
+    //    Portbouët,
+    //    Treichville,
+    //    Songon,
+    //    Yopougon
 
-    }
+    //}
 }

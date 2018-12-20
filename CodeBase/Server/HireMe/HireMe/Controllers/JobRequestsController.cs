@@ -142,17 +142,25 @@ namespace HireMe.Controllers
             var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
             jobRequestNote.EmployerId = employer.EmployerId;
             var jobRequest = db.JobRequests
+                .Include(t => t.Job)
                 .Include(p => p.JobRequestNotes)
                 .FirstOrDefault(p => p.JobRequestId == jobRequestNote.JobRequestId);
             if (jobRequest == null)
                 return HttpNotFound();
             jobRequestNote.CreatedDate = DateTime.Now.ToString("dd-MMM-yyyy");
             jobRequest.JobRequestNotes.Add(jobRequestNote);
+
+            // now we need to make an entry to the user feed back
+            //var userId = User.Identity.GetUserId();
+            var candidate = db.Candidates.Find(jobRequest.CandidateId);
+            // if userId is null then probably we need to get the user id from the employerid from jobrequestnote
+            var userFeedback = new UserFeedback { SenderId = userId, ReceiverId = candidate.AspNetUserId, CreatedDate = DateTime.Now, Comments = jobRequestNote.Note, JobName = jobRequest.Job.JobName, Rating = jobRequestNote.StarRating };
+            db.UserFeedbacks.Add(userFeedback);
             db.SaveChanges();
 
 
             // get the userid who has created the job request
-            var candidate = db.Candidates.Find(jobRequest.CandidateId);
+            //var candidate = db.Candidates.Find(jobRequest.CandidateId);
             if (candidate != null)
             {
                 NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Job Request Note", jobRequestNote.Note, 0, true);
