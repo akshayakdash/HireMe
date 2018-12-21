@@ -103,11 +103,14 @@ namespace HireMe.Models
         public DbSet<JobTekNotification> Notifications { get; set; }
         public DbSet<SignalRUserConnection> SignalRConnections { get; set; }
         public DbSet<JobRequestJobTask> JobRequestJobTasks { get; set; }
+        public DbSet<UserFeedback> UserFeedbacks { get; set; }
 
         public DbSet<v_SearchJobRequest> v_JobRequests { get; set; }
         public DbSet<v_ExportJobRequest> v_ExportJobRequests { get; set; }
         public DbSet<v_ExportJobOffer> v_ExportJobOffers { get; set; }
         public DbSet<v_JobCount> v_JobCounts { get; set; }
         public DbSet<v_JobRequest_Count> v_JobRequestCount { get; set; }
+
+        
     }
 }

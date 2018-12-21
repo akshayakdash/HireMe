@@ -315,6 +315,10 @@
     <Compile Include="Migrations\201812121839576_Id_proof_for_Agency.Designer.cs">
       <DependentUpon>201812121839576_Id_proof_for_Agency.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812201554492_User_Feedback_Added.cs" />
+    <Compile Include="Migrations\201812201554492_User_Feedback_Added.Designer.cs">
+      <DependentUpon>201812201554492_User_Feedback_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -335,75 +339,209 @@
     <Compile Include="Utility\SearchParam.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\apple-touch-180x180.png" />
+    <Content Include="assets\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\bootstrap\js\popper.min.js" />
     <Content Include="assets\css\custom.css" />
     <Content Include="assets\css\pages-style.css" />
     <Content Include="assets\css\vgorpv.css" />
+    <Content Include="assets\favicon.png" />
+    <Content Include="assets\fonts\bizhub-icons\css\bizhub-icons.min.css" />
+    <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.svg" />
+    <Content Include="assets\fonts\fontawesome\css\font-awesome.min.css" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.eot" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.svg" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.ttf" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff2" />
+    <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfontd41d.eot" />
     <Content Include="assets\images\age.png" />
     <Content Include="assets\images\agency.jpg" />
+    <Content Include="assets\images\agency1.jpg" />
+    <Content Include="assets\images\answer.png" />
     <Content Include="assets\images\arrow.png" />
     <Content Include="assets\images\bg-footer.jpg" />
     <Content Include="assets\images\bg-slide-1.jpg" />
     <Content Include="assets\images\bg-slide-2.jpg" />
+    <Content Include="assets\images\bg-slide-3.jpg" />
+    <Content Include="assets\images\bg-slide-4.jpg" />
+    <Content Include="assets\images\bg-slide-5.jpg" />
+    <Content Include="assets\images\bg-slide-6.jpg" />
     <Content Include="assets\images\bg2.jpg" />
     <Content Include="assets\images\blog-post-1.jpg" />
     <Content Include="assets\images\blog-post-2.jpg" />
     <Content Include="assets\images\bug.png" />
     <Content Include="assets\images\calendar.png" />
     <Content Include="assets\images\candidate.jpg" />
+    <Content Include="assets\images\candidate1.jpg" />
     <Content Include="assets\images\ceremony-icon.png" />
     <Content Include="assets\images\check.png" />
+    <Content Include="assets\images\check1.png" />
+    <Content Include="assets\images\childcare.png" />
+    <Content Include="assets\images\childcare1.png" />
+    <Content Include="assets\images\cleaning.png" />
+    <Content Include="assets\images\cleaning1.png" />
     <Content Include="assets\images\company.png" />
+    <Content Include="assets\images\cooking1.png" />
     <Content Include="assets\images\course-icon.png" />
     <Content Include="assets\images\description.png" />
+    <Content Include="assets\images\dessert.png" />
+    <Content Include="assets\images\dessert1.png" />
     <Content Include="assets\images\email.png" />
     <Content Include="assets\images\employer.jpg" />
+    <Content Include="assets\images\employer1.jpg" />
+    <Content Include="assets\images\eyeglass.png" />
+    <Content Include="assets\images\eyeglass1.png" />
     <Content Include="assets\images\feedback.png" />
+    <Content Include="assets\images\filter-icon.png" />
     <Content Include="assets\images\filter.png" />
+    <Content Include="assets\images\gitar.png" />
+    <Content Include="assets\images\gitar1.png" />
+    <Content Include="assets\images\gratin.png" />
+    <Content Include="assets\images\gratin1.png" />
+    <Content Include="assets\images\grill.png" />
+    <Content Include="assets\images\grill1.png" />
     <Content Include="assets\images\home-icon.png" />
     <Content Include="assets\images\id.png" />
+    <Content Include="assets\images\IDcard-icon.png" />
+    <Content Include="assets\images\idcard.jpg" />
     <Content Include="assets\images\image-18.jpg" />
     <Content Include="assets\images\image-19.jpg" />
+    <Content Include="assets\images\ironing1.png" />
     <Content Include="assets\images\key.png" />
+    <Content Include="assets\images\laundry.png" />
+    <Content Include="assets\images\laundry1.png" />
     <Content Include="assets\images\lifecycle.png" />
-    <Content Include="assets\images\logo-footer.png" />
-    <Content Include="assets\images\logo-white.png" />
     <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\logos\1.jpg" />
+    <Content Include="assets\images\logos\2.jpg" />
+    <Content Include="assets\images\logos\3.jpg" />
+    <Content Include="assets\images\logos\4.jpg" />
+    <Content Include="assets\images\logos\5.jpg" />
+    <Content Include="assets\images\logos\6.jpg" />
+    <Content Include="assets\images\man-user.png" />
     <Content Include="assets\images\manage-favorites.png" />
     <Content Include="assets\images\map.png" />
-    <Content Include="assets\images\Marketing.mov" />
     <Content Include="assets\images\message.png" />
     <Content Include="assets\images\mission.png" />
     <Content Include="assets\images\multiservice.png" />
+    <Content Include="assets\images\password.png" />
+    <Content Include="assets\images\percussion.png" />
+    <Content Include="assets\images\percussion1.png" />
     <Content Include="assets\images\phone.png" />
-    <Content Include="assets\images\portfolio\image-10.jpg" />
-    <Content Include="assets\images\portfolio\image-11.jpg" />
-    <Content Include="assets\images\portfolio\image-12.jpg" />
-    <Content Include="assets\images\portfolio\image-13.jpg" />
-    <Content Include="assets\images\portfolio\image-7.jpg" />
-    <Content Include="assets\images\portfolio\image-8.jpg" />
-    <Content Include="assets\images\portfolio\image-9.jpg" />
+    <Content Include="assets\images\photo.png" />
+    <Content Include="assets\images\piano.png" />
+    <Content Include="assets\images\piano1.png" />
+    <Content Include="assets\images\portfolio\agency-half.jpg" />
+    <Content Include="assets\images\portfolio\candidate-half.jpg" />
+    <Content Include="assets\images\portfolio\catering.jpg" />
+    <Content Include="assets\images\portfolio\catering1.jpg" />
+    <Content Include="assets\images\portfolio\Ceremony.jpg" />
+    <Content Include="assets\images\portfolio\Ceremony1.jpg" />
+    <Content Include="assets\images\portfolio\cook.jpg" />
+    <Content Include="assets\images\portfolio\cook1.jpg" />
+    <Content Include="assets\images\portfolio\electrician.jpg" />
+    <Content Include="assets\images\portfolio\electrician1.jpg" />
+    <Content Include="assets\images\portfolio\employer-half.jpg" />
+    <Content Include="assets\images\portfolio\esthetician.jpg" />
+    <Content Include="assets\images\portfolio\guardian.jpg" />
+    <Content Include="assets\images\portfolio\guardian1.jpg" />
+    <Content Include="assets\images\portfolio\hairdressing.jpg" />
+    <Content Include="assets\images\portfolio\music.jpg" />
+    <Content Include="assets\images\portfolio\music1.jpg" />
+    <Content Include="assets\images\portfolio\nanny.jpg" />
+    <Content Include="assets\images\portfolio\nanny1.jpg" />
+    <Content Include="assets\images\portfolio\plumber.jpg" />
+    <Content Include="assets\images\portfolio\plumber1.jpg" />
+    <Content Include="assets\images\portfolio\schoolsupport.jpg" />
     <Content Include="assets\images\post-message.png" />
+    <Content Include="assets\images\publish.jpg" />
+    <Content Include="assets\images\question.png" />
+    <Content Include="assets\images\radio - Copy.png" />
     <Content Include="assets\images\radio.png" />
+    <Content Include="assets\images\recommendation-icon.png" />
     <Content Include="assets\images\recommendation.png" />
     <Content Include="assets\images\reg-bg.jpg" />
+    <Content Include="assets\images\register-icon.png" />
     <Content Include="assets\images\registrationbg.jpg" />
     <Content Include="assets\images\research-proces.jpg" />
+    <Content Include="assets\images\rice.png" />
+    <Content Include="assets\images\rice1.png" />
     <Content Include="assets\images\rules.jpg" />
+    <Content Include="assets\images\rules1.jpg" />
+    <Content Include="assets\images\salad.png" />
+    <Content Include="assets\images\salad1.png" />
     <Content Include="assets\images\salon-icon.png" />
+    <Content Include="assets\images\sauces.png" />
+    <Content Include="assets\images\sauces1.png" />
+    <Content Include="assets\images\search-icon.png" />
+    <Content Include="assets\images\search-profile.jpg" />
     <Content Include="assets\images\search-profile.png" />
     <Content Include="assets\images\search-white.png" />
     <Content Include="assets\images\search.png" />
     <Content Include="assets\images\settings-icon.png" />
     <Content Include="assets\images\settings.png" />
+    <Content Include="assets\images\singing.png" />
+    <Content Include="assets\images\singing1.png" />
+    <Content Include="assets\images\sleep.png" />
+    <Content Include="assets\images\sleep1.png" />
+    <Content Include="assets\images\tuto-image.jpg" />
     <Content Include="assets\images\url.png" />
+    <Content Include="assets\images\user-icon.png" />
     <Content Include="assets\images\user.png" />
+    <Content Include="assets\images\verified.png" />
+    <Content Include="assets\images\windinstrument.png" />
+    <Content Include="assets\images\windinstrument1.png" />
+    <Content Include="assets\images\woman-user.png" />
+    <Content Include="assets\images\write.png" />
+    <Content Include="assets\images\write1.png" />
     <Content Include="assets\images\zoom.png" />
     <Content Include="assets\js\custom.js" />
     <Content Include="assets\js\vgorpv.js" />
+    <Content Include="assets\mstile.png" />
+    <Content Include="assets\plugins\animations\animate.min.css" />
+    <Content Include="assets\plugins\animations\wow.min.js" />
+    <Content Include="assets\plugins\fancybox\jquery.fancybox.min.css" />
+    <Content Include="assets\plugins\fancybox\jquery.fancybox.min.js" />
+    <Content Include="assets\plugins\jquery\jquery-2.2.4.min.js" />
+    <Content Include="assets\plugins\menu\hoverintent.min.js" />
+    <Content Include="assets\plugins\menu\superfish.min.js" />
+    <Content Include="assets\plugins\owl-carousel\owl.carousel.min.css" />
+    <Content Include="assets\plugins\owl-carousel\owl.carousel.min.js" />
+    <Content Include="assets\plugins\owl-carousel\owl.video.play.png" />
+    <Content Include="assets\plugins\parallax\jquery.stellar.min.js" />
+    <Content Include="assets\plugins\revolutionslider\assets\coloredbg.png" />
+    <Content Include="assets\plugins\revolutionslider\assets\gridtile.png" />
+    <Content Include="assets\plugins\revolutionslider\assets\gridtile_3x3.png" />
+    <Content Include="assets\plugins\revolutionslider\assets\gridtile_3x3_white.png" />
+    <Content Include="assets\plugins\revolutionslider\assets\gridtile_white.png" />
+    <Content Include="assets\plugins\revolutionslider\assets\loader.gif" />
+    <Content Include="assets\plugins\revolutionslider\css\closedhand.cur" />
+    <Content Include="assets\plugins\revolutionslider\css\layers.css" />
+    <Content Include="assets\plugins\revolutionslider\css\navigation.css" />
+    <Content Include="assets\plugins\revolutionslider\css\openhand.cur" />
+    <Content Include="assets\plugins\revolutionslider\css\settings.css" />
+    <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.svg" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.actions.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.carousel.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.kenburn.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.layeranimation.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.migration.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.navigation.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.parallax.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.slideanims.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\extensions\revolution.extension.video.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\jquery.themepunch.revolution.min.js" />
+    <Content Include="assets\plugins\revolutionslider\js\jquery.themepunch.tools.min.js" />
+    <Content Include="assets\plugins\viewport\jquery.viewport.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\angular.min.js" />
@@ -412,6 +550,13 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.eot" />
+    <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.ttf" />
+    <Content Include="assets\fonts\bizhub-icons\fonts\bizhub-icons.woff" />
+    <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.eot" />
+    <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.ttf" />
+    <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.woff" />
+    <None Include="Properties\PublishProfiles\JobTekUat - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ChartJs\angular-chart.js" />
     <Content Include="Scripts\ChartJs\app.js" />
@@ -567,15 +712,6 @@
     <Folder Include="Views\CandidateJobRequests\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
@@ -625,6 +761,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812121839576_Id_proof_for_Agency.resx">
       <DependentUpon>201812121839576_Id_proof_for_Agency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812201554492_User_Feedback_Added.resx">
+      <DependentUpon>201812201554492_User_Feedback_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
