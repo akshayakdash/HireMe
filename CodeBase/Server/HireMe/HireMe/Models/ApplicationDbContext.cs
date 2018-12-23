@@ -61,6 +61,16 @@ namespace HireMe.Models
           .WithOptional()
           .HasForeignKey(agncy => agncy.AspNetUserId);
 
+            modelBuilder.Entity<Candidate>()
+        .HasMany(user => user.JobRequests)
+        .WithOptional()
+        .HasForeignKey(agncy => agncy.CandidateId);
+
+            //modelBuilder.Entity<JobRequest>()
+            //.HasRequired(e => e.Candidate)
+            //.WithOptional()
+            //.WillCascadeOnDelete(false);
+
             // uncomment it when we want to create db migration
             //modelBuilder.Ignore<JobTekNotification>();
             //modelBuilder.Ignore<v_SearchJobRequest>();
@@ -111,6 +121,6 @@ namespace HireMe.Models
         public DbSet<v_JobCount> v_JobCounts { get; set; }
         public DbSet<v_JobRequest_Count> v_JobRequestCount { get; set; }
 
-        
+
     }
 }

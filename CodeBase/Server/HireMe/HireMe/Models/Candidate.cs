@@ -385,9 +385,8 @@ namespace HireMe.Models
 
         public bool VerifiedByAdmin { get; set; }
         public DateTime? VerificationDate { get; set; }
-
-        //public string AgencyJobRequestGroupId { get; set; }
-        //public string AgencyJobRequestGroupName { get; set; }
+        public string AgencyJobRequestGroupId { get; set; }
+        public string AgencyJobRequestTitle { get; set; }
         //public int CrewMemberCount { get; set; }
     }
 

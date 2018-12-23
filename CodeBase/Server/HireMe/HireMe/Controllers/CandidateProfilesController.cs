@@ -111,30 +111,6 @@ namespace HireMe.Controllers
 
 
                     var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
-
-                    // iterate the skill pictures
-                    //if (candidateProfile.JobRequestSkillPics != null && candidateProfile.JobRequestSkillPics.Count > 0)
-                    //{
-                    //    for (int i = 0; i < candidateProfile.JobRequestSkillPics.Count; i++)
-                    //    {
-                    //        var skillPic = candidateProfile.JobRequestSkillPics[i];
-                    //        if (skillPic != null && skillPic.ContentLength > 0)
-                    //        {
-
-                    //            string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                    //            byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                    //            using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
-                    //            {
-                    //                thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
-                    //            }
-
-                    //            //profileImagePath = Convert.ToBase64String(thePictureAsBytes);
-                    //        }
-                    //    }
-
-                    //}
-
-
                     if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
                     {
                         var skillPic = candidateProfile.JobRequestSkillPic1;
@@ -174,7 +150,7 @@ namespace HireMe.Controllers
                         jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
                     }
 
-
+                    candidateProfile.Disponibility = candidateProfile.Disponibility;
 
                     candidateProfile.JobTasks.ForEach(task =>
                     {

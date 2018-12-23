@@ -405,6 +405,7 @@
                     .then(function (response) {
                         console.log(response.data);
                         $scope.members = response.data;
+                        $("#FilterClose1").click();
                     });
             }
 
