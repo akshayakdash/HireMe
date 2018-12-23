@@ -711,6 +711,7 @@
     <Content Include="Views\Shared\_jobOfferNotes.cshtml" />
     <Content Include="Views\Shared\_agencyDetails.cshtml" />
     <Content Include="Views\Agency\CreateJobRequest.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
