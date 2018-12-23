@@ -11915,3 +11915,53 @@ blockquote {
 .text-red {
     color: #fe005a;
 }
+.contact-form {
+    background: #fe005a;
+    color: #fff;
+    padding: 3px;
+}
+.contact-form .address{
+    padding: 15px 40px;
+}
+.contact-form .address h1 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.address-content{
+
+}
+.address-content a{
+    color:#fff;
+}
+.address-content h3 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 30px;
+}
+.address-content h3 i {
+    margin-right: 20px;
+    width:15px;
+}
+.address-content p {
+    padding-left: 35px;
+    margin-bottom:10px;
+}
+.form-area {
+    background: #fff;
+    color: #636363;
+    padding: 15px 30px;
+    text-align: center;
+}
+.form-area h1 {
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+}
+.form-area p{
+    font-weight:600;
+}
