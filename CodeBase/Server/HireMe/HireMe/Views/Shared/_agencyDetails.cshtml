@@ -6,9 +6,125 @@
                                                         .Select(c => c.Value);
     string role = roles.FirstOrDefault();}
 
+<!--Needs to be added-->
+<div class="row">
+    <div class="col-sm-4">
+        <div class="agency-pics">
+            <img src="~/assets/images/agency.jpg" />
+            <h3>Agency Logo</h3>
+        </div>
+
+        <div class="agency-pics">
+            <img src="~/assets/images/no-IDcard.jpg" />
+            <h3>Agency ID Proof</h3>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>
+                        Agency Name
+                    </td>
+                    <td>
+                        <strong>Nounou babi</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Agency website URL
+                    </td>
+                    <td>
+                        <a href="https://www.facebook.com/ecoleyarani/" target="_blank">https://www.facebook.com/ecoleyarani</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Manager first name
+                    </td>
+                    <td>
+                        Kouakou
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Manager last name
+                    </td>
+                    <td>
+                        &nbsp;
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Manager DOB
+                    </td>
+                    <td>
+                        11/23/2003
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Company Activity Desc.
+                    </td>
+                    <td>
+                        Nous formons des professionnel
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tab-section">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <td>
+                            Country
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            City
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            District
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Profile Verified
+                        </td>
+                        <td>
+                            &nbsp;
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Created Date
+                        </td>
+                        <td>
+                            11/23/2003
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--/Needs to be added-->
+
+
 <div>
-    <h4>Agency</h4>
-    <hr />
     <dl class="dl-horizontal">
 
         <dt>
@@ -123,9 +239,6 @@
         <dd>
             @Html.DisplayFor(model => model.CreatedDate)
         </dd>
-
-   
-
     </dl>
 </div>
 

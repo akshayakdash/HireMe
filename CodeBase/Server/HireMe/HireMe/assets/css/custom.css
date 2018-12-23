@@ -11965,3 +11965,17 @@ blockquote {
 .form-area p{
     font-weight:600;
 }
+.agency-pics {
+    text-align: center;
+    border: 1px solid #fe005a;
+    padding: 2px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+    .agency-pics img {
+        width: 100%;
+    }
+    .agency-pics h3 {
+        font-size: 16px;
+        font-weight: 600;
+    }
