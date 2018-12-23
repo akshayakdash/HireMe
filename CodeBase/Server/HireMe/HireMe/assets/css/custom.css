@@ -985,6 +985,9 @@ dl {
     .logos-list li {
         flex-basis: 50%;
     }
+    .d-xs-none {
+        display: none !important;
+    }
 }
 
 /***********************************************************************************
@@ -2006,9 +2009,9 @@ dl {
         position: relative;
         overflow: hidden;
         display: block;
-        padding: 10px 50px;
+        padding: 10px 30px;
         border-radius: 30px;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
         background-color: #e9f1f5;
         color: #252525;
         font-size: 18px;
@@ -2053,7 +2056,8 @@ dl {
 
         .accordion-title a:hover,
         .accordion-title a[aria-expanded="true"] {
-            background-color: transparent;
+            background-color: #fe005a;
+            color:#fff;
         }
 
             .accordion-title a:hover:after,
@@ -2064,7 +2068,7 @@ dl {
             }
 
 .accordion-body {
-    padding: 15px 50px 30px;
+    padding: 15px 30px 30px;
 }
 
     .accordion-body > *:last-child {
@@ -7007,7 +7011,7 @@ blockquote {
 }
 
 #section-311 {
-    padding: 40px 0 0;
+    padding: 0;
     margin-bottom: 0;
     background-color: #f8f8fb;
 }
@@ -10718,6 +10722,9 @@ blockquote {
     .contact-lable {
         display: none;
     }
+    .d-xs-none {
+        display: none !important;
+    }
 }
     /*Small Switch*/
     .switch-area {
@@ -11905,3 +11912,6 @@ blockquote {
 
     .border-bottom {
     }
+.text-red {
+    color: #fe005a;
+}

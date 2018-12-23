@@ -183,6 +183,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                         <div class="tree-title">
                             @(item.JobTaskName)
                         </div>
+                        
                         <div>
                             @{
                                     var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);

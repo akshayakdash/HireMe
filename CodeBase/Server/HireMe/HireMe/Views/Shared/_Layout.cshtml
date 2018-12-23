@@ -156,7 +156,8 @@
                                     <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
                                 }
                                 <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
-
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Contact Us</a></li>
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))

@@ -60,28 +60,6 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            @*<div class="profileitems">
-                                                                    <div class="left">
-                                                                        <img src="~/assets/images/image-18.jpg" />
-                                                                        <div class="rating">
-
-                                                                        </div>
-                                                                        <div class="favorite">
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                                        <h2 class="name">@item.Employer.FirstName</h2>
-                                                                        <h2 class="name">@item.Job.JobName</h2>
-
-                                                                        <div class="published">Published: <span>@item.PublishedDate</span></div>
-                                                                    </div>
-                                                                    <div class="profile-footer">
-                                                                        @item.AdditionalDescription
-                                                                    </div>
-                                                                </div>*@
-
 
                                                             <div class="profileitems searchprofile-section">
                                                                 @if (item.ProfileVerified)
@@ -90,19 +68,20 @@
                                                                 }
 
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
                                                                     <div class="rating">
-                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                        @for (int i = 0; i < item.StarRating; i++)
+                                                                        {
+                                                                            <i class="fa fa-star"></i>
+                                                                        }
+                                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                        {
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        }
                                                                     </div>
-                                                                    @*<div class="favorite">
-                                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                                        </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    @*<h1>
-                                                                    @(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")
-                                                                      </h1>*@
-                                                                    <h2 class="name">
+                                                                    <h1>
                                                                         @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
@@ -111,9 +90,12 @@
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
                                                                         }
-                                                                    <span>&nbsp;@item.Employer.FirstName</span>
-                                                                    </h2>
-                                                                    <p class="location"><span>@item.Job.JobName</span></p>
+                                                                    </h1>
+                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                    <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
+                                                                    <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
                                                                 </div>
@@ -125,9 +107,9 @@
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                                        @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>*@
+                                                                        @*<li><a href="#" onclick="deleteJobOffer(@item.JobOfferId)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="~/JobOffers/Details/@item.JobOfferId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/@("JobOffers/Details/"+item.JobOfferId)" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -161,27 +143,6 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
-                                                            @*<div class="profileitems">
-                                                                    <div class="left">
-                                                                        <img src="~/assets/images/image-18.jpg" />
-                                                                        <div class="rating">
-
-                                                                        </div>
-                                                                        <div class="favorite">
-
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")<span></span></h1>
-                                                                        <h2 class="name">@item.Employer.FirstName</h2>
-                                                                        <h2 class="name">@item.Job.JobName</h2>
-
-                                                                        <div class="published">Published: <span>@item.PublishedDate</span></div>
-                                                                    </div>
-                                                                    <div class="profile-footer">
-                                                                        @item.AdditionalDescription
-                                                                    </div>
-                                                                </div>*@
 
                                                             <div class="profileitems searchprofile-section">
                                                                 @if (item.ProfileVerified)
@@ -190,18 +151,34 @@
                                                                 }
 
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
                                                                     <div class="rating">
-                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                        @for (int i = 0; i < item.StarRating; i++)
+                                                                        {
+                                                                            <i class="fa fa-star"></i>
+                                                                        }
+                                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                        {
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        }
                                                                     </div>
-                                                                    @*<div class="favorite">
-                                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                                        </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h1>
+                                                                        @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
+                                                                        }
+                                                                    </h1>
                                                                     <h2 class="name"><span>@item.Employer.FirstName</span></h2>
-                                                                    <p class="location"><span> @item.Job.JobName</span></p>
+                                                                    <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
+                                                                    <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
                                                                 </div>
@@ -213,12 +190,14 @@
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" onclick="deleteJobOffer(@item.JobOfferId)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/@("JobOffers/Details/"+item.JobOfferId)" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
+
+
                                                         </div>
                                                     }
 
@@ -251,6 +230,7 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
+
                                                             <div class="profileitems searchprofile-section">
                                                                 @if (item.ProfileVerified)
                                                                 {
@@ -258,18 +238,34 @@
                                                                 }
 
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
                                                                     <div class="rating">
-                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                        @for (int i = 0; i < item.StarRating; i++)
+                                                                        {
+                                                                            <i class="fa fa-star"></i>
+                                                                        }
+                                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                        {
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        }
                                                                     </div>
-                                                                    @*<div class="favorite">
-                                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                                        </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h1>
+                                                                        @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
+                                                                        }
+                                                                    </h1>
                                                                     <h2 class="name"><span>@item.Employer.FirstName</span></h2>
-                                                                    <p class="location"><span> @item.Job.JobName</span></p>
+                                                                    <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
+                                                                    <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
                                                                 </div>
@@ -281,12 +277,14 @@
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" onclick="deleteJobOffer(@item.JobOfferId)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/@("JobOffers/Details/"+item.JobOfferId)" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
+
+
                                                         </div>
                                                     }
 
@@ -319,6 +317,7 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
+
                                                             <div class="profileitems searchprofile-section">
                                                                 @if (item.ProfileVerified)
                                                                 {
@@ -326,18 +325,34 @@
                                                                 }
 
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
                                                                     <div class="rating">
-                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                        @for (int i = 0; i < item.StarRating; i++)
+                                                                        {
+                                                                            <i class="fa fa-star"></i>
+                                                                        }
+                                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                        {
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        }
                                                                     </div>
-                                                                    @*<div class="favorite">
-                                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                                        </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h1>
+                                                                        @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
+                                                                        }
+                                                                    </h1>
                                                                     <h2 class="name"><span>@item.Employer.FirstName</span></h2>
-                                                                    <p class="location"><span> @item.Job.JobName</span></p>
+                                                                    <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
+                                                                    <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
                                                                 </div>
@@ -349,12 +364,14 @@
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" onclick="deleteJobOffer(@item.JobOfferId)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/@("JobOffers/Details/"+item.JobOfferId)" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
+
+
                                                         </div>
                                                     }
 
@@ -386,6 +403,7 @@
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
                                                     {
                                                         <div class="col-md-4 col-sm-6">
+
                                                             <div class="profileitems searchprofile-section">
                                                                 @if (item.ProfileVerified)
                                                                 {
@@ -393,18 +411,34 @@
                                                                 }
 
                                                                 <div class="left">
-                                                                    <img src="~/assets/images/image-18.jpg" />
+                                                                    <img src="data:image/jpeg;base64,@item.Employer.ProfilePicUrl" />
                                                                     <div class="rating">
-                                                                        <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
+                                                                        @for (int i = 0; i < item.StarRating; i++)
+                                                                        {
+                                                                            <i class="fa fa-star"></i>
+                                                                        }
+                                                                        @for (int i = 0; i < (5 - item.StarRating); i++)
+                                                                        {
+                                                                            <i class="fa fa-star-o"></i>
+                                                                        }
                                                                     </div>
-                                                                    @*<div class="favorite">
-                                                                            <a href="javascropt(0);" ><i class="fa fa-heart-o"></i></a>
-                                                                        </div>*@
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>@(item.Employer.Gender == HireMe.Models.Gender.Male ? "Man" : "Woman")</h1>
+                                                                    <h1>
+                                                                        @if (item.Employer.Gender == HireMe.Models.Gender.Female)
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
+                                                                        }
+                                                                    </h1>
                                                                     <h2 class="name"><span>@item.Employer.FirstName</span></h2>
-                                                                    <p class="location"><span> @item.Job.JobName</span></p>
+                                                                    <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
+                                                                    <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
+                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
                                                                 </div>
@@ -416,12 +450,14 @@
                                                                         @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
                                                                             <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="" title="Favorite" id="set_favourite_job_req_link" data-ng-click="setFavouriteJobRequest(jr.JobRequestId)"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                                                                        @*<li><a href="#" onclick="deleteJobOffer(@item.JobOfferId)" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>*@
                                                                         @*<li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
-                                                                        <li><a href="#" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                                        <li><a href="~/@("JobOffers/Details/"+item.JobOfferId)" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
+
+
                                                         </div>
                                                     }
 

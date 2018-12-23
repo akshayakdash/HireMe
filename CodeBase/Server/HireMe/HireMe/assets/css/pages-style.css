@@ -2520,6 +2520,7 @@
 
 .service-box {
 	margin-bottom: 50px;
+    display:flex;
 }
 
 .service-box-content {}
@@ -3153,7 +3154,7 @@
 }
 
 .service-box.style-9.icon-left .service-box-content {
-	margin-left: 90px;
+	margin-left: 30px;
 }
 
 .service-box.style-9.icon-right .service-box-content {
