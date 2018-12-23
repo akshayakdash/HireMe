@@ -133,6 +133,12 @@ namespace HireMe.Models
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$", ErrorMessage = "Password should be of 6 characters long and should contain" +
+            "at least one Upper case letter, " +
+            "one lower case letter " +
+            "one digit " +
+            "one special character " +
+            "e.g Pass@123")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

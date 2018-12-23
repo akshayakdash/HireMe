@@ -359,13 +359,15 @@
 
         </header>
 
+        @{
+            var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+        }
 
-
-        @if (HttpContext.Current.User.Identity.IsAuthenticated && !((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
+        @if (HttpContext.Current.User.Identity.IsAuthenticated && !((Request.RawUrl.ToString() == "/" ||  Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index" || controllerName == "Home" || controllerName == "home")))
         {
             <div id="mySidenav" class="sidenav">
 
-
+                @Request.RawUrl.ToString()
 
                 <div class="sidenav-header">User Account - @role</div>
                 @*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*@
