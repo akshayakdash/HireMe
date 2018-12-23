@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HireMe.Utility;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -109,5 +110,87 @@ namespace HireMe.Models
         public int? DistrictId { get; set; }
         [NotMapped]
         public string District { get; set; }
+    }
+
+    public class AgencyJobRequestViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public string Title { get; set; }
+        public int CandidateId { get; set; }
+        public string AspNetUserId { get; set; }
+        //[ForeignKey("AspNetUserId")]
+        //public AppUser ApplicationUser { get; set; }
+        public int? AgencyId { get; set; }
+        [Required]
+        public Gender Gender { get; set; }
+        
+        //[Required]
+        //public int? Age { get; set; }
+        [Required]
+        public int? ExperienceInYears { get; set; }
+        public int? ExperienceInMonths { get; set; }
+
+        public string IdProofDoc { get; set; }
+        public string IdProofDocDesc { get; set; }
+
+        public bool ProfileVerified { get; set; }
+        [Required]
+        public StaffType StaffType { get; set; }
+        public string StaffTypeDesc { get; set; }
+        [Required]
+        public DateTime Disponibility { get; set; }
+
+        public int? CountryId { get; set; }
+        public string Country { get; set; }
+        [Required]
+        public int? CityId { get; set; }
+        public string City { get; set; }
+        [Required]
+        public int? DistrictId { get; set; }
+        public string District { get; set; }
+        [Required]
+        public SalaryType SalaryType { get; set; }
+        public string SalaryTypeDesc { get; set; }
+        public string SalaryTypeOtherDesc { get; set; }
+
+        public bool CanRead { get; set; }
+        public bool CanWrite { get; set; }
+
+        [Required]
+        public decimal ExpectedMinSalary { get; set; }
+        [Required]
+        public decimal ExpectedMaxSalary { get; set; }
+
+        public bool SleepOnSite { get; set; }
+
+        public int? ExpectedMinRooms { get; set; }
+        public int? ExpectedMaxRooms { get; set; }
+
+        public int? MinGroupPeople { get; set; }
+        public int? MaxGroupPeople { get; set; }
+
+        public string CreatedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public string UpdatedDate { get; set; }
+        public string UpdatedBy { get; set; }
+
+        public string AdditionalDescription { get; set; }
+        public bool PublishProfile { get; set; }
+
+        public List<JobTaskViewModel> JobTasks { get; set; }
+
+        public List<SelectedJobTask> SelectedJobTasks { get; set; }
+        public int JobId { get; set; }
+
+        //public List<JobRequest> JobRequests { get; set; }
+
+        public List<HttpPostedFileBase> JobRequestSkillPics { get; set; }
+
+        public HttpPostedFileBase JobRequestSkillPic1 { get; set; }
+        public HttpPostedFileBase JobRequestSkillPic2 { get; set; }
+        public HttpPostedFileBase JobRequestSkillPic3 { get; set; }
+
+        public List<int> CandidateIds { get; set; }
     }
 }

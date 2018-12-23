@@ -1,0 +1,685 @@
+﻿
+@model HireMe.Models.AgencyJobRequestViewModel
+@using HireMe.Models
+
+@{
+    ViewBag.Title = "Create";
+}
+
+@functions
+    {
+    private int count = 0;
+}
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        $("#CityId").empty();
+        $.ajax({
+            type: 'GET',
+            url: '/Account/GetCities?id=1', // we are calling json method
+
+            dataType: 'json',
+
+            // data: { id: $("#CountryId").val() },
+            // here we are get value of selected country and passing same value
+            //  as inputto json method GetStates.
+
+            success: function (cities) {
+                // states contains the JSON formatted list
+                // of states passed from the controller
+                $("#CityId").append('<option value="0">' + ' --Select City--' + '</option>');
+                $.each(cities, function (i, city) {
+                    $("#CityId").append('<option value="' + city.Value + '">' + city.Text + '</option>');
+                    // here we are adding option for States
+
+                });
+            },
+            error: function (ex) {
+                alert('Failed to retrieve states.' + ex);
+            }
+        });
+        //return false;
+
+
+        $("#CityId").change(function () {
+            $("#DistrictId").empty();
+            $.ajax({
+                type: 'GET',
+                url: '/Account/GetDistricts?id=' + $("#CityId").val(), // we are calling json method
+
+                dataType: 'json',
+                success: function (districts) {
+                    // states contains the JSON formatted list
+                    // of states passed from the controller
+                    $("#DistrictId").append('<option value="0">' + ' --Select District--' + '</option>');
+                    $.each(districts, function (i, district) {
+                        $("#DistrictId").append('<option value="' + district.Value + '">' + district.Text + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve states.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+</script>
+
+@helper ShowTaskTree(IEnumerable<HireMe.Models.JobTaskViewModel> jobTasks)
+{
+for (int i = 0; i < jobTasks.Count(); i++)
+{
+    count = count + 1;
+    var item = jobTasks.ElementAt(i);
+
+        <div class="col-sm-12">
+            <div class="filtersection-panel">
+                <div class="filtersection-header">
+                    @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
+                    @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
+                    <span style="background-color:#ff055a;"><img style="width: 15px;" src="@(Model.JobTasks[count - 1].IconImage)" alt=""></span>
+                    <span>@item.JobTaskName</span>
+
+                    <div class="switch-area-inner switch-area-inner-cus">
+                        <label class="checkbox">
+                            @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
+                            <span class=""></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="filtersection-body">
+                    <div class="">
+                        @Html.TextBoxFor(p => p.JobTasks[count - 1].Note, new { @class = "form-control", @placeholder = "Comment" })
+                    </div>
+                </div>
+            </div>
+            @if (item.SubTasks.Any())
+            {
+
+            @ShowTaskTree(item.SubTasks)
+
+            }
+        </div>
+}
+}
+
+
+<style>
+    #footer-container {
+        display: none;
+    }
+</style>
+@{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                                                    .Select(c => c.Value);
+    string role = roles.FirstOrDefault();}
+
+@if (ViewBag.AgencyProfileVerfied != null && ViewBag.AgencyProfileVerfied)
+{
+
+    if (Request.QueryString["jobId"] == null)
+    {
+
+        <div id="main-container-user">
+
+
+            <div class="full-section-container wow fadeInUp">
+                <div class="tab-section">
+                    <div class="tab-section-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="headline text-center mb-1 wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
+                                    <h2>Select Job for candidate</h2>
+                                </div>
+                                @if (ViewBag.JobCategories != null)
+                                {
+                                <div class="tabs style-2">
+
+                                    <ul class="nav nav-tabs job-tab">
+                                        @for (int i = 0; i < ViewBag.JobCategories.Count; i++)
+                                            {
+                                                var item = ViewBag.JobCategories[i];
+                                            <li><a class="@(i == 0 ? "active" : "")" href="@("#tab-agency-job-" + i)" data-toggle="tab"><img src="@item.IconImage" />@item.CategoryName</a></li>
+                                            }
+                                    </ul>
+                                    @*<ul class="nav nav-tabs">
+                                            <li><a class="active" href="#tab-1-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
+                                            <li><a href="#tab-1-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
+                                            <li><a href="#tab-1-3" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                            <li><a href="#tab-1-4" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
+                                            <li><a href="#tab-1-5" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Organization Ceremony</a></li>
+                                        </ul>*@
+
+                                    <div class="tab-content">
+
+                                        @for (int i = 0; i < ViewBag.JobCategories.Count; i++)
+                                            {
+                                                var item = ViewBag.JobCategories[i];
+                                        <div class="tab-pane fade show @(i == 0 ? "active" : "")" id="@("tab-agency-job-" + i)">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="isotope cols-3 gutter">
+                                                        @foreach (var job in item.Jobs)
+                                                                {
+                                                                <div class="isotope-item categ-1 categ-2">
+                                                                    <div class="portfolio-item">
+                                                                        <div class="portfolio-item-thumbnail">
+                                                                            <img src="@(job.IconImage)" alt="">
+                                                                            <div class="portfolio-item-hover"></div>
+                                                                            <div class="portfolio-item-description">
+                                                                                <h5><a href="~/Agency/CreateJobRequest@("?jobId=" + job.JobId)">@job.JobName</a></h5>
+                                                                            </div><!-- portfolio-item-description -->
+                                                                            @*<a class="fancybox zoom-action" data-fancybox="portfolio" href="#"><i class="bizhub-icon-search"></i></a>*@
+                                                                        </div><!-- portfolio-item-thumbnail -->
+                                                                    </div><!-- portfolio-item -->
+                                                                </div>
+                                                                }
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                            }
+
+                                    </div><!-- tab-content -->
+                                </div><!-- tabs -->
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="headline text-center">
+                                <h2>Our Trusted Partners</h2>
+                            </div><!-- headline -->
+                        </div><!-- col -->
+                    </div><!-- row -->
+                </div><!-- container -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="owl-carousel logos-slider">
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/6.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/5.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/4.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/3.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/2.jpg);"></a></div>
+                                <div class="item"><a target="_blank" href="#" style="background-image:url(/assets/images/logos/1.jpg);"></a></div>
+                            </div><!-- logos-slider -->
+                        </div><!-- col -->
+                    </div><!-- row -->
+                </div><!-- container -->
+            </div>
+            <!---- Tab Section end-->
+
+
+
+
+
+        </div>
+    }
+    else
+    {
+
+        <div id="main-container-user">
+
+
+            <div class="full-section-container wow fadeInUp">
+                @using (Html.BeginForm("CreateJobRequest", "Agency", FormMethod.Post, new { role = "form", enctype = "multipart/form-data" }))
+                {
+                @Html.AntiForgeryToken()
+                <div class="tab-section">
+                    <div class="tab-section-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tabs style-2">
+                                    <div class="tab-header">
+                                        Job Profile
+                                    </div>
+                                    <div class="tab-content search-criteria" style="margin-top:0;">
+
+                                        <div class="tab-pane fade show active" id="tab-1-1">
+                                            <div class="row">
+                                                <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12">
+                                                            <div class="row">
+                                                                <div class="col-lg-12 col-md-6">
+                                                                    @Html.TextBoxFor(p => p.Title, new { @class = "form-control", @placeholder = "Job Title" })
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Years of Experience
+                                                                </div>
+
+                                                                <div class="filtersection-body">
+                                                                   
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            @Html.TextBoxFor(p => p.ExperienceInYears, new { @class = "form-control", @placeholder = "in yrs" })
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            @Html.TextBoxFor(p => p.ExperienceInMonths, new { @class = "form-control", @placeholder = "in months" })
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        @Html.ValidationMessageFor(m => m.ExperienceInYears, "", new { @class = "text-danger" })
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        <h3>Select Candidates</h3>
+                                                                        <div class="col-lg-6">
+                                                                            @if (ViewBag.Candidates != null)
+                                                                                {
+                                                                                    foreach (var candidate in ViewBag.Candidates)
+                                                                                    {
+                                                                                <p>
+                                                                                    <div class="switch-area-inner switch-area-inner-cus">
+                                                                                        <label class="checkbox">
+                                                                                            <input type="checkbox" name="candidateIds[]" value="@candidate.CandidateId" />
+                                                                                            <span class=""></span>
+                                                                                        </label>
+                                                                                    </div>@candidate.FirstName
+                                                                                </p>
+                                                                                    }
+                                                                                }
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Localizations
+                                                                </div>
+
+                                                                <div class="filtersection-body">
+                                                                    @Html.HiddenFor(p => p.Country, new { @value = "Ivory" })
+                                                                    @Html.HiddenFor(p => p.CountryId, new { @value = 1 })
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            @Html.DropDownList("CityId", new SelectList(string.Empty, "Value", "Text"), "--Select City --", new { @class = "form-control" })
+                                                                            @*@Html.DropDownListFor(model => model.CityId, ViewBag.Cities as IEnumerable<SelectListItem>, "Select City", new { @class = "form-control" })*@
+
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            @Html.DropDownList("DistrictId", new SelectList(string.Empty, "Value", "Text"), "--Select District--", new { @class = "form-control" })
+                                                                            @*@Html.DropDownListFor(p => p.DistrictId, ViewBag.Districts as IEnumerable<SelectListItem>, "Select District", new { @class = "form-control" })*@
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div class="row">
+                                                                        @Html.ValidationMessageFor(m => m.CityId, "", new { @class = "text-danger" })
+                                                                        @Html.ValidationMessageFor(m => m.DistrictId, "", new { @class = "text-danger" })
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Salary Between
+                                                                </div>
+
+                                                                <div class="filtersection-body">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-6">
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Monthly, new { @value = SalaryType.Monthly })
+                                                                                    Monthly
+                                                                                    <span></span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Hourly, new { @value = SalaryType.Hourly })
+                                                                                    Hourly
+                                                                                    <span></span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="radio">
+                                                                                <label>
+                                                                                    @Html.RadioButtonFor(p => p.SalaryType, SalaryType.Hourly, new { @value = SalaryType.PriceOfService })
+                                                                                    Price Of Service
+                                                                                    <span></span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <div class="salary-type-other" style="display:none">
+                                                                                @Html.TextBoxFor(p => p.SalaryTypeOtherDesc, new { @class = "form-control", @placeholder = "Salary type" })
+                                                                            </div>
+                                                                            <div class="row">
+                                                                                @Html.ValidationMessageFor(m => m.SalaryType, "", new { @class = "text-danger" })
+                                                                                @Html.ValidationMessageFor(m => m.SalaryTypeOtherDesc, "", new { @class = "text-danger" })
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div class="row">
+                                                                                <div class="col-lg-6 col-md-6">
+                                                                                    @Html.TextBoxFor(p => p.ExpectedMinSalary, "{0:#.#}", new { @class = "form-control", @placeholder = "Min Salary", @value = "", @type = "number" })
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-6">
+                                                                                    @Html.TextBoxFor(p => p.ExpectedMaxSalary, "{0:#.#}", new { @class = "form-control", @placeholder = "Max Salary", @value = "", @type = "number" })
+                                                                                </div>
+                                                                                <div class="row">
+                                                                                    @Html.ValidationMessageFor(m => m.ExpectedMinSalary, "", new { @class = "text-danger" })
+                                                                                    @Html.ValidationMessageFor(m => m.ExpectedMaxSalary, "", new { @class = "text-danger" })
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+                                        </div><!-- tab-pane -->
+                                        <div class="tab-pane fade show" id="tab-1-2">
+                                            <div class="row">
+                                                <div class="col-md-6" style="border-right:2px solid #ff6a00;">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Do you know how to read ?
+                                                                    <div class="switch-area-inner switch-area-inner-cus">
+                                                                        <label class="checkbox">
+                                                                            @Html.CheckBoxFor(p => p.CanRead)
+                                                                            <span class=""></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="filtersection-body">
+                                                                    <div class="icon-section">
+                                                                        <img src="~/assets/images/eyeglass1.png" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Do you know how to write ?
+                                                                    <div class="switch-area-inner switch-area-inner-cus">
+                                                                        <label class="checkbox">
+                                                                            @Html.CheckBoxFor(p => p.CanWrite)
+                                                                            <span class=""></span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="filtersection-body">
+                                                                    <div class="icon-section">
+                                                                        <img src="~/assets/images/write1.png" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Sleep on Site
+                                                                    <div class="switch-area-inner switch-area-inner-cus">
+                                                                        <label class="checkbox">
+                                                                            @Html.CheckBoxFor(p => p.SleepOnSite, new { })
+                                                                            <span class=""></span>
+                                                                        </label>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="filtersection-body">
+                                                                    <div class="icon-section">
+                                                                        <img src="~/assets/images/sleep1.png" alt="">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Disponibility
+                                                                </div>
+
+                                                                <div class="filtersection-body">
+                                                                    <div class="date">
+                                                                        @Html.TextBoxFor(p => p.Disponibility, new { @type = "date", @class = "form-control" })
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        @Html.ValidationMessageFor(m => m.Disponibility, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-sm-12 room-section" style="display:none;">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Number of people
+
+                                                                </div>
+
+                                                                <div class="filtersection-body">
+
+                                                                    <div class="row">
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            @Html.TextBoxFor(p => p.MinGroupPeople, new { @class = "form-control", @placeholder = "No of Adults" })
+
+                                                                        </div>
+                                                                        <div class="col-lg-6 col-md-6">
+                                                                            @Html.TextBoxFor(p => p.MaxGroupPeople, new { @class = "form-control", @placeholder = "No of Children" })
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-6">
+
+
+                                                    <div class="row">
+                                                        @ShowTaskTree(Model.JobTasks.Where(p => p.ParentJobTaskId == null))
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Additional Description
+                                                                    @*<div class="switch-area-inner">
+                                                                            <label class="switchsmall">
+                                                                                <input type="checkbox">
+                                                                                <span class="slider1 round"></span>
+                                                                            </label>
+                                                                        </div>*@
+                                                                </div>
+                                                                <div class="filtersection-body">
+                                                                    @*<textarea id="comment" class="form-control" name="comment" rows="2" placeholder="Comment"></textarea>*@
+                                                                    @Html.TextAreaFor(p => p.AdditionalDescription, new { @class = "form-control", @placeholder = "Comment" })
+                                                                    @Html.HiddenFor(p => p.JobId, new { @value = Model.JobId })
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-12">
+                                                            <div class="filtersection-panel">
+                                                                <div class="filtersection-header">
+                                                                    Upload Pictures
+                                                                    @*<div class="switch-area-inner">
+                                                                            <label class="switchsmall">
+                                                                                <input type="checkbox">
+                                                                                <span class="slider1 round"></span>
+                                                                            </label>
+                                                                        </div>*@
+                                                                </div>
+                                                                <div class="filtersection-body">
+
+                                                                    <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic1" name="JobRequestSkillPic1" accept="image/png, image/jpeg,image/jpg">
+                                                                    <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic2" name="JobRequestSkillPic2" accept="image/png, image/jpeg,image/jpg">
+                                                                    <input type="file" class="form-control" placeholder="Upload Picture" id="JobRequestSkillPic3" name="JobRequestSkillPic3" accept="image/png, image/jpeg,image/jpg">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- tab-pane -->
+                                    </div>
+                                    <ul class="nav nav-tabs" style="width: 100%;">
+                                        <li style="width: 50%;">
+                                            <a style="float:left;" class="backbtn active" href="#tab-1-1" data-toggle="tab">Back</a>
+                                        </li>
+                                        <li style="width: 50%;">
+                                            <a style="float:right;" class="nextbtn active" href="#tab-1-2" data-toggle="tab">Next</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                }
+
+
+            </div>
+
+        </div>
+    }
+}
+else
+{
+    <div id="main-container-user">
+        <div class="full-section-container wow fadeInUp">Your profile has not been verified by admin.</div>
+    </div>
+}
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "280px";
+        document.getElementById("main-container-user").style.marginLeft = "280px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main-container-user").style.marginLeft = "0";
+    }
+</script>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+
+
+        //alert(jobRequestId);
+        $(document).ready(function () {
+            // alert("s")
+            $(".backbtn").hide();
+            $("#tab-1-2").hide();
+            $("#tab-1-1").show();
+            $(".backbtn").click(function () {
+                //alert("s")
+                $(this).hide();
+                $(".nextbtn").show();
+                $(".nextbtn").addClass("active");
+                $("#tab-1-2").hide();
+                $("#tab-1-1").show();
+                //$(".backbtn").click();
+            })
+            $(".nextbtn").click(function () {
+                if ($('#Title').valid()
+                    && $('#ExperienceInYears').valid()
+                    //&& $('input[name="ExperienceInMonths"]').valid()
+                    && $('#CityId').valid()
+                    && $('#DistrictId').valid()
+                    && $('#SalaryType').valid()
+                    && $('#ExpectedMinSalary').valid()
+                    && $('#ExpectedMaxSalary').valid()
+                ) {
+
+                    $(this).hide();
+                    $(".backbtn").show();
+                    $(".backbtn").addClass("active");
+                    // $(".nextbtn").click();
+                    $("#tab-1-1").hide();
+                    $("#tab-1-2").show();
+                }
+            });
+
+            $("#SleepOnSite").click(function (event) {
+                console.log($(event.target).prop("checked"));
+                if ($(event.target).prop("checked")) {
+                    $(".room-section").show();
+                } else {
+                    $(".room-section").hide();
+                }
+            });
+
+            //var uploadField = document.getElementByName("JobRequestSkillPic1");
+
+            document.getElementById("JobRequestSkillPic1").onchange = function () {
+                if (this.files[0].size > 307200) {
+                    alert("File is too big!");
+                    this.value = "";
+                };
+            };
+            document.getElementById("JobRequestSkillPic2").onchange = function () {
+                if (this.files[0].size > 307200) {
+                    alert("File is too big!");
+                    this.value = "";
+                };
+            };
+            document.getElementById("JobRequestSkillPic3").onchange = function () {
+                console.log(this.files[0].size);
+                if (this.files[0].size > 307200) {
+                    alert("File is too big!");
+                    this.value = "";
+                };
+            };
+        })
+
+    </script>
+}
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@

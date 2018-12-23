@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
 using HireMe.Utility;
+using Newtonsoft.Json;
 
 namespace HireMe.Controllers
 {
@@ -37,50 +38,6 @@ namespace HireMe.Controllers
         [HttpPost]
         public async Task<ActionResult> RegisterCandidate(RegisterCandidateViewModel model)
         {
-            //if (ModelState.IsValid)
-            //{
-            //    #region ProfileImageUpload
-            //    string imagePath = string.Empty;
-            //    if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
-            //    {
-            //        //Use Namespace called :  System.IO  
-            //        string FileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
-
-            //        //To Get File Extension  
-            //        string FileExtension = Path.GetExtension(model.profile_pic.FileName);
-
-            //        //Add Current Date To Attached File Name  
-            //        FileName = DateTime.Now.ToString("yyyyMMdd") + "-" + FileName.Trim() + FileExtension;
-
-            //        //Get Upload path from Web.Config file AppSettings.  
-            //        //string UploadPath = ConfigurationManager.AppSettings["UserImagePath"].ToString();
-
-            //        var UploadPath = Path.Combine(Server.MapPath("~/App_Data/uploads"), FileName);
-            //        imagePath = UploadPath;
-
-            //        //Its Create complete path to store in server.  
-            //        //model.ImagePath = UploadPath + FileName;
-
-            //        //To copy and save file into server.  
-            //        model.profile_pic.SaveAs(imagePath);
-            //    }
-            //    #endregion
-            //    var candidate = AutoMapper.Mapper.Map<Candidate>(model);
-            //    candidate.EmailId = model.Email;
-            //    candidate.ContactNo = model.PhoneNumber;
-            //    candidate.StaffType = StaffType.Agency;
-            //    var userId = User.Identity.GetUserId();
-            //    // get the agencyid
-            //    var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
-            //    candidate.AgencyId = agency.AgencyId;
-            //    candidate.AspNetUserId = null;
-            //    db.Candidates.Add(candidate);
-            //    db.SaveChanges();
-            //    //return RedirectToAction("GetAgencyCandidates");
-            //    return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
-            //}
-            //return View(model);
-
             var userId = User.Identity.GetUserId();
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
 
@@ -99,6 +56,14 @@ namespace HireMe.Controllers
             if (ModelState.IsValid)
             {
                 var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+
+                int age = 0;
+                if (model.DOB != default(DateTime) && !(model.DOB > DateTime.Now))
+                {
+                    age = DateTime.Now.Year - model.DOB.Year;
+                    if (DateTime.Now.DayOfYear < model.DOB.DayOfYear)
+                        age = age - 1;
+                }
                 // now check if it has file associated with it
 
                 #region ProfileImageUpload
@@ -135,7 +100,7 @@ namespace HireMe.Controllers
                 string phoneNumber = model.PhoneNumber.Replace("-", "");
 
 
-                var candidate = new Candidate {AgencyId = agency.AgencyId, StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
+                var candidate = new Candidate { AgencyId = agency.AgencyId, StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = age };
                 candidate.CreatedDate = DateTime.Now.ToString();
                 var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                 if (cntry != null)
@@ -198,7 +163,7 @@ namespace HireMe.Controllers
                 AddErrors(result);
             }
             // If we got this far, something failed, redisplay form   
-          
+
             ViewBag.NewCandidateRegistered = false;
             ViewBag.AgencyProfileVerfied = true;
             return View(model);
@@ -226,7 +191,7 @@ namespace HireMe.Controllers
             candidate.ProfileVerified = true;
             db.SaveChanges();
 
-            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency"+ agency.AgencyName + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.AgencyName + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
@@ -345,6 +310,150 @@ namespace HireMe.Controllers
             if (agency == null)
                 return HttpNotFound();
             return PartialView("_agencyDetails", agency);
+        }
+
+        /// <summary>
+        /// Id is the jobId
+        /// </summary>
+        /// <param name="jobId"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult CreateJobRequest(int? jobId)
+        {
+            // now prepare the job tasks for the job
+            ViewBag.JobCategories = db.JobCategories.Include(t => t.Jobs).ToList();
+            var userId = User.Identity.GetUserId();
+            // get the agencyid
+            var agency = db.Agencies.First(p => p.AspNetUserId == userId);
+            ViewBag.AgencyProfileVerfied = agency.ProfileVerified;
+            // get the job tasks for a job
+            if (jobId.HasValue)
+            {
+                Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == jobId);
+
+
+                var candidates = db.Candidates.Include(path => path.ApplicationUser).Where(p => p.AgencyId == agency.AgencyId && p.StaffType == StaffType.Agency).ToList();
+                ViewBag.Candidates = candidates;
+
+                var candidateProfile = new AgencyJobRequestViewModel { JobId = jobId.Value, JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks) };
+
+                ViewBag.Cities = db.Cities.Select(p => new SelectListItem { Text = p.CityName, Value = p.CityId.ToString() }).ToList();
+                ViewBag.Districts = db.Districts.Select(p => new SelectListItem { Text = p.DistrictName, Value = p.DistrictId.ToString() }).ToList();
+
+                return View(candidateProfile);
+            }
+            else
+            {
+                ViewBag.Cities = db.Cities.Select(p => new SelectListItem { Text = p.CityName, Value = p.CityId.ToString() }).ToList();
+                ViewBag.Districts = db.Districts.Select(p => new SelectListItem { Text = p.DistrictName, Value = p.DistrictId.ToString() }).ToList();
+                return View(new AgencyJobRequestViewModel { });
+            }
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> CreateJobRequest(AgencyJobRequestViewModel candidateProfile)
+        {
+            var userId = User.Identity.GetUserId();
+            var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
+            ViewBag.NewJobProfileCreated = false;
+            if (ModelState.IsValid)
+            {
+                var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { }, AgencyJobRequestGroupId = Guid.NewGuid().ToString(), AgencyJobRequestTitle = candidateProfile.Title };
+                if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
+                {
+                    var skillPic = candidateProfile.JobRequestSkillPic1;
+                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                    }
+
+                    jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+                }
+
+                if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
+                {
+                    var skillPic = candidateProfile.JobRequestSkillPic2;
+                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                    }
+
+                    jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+                }
+
+                if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
+                {
+                    var skillPic = candidateProfile.JobRequestSkillPic3;
+                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                    }
+
+                    jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+                }
+
+
+
+                candidateProfile.JobTasks.ForEach(task =>
+                {
+                    if (task.Selected)
+                    {
+                        jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                    }
+                });
+
+                // now get the candidates for whom the job request would be created by the agency
+                if (candidateProfile.CandidateIds != null && candidateProfile.CandidateIds.Count > 0)
+                {
+                    //var selectedCandidates = db.Candidates.Include(p => p.JobRequests).Where(p => candidateProfile.CandidateIds.Contains(p.CandidateId)).ToList();
+                    candidateProfile.CandidateIds.ForEach(cndId =>
+                    {
+                        var serializedJobRequest = JsonConvert.SerializeObject(jobRequest);
+                        var clonedJobRequest = JsonConvert.DeserializeObject<JobRequest>(serializedJobRequest);
+                        //clonedJobRequest.CandidateId = candidate.CandidateId;
+                        var candidate = db.Candidates.Include(p => p.JobRequests).FirstOrDefault(t => t.CandidateId == cndId);
+                        candidate.Disponibility = candidateProfile.Disponibility;
+                        candidate.JobRequests.Add(clonedJobRequest);
+                        db.JobRequests.Add(clonedJobRequest);
+                        db.SaveChanges();
+                    });
+
+                    //candidateProfile.CandidateIds.ForEach(cndId =>
+                    //{
+                    //    var serializedJobRequest = JsonConvert.SerializeObject(jobRequest);
+                    //    var clonedJobRequest = JsonConvert.DeserializeObject<JobRequest>(serializedJobRequest);
+                    //    clonedJobRequest.CandidateId = cndId;
+                    //    db.JobRequests.Add(clonedJobRequest);
+                    //});
+                    //db.SaveChanges();
+                    ViewBag.NewJobProfileCreated = true;
+                }
+
+
+
+
+                //AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form   
+
+
+            ViewBag.AgencyProfileVerfied = true;
+
+
+            // get the agencyid
+            var candidates = db.Candidates.Include(path => path.ApplicationUser).Where(p => p.AgencyId == agency.AgencyId && p.StaffType == StaffType.Agency).ToList();
+            ViewBag.Candidates = candidates;
+            ViewBag.Cities = db.Cities.Select(p => new SelectListItem { Text = p.CityName, Value = p.CityId.ToString() }).ToList();
+            ViewBag.Districts = db.Districts.Select(p => new SelectListItem { Text = p.DistrictName, Value = p.DistrictId.ToString() }).ToList();
+            ViewBag.JobCategories = db.JobCategories.Include(t => t.Jobs).ToList();
+            ViewBag.AgencyProfileVerfied = true;
+            return View(candidateProfile);
         }
 
         private void AddErrors(IdentityResult result)

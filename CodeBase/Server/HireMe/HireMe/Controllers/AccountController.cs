@@ -200,9 +200,15 @@ namespace HireMe.Controllers
             var districts = context.Districts.ToList();
             if (ModelState.IsValid)
             {
-              
-                // now check if it has file associated with it
 
+                // now check if it has file associated with it
+                int age = 0;
+                if (model.DOB != default(DateTime) && !(model.DOB > DateTime.Now))
+                {
+                    age = DateTime.Now.Year - model.DOB.Year;
+                    if (DateTime.Now.DayOfYear < model.DOB.DayOfYear)
+                        age = age - 1;
+                }
                 #region ProfileImageUpload
                 string profileImagePath = string.Empty;
                 if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
@@ -262,13 +268,13 @@ namespace HireMe.Controllers
                 if (model.UserRoles.Contains("Agency"))
                 {
                     
-                    var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = model.Age.ToString(), IdProofDoc = idProofImagePath};
+                    var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = age.ToString(), IdProofDoc = idProofImagePath};
                     agency.CreatedDate = DateTime.Now.ToString();
                     user.Agencies = new System.Collections.Generic.List<Agency> { agency };
                 }
                 else if (model.UserRoles.Contains("Candidate"))
                 {
-                    var candidate = new Candidate { StaffType = StaffType.Independent, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
+                    var candidate = new Candidate { StaffType = StaffType.Independent, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = age };
                     candidate.CreatedDate = DateTime.Now.ToString();
                     var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                     if (cntry != null)
@@ -283,7 +289,7 @@ namespace HireMe.Controllers
                 }
                 else if (model.UserRoles.Contains("Employer"))
                 {
-                    var employer = new Employer { FirstName = model.FirstName, LastName = model.LastName, ContactNo = phoneNumber,  Gender = Gender.Male, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = model.Age };
+                    var employer = new Employer { FirstName = model.FirstName, LastName = model.LastName, ContactNo = phoneNumber,  Gender = Gender.Male, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = age };
                     employer.CreatedDate = DateTime.Now.ToString();
                     var cntry = countries.FirstOrDefault(p => p.CountryId == employer.CountryId);
                     if (cntry != null)
