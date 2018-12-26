@@ -1288,6 +1288,10 @@
             display:block;
             float:none;
     }
+    .switch{
+        position:initial;
+        float:left;
+    }
 
 }
 

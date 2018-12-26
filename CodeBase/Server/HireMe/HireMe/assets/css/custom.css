@@ -10706,7 +10706,7 @@ blockquote {
         display:block!important;
     }
     .switch {
-        position: initial;
+        /*position: initial;*/
     }
     .Filterjob{
         top:6px;
