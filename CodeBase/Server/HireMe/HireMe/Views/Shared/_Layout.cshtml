@@ -166,7 +166,7 @@
                                 <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
                                 <li><a href="~/Home/FAQ">FAQ</a></li>
                                 <li><a href="~/Home/Contact">Contact Us</a></li>
-                                <li><a href="#" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
+                                
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
@@ -218,6 +218,7 @@
                                     </li>
                                     <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                                 }
+                                <li><a href="javascript:void(0);" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
                             </ul>
 
 
@@ -264,7 +265,6 @@
                                     <li>@Html.ActionLink("Offers & Services", "About", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "About", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("FAQ", "FAQ", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "FAQ", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "Contact", cssClass: "waves active") })</li>
-                                    <li><a href="#" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
                                     <li class="dropdown">
                                         <a href="#" class="waves">REGISTER</a>
                                         <ul>
@@ -274,12 +274,14 @@
                                         </ul>
                                     </li>
                                     <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                    <li><a href="javascript:void(0);" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
                                 }
 
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
                                     @*<li>@Html.ActionLink("Dashboard", "Index", "Users", new { @class = "waves" })</li>*@
                                     <li class="divider"></li>
+                                    
                                     <li class="">
                                         <a href="~/Home" class="@Html.IsSelected(controllers: "Home", cssClass: "waves active")"><i class="fa fa-home"></i> Home</a>
                                     </li>
@@ -356,7 +358,7 @@
                                     </li>
                                 }
 
-
+                                <li><a href="javascript:void(0);" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
                             </ul>
 
 

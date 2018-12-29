@@ -11848,6 +11848,7 @@ blockquote {
         margin-top: -13px;
         margin-bottom: -11px;
         margin-right: 10px;
+        border:1px solid #ccc;
     }
 
     .img-circle {
@@ -11891,7 +11892,7 @@ blockquote {
         margin: 7px 0 8px;
         overflow: hidden;
         background-color: #eee;
-        border-bottom: 1px solid #ffffff;
+        border-bottom: 1px solid #eee;
     }
 
     .tree-img {
@@ -12039,4 +12040,32 @@ blockquote {
 }
 .ratings-list .feedback-date {
     font-size: 13px;
+}
+.language-toggle {
+    width: 37px;
+    height: 37px;
+    border-radius: 50%;
+    background-color: #fe005a;
+    color: #fff !important;
+    font-size: 22px !important;
+    line-height: 41px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0 !important;
+    font-weight: 700 !important;
+}
+#mobile-menu .language-toggle {
+    width: auto;
+    height: auto;
+    border-radius: 0;
+    background-color: #eee;
+    color: #252525 !important;
+    font-size: 22px !important;
+    line-height: 41px;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 0 !important;
+    font-weight: 700 !important;
 }
