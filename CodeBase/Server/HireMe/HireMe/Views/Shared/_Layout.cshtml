@@ -23,10 +23,18 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-
+    <style>
+        .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+        body {
+            top:0px !important;
+        }
+    </style>
 
 </head>
 <body class="sticky-header header-classic page-header-style-1 footer-style-1">
+    <div id="google_translate_element" style="display:none;"></div>
     <div id="main-container">
         @if (Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")
         {
@@ -118,8 +126,8 @@
         }
 
         @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                            .Select(c => c.Value);
+                                                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                                .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
         <header id="header">
 
@@ -158,6 +166,7 @@
                                 <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
                                 <li><a href="~/Home/FAQ">FAQ</a></li>
                                 <li><a href="~/Home/Contact">Contact Us</a></li>
+                                <li><a href="#" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
@@ -251,10 +260,11 @@
                                 }
                                 else
                                 {
-                                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class= Html.IsSelected(controllers: "Home", actions: "Index", cssClass: "waves active") })</li>
-                                    <li>@Html.ActionLink("Offers & Services", "About", "Home",new { @class = Html.IsSelected(controllers: "Home", actions:"About", cssClass: "waves active") })</li>
+                                    <li>@Html.ActionLink("Home", "Index", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "Index", cssClass: "waves active") })</li>
+                                    <li>@Html.ActionLink("Offers & Services", "About", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "About", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("FAQ", "FAQ", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "FAQ", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "Contact", cssClass: "waves active") })</li>
+                                    <li><a href="#" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
                                     <li class="dropdown">
                                         <a href="#" class="waves">REGISTER</a>
                                         <ul>
@@ -359,13 +369,15 @@
 
         </header>
 
+        @{
+            var controllerName = HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+        }
 
-
-        @if (HttpContext.Current.User.Identity.IsAuthenticated && !((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
+        @if (HttpContext.Current.User.Identity.IsAuthenticated && !((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index" || controllerName == "Home" || controllerName == "home")))
         {
             <div id="mySidenav" class="sidenav">
 
-
+                @*@Request.RawUrl.ToString()*@
 
                 <div class="sidenav-header">User Account - @role</div>
                 @*<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>*@
@@ -523,6 +535,53 @@
                 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
             })();
     </script>
+    <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
+                //toggleLanguage();
+
+
+            }
+
+
+            function toggleLanguage() {
+
+                var selectFieldValue = document.querySelector("#google_translate_element select").value;
+                //alert();
+                var language = selectFieldValue == "fr" ? "en" : "fr";//document.getElementById("language").value;
+                var selectField = document.querySelector("#google_translate_element select");
+                for (var i = 0; i < selectField.children.length; i++) {
+                    var option = selectField.children[i];
+                    // find desired langauge and change the former language of the hidden selection-field
+                    if (option.value == language) {
+                        selectField.selectedIndex = i;
+                        // trigger change event afterwards to make google-lib translate this side
+                        selectField.dispatchEvent(new Event('change'));
+                        break;
+                    }
+                }
+                //setChangeLanguageText();
+            }
+
+            //function setChangeLanguageText() {
+            //    //var selectField = document.querySelector("#google_translate_element select").value;
+            //    //$(".language-toggle").prop("title", "Change language to French");
+
+            //    //if (selectField == "fr") {
+            //    //    $(".language-toggle").prop("title", "Change language to English");
+            //    //} else {
+            //    //    $(".language-toggle").prop("title", "Change language to French");
+            //    //}
+            //}
+            //setTimeout(function () {
+            //    setChangeLanguageText();
+            //}, 5000)
+            //toggleLanguage();
+    </script>
+
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
     <noscript>
         <a href="https://www.livechatinc.com/chat-with/10397537/">Chat with us</a>,
         powered by <a href="https://www.livechatinc.com/?welcome" rel="noopener" target="_blank">LiveChat</a>
