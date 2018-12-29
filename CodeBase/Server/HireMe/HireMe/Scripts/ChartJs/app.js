@@ -44,7 +44,8 @@
         }, 500);
 
         $scope.options = {
-            legend: { display: true, position: 'left' }, responsive: true, title: {
+            legend: { display: true, position: 'left' }, responsive: true,
+            maintainAspectRatio: false, title: {
                 display: true,
                 text: 'Our Members'
             }
@@ -139,7 +140,8 @@
             }
         ];
         $scope.options = {
-            legend: { display: true }, responsive: true, title: {
+            legend: { display: true }, responsive: true,
+            maintainAspectRatio: false, title: {
                 display: true,
                 text: 'Dashboard Members'
             }

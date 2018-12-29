@@ -126,6 +126,11 @@ namespace HireMe.Controllers
             {
                 return HttpNotFound();
             }
+            else
+            {
+                db.JobRequests.Remove(jobRequest);
+                db.SaveChanges();
+            }
             return View(jobRequest);
         }
 
