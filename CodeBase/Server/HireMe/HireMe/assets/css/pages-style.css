@@ -666,23 +666,32 @@
 }
 
 .menu li a {
-	display: block;
-	padding: 7px 15px;
-	font-size: 15px;
-	color: #252525;
-	-webkit-transition: all 0.25s;
-	transition: all 0.25s;
+    display: block;
+    padding: 10px 10px 25px;
+    font-size: 15px;
+    color: #252525;
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
     /*max-width: 150px;*/
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 }
-.sf-with-ul {
-    /*max-width: 150px;*/
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-}
+    .menu li.dropdown ul li a {
+        padding: 7px 15px;
+        border-bottom:1px solid #ebebeb !important;
+    }
+        .menu li.dropdown ul li a .fa {
+            font-size: 17px;
+            display: inline-block;
+            padding-right: 10px;
+        }
+    .sf-with-ul {
+        /*max-width: 150px;*/
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 #header-sticky .sf-with-ul{
     max-width:inherit;
 }
@@ -1287,6 +1296,10 @@
      .mobile-app{
             display:block;
             float:none;
+    }
+    .switch{
+        position:initial;
+        float:left;
     }
 
 }

@@ -403,9 +403,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
                                                         @(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "") + ", " + (Model.Candidate.District ?? ""))
-
-
-
                                                     </div>
                                                     @*<div class="col-lg-6 col-md-6">
                                                             @Model.Candidate.District
@@ -565,10 +562,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                             </div>
                             <div class="col-md-6">
-
-
                                 <div class="row">
-
                                     <div class="col-sm-12">
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
@@ -576,67 +570,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                             </div>
                                             <div class="filtersection-body">
                                                 @ShowTaskTree(Model.MasterJobTasks.Where(p => p.ParentJobTaskId == null))
-
-                                                
-                                                @*<ul class="tree">
-                                                    <li>
-                                                        <input type="checkbox" checked="checked" id="c1" />
-                                                        <label class="tree_label" for="c1">Level 0</label>
-                                                        <ul>
-                                                            <li>
-                                                                <input type="checkbox" checked="checked" id="c2" />
-                                                                <label for="c2" class="tree_label">Level 1</label>
-                                                                <ul>
-                                                                    <li><span class="tree_label">Level 2</span></li>
-                                                                    <li><span class="tree_label">Level 2</span></li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" id="c3" />
-                                                                <label for="c3" class="tree_label">Looong level 1 <br />label text <br />with line-breaks</label>
-                                                                <ul>
-                                                                    <li><span class="tree_label">Level 2</span></li>
-                                                                    <li>
-                                                                        <input type="checkbox" id="c4" />
-                                                                        <label for="c4" class="tree_label"><span class="tree_custom">Specified tree item view</span></label>
-                                                                        <ul>
-                                                                            <li><span class="tree_label">Level 3</span></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-
-
-                                                    <li>
-                                                        <input type="checkbox" id="c5" />
-                                                        <label class="tree_label" for="c5">Level 0</label>
-                                                        <ul>
-                                                            <li>
-                                                                <input type="checkbox" id="c6" />
-                                                                <label for="c6" class="tree_label">Level 1</label>
-                                                                <ul>
-                                                                    <li><span class="tree_label">Level 2</span></li>
-                                                                </ul>
-                                                            </li>
-                                                            <li>
-                                                                <input type="checkbox" id="c7" />
-                                                                <label for="c7" class="tree_label">Level 1</label>
-                                                                <ul>
-                                                                    <li><span class="tree_label">Level 2</span></li>
-                                                                    <li>
-                                                                        <input type="checkbox" id="c8" />
-                                                                        <label for="c8" class="tree_label">Level 2</label>
-                                                                        <ul>
-                                                                            <li><span class="tree_label">Level 3</span></li>
-                                                                        </ul>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>*@
                                             </div>
                                         </div>
                                     </div>
@@ -659,26 +592,111 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic1))
                                     {
                                         <div class="col-lg-4">
-                                            <img src="data:image/jpeg;base64,@Model.SkillPic1" />
+                                            <div class="additional-desc">
+                                                <img src="data:image/jpeg;base64,@Model.SkillPic1" />
+                                            </div>
                                         </div>
                                     }
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic2))
                                     {
                                         <div class="col-lg-4">
-                                            <img src="data:image/jpeg;base64,@Model.SkillPic2" />
+                                            <div class="additional-desc">
+                                                <img src="data:image/jpeg;base64,@Model.SkillPic2" />
+                                            </div>
                                         </div>
                                     }
                                     @if (!string.IsNullOrWhiteSpace(Model.SkillPic3))
                                     {
-                                        <div class="col-lg-4">
-                                            <img src="data:image/jpeg;base64,@Model.SkillPic3" />
+                                        <div class="col-md-4">
+                                            <div class="additional-desc">
+                                                <img src="data:image/jpeg;base64,@Model.SkillPic3" />
+                                            </div>
                                         </div>
                                     }
                                 </div>
                                 @if (role == "Admin")
                                 {
-                                    <div class="row"><button class="btn btn-default" onclick="validateJobRequest(@Model.JobRequestId)">Validate</button></div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12 text-center">
+                                            <button class="btn btn-style-1 waves mb-0" onclick="validateJobRequest(@Model.JobRequestId)">Validate</button>
+                                        </div>
+                                    </div>
                                 }
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="ratingsandreviews">
+                                    <h3 class="ratings-header">
+                                        Candidate Reviews & Ratings
+                                    </h3>
+                                    <div class="ratings-body">
+                                        <div class="ratings-list">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="rates-num">
+                                                        5/3&nbsp;<i class="fa fa-star"></i>
+                                                    </div>&nbsp;
+                                                    <span class="rate-jobname">Job Name</span>
+                                                    <p>
+                                                        Excellent product (Feedback)
+                                                    </p>
+                                                    <p>
+                                                      <span class="user-name">
+                                                          <i class="fa fa-user"></i>&nbsp;User Name
+                                                      </span>
+                                                        <span class="feedback-date">
+                                                            <i class="fa fa-calendar"></i>&nbsp;12/12/2018
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ratings-list">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="rates-num">
+                                                        5/3&nbsp;<i class="fa fa-star"></i>
+                                                    </div>&nbsp;
+                                                    <span class="rate-jobname">Job Name</span>
+                                                    <p>
+                                                        Excellent product (Feedback)
+                                                    </p>
+                                                    <p>
+                                                        <span class="user-name">
+                                                            <i class="fa fa-user"></i>&nbsp;User Name
+                                                        </span>
+                                                        <span class="feedback-date">
+                                                            <i class="fa fa-calendar"></i>&nbsp;12/12/2018
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ratings-list">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="rates-num">
+                                                        5/3&nbsp;<i class="fa fa-star"></i>
+                                                    </div>&nbsp;
+                                                    <span class="rate-jobname">Job Name</span>
+                                                    <p>
+                                                        Excellent product (Feedback)
+                                                    </p>
+                                                    <p>
+                                                        <span class="user-name">
+                                                            <i class="fa fa-user"></i>&nbsp;User Name
+                                                        </span>
+                                                        <span class="feedback-date">
+                                                            <i class="fa fa-calendar"></i>&nbsp;12/12/2018
+                                                        </span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -687,7 +705,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
             </div>
         </div>
 
-        <div class="row">
+        <!--<div class="row">
             <h2>Candidate Reviews & Ratings</h2>
             @if (ViewBag.UserFeedbacks != null && ViewBag.UserFeedbacks.Count > 0)
             {
@@ -711,7 +729,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     }
                 </table>
             }
-        </div>
+        </div>-->
 
 
         <div class="container">
