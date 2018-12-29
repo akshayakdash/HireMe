@@ -11903,11 +11903,19 @@ blockquote {
         padding: 5px;
     }
 
-    .tree-title {
-        line-height: 40px;
-        padding-left: 10px;
-        border-bottom: 1px dotted #ccc;
-        margin-bottom: 10px;
+.tree-title {
+    line-height: 30px;
+    padding-left: 10px;
+    border-bottom: 1px dotted #ccc;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+    .tree-title p {
+        margin: 0;
+        line-height: inherit;
+        font-weight: 400;
+        font-size: 14px;
+        color:#999;
     }
 
     .border-bottom {
