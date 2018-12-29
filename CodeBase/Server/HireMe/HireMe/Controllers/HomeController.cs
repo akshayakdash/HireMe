@@ -31,6 +31,11 @@ namespace HireMe.Controllers
             return View();
         }
 
+        public ActionResult FAQ()
+        {
+            return View();
+        }
+
         private void createRolesandUsers()
         {
             ApplicationDbContext context = new ApplicationDbContext();

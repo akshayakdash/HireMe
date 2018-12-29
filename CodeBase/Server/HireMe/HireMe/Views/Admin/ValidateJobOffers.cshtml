@@ -81,7 +81,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>
+                                                                    <h2 class="name">
                                                                         @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
@@ -90,11 +90,11 @@
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
                                                                         }
-                                                                    </h1>
-                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                        @item.Employer.FirstName
+                                                                    </h2>
                                                                     <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
                                                                     <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <h3 class="location"><i class="fa fa-birthday-cake"></i> <span>@item.MinAge Yrs - @item.MaxAge Yrs</span></h3>
                                                                     <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
@@ -134,10 +134,10 @@
 
                                     </div>
                                 </div>
+
                                 <div class="tab-pane fade" id="tab-1-2">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="isotope cols-3 gutter">
+                                        
                                                 @if (Model != null)
                                                 {
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2))
@@ -164,7 +164,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>
+                                                                    <h2 class="name">
                                                                         @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
@@ -173,11 +173,11 @@
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
                                                                         }
-                                                                    </h1>
-                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                        @item.Employer.FirstName
+                                                                    </h2>
                                                                     <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
                                                                     <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><i class="fa fa-birthday-cake"></i> <span>@item.MinAge Yrs - @item.MaxAge Yrs</span></p>
                                                                     <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
@@ -216,15 +216,13 @@
                                                 }
                                                 
 
-                                            </div>
-                                        </div>
+                                            
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-1-3">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="isotope cols-3 gutter">
+                                       
                                                 @if (Model != null)
                                                 {
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3))
@@ -251,7 +249,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>
+                                                                    <h2 class="name">
                                                                         @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
@@ -260,11 +258,11 @@
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
                                                                         }
-                                                                    </h1>
-                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                        @item.Employer.FirstName
+                                                                    </h2>
                                                                     <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
                                                                     <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><i class="fa-birthday-cake"></i> <span>@item.MinAge Yrs - @item.MaxAge Yrs</span></p>
                                                                     <p class="location"><span>Staff Type:  @item.StaffType</span></p>
 
 
@@ -303,15 +301,13 @@
                                                 }
                                                 
 
-                                            </div>
-                                        </div>
+                                           
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-1-4">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="isotope cols-3 gutter">
+                                        
                                                 @if (Model != null)
                                                 {
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4))
@@ -338,7 +334,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>
+                                                                    <h2 class="name">
                                                                         @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
@@ -347,14 +343,12 @@
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
                                                                         }
-                                                                    </h1>
-                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                        @item.Employer.FirstName
+                                                                    </h2>
                                                                     <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
                                                                     <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><i class="fa-birthday-cake"></i> <span>@item.MinAge Yrs - @item.MaxAge Yrs</span></p>
                                                                     <p class="location"><span>Staff Type:  @item.StaffType</span></p>
-
-
                                                                 </div>
                                                                 <div class="profile-footer">
                                                                     @item.AdditionalDescription&nbsp;
@@ -389,15 +383,13 @@
                                                 }
                                                 
 
-                                            </div>
-                                        </div>
+                                            
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 
                                 <div class="tab-pane fade" id="tab-1-5">
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="isotope cols-3 gutter">
+                                       
                                                 @if (Model != null)
                                                 {
                                                     foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5))
@@ -424,7 +416,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="right">
-                                                                    <h1>
+                                                                    <h2 class="name">
                                                                         @if (item.Employer.Gender == HireMe.Models.Gender.Female)
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/woman-user.png" /></span>
@@ -433,14 +425,12 @@
                                                                         {
                                                                             <span><img style="width: 16px;" src="~/assets/images/user.png" /></span>
                                                                         }
-                                                                    </h1>
-                                                                    <h2 class="name"><span>@item.Employer.FirstName</span></h2>
+                                                                        @item.Employer.FirstName
+                                                                    </h2>
                                                                     <p class="location"><span> @item.Job.JobName</span><span>, Exp : (@item.ExperienceInYears) Yrs</span></p>
                                                                     <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                                    <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                                    <p class="location"><i class="fa-birthday-cake"></i> <span>@item.MinAge Yrs - @item.MaxAge Yrs</span></p>
                                                                     <p class="location"><span>Staff Type:  @item.StaffType</span></p>
-
-
                                                                 </div>
                                                                 <div class="profile-footer">
                                                                     @item.AdditionalDescription&nbsp;
@@ -474,10 +464,7 @@
 
 
                                                 }
-                                                
 
-                                            </div>
-                                        </div>
                                     </div><!-- service-box -->
                                 </div><!-- tab-pane -->
 

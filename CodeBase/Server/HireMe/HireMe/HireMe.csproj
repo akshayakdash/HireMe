@@ -319,6 +319,10 @@
     <Compile Include="Migrations\201812201554492_User_Feedback_Added.Designer.cs">
       <DependentUpon>201812201554492_User_Feedback_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201812231450568_Agency_JobGroupId_Added.cs" />
+    <Compile Include="Migrations\201812231450568_Agency_JobGroupId_Added.Designer.cs">
+      <DependentUpon>201812231450568_Agency_JobGroupId_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -706,6 +710,8 @@
     <Content Include="Views\Shared\_jobRequestNotes.cshtml" />
     <Content Include="Views\Shared\_jobOfferNotes.cshtml" />
     <Content Include="Views\Shared\_agencyDetails.cshtml" />
+    <Content Include="Views\Agency\CreateJobRequest.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -764,6 +770,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812201554492_User_Feedback_Added.resx">
       <DependentUpon>201812201554492_User_Feedback_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201812231450568_Agency_JobGroupId_Added.resx">
+      <DependentUpon>201812231450568_Agency_JobGroupId_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -156,7 +156,8 @@
                                     <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
                                 }
                                 <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
-
+                                <li><a href="~/Home/FAQ">FAQ</a></li>
+                                <li><a href="~/Home/Contact">Contact Us</a></li>
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
@@ -252,6 +253,8 @@
                                 {
                                     <li>@Html.ActionLink("Home", "Index", "Home", new { @class= Html.IsSelected(controllers: "Home", actions: "Index", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("Offers & Services", "About", "Home",new { @class = Html.IsSelected(controllers: "Home", actions:"About", cssClass: "waves active") })</li>
+                                    <li>@Html.ActionLink("FAQ", "FAQ", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "FAQ", cssClass: "waves active") })</li>
+                                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "Contact", cssClass: "waves active") })</li>
                                     <li class="dropdown">
                                         <a href="#" class="waves">REGISTER</a>
                                         <ul>

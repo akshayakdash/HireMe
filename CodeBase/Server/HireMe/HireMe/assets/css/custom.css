@@ -985,6 +985,9 @@ dl {
     .logos-list li {
         flex-basis: 50%;
     }
+    .d-xs-none {
+        display: none !important;
+    }
 }
 
 /***********************************************************************************
@@ -2006,9 +2009,9 @@ dl {
         position: relative;
         overflow: hidden;
         display: block;
-        padding: 10px 50px;
+        padding: 10px 30px;
         border-radius: 30px;
-        margin-bottom: 15px;
+        margin-bottom: 5px;
         background-color: #e9f1f5;
         color: #252525;
         font-size: 18px;
@@ -2053,7 +2056,8 @@ dl {
 
         .accordion-title a:hover,
         .accordion-title a[aria-expanded="true"] {
-            background-color: transparent;
+            background-color: #fe005a;
+            color:#fff;
         }
 
             .accordion-title a:hover:after,
@@ -2064,7 +2068,7 @@ dl {
             }
 
 .accordion-body {
-    padding: 15px 50px 30px;
+    padding: 15px 30px 30px;
 }
 
     .accordion-body > *:last-child {
@@ -7007,7 +7011,7 @@ blockquote {
 }
 
 #section-311 {
-    padding: 40px 0 0;
+    padding: 0;
     margin-bottom: 0;
     background-color: #f8f8fb;
 }
@@ -10702,7 +10706,7 @@ blockquote {
         display:block!important;
     }
     .switch {
-        position: initial;
+        /*position: initial;*/
     }
     .Filterjob{
         top:6px;
@@ -10717,6 +10721,9 @@ blockquote {
 @media only screen and (max-width: 450px) and (min-width: 320px) {
     .contact-lable {
         display: none;
+    }
+    .d-xs-none {
+        display: none !important;
     }
 }
     /*Small Switch*/
@@ -11904,4 +11911,71 @@ blockquote {
     }
 
     .border-bottom {
+    }
+.text-red {
+    color: #fe005a;
+}
+.contact-form {
+    background: #fe005a;
+    color: #fff;
+    padding: 3px;
+}
+.contact-form .address{
+    padding: 15px 40px;
+}
+.contact-form .address h1 {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.address-content{
+
+}
+.address-content a{
+    color:#fff;
+}
+.address-content h3 {
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0;
+    line-height: 30px;
+}
+.address-content h3 i {
+    margin-right: 20px;
+    width:15px;
+}
+.address-content p {
+    padding-left: 35px;
+    margin-bottom:10px;
+}
+.form-area {
+    background: #fff;
+    color: #636363;
+    padding: 15px 30px;
+    text-align: center;
+}
+.form-area h1 {
+    font-size: 30px;
+    font-weight: 600;
+    margin: 0;
+}
+.form-area p{
+    font-weight:600;
+}
+.agency-pics {
+    text-align: center;
+    border: 1px solid #fe005a;
+    padding: 2px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+    .agency-pics img {
+        width: 100%;
+    }
+    .agency-pics h3 {
+        font-size: 16px;
+        font-weight: 600;
     }
