@@ -12069,3 +12069,81 @@ blockquote {
     padding: 0 !important;
     font-weight: 700 !important;
 }
+
+.candidate-card {
+    display: block;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    padding: 10px;
+    margin-bottom: 10px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transition: all 0.25s;
+    transition: all 0.25s;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#ffd7d7));
+    background-image: -webkit-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -moz-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -ms-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: -o-linear-gradient(top, #ffffff, #ffd7d7);
+    background-image: linear-gradient(to bottom, #ffffff, #ffd7d7);
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#ffffff, endColorstr=#ffd7d7);
+    text-align: center;
+    font-size: 13px;
+    cursor:pointer;
+}
+.candidate-profile {
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: auto;
+}
+.candidate-profile img{
+    width:100%;
+}
+.candidate-card .candidate-name {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    font-size: 16px;
+    text-align: center;
+    line-height: 30px;
+}
+.candidate-card p {
+    margin:0;
+}
+.candidate-card .candidate-dob {
+    margin-right:10px;
+}
+.candidate-address, .candidate-email {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.candidate-card .check {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: 2px solid #ccc;
+    width: 25px;
+    height: 25px;
+    font-size: 20px;
+    line-height: 21px;
+}
+.candidate-card .check i{
+    display:none;
+}
+.candidate-card .selected .check {
+    border: 2px solid #fe005a;
+    color: #fe005a;
+}
+.candidate-card .selected .check i{
+    display:block;
+}
