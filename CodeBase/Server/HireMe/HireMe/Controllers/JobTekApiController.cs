@@ -434,7 +434,7 @@ namespace HireMe.Controllers
         public HttpResponseMessage GetJobRequestCounts(int year = 0)
         {
             year = year == 0 ? DateTime.Today.Year : year;
-            var jobCounts = db.v_JobRequestCount.Where(p => p.TotalRequests > 0)
+            var jobCounts = db.v_JobRequestCount//.Where(p => p.TotalRequests > 0)
                 .GroupBy(p => p.JobName)
                 .Select(g => new
                 {
@@ -459,7 +459,7 @@ namespace HireMe.Controllers
         public HttpResponseMessage GetJobOfferCounts(int year = 0)
         {
             year = year == 0 ? DateTime.Today.Year : year;
-            var jobCounts = db.v_JobOfferCount.Where(p => p.TotalRequests > 0)
+            var jobCounts = db.v_JobOfferCount//.Where(p => p.TotalRequests > 0)
                 .GroupBy(p => p.JobName)
                 .Select(g => new
                 {

@@ -274,7 +274,7 @@
                                         </ul>
                                     </li>
                                     <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                                    <li><a href="javascript:void(0);" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
+                                    @*<li><a href="javascript:void(0);" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>*@
                                 }
 
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
