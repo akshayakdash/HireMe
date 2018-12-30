@@ -699,6 +699,28 @@ namespace HireMe.Models
         public string JobName { get; set; }
         public int TotalRequests { get; set; }
     }
+
+    [Table("v_categorywiseoffercount")]
+    public class v_JobCount_JobOffer
+    {
+        [Key]
+        public string JobName { get; set; }
+        //public int TotalOffers { get; set; }
+        [Column("TotalOffers")]
+        public int TotalRequests { get; set; }
+    }
+
+    [Table("v_joboffers")]
+    public class v_JobOffer_Count
+    {
+        [Key]
+        public string PK { get; set; }
+        public string Month { get; set; }
+        public string JobName { get; set; }
+        //public int TotalOffers { get; set; }
+        [Column("TotalOffers")]
+        public int TotalRequests { get; set; }
+    }
     #endregion
 
 

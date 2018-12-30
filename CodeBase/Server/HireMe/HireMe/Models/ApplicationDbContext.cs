@@ -121,6 +121,10 @@ namespace HireMe.Models
         public DbSet<v_JobCount> v_JobCounts { get; set; }
         public DbSet<v_JobRequest_Count> v_JobRequestCount { get; set; }
 
+        public DbSet<v_JobCount_JobOffer> v_JobOfferDoughnotData { get; set; }
+        public DbSet<v_JobOffer_Count> v_JobOfferCount { get; set; }
+
+
 
     }
 }
