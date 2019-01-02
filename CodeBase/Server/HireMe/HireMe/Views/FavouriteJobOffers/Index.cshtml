@@ -217,8 +217,8 @@
                                                         <h2 class="jobname">@item.Job.JobName</h2>
                                                         <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
                                                         <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                        <p class="location"><i class="fa fa-birthday-cake"></i> <span>@item.MinAge - @item.MaxAge</span></p>
                                                         <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                        <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
                                                         <p class="location"><span>Staff Type:  @item.StaffType</span></p>
                                                         <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
                                                     </div>
@@ -304,8 +304,8 @@
                                                             <h2 class="jobname">@item.Job.JobName</h2>
                                                             <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
                                                             <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                            <p class="location"><i class="fa fa-birthday-cake"></i> <span>@item.MinAge - @item.MaxAge</span></p>
                                                             <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
                                                             <p class="location"><span>Staff Type:  @item.StaffType</span></p>
                                                             <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
                                                         </div>
@@ -390,8 +390,9 @@
                                                             <h2 class="jobname">@item.Job.JobName</h2>
                                                             <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
                                                             <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                            <p class="location"><i class="fa fa-birthday-cake"></i> <span>@item.MinAge - @item.MaxAge</span></p>
                                                             <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                            
                                                             <p class="location"><span>Staff Type:  @item.StaffType</span></p>
                                                             <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
                                                         </div>
@@ -476,8 +477,9 @@
                                                             <h2 class="jobname">@item.Job.JobName</h2>
                                                             <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
                                                             <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                            <p class="location"><i class="fa fa-birthday-cake"></i> <span>@item.MinAge - @item.MaxAge</span></p>
                                                             <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                            <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
+                                                           
                                                             <p class="location"><span>Staff Type:  @item.StaffType</span></p>
                                                             <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
                                                         </div>
@@ -562,8 +564,8 @@
                                                         <h2 class="jobname">@item.Job.JobName</h2>
                                                         <h2 class="email"><i class="fa fa-envelope"></i> @item.Employer.EmailId</h2>
                                                         <p class="location"><i class="fa fa-map-marker"></i> <span>@item.Employer.Country,</span><span> @item.Employer.City,</span><span> @item.Employer.District</span></p>
+                                                        <p class="location"><i class="fa fa-birthday-cake"></i> <span>@item.MinAge - @item.MaxAge</span></p>
                                                         <p class="location"><span>Salary:  @item.ExpectedMinSalary - @item.ExpectedMaxSalary</span></p>
-                                                        <p class="location"><span>Age Limit:  @item.MinAge - @item.MaxAge</span></p>
                                                         <p class="location"><span>Staff Type:  @item.StaffType</span></p>
                                                         <div class="published">Published: <span>@item.PublishedDate.ToString("dd-MMM-yyyy")</span></div>
                                                     </div>
@@ -640,25 +642,13 @@
 
                                         </div>
                                         <div class="tab-pane active" id="note-tab-2">
-                                            <div class="col-md-12" id="note-list"></div>
+                                            <div id="note-list"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        @*<div class="row">
-                                <div class="col-md-12">
-                                    <div class="note-stars">
-                                        <a id="stars"><i class="fa fa-star" data-value='1'></i><i class="fa fa-star" data-value='2'></i><i class="fa fa-star" data-value='3'></i><i class="fa fa-star" data-value='4'></i><i class="fa fa-star" data-value='5'></i></a>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Description</label>
-                                        <textarea id="jobOfferNote" class="form-control" rows="2"></textarea>
-                                    </div>
-                                    <button type="button" onclick="saveJobOfferNote()" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Submit</button>
-                                </div>
-                            </div>*@
+                       
                     </div>
                 </div>
             </div>

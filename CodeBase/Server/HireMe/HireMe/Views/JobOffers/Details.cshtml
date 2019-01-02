@@ -87,41 +87,38 @@ for (int i = 0; i < jobTasks.Count(); i++)
                 }
             </div>*@
 
-
-            <div class="row" style="margin-left: 5px;">
-                <div class="col-lg-1 col-md-1">
-                    <img style="max-width:20px;background-color:#ff055a;" src="@item.IconImage" />
-                </div>
-                <div class="col-lg-11 col-md-11">
-                    <div>
-                        @(item.JobTaskName)
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-1 pl-0 pr-0">
+                        <img class="tree-img" src="@item.IconImage" />
                     </div>
-                    <div>
-                        @{
+                    <div class="col-md-11 pl-0 pr-0">
+                        <div class="tree-title">
+                            @{
                             var selectedTask = Model.JobOfferJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
-                        }
-                        @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
-                        {
-                            <span>@selectedTask.TaskResponseAdditionalDescription</span>
-                        }
-                    </div>
-                    @if (item.SubTasks.Any())
-            {
-
-                        @ShowTaskTree(item.SubTasks)
-
-                    }
-                </div>
-        
-            </div>
-                                }
                             }
+                            @(item.JobTaskName)
+                            @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                            {
+                            <p><strong>Desc:</strong> @selectedTask.TaskResponseAdditionalDescription</p>
+                            }
+                        
+                            @if (item.SubTasks.Any())
+                            {
+                            @ShowTaskTree(item.SubTasks)
+                            }
+                    </div>
+                </div>
+                </div>
+            </div>
+                                    }
+                                }
 }
 
 
 
 
-<div id="main-container-user" style="margin-left: 280px;" ng-app="myApp" ng-controller="searchJobRequestCtrl">
+<div id="main-container-user" ng-app="myApp" ng-controller="searchJobRequestCtrl">
 
     @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
                                         .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
@@ -192,7 +189,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         {
                                                             <i class="fa fa-star-o"></i>
                                                         }
-
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -202,20 +198,16 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="col-md-12">
-
-                            </div>
+                                    <div class="col-md-12"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-6" style="border-right:2px solid #ff6a00;">
 
                                 <div class="row">
-
                                     <div class="col-sm-6">
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Gender
-
                                             </div>
 
                                             <div class="filtersection-body">
@@ -227,7 +219,6 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Type of Staff
-
                                             </div>
 
                                             <div class="filtersection-body">
@@ -241,14 +232,11 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Age
-
                                             </div>
-
                                             <div class="filtersection-body">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
                                                         @(Model.MinAge + " yrs") - @(Model.MaxAge + " yrs")
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -258,9 +246,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Years of Experience
-
                                             </div>
-
                                             <div class="filtersection-body">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12">
@@ -305,9 +291,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
                                                 Salary Between
-
                                             </div>
-
                                             <div class="filtersection-body">
                                                 <div class="row">
                                                     <div class="col-sm-6">
@@ -321,17 +305,13 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                             <div class="col-lg-6 col-md-6">
                                                                 @Model.ExpectedMaxSalary
                                                             </div>
-
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
-
-
                             </div>
                         </div>
 
@@ -488,19 +468,61 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         </div>
                                     </div>
                                 </div>
+
                                 @if (role == "Admin")
                                         {
-                                        <div class="row"><button class="btn btn-default" onclick="validateJobOffer(@Model.JobOfferId)">Validate</button></div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-style-1 waves mb-0" onclick="validateJobOffer(@Model.JobOfferId)">Validate</button>
+                                            </div>
+                                        </div>
                                         }
                             </div>
                         </div>
-
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="ratingsandreviews">
+                                    <h3 class="ratings-header">
+                                        Employer Reviews & Ratings
+                                    </h3>
+                                    @if (ViewBag.UserFeedbacks != null && ViewBag.UserFeedbacks.Count > 0)
+                                    {
+                                        <div class="ratings-body">
+                                            @foreach (UserFeedback feedback in ViewBag.UserFeedbacks)
+                                            {
+                                                <div class="ratings-list">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="rates-num">
+                                                                @feedback.Rating&nbsp;<i class="fa fa-star"></i>@*5/3*@
+                                                            </div>&nbsp;
+                                                            <span class="rate-jobname">@feedback.JobName</span>
+                                                            <p>
+                                                                @feedback.Comments
+                                                            </p>
+                                                            <p>
+                                                                <span class="user-name">
+                                                                    <i class="fa fa-user"></i>&nbsp;@(feedback.Sender != null ? feedback.Sender.FirstName : "")
+                                                                </span>
+                                                                <span class="feedback-date">
+                                                                    <i class="fa fa-calendar"></i>&nbsp;@feedback.CreatedDate.ToString("dd-MMM-yyyy")
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        @*<div class="row">
             <h2>Employer Reviews & Ratings</h2>
             @if (ViewBag.UserFeedbacks != null && ViewBag.UserFeedbacks.Count > 0)
             {
@@ -524,7 +546,11 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     }
                 </table>
             }
-        </div>
+        </div>*@
+
+        
+
+
 
 
         <div class="container">
