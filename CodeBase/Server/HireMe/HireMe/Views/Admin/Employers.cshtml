@@ -99,14 +99,18 @@
                                                             <img src="data:image/jpeg;base64,@item.ProfilePicUrl" />
 
                                                             <h2 class="contact-num"><i class="fa fa-phone"></i> <span>@item.ContactNo</span></h2>
-
+                                                            <div class="idcard idcard-mobile">
+                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
+                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
+                                                                </a>
+                                                            </div>
                                                             @if (!item.ProfileVerified)
                                                             {
                                                                 <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateEmployerAccount(@item.EmployerId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
                                                             }
                                                         </div>
                                                         <div class="right">
-                                                            <div class="idcard">
+                                                            <div class="idcard idcard-desktop">
                                                                 <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
                                                                     <img src="data:image/jpeg;base64,@item.IdProofDoc" />
                                                                 </a>

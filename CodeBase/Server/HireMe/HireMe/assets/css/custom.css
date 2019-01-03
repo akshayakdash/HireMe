@@ -350,7 +350,9 @@ input[type="button"] {
     text-transform: uppercase;
     color: #252525;
 }*/
-
+.idcard-mobile {
+    display: none;
+}
 table td {
     padding: 0 20px;
 }
@@ -6515,8 +6517,42 @@ blockquote {
         .filter li:last-child {
             margin-bottom: 0;
         }
+    .idcard-desktop {
+        display: none;
+    }
+    .idcard-mobile {
+        display: block;
+        padding: 0 10px;
+    }
+        .idcard-mobile img {
+            width: 100% !important;
+            max-height: 150px;
+            border: 1px solid #666 !important;
+            border-radius: 5px !important;
+            padding: 3px;
+            background: #fff;
+        }
 }
+@media (max-width: 640px) {
 
+    .idcard-desktop {
+        display: none;
+    }
+
+    .idcard-mobile {
+        display: block;
+        padding: 0 10px;
+    }
+
+        .idcard-mobile img {
+            width: 100% !important;
+            max-height: 150px;
+            border: 1px solid #666 !important;
+            border-radius: 5px !important;
+            padding: 3px;
+            background: #fff;
+        }
+}
 /***********************************************************************************
  *	+ PAGINATION
  ***********************************************************************************/
@@ -10060,7 +10096,7 @@ blockquote {
     }
 
     .profileitems .right {
-        margin-left: 130px;
+        margin-left: 115px;
     }
 
         .profileitems .right h1, .profileitems .right h2, .profileitems .right h3, .profileitems .left h3 {
@@ -10203,7 +10239,7 @@ blockquote {
 ***/
 
 .searchprofile-section {
-    display: block;
+    display: flow-root;
     width: 100%;
 }
 
