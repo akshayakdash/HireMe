@@ -6417,72 +6417,72 @@ blockquote {
  *	+ FILTER
  ***********************************************************************************/
 
-.filter {
-    margin-bottom: 80px;
-    list-style: none;
-}
+    .filter {
+        margin-bottom: 80px;
+        list-style: none;
+    }
 
     .filter li {
         display: inline-block;
         margin-right: 35px;
     }
 
-        .filter li:after {
-            margin-left: 35px;
-            content: "-";
-        }
+    .filter li:after {
+        margin-left: 35px;
+        content: "-";
+    }
 
-        .filter li:last-child {
-            margin-right: 0;
-        }
+    .filter li:last-child {
+        margin-right: 0;
+    }
 
-            .filter li:last-child:after {
-                display: none;
-            }
+    .filter li:last-child:after {
+        display: none;
+    }
 
-        .filter li a {
-            display: inline-block;
-            color: #636363;
-            font-weight: 600;
-            text-decoration: none;
-            -webkit-transition: all 0.25s;
-            transition: all 0.25s;
-        }
+    .filter li a {
+        display: inline-block;
+        color: #636363;
+        font-weight: 600;
+        text-decoration: none;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
 
-            .filter li a:hover,
-            .filter li a.active {
-                color: #fe005a;
-            }
+    .filter li a:hover,
+    .filter li a.active {
+        color: #fe005a;
+    }
 
     /* STYLE 2 */
     .filter.style-2 li {
         margin-right: 15px;
     }
 
-        .filter.style-2 li:last-child {
-            margin-right: 0;
-        }
+    .filter.style-2 li:last-child {
+        margin-right: 0;
+    }
 
-        .filter.style-2 li:after {
-            display: none;
-        }
+    .filter.style-2 li:after {
+        display: none;
+    }
 
-        .filter.style-2 li a {
-            padding: 7px 30px;
-            border-radius: 20px;
-            background-color: #f7fafc;
-        }
+    .filter.style-2 li a {
+        padding: 7px 30px;
+        border-radius: 20px;
+        background-color: #f7fafc;
+    }
 
-            .filter.style-2 li a:hover,
-            .filter.style-2 li a.active {
-                background-color: #fe005a;
-                color: #fff;
-            }
+    .filter.style-2 li a:hover,
+    .filter.style-2 li a.active {
+        background-color: #fe005a;
+        color: #fff;
+    }
 
 /* DARK SECTION */
-.full-section.dark-section .filter:not(.style-2) li a {
-    color: inherit;
-}
+    .full-section.dark-section .filter:not(.style-2) li a {
+        color: inherit;
+    }
 
     .full-section.dark-section .filter:not(.style-2) li a:hover,
     .full-section.dark-section .filter:not(.style-2) li a.active {
@@ -6501,9 +6501,9 @@ blockquote {
         margin-bottom: 10px;
     }
 
-        .filter.style-2 li:last-child {
-            margin-bottom: 0;
-        }
+    .filter.style-2 li:last-child {
+        margin-bottom: 0;
+    }
 }
 
 @media (max-width: 575px) {
@@ -6514,9 +6514,9 @@ blockquote {
         margin-bottom: 10px;
     }
 
-        .filter li:last-child {
-            margin-bottom: 0;
-        }
+    .filter li:last-child {
+        margin-bottom: 0;
+    }
     .idcard-desktop {
         display: none;
     }
@@ -6524,14 +6524,14 @@ blockquote {
         display: block;
         padding: 0 10px;
     }
-        .idcard-mobile img {
-            width: 100% !important;
-            max-height: 150px;
-            border: 1px solid #666 !important;
-            border-radius: 5px !important;
-            padding: 3px;
-            background: #fff;
-        }
+    .idcard-mobile img {
+        width: 100% !important;
+        max-height: 150px;
+        border: 1px solid #666 !important;
+        border-radius: 5px !important;
+        padding: 3px;
+        background: #fff;
+    }
 }
 @media (max-width: 640px) {
 
@@ -6544,14 +6544,14 @@ blockquote {
         padding: 0 10px;
     }
 
-        .idcard-mobile img {
-            width: 100% !important;
-            max-height: 150px;
-            border: 1px solid #666 !important;
-            border-radius: 5px !important;
-            padding: 3px;
-            background: #fff;
-        }
+    .idcard-mobile img {
+        width: 100% !important;
+        max-height: 150px;
+        border: 1px solid #666 !important;
+        border-radius: 5px !important;
+        padding: 3px;
+        background: #fff;
+    }
 }
 /***********************************************************************************
  *	+ PAGINATION
@@ -6561,49 +6561,49 @@ blockquote {
  *	+ PAGINATION
  ***********************************************************************************/
 
-.pagination {
-    margin: 2px 0;
-}
+    .pagination {
+        margin: 2px 0;
+    }
 
     .pagination li {
         margin-right: 5px;
     }
 
-        .pagination li:last-child {
-            margin-right: 0;
-        }
+    .pagination li:last-child {
+        margin-right: 0;
+    }
 
-        .pagination li a {
-            display: block;
-            /* width: 40px; */
-            /* height: 40px; */
-            border: 1px solid transparent;
-            border-radius: 5px;
-            color: #636363;
-            /* line-height: 36px; */
-            font-weight: 600;
-            padding: 3px 12px;
-            text-align: center;
-            text-decoration: none;
-            -webkit-transition: all 0.25s;
-            transition: all 0.25s;
-        }
+    .pagination li a {
+        display: block;
+        /* width: 40px; */
+        /* height: 40px; */
+        border: 1px solid transparent;
+        border-radius: 5px;
+        color: #636363;
+        /* line-height: 36px; */
+        font-weight: 600;
+        padding: 3px 12px;
+        text-align: center;
+        text-decoration: none;
+        -webkit-transition: all 0.25s;
+        transition: all 0.25s;
+    }
 
-            .pagination li.active a
-             {
-                border-color: #fe005a;
-                color: #fff;
-                background: #fe005a;
-            }
-        .pagination li a:hover {
-            border-color: #ccc;
-            color: #333;
-            background: #eee;
-        }
-        /* DARK SECTION */
-        .full-section.dark-section .pagination li a {
-            color: inherit;
-        }
+    .pagination li.active a
+        {
+        border-color: #fe005a;
+        color: #fff;
+        background: #fe005a;
+    }
+    .pagination li a:hover {
+        border-color: #ccc;
+        color: #333;
+        background: #eee;
+    }
+    /* DARK SECTION */
+    .full-section.dark-section .pagination li a {
+        color: inherit;
+    }
 
     .full-section.dark-section .pagination li.active a,
     .full-section.dark-section .pagination li a:hover {
@@ -6717,10 +6717,10 @@ blockquote {
     right: 0;
 }
 
-    .half-image-left img,
-    .half-image-right img {
-        display: none;
-    }
+.half-image-left img,
+.half-image-right img {
+    display: none;
+}
 
 /* PARALLAX */
 .parallax {
