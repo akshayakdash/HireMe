@@ -176,10 +176,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                 <div class="row">
 
                     <div class="col-md-1 pl-0 pr-0">
-                        @*<img style="max-width:20px;background-color:#ff055a;" src="@item.IconImage" />*@
                         <img class="tree-img" src="@item.IconImage" />
                     </div>
-                    <div class=" col-md-11 pl-0 pr-0">
+                    <div class="col-md-11 pl-0 pr-0">
                         <div class="tree-title">
                             @{
                                 var selectedTask = Model.JobRequestJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
@@ -192,9 +191,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
                         </div>
 
                         @if (item.SubTasks.Any())
-                                {
-                            @ShowTaskTree(item.SubTasks)
-                                }
+                        {
+                        @ShowTaskTree(item.SubTasks)
+                        }
                     </div>
 
                 </div>
