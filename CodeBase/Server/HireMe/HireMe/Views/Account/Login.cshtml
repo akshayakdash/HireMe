@@ -18,7 +18,45 @@
     #header {
         display: none;
     }
+    .reg-btn-secondary {
+        color: #dc3545;
+        background-color: #ffffff;
+        border-color: #6c757d;
+    }
+        .reg-btn-secondary:hover {
+            color: #dc3545;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+    .reg-btn {
+        position: relative;
+        z-index: 1;
+        padding: 0;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 30px;
+        font: 700 12px/24px "Raleway", sans-serif;
+        letter-spacing: 1.2px;
+        /* text-transform: uppercase; */
+        cursor: pointer;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+    }
+
+    .reg-btn-secondary:not(:disabled):not(.disabled).active, .reg-btn-secondary:not(:disabled):not(.disabled):active, .show > .reg-btn-secondary.dropdown-toggle {
+        color: #dc3545;
+        background-color: #ffffff;
+        border-color: #ffffff;
+    }
+    .reg-btn-secondary:not(:disabled):not(.disabled).active:focus, .reg-btn-secondary:not(:disabled):not(.disabled):active:focus, .show > .reg-btn-secondary.dropdown-toggle:focus {
+        box-shadow: NONE;
+    }
 </style>
+
 
 <!-- PAGE CONTENT -->
 
@@ -97,7 +135,17 @@
                                 <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
                             </div>
                             <span>
-                                @Html.ActionLink("Don't have an account?", "Register")
+                                @*@Html.ActionLink("Don't have an account?", "Register")*@
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle reg-btn reg-btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Don't have an account?
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="/Home/CandidatInfo?Length=4">CANDIDATE</a>
+                                        <a class="dropdown-item" href="/Home/EmployerInfo?Length=4">EMPLOYER</a>
+                                        <a class="dropdown-item" href="/Home/AgencyInfo?Length=4">AGENCY</a>
+                                    </div>
+                                </div>
                             </span>
                             <span style="float:right;"><a href="/Account/ForgotPassword">Forgotten password?</a></span>
                         </div>

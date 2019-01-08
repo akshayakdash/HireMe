@@ -150,7 +150,7 @@ namespace HireMe.Controllers
                         jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
                     }
 
-                    candidateProfile.Disponibility = candidateProfile.Disponibility;
+
 
                     candidateProfile.JobTasks.ForEach(task =>
                     {
@@ -160,7 +160,22 @@ namespace HireMe.Controllers
                         }
                     });
 
+                    existingCandidate.Disponibility = candidateProfile.Disponibility;
+                    existingCandidate.ExpectedMinSalary = candidateProfile.ExpectedMinSalary;
+                    existingCandidate.ExpectedMaxSalary = candidateProfile.ExpectedMaxSalary;
+                    existingCandidate.CanRead = candidateProfile.CanRead;
+                    existingCandidate.CanWrite = candidateProfile.CanWrite;
+                    existingCandidate.SleepOnSite = candidateProfile.SleepOnSite;
+                    existingCandidate.ExperienceInYears = candidateProfile.ExperienceInYears;
+                    existingCandidate.ExperienceInMonths = candidateProfile.ExperienceInMonths;
+                    if (candidateProfile.SleepOnSite)
+                    {
+                        existingCandidate.ExpectedMinRooms = candidateProfile.ExpectedMinRooms;
+                        existingCandidate.ExpectedMaxRooms = candidateProfile.ExpectedMaxRooms;
+                    }
+
                     existingCandidate.JobRequests.Add(jobRequest);
+                    db.Entry(existingCandidate).State = EntityState.Modified;
                     db.SaveChanges();
                 }
 
