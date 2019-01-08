@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
     function validateJobOffer(jobOfferId) {
-        if (jobRequestId) {
+        if (jobOfferId) {
             $.ajax
                 ({
                     url: '/Admin/ValidateJobOffer?jobOfferId=' + jobOfferId,
