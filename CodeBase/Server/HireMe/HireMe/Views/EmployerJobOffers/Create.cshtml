@@ -152,7 +152,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Gender
+                                                                    What gender are you looking for ?
                                                                     @*<div class="switch-area-inner">
                                                                             <label class="switchsmall">
                                                                                 <input type="checkbox">
@@ -185,7 +185,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Type of Staff
+                                                                    What type of Staff are you looking for ?
                                                                     @*<div class="switch-area-inner">
                                                                             <label class="switchsmall">
                                                                                 <input type="checkbox">
@@ -227,7 +227,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Age
+                                                                    What age range are you looking for ?
                                                                     @*<div class="switch-area-inner">
                                                                             <label class="switchsmall">
                                                                                 <input type="checkbox">
@@ -258,7 +258,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                         new SelectListItem{ Text="35", Value = "35" },
                                                                         new SelectListItem{ Text="40", Value = "40" },
                                                                      },"--select--")*@
-                                                                            @Html.TextBoxFor(p => p.MaxAge, "{0:#.#}", new { @class = "form-control", @placeholder = "Min Age", @value = "", @type = "number" })
+                                                                            @Html.TextBoxFor(p => p.MaxAge, "{0:#.#}", new { @class = "form-control", @placeholder = "Max Age", @value = "", @type = "number" })
                                                                         </div>
                                                                     </div>
                                                                     <div class="row">
@@ -271,7 +271,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Years of Experience
+                                                                    What min yrs of experience do you require ?
                                                                     @*<div class="switch-area-inner">
                                                                             <label class="switchsmall">
                                                                                 <input type="checkbox">
@@ -298,8 +298,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                             new SelectListItem{ Text="2", Value = "10" }
                                                                          }, "--years--")
                                                                         </div>
-                                                                        <div class="col-lg-6 col-md-6">
-                                                                            @*@Html.TextBoxFor(p => p.ExperienceInMonths, new { @class = "form-control" })*@
+                                                                        @*<div class="col-lg-6 col-md-6">
                                                                             @Html.DropDownListFor(p => p.ExperienceInMonths, new List<SelectListItem>
                                                                         {
                                                                              new SelectListItem{ Text="1", Value = "1" },
@@ -314,7 +313,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                             new SelectListItem{ Text="8", Value = "10" },
                                                                             new SelectListItem{ Text="8", Value = "12" }
                                                                          }, "--months--")
-                                                                        </div>
+                                                                        </div>*@
                                                                     </div>
 
                                                                     <div class="row">
@@ -332,7 +331,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-12">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Localizations
+                                                                   Candidate localizations ?
                                                                     @*<div class="switch-area-inner">
                                                                             <label class="switchsmall">
                                                                                 <input type="checkbox">
@@ -368,7 +367,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-12">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Salary Between
+                                                                    What salary do you propose for the candidate ?
                                                                     @*<div class="switch-area-inner">
                                                                             <label class="switchsmall">
                                                                                 <input type="checkbox">
@@ -444,7 +443,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Can Read ?
+                                                                    Candidadate must know how to read ?
                                                                     <div class="switch-area-inner switch-area-inner-cus">
                                                                         <label class="checkbox">
                                                                             @Html.CheckBoxFor(p => p.CanRead)
@@ -462,7 +461,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Can Write ?
+                                                                    Candidate must know how to write ?
                                                                     <div class="switch-area-inner switch-area-inner-cus">
                                                                         <label class="checkbox">
                                                                             @Html.CheckBoxFor(p => p.CanWrite)
@@ -482,7 +481,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Sleep on Site
+                                                                   Candidate must sleep on Site ?
                                                                     <div class="switch-area-inner switch-area-inner-cus">
                                                                         <label class="checkbox">
                                                                             @Html.CheckBoxFor(p => p.SleepOnSite, new { })
@@ -500,7 +499,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                         <div class="col-sm-6">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Disponibility
+                                                                    When should the service start ?
                                                                     @*<div class="switch-area-inner">
                                                                             <label class="switchsmall">
                                                                                 <input type="checkbox">
@@ -540,10 +539,10 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                                 </div>
                                                             </div>
                                                         </div>*@
-                                                        <div class="col-sm-12 room-section" style="display:none;">
+                                                        <div class="col-sm-12 room-section">
                                                             <div class="filtersection-panel">
                                                                 <div class="filtersection-header">
-                                                                    Number of people
+                                                                    How many people live in your home ?
 
                                                                 </div>
 
@@ -804,14 +803,14 @@ for (int i = 0; i < jobTasks.Count(); i++)
             //$("#tab-1-2").show();
         })
 
-        $("#SleepOnSite").click(function (event) {
-            console.log($(event.target).prop("checked"));
-            if ($(event.target).prop("checked")) {
-                $(".room-section").show();
-            } else {
-                $(".room-section").hide();
-            }
-        });
+        //$("#SleepOnSite").click(function (event) {
+        //    console.log($(event.target).prop("checked"));
+        //    if ($(event.target).prop("checked")) {
+        //        $(".room-section").show();
+        //    } else {
+        //        $(".room-section").hide();
+        //    }
+        //});
 
         $("input[name='SalaryType']").change(function (event) {
             console.log(event);
