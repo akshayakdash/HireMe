@@ -140,7 +140,7 @@ namespace HireMe.Models
         public int MaxAge { get; set; }
         [Required]
         public int? ExperienceInYears { get; set; }
-        [Required]
+        //[Required]
         public int? ExperienceInMonths { get; set; }
 
         public string IdProofDoc { get; set; }

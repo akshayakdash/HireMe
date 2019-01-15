@@ -323,6 +323,10 @@
     <Compile Include="Migrations\201812231450568_Agency_JobGroupId_Added.Designer.cs">
       <DependentUpon>201812231450568_Agency_JobGroupId_Added.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201901151722314_Id_Proof_Doc1_Colum_Added.cs" />
+    <Compile Include="Migrations\201901151722314_Id_Proof_Doc1_Colum_Added.Designer.cs">
+      <DependentUpon>201901151722314_Id_Proof_Doc1_Colum_Added.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -773,6 +777,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812231450568_Agency_JobGroupId_Added.resx">
       <DependentUpon>201812231450568_Agency_JobGroupId_Added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201901151722314_Id_Proof_Doc1_Colum_Added.resx">
+      <DependentUpon>201901151722314_Id_Proof_Doc1_Colum_Added.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

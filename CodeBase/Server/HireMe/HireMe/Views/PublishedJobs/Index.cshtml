@@ -630,7 +630,7 @@
                                                 </ul>
                                             </div>
                                             <h3><span class="age"><span data-ng-bind="jr.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.ExperienceInYears + 'yrs'"></span></h3>
-                                            <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Phone'" data-ng-bind="jr.ContactNo"></span></h2>
+                                            <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="jr.ContactOption && jr.ContactOption | contactOptionContains :'Phone'" data-ng-bind="jr.ContactNo"></span></h2>
                                         </div>
                                         <div class="right">
                                             @*<div class="idcard">
@@ -655,7 +655,7 @@
                                                 <h2 class="jobname"><span data-ng-bind="jr.JobName"></span></h2>
                                                 @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
                                                 @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
-                                                <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.ContactOption || jr.ContactOption == 'Email'" data-ng-bind="jr.EmailId"></span></h2>
+                                                <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="jr.ContactOption &&  jr.ContactOption | contactOptionContains:'Email'" data-ng-bind="jr.EmailId"></span></h2>
                                                 <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Country">,</span><span> {{jr.City}},</span><span> {{jr.District}}</span></p>
                                                 <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
                                                 <div class="published">Disponibility: <span>{{jr.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
@@ -718,7 +718,7 @@
                                             <div ng-if="jr.StarRating" star-rating rating-value="jr.StarRating" max="'5'"></div>
                                             </div>
                                             <h3><span class="age"><span data-ng-bind="jr.Employer.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.ExperienceInYears + 'yrs'"></span></h3>
-                                            <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Employer.ContactOption || jr.Employer.ContactOption == 'Phone'" data-ng-bind="jr.Employer.ContactNo"></span></h2>
+                                            <h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="jr.Employer.ContactOption && jr.Employer.ContactOption | contactOptionContains: 'Phone'" data-ng-bind="jr.Employer.ContactNo"></span></h2>
                                         </div>
                                         <div class="right">
                                             @*<div class="idcard">
@@ -740,7 +740,7 @@
                                                 <h2 class="jobname"><span data-ng-bind="jr.Job.JobName"></span></h2>
                                                 @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
                                                 @*<h2 class="contact-num"><i class="fa fa-phone"></i> <span data-ng-if="!jr.Candidate.ContactOption || jr.Candidate.ContactOption == 'Phone'" data-ng-bind="jr.Candidate.ContactNo"></span></h2>*@
-                                                <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="!jr.Employer.ContactOption || jr.Employer.ContactOption == 'Email'" data-ng-bind="jr.Employer.EmailId"></span></h2>
+                                                <h2 class="email"><i class="fa fa-envelope"></i> <span data-ng-if="jr.Employer.ContactOption && jr.Employer.ContactOption| contactOptionContains: 'Email'" data-ng-bind="jr.Employer.EmailId"></span></h2>
                                                 <p class="location"><i class="fa fa-map-marker"></i> <span data-ng-bind="jr.Employer.Country">,</span><span> {{jr.Candidate.City}},</span><span> {{jr.Candidate.District}}</span></p>
                                                 <div class="published">Published: <span>{{jr.PublishedDate | date :  "dd-MMM-yyyy"}}</span></div>
                                                 <div class="published">Disponibility: <span>{{jr.Disponibility | date :  "dd-MMM-yyyy"}}</span></div>
@@ -926,6 +926,30 @@
                 }
             };
         }]);
+
+        angular.module('myApp').filter("contactOptionContains", function () {
+            return function (csv, option) {
+                //var result = "";
+                //input = input || "";
+                //for (var i = 0; i < input.length; i++) {
+                //    result = input.charAt(i) + result;
+                //}
+                //return result;
+                if (!csv) {
+                    return false;
+                } else {
+                    //var str = "1,2,3,4,5,6,7,8,9,10,10,2212312";
+                    var str = csv;
+                    var split_str = str.split(",");
+                    if (split_str.indexOf(option) !== -1) {
+                        // Original string contains 7
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
+            };
+        })
 
         angular.module('myApp').directive('starRating', function () {
             return {

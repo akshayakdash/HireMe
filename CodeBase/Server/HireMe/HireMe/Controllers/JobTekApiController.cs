@@ -419,10 +419,11 @@ namespace HireMe.Controllers
             var job = db.Jobs;
             return Request.CreateResponse(HttpStatusCode.OK, job);
         }
-        [Route("api/JobTekApi/GetJobCounts")]
+        [Route("api/JobTekApi/GetJobRequestDoughnotData")]
         [HttpGet]
-        public HttpResponseMessage GetJobCounts()
+        public HttpResponseMessage GetJobCounts(int year = 0)
         {
+            year = year == 0 ? DateTime.Today.Year : year;
             var jobCounts = db.v_JobCounts;
             return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
         }
@@ -430,9 +431,35 @@ namespace HireMe.Controllers
 
         [Route("api/JobTekApi/GetJobRequestCounts")]
         [HttpGet]
-        public HttpResponseMessage GetJobRequestCounts()
+        public HttpResponseMessage GetJobRequestCounts(int year = 0)
         {
-            var jobCounts = db.v_JobRequestCount.Where(p => p.TotalRequests > 0)
+            year = year == 0 ? DateTime.Today.Year : year;
+            var jobCounts = db.v_JobRequestCount//.Where(p => p.TotalRequests > 0)
+                .GroupBy(p => p.JobName)
+                .Select(g => new
+                {
+                    JobName = g.Key,
+                    Items = g.ToList()
+                }).ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
+        }
+
+        [Route("api/JobTekApi/GetJobOfferDoughnotData")]
+        [HttpGet]
+        public HttpResponseMessage GetJobOfferDoghnotData(int year = 0)
+        {
+            year = year == 0 ? DateTime.Today.Year : year;
+            var jobCounts = db.v_JobOfferDoughnotData;
+            return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
+        }
+
+
+        [Route("api/JobTekApi/GetJobOfferCounts")]
+        [HttpGet]
+        public HttpResponseMessage GetJobOfferCounts(int year = 0)
+        {
+            year = year == 0 ? DateTime.Today.Year : year;
+            var jobCounts = db.v_JobOfferCount//.Where(p => p.TotalRequests > 0)
                 .GroupBy(p => p.JobName)
                 .Select(g => new
                 {
