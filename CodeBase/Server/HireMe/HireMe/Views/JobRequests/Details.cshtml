@@ -1,7 +1,4 @@
-﻿@model HireMe.Models.JobRequest
-@using HireMe.Models
-
-<style>
+﻿<style>
     #footer-container {
         display: none;
     }
@@ -34,6 +31,8 @@
         margin-top: 20px;
     }
 </style>
+@model HireMe.Models.JobRequest
+@using HireMe.Models
 
 <script type="text/javascript">
     function validateJobRequest(jobRequestId) {
@@ -641,17 +640,11 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         Candidate Reviews & Ratings
                                     </h3>
                                     <div class="ratings-body">
-@if (ViewBag.UserFeedbacks != null && ViewBag.UserFeedbacks.Count > 0)
-{
+                                    @if (ViewBag.UserFeedbacks != null && ViewBag.UserFeedbacks.Count > 0)
+                                    {
                                         @foreach (UserFeedback feedback in ViewBag.UserFeedbacks)
                                         {
-                                            @*<tr>
-                                                <td>@feedback.CreatedDate.ToString("dd-MMM-yyyy")</td>
-                                                <td>@(feedback.Sender != null ? feedback.Sender.FirstName : "")</td>
-                                                <td>@feedback.JobName</td>
-                                                <td>@feedback.Comments</td>
-                                                <td>@feedback.Rating</td>
-                                            </tr>*@
+                                           
 
                                             <div class="ratings-list">
                                                 <div class="row">
@@ -675,10 +668,10 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                                 </div>
                                             </div>
                                         }
-}
-else {
-    <div style="text-align:center;padding:15px;font-size:20px;">No review and ratings for this candidate</div>
-}@*<div class="ratings-list">
+                                        }
+                                        else {
+                                            <div style="text-align:center;padding:15px;font-size:20px;">No review and ratings for this candidate</div>
+                                        }@*<div class="ratings-list">
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="rates-num">
