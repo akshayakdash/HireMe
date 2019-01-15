@@ -12183,3 +12183,18 @@ blockquote {
 .candidate-card .selected .check i{
     display:block;
 }
+
+.profileitems .right > .twoidcard img {
+    max-height: 75px;
+    min-height: 75px;
+}
+
+.col-id-card {
+    border: 1px solid #020202;
+    border-radius: 5px;
+    padding: 5px 5px;
+}
+.col-id-card  img{
+    width: 100%;
+    height: 75px;
+}
