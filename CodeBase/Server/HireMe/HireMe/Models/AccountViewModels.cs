@@ -154,6 +154,7 @@ namespace HireMe.Models
 
         public HttpPostedFileBase profile_pic { get; set; }
         public HttpPostedFileBase id_proof { get; set; }
+        public HttpPostedFileBase id_proof_back { get; set; }
 
         [Required(ErrorMessage = "Please agree the terms and conditions")]
         [Display(Name = "Agree Terms and Conditions")]
