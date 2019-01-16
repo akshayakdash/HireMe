@@ -97,7 +97,7 @@ namespace HireMe.Models
         // This field is added later to check the consent of the user
         // if contact option is blank then both email and phone no will be visible
         public string ContactOption { get; set; }
-
+        public string IdProofDoc1 { get; internal set; }
     }
 
 
@@ -188,6 +188,7 @@ namespace HireMe.Models
             }
         }
 
+        public string IdProofDoc1 { get; internal set; }
     }
 
     public class Employer
@@ -251,6 +252,7 @@ namespace HireMe.Models
 
         public int Age { get; set; }
         public DateTime DOB { get; set; }
+        public string IdProofDoc1 { get; internal set; }
     }
 
     // Master tables
@@ -697,6 +699,28 @@ namespace HireMe.Models
         public string PK { get; set; }
         public string Month { get; set; }
         public string JobName { get; set; }
+        public int TotalRequests { get; set; }
+    }
+
+    [Table("v_categorywiseoffercount")]
+    public class v_JobCount_JobOffer
+    {
+        [Key]
+        public string JobName { get; set; }
+        //public int TotalOffers { get; set; }
+        [Column("TotalOffers")]
+        public int TotalRequests { get; set; }
+    }
+
+    [Table("v_joboffers")]
+    public class v_JobOffer_Count
+    {
+        [Key]
+        public string PK { get; set; }
+        public string Month { get; set; }
+        public string JobName { get; set; }
+        //public int TotalOffers { get; set; }
+        [Column("TotalOffers")]
         public int TotalRequests { get; set; }
     }
     #endregion

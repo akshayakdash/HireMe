@@ -1,15 +1,14 @@
 ﻿<style>
     .chart-container {
         position: relative;
-       
         height: 80vh;
         width: 80vw;
     }
 </style>
 <div id="main-container-user">
     @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                            .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                            .Select(c => c.Value);
+                                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                    .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
 
@@ -105,7 +104,7 @@
         else
         {
 
-            <div class="full-section-container" ng-app="admindashboard">
+            <div class="full-section-container" ng-app="admindashboard" ng-controller="kpiCtrl">
                 <div class="jobsearch-section">
                     <div class="left-section">
                         <div class="filter-overlay">
@@ -115,13 +114,24 @@
                             <i class="fa fa-align-left"></i>
 
                             <span class="grid-title">Graphs</span>
+                            <span><i id="progress1" class="fa fa-spinner fa-spin" style="font-size:24px;" ng-show="loading"></i></span>
+                            @*<div class='switch' style="right:10px;">
+                                    <div class='quality'>
+                                        <input checked id='q1' name='q' type='radio' value='q1'>
+                                        <label for='q1'>Job Request</label>
+                                    </div><div class='quality'>
+                                        <input id='q2' name='q' type='radio' value='q2'>
+                                        <label for='q2'>Job Offer</label>
+                                    </div>
+                                </div>*@
+
                             <div class='switch' style="right:10px;">
                                 <div class='quality'>
-                                    <input checked id='q1' name='q' type='radio' value='q1'>
-                                    <label for='q1'>Job Request</label>
+                                    <input id="job_type_request" checked name='JobType' type='radio' ng-value="1" data-ng-model="jobType" data-ng-change="getJobRequests()">
+                                    <label for="job_type_request">Job Request</label>
                                 </div><div class='quality'>
-                                    <input id='q2' name='q' type='radio' value='q2'>
-                                    <label for='q2'>Job Offer</label>
+                                    <input id="job_type_offer" name='JobType' type='radio' ng-value="2" data-ng-model="jobType" data-ng-change="getJobOffers()">
+                                    <label for="job_type_offer">Job Offer</label>
                                 </div>
                             </div>
                         </div>
@@ -129,65 +139,37 @@
                         <div class="body">
                             <div class="container">
                                 <div class="row">
+                                    <div class="col-lg-2">
+                                        <form class="form-inline">
+                                            <div class="form-group">
+                                                <label class="label" for="email">Select Year:</label>
+                                                <select class="form-control">
+                                                    <option selected>2018</option>
+                                                </select>
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    
+
+                                </div>
+                                <div class="row">
                                     <section id="reactive">
-                                        @*<div class="page-header">
-                                                <h1>Dashboard Members</h1>
-                                            </div>*@
-                                        <div class="row mb-5" ng-controller="DataTablesCtrl">
+
+                                        <div class="row mb-5">
                                             <div class="col-lg-12 col-sm-12">
                                                 <div class="chart-container">
-                                                    <canvas id="tables" class="chart chart-line ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels" chart-colors="colors"></canvas>
+                                                    <canvas id="tables" class="chart chart-line ng-isolate-scope" chart-data="line_chart_data" chart-series="line_chart_series" chart-options="line_chart_options" chart-labels="line_chart_labels" chart-colors="line_chart_colors"></canvas>
                                                 </div>
                                             </div>
-                                            @*<div class="col-lg-6 col-sm-12">
-                                                    <div class="panel panel-default">
-                                                        <div class="panel-heading">Chart Data</div>
-                                                        <div class="panel-body">
-                                                            <table class="table table-responsive table-condensed table-striped">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <!-- ngRepeat: label in labels -->
-                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">January</th><!-- end ngRepeat: label in labels -->
-                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">February</th><!-- end ngRepeat: label in labels -->
-                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">March</th><!-- end ngRepeat: label in labels -->
-                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">April</th><!-- end ngRepeat: label in labels -->
-                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">May</th><!-- end ngRepeat: label in labels -->
-                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">June</th><!-- end ngRepeat: label in labels -->
-                                                                        <th ng-repeat="label in labels" class="ng-binding ng-scope">July</th><!-- end ngRepeat: label in labels -->
-                                                                    </tr>
-                                                                    <!-- ngRepeat: dataSet in data -->
-                                                                    <tr ng-repeat="dataSet in data" class="ng-scope">
-                                                                        <!-- ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">66</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">55</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">64</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">86</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">49</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">50</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">34</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                    </tr><!-- end ngRepeat: dataSet in data -->
-                                                                    <tr ng-repeat="dataSet in data" class="ng-scope">
-                                                                        <!-- ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">28</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">54</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">39</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">13</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">79</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">23</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                        <td ng-repeat="set in dataSet track by $index" class="ng-scope"><span style="text-align: right;" class="ng-binding">94</span></td><!-- end ngRepeat: set in dataSet track by $index -->
-                                                                    </tr><!-- end ngRepeat: dataSet in data -->
-                                                                </tbody>
-                                                            </table>
-                                                            <button type="button" class="btn btn-primary pull-right" ng-click="randomize()">Randomize</button>
-                                                        </div>
-                                                    </div>
-                                                </div>*@
+
                                         </div>
                                         <div class="row">
-                                            <div class="col-sm-12" id="doughnut-chart" ng-controller="DoughnutCtrl">
+                                            <div class="col-sm-12" id="doughnut-chart">
                                                 <div class="panel panel-default">
                                                     <div class="chart-container">
-                                                        <canvas id="doughnut" class="chart chart-doughnut chart-xs ng-isolate-scope" chart-data="data" chart-series="series" chart-options="options" chart-labels="labels"></canvas>
+                                                        <canvas id="doughnut" class="chart chart-doughnut chart-xs ng-isolate-scope" chart-data="doughnut_data" chart-series="doughnut_series" chart-options="doughnut_options" chart-labels="doughnut_labels"></canvas>
                                                     </div>
                                                 </div>
                                             </div>
@@ -195,7 +177,7 @@
                                         </div>
                                     </section>
                                 </div>
-                                
+
                             </div>
                         </div>
 

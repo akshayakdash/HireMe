@@ -97,20 +97,28 @@
                                                             <img src="data:image/jpeg;base64,@item.ProfilePicUrl" />
 
                                                             <h2 class="contact-num"><i class="fa fa-phone"></i> <span>@item.ContactNo</span></h2>
-                                                            <div class="idcard idcard-mobile">
+                                                            @*<div class="idcard idcard-mobile">
                                                                 <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
                                                                     <img src="data:image/jpeg;base64,@item.IdProofDoc" />
                                                                 </a>
-                                                            </div>
+                                                            </div>*@
                                                             @if (!item.ProfileVerified)
                                                             {
                                                                 <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateEmployerAccount(@item.EmployerId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
                                                             }
                                                         </div>
                                                         <div class="right">
-                                                            <div class="idcard idcard-desktop">
+                                                            @*<div class="idcard idcard-desktop">
                                                                 <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
                                                                     <img src="data:image/jpeg;base64,@item.IdProofDoc" />
+                                                                </a>
+                                                            </div>*@
+                                                            <div class="idcard twoidcard d-none d-md-block">
+                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
+                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
+                                                                </a>
+                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc1" class="fancybox" >
+                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc1" style="margin-top:5px;"/>
                                                                 </a>
                                                             </div>
                                                             <div class="right-left">
@@ -129,6 +137,18 @@
                                                                
                                                                 <p class="location"><span>@item.Country,</span><span> @item.City,</span><span> @item.District</span></p>
                                                                 <div class="published">Registered on: <span>@item.CreatedDate</span></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row d-md-none d-lg-none d-sm-block" style="margin-top: 30px;">
+                                                            <div class="col col-id-card" style="margin-left: 10px;margin-right:5px;">
+                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
+                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
+                                                                </a>
+                                                            </div>
+                                                            <div class="col col-id-card" style="margin-left: 5px;margin-right:10px;">
+                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc1" class="fancybox">
+                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc1" />
+                                                                </a>
                                                             </div>
                                                         </div>
                                                     </div>

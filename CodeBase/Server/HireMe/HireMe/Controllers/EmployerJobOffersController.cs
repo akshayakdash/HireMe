@@ -97,6 +97,26 @@ namespace HireMe.Controllers
                     jobOffer.CountryId = 1; // TO Do _Hard coded for Ivory
                     jobOffer.CityId = employerJobOffer.CityId;
                     jobOffer.DistrictId = employerJobOffer.DistrictId;
+
+                    var country = db.Countries.FirstOrDefault(p => p.CountryId == jobOffer.CountryId);
+                    if (country != null)
+                    {
+                        jobOffer.Country = country.CountryName;
+                    }
+
+
+                    var city = db.Cities.FirstOrDefault(p => p.CityId == jobOffer.CityId);
+                    if (city != null)
+                    {
+                        jobOffer.City = city.CityName;
+                    }
+
+                    var district = db.Districts.FirstOrDefault(p => p.DistrictId == jobOffer.DistrictId);
+                    if (district != null)
+                    {
+                        jobOffer.District = district.DistrictName;
+                    }
+
                     employerJobOffer.JobTasks.ForEach(task =>
                     {
                         if (task.Selected)
@@ -128,6 +148,24 @@ namespace HireMe.Controllers
                     jobOffer.CityId = employerJobOffer.CityId;
                     jobOffer.DistrictId = employerJobOffer.DistrictId;
 
+                    var country = db.Countries.FirstOrDefault(p => p.CountryId == jobOffer.CountryId);
+                    if (country != null)
+                    {
+                        jobOffer.Country = country.CountryName;
+                    }
+
+
+                    var city = db.Cities.FirstOrDefault(p => p.CityId == jobOffer.CityId);
+                    if (city != null)
+                    {
+                        jobOffer.City = city.CityName;
+                    }
+
+                    var district = db.Districts.FirstOrDefault(p => p.DistrictId == jobOffer.DistrictId);
+                    if (district != null)
+                    {
+                        jobOffer.District = district.DistrictName;
+                    }
                     employerJobOffer.JobTasks.ForEach(task =>
                     {
                         if (task.Selected)
