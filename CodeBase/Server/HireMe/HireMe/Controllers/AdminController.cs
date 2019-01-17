@@ -197,6 +197,7 @@ namespace HireMe.Controllers
             return View(db.JobOffers
                .Include(path => path.Job)
                .Include(t => t.Employer)
+               .Where(p => !p.VerifiedByAdmin)
                .OrderByDescending(p => p.JobOfferId)
                .ToList());
         }
@@ -207,6 +208,7 @@ namespace HireMe.Controllers
             return View(db.JobRequests
                .Include(path => path.Job)
                .Include(t => t.Candidate)
+               .Where(p => !p.VerifiedByAdmin)
                .OrderByDescending(p => p.JobRequestId)
                .ToList());
         }

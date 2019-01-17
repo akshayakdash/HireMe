@@ -79,7 +79,7 @@ namespace HireMe.Models
         public Gender Gender { get; set; }
 
         [Display(Name = "Address")]
-        [Required]
+        //[Required]
         public string Address { get; set; }
 
         [Required(ErrorMessage = "You must provide a valid phone number")]
@@ -95,6 +95,7 @@ namespace HireMe.Models
 
         public HttpPostedFileBase profile_pic { get; set; }
         public HttpPostedFileBase id_proof { get; set; }
+        public HttpPostedFileBase id_proof1 { get; set; }
 
         [Required]
         public int? CountryId { get; set; }
@@ -106,7 +107,7 @@ namespace HireMe.Models
         [NotMapped]
         public string City { get; set; }
 
-        [Required]
+        //[Required]
         public int? DistrictId { get; set; }
         [NotMapped]
         public string District { get; set; }
