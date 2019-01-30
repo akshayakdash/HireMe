@@ -59,7 +59,8 @@ namespace HireMe.Controllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, db.JobRequests.Include(p => p.Candidate).Include(t => t.Job).ToList());
+                //return Request.CreateResponse(HttpStatusCode.OK, db.JobRequests.Include(p => p.Candidate).Include(t => t.Job).ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, db.v_JobRequests.OrderByDescending(p => p.JobRequestId).ToList());
             }
         }
 
