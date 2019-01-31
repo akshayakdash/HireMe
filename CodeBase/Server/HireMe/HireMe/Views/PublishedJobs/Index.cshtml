@@ -642,7 +642,7 @@
                                                     <span data-ng-if="jr.Candidate && jr.Candidate.Gender == 2"><i class="fa fa-female"></i></span>
                                                     <span data-ng-if="jr.Candidate && jr.Candidate.Gender  == 1"><i class="fa fa-male"></i></span>
                                                     <span data-ng-if="jr.StaffType == 1">Individual</span>
-                                                    <span data-ng-if="jr.StaffType == 2">Agency <i title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.AgencyId)"></i></span>
+                                                    <span data-ng-if="jr.StaffType == 2">Agency <i style="cursor:pointer" title="show agency info" class="fa fa-info-circle" data-ng-click="showAgencyInfo(jr.AgencyId)"></i></span>
                                                     @*<span>{{jr.StaffType == 1 ? "Individual" : '<span ng-click="">Agency <i class="fa fa-info"></i></span>'}}</span>
                 <span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
                                                 </h1>
