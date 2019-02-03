@@ -194,7 +194,7 @@ namespace HireMe.Controllers
         public ActionResult ValidateJobOffers()
         {
 
-            return View(db.JobOffers
+            return View(db.JobOffers.AsNoTracking()
                .Include(path => path.Job)
                .Include(t => t.Employer)
                .Where(p => !p.VerifiedByAdmin)
@@ -205,7 +205,7 @@ namespace HireMe.Controllers
         [HttpGet]
         public ActionResult ValidateJobRequests()
         {
-            return View(db.JobRequests
+            return View(db.JobRequests.AsNoTracking()
                .Include(path => path.Job)
                .Include(t => t.Candidate)
                .Where(p => !p.VerifiedByAdmin)

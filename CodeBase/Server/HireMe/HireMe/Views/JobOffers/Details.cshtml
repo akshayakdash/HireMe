@@ -17,7 +17,14 @@
                     type: 'get',
                     success: function (result) {
                         alert("Job Offer validated successfully.");
-                        window.history.back();
+                        //window.history.back();
+                        if ('referrer' in document) {
+                            window.location = document.referrer;
+                            /* OR */
+                            //location.replace(document.referrer);
+                        } else {
+                            window.history.back();
+                        }
                     }
                 });
         }
