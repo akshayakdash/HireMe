@@ -12,12 +12,27 @@ using System.Linq.Dynamic;
 using OfficeOpenXml;
 using System.Net.Http.Headers;
 using Microsoft.AspNet.Identity;
+using Newtonsoft.Json;
+using System.Net.Http.Formatting;
 
 namespace HireMe.Controllers
 {
     public class JobTekApiController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private JsonMediaTypeFormatter jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+
+        public JobTekApiController()
+        {
+            var jSettings = new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            };
+
+            jsonFormatter.SerializerSettings = jSettings;
+        }
 
         [HttpGet]
         [Route("api/JobTekApi/SearchJobRequests")]
@@ -468,6 +483,14 @@ namespace HireMe.Controllers
                     Items = g.ToList()
                 }).ToList();
             return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
+        }
+
+        [Route("api/JobTekApi/GetJobCategories")]
+        [HttpGet]
+        public HttpResponseMessage GetJobCategories()
+        {
+            var jobCategories = db.JobCategories.Include(p => p.Jobs).ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, jobCategories, jsonFormatter);
         }
 
         protected override void Dispose(bool disposing)
