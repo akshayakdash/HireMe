@@ -95,12 +95,26 @@ namespace HireMe.Controllers
                     }
                     idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
+
+                string idProofImagePath1 = string.Empty;
+                if (model.id_proof1 != null && model.id_proof1.ContentLength > 0)
+                {
+
+
+                    string theFileName = Path.GetFileNameWithoutExtension(model.id_proof1.FileName);
+                    byte[] thePictureAsBytes = new byte[model.id_proof1.ContentLength];
+                    using (BinaryReader theReader = new BinaryReader(model.id_proof1.InputStream))
+                    {
+                        thePictureAsBytes = theReader.ReadBytes(model.id_proof1.ContentLength);
+                    }
+                    idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
+                }
                 #endregion
                 var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
                 string phoneNumber = model.PhoneNumber.Replace("-", "");
 
 
-                var candidate = new Candidate { AgencyId = agency.AgencyId, StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, Age = age };
+                var candidate = new Candidate { Gender = model.Gender, AgencyId = agency.AgencyId, StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1, Age = age };
                 candidate.CreatedDate = DateTime.Now.ToString();
                 var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                 if (cntry != null)

@@ -46,46 +46,46 @@ for (int i = 0; i < jobTasks.Count(); i++)
             @*<div class="checkbox" style="margin-left:25px;">
                 <label>*@
 
-                    @*@Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
-                        @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
-                        @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
-                        @item.JobTaskName
-                        @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
-                    @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
-                    @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
-                    @*<img src="~/assets/images/home-icon.png" />
-                    @(item.JobTaskName)
+            @*@Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskId, new { @value = "@item.JobTaskId" })
+                @Html.HiddenFor(p => p.JobTasks[count - 1].JobTaskName, new { @value = "@item.JobTaskName" })
+                @Html.CheckBoxFor(p => p.JobTasks[count - 1].Selected)
+                @item.JobTaskName
+                @Html.TextBoxFor(p => p.JobTasks[count - 1].Note)*@
+            @*<input type="checkbox" name="SelectedJobTasks[@ViewBag.count].SelectedJobTaskId" value="@item.JobTaskId" />*@
+            @*<input type="text" name="SelectedJobTasks[@i].SelectedJobTaskNote" value="" />*@
+            @*<img src="~/assets/images/home-icon.png" />
+                        @(item.JobTaskName)
 
-                    <div class="toggle-group">
-                        <input type="checkbox" name="on-off-switch" id="on-off-switch" checked="" tabindex="1">
-                        <label for="on-off-switch">
+                        <div class="toggle-group">
+                            <input type="checkbox" name="on-off-switch" id="on-off-switch" checked="" tabindex="1">
+                            <label for="on-off-switch">
 
-                        </label>
-                        <div class="onoffswitch" aria-hidden="true">
-                            <div class="onoffswitch-label">
-                                <div class="onoffswitch-inner"></div>
-                                <div class="onoffswitch-switch"></div>
+                            </label>
+                            <div class="onoffswitch" aria-hidden="true">
+                                <div class="onoffswitch-label">
+                                    <div class="onoffswitch-inner"></div>
+                                    <div class="onoffswitch-switch"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    @{
-                        var selectedTask = Model.JobOfferJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
+                        @{
+                            var selectedTask = Model.JobOfferJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
+                        }
+                        @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
+                        {
+                            <span>@selectedTask.TaskResponseAdditionalDescription</span>
+                        }
+
+
+                        <span></span>
+                    </label>
+                    @if (item.SubTasks.Any())
+                {
+
+                        @ShowTaskTree(item.SubTasks)
+
                     }
-                    @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
-                    {
-                        <span>@selectedTask.TaskResponseAdditionalDescription</span>
-                    }
-
-
-                    <span></span>
-                </label>
-                @if (item.SubTasks.Any())
-            {
-
-                    @ShowTaskTree(item.SubTasks)
-
-                }
-            </div>*@
+                </div>*@
 
             <div class="col-md-12">
                 <div class="row">
@@ -95,20 +95,20 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     <div class="col-md-11 pl-0 pr-0">
                         <div class="tree-title">
                             @{
-                            var selectedTask = Model.JobOfferJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
+                                var selectedTask = Model.JobOfferJobTasks.FirstOrDefault(p => p.JobTaskId == item.JobTaskId);
                             }
                             @(item.JobTaskName)
                             @if (!string.IsNullOrWhiteSpace(selectedTask.TaskResponseAdditionalDescription))
                             {
-                            <p><strong>Desc:</strong> @selectedTask.TaskResponseAdditionalDescription</p>
+                                <p><strong>Desc:</strong> @selectedTask.TaskResponseAdditionalDescription</p>
                             }
-                        
+
                             @if (item.SubTasks.Any())
                             {
-                            @ShowTaskTree(item.SubTasks)
+                                @ShowTaskTree(item.SubTasks)
                             }
+                        </div>
                     </div>
-                </div>
                 </div>
             </div>
                                     }
@@ -121,8 +121,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
 <div id="main-container-user" ng-app="myApp" ng-controller="searchJobRequestCtrl">
 
     @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                        .Select(c => c.Value);
+                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                        .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
 
@@ -133,7 +133,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
         <!--<div class="tab-section">
             <div class="tab-section-body"></div>
         </div>-->
-        
+
         <div class="row">
             <div class="col-md-12">
                 <div class="headline text-center mb-3">
@@ -148,57 +148,57 @@ for (int i = 0; i < jobTasks.Count(); i++)
                     </div>
                     <div class="tab-content search-criteria" style="margin-top:0;">
 
-                                <div class="row">
-                                    <div class="col-md-4 text-center">
-                                        <div class="profile-pic">
-                                            <img src="data:image/jpeg;base64,@Model.Employer.ProfilePicUrl" />
-                                        </div>
-                                        @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
-                                    </div>
-                                    <div class="col-md-8">
-                                        @*<div class="row">
-                                                <div class="col-md-4">Email:</div>
-                                                <div class="col-md-8">agency@gmail.com</div>
-                                            </div>*@
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Name:</td>
-                                                    <td>@(Model.Employer.FirstName + " " + (Model.Employer.LastName ?? ""))</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Address:</td>
-                                                    <td>@(Model.Employer.Country + ", " + (Model.Employer.City ?? "") + ", " + (Model.Employer.District ?? ""))</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Email:</td>
-                                                    <td>@Model.Employer.EmailId</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Phone:</td>
-                                                    <td>@Model.Employer.ContactNo</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Rating:</td>
-                                                    <td>
-                                                        @for (int i = 0; i < Model.StarRating; i++)
-                                                        {
-                                                            <i class="fa fa-star"></i>
-                                                        }
-                                                        @for (int i = 0; i < (5 - Model.StarRating); i++)
-                                                        {
-                                                            <i class="fa fa-star-o"></i>
-                                                        }
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Description:</td>
-                                                    <td>@Model.AdditionalDescription</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="col-md-12"></div>
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <div class="profile-pic">
+                                    <img src="data:image/jpeg;base64,@Model.Employer.ProfilePicUrl" />
+                                </div>
+                                @*<button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Validate</button>*@
+                            </div>
+                            <div class="col-md-8">
+                                @*<div class="row">
+                                        <div class="col-md-4">Email:</div>
+                                        <div class="col-md-8">agency@gmail.com</div>
+                                    </div>*@
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td>Name:</td>
+                                            <td>@(Model.Employer.FirstName + " " + (Model.Employer.LastName ?? ""))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Address:</td>
+                                            <td>@(Model.Employer.Country + ", " + (Model.Employer.City ?? "") + ", " + (Model.Employer.District ?? ""))</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Email:</td>
+                                            <td>@Model.Employer.EmailId</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Phone:</td>
+                                            <td>@Model.Employer.ContactNo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Rating:</td>
+                                            <td>
+                                                @for (int i = 0; i < Model.StarRating; i++)
+                                                {
+                                                    <i class="fa fa-star"></i>
+                                                }
+                                                @for (int i = 0; i < (5 - Model.StarRating); i++)
+                                                {
+                                                    <i class="fa fa-star-o"></i>
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Description:</td>
+                                            <td>@Model.AdditionalDescription</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-md-12"></div>
                         </div>
                         <div class="row">
                             <div class="col-md-6" style="border-right:2px solid #ff6a00;">
@@ -394,26 +394,26 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                         </div>
                                     </div>
                                     @*<div class="col-sm-12">
-                                        <div class="filtersection-panel">
-                                            <div class="filtersection-header">
-                                                Number of rooms
+                                            <div class="filtersection-panel">
+                                                <div class="filtersection-header">
+                                                    Number of rooms
 
-                                            </div>
+                                                </div>
 
-                                            <div class="filtersection-body">
+                                                <div class="filtersection-body">
 
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-md-6">
-                                                        @Model.ExpectedMinRooms
+                                                    <div class="row">
+                                                        <div class="col-lg-6 col-md-6">
+                                                            @Model.ExpectedMinRooms
 
-                                                    </div>
-                                                    <div class="col-lg-6 col-md-6">
-                                                        @Model.ExpectedMaxRooms
+                                                        </div>
+                                                        <div class="col-lg-6 col-md-6">
+                                                            @Model.ExpectedMaxRooms
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>*@
+                                        </div>*@
                                     <div class="col-sm-12">
                                         <div class="filtersection-panel">
                                             <div class="filtersection-header">
@@ -470,13 +470,16 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                 </div>
 
                                 @if (role == "Admin")
-                                        {
+                                {
+                                    if (!Model.VerifiedByAdmin)
+                                    {
                                         <div class="row">
                                             <div class="col-md-12 text-center">
                                                 <button class="btn btn-style-1 waves mb-0" onclick="validateJobOffer(@Model.JobOfferId)">Validate</button>
                                             </div>
                                         </div>
-                                        }
+                                    }
+                                }
                             </div>
                         </div>
                         <div class="row">
@@ -523,32 +526,32 @@ for (int i = 0; i < jobTasks.Count(); i++)
         </div>
 
         @*<div class="row">
-            <h2>Employer Reviews & Ratings</h2>
-            @if (ViewBag.UserFeedbacks != null && ViewBag.UserFeedbacks.Count > 0)
-            {
-                <table>
-                    <tr>
-                        <td>Date</td>
-                        <td>User Name</td>
-                        <td>Job Name</td>
-                        <td>Comment</td>
-                        <td>Rating</td>
-                    </tr>
-                    @foreach (UserFeedback feedback in ViewBag.UserFeedbacks)
-                    {
+                <h2>Employer Reviews & Ratings</h2>
+                @if (ViewBag.UserFeedbacks != null && ViewBag.UserFeedbacks.Count > 0)
+                {
+                    <table>
                         <tr>
-                            <td>@feedback.CreatedDate.ToString("dd-MMM-yyyy")</td>
-                            <td>@(feedback.Sender != null ? feedback.Sender.FirstName : "")</td>
-                            <td>@feedback.JobName</td>
-                            <td>@feedback.Comments</td>
-                            <td>@feedback.Rating</td>
+                            <td>Date</td>
+                            <td>User Name</td>
+                            <td>Job Name</td>
+                            <td>Comment</td>
+                            <td>Rating</td>
                         </tr>
-                    }
-                </table>
-            }
-        </div>*@
+                        @foreach (UserFeedback feedback in ViewBag.UserFeedbacks)
+                        {
+                            <tr>
+                                <td>@feedback.CreatedDate.ToString("dd-MMM-yyyy")</td>
+                                <td>@(feedback.Sender != null ? feedback.Sender.FirstName : "")</td>
+                                <td>@feedback.JobName</td>
+                                <td>@feedback.Comments</td>
+                                <td>@feedback.Rating</td>
+                            </tr>
+                        }
+                    </table>
+                }
+            </div>*@
 
-        
+
 
 
 
@@ -624,7 +627,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
     </script>
 
     <script>
-      
+
     </script>
     <script src="~/Scripts/angular.min.js"></script>
     <script type="text/javascript">

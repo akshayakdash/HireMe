@@ -12198,3 +12198,20 @@ blockquote {
     width: 100%;
     height: 75px;
 }
+.candidate-info {
+    padding: 5px;
+    background: rgba(2, 136, 253, 0.15);
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+    .candidate-info .candidate-header {
+        font-size: 14px;
+        line-height: initial;
+        color: #0b82ca;
+        margin:0;
+    }
+    .candidate-info .experience {
+        margin: 0;
+        line-height: initial;
+        font-weight: 600 !important;
+    }
