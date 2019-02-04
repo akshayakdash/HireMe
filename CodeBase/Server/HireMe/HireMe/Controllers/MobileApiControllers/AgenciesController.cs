@@ -9,9 +9,11 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Data.Entity;
 using HireMe.Utility;
+using System.Web.Http.Cors;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AgenciesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
