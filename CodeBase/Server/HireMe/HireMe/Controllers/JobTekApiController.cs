@@ -14,9 +14,11 @@ using System.Net.Http.Headers;
 using Microsoft.AspNet.Identity;
 using Newtonsoft.Json;
 using System.Net.Http.Formatting;
+using System.Web.Http.Cors;
 
 namespace HireMe.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class JobTekApiController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

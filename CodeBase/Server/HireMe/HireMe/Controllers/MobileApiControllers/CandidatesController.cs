@@ -11,9 +11,11 @@ using System.Data.Entity;
 using System.Linq.Dynamic;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json;
+using System.Web.Http.Cors;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CandidatesController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();

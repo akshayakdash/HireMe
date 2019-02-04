@@ -13,9 +13,11 @@ using OfficeOpenXml;
 using System.Collections;
 using System.Linq.Dynamic;
 using System.Net.Http.Headers;
+using System.Web.Http.Cors;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class AdminController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
