@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Data.Entity;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -16,6 +17,8 @@ namespace HireMe.Controllers.MobileApiControllers
     public class AccountsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
         private JsonMediaTypeFormatter jsonFormatter = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
 
         public AccountsController()
@@ -32,6 +35,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
         [HttpPost]
         [AllowAnonymous]
+        [Route("api/Accounts/Register")]
         public HttpResponseMessage Register(RegisterViewModel model)
         {
             var countries = db.Countries.ToList();
@@ -138,6 +142,16 @@ namespace HireMe.Controllers.MobileApiControllers
                 }
             }
             throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("api/Accounts/Login")]
+        public HttpResponseMessage Login(LoginViewModel model)
+        {
+            var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName);
+            var role = db.Roles.Where(t => t.Id == user.Roles.ElementAt(0).RoleId);
+            return Request.CreateResponse(HttpStatusCode.OK, new { user.FirstName, role, user.Id, user.UserName });
         }
     }
 }
