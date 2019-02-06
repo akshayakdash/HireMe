@@ -254,6 +254,7 @@
     <Compile Include="Controllers\JobsController.cs" />
     <Compile Include="Controllers\JobTekApiController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MobileApiControllers\AccountsController.cs" />
     <Compile Include="Controllers\MobileApiControllers\AdminController.cs" />
     <Compile Include="Controllers\MobileApiControllers\AgenciesController.cs" />
     <Compile Include="Controllers\MobileApiControllers\CandidatesController.cs" />

@@ -39,8 +39,14 @@ namespace HireMe.Models
         public List<Agency> Agencies { get; set; }
         public List<Employer> Employers { get; set; }
 
+        //public List<ApplicationRole> Roles { get; set; }
+
         public List<SignalRUserConnection> SignalRConnections { get; set; }
     }
+
+    //public class ApplicationRole : IdentityRole
+    //{
+    //}
 
    
 }

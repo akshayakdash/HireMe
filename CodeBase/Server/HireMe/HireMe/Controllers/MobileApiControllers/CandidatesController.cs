@@ -12,6 +12,7 @@ using System.Linq.Dynamic;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json;
 using System.Web.Http.Cors;
+using System.IO;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -107,6 +108,83 @@ namespace HireMe.Controllers.MobileApiControllers
                 .Where(j => j.CandidateId == candidateId)
                 .ToList();
             return Request.CreateResponse(HttpStatusCode.OK, myJobRequests, jsonFormatter);
+        }
+
+        [HttpPost]
+        [Route("api/Candidates/{candidateId}/JobRequests")]
+        public HttpResponseMessage CreateJobRequest([FromUri]int candidateId,[FromBody] CandidateProfileViewModel candidateProfile)
+        {
+            var existingCandidate = db.Candidates.Include(path => path.JobRequests).FirstOrDefault(t => t.CandidateId == candidateId);
+            if (existingCandidate == null)
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Candidate not found.");
+            var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
+            if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
+            {
+                var skillPic = candidateProfile.JobRequestSkillPic1;
+                string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                {
+                    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                }
+
+                jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+            }
+
+            if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
+            {
+                var skillPic = candidateProfile.JobRequestSkillPic2;
+                string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                {
+                    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                }
+
+                jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+            }
+
+            if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
+            {
+                var skillPic = candidateProfile.JobRequestSkillPic3;
+                string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                {
+                    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                }
+
+                jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+            }
+
+
+
+            candidateProfile.JobTasks.ForEach(task =>
+            {
+                if (task.Selected)
+                {
+                    jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                }
+            });
+
+            existingCandidate.Disponibility = candidateProfile.Disponibility;
+            existingCandidate.ExpectedMinSalary = candidateProfile.ExpectedMinSalary;
+            existingCandidate.ExpectedMaxSalary = candidateProfile.ExpectedMaxSalary;
+            existingCandidate.CanRead = candidateProfile.CanRead;
+            existingCandidate.CanWrite = candidateProfile.CanWrite;
+            existingCandidate.SleepOnSite = candidateProfile.SleepOnSite;
+            existingCandidate.ExperienceInYears = candidateProfile.ExperienceInYears;
+            existingCandidate.ExperienceInMonths = candidateProfile.ExperienceInMonths;
+            if (candidateProfile.SleepOnSite)
+            {
+                existingCandidate.ExpectedMinRooms = candidateProfile.ExpectedMinRooms;
+                existingCandidate.ExpectedMaxRooms = candidateProfile.ExpectedMaxRooms;
+            }
+
+            existingCandidate.JobRequests.Add(jobRequest);
+            db.Entry(existingCandidate).State = EntityState.Modified;
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         [HttpGet]
