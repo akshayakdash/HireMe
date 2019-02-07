@@ -60,7 +60,7 @@ namespace HireMe.Controllers.MobileApiControllers
             candidate.ProfileVerified = true;
             db.SaveChanges();
             NotificationFramework.SendNotification("", candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Candidate Profile verified successfully.", Data = candidate });
         }
 
         #endregion
@@ -90,7 +90,7 @@ namespace HireMe.Controllers.MobileApiControllers
             employer.ProfileVerified = true;
             db.SaveChanges();
             NotificationFramework.SendNotification("", employer.AspNetUserId, "Employer Account Activation - JOBTek", "Your employer Account " + employer.FirstName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "employeer Profile verified successfully.", Data = employer });
         }
         #endregion
 
@@ -119,7 +119,7 @@ namespace HireMe.Controllers.MobileApiControllers
             agency.ProfileVerified = true;
             db.SaveChanges();
             NotificationFramework.SendNotification("", agency.AspNetUserId, "Agency Account Activation - JOBTek", "Your agency Account " + agency.AgencyName + " was activated by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Agency Profile verified successfully.", Data = agency });
         }
         #endregion
 
@@ -156,7 +156,7 @@ namespace HireMe.Controllers.MobileApiControllers
             }
             // we need to send a notification to the user about the job request verifications
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job request verified successfully.", Data = jobRequest });
         }
         #endregion
 
@@ -194,7 +194,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 NotificationFramework.SendNotification("", employer.AspNetUserId, "Job Offer Verified - JOBTek", "Your job requrest for " + job.JobName + " was verified by Admin on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job offer verified successfully.", Data = jobOffer });
         }
         #endregion
 
