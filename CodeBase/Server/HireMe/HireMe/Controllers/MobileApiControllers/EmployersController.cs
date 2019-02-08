@@ -39,11 +39,14 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Employers/{employerId}/JobOffers")]
         public HttpResponseMessage MyJobOffers(int employerId)
         {
-            var myJobOffers = db.JobOffers
-                .Include(path => path.Job)
-                .Include(t => t.Employer)
-                .Where(j => j.EmployerId == employerId)
-                .ToList();
+            //var myJobOffers = db.JobOffers
+            //    .Include(path => path.Job)
+            //    .Include(t => t.Employer)
+            //    .Where(j => j.EmployerId == employerId)
+            //    .ToList();
+
+            var myJobOffers = db.v_SearchJobOffer_Mobile
+                .Where(p => p.IsPublished && p.EmployerId == employerId);
             return Request.CreateResponse(HttpStatusCode.OK, myJobOffers, jsonFormatter);
         }
 
@@ -53,7 +56,7 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 var existingEmployer = db.Employers.Include(path => path.JobOffers).FirstOrDefault(p => p.EmployerId == employerId);
                 if (existingEmployer == null)
                 {
@@ -155,8 +158,8 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.SaveChanges();
                 }
             }
-          
-            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Offer created successfully."});
+
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Offer created successfully.", Data = employerJobOffer}, jsonFormatter);
         }
 
         [HttpGet]
@@ -168,6 +171,25 @@ namespace HireMe.Controllers.MobileApiControllers
                 .Include(t => t.Employer)
                 .FirstOrDefault(j => j.EmployerId == employerId && j.JobOfferId == jobOfferId);
             return Request.CreateResponse(HttpStatusCode.OK, myJobOffer, jsonFormatter);
+        }
+
+        [HttpDelete]
+        [Route("api/Employers/{employerId}/JobOffers/{jobOfferId}")]
+        public HttpResponseMessage MyJobOffers(int employerId, int jobOfferId)
+        {
+            //var myJobOffers = db.JobOffers
+            //    .Include(path => path.Job)
+            //    .Include(t => t.Employer)
+            //    .Where(j => j.EmployerId == employerId)
+            //    .ToList();
+
+            var jobOffer = db.JobOffers.Find(jobOfferId);
+            if (jobOffer == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Job offer not found");
+            jobOffer.IsPublished = false;
+            db.Entry(jobOffer).Property(p => p.IsPublished).IsModified = true;
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job offer removed successfully", Data = jobOffer }, jsonFormatter);
         }
         #endregion
 

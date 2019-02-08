@@ -656,6 +656,86 @@ namespace HireMe.Models
         public List<JobRequestJobTask> JobRequestJobTasks { get; set; }
     }
 
+    public class v_SearchJobRequest_Mobile
+    {
+        [Key]
+        public int JobRequestId { get; set; }
+        public int CandidateId { get; set; }
+        public int JobId { get; set; }
+        public bool IsPublished { get; set; }
+        public DateTime? PublishedDate { get; set; }
+        public string JobRequestDescription { get; set; }
+        public int StarRating { get; set; }
+        public bool VerifiedByAdmin { get; set; }
+        
+        public int? AgencyId { get; set; }
+       
+        public Gender Gender { get; set; }
+        public int? Age { get; set; }
+        public DateTime DOB { get; set; }
+        public int? ExperienceInYears { get; set; }
+        public int? ExperienceInMonths { get; set; }
+       
+        public bool ProfileVerified { get; set; }
+        public StaffType StaffType { get; set; }
+        public DateTime? Disponibility { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string District { get; set; }
+       
+       
+        public decimal ExpectedMinSalary { get; set; }
+        public decimal ExpectedMaxSalary { get; set; }
+       
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ContactNo { get; set; }
+        public string EmailId { get; set; }
+        public string Address { get; set; }
+        public string ContactOption { get; set; }
+        public string JobName { get; set; }
+        public int JobCategoryId { get; set; }
+        public string IconImage { get; set; }
+        public string AdditionalDescription { get; set; }
+        [ForeignKey("JobRequestId")]
+        public List<JobRequestJobTask> JobRequestJobTasks { get; set; }
+    }
+
+    public class v_SearchJobOffer_Mobile
+    {
+        [Key]
+        public int JobofferId { get; set; }
+        public int JobId { get; set; }
+        public int EmployerId { get; set; }
+        public Gender Gender { get; set; }
+        public int MinAge { get; set; }
+        public int MaxAge { get; set; }
+        public int MinExperience { get; set; }
+        public int MaxExperience { get; set; }
+        public StaffType StaffType { get; set; }
+        public SalaryType SalaryType { get; set; }
+        public string SalaryTypeOtherDesc { get; set; }
+        public DateTime Disponibility { get; set; }
+        public decimal ExpectedMinSalary { get; set; }
+        public decimal ExpectedMaxSalary { get; set; }
+        public int NoOfChildren { get; set; }
+        public int NoOfAdults { get; set; }
+        public bool IsPublished { get; set; }
+        public DateTime? PublishedDate { get; set; }
+        public string AdditionalDescription { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
+        public string District { get; set; }
+        public string JobName { get; set; }
+        public int JobCategoryId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string ContactNo { get; set; }
+        public string EmailId { get; set; }
+        public string ContactOption { get; set; }
+        public List<JobOfferJobTask> JobOfferJobTasks { get; set; }
+    }
+
     public class v_ExportJobRequest
     {
         [Key]

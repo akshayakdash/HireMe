@@ -116,6 +116,10 @@ namespace HireMe.Models
         public DbSet<UserFeedback> UserFeedbacks { get; set; }
 
         public DbSet<v_SearchJobRequest> v_JobRequests { get; set; }
+
+        public DbSet<v_SearchJobRequest_Mobile> v_SearchJobRequests_Mobile { get; set; }
+        public DbSet<v_SearchJobOffer_Mobile> v_SearchJobOffer_Mobile { get; set; }
+
         public DbSet<v_ExportJobRequest> v_ExportJobRequests { get; set; }
         public DbSet<v_ExportJobOffer> v_ExportJobOffers { get; set; }
         public DbSet<v_JobCount> v_JobCounts { get; set; }

@@ -102,10 +102,14 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Candidates/{candidateId}/JobRequests")]
         public HttpResponseMessage MyJobRequests(int candidateId)
         {
-            var myJobRequests = db.JobRequests
-                .Include(path => path.Job)
-                .Include(t => t.Candidate)
-                .Where(j => j.CandidateId == candidateId)
+            //var myJobRequests = db.JobRequests
+            //    .Include(path => path.Job)
+            //    .Include(t => t.Candidate)
+            //    .Where(j => j.CandidateId == candidateId)
+            //    .ToList();
+
+            var myJobRequests = db.v_SearchJobRequests_Mobile
+                .Where(p => p.CandidateId == candidateId && p.IsPublished)
                 .ToList();
             return Request.CreateResponse(HttpStatusCode.OK, myJobRequests, jsonFormatter);
         }
@@ -184,7 +188,7 @@ namespace HireMe.Controllers.MobileApiControllers
             existingCandidate.JobRequests.Add(jobRequest);
             db.Entry(existingCandidate).State = EntityState.Modified;
             db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.Created);
+            return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Job request created successfully", Data = jobRequest }, jsonFormatter);
         }
 
         [HttpGet]
@@ -198,12 +202,20 @@ namespace HireMe.Controllers.MobileApiControllers
             return Request.CreateResponse(HttpStatusCode.OK, myJobRequest, jsonFormatter);
         }
 
-        [HttpPost]
-        [Route("api/Candidates/{candidateId}/JobRequests")]
-        public HttpResponseMessage CreateJobRequest(CandidateProfileViewModel candidateProfile)
+        [HttpDelete]
+        [Route("api/Candidates/{candidateId}/JobRequests/{jobRequestId}")]
+        public HttpResponseMessage DeleteJobRequest(int candidateId, int jobRequestId)
         {
-            throw new NotImplementedException();
+            // first find the job request
+            var jobRequest = db.JobRequests.Find(jobRequestId);
+            if (jobRequest == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Job request does not exists.");
+            jobRequest.IsPublished = false;
+            db.Entry(jobRequest).Property(t => t.IsPublished).IsModified = true;
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job offer removed successfully", Data = jobRequest });
         }
+
         #endregion
 
         #region FavouriteJobOffers
