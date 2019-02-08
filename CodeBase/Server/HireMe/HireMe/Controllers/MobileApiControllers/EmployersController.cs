@@ -268,6 +268,18 @@ namespace HireMe.Controllers.MobileApiControllers
                 .Include(path => path.Sender)
                 .Include(t => t.Receiver)
                 .Where(p => p.ReceiverId == userId)
+                .Select(p =>
+                    new
+                    {
+                        p.Category,
+                        p.Content,
+                        p.CreatedDate,
+                        p.Subject,
+                        p.SenderId,
+                        p.Sender.FirstName,
+                        p.Sender.UserName,
+                        p.Receiver.Id,
+                    })
                 .OrderByDescending(r => r.CreatedDate);
             return Request.CreateResponse(HttpStatusCode.OK, notifications.ToList(), jsonFormatter);
         }
@@ -330,6 +342,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     employer.CityId = model.CityId;
                     employer.DistrictId = model.DistrictId;
                     db.Entry(employer).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK);
