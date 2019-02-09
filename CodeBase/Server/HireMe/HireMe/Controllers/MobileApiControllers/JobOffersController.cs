@@ -35,16 +35,20 @@ namespace HireMe.Controllers.MobileApiControllers
 
         [HttpGet]
         [Route("api/JobOffers")]
-        public HttpResponseMessage SearchJobOffers([FromUri]JobOfferSearchParam searchParam = null)
+        public HttpResponseMessage SearchJobOffers([FromUri]V_JobOfferSearchParam searchParam = null)
         {
             if (searchParam != null)
             {
                 object[] queryString = searchParam.GetSearchQuery();
                 ArrayList searchArgs = (ArrayList)queryString[1];
-                var jobOffers = db.JobOffers
-                    .Include(j => j.Employer)
-                    .Include(j => j.Job)
-                    .Include(j => j.JobOfferJobTasks)
+                //var jobOffers = db.JobOffers
+                //    .Include(j => j.Employer)
+                //    .Include(j => j.Job)
+                //    .Include(j => j.JobOfferJobTasks)
+                //    .AsQueryable()
+                //    .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
+                var jobOffers = db.v_SearchJobOffer_Mobile
+                    .Include(p => p.JobOfferJobTasks)
                     .AsQueryable()
                     .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
@@ -53,15 +57,19 @@ namespace HireMe.Controllers.MobileApiControllers
                     jobOffers = jobOffers
                         .Where(p => p.JobOfferJobTasks.Select(t => t.JobTaskId).Any(c => searchParam.Tasks.Contains(c))).ToList();
                 }
-                return Request.CreateResponse(HttpStatusCode.OK, jobOffers.OrderByDescending(p => p.JobOfferId).ToList(), jsonFormatter);
+                return Request.CreateResponse(HttpStatusCode.OK, jobOffers.OrderByDescending(p => p.JobofferId).ToList(), jsonFormatter);
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK, db.JobOffers
-                    .Include(j => j.Employer)
-                    .Include(j => j.Job)
-                    .Include(j => j.JobOfferJobTasks)
-                    .OrderByDescending(p => p.JobOfferId).ToList(), jsonFormatter);
+                //return Request.CreateResponse(HttpStatusCode.OK, db.JobOffers
+                //    .Include(j => j.Employer)
+                //    .Include(j => j.Job)
+                //    .Include(j => j.JobOfferJobTasks)
+                //    .OrderByDescending(p => p.JobOfferId).ToList(), jsonFormatter);
+
+                return Request.CreateResponse(HttpStatusCode.OK, db.v_SearchJobOffer_Mobile
+                       //.Include(j => j.JobOfferJobTasks)
+                       .OrderByDescending(p => p.JobofferId).ToList(), jsonFormatter);
             }
         }
 
@@ -84,13 +92,6 @@ namespace HireMe.Controllers.MobileApiControllers
                 .Include(p => p.JobTasks)
                 .FirstOrDefault(p => p.JobId == jobOffer.JobId)
                 .JobTasks;
-
-            //var userId = jobOffer.Employer.AspNetUserId;
-            //// get all the feedbacks given to the user
-            //var userFeedbacks = db.UserFeedbacks.Include(p => p.Sender).Where(p => p.ReceiverId == userId);
-            //ViewBag.UserFeedbacks = userFeedbacks.ToList();
-
-
             return Request.CreateResponse(HttpStatusCode.OK, jobOffer, jsonFormatter);
         }
     }

@@ -10,6 +10,8 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Data.Entity;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -140,7 +142,20 @@ namespace HireMe.Controllers.MobileApiControllers
                     // need to add countryid, cityId and districtId to Employer entity
                     user.Employers = new List<Employer> { employer };
                 }
+
+
+
+                var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var result = UserManager.CreateAsync(user, model.Password).Result;
+
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                }
+                return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Registration successful to the portal." });
             }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Internal Server Error." });
+
             throw new NotImplementedException();
         }
 
@@ -149,7 +164,12 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Accounts/Login")]
         public HttpResponseMessage Login(LoginViewModel model)
         {
-            if(model.UserName == "Admin1")
+
+            var SignInManager = HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
+
+            var result = SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
+
+            if (model.UserName == "Admin1")
             {
                 return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Admin", Role = "Admin", UserId = 1, UserName = "Admin1" });
             }
