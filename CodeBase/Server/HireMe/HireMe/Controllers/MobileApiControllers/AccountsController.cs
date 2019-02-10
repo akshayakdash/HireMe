@@ -205,5 +205,13 @@ namespace HireMe.Controllers.MobileApiControllers
             //var role = db.Roles.Where(t => t.Id == user.Roles.ElementAt(0).RoleId);
             //return Request.CreateResponse(HttpStatusCode.OK, new { user.FirstName, role, user.Id, user.UserName });
         }
+
+        [AllowAnonymous]
+        [Route("api/Accounts/SecurityQuestions")]
+        [HttpGet]
+        public HttpResponseMessage SecurityQuestions()
+        {
+            return Request.CreateResponse(HttpStatusCode.OK, db.SecurityQuestions.ToList());
+        }
     }
 }
