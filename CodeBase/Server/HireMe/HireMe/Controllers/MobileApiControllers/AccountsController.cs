@@ -185,25 +185,25 @@ namespace HireMe.Controllers.MobileApiControllers
 
             var result = SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
 
-            if (model.UserName == "Admin1")
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Admin", Role = "Admin", UserId = 1, UserName = "Admin1" });
-            }
-            else if (model.UserName == "Employee1")
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Candidate", Role = "Candidate", UserId = 1, UserName = "Employee1" });
-            }
-            else if (model.UserName == "Employer1")
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Employer", Role = "Employer", UserId = 1, UserName = "Employer1" });
-            }
-            else
-            {
-                return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Agency", Role = "Agency", UserId = 1, UserName = "Agency1" });
-            }
-            //var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName);
-            //var role = db.Roles.Where(t => t.Id == user.Roles.ElementAt(0).RoleId);
-            //return Request.CreateResponse(HttpStatusCode.OK, new { user.FirstName, role, user.Id, user.UserName });
+            //if (model.UserName == "Admin1")
+            //{
+            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Admin", Role = "Admin", UserId = 1, UserName = "Admin1" });
+            //}
+            //else if (model.UserName == "Employee1")
+            //{
+            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Candidate", Role = "Candidate", UserId = 1, UserName = "Employee1" });
+            //}
+            //else if (model.UserName == "Employer1")
+            //{
+            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Employer", Role = "Employer", UserId = 1, UserName = "Employer1" });
+            //}
+            //else
+            //{
+            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Agency", Role = "Agency", UserId = 1, UserName = "Agency1" });
+            //}
+            var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName || p.Email == model.UserName);
+            var role = db.Roles.Where(t => t.Id == user.Roles.ElementAt(0).RoleId);
+            return Request.CreateResponse(HttpStatusCode.OK, new { user.FirstName, role, user.Id, user.UserName, user.Email });
         }
 
         [AllowAnonymous]
