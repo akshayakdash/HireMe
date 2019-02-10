@@ -159,7 +159,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 }
             }
 
-            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Offer created successfully.", Data = employerJobOffer}, jsonFormatter);
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Offer created successfully.", Data = employerJobOffer }, jsonFormatter);
         }
 
         [HttpGet]
@@ -268,6 +268,18 @@ namespace HireMe.Controllers.MobileApiControllers
                 .Include(path => path.Sender)
                 .Include(t => t.Receiver)
                 .Where(p => p.ReceiverId == userId)
+                .Select(p =>
+                    new
+                    {
+                        p.Category,
+                        p.Content,
+                        p.CreatedDate,
+                        p.Subject,
+                        p.SenderId,
+                        p.Sender.FirstName,
+                        p.Sender.UserName,
+                        p.Receiver.Id,
+                    })
                 .OrderByDescending(r => r.CreatedDate);
             return Request.CreateResponse(HttpStatusCode.OK, notifications.ToList(), jsonFormatter);
         }
@@ -330,16 +342,27 @@ namespace HireMe.Controllers.MobileApiControllers
                     employer.CityId = model.CityId;
                     employer.DistrictId = model.DistrictId;
                     db.Entry(employer).State = System.Data.Entity.EntityState.Modified;
+                    db.SaveChanges();
                 }
             }
             return Request.CreateResponse(HttpStatusCode.OK);
         }
         #endregion
 
-        #region JobRequestNote
-        [Route("api/Employers/{employerId}/JobRequestNotes")]
+        #region JobRequestNotes
+
+        [Route("api/Employers/{employerId}/JobRequests/{jobRequestId}/JobRequestNotes")]
+        [HttpGet]
+        public HttpResponseMessage GetJobRequestNotes([FromUri]int employerId, [FromUri]int jobRequestId)
+        {
+            var jobRequestNotes = db.JobRequestNotes
+                .Where(p => p.JobRequestId == jobRequestId && p.EmployerId == employerId);
+            return Request.CreateResponse(HttpStatusCode.OK, jobRequestNotes, jsonFormatter);
+        }
+
+        [Route("api/Employers/{employerId}/JobRequests/{jobRequestId}/JobRequestNotes")]
         [HttpPost]
-        public HttpResponseMessage SaveJobRequestNote([FromBody]JobRequestNote jobRequestNote, [FromUri]int employerId)
+        public HttpResponseMessage SaveJobRequestNote([FromBody]JobRequestNote jobRequestNote, [FromUri]int employerId, [FromUri]int jobRequestId)
         {
             jobRequestNote.EmployerId = employerId;
             var jobRequest = db.JobRequests

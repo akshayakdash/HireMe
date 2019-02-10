@@ -10,6 +10,8 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Data.Entity;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -65,6 +67,11 @@ namespace HireMe.Controllers.MobileApiControllers
                     }
                     profileImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
+
+                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                {
+                    profileImagePath = model.profile_pic_base64;
+                }
                 #endregion
 
                 #region Id Card
@@ -82,6 +89,12 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
 
+                // store for mobile
+                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                {
+                    idProofImagePath = model.id_proof_base64;
+                }
+
                 string idProofImagePath1 = string.Empty;
                 if (model.id_proof != null && model.id_proof.ContentLength > 0)
                 {
@@ -94,6 +107,11 @@ namespace HireMe.Controllers.MobileApiControllers
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof_back.ContentLength);
                     }
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.id_proof_back_base64))
+                {
+                    idProofImagePath1 = model.id_proof_back_base64;
                 }
                 #endregion
                 string contactNumber = model.PhoneNumber.Replace("-", "");
@@ -140,7 +158,20 @@ namespace HireMe.Controllers.MobileApiControllers
                     // need to add countryid, cityId and districtId to Employer entity
                     user.Employers = new List<Employer> { employer };
                 }
+
+
+
+                var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                var result = UserManager.CreateAsync(user, model.Password).Result;
+
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                }
+                return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Registration successful to the portal." });
             }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Internal Server Error." });
+
             throw new NotImplementedException();
         }
 
@@ -149,7 +180,12 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Accounts/Login")]
         public HttpResponseMessage Login(LoginViewModel model)
         {
-            if(model.UserName == "Admin1")
+
+            var SignInManager = HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
+
+            var result = SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
+
+            if (model.UserName == "Admin1")
             {
                 return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Admin", Role = "Admin", UserId = 1, UserName = "Admin1" });
             }
