@@ -200,9 +200,9 @@ namespace HireMe.Controllers.MobileApiControllers
 
         #region KPI
 
-        [HttpGet]
+        [HttpPost]
         [Route("api/Admin/SearchMembers")]
-        public HttpResponseMessage SearchMembers([FromUri]MemberSearchParam searchParam)
+        public HttpResponseMessage SearchMembers(MemberSearchParam searchParam)
         {
             if (searchParam == null)
                 searchParam = new MemberSearchParam { MemberType = MemberType.Candidate };

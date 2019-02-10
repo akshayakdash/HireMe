@@ -223,6 +223,7 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Candidates/{candidateId}/FavouriteJobOffers")]
         public HttpResponseMessage MyFavouriteJobOffers(int candidateId)
         {
+            List<JobOffer> newArray = new List<JobOffer>();
             var existingCandidate = db.Candidates.Include(t => t.FavouriteJobOffers.Select(c => c.Job)).FirstOrDefault(p => p.CandidateId == candidateId);
             if (existingCandidate != null && existingCandidate.FavouriteJobOffers != null && existingCandidate.FavouriteJobOffers.Count > 0)
             {
@@ -234,7 +235,7 @@ namespace HireMe.Controllers.MobileApiControllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, newArray);
             }
         }
 
@@ -242,6 +243,7 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Candidates/{candidateId}/FavouriteJobOffers/{jobOfferId}")]
         public HttpResponseMessage AddFavouriteJobOffer(int candidateId, int jobOfferId)
         {
+            JobOffer newJob = new JobOffer();
             var existingCandidate = db.Candidates.Include(t => t.FavouriteJobOffers.Select(c => c.Job)).FirstOrDefault(p => p.CandidateId == candidateId);
             if (existingCandidate != null && existingCandidate.FavouriteJobOffers != null && existingCandidate.FavouriteJobOffers.Count > 0)
             {
@@ -255,7 +257,7 @@ namespace HireMe.Controllers.MobileApiControllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, newJob);
             }
         }
 

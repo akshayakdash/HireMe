@@ -198,8 +198,11 @@ namespace HireMe.Controllers.MobileApiControllers
             var agency = db.Agencies.Find(agencyId);
             if (agency != null)
             {
-                var jobRequests = db.JobRequests.Include(path => path.Job).Include(t => t.Candidate).ToList();
-                jobRequests = jobRequests.Where(p => p.Candidate.StaffType == StaffType.Agency && p.Candidate.AgencyId == agency.AgencyId).ToList();
+                //var jobRequests = db.JobRequests.Include(path => path.Job).Include(t => t.Candidate).ToList();
+                //jobRequests = jobRequests.Where(p => p.Candidate.StaffType == StaffType.Agency && p.Candidate.AgencyId == agency.AgencyId).ToList();
+                //return Request.CreateResponse(HttpStatusCode.OK, jobRequests, jsonFormatter);
+
+                var jobRequests = db.v_SearchJobRequests_Mobile.Where(p => p.AgencyId == agencyId).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, jobRequests, jsonFormatter);
             }
             else
