@@ -495,6 +495,17 @@ namespace HireMe.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, jobCategories, jsonFormatter);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/JobTekApi/Agencies/{agencyId}")]
+        public HttpResponseMessage GetAgencyDetails(int agencyId)
+        {
+            var agency = db.Agencies.Find(agencyId);
+            if (agency == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            return Request.CreateResponse(HttpStatusCode.OK, agency);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
