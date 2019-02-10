@@ -219,7 +219,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 }
             }
 
-            var result = new { user.FirstName, Role = role.Name, AspNetUserId = user.Id, user.UserName, user.Email, UserId = userId };
+            var result = new { user.FirstName, Role = role.Name == "Candidate" ? "Employee" : role.Name, AspNetUserId = user.Id, user.UserName, user.Email, UserId = userId };
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
