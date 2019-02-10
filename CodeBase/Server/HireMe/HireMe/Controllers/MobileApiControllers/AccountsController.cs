@@ -184,26 +184,42 @@ namespace HireMe.Controllers.MobileApiControllers
 
             //var result = SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
 
-            //if (model.UserName == "Admin1")
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Admin", Role = "Admin", UserId = 1, UserName = "Admin1" });
-            //}
-            //else if (model.UserName == "Employee1")
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Candidate", Role = "Candidate", UserId = 1, UserName = "Employee1" });
-            //}
-            //else if (model.UserName == "Employer1")
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Employer", Role = "Employer", UserId = 1, UserName = "Employer1" });
-            //}
-            //else
-            //{
-            //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Agency", Role = "Agency", UserId = 1, UserName = "Agency1" });
-            //}
+
             var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName || p.Email == model.UserName);
             var roleId = user.Roles.ElementAt(0).RoleId;
             var role = db.Roles.FirstOrDefault(t => t.Id == roleId);
-            var result = new { user.FirstName, Role = role.Name, UserId = user.Id, user.UserName, user.Email };
+            int userId = 0;
+
+            if (role.Name == "Admin")
+            {
+                userId = 1;
+            }
+            else if (role.Name == "Candidate")
+            {
+                var candidate = db.Candidates.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                if (candidate != null)
+                {
+                    userId = candidate.CandidateId;
+                }
+            }
+            else if (role.Name == "Employer")
+            {
+                var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                if (employer != null)
+                {
+                    userId = employer.EmployerId;
+                }
+            }
+            else if (role.Name == "Agency")
+            {
+                var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                if (agency != null)
+                {
+                    userId = agency.AgencyId;
+                }
+            }
+
+            var result = new { user.FirstName, Role = role.Name, AspNetUserId = user.Id, user.UserName, user.Email, UserId = userId };
             return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
