@@ -67,6 +67,11 @@ namespace HireMe.Controllers.MobileApiControllers
                     }
                     profileImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
+
+                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                {
+                    profileImagePath = model.profile_pic_base64;
+                }
                 #endregion
 
                 #region Id Card
@@ -84,6 +89,12 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
 
+                // store for mobile
+                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                {
+                    idProofImagePath = model.id_proof_base64;
+                }
+
                 string idProofImagePath1 = string.Empty;
                 if (model.id_proof != null && model.id_proof.ContentLength > 0)
                 {
@@ -96,6 +107,11 @@ namespace HireMe.Controllers.MobileApiControllers
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof_back.ContentLength);
                     }
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.id_proof_back_base64))
+                {
+                    idProofImagePath1 = model.id_proof_back_base64;
                 }
                 #endregion
                 string contactNumber = model.PhoneNumber.Replace("-", "");
