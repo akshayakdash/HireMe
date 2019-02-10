@@ -82,6 +82,11 @@ namespace HireMe.Controllers.MobileApiControllers
                     }
                     profileImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
+
+                if(!string.IsNullOrWhiteSpace(model.profile_pic_base64))
+                {
+                    profileImagePath = model.profile_pic_base64;
+                }
                 #endregion
 
                 #region Id Card
@@ -99,6 +104,11 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
 
+                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                {
+                    idProofImagePath = model.id_proof_base64;
+                }
+
                 string idProofImagePath1 = string.Empty;
                 if (model.id_proof1 != null && model.id_proof1.ContentLength > 0)
                 {
@@ -111,6 +121,11 @@ namespace HireMe.Controllers.MobileApiControllers
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof1.ContentLength);
                     }
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.id_proof1_base64))
+                {
+                    idProofImagePath1 = model.id_proof1_base64;
                 }
                 #endregion
                 var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
