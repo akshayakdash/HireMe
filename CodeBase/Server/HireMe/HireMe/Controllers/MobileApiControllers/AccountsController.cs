@@ -202,8 +202,10 @@ namespace HireMe.Controllers.MobileApiControllers
             //    return Request.CreateResponse(HttpStatusCode.OK, new { FirestName = "Agency", Role = "Agency", UserId = 1, UserName = "Agency1" });
             //}
             var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName || p.Email == model.UserName);
-            var role = db.Roles.Where(t => t.Id == user.Roles.ElementAt(0).RoleId);
-            return Request.CreateResponse(HttpStatusCode.OK, new { user.FirstName, Role = role, UserId = user.Id, user.UserName, user.Email });
+            var roleId = user.Roles.ElementAt(0).RoleId;
+            var role = db.Roles.FirstOrDefault(t => t.Id == roleId);
+            var result = new { user.FirstName, Role = role.Name, UserId = user.Id, user.UserName, user.Email };
+            return Request.CreateResponse(HttpStatusCode.OK, result);
         }
 
         [AllowAnonymous]
