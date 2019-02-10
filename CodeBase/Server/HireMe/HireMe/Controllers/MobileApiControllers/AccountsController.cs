@@ -172,7 +172,6 @@ namespace HireMe.Controllers.MobileApiControllers
             }
             return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Internal Server Error." });
 
-            throw new NotImplementedException();
         }
 
         [HttpPost]
