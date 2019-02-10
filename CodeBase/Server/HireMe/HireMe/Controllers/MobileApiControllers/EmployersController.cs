@@ -365,6 +365,8 @@ namespace HireMe.Controllers.MobileApiControllers
         public HttpResponseMessage SaveJobRequestNote([FromBody]JobRequestNote jobRequestNote, [FromUri]int employerId, [FromUri]int jobRequestId)
         {
             jobRequestNote.EmployerId = employerId;
+            jobRequestNote.JobRequestId = jobRequestId;
+            jobRequestNote.CreatedDate = DateTime.Today.ToString("dd-MMM-yyyy");
             var jobRequest = db.JobRequests
                 .Include(t => t.Job)
                 .Include(p => p.JobRequestNotes)
