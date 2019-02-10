@@ -158,11 +158,11 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.SaveChanges();
 
                     NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + randomPassword, 0, true);
-                   
-                    return Request.CreateResponse(HttpStatusCode.OK);
+
+                    return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Registration successful to the portal." });
                 }
-                return Request.CreateResponse(HttpStatusCode.InternalServerError);
-               
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Internal Server Error." });
+
             }
             return Request.CreateResponse(HttpStatusCode.OK);
         }
