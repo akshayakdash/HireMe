@@ -198,6 +198,7 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Employers/{employerId}/FavouriteJobRequests")]
         public HttpResponseMessage MyFavouriteJobRequests(int employerId)
         {
+            List<JobRequest> newArray = new List<JobRequest>();
             var existingEmployer = db.Employers.Include(t => t.FavouriteJobRequests.Select(c => c.Job)).FirstOrDefault(p => p.EmployerId == employerId);
             if (existingEmployer != null && existingEmployer.FavouriteJobRequests != null && existingEmployer.FavouriteJobRequests.Count > 0)
             {
@@ -209,7 +210,7 @@ namespace HireMe.Controllers.MobileApiControllers
             }
             else
             {
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, newArray);
             }
         }
 
@@ -218,7 +219,7 @@ namespace HireMe.Controllers.MobileApiControllers
         public HttpResponseMessage AddFavouriteJobRequest(int employerId, int jobRequestId)
         {
             var existingEmployer = db.Employers.Include(t => t.FavouriteJobRequests.Select(c => c.Job)).FirstOrDefault(p => p.EmployerId == employerId);
-            if (existingEmployer != null && existingEmployer.FavouriteJobRequests != null && existingEmployer.FavouriteJobRequests.Count > 0)
+            if (existingEmployer != null)
             {
                 var jobRequest = db.JobRequests.Find(jobRequestId);
                 if (jobRequest != null)
