@@ -181,9 +181,9 @@ namespace HireMe.Controllers.MobileApiControllers
         public HttpResponseMessage Login(LoginViewModel model)
         {
 
-            var SignInManager = HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
+            //var SignInManager = HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
 
-            var result = SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
+            //var result = SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
 
             //if (model.UserName == "Admin1")
             //{
@@ -203,7 +203,7 @@ namespace HireMe.Controllers.MobileApiControllers
             //}
             var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName || p.Email == model.UserName);
             var role = db.Roles.Where(t => t.Id == user.Roles.ElementAt(0).RoleId);
-            return Request.CreateResponse(HttpStatusCode.OK, new { user.FirstName, role, user.Id, user.UserName, user.Email });
+            return Request.CreateResponse(HttpStatusCode.OK, new { user.FirstName, Role = role, UserId = user.Id, user.UserName, user.Email });
         }
 
         [AllowAnonymous]
