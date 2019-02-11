@@ -9,6 +9,9 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Data.Entity;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -426,6 +429,24 @@ namespace HireMe.Controllers.MobileApiControllers
             }
             return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Id Proof documents updated successfully." });
             #endregion
+        }
+
+        [HttpPut]
+        [Route("api/Employers/{employerId}/PasswordUpdate")]
+        public HttpResponseMessage ChangePassword([FromUri]int employerId, [FromBody]ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+            var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var employer = db.Employers.Find(employerId);
+            var result = UserManager.ChangePassword(employer.AspNetUserId, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password updated successfully." });
+            }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "There is some error." });
         }
         #endregion
 

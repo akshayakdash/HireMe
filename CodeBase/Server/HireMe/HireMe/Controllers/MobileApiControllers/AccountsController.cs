@@ -228,5 +228,66 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             return Request.CreateResponse(HttpStatusCode.OK, db.SecurityQuestions.ToList());
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("api/Accounts/ForgotPassword")]
+        public HttpResponseMessage ForgotPassword(ForgotPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.FirstOrDefault(p => p.Email == model.Email);
+                if (user == null)
+                {
+                    // Don't reveal that the user does not exist or is not confirmed
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Error in forgot password." });
+                }
+                var newOtp = new Random().Next(99999, 999999);
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "OTP generated successfully.", Data = new { OTP = newOtp } });
+
+                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                // Send an email with this link
+                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid model." });
+            }
+
+            // If we got this far, something failed, redisplay form
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("api/Accounts/PasswordReset")]
+        public HttpResponseMessage ResetPassword(ResetPasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid model" });
+            }
+            var user = db.Users.FirstOrDefault(p => p.Email == model.Email);
+            if (user == null)
+            {
+                // Don't reveal that the user does not exist or is not confirmed
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Error in forgot password." });
+            }
+
+            // Need to check for the active OTP
+
+
+            var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var result = UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password).Result;
+            if (result.Succeeded)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password reset successfully."  });
+            }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to reset the password." });
+        }
+
     }
 }

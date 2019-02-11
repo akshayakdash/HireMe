@@ -13,6 +13,7 @@ using System.Web.Http.Cors;
 using System.IO;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -209,6 +210,20 @@ namespace HireMe.Controllers.MobileApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
+        }
+
+        [HttpGet]
+        [Route("api/Agencies/{agencyId}/JobRequests/{jobRequestIs}")]
+        public HttpResponseMessage MyJobRequests(int agencyId, int jobRequestId)
+        {
+
+            var jobRequest = db.JobRequests.Find(jobRequestId);
+            if (jobRequest == null)
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Job Request not found." });
+            jobRequest.IsPublished = false;
+            db.Entry(jobRequest).Property(p => p.IsPublished).IsModified = true;
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Request removed successfully." });
         }
 
         [HttpPost]
@@ -457,6 +472,24 @@ namespace HireMe.Controllers.MobileApiControllers
             }
             return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Id Proof documents updated successfully." });
             #endregion
+        }
+
+        [HttpPut]
+        [Route("api/Agencies/{agencyId}/PasswordUpdate")]
+        public HttpResponseMessage ChangePassword([FromUri]int agencyId, [FromBody]ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+            var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var agency = db.Agencies.Find(agencyId);
+            var result = UserManager.ChangePassword(agency.AspNetUserId, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password updated successfully." });
+            }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "There is some error." });
         }
         #endregion
 
