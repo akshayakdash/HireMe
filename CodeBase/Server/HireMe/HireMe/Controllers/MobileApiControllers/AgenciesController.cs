@@ -378,8 +378,85 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.Entry(agency).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile updated successfully.", Data = model });
             }
-            return Request.CreateResponse(HttpStatusCode.OK);
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+        }
+
+
+        [HttpPut]
+        [Route("api/Agencies/{agencyId}/ProfilePicture")]
+        public HttpResponseMessage UpdateProfilePic([FromUri]int agencyId, [FromBody] UpdateProfilePictureViewModel model)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Profile_pic_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+                var existingAgency = db.Agencies.FirstOrDefault(p => p.AgencyId == agencyId);
+                if (existingAgency == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Agency not found." });
+                // now get the application user 
+                var user = db.Users.Find(existingAgency.AspNetUserId);
+                user.ProfilePicUrl = model.Profile_pic_base64;
+                db.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile picture updated successfully." });
+        }
+
+        [HttpPut]
+        [Route("api/Agencies/{agencyId}/IdProofDocs")]
+        public HttpResponseMessage UpdateIdCard([FromUri]int agencyId, [FromBody]UpdateIdCardViewModel model)
+        {
+            #region ProfileImageUpload
+            string profileImagePath = string.Empty;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Id_Card_Front_base64) && string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+
+                var existingAgency = db.Agencies.FirstOrDefault(p => p.AgencyId == agencyId);
+                if (existingAgency == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Agency not found." });
+
+                // now get the application user 
+                var user = db.Users.Find(existingAgency.AspNetUserId);
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
+                {
+                    existingAgency.IdProofDoc = model.Id_Card_Front_base64;
+                    db.Entry(existingAgency).Property(p => p.IdProofDoc).IsModified = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                {
+                    existingAgency.IdProofDoc1 = model.Id_Card_Back_base64;
+                    db.Entry(existingAgency).Property(p => p.IdProofDoc1).IsModified = true;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Id Proof documents updated successfully." });
+            #endregion
         }
         #endregion
 

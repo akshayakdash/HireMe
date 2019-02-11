@@ -13,6 +13,9 @@ using System.Net.Http.Formatting;
 using Newtonsoft.Json;
 using System.Web.Http.Cors;
 using System.IO;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -357,6 +360,9 @@ namespace HireMe.Controllers.MobileApiControllers
                 user.DistrictId = model.DistrictId;
 
                 db.Entry(user).State = System.Data.Entity.EntityState.Modified;
+                if (candidate == null)
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Candidate not found on this id." });
+
                 if (candidate != null)
                 {
                     candidate.FirstName = model.FirstName;
@@ -372,8 +378,90 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.Entry(candidate).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile updated successfully.", Data = model });
             }
-            return Request.CreateResponse(HttpStatusCode.OK);
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+
+        }
+
+        [HttpPut]
+        [Route("api/Candidates/{candidateId}/ProfilePicture")]
+        public HttpResponseMessage UpdateProfilePic([FromUri]int candidateId, [FromBody] UpdateProfilePictureViewModel model)
+        {
+
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Profile_pic_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+                var existingCandidate = db.Candidates.FirstOrDefault(p => p.CandidateId == candidateId);
+                if (existingCandidate == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Candidate not found." });
+                // now get the application user 
+                var user = db.Users.Find(existingCandidate.AspNetUserId);
+                user.ProfilePicUrl = model.Profile_pic_base64;
+                db.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
+
+                existingCandidate.ProfilePicUrl = model.Profile_pic_base64;
+                db.Entry(existingCandidate).Property(p => p.ProfilePicUrl).IsModified = true;
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile picture updated successfully." });
+        }
+
+        [HttpPut]
+        [Route("api/Candidates/{candidateId}/IdProofDocs")]
+        public HttpResponseMessage UpdateIdCard([FromUri]int candidateId, [FromBody]UpdateIdCardViewModel model)
+        {
+            #region ProfileImageUpload
+            string profileImagePath = string.Empty;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Id_Card_Front_base64) && string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+
+                var existingCandidate = db.Candidates.FirstOrDefault(p => p.CandidateId == candidateId);
+                if (existingCandidate == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Candidate not found." });
+
+                var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                // now get the application user 
+                var user = db.Users.Find(existingCandidate.AspNetUserId);
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
+                {
+                    existingCandidate.IdProofDoc = model.Id_Card_Front_base64;
+                    db.Entry(existingCandidate).Property(p => p.IdProofDoc).IsModified = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                {
+                    existingCandidate.IdProofDoc1 = model.Id_Card_Back_base64;
+                    db.Entry(existingCandidate).Property(p => p.IdProofDoc1).IsModified = true;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Id Proof documents updated successfully." });
+            #endregion
         }
         #endregion
 

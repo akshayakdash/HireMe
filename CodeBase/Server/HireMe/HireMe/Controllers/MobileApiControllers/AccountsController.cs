@@ -179,16 +179,14 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Accounts/Login")]
         public HttpResponseMessage Login(LoginViewModel model)
         {
-
-            //var SignInManager = HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
-
-            //var result = SignInManager.PasswordSignInAsync(model.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
-
-
             var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName || p.Email == model.UserName);
             var roleId = user.Roles.ElementAt(0).RoleId;
             var role = db.Roles.FirstOrDefault(t => t.Id == roleId);
             int userId = 0;
+
+            var SignInManager = HttpContext.Current.GetOwinContext().Get<ApplicationSignInManager>();
+
+            var res = SignInManager.PasswordSignInAsync(user.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
 
             if (role.Name == "Admin")
             {

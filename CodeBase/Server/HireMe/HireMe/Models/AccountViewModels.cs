@@ -252,6 +252,17 @@ namespace HireMe.Models
         // TO Do: Agency Section TO Be added
     }
 
+    public class UpdateProfilePictureViewModel
+    {
+        public string Profile_pic_base64 { get; set; }
+    }
+
+    public class UpdateIdCardViewModel
+    {
+        public string Id_Card_Front_base64 { get; set; }
+        public string Id_Card_Back_base64 { get; set; }
+    }
+
 
 
     public class ResetPasswordViewModel
