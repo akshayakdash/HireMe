@@ -427,7 +427,7 @@ namespace HireMe.Controllers
         public HttpResponseMessage GetJobTasks(int jobId)
         {
             var job = db.Jobs.Include(path => path.JobTasks).FirstOrDefault(p => p.JobId == jobId);
-            return Request.CreateResponse(HttpStatusCode.OK, job);
+            return Request.CreateResponse(HttpStatusCode.OK, job, jsonFormatter);
         }
 
         [Route("api/JobTekApi/GetJobs")]
