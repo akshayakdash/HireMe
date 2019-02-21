@@ -87,7 +87,7 @@ namespace HireMe.Controllers.MobileApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.NotFound);
             }
-
+            db.Entry(jobOffer.Job).Collection(p => p.JobTasks).Load();
             jobOffer.MasterJobTasks = db.Jobs
                 .Include(p => p.JobTasks)
                 .FirstOrDefault(p => p.JobId == jobOffer.JobId)
