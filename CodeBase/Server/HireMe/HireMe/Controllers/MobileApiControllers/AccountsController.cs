@@ -243,7 +243,9 @@ namespace HireMe.Controllers.MobileApiControllers
                     return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Error in forgot password." });
                 }
                 var newOtp = new Random().Next(99999, 999999);
-                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "OTP generated successfully.", Data = new { OTP = newOtp } });
+                var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                string code = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "OTP generated successfully.", Data = new { OTP = newOtp, Code=code } });
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
@@ -281,6 +283,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
 
             var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            //string code = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
             var result = UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password).Result;
             if (result.Succeeded)
             {
