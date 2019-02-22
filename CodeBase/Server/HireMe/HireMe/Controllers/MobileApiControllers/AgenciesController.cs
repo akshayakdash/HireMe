@@ -13,6 +13,7 @@ using System.Web.Http.Cors;
 using System.IO;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -211,6 +212,20 @@ namespace HireMe.Controllers.MobileApiControllers
             }
         }
 
+        [HttpGet]
+        [Route("api/Agencies/{agencyId}/JobRequests/{jobRequestIs}")]
+        public HttpResponseMessage MyJobRequests(int agencyId, int jobRequestId)
+        {
+
+            var jobRequest = db.JobRequests.Find(jobRequestId);
+            if (jobRequest == null)
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Job Request not found." });
+            jobRequest.IsPublished = false;
+            db.Entry(jobRequest).Property(p => p.IsPublished).IsModified = true;
+            db.SaveChanges();
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Request removed successfully." });
+        }
+
         [HttpPost]
         [Route("api/Agencies/{agencyId}/JobRequests")]
         public HttpResponseMessage CreateJobRequest(AgencyJobRequestViewModel candidateProfile)
@@ -378,8 +393,103 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.Entry(agency).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile updated successfully.", Data = model });
             }
-            return Request.CreateResponse(HttpStatusCode.OK);
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+        }
+
+
+        [HttpPut]
+        [Route("api/Agencies/{agencyId}/ProfilePicture")]
+        public HttpResponseMessage UpdateProfilePic([FromUri]int agencyId, [FromBody] UpdateProfilePictureViewModel model)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Profile_pic_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+                var existingAgency = db.Agencies.FirstOrDefault(p => p.AgencyId == agencyId);
+                if (existingAgency == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Agency not found." });
+                // now get the application user 
+                var user = db.Users.Find(existingAgency.AspNetUserId);
+                user.ProfilePicUrl = model.Profile_pic_base64;
+                db.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile picture updated successfully." });
+        }
+
+        [HttpPut]
+        [Route("api/Agencies/{agencyId}/IdProofDocs")]
+        public HttpResponseMessage UpdateIdCard([FromUri]int agencyId, [FromBody]UpdateIdCardViewModel model)
+        {
+            #region ProfileImageUpload
+            string profileImagePath = string.Empty;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Id_Card_Front_base64) && string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+
+                var existingAgency = db.Agencies.FirstOrDefault(p => p.AgencyId == agencyId);
+                if (existingAgency == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Agency not found." });
+
+                // now get the application user 
+                var user = db.Users.Find(existingAgency.AspNetUserId);
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
+                {
+                    existingAgency.IdProofDoc = model.Id_Card_Front_base64;
+                    db.Entry(existingAgency).Property(p => p.IdProofDoc).IsModified = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                {
+                    existingAgency.IdProofDoc1 = model.Id_Card_Back_base64;
+                    db.Entry(existingAgency).Property(p => p.IdProofDoc1).IsModified = true;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Id Proof documents updated successfully." });
+            #endregion
+        }
+
+        [HttpPut]
+        [Route("api/Agencies/{agencyId}/PasswordUpdate")]
+        public HttpResponseMessage ChangePassword([FromUri]int agencyId, [FromBody]ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+            var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var agency = db.Agencies.Find(agencyId);
+            var result = UserManager.ChangePassword(agency.AspNetUserId, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password updated successfully." });
+            }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "There is some error." });
         }
         #endregion
 

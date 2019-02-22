@@ -9,6 +9,9 @@ using System.Net.Http.Formatting;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Data.Entity;
+using System.Web;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -345,8 +348,105 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.Entry(employer).State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                 }
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile updated successfully.", Data = model });
             }
-            return Request.CreateResponse(HttpStatusCode.OK);
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+        }
+
+        [HttpPut]
+        [Route("api/Employers/{employerId}/ProfilePicture")]
+        public HttpResponseMessage UpdateProfilePic([FromUri]int employerId, [FromBody] UpdateProfilePictureViewModel model)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Profile_pic_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+                var existingEmployer = db.Employers.FirstOrDefault(p => p.EmployerId == employerId);
+                if (existingEmployer == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Employer not found." });
+                // now get the application user 
+                var user = db.Users.Find(existingEmployer.AspNetUserId);
+                user.ProfilePicUrl = model.Profile_pic_base64;
+                db.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
+
+                existingEmployer.ProfilePicUrl = model.Profile_pic_base64;
+                db.Entry(existingEmployer).Property(p => p.ProfilePicUrl).IsModified = true;
+                db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Profile picture updated successfully." });
+        }
+
+        [HttpPut]
+        [Route("api/Employers/{employerId}/IdProofDocs")]
+        public HttpResponseMessage UpdateIdCard([FromUri]int employerId, [FromBody]UpdateIdCardViewModel model)
+        {
+            #region ProfileImageUpload
+            string profileImagePath = string.Empty;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(model.Id_Card_Front_base64) && string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid file content." });
+
+                var existingEmployer = db.Employers.FirstOrDefault(p => p.EmployerId == employerId);
+                if (existingEmployer == null)
+                    return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Employer not found." });
+
+                // now get the application user 
+                var user = db.Users.Find(existingEmployer.AspNetUserId);
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
+                {
+                    existingEmployer.IdProofDoc = model.Id_Card_Front_base64;
+                    db.Entry(existingEmployer).Property(p => p.IdProofDoc).IsModified = true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                {
+                    existingEmployer.IdProofDoc1 = model.Id_Card_Back_base64;
+                    db.Entry(existingEmployer).Property(p => p.IdProofDoc1).IsModified = true;
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to upload the file" });
+            }
+            finally
+            {
+
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Id Proof documents updated successfully." });
+            #endregion
+        }
+
+        [HttpPut]
+        [Route("api/Employers/{employerId}/PasswordUpdate")]
+        public HttpResponseMessage ChangePassword([FromUri]int employerId, [FromBody]ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Model is not valid." });
+            }
+            var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var employer = db.Employers.Find(employerId);
+            var result = UserManager.ChangePassword(employer.AspNetUserId, model.OldPassword, model.NewPassword);
+            if (result.Succeeded)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password updated successfully." });
+            }
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "There is some error." });
         }
         #endregion
 
