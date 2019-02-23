@@ -125,46 +125,20 @@ namespace HireMe.Controllers.MobileApiControllers
             if (existingCandidate == null)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Candidate not found.");
             var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
-            if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
+            if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic1Base64))
             {
-                var skillPic = candidateProfile.JobRequestSkillPic1;
-                string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
-                {
-                    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
-                }
-
-                jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+                jobRequest.SkillPic1 = candidateProfile.JobRequestSkillPic1Base64;
             }
 
-            if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
+            if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic2Base64))
             {
-                var skillPic = candidateProfile.JobRequestSkillPic2;
-                string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
-                {
-                    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
-                }
-
-                jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+                jobRequest.SkillPic2 = candidateProfile.JobRequestSkillPic2Base64;
             }
 
-            if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
+            if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic3Base64))
             {
-                var skillPic = candidateProfile.JobRequestSkillPic3;
-                string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
-                {
-                    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
-                }
-
-                jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+                jobRequest.SkillPic3 = candidateProfile.JobRequestSkillPic3Base64;
             }
-
-
 
             candidateProfile.JobTasks.ForEach(task =>
             {
