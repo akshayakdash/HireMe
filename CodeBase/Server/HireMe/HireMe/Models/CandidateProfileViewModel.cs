@@ -101,6 +101,10 @@ namespace HireMe.Models
         public HttpPostedFileBase JobRequestSkillPic1 { get; set; }
         public HttpPostedFileBase JobRequestSkillPic2 { get; set; }
         public HttpPostedFileBase JobRequestSkillPic3 { get; set; }
+
+        public string JobRequestSkillPic1Base64 { get; set; }
+        public string JobRequestSkillPic2Base64 { get; set; }
+        public string JobRequestSkillPic3Base64 { get; set; }
     }
 
     public class EmployerJobOfferViewModel
