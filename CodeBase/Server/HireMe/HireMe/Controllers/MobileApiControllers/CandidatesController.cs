@@ -440,7 +440,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
         [HttpPut]
         [Route("api/Candidates/{candidateId}/PasswordUpdate")]
-        public HttpResponseMessage ChangePassword([FromUri]int candidateId, [FromBody]ChangePasswordViewModel model)
+        public HttpResponseMessage ChangePassword(int candidateId, ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {

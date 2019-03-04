@@ -389,6 +389,9 @@ namespace HireMe.Models
         public DateTime? VerificationDate { get; set; }
         public string AgencyJobRequestGroupId { get; set; }
         public string AgencyJobRequestTitle { get; set; }
+        public string SkillPic1Base64 { get; internal set; }
+        public string SkillPic2Base64 { get; internal set; }
+        public string SkillPic3Base64 { get; internal set; }
         //public int CrewMemberCount { get; set; }
     }
 
