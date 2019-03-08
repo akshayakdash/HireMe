@@ -56,7 +56,7 @@ namespace HireMe.Controllers.MobileApiControllers
             var cities = db.Cities.ToList();
             var districts = db.Districts.ToList();
 
-         
+
             if (ModelState.IsValid)
             {
                 var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
@@ -84,7 +84,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     profileImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
 
-                if(!string.IsNullOrWhiteSpace(model.profile_pic_base64))
+                if (!string.IsNullOrWhiteSpace(model.profile_pic_base64))
                 {
                     profileImagePath = model.profile_pic_base64;
                 }
@@ -152,7 +152,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 if (result.Succeeded)
                 {
                     //Assign Role to user Here       
-                     UserManager.AddToRoleAsync(user.Id, "Candidate");
+                    UserManager.AddToRoleAsync(user.Id, "Candidate");
 
                     // insert a welcome notification
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
@@ -195,7 +195,7 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Agencies/{agencyId}/JobRequests")]
         public HttpResponseMessage MyJobRequests(int agencyId)
         {
-          
+
             var agency = db.Agencies.Find(agencyId);
             if (agency != null)
             {
@@ -213,8 +213,8 @@ namespace HireMe.Controllers.MobileApiControllers
         }
 
         [HttpGet]
-        [Route("api/Agencies/{agencyId}/JobRequests/{jobRequestIs}")]
-        public HttpResponseMessage MyJobRequests(int agencyId, int jobRequestId)
+        [Route("api/Agencies/{agencyId}/JobRequests/{jobRequestId}")]
+        public HttpResponseMessage RemoveJobRequest(int agencyId, int jobRequestId)
         {
 
             var jobRequest = db.JobRequests.Find(jobRequestId);
@@ -246,6 +246,10 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
                 }
+                else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
+                {
+                    jobRequest.SkillPic1 = jobRequest.SkillPic1Base64;
+                }
 
                 if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
                 {
@@ -259,6 +263,10 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
                 }
+                else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
+                {
+                    jobRequest.SkillPic2 = jobRequest.SkillPic2Base64;
+                }
 
                 if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
                 {
@@ -271,6 +279,10 @@ namespace HireMe.Controllers.MobileApiControllers
                     }
 
                     jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+                }
+                else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic3Base64))
+                {
+                    jobRequest.SkillPic3 = jobRequest.SkillPic3Base64;
                 }
 
 
@@ -299,12 +311,8 @@ namespace HireMe.Controllers.MobileApiControllers
                         db.SaveChanges();
                     });
                 }
-
-
-
-
             }
-            return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Job request created for the selected candidates."});
+            return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Job request created for the selected candidates." });
         }
 
         [HttpGet]
@@ -385,7 +393,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 {
                     agency.ManagerFirstName = model.FirstName;
                     agency.ManagerLastName = model.LastName;
-                    agency.ManagerAge =  model.Age.ToString();
+                    agency.ManagerAge = model.Age.ToString();
                     //agency.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                     //agency. = model.PhoneNumber;
                     //agency.EmailId = model.Email;
@@ -479,7 +487,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
         [HttpPut]
         [Route("api/Agencies/{agencyId}/PasswordUpdate")]
-        public HttpResponseMessage ChangePassword([FromUri]int agencyId, [FromBody]ChangePasswordViewModel model)
+        public HttpResponseMessage ChangePassword(int agencyId, ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
