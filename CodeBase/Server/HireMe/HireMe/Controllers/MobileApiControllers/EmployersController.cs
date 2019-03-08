@@ -178,7 +178,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
         [HttpDelete]
         [Route("api/Employers/{employerId}/JobOffers/{jobOfferId}")]
-        public HttpResponseMessage MyJobOffers(int employerId, int jobOfferId)
+        public HttpResponseMessage DeleteJobOffer(int employerId, int jobOfferId)
         {
             //var myJobOffers = db.JobOffers
             //    .Include(path => path.Job)
@@ -306,7 +306,10 @@ namespace HireMe.Controllers.MobileApiControllers
                 Address = user.Address,
                 CityId = user.CityId,
                 CountryId = user.CountryId,
-                DistrictId = user.DistrictId
+                DistrictId = user.DistrictId,
+                profile_pic_base64 = user.ProfilePicUrl,
+                id_proof_base64 = employer.IdProofDoc,
+                id_proof1_base64 = employer.IdProofDoc1
             };
 
             updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(employer.ContactOption) ? employer.ContactOption.Split(',') : new string[0];

@@ -307,7 +307,10 @@ namespace HireMe.Controllers.MobileApiControllers
                 Address = user.Address,
                 CityId = user.CityId,
                 CountryId = user.CountryId,
-                DistrictId = user.DistrictId
+                DistrictId = user.DistrictId,
+                profile_pic_base64 = user.ProfilePicUrl,
+                id_proof_base64 = candidate.IdProofDoc,
+                id_proof1_base64 = candidate.IdProofDoc1
             };
 
             updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(candidate.ContactOption) ? candidate.ContactOption.Split(',') : new string[0];

@@ -233,6 +233,11 @@ namespace HireMe.Models
 
         public HttpPostedFileBase profile_pic { get; set; }
         public HttpPostedFileBase id_proof { get; set; }
+        public HttpPostedFileBase id_proof1 { get; set; }
+
+        public string profile_pic_base64 { get; set; }
+        public string id_proof_base64 { get; set; }
+        public string id_proof1_base64 { get; set; }
 
         public int? CountryId { get; set; }
 

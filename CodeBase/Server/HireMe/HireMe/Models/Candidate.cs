@@ -707,6 +707,7 @@ namespace HireMe.Models
         public int JobofferId { get; set; }
         public int JobId { get; set; }
         public int EmployerId { get; set; }
+        public int ProfileVerified { get; set; } // view modified...added profile verified column
         public Gender Gender { get; set; }
         public int MinAge { get; set; }
         public int MaxAge { get; set; }

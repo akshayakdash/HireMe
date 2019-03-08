@@ -188,37 +188,44 @@ namespace HireMe.Controllers.MobileApiControllers
 
             var res = SignInManager.PasswordSignInAsync(user.UserName.Trim(), model.Password, model.RememberMe, shouldLockout: false).Result;
 
-            if (role.Name == "Admin")
+            if (res == SignInStatus.Success)
             {
-                userId = 1;
-            }
-            else if (role.Name == "Candidate")
-            {
-                var candidate = db.Candidates.FirstOrDefault(p => p.AspNetUserId == user.Id);
-                if (candidate != null)
+                if (role.Name == "Admin")
                 {
-                    userId = candidate.CandidateId;
+                    userId = 1;
                 }
-            }
-            else if (role.Name == "Employer")
-            {
-                var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == user.Id);
-                if (employer != null)
+                else if (role.Name == "Candidate")
                 {
-                    userId = employer.EmployerId;
+                    var candidate = db.Candidates.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                    if (candidate != null)
+                    {
+                        userId = candidate.CandidateId;
+                    }
                 }
-            }
-            else if (role.Name == "Agency")
-            {
-                var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == user.Id);
-                if (agency != null)
+                else if (role.Name == "Employer")
                 {
-                    userId = agency.AgencyId;
+                    var employer = db.Employers.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                    if (employer != null)
+                    {
+                        userId = employer.EmployerId;
+                    }
                 }
-            }
+                else if (role.Name == "Agency")
+                {
+                    var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == user.Id);
+                    if (agency != null)
+                    {
+                        userId = agency.AgencyId;
+                    }
+                }
 
-            var result = new { user.FirstName, Role = role.Name == "Candidate" ? "Employee" : role.Name, AspNetUserId = user.Id, user.UserName, user.Email, UserId = userId };
-            return Request.CreateResponse(HttpStatusCode.OK, result);
+                var result = new { user.FirstName, Role = role.Name == "Candidate" ? "Employee" : role.Name, AspNetUserId = user.Id, user.UserName, user.Email, UserId = userId };
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Invalid Credentials." });
+            }
         }
 
         [AllowAnonymous]
@@ -245,7 +252,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 var newOtp = new Random().Next(99999, 999999);
                 var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 string code = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
-                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "OTP generated successfully.", Data = new { OTP = newOtp, Code=code } });
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "OTP generated successfully.", Data = new { OTP = newOtp, Code = code } });
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
@@ -287,7 +294,7 @@ namespace HireMe.Controllers.MobileApiControllers
             var result = UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password).Result;
             if (result.Succeeded)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password reset successfully."  });
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password reset successfully." });
             }
             return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Unable to reset the password." });
         }
