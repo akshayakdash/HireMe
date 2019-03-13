@@ -12,6 +12,8 @@ using System.Data.Entity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using HireMe.Utility;
+using System.IO;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -372,10 +374,16 @@ namespace HireMe.Controllers.MobileApiControllers
                     return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Employer not found." });
                 // now get the application user 
                 var user = db.Users.Find(existingEmployer.AspNetUserId);
-                user.ProfilePicUrl = model.Profile_pic_base64;
+                // store the image to file path and update the location in 2 tables i.e user and   candidate
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
+                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Profile_pic_base64);
+                File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
+
+
+                user.ProfilePicUrl = "http://40.89.160.98/Uploads/" + fileName; //model.Profile_pic_base64;
                 db.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
 
-                existingEmployer.ProfilePicUrl = model.Profile_pic_base64;
+                existingEmployer.ProfilePicUrl = "http://40.89.160.98/Uploads/" + fileName;
                 db.Entry(existingEmployer).Property(p => p.ProfilePicUrl).IsModified = true;
                 db.SaveChanges();
 
@@ -409,15 +417,33 @@ namespace HireMe.Controllers.MobileApiControllers
                 // now get the application user 
                 var user = db.Users.Find(existingEmployer.AspNetUserId);
 
+                //if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
+                //{
+                //    existingEmployer.IdProofDoc = model.Id_Card_Front_base64;
+                //    db.Entry(existingEmployer).Property(p => p.IdProofDoc).IsModified = true;
+                //}
+
+                //if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
+                //{
+                //    existingEmployer.IdProofDoc1 = model.Id_Card_Back_base64;
+                //    db.Entry(existingEmployer).Property(p => p.IdProofDoc1).IsModified = true;
+                //}
+
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
                 {
-                    existingEmployer.IdProofDoc = model.Id_Card_Front_base64;
+                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Id_Card_Front_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
+
+                    existingEmployer.IdProofDoc = "http://40.89.160.98/Uploads/" + fileName; //path + fileName; // model.Id_Card_Front_base64;
                     db.Entry(existingEmployer).Property(p => p.IdProofDoc).IsModified = true;
                 }
 
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
                 {
-                    existingEmployer.IdProofDoc1 = model.Id_Card_Back_base64;
+                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Id_Card_Back_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Back_base64));
+                    existingEmployer.IdProofDoc1 = "http://40.89.160.98/Uploads/" + fileName; //model.Id_Card_Back_base64;
                     db.Entry(existingEmployer).Property(p => p.IdProofDoc1).IsModified = true;
                 }
                 db.SaveChanges();

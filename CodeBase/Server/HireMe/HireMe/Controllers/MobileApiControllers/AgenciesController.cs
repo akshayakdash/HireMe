@@ -233,56 +233,75 @@ namespace HireMe.Controllers.MobileApiControllers
             var agency = db.Agencies.FirstOrDefault(p => p.AgencyId == candidateProfile.AgencyId);
             if (ModelState.IsValid)
             {
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
                 var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { }, AgencyJobRequestGroupId = Guid.NewGuid().ToString(), AgencyJobRequestTitle = candidateProfile.Title };
                 if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic1;
-                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                    byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                    using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
-                    {
-                        thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
-                    }
+                    //string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    //byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                    //using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                    //{
+                    //thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                    //}
+                    string fileName = DateTime.Now.Ticks.ToString()  + "_" + Path.GetFileName(skillPic.FileName);
+                    skillPic.SaveAs(path + fileName);
 
-                    jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
                 else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
                 {
-                    jobRequest.SkillPic1 = jobRequest.SkillPic1Base64;
+                    //jobRequest.SkillPic1 = jobRequest.SkillPic1Base64;
+                    string fileName = DateTime.Now.Ticks.ToString()  + "."+Base64Extensions.GetFileExtension(jobRequest.SkillPic1Base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic1Base64));
+                    jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
+
 
                 if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic2;
-                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                    byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                    using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
-                    {
-                        thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
-                    }
+                    //string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    //byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                    //using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                    //{
+                    //    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                    //}
+                    string fileName = DateTime.Now.Ticks.ToString()  + "_" + Path.GetFileName(skillPic.FileName);
+                    skillPic.SaveAs(path + fileName);
 
-                    jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName;
+                    //jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
                 }
                 else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
                 {
-                    jobRequest.SkillPic2 = jobRequest.SkillPic2Base64;
+                    //jobRequest.SkillPic2 = jobRequest.SkillPic2Base64;
+                    string fileName = DateTime.Now.Ticks.ToString()  + "." + Base64Extensions.GetFileExtension(jobRequest.SkillPic2Base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic2Base64));
+                    jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
                 if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic3;
-                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                    byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                    using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
-                    {
-                        thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
-                    }
+                    //string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    //byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
+                    //using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                    //{
+                    //    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                    //}
+                    string fileName = DateTime.Now.Ticks.ToString()  + "_" + Path.GetFileName(skillPic.FileName);
+                    skillPic.SaveAs(path + fileName);
 
-                    jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
+                    //jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
                 }
                 else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic3Base64))
                 {
-                    jobRequest.SkillPic3 = jobRequest.SkillPic3Base64;
+                    //jobRequest.SkillPic3 = jobRequest.SkillPic3Base64;
+                    string fileName = DateTime.Now.Ticks.ToString()  + "." + Base64Extensions.GetFileExtension(jobRequest.SkillPic3Base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic3Base64));
+                    jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
 
@@ -426,7 +445,17 @@ namespace HireMe.Controllers.MobileApiControllers
                     return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Agency not found." });
                 // now get the application user 
                 var user = db.Users.Find(existingAgency.AspNetUserId);
-                user.ProfilePicUrl = model.Profile_pic_base64;
+
+                // store the image to file path and update the location in 2 tables i.e user and   candidate
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
+                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Profile_pic_base64);
+                File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
+
+
+                user.ProfilePicUrl = "http://40.89.160.98/Uploads/" + fileName; //model.Profile_pic_base64;
+
+
+                //user.ProfilePicUrl = model.Profile_pic_base64;
                 db.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
                 db.SaveChanges();
 

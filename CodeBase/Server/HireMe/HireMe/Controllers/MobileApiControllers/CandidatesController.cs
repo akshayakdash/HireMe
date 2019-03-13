@@ -121,23 +121,38 @@ namespace HireMe.Controllers.MobileApiControllers
         [Route("api/Candidates/{candidateId}/JobRequests")]
         public HttpResponseMessage CreateJobRequest([FromUri]int candidateId, [FromBody] CandidateProfileViewModel candidateProfile)
         {
-            var existingCandidate = db.Candidates.Include(path => path.JobRequests).FirstOrDefault(t => t.CandidateId == candidateId);
+
+            var existingCandidate = db.Candidates.Include(p => p.JobRequests).FirstOrDefault(t => t.CandidateId == candidateId);
             if (existingCandidate == null)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Candidate not found.");
             var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
+
+            string path = HttpContext.Current.Server.MapPath("~/Uploads/");
+
             if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic1Base64))
             {
-                jobRequest.SkillPic1 = candidateProfile.JobRequestSkillPic1Base64;
+                //jobRequest.SkillPic1 = candidateProfile.JobRequestSkillPic1Base64;
+                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic1Base64);
+                File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic1Base64));
+                //jobRequest.SkillPic2 = path + fileName;
+
+                jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName;
             }
 
             if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic2Base64))
             {
-                jobRequest.SkillPic2 = candidateProfile.JobRequestSkillPic2Base64;
+                //jobRequest.SkillPic2 = candidateProfile.JobRequestSkillPic2Base64;
+                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic2Base64);
+                File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic2Base64));
+                jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName;
             }
 
             if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic3Base64))
             {
-                jobRequest.SkillPic3 = candidateProfile.JobRequestSkillPic3Base64;
+                //jobRequest.SkillPic3 = candidateProfile.JobRequestSkillPic3Base64;
+                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic3Base64);
+                File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic3Base64));
+                jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName;
             }
 
             candidateProfile.JobTasks.ForEach(task =>
@@ -376,12 +391,19 @@ namespace HireMe.Controllers.MobileApiControllers
                 var existingCandidate = db.Candidates.FirstOrDefault(p => p.CandidateId == candidateId);
                 if (existingCandidate == null)
                     return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Candidate not found." });
+
+                // store the image to file path and update the location in 2 tables i.e user and   candidate
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
+                string fileName = DateTime.Now.Ticks.ToString() +"." + Base64Extensions.GetFileExtension(model.Profile_pic_base64);
+                File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
                 // now get the application user 
                 var user = db.Users.Find(existingCandidate.AspNetUserId);
-                user.ProfilePicUrl = model.Profile_pic_base64;
+                user.ProfilePicUrl = "http://40.89.160.98/Uploads/" + fileName;//path + fileName;
+
+
                 db.Entry(user).Property(p => p.ProfilePicUrl).IsModified = true;
 
-                existingCandidate.ProfilePicUrl = model.Profile_pic_base64;
+                existingCandidate.ProfilePicUrl = "http://40.89.160.98/Uploads/" + fileName;//path + fileName;
                 db.Entry(existingCandidate).Property(p => p.ProfilePicUrl).IsModified = true;
                 db.SaveChanges();
 
@@ -415,16 +437,21 @@ namespace HireMe.Controllers.MobileApiControllers
                 var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 // now get the application user 
                 var user = db.Users.Find(existingCandidate.AspNetUserId);
-
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
                 {
-                    existingCandidate.IdProofDoc = model.Id_Card_Front_base64;
+                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Id_Card_Front_base64);
+                   File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
+                    
+                    existingCandidate.IdProofDoc = "http://40.89.160.98/Uploads/" + fileName;//path + fileName;
                     db.Entry(existingCandidate).Property(p => p.IdProofDoc).IsModified = true;
                 }
 
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
                 {
-                    existingCandidate.IdProofDoc1 = model.Id_Card_Back_base64;
+                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Id_Card_Back_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Back_base64));
+                    existingCandidate.IdProofDoc1 = "http://40.89.160.98/Uploads/" + fileName;//path + fileName;
                     db.Entry(existingCandidate).Property(p => p.IdProofDoc1).IsModified = true;
                 }
                 db.SaveChanges();

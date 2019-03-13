@@ -12,6 +12,7 @@ using System.Web.Http.Cors;
 using System.Data.Entity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
+using HireMe.Utility;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -55,6 +56,7 @@ namespace HireMe.Controllers.MobileApiControllers
                         age = age - 1;
                 }
                 #region ProfileImageUpload
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
                 string profileImagePath = string.Empty;
                 if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
                 {
@@ -68,9 +70,13 @@ namespace HireMe.Controllers.MobileApiControllers
                     profileImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
 
-                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                if (!string.IsNullOrWhiteSpace(model.profile_pic_base64))
                 {
-                    profileImagePath = model.profile_pic_base64;
+                    
+                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
+                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    //profileImagePath = model.profile_pic_base64;
                 }
                 #endregion
 
@@ -92,7 +98,10 @@ namespace HireMe.Controllers.MobileApiControllers
                 // store for mobile
                 if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
                 {
-                    idProofImagePath = model.id_proof_base64;
+                    //idProofImagePath = model.id_proof_base64;
+                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.id_proof_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
+                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
@@ -111,7 +120,10 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 if (!string.IsNullOrWhiteSpace(model.id_proof_back_base64))
                 {
-                    idProofImagePath1 = model.id_proof_back_base64;
+                    //idProofImagePath1 = model.id_proof_back_base64;
+                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.id_proof_back_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_back_base64));
+                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
                 }
                 #endregion
                 string contactNumber = model.PhoneNumber.Replace("-", "");
