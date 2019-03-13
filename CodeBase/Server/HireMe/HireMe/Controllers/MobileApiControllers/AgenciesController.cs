@@ -187,7 +187,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
             NotificationFramework.SendNotification(agency.AspNetUserId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.AgencyName + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
 
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Candidate Profile verified successfully." });
         }
 
 
