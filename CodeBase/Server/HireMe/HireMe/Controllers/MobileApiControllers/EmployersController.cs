@@ -376,7 +376,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 var user = db.Users.Find(existingEmployer.AspNetUserId);
                 // store the image to file path and update the location in 2 tables i.e user and   candidate
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
-                string fileName = DateTime.Now.Ticks.ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
 
 
@@ -432,7 +432,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
                 {
-                    string fileName = DateTime.Now.Ticks.ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.Id_Card_Front_base64);
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.Id_Card_Front_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
 
                     existingEmployer.IdProofDoc = "http://40.89.160.98/Uploads/" + fileName; //path + fileName; // model.Id_Card_Front_base64;
@@ -441,7 +441,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
                 {
-                    string fileName = DateTime.Now.Ticks.ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.Id_Card_Back_base64);
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.Id_Card_Back_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Back_base64));
                     existingEmployer.IdProofDoc1 = "http://40.89.160.98/Uploads/" + fileName; //model.Id_Card_Back_base64;
                     db.Entry(existingEmployer).Property(p => p.IdProofDoc1).IsModified = true;
