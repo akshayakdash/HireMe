@@ -705,6 +705,7 @@ namespace HireMe.Models
         public string AdditionalDescription { get; set; }
         [ForeignKey("JobRequestId")]
         public List<JobRequestJobTask> JobRequestJobTasks { get; set; }
+        public string ProfilePicUrl { get; set; }
     }
 
     public class v_SearchJobOffer_Mobile
@@ -741,6 +742,7 @@ namespace HireMe.Models
         public string EmailId { get; set; }
         public string ContactOption { get; set; }
         public List<JobOfferJobTask> JobOfferJobTasks { get; set; }
+        public string ProfilePicUrl { get; set; }
     }
 
     public class v_ExportJobRequest
