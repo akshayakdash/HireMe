@@ -252,7 +252,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
                 {
                     //jobRequest.SkillPic1 = jobRequest.SkillPic1Base64;
-                    string fileName = DateTime.Now.Ticks.ToString()  + "."+Base64Extensions.GetFileExtension(jobRequest.SkillPic1Base64);
+                    string fileName = DateTime.Now.Ticks.ToString()  + ".jpg";//+Base64Extensions.GetFileExtension(jobRequest.SkillPic1Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic1Base64));
                     jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
@@ -276,7 +276,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
                 {
                     //jobRequest.SkillPic2 = jobRequest.SkillPic2Base64;
-                    string fileName = DateTime.Now.Ticks.ToString()  + "." + Base64Extensions.GetFileExtension(jobRequest.SkillPic2Base64);
+                    string fileName = DateTime.Now.Ticks.ToString()  + ".jpg";// + Base64Extensions.GetFileExtension(jobRequest.SkillPic2Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic2Base64));
                     jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
@@ -299,7 +299,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic3Base64))
                 {
                     //jobRequest.SkillPic3 = jobRequest.SkillPic3Base64;
-                    string fileName = DateTime.Now.Ticks.ToString()  + "." + Base64Extensions.GetFileExtension(jobRequest.SkillPic3Base64);
+                    string fileName = DateTime.Now.Ticks.ToString()  + ".jpg";// Base64Extensions.GetFileExtension(jobRequest.SkillPic3Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic3Base64));
                     jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
@@ -448,7 +448,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 // store the image to file path and update the location in 2 tables i.e user and   candidate
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
-                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Profile_pic_base64);
+                string fileName = DateTime.Now.Ticks.ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
 
 

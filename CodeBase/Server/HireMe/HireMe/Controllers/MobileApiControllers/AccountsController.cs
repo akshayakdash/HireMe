@@ -73,7 +73,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 if (!string.IsNullOrWhiteSpace(model.profile_pic_base64))
                 {
                     
-                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                    string fileName = DateTime.Now.Ticks.ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
                     profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
                     //profileImagePath = model.profile_pic_base64;
@@ -99,7 +99,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
                 {
                     //idProofImagePath = model.id_proof_base64;
-                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.id_proof_base64);
+                    string fileName = DateTime.Now.Ticks.ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
                     idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
                 }
@@ -121,7 +121,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 if (!string.IsNullOrWhiteSpace(model.id_proof_back_base64))
                 {
                     //idProofImagePath1 = model.id_proof_back_base64;
-                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.id_proof_back_base64);
+                    string fileName = DateTime.Now.Ticks.ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_back_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_back_base64));
                     idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
                 }
