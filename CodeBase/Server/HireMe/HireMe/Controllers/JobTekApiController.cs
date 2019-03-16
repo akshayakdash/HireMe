@@ -426,7 +426,8 @@ namespace HireMe.Controllers
         [HttpGet]
         public HttpResponseMessage GetJobTasks(int jobId)
         {
-            var job = db.Jobs.Include(path => path.JobTasks).FirstOrDefault(p => p.JobId == jobId);
+            var job = db.Jobs.Include(p => p.JobTasks.Select(t => t.SubTasks)).FirstOrDefault(p => p.JobId == jobId);
+            job.JobTasks = job.JobTasks.Where(p => p.ParentJobTaskId == null).ToList();
             return Request.CreateResponse(HttpStatusCode.OK, job, jsonFormatter);
         }
 
