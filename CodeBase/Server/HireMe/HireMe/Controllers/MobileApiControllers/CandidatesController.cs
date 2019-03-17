@@ -114,7 +114,14 @@ namespace HireMe.Controllers.MobileApiControllers
             var myJobRequests = db.v_SearchJobRequests_Mobile
                 .Where(p => p.CandidateId == candidateId && p.IsPublished)
                 .ToList();
-            return Request.CreateResponse(HttpStatusCode.OK, myJobRequests, jsonFormatter);
+            if (myJobRequests.Count > 0)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, myJobRequests, jsonFormatter);
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, "Vous n'avez pas créé de demande de travail ou vos demandes de travail précédentes sont en attente d'approbation.", jsonFormatter);
+            }
         }
 
         [HttpPost]
@@ -132,7 +139,7 @@ namespace HireMe.Controllers.MobileApiControllers
             if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic1Base64))
             {
                 //jobRequest.SkillPic1 = candidateProfile.JobRequestSkillPic1Base64;
-                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic1Base64);
+                string fileName = Guid.NewGuid().ToString() + ".jpg";//+ Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic1Base64);
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic1Base64));
                 //jobRequest.SkillPic2 = path + fileName;
 
@@ -142,7 +149,7 @@ namespace HireMe.Controllers.MobileApiControllers
             if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic2Base64))
             {
                 //jobRequest.SkillPic2 = candidateProfile.JobRequestSkillPic2Base64;
-                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic2Base64);
+                string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic2Base64);
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic2Base64));
                 jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName;
             }
@@ -150,7 +157,7 @@ namespace HireMe.Controllers.MobileApiControllers
             if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic3Base64))
             {
                 //jobRequest.SkillPic3 = candidateProfile.JobRequestSkillPic3Base64;
-                string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic3Base64);
+                string fileName = Guid.NewGuid().ToString() + ".jpg";//+ Base64Extensions.GetFileExtension(candidateProfile.JobRequestSkillPic3Base64);
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic3Base64));
                 jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName;
             }
@@ -394,7 +401,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 // store the image to file path and update the location in 2 tables i.e user and   candidate
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
-                string fileName = DateTime.Now.Ticks.ToString() +"." + Base64Extensions.GetFileExtension(model.Profile_pic_base64);
+                string fileName = Guid.NewGuid().ToString() +".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
                 // now get the application user 
                 var user = db.Users.Find(existingCandidate.AspNetUserId);
@@ -440,8 +447,8 @@ namespace HireMe.Controllers.MobileApiControllers
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
                 {
-                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Id_Card_Front_base64);
-                   File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.Id_Card_Front_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
                     
                     existingCandidate.IdProofDoc = "http://40.89.160.98/Uploads/" + fileName;//path + fileName;
                     db.Entry(existingCandidate).Property(p => p.IdProofDoc).IsModified = true;
@@ -449,7 +456,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
                 {
-                    string fileName = DateTime.Now.Ticks.ToString() + "." + Base64Extensions.GetFileExtension(model.Id_Card_Back_base64);
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.Id_Card_Back_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Back_base64));
                     existingCandidate.IdProofDoc1 = "http://40.89.160.98/Uploads/" + fileName;//path + fileName;
                     db.Entry(existingCandidate).Property(p => p.IdProofDoc1).IsModified = true;
