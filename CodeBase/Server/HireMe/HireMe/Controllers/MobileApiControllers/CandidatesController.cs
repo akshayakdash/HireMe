@@ -111,6 +111,9 @@ namespace HireMe.Controllers.MobileApiControllers
             //    .Where(j => j.CandidateId == candidateId)
             //    .ToList();
 
+            //  WHERE
+            //(`jobrequest`.`VerifiedByAdmin` = TRUE)
+
             var myJobRequests = db.v_SearchJobRequests_Mobile
                 .Where(p => p.CandidateId == candidateId && p.IsPublished)
                 .ToList();
@@ -224,7 +227,7 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             List<JobOffer> newArray = new List<JobOffer>();
             var existingCandidate = db.Candidates.Include(t => t.FavouriteJobOffers.Select(c => c.Job)).FirstOrDefault(p => p.CandidateId == candidateId);
-            if (existingCandidate != null && existingCandidate.FavouriteJobOffers != null && existingCandidate.FavouriteJobOffers.Count > 0)
+            if (existingCandidate != null && existingCandidate.FavouriteJobOffers != null)
             {
                 existingCandidate.FavouriteJobOffers.ForEach(favJobRequest =>
                 {
@@ -244,7 +247,7 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             JobOffer newJob = new JobOffer();
             var existingCandidate = db.Candidates.Include(t => t.FavouriteJobOffers.Select(c => c.Job)).FirstOrDefault(p => p.CandidateId == candidateId);
-            if (existingCandidate != null && existingCandidate.FavouriteJobOffers != null && existingCandidate.FavouriteJobOffers.Count > 0)
+            if (existingCandidate != null && existingCandidate.FavouriteJobOffers != null)
             {
                 var jobOffer = db.JobOffers.Find(jobOfferId);
                 if (jobOffer != null)
@@ -335,7 +338,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 id_proof1_base64 = candidate.IdProofDoc1
             };
 
-            updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(candidate.ContactOption) ? candidate.ContactOption.Split(',') : new string[0];
+            updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(candidate.ContactOption) ? candidate.ContactOption.Split(',') : new[] { "Email", "Phone" };
             updateProfileViewModel.ProfileVerified = candidate.ProfileVerified;
             updateProfileViewModel.Age = candidate.Age.HasValue ? candidate.Age.Value : 0;
             //ViewBag.IdProofDoc = candidate.IdProofDoc;
@@ -401,7 +404,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 // store the image to file path and update the location in 2 tables i.e user and   candidate
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
-                string fileName = Guid.NewGuid().ToString() +".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
                 // now get the application user 
                 var user = db.Users.Find(existingCandidate.AspNetUserId);
@@ -449,7 +452,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 {
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.Id_Card_Front_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
-                    
+
                     existingCandidate.IdProofDoc = "http://40.89.160.98/Uploads/" + fileName;//path + fileName;
                     db.Entry(existingCandidate).Property(p => p.IdProofDoc).IsModified = true;
                 }
