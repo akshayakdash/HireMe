@@ -165,12 +165,32 @@ namespace HireMe.Controllers.MobileApiControllers
                 jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName;
             }
 
-            candidateProfile.JobTasks.ForEach(task =>
+            //candidateProfile.JobTasks.ForEach(task =>
+            //{
+            //    if (task.Selected)
+            //    {
+            //        jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+            //    }
+            //});
+
+
+            Action<JobTaskViewModel> saveJobRequestTaskTree = null;
+
+            saveJobRequestTaskTree = (task) =>
             {
+                //Console.WriteLine(n.Value);
                 if (task.Selected)
                 {
                     jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
                 }
+                if (task.SubTasks != null)
+                    task.SubTasks.ToList().ForEach(saveJobRequestTaskTree);
+            };
+
+
+            candidateProfile.JobTasks.ForEach(task =>
+            {
+                saveJobRequestTaskTree(task);
             });
 
             existingCandidate.Disponibility = candidateProfile.Disponibility;
