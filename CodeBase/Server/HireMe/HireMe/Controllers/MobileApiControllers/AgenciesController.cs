@@ -69,7 +69,7 @@ namespace HireMe.Controllers.MobileApiControllers
                         age = age - 1;
                 }
                 // now check if it has file associated with it
-
+                string path = HttpContext.Current.Server.MapPath("~/Uploads/");
                 #region ProfileImageUpload
                 string profileImagePath = string.Empty;
                 if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
@@ -86,7 +86,11 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 if (!string.IsNullOrWhiteSpace(model.profile_pic_base64))
                 {
-                    profileImagePath = model.profile_pic_base64;
+
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
+                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    //profileImagePath = model.profile_pic_base64;
                 }
                 #endregion
 
@@ -105,9 +109,13 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
 
-                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                if (!string.IsNullOrWhiteSpace(model.profile_pic_base64))
                 {
-                    idProofImagePath = model.id_proof_base64;
+
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
+                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    //profileImagePath = model.profile_pic_base64;
                 }
 
                 string idProofImagePath1 = string.Empty;
@@ -124,9 +132,12 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
                 }
 
-                if (!string.IsNullOrWhiteSpace(model.id_proof1_base64))
+                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
                 {
-                    idProofImagePath1 = model.id_proof1_base64;
+                    //idProofImagePath = model.id_proof_base64;
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
+                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
                 }
                 #endregion
                 var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
@@ -306,13 +317,33 @@ namespace HireMe.Controllers.MobileApiControllers
 
 
 
-                candidateProfile.JobTasks.ForEach(task =>
+                //candidateProfile.JobTasks.ForEach(task =>
+                //{
+                //    if (task.Selected)
+                //    {
+                //        jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                //    }
+                //});
+
+                Action<JobTaskViewModel> saveJobRequestTaskTree = null;
+
+                saveJobRequestTaskTree = (task) =>
                 {
+                    //Console.WriteLine(n.Value);
                     if (task.Selected)
                     {
                         jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
                     }
+                    if (task.SubTasks != null)
+                        task.SubTasks.ToList().ForEach(saveJobRequestTaskTree);
+                };
+
+
+                candidateProfile.JobTasks.ForEach(task =>
+                {
+                    saveJobRequestTaskTree(task);
                 });
+
 
                 // now get the candidates for whom the job request would be created by the agency
                 if (candidateProfile.CandidateIds != null && candidateProfile.CandidateIds.Count > 0)

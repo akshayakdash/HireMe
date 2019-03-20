@@ -179,6 +179,10 @@ namespace HireMe.Controllers.MobileApiControllers
                 if (result.Succeeded)
                 {
                     UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+
+                    // insert a welcome notification
+                    db.Notifications.Add(new JobTekNotification { Content = "Welcome " + model.UserName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = user.Id, CreatedDate = DateTime.Now });
+                    db.SaveChanges();
                 }
                 return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Registration successful to the portal." });
             }

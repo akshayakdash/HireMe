@@ -44,7 +44,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 var jobRequests = db.v_SearchJobRequests_Mobile
                     .Include(p => p.JobRequestJobTasks)
-                    .Where(p => p.JobId == searchParam.Job)
+                    .Where(p => p.JobId == searchParam.Job && p.VerifiedByAdmin)
                     .AsQueryable()
                     .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
@@ -59,7 +59,7 @@ namespace HireMe.Controllers.MobileApiControllers
             else
             {
                 //return Request.CreateResponse(HttpStatusCode.OK, db.JobRequests.Include(p => p.Candidate).Include(t => t.Job).ToList());
-                return Request.CreateResponse(HttpStatusCode.OK, db.v_SearchJobRequests_Mobile.OrderByDescending(p => p.JobRequestId).ToList(), jsonFormatter);
+                return Request.CreateResponse(HttpStatusCode.OK, db.v_SearchJobRequests_Mobile.Where(t => t.VerifiedByAdmin).OrderByDescending(p => p.JobRequestId).ToList(), jsonFormatter);
             }
         }
 
