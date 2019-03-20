@@ -396,6 +396,9 @@ namespace HireMe.Models
         [NotMapped]
         public string SkillPic3Base64 { get; internal set; }
         //public int CrewMemberCount { get; set; }
+
+        [NotMapped]
+        public List<UserFeedback> UserFeedbacks { get; set; }
     }
 
     public class JobRequestJobTask
