@@ -306,13 +306,33 @@ namespace HireMe.Controllers.MobileApiControllers
 
 
 
-                candidateProfile.JobTasks.ForEach(task =>
+                //candidateProfile.JobTasks.ForEach(task =>
+                //{
+                //    if (task.Selected)
+                //    {
+                //        jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                //    }
+                //});
+
+                Action<JobTaskViewModel> saveJobRequestTaskTree = null;
+
+                saveJobRequestTaskTree = (task) =>
                 {
+                    //Console.WriteLine(n.Value);
                     if (task.Selected)
                     {
                         jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
                     }
+                    if (task.SubTasks != null)
+                        task.SubTasks.ToList().ForEach(saveJobRequestTaskTree);
+                };
+
+
+                candidateProfile.JobTasks.ForEach(task =>
+                {
+                    saveJobRequestTaskTree(task);
                 });
+
 
                 // now get the candidates for whom the job request would be created by the agency
                 if (candidateProfile.CandidateIds != null && candidateProfile.CandidateIds.Count > 0)
