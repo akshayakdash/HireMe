@@ -349,7 +349,7 @@ namespace HireMe.Utility
             {
                 if (City > 0)
                 {
-                    queryString.Append(" and Candidate.CityId = @" + paramCount);
+                    queryString.Append(" and CityId = @" + paramCount);
                     paramList.Add(City);
                     paramCount++;
                 }

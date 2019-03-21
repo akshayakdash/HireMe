@@ -522,13 +522,23 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Front_base64))
                 {
-                    existingAgency.IdProofDoc = model.Id_Card_Front_base64;
+                    // store the image to file path and update the location
+                    string path = HttpContext.Current.Server.MapPath("~/Uploads/");
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
+
+                    existingAgency.IdProofDoc = "http://40.89.160.98/Uploads/" + fileName; //model.Id_Card_Front_base64;
                     db.Entry(existingAgency).Property(p => p.IdProofDoc).IsModified = true;
                 }
 
                 if (!string.IsNullOrWhiteSpace(model.Id_Card_Back_base64))
                 {
-                    existingAgency.IdProofDoc1 = model.Id_Card_Back_base64;
+                    // store the image to file path and update the location
+                    string path = HttpContext.Current.Server.MapPath("~/Uploads/");
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Back_base64));
+
+                    existingAgency.IdProofDoc1 = "http://40.89.160.98/Uploads/" + fileName; //model.Id_Card_Back_base64;
                     db.Entry(existingAgency).Property(p => p.IdProofDoc1).IsModified = true;
                 }
                 db.SaveChanges();

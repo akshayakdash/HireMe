@@ -502,8 +502,14 @@ namespace HireMe.Controllers
         public HttpResponseMessage GetAgencyDetails(int agencyId)
         {
             var agency = db.Agencies.Find(agencyId);
+            var user = db.Users.Find(agency.AspNetUserId);
             if (agency == null)
                 return Request.CreateResponse(HttpStatusCode.NotFound);
+
+            agency.City = db.Cities.Find(user.CityId).CityName;
+            agency.Country = db.Countries.Find(user.CountryId).CountryName;
+            agency.District = db.Districts.Find(user.DistrictId).DistrictName;
+
             return Request.CreateResponse(HttpStatusCode.OK, agency);
         }
 

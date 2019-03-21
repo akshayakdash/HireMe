@@ -42,9 +42,14 @@ namespace HireMe.Controllers.MobileApiControllers
                 object[] queryString = searchParam.GetSearchQuery();
                 ArrayList searchArgs = (ArrayList)queryString[1];
 
+                var sTemp = db.v_SearchJobRequests_Mobile
+                    .Include(p => p.JobRequestJobTasks)
+                    .Where(p => p.JobId == searchParam.Job && p.VerifiedByAdmin == true)
+                    .AsQueryable();
+
                 var jobRequests = db.v_SearchJobRequests_Mobile
                     .Include(p => p.JobRequestJobTasks)
-                    .Where(p => p.JobId == searchParam.Job && p.VerifiedByAdmin)
+                    .Where(p => p.JobId == searchParam.Job && p.VerifiedByAdmin == true)
                     .AsQueryable()
                     .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
