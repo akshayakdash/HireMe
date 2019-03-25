@@ -695,9 +695,9 @@ namespace HireMe.Models
         public string City { get; set; }
         public string District { get; set; }
 
-        public string CountryId { get; set; }
-        public string CityId { get; set; }
-        public string DistrictId { get; set; }
+        public int CountryId { get; set; }
+        public int CityId { get; set; }
+        public int DistrictId { get; set; }
 
         public decimal ExpectedMinSalary { get; set; }
         public decimal ExpectedMaxSalary { get; set; }
