@@ -314,7 +314,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 id_proof1_base64 = employer.IdProofDoc1
             };
 
-            updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(employer.ContactOption) ? employer.ContactOption.Split(',') : new string[0];
+            updateProfileViewModel.ContactOption = !string.IsNullOrWhiteSpace(employer.ContactOption) ? employer.ContactOption.Split(',') : new string[] { "Email","Phone"};
             updateProfileViewModel.ProfileVerified = employer.ProfileVerified;
             updateProfileViewModel.Age = employer.Age;
             //ViewBag.IdProofDoc = candidate.IdProofDoc;

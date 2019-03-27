@@ -97,7 +97,7 @@ namespace HireMe.Models
         // This field is added later to check the consent of the user
         // if contact option is blank then both email and phone no will be visible
         public string ContactOption { get; set; }
-        public string IdProofDoc1 { get; internal set; }
+        public string IdProofDoc1 { get; set; }
     }
 
 
@@ -396,6 +396,9 @@ namespace HireMe.Models
         [NotMapped]
         public string SkillPic3Base64 { get; internal set; }
         //public int CrewMemberCount { get; set; }
+
+        [NotMapped]
+        public List<UserFeedback> UserFeedbacks { get; set; }
     }
 
     public class JobRequestJobTask
@@ -642,6 +645,9 @@ namespace HireMe.Models
         public string Country { get; set; }
         public string City { get; set; }
         public string District { get; set; }
+        public int CountryId { get; set; }
+        public int CityId { get; set; }
+        public int DistrictId { get; set; }
         public SalaryType SalaryType { get; set; }
         public string SalaryTypeOtherDesc { get; set; }
         public bool CanRead { get; set; }
@@ -688,8 +694,11 @@ namespace HireMe.Models
         public string Country { get; set; }
         public string City { get; set; }
         public string District { get; set; }
-       
-       
+
+        public string CountryId { get; set; }
+        public string CityId { get; set; }
+        public string DistrictId { get; set; }
+
         public decimal ExpectedMinSalary { get; set; }
         public decimal ExpectedMaxSalary { get; set; }
        

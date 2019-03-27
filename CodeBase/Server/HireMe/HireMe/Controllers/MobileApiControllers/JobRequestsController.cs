@@ -42,9 +42,14 @@ namespace HireMe.Controllers.MobileApiControllers
                 object[] queryString = searchParam.GetSearchQuery();
                 ArrayList searchArgs = (ArrayList)queryString[1];
 
+                var sTemp = db.v_SearchJobRequests_Mobile
+                    .Include(p => p.JobRequestJobTasks)
+                    .Where(p => p.JobId == searchParam.Job && p.VerifiedByAdmin == true)
+                    .AsQueryable();
+
                 var jobRequests = db.v_SearchJobRequests_Mobile
                     .Include(p => p.JobRequestJobTasks)
-                    .Where(p => p.JobId == searchParam.Job && p.VerifiedByAdmin)
+                    .Where(p => p.JobId == searchParam.Job && p.VerifiedByAdmin == true)
                     .AsQueryable()
                     .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
@@ -83,6 +88,12 @@ namespace HireMe.Controllers.MobileApiControllers
                 .Include(p => p.JobTasks)
                 .FirstOrDefault(p => p.JobId == jobRequest.JobId)
                 .JobTasks;
+
+            var userId = jobRequest.Candidate.AspNetUserId;
+            // get all the feedbacks given to the user
+            var userFeedbacks = db.UserFeedbacks.Include(p => p.Sender).Where(p => p.ReceiverId == userId);
+            jobRequest.UserFeedbacks = userFeedbacks.ToList();
+
             return Request.CreateResponse(HttpStatusCode.OK, jobRequest, jsonFormatter);
         }
 
