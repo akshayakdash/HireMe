@@ -109,12 +109,12 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                 }
 
-                if (!string.IsNullOrWhiteSpace(model.profile_pic_base64))
+                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
                 {
 
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
-                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
-                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
+                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
                     //profileImagePath = model.profile_pic_base64;
                 }
 
@@ -132,19 +132,29 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
                 }
 
-                if (!string.IsNullOrWhiteSpace(model.id_proof_base64))
+                if (!string.IsNullOrWhiteSpace(model.id_proof1_base64))
                 {
                     //idProofImagePath = model.id_proof_base64;
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_base64);
-                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
-                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof1_base64));
+                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
                 }
                 #endregion
-                var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
+                var user = new ApplicationUser { UserName = randomUserName, Email = model.Email,
+                    Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName,
+                    LastName = model.LastName, ProfilePicUrl = profileImagePath,
+                    CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
                 string phoneNumber = model.PhoneNumber.Replace("-", "");
 
 
-                var candidate = new Candidate { Gender = model.Gender, AgencyId = agency.AgencyId, StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1, Age = age };
+                var candidate = new Candidate { Gender = model.Gender, AgencyId = agency.AgencyId,
+                    StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName,
+                    Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber,
+                    CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId,
+                    ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath,
+                    IdProofDoc1 = idProofImagePath1, Age = age
+            };
+
                 candidate.CreatedDate = DateTime.Now.ToString();
                 var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                 if (cntry != null)
@@ -356,6 +366,12 @@ namespace HireMe.Controllers.MobileApiControllers
                         //clonedJobRequest.CandidateId = candidate.CandidateId;
                         var candidate = db.Candidates.Include(p => p.JobRequests).FirstOrDefault(t => t.CandidateId == cndId);
                         candidate.Disponibility = candidateProfile.Disponibility;
+                        //This was not there I have added the same
+                        candidate.ExpectedMinSalary = candidateProfile.ExpectedMinSalary;
+                        candidate.ExpectedMaxSalary = candidateProfile.ExpectedMaxSalary;
+                        candidate.ExperienceInYears = candidateProfile.ExperienceInYears;
+                        candidate.ExperienceInMonths = candidateProfile.ExperienceInMonths;
+
                         candidate.JobRequests.Add(clonedJobRequest);
                         db.JobRequests.Add(clonedJobRequest);
                         db.SaveChanges();
