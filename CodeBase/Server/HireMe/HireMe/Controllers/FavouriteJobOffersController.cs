@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using HireMe.Models;
+using HireMe.Utility;
 using Microsoft.AspNet.Identity;
 namespace HireMe.Controllers
 {
@@ -80,6 +81,7 @@ namespace HireMe.Controllers
             }
             db.SaveChanges();
 
+            NotificationFramework.SendNotification("", userId, "Job offer Shortlisted", "Job offer added to favourites");
             //return View();
             return Json("Successfully added to favourites.", JsonRequestBehavior.AllowGet);
         }

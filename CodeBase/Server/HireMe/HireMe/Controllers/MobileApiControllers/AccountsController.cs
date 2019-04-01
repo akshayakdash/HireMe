@@ -268,6 +268,10 @@ namespace HireMe.Controllers.MobileApiControllers
                 var newOtp = new Random().Next(99999, 999999);
                 var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 string code = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
+
+                // send email with the code
+                NotificationFramework.SendNotification("", user.Id, "Reset password code", "Your unique code to reset password is : " + code);
+
                 return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "OTP generated successfully.", Data = new { OTP = newOtp, Code = code } });
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771

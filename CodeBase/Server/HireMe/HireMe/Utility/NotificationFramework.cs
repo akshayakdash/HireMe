@@ -3,6 +3,7 @@ using HireMe.Models;
 using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Mail;
@@ -60,49 +61,57 @@ namespace HireMe.Utility
                         }
                     }
 
-                   
+
+                    using (SmtpClient client = new SmtpClient())
+                    {
+                        try
+                        {
+                            //client.Port = 25;
+                            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            //client.UseDefaultCredentials = false;
+                            //client.Host = "smtp.gmail.com";
+                            //mail.Subject = "this is a test email.";
+                            //mail.Body = "this is my test email body";
+                            //client.Send(mail);
+
+
+                            // SmtpClient client = new SmtpClient();
+                            client.Port = 587;
+                            client.Host = "smtp.gmail.com";
+                            //client.EnableSsl = true;
+                            client.Timeout = 10000;
+                            client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                            client.UseDefaultCredentials = false;
+
+                            var reciever = db.Users.Find(receiverId);
+
+                            if (reciever != null)
+                            {
+                                client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
+
+                                MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMailUserName"], reciever.Email);
+                                mail.Subject = subject;
+                                mail.Body = content;
+                                mail.IsBodyHtml = true;
+                                mail.BodyEncoding = UTF8Encoding.UTF8;
+                                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                                client.SendMailAsync(mail);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+
                 }
 
-               
+
 
                 // now if the user has chosen sendAsEmail to true -- then prepare the mail and send it
                 //MailMessage mail = new MailMessage("you@yourcompany.com", "user@hotmail.com");
 
-                //using (SmtpClient client = new SmtpClient())
-                //{
-                //    try
-                //    {
-                //        //client.Port = 25;
-                //        //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //        //client.UseDefaultCredentials = false;
-                //        //client.Host = "smtp.gmail.com";
-                //        //mail.Subject = "this is a test email.";
-                //        //mail.Body = "this is my test email body";
-                //        //client.Send(mail);
 
-
-                //        // SmtpClient client = new SmtpClient();
-                //        client.Port = 587;
-                //        client.Host = "smtp.gmail.com";
-                //        client.EnableSsl = true;
-                //        client.Timeout = 10000;
-                //        client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //        client.UseDefaultCredentials = false;
-                //        client.Credentials = new System.Net.NetworkCredential("user@gmail.com", "password");
-
-                //        MailMessage mail = new MailMessage("donotreply@domain.com", "sendtomyemail@domain.co.uk");
-                //        mail.Subject = subject;
-                //        mail.Body = content;
-                //        mail.IsBodyHtml = true;
-                //        mail.BodyEncoding = UTF8Encoding.UTF8;
-                //        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-                //        client.SendMailAsync(mail);
-                //    }
-                //    catch (Exception ex)
-                //    {
-
-                //    }
-                //}
             });
         }
     }
