@@ -272,7 +272,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 // send email with the code
                 NotificationFramework.SendNotification("", user.Id, "Reset password code", "Your unique code to reset password is : " + code);
 
-                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "OTP generated successfully.", Data = new { OTP = newOtp, Code = code } });
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Your unique code to reset password is generated successfully and sent to your email.", Data = new { OTP = newOtp, Code = code } });
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
