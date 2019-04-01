@@ -78,7 +78,7 @@ namespace HireMe.Utility
                             // SmtpClient client = new SmtpClient();
                             client.Port = 587;
                             client.Host = "smtp.gmail.com";
-                            //client.EnableSsl = true;
+                            client.EnableSsl = true;
                             client.Timeout = 10000;
                             client.DeliveryMethod = SmtpDeliveryMethod.Network;
                             client.UseDefaultCredentials = false;
@@ -95,7 +95,7 @@ namespace HireMe.Utility
                                 mail.IsBodyHtml = true;
                                 mail.BodyEncoding = UTF8Encoding.UTF8;
                                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-                                client.SendMailAsync(mail);
+                                client.Send(mail);
                             }
                         }
                         catch (Exception ex)
