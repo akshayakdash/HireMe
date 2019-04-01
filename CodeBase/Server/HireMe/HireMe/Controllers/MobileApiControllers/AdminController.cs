@@ -101,7 +101,8 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             var unverifiedAgencies = db.Agencies
                 .Include(p => p.ApplicationUser)
-                .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                //.Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                .Where(p => !p.ProfileVerified)
                 .OrderByDescending(p => p.AgencyId)
                 .ToList();
             return Request.CreateResponse(HttpStatusCode.OK, unverifiedAgencies, jsonFormatter);
