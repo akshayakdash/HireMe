@@ -617,6 +617,17 @@ namespace HireMe.Models
 
     }
 
+    public class JOBTekOtp
+    {
+        public int Id { get; set; }
+        public string AspNetUserId { get; set; }
+        public string OTP { get; set; }
+        public string UniqueCode { get; set; }
+        public string Reason { get; set; }
+        public bool IsActive { get; set; }
+        public DateTime CreatedDate { get; set; }
+    }
+
     #region DB Views
     public class v_SearchJobRequest
     {

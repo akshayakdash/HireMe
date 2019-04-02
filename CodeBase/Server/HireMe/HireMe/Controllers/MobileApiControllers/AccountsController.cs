@@ -72,7 +72,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 if (!string.IsNullOrWhiteSpace(model.profile_pic_base64))
                 {
-                    
+
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
                     profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
@@ -174,6 +174,10 @@ namespace HireMe.Controllers.MobileApiControllers
 
 
                 var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                // first check if there is any user already exists on this user name
+                var userExists = UserManager.FindByNameAsync(model.UserName).Result;
+                if (userExists != null)
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "User Name already taken." });
                 var result = UserManager.CreateAsync(user, model.Password).Result;
 
                 if (result.Succeeded)
@@ -269,8 +273,30 @@ namespace HireMe.Controllers.MobileApiControllers
                 var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 string code = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
 
+
+                //first find the OTP repository to get the active OTP
+                var existingActiveOTP = db.UserOtps.FirstOrDefault(p => p.AspNetUserId == user.Id);
+
+                // if existing otp record found then update it else create a new entry
+                if (existingActiveOTP != null)
+                {
+                    existingActiveOTP.OTP = newOtp.ToString();
+                    existingActiveOTP.UniqueCode = code;
+                    existingActiveOTP.IsActive = true;
+                    existingActiveOTP.CreatedDate = DateTime.Now;
+                    db.Entry(existingActiveOTP).Property(p => p.OTP).IsModified = true;
+                    db.Entry(existingActiveOTP).Property(p => p.UniqueCode).IsModified = true;
+                    db.Entry(existingActiveOTP).Property(p => p.IsActive).IsModified = true;
+                    db.Entry(existingActiveOTP).Property(p => p.CreatedDate).IsModified = true;
+                }
+                else
+                {
+                    db.UserOtps.Add(new JOBTekOtp { AspNetUserId = user.Id, IsActive = true, OTP = newOtp.ToString(), UniqueCode = code, CreatedDate = DateTime.Now });
+                }
+                db.SaveChanges();
+
                 // send email with the code
-                NotificationFramework.SendNotification("", user.Id, "Reset password code", "Your unique code to reset password is : " + code);
+                NotificationFramework.SendNotification("", user.Id, "Reset password code", "Your unique code to reset password is : " + newOtp.ToString());
 
                 return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Your unique code to reset password is generated successfully and sent to your email.", Data = new { OTP = newOtp, Code = code } });
 
@@ -307,11 +333,13 @@ namespace HireMe.Controllers.MobileApiControllers
             }
 
             // Need to check for the active OTP
-
+            var existingOtp = db.UserOtps.FirstOrDefault(p => p.AspNetUserId == user.Id && p.OTP == model.Code);
+            if (existingOtp == null)
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Invalid OTP" });
 
             var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             //string code = UserManager.GeneratePasswordResetTokenAsync(user.Id).Result;
-            var result = UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password).Result;
+            var result = UserManager.ResetPasswordAsync(user.Id, existingOtp.UniqueCode, model.Password).Result;
             if (result.Succeeded)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password reset successfully." });

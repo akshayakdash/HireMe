@@ -61,6 +61,11 @@ namespace HireMe.Models
           .WithOptional()
           .HasForeignKey(agncy => agncy.AspNetUserId);
 
+            modelBuilder.Entity<ApplicationUser>()
+         .HasMany(user => user.OTPList)
+         .WithOptional()
+         .HasForeignKey(otp => otp.AspNetUserId);
+
             modelBuilder.Entity<Candidate>()
         .HasMany(user => user.JobRequests)
         .WithOptional()
@@ -114,6 +119,7 @@ namespace HireMe.Models
         public DbSet<SignalRUserConnection> SignalRConnections { get; set; }
         public DbSet<JobRequestJobTask> JobRequestJobTasks { get; set; }
         public DbSet<UserFeedback> UserFeedbacks { get; set; }
+        public DbSet<JOBTekOtp> UserOtps { get; set; }
 
         public DbSet<v_SearchJobRequest> v_JobRequests { get; set; }
 
