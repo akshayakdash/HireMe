@@ -255,7 +255,12 @@ namespace HireMe.Controllers.MobileApiControllers
             if (ModelState.IsValid)
             {
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
-                var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { }, AgencyJobRequestGroupId = Guid.NewGuid().ToString(), AgencyJobRequestTitle = candidateProfile.Title };
+                var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now,
+                    JobRequestDescription = candidateProfile.AdditionalDescription,
+                    JobId = candidateProfile.JobId,
+                    JobRequestJobTasks = new List<JobRequestJobTask> { },
+                    AgencyJobRequestGroupId = Guid.NewGuid().ToString(),
+                    AgencyJobRequestTitle = candidateProfile.Title };
                 if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic1;
@@ -270,11 +275,11 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
-                else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
+                else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic1Base64))
                 {
                     //jobRequest.SkillPic1 = jobRequest.SkillPic1Base64;
                     string fileName = Guid.NewGuid().ToString()  + ".jpg";//+Base64Extensions.GetFileExtension(jobRequest.SkillPic1Base64);
-                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic1Base64));
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic1Base64));
                     jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
@@ -294,11 +299,11 @@ namespace HireMe.Controllers.MobileApiControllers
                     jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName;
                     //jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
                 }
-                else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic1Base64))
+                else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic2Base64))
                 {
                     //jobRequest.SkillPic2 = jobRequest.SkillPic2Base64;
                     string fileName = Guid.NewGuid().ToString()  + ".jpg";// + Base64Extensions.GetFileExtension(jobRequest.SkillPic2Base64);
-                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic2Base64));
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic2Base64));
                     jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
@@ -317,11 +322,11 @@ namespace HireMe.Controllers.MobileApiControllers
                     jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                     //jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
                 }
-                else if (!string.IsNullOrWhiteSpace(jobRequest.SkillPic3Base64))
+                else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic3Base64))
                 {
                     //jobRequest.SkillPic3 = jobRequest.SkillPic3Base64;
                     string fileName = Guid.NewGuid().ToString()  + ".jpg";// Base64Extensions.GetFileExtension(jobRequest.SkillPic3Base64);
-                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(jobRequest.SkillPic3Base64));
+                    File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic3Base64));
                     jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
@@ -371,6 +376,12 @@ namespace HireMe.Controllers.MobileApiControllers
                         candidate.ExpectedMaxSalary = candidateProfile.ExpectedMaxSalary;
                         candidate.ExperienceInYears = candidateProfile.ExperienceInYears;
                         candidate.ExperienceInMonths = candidateProfile.ExperienceInMonths;
+                        candidate.MinGroupPeople = candidateProfile.MinGroupPeople;
+                        candidate.MaxGroupPeople = candidateProfile.MaxGroupPeople;
+                        candidate.SalaryType = candidateProfile.SalaryType;
+                        candidate.CanRead = candidateProfile.CanRead;
+                        candidate.CanWrite = candidateProfile.CanWrite;
+                        candidate.SleepOnSite = candidateProfile.SleepOnSite;
 
                         candidate.JobRequests.Add(clonedJobRequest);
                         db.JobRequests.Add(clonedJobRequest);
