@@ -42,7 +42,8 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             var unverifiedCandidates = db.Candidates
                 .Include(p => p.ApplicationUser)
-                .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                //.Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                .Where(p => !p.ProfileVerified)
                 .OrderByDescending(p => p.CandidateId)
                 .ToList();
             return Request.CreateResponse(HttpStatusCode.OK, unverifiedCandidates, jsonFormatter);

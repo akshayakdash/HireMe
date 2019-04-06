@@ -135,6 +135,10 @@ namespace HireMe.Controllers.MobileApiControllers
             var existingCandidate = db.Candidates.Include(p => p.JobRequests).FirstOrDefault(t => t.CandidateId == candidateId);
             if (existingCandidate == null)
                 return Request.CreateResponse(HttpStatusCode.BadRequest, "Candidate not found.");
+
+            // if existing candidate's profile is not verified then dont allow to create any job request
+            if (!existingCandidate.ProfileVerified)
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Candidate profile not verified by admin." }, jsonFormatter);
             var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
 
             string path = HttpContext.Current.Server.MapPath("~/Uploads/");
