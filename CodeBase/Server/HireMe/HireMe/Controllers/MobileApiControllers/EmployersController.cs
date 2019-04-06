@@ -63,6 +63,10 @@ namespace HireMe.Controllers.MobileApiControllers
             {
 
                 var existingEmployer = db.Employers.Include(path => path.JobOffers).FirstOrDefault(p => p.EmployerId == employerId);
+
+                // validation code added if the employer is not verified to create the job offer
+                if(!existingEmployer.ProfileVerified)
+                    return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Your profile is not verified.Please contact support." });
                 if (existingEmployer == null)
                 {
                     var appUser = db.Users.Find(existingEmployer.AspNetUserId);
@@ -119,8 +123,6 @@ namespace HireMe.Controllers.MobileApiControllers
                 }
                 else
                 {
-
-
                     //var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
                     var jobOffer = AutoMapper.Mapper.Map<JobOffer>(employerJobOffer);
                     jobOffer.IsPublished = true;
