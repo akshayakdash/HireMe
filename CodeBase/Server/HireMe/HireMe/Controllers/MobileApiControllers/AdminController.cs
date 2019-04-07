@@ -42,7 +42,8 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             var unverifiedCandidates = db.Candidates
                 .Include(p => p.ApplicationUser)
-                .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                //.Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                .Where(p => !p.ProfileVerified)
                 .OrderByDescending(p => p.CandidateId)
                 .ToList();
             return Request.CreateResponse(HttpStatusCode.OK, unverifiedCandidates, jsonFormatter);
@@ -72,7 +73,8 @@ namespace HireMe.Controllers.MobileApiControllers
         {
             var unverifiedEmployers = db.Employers
                 .Include(p => p.ApplicationUser)
-                .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                //.Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                .Where(p => !p.ProfileVerified) // note : as per charles we have added this condition, but it is problematic 
                 .OrderByDescending(p => p.EmployerId)
                 .ToList();
             return Request.CreateResponse(HttpStatusCode.OK, unverifiedEmployers, jsonFormatter);

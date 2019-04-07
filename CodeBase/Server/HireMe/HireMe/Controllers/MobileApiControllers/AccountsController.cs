@@ -143,6 +143,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 {
                     var candidate = new Candidate { Gender = model.Gender, StaffType = StaffType.Independent, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1, Age = age };
                     candidate.CreatedDate = DateTime.Now.ToString();
+                    candidate.ContactOption = "Email,Phone";// added on 6th Apr 2019
                     var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                     if (cntry != null)
                         candidate.Country = cntry.CountryName;
@@ -158,6 +159,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 {
                     var employer = new Employer { Gender = model.Gender, FirstName = model.FirstName, LastName = model.LastName, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1, Age = age };
                     employer.CreatedDate = DateTime.Now.ToString();
+                    employer.ContactOption = "Email,Phone"; // added on 6th Apr 2019
                     var cntry = countries.FirstOrDefault(p => p.CountryId == employer.CountryId);
                     if (cntry != null)
                         employer.Country = cntry.CountryName;
