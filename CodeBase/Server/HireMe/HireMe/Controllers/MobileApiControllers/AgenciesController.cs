@@ -383,6 +383,7 @@ namespace HireMe.Controllers.MobileApiControllers
                         candidate.CanWrite = candidateProfile.CanWrite;
                         candidate.SleepOnSite = candidateProfile.SleepOnSite;
 
+
                         candidate.JobRequests.Add(clonedJobRequest);
                         db.JobRequests.Add(clonedJobRequest);
                         db.SaveChanges();

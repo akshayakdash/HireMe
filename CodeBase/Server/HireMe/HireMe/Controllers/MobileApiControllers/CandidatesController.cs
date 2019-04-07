@@ -201,6 +201,11 @@ namespace HireMe.Controllers.MobileApiControllers
             existingCandidate.SleepOnSite = candidateProfile.SleepOnSite;
             existingCandidate.ExperienceInYears = candidateProfile.ExperienceInYears;
             existingCandidate.ExperienceInMonths = candidateProfile.ExperienceInMonths;
+            //existingCandidate.CityId = candidateProfile.CityId;
+            //existingCandidate.DistrictId = candidateProfile.DistrictId;
+            existingCandidate.MinGroupPeople = candidateProfile.MinGroupPeople;
+            existingCandidate.MaxGroupPeople = candidateProfile.MaxGroupPeople;
+            existingCandidate.SalaryType = candidateProfile.SalaryType;
             if (candidateProfile.SleepOnSite)
             {
                 existingCandidate.ExpectedMinRooms = candidateProfile.ExpectedMinRooms;
