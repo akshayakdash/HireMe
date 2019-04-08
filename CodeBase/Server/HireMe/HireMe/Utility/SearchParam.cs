@@ -339,7 +339,7 @@ namespace HireMe.Utility
             {
                 if (Disponibility.HasValue)
                 {
-                    queryString.Append(" and Disponibility.Date = @" + paramCount);
+                    queryString.Append(" and Disponibility >= @" + paramCount);
                     paramList.Add(Disponibility.Value.Date);
                     paramCount++;
                 }
@@ -493,7 +493,7 @@ namespace HireMe.Utility
             {
                 if (Disponibility.HasValue)
                 {
-                    queryString.Append(" and Disponibility.Date = @" + paramCount);
+                    queryString.Append(" and Disponibility >= @" + paramCount);
                     paramList.Add(Disponibility.Value.Date);
                     paramCount++;
                 }
