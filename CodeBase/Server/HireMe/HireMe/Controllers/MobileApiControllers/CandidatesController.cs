@@ -248,7 +248,7 @@ namespace HireMe.Controllers.MobileApiControllers
             jobRequest.IsPublished = false;
             db.Entry(jobRequest).Property(t => t.IsPublished).IsModified = true;
             db.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job offer removed successfully", Data = jobRequest });
+            return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job request removed successfully", Data = jobRequest });
         }
 
         #endregion

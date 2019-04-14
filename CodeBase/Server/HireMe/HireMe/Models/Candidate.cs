@@ -735,6 +735,7 @@ namespace HireMe.Models
         public int JobId { get; set; }
         public int EmployerId { get; set; }
         public int ProfileVerified { get; set; } // view modified...added profile verified column
+        public bool VerifiedByAdmin { get; set; } // view modified...added this column on 14-Apr-2019
         public Gender Gender { get; set; }
         public int MinAge { get; set; }
         public int MaxAge { get; set; }

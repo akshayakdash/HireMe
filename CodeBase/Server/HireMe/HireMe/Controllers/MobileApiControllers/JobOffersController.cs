@@ -50,6 +50,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 var jobOffers = db.v_SearchJobOffer_Mobile
                     .Include(p => p.JobOfferJobTasks)
                     .AsQueryable()
+                    .Where(p => p.VerifiedByAdmin)
                     .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
                 if (searchParam != null && searchParam.Tasks != null && searchParam.Tasks.Count > 0)
