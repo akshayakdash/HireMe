@@ -217,8 +217,8 @@ namespace HireMe.Controllers
                     var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
                     if (agency != null)
                     {
-                        agency.ManagerFirstName = model.FirstName;
-                        agency.ManagerLastName = model.LastName;
+                        //agency.ManagerFirstName = model.FirstName;
+                        //agency.ManagerLastName = model.LastName;
                          agency.ManagerAge = model.Age.ToString();
                         agency.CountryId = model.CountryId;
                         agency.CityId = model.CityId;

@@ -469,8 +469,9 @@ namespace HireMe.Controllers.MobileApiControllers
                 db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                 if (agency != null)
                 {
-                    agency.ManagerFirstName = model.FirstName;
-                    agency.ManagerLastName = model.LastName;
+                    //agency.ManagerFirstName = model.FirstName;
+                    //agency.ManagerLastName = model.LastName;
+                    //******Need to relook at the above lines. You cannot update responsible person name with user's first name and last name - 15-Apr-2019
                     agency.ManagerAge = model.Age.ToString();
                     //agency.ContactOption = model.ContactOption != null && model.ContactOption.Length > 0 ? string.Join(",", model.ContactOption) : "";
                     //agency. = model.PhoneNumber;
