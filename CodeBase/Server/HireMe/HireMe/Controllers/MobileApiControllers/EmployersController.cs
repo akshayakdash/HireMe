@@ -153,12 +153,33 @@ namespace HireMe.Controllers.MobileApiControllers
                     {
                         jobOffer.District = district.DistrictName;
                     }
-                    employerJobOffer.JobTasks.ForEach(task =>
+
+
+                    //employerJobOffer.JobTasks.ForEach(task =>
+                    //{
+                    //    if (task.Selected)
+                    //    {
+                    //        jobOffer.JobOfferJobTasks.Add(new JobOfferJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                    //    }
+                    //});
+
+                    Action<JobTaskViewModel> saveJobOfferTaskTree = null;
+
+                    saveJobOfferTaskTree = (task) =>
                     {
+                        //Console.WriteLine(n.Value);
                         if (task.Selected)
                         {
                             jobOffer.JobOfferJobTasks.Add(new JobOfferJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
                         }
+                        if (task.SubTasks != null)
+                            task.SubTasks.ToList().ForEach(saveJobOfferTaskTree);
+                    };
+
+
+                    employerJobOffer.JobTasks.ForEach(task =>
+                    {
+                        saveJobOfferTaskTree(task);
                     });
 
                     existingEmployer.JobOffers.Add(jobOffer);
