@@ -234,7 +234,8 @@ namespace HireMe.Utility
         public int MaxAge { get; set; }
         public StaffType StaffType { get; set; }
         public string YearsOfExperience { get; set; }
-
+        //Added a new property to check if the API request is from Admin interface
+        public bool IsAdmin{ get;set; }
 
         public int Job { get; set; }
         public bool ProfileVerified { get; set; }
@@ -264,6 +265,12 @@ namespace HireMe.Utility
             ArrayList paramList = new ArrayList();
             int paramCount = 0;
             StringBuilder queryString = new StringBuilder();
+            if (IsAdmin == false)
+            {
+                queryString.Append(" and verifiedbyadmin = @" + paramCount);
+                paramList.Add(true);
+                paramCount++;
+            }
             if (Gender != null && Gender != default(Gender))
             {
                 queryString.Append(" and Gender = @" + paramCount);
@@ -413,7 +420,8 @@ namespace HireMe.Utility
         public int MaxAge { get; set; }
         public StaffType StaffType { get; set; }
         public string YearsOfExperience { get; set; }
-
+        //Added a new property to check if the API request is from Admin interface
+        public bool IsAdmin { get; set; }
 
         public int Job { get; set; }
         public bool ProfileVerified { get; set; }
@@ -443,6 +451,14 @@ namespace HireMe.Utility
             ArrayList paramList = new ArrayList();
             int paramCount = 0;
             StringBuilder queryString = new StringBuilder();
+
+            if (IsAdmin == false)
+            {
+                queryString.Append(" and verifiedbyadmin = @" + paramCount);
+                paramList.Add(true);
+                paramCount++;
+            }
+
             if (Gender != null && Gender != default(Gender))
             {
                 queryString.Append(" and Gender = @" + paramCount);
