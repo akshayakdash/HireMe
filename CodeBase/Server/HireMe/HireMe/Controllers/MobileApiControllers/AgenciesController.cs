@@ -233,7 +233,7 @@ namespace HireMe.Controllers.MobileApiControllers
             }
         }
 
-        [HttpGet]
+        [HttpDelete]
         [Route("api/Agencies/{agencyId}/JobRequests/{jobRequestId}")]
         public HttpResponseMessage RemoveJobRequest(int agencyId, int jobRequestId)
         {
@@ -241,8 +241,17 @@ namespace HireMe.Controllers.MobileApiControllers
             var jobRequest = db.JobRequests.Find(jobRequestId);
             if (jobRequest == null)
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "Job Request not found." });
+            // delete job request for a single candidate
             jobRequest.IsPublished = false;
             db.Entry(jobRequest).Property(p => p.IsPublished).IsModified = true;
+
+            // uncomment below and comment above to enable deletion of job request created for multiple candidates of agency
+            //var groupedJobRequests = db.JobRequests.Where(p => p.AgencyJobRequestGroupId == jobRequest.AgencyJobRequestGroupId).ToList();
+            //groupedJobRequests.ForEach(jr => {
+            //    jr.IsPublished = false;
+            //    db.Entry(jr).Property(p => p.IsPublished).IsModified = true;
+            //});
+            
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Request removed successfully." });
         }

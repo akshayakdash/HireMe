@@ -51,8 +51,8 @@ namespace HireMe.Controllers.MobileApiControllers
             //    .ToList();
 
             var myJobOffers = db.v_SearchJobOffer_Mobile
-                //.Where(p => p.IsPublished && p.EmployerId == employerId);
-                .Where(p => p.EmployerId == employerId);
+                .Where(p => p.IsPublished && p.EmployerId == employerId);
+                //.Where(p => p.EmployerId == employerId);
             return Request.CreateResponse(HttpStatusCode.OK, myJobOffers, jsonFormatter);
         }
 
