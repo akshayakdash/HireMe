@@ -52,6 +52,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
             var myJobOffers = db.v_SearchJobOffer_Mobile
                 .Where(p => p.IsPublished && p.EmployerId == employerId);
+                //.Where(p => p.EmployerId == employerId);
             return Request.CreateResponse(HttpStatusCode.OK, myJobOffers, jsonFormatter);
         }
 
@@ -530,7 +531,8 @@ namespace HireMe.Controllers.MobileApiControllers
 
             // now calculate the average star rating for the job request based on the user rating
             // we can use this logic  -- (5*252 + 4*124 + 3*40 + 2*29 + 1*33) / (252+124+40+29+33)
-            var averageRating = (int)Math.Ceiling(db.JobRequestNotes.Average(p => p.StarRating));
+            var averageRating = (int)Math.Ceiling(jobRequest.JobRequestNotes.Average(p => p.StarRating));
+
             jobRequest.StarRating = averageRating;
             db.Entry(jobRequest).Property(p => p.StarRating).IsModified = true;
 
