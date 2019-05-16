@@ -164,9 +164,9 @@ namespace HireMe.Models
         [Display(Name = "Agree Terms and Conditions")]
         public bool AgreeTermsAndConditions { get; set; }
 
-        [Required(ErrorMessage = "Please select the security question.")]
+        //[Required(ErrorMessage = "Please select the security question.")]
         public int SecurityQuestionId { get; set; }
-        [Required(ErrorMessage = "Please enter the security question's answer.")]
+        //[Required(ErrorMessage = "Please enter the security question's answer.")]
         public string SecurityQuestionAnswer { get; set; }
 
         [Required]
