@@ -39,7 +39,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
 
 
-        #region JobOffers
+         #region JobOffers
         [HttpGet]
         [Route("api/Employers/{employerId}/JobOffers")]
         public HttpResponseMessage MyJobOffers(int employerId)
