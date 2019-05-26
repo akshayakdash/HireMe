@@ -12,12 +12,12 @@
 @if (role == "Admin")
 {
         <div class="agency-pics">
-            <img src="data:image/jpeg;base64, @(Model.IdProofDoc)" />
+            <img src="@(Model.IdProofDoc)" />
             <h3>Agency Logo</h3>
         </div>
 }
         <div class="agency-pics">
-            <img src="data:image/jpeg;base64, @(Model.AgencyLogo)" />
+            <img src="@(Model.AgencyLogo)" />
             <h3>Agency ID Proof</h3>
         </div>
     </div>

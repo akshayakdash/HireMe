@@ -458,44 +458,37 @@
                                             </div>
                                         </div>
 
-                                        @if (ViewBag.SecurityQuestions != null)
-                                    {
-
-                                    <div class="input-group mb-2">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
-                                            <span class="required-field"></span>
+                                        @*@if (ViewBag.SecurityQuestions != null)
+                                        {
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
+                                                    <span class="required-field"></span>
+                                                </div>
+                                                @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control" })
+                                                <span class="input-lable">Security Question</span>
+                                            </div>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
+                                                    <span class="required-field"></span>
+                                                </div>
+                                                @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
+                                                <span class="input-lable">Security Answer</span>
+                                            </div>
+                                        }*@
+                                        <div class="checkbox">
+                                            <label>
+                                                @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
+                                                @Html.ActionLink("I agree terms and conditions", "actionname", "controllername")
+                                                <span></span>
+                                            </label>
                                         </div>
-                                        @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control" })
-                                        <span class="input-lable">Security Question</span>
-                                    </div>
-
-                                    @*<div class="row">
-                                            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
-                                        </div>*@
-
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
-                                            <span class="required-field"></span>
+                                        <div class="row">
+                                            <div class="col-sm-12 error-arrow">
+                                                @Html.ValidationMessageFor(m => m.AgreeTermsAndConditions, "", new { @class = "text-danger" })
+                                            </div>
                                         </div>
-                                        @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
-                                        <span class="input-lable">Security Answer</span>
-                                    </div>
-                                    <div class="checkbox">
-                                        <label>
-                                            @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
-                                            @Html.ActionLink("I agree terms and conditions", "actionname", "controllername")
-                                            <span></span>
-                                        </label>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-12 error-arrow">
-                                            @Html.ValidationMessageFor(m => m.AgreeTermsAndConditions, "", new { @class = "text-danger" })
-                                        </div>
-                                    </div>
-                                    }
-
                                     </fieldset>
 
                                 </div>

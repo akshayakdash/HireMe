@@ -1,5 +1,7 @@
-﻿@model IEnumerable<HireMe.Models.JobRequest>
+﻿@*@model IEnumerable<HireMe.Models.JobRequest>*@
 
+@model PagedList.IPagedList<HireMe.Models.JobRequest>
+@using PagedList.Mvc;
 
 <style>
     #footer-container {
@@ -8,9 +10,9 @@
 </style>
 
 <div id="main-container-user">
-    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                .Select(c => c.Value);
+    @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                    .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
     <section class="right-side">
@@ -51,21 +53,35 @@
                                         }
                                     </ul>*@
                                 <ul class="nav nav-tabs job-tab">
-                                    <li><a class="active" href="#tab-validatejobrequest-1" data-toggle="tab"><img src="~/assets/images/home-icon.png" />Home Jobs</a></li>
-                                    <li><a href="#tab-validatejobrequest-2" data-toggle="tab"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a></li>
-                                    <li><a href="#tab-validatejobrequest-3" data-toggle="tab"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a></li>
-                                    <li><a href="#tab-validatejobrequest-4" data-toggle="tab"><img src="~/assets/images/ceremony-icon.png" />Ceremony Organization</a></li>
-                                    <li><a href="#tab-validatejobrequest-5" data-toggle="tab"><img src="~/assets/images/course-icon.png" />Course</a></li>
+                                    <li>
+                                        <a class="@((Request.QueryString["jobCat"] == null || int.Parse(Request.QueryString["jobCat"]) == 1) ? "active" : "")"
+                                           href="/Admin/ValidateJobRequests?jobCat=1"><img src="~/assets/images/home-icon.png" />Home Jobs</a>
+                                    </li>
+                                    <li>
+                                        <a class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 2) ? "active" : "")"
+                                           href="/Admin/ValidateJobRequests?jobCat=2"><img src="~/assets/images/settings-icon.png" />Troubleshooting</a>
+                                    </li>
+                                    <li>
+                                        <a class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 3) ? "active" : "")"
+                                           href="/Admin/ValidateJobRequests?jobCat=3"><img src="~/assets/images/salon-icon.png" />Hairstyle/ Care</a>
+                                    </li>
+                                    <li>
+                                        <a class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 4) ? "active" : "")"
+                                           href="/Admin/ValidateJobRequests?jobCat=4"><img src="~/assets/images/ceremony-icon.png" />Ceremony Organization</a>
+                                    </li>
+                                    <li>
+                                        <a class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 5) ? "active" : "")"
+                                           href="/Admin/ValidateJobRequests?jobCat=5"><img src="~/assets/images/course-icon.png" />Course</a>
+                                    </li>
                                 </ul>
 
                                 <div class="tab-content">
 
 
-
-                                    <div class="tab-pane fade show active" id="tab-validatejobrequest-1">
+                                    <div class="@((Request.QueryString["jobCat"] == null || int.Parse(Request.QueryString["jobCat"]) == 1) ? "tab-pane fade show active" : "tab-pane fade")" id="tab-validatejobrequest-1">
 
                                         <div class="row">
-                                            @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 1).ToList())
+                                            @foreach (var item in Model)
                                             {
                                                 <div class="col-sm-6">
                                                     <div class="profileitems searchprofile-section">
@@ -76,7 +92,7 @@
                                                             </span>
                                                         }
                                                         <div class="left">
-                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                            <img src="@item.Candidate.ProfilePicUrl" />
                                                             @*<div class="rating">
                                                                     <a href="javascropt(0);"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></a>
                                                                 </div>
@@ -97,8 +113,8 @@
                                                             <div class="idcard">
                                                                 @if (item.Candidate != null && !string.IsNullOrWhiteSpace(item.Candidate.ProfilePicUrl))
                                                                 {
-                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
-                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    <a href="@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="@item.Candidate.IdProofDoc" />
                                                                     </a>
                                                                 }
                                                                 else
@@ -145,12 +161,22 @@
                                             }
 
                                         </div>
+                                        <div class="row">
+                                            @if (Model != null && Model.Count > 0)
+                                            {
+                                                <div id='Paging' style="text-align:center">
+                                                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                    of @Model.PageCount
 
+                                                    @Html.PagedListPager(Model, page => Url.Action("ValidateJobRequests", new { page, jobCat=1 }))
+                                                </div>
+                                            }
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade show" id="tab-validatejobrequest-2">
+                                    <div class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 2) ? "tab-pane fade show active" : "tab-pane fade")" id="tab-validatejobrequest-2">
 
                                         <div class="row">
-                                            @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 2).OrderByDescending(p => p.JobRequestId))
+                                            @foreach (var item in Model)
                                             {
                                                 <div class="col-sm-6">
                                                     <div class="profileitems searchprofile-section">
@@ -161,7 +187,7 @@
                                                             </span>
                                                         }
                                                         <div class="left">
-                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                            <img src="@item.Candidate.ProfilePicUrl" />
                                                             <h3>
                                                                 <span class="age">@item.Candidate.Age Yrs </span>
                                                                 <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
@@ -174,8 +200,8 @@
                                                             <div class="idcard">
                                                                 @if (item.Candidate != null && !string.IsNullOrWhiteSpace(item.Candidate.ProfilePicUrl))
                                                                 {
-                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
-                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    <a href="@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="@item.Candidate.IdProofDoc" />
                                                                     </a>
                                                                 }
                                                                 else
@@ -218,10 +244,10 @@
                                                         <div class="team-contact-info">
                                                             <ul class="social-icons">
                                                                 @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                 <li>@*<a href="" title="Favorite" id="set_favourite_job_req_link"><i class="fa fa-heart-o" aria-hidden="true"></i></a>*@</li>
                                                                 @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
                                                                 <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                             </ul>
                                                         </div>
@@ -230,11 +256,22 @@
                                             }
 
                                         </div>
+                                        <div class="row">
+                                            @if (Model != null && Model.Count > 0)
+                                            {
+                                                <div id='Paging' style="text-align:center">
+                                                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                    of @Model.PageCount
+
+                                                    @Html.PagedListPager(Model, page => Url.Action("ValidateJobRequests", new { page, jobCat = 2 }))
+                                                </div>
+                                            }
+                                        </div>
 
                                     </div>
-                                    <div class="tab-pane fade show" id="tab-validatejobrequest-3">
+                                    <div class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 3) ? "tab-pane fade show active" : "tab-pane fade")" id="tab-validatejobrequest-3">
                                         <div class="row">
-                                            @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 3).OrderByDescending(p => p.JobRequestId))
+                                            @foreach (var item in Model)
                                             {
                                                 <div class="col-sm-6">
                                                     <div class="profileitems searchprofile-section">
@@ -245,8 +282,8 @@
                                                             </span>
                                                         }
                                                         <div class="left">
-                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
-                                                           
+                                                            <img src="@item.Candidate.ProfilePicUrl" />
+
 
                                                             <h3>
                                                                 <span class="age">@item.Candidate.Age Yrs </span>
@@ -260,8 +297,8 @@
                                                             <div class="idcard">
                                                                 @if (item.Candidate != null && !string.IsNullOrWhiteSpace(item.Candidate.ProfilePicUrl))
                                                                 {
-                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
-                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    <a href="@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="@item.Candidate.IdProofDoc" />
                                                                     </a>
                                                                 }
                                                                 else
@@ -302,10 +339,10 @@
                                                         <div class="team-contact-info">
                                                             <ul class="social-icons">
                                                                 @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                 <li>@*<a href="" title="Favorite" id="set_favourite_job_req_link"><i class="fa fa-heart-o" aria-hidden="true"></i></a>*@</li>
                                                                 @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
                                                                 <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                             </ul>
                                                         </div>
@@ -313,18 +350,29 @@
                                                 </div>
                                             }
 
+                                        </div>
+                                        <div class="row">
+                                            @if (Model != null && Model.Count > 0)
+                                            {
+                                                <div id='Paging' style="text-align:center">
+                                                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                    of @Model.PageCount
+
+                                                    @Html.PagedListPager(Model, page => Url.Action("ValidateJobRequests", new { page, jobCat = 3 }))
+                                                </div>
+                                            }
                                         </div>
                                         @*<div style="    text-align: center;">
 
-                                                <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                            </div>*@
+        </div>*@
 
                                     </div>
-                                    <div class="tab-pane fade show" id="tab-validatejobrequest-4">
+                                    <div class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 4) ? "tab-pane fade show active" : "tab-pane fade")" id="tab-validatejobrequest-4">
 
                                         <div class="row">
-                                            @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 4).OrderByDescending(p => p.JobRequestId))
+                                            @foreach (var item in Model)
                                             {
                                                 <div class="col-sm-6">
                                                     <div class="profileitems searchprofile-section">
@@ -335,8 +383,8 @@
                                                             </span>
                                                         }
                                                         <div class="left">
-                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
-                                                           
+                                                            <img src="@item.Candidate.ProfilePicUrl" />
+
                                                             <h3>
                                                                 <span class="age">@item.Candidate.Age Yrs </span>
                                                                 <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
@@ -379,10 +427,10 @@
                                                         <div class="team-contact-info">
                                                             <ul class="social-icons">
                                                                 @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                 <li>@*<a href="" title="Favorite" id="set_favourite_job_req_link"><i class="fa fa-heart-o" aria-hidden="true"></i></a>*@</li>
                                                                 @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
                                                                 <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                             </ul>
                                                         </div>
@@ -391,14 +439,25 @@
                                             }
 
                                         </div>
+                                        <div class="row">
+                                            @if (Model != null && Model.Count > 0)
+                                            {
+                                                <div id='Paging' style="text-align:center">
+                                                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                    of @Model.PageCount
+
+                                                    @Html.PagedListPager(Model, page => Url.Action("ValidateJobRequests", new { page, jobCat=4 }))
+                                                </div>
+                                            }
+                                        </div>
                                         @*<div style="    text-align: center;">
 
-                                                <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
-                                            </div>*@
+        </div>*@
 
                                     </div>
-                                    <div class="tab-pane fade show" id="tab-validatejobrequest-5">
+                                    <div class="@((Request.QueryString["jobCat"] != null && int.Parse(Request.QueryString["jobCat"]) == 5) ? "tab-pane fade show active" : "tab-pane fade")" id="tab-validatejobrequest-5">
 
                                         <div class="row">
                                             @foreach (var item in Model.Where(p => p.Job.JobCategoryId == 5).OrderByDescending(p => p.JobRequestId))
@@ -412,7 +471,7 @@
                                                             </span>
                                                         }
                                                         <div class="left">
-                                                            <img src="data:image/jpeg;base64,@item.Candidate.ProfilePicUrl" />
+                                                            <img src="@item.Candidate.ProfilePicUrl" />
                                                             <h3>
                                                                 <span class="age">@item.Candidate.Age Yrs </span>
                                                                 <span class="experience">Exp: @item.Candidate.ExperienceInYears Yrs</span>
@@ -425,8 +484,8 @@
                                                             <div class="idcard">
                                                                 @if (item.Candidate != null && !string.IsNullOrWhiteSpace(item.Candidate.ProfilePicUrl))
                                                                 {
-                                                                    <a href="data:image/jpeg;base64,@item.Candidate.IdProofDoc" class="fancybox">
-                                                                        <img src="data:image/jpeg;base64,@item.Candidate.IdProofDoc" />
+                                                                    <a href="@item.Candidate.IdProofDoc" class="fancybox">
+                                                                        <img src="@item.Candidate.IdProofDoc" />
                                                                     </a>
                                                                 }
                                                                 else
@@ -463,10 +522,10 @@
                                                         <div class="team-contact-info">
                                                             <ul class="social-icons">
                                                                 @*<li><a href="#" title="+225 07-02-54-69"><i class="fa fa-phone" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="jk@gmail.com"><i class="fa fa-envelope-open" aria-hidden="true"></i></a></li>*@
                                                                 <li>@*<a href="" title="Favorite" id="set_favourite_job_req_link"><i class="fa fa-heart-o" aria-hidden="true"></i></a>*@</li>
                                                                 @*<li><a href="#" title="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
-                                                                    <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
+                                <li><a href="#" title="Note"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></li>*@
                                                                 <li><a href="~/JobRequests/Details/@item.JobRequestId" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
                                                             </ul>
                                                         </div>
@@ -474,6 +533,17 @@
                                                 </div>
                                             }
 
+                                        </div>
+                                        <div class="row">
+                                            @if (Model != null && Model.Count > 0)
+                                            {
+                                                <div id='Paging' style="text-align:center">
+                                                    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                    of @Model.PageCount
+
+                                                    @Html.PagedListPager(Model, page => Url.Action("ValidateJobRequests", new { page, jobCat=5 }))
+                                                </div>
+                                            }
                                         </div>
                                     </div>
 

@@ -1,4 +1,7 @@
-﻿@model IEnumerable<HireMe.Models.Employer>
+﻿@*@model IEnumerable<HireMe.Models.Employer>*@
+
+@model PagedList.IPagedList<HireMe.Models.Employer>
+@using PagedList.Mvc;
 <style>
     #footer-container {
         display: none;
@@ -30,7 +33,7 @@
 </script>
 
 <div id="main-container-user">
-    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+    @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
         .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
         .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
@@ -94,14 +97,14 @@
                                                             </span>
                                                         }
                                                         <div class="left">
-                                                            <img src="data:image/jpeg;base64,@item.ProfilePicUrl" />
+                                                            <img src="@item.ProfilePicUrl" />
 
                                                             <h2 class="contact-num"><i class="fa fa-phone"></i> <span>@item.ContactNo</span></h2>
                                                             @*<div class="idcard idcard-mobile">
-                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
-                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
-                                                                </a>
-                                                            </div>*@
+                                <a href="@item.IdProofDoc" class="fancybox">
+                                    <img src="@item.IdProofDoc" />
+                                </a>
+                            </div>*@
                                                             @if (!item.ProfileVerified)
                                                             {
                                                                 <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateEmployerAccount(@item.EmployerId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
@@ -109,24 +112,24 @@
                                                         </div>
                                                         <div class="right">
                                                             @*<div class="idcard idcard-desktop">
-                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
-                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
-                                                                </a>
-                                                            </div>*@
+                                <a href="@item.IdProofDoc" class="fancybox">
+                                    <img src="@item.IdProofDoc" />
+                                </a>
+                            </div>*@
                                                             <div class="idcard twoidcard d-none d-md-block">
-                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
-                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
+                                                                <a href="@item.IdProofDoc" class="fancybox">
+                                                                    <img src="@item.IdProofDoc" />
                                                                 </a>
-                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc1" class="fancybox" >
-                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc1" style="margin-top:5px;"/>
+                                                                <a href="@item.IdProofDoc1" class="fancybox">
+                                                                    <img src="@item.IdProofDoc1" style="margin-top:5px;" />
                                                                 </a>
                                                             </div>
                                                             <div class="right-left">
                                                                 <h2 class="name">
                                                                     @if (item.Gender == HireMe.Models.Gender.Male)
-                                                                    {<img src="~/assets/images/man-user.png" />  }
+                                                                    {<img src="~/assets/images/man-user.png" /> }
                                                                     else
-                                                                    {<img src="~/assets/images/woman-user.png" />  }
+                                                                    {<img src="~/assets/images/woman-user.png" />}
 
                                                                     @(item.FirstName + " " + item.LastName)
                                                                 </h2>
@@ -134,20 +137,20 @@
                                                                 <h3 class="location"><i class="fa fa-birthday-cake"></i> @item.Age Yrs</h3>
                                                                 @*<h3><span class="age"><span>(</span>@item.Age Yrs)</span><span class="experience">Exp: @item.ExperienceInYears Yrs</span></h3>*@
                                                                 <p class="location">@item.Address</p>
-                                                               
+
                                                                 <p class="location"><span>@item.Country,</span><span> @item.City,</span><span> @item.District</span></p>
                                                                 <div class="published">Registered on: <span>@item.CreatedDate</span></div>
                                                             </div>
                                                         </div>
                                                         <div class="row d-md-none d-lg-none d-sm-block" style="margin-top: 30px;">
                                                             <div class="col col-id-card" style="margin-left: 10px;margin-right:5px;">
-                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc" class="fancybox">
-                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc" />
+                                                                <a href="@item.IdProofDoc" class="fancybox">
+                                                                    <img src="@item.IdProofDoc" />
                                                                 </a>
                                                             </div>
                                                             <div class="col col-id-card" style="margin-left: 5px;margin-right:10px;">
-                                                                <a href="data:image/jpeg;base64,@item.IdProofDoc1" class="fancybox">
-                                                                    <img src="data:image/jpeg;base64,@item.IdProofDoc1" />
+                                                                <a href="@item.IdProofDoc1" class="fancybox">
+                                                                    <img src="@item.IdProofDoc1" />
                                                                 </a>
                                                             </div>
                                                         </div>
@@ -156,9 +159,18 @@
                                             }
 
                                         </div>
+                                        @if (Model != null && Model.Count > 0)
+                                        {
+                                            <div id='Paging' style="text-align:center">
+                                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                of @Model.PageCount
+
+                                                @Html.PagedListPager(Model, page => Url.Action("Employers", new { page }))
+                                            </div>
+                                        }
                                         @*<div style="    text-align: center;">
 
-                                                <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
+                                            <button class="btn btn-style-1 btn-lg waves" id="submit" name="submit" value=""><a style="color: #ffffff;" href="~/JobCategories"><i class="fa fa-plus"></i> Create a Job Request</a></button>
 
                                             </div>*@
 
@@ -288,5 +300,5 @@
             {
                 <div class="row"><h2>No Employer registered yet.</h2></div>
             }*@
-        </section>
+    </section>
 </div>

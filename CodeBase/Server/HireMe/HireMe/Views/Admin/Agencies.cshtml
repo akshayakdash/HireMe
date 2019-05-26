@@ -1,4 +1,7 @@
-﻿@model IEnumerable<HireMe.Models.Agency>
+﻿@*@model IEnumerable<HireMe.Models.Agency>*@
+
+@model PagedList.IPagedList<HireMe.Models.Agency>
+@using PagedList.Mvc;
 <style>
     #footer-container {
         display: none;
@@ -53,9 +56,9 @@
 </script>
 
 <div id="main-container-user">
-    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-        .Select(c => c.Value);
+    @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+         .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+         .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
     <section class="right-side">
@@ -70,81 +73,90 @@
                         </div>
                         @if (Model != null)
                         {
-                            foreach (var item in Model)
-                            {
+                                foreach (var item in Model)
+                                {
 
-                                <div class="col-sm-6">
-                                    <div class="profileitems searchprofile-section">
-                                        @if (item.ProfileVerified)
-                                        {
-                                            <span class="validate">
-                                                <img src="~/assets/images/verified.png" />
-                                            </span>
-                                        }
-                                        <div class="left">
-                                            <img src="data:image/jpeg;base64,@item.ProfilePicUrl" />
-                                            @*<div class="rating">&nbsp;</div>
-                                            <div class="favorite"></div>*@
-                                            <h2 class="contact-num"><i class="fa fa-phone"></i> @item.PhoneNo</h2>
-                                            @if (!item.ProfileVerified)
+                                    <div class="col-sm-6">
+                                        <div class="profileitems searchprofile-section">
+                                            @if (item.ProfileVerified)
                                             {
-                                                <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
+                                                <span class="validate">
+                                                    <img src="~/assets/images/verified.png" />
+                                                </span>
                                             }
-                                            else
-                                            {
-                                                @*<p>Verified</p>*@
+                                            <div class="left">
+                                                <img src="@item.ProfilePicUrl" />
+                                                @*<img src="data:image/jpeg;base64,@item.ProfilePicUrl" />*@
+                                                @*<div class="rating">&nbsp;</div>
+                                                    <div class="favorite"></div>*@
+                                                <h2 class="contact-num"><i class="fa fa-phone"></i> @item.PhoneNo</h2>
+                                                @if (!item.ProfileVerified)
+                                                {
+                                                    <button class="btn btn-default btn-xs btn-block" type="button" onclick="activateAgencyAccount(@item.AgencyId)"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Verify</button>
+                                                }
+                                                else
+                                                {
+                                                    @*<p>Verified</p>*@
 
-                                            }
-                                        </div>
-                                        <div class="right">
-                                            @*<div class="idcard">
-                                                <a href="data:image/jpeg;base64,@item.AgencyLogo" class="fancybox">
-                                                    <img src="data:image/jpeg;base64,@item.AgencyLogo" />
-                                                </a>
-                                            </div>*@
-                                            <div class="idcard twoidcard d-none d-md-block">
-    <a href="data:image/jpeg;base64,@item.AgencyLogo" class="fancybox">
-        <img src="data:image/jpeg;base64,@item.AgencyLogo" />
-    </a>
-    <a href="data:image/jpeg;base64,@item.AgencyLogo" class="fancybox" >
-        <img src="data:image/jpeg;base64,@item.AgencyLogo" style="margin-top:5px;"/>
-    </a>
-</div>
-                                            <div class="right-left">
-                                                <h1>@(item.AgencyName)<span></span></h1>
-                                                <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
+                                                }
+                                            </div>
+                                            <div class="right">
+                                                @*<div class="idcard">
+                                                        <a href="data:image/jpeg;base64,@item.AgencyLogo" class="fancybox">
+                                                            <img src="data:image/jpeg;base64,@item.AgencyLogo" />
+                                                        </a>
+                                                    </div>*@
+                                                <div class="idcard twoidcard d-none d-md-block">
+                                                    <a href="@item.AgencyLogo" class="fancybox">
+                                                        <img src="@item.AgencyLogo" />
+                                                    </a>
+                                                    <a href="@item.AgencyLogo" class="fancybox">
+                                                        <img src="@item.AgencyLogo" style="margin-top:5px;" />
+                                                    </a>
+                                                </div>
+                                                <div class="right-left">
+                                                    <h1>@(item.AgencyName)<span></span></h1>
+                                                    <h2 class="name"><img src="~/assets/images/man-user.png" /> @item.ManagerFirstName</h2>
 
-                                                <h2 class="email"><i class="fa fa-envelope"></i>@item.EmailId</h2>
-                                                <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
-                                                <div class="published">Registered on: <span>@item.CreatedDate</span></div>
-                                                @*<div class="published">Candidates Registered: 5 </div>*@
+                                                    <h2 class="email"><i class="fa fa-envelope"></i>@item.EmailId</h2>
+                                                    <h2 class="url"><i class="fa fa-globe"></i> <a href="@item.AgencyWebsiteURL" target="_blank">@item.AgencyWebsiteURL</a></h2>
+                                                    <div class="published">Registered on: <span>@item.CreatedDate</span></div>
+                                                    @*<div class="published">Candidates Registered: 5 </div>*@
+                                                </div>
+                                            </div>
+                                            <div class="profile-footer">
+                                                @item.CompanyActivityDesc
+                                            </div>
+                                            <div class="team-contact-info">
+                                                <ul class="social-icons">
+                                                    <li><a href="#" onclick="showAgencyInfo(@item.AgencyId)" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="row d-md-none d-lg-none d-sm-block" style="margin-top: 30px;">
+                                                <div class="col col-id-card" style="margin-left: 10px;margin-right:5px;">
+                                                    <a href="@item.AgencyLogo" class="fancybox">
+                                                        <img src="@item.AgencyLogo" />
+                                                    </a>
+                                                </div>
+                                                <div class="col col-id-card" style="margin-left: 5px;margin-right:10px;">
+                                                    <a href="@item.AgencyLogo" class="fancybox">
+                                                        <img src="@item.AgencyLogo" />
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="profile-footer">
-                                            @item.CompanyActivityDesc
-                                        </div>
-                                        <div class="team-contact-info">
-                                            <ul class="social-icons">
-                                              <li><a href="#" onclick="showAgencyInfo(@item.AgencyId)" title="see more details"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
-                                            </ul>
-                                        </div>
 
-                                        <div class="row d-md-none d-lg-none d-sm-block" style="margin-top: 30px;">
-                                            <div class="col col-id-card" style="margin-left: 10px;margin-right:5px;">
-                                                <a href="data:image/jpeg;base64,@item.AgencyLogo" class="fancybox">
-                                                    <img src="data:image/jpeg;base64,@item.AgencyLogo" />
-                                                </a>
-                                            </div>
-                                            <div class="col col-id-card" style="margin-left: 5px;margin-right:10px;">
-                                                <a href="data:image/jpeg;base64,@item.AgencyLogo" class="fancybox">
-                                                    <img src="data:image/jpeg;base64,@item.AgencyLogo" />
-                                                </a>
-                                            </div>
+                                    </div>
+                                }
+                                    <div class="row">
+                                        <div class="col-sm-12" id='Paging' style="text-align:center">
+                                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                            of @Model.PageCount
+
+                                            @Html.PagedListPager(Model, page => Url.Action("Agencies", new { page }))
                                         </div>
                                     </div>
-
-                                </div>
-                            }
                         }
                         else
                         {

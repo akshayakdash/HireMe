@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using HireMe.Models;
 using HireMe.Utility;
 using System.Threading.Tasks;
+using PagedList;
 
 namespace HireMe.Controllers
 {
@@ -17,9 +18,16 @@ namespace HireMe.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
-        public ActionResult Agencies()
+        public ActionResult Agencies(int? page)
         {
-            return View(db.Agencies.Include(p => p.ApplicationUser).OrderByDescending(p => p.AgencyId).ToList());
+            int pageSize = 10;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var agencies = db.Agencies
+                .Include(p => p.ApplicationUser)
+                .OrderByDescending(p => p.AgencyId)
+                .ToPagedList(pageIndex, pageSize);
+            return View(agencies);
         }
 
         public ActionResult ActivateAgency(int id)
@@ -38,13 +46,16 @@ namespace HireMe.Controllers
         }
 
         [HttpGet]
-        public ActionResult Candidates()
+        public ActionResult Candidates(int? page)
         {
+            int pageSize = 10;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
             var candidates = db.Candidates
                 .Include(p => p.ApplicationUser)
                 .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
                 .OrderByDescending(p => p.CandidateId)
-                .ToList();
+                .ToPagedList(pageIndex, pageSize);
             return View(candidates);
         }
 
@@ -64,9 +75,16 @@ namespace HireMe.Controllers
         }
 
         [HttpGet]
-        public ActionResult Employers()
+        public ActionResult Employers(int? page)
         {
-            var employers = db.Employers.Include(p => p.ApplicationUser).OrderByDescending(p => p.EmployerId).ToList();
+            int pageSize = 10;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            var employers = db.Employers
+                .Include(p => p.ApplicationUser)
+                .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+                .OrderByDescending(p => p.EmployerId)
+                .ToPagedList(pageIndex, pageSize);
             return View(employers);
         }
 
@@ -191,26 +209,44 @@ namespace HireMe.Controllers
 
 
         [HttpGet]
-        public ActionResult ValidateJobOffers()
+        public ActionResult ValidateJobOffers(int? jobCat, int? page)
         {
+            jobCat = jobCat ?? 1;
+            int pageSize = 10;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
 
-            return View(db.JobOffers.AsNoTracking()
+            var jobOffers = db.JobOffers.AsNoTracking()
                .Include(path => path.Job)
+               .Where(p => p.Job.JobCategoryId == jobCat)
                .Include(t => t.Employer)
                .Where(p => !p.VerifiedByAdmin)
                .OrderByDescending(p => p.JobOfferId)
-               .ToList());
+               .ToPagedList(pageIndex, pageSize);
+            return View(jobOffers);
         }
 
         [HttpGet]
-        public ActionResult ValidateJobRequests()
+        public ActionResult ValidateJobRequests(int? jobCat, int? page )
         {
-            return View(db.JobRequests.AsNoTracking()
+            jobCat = jobCat ?? 1;
+            int pageSize = 10;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+            //var  = db.Employers
+            //    .Include(p => p.ApplicationUser)
+            //    .Where(p => (p.IdProofDoc != null && p.IdProofDoc != "") && !p.ProfileVerified)
+            //    .OrderByDescending(p => p.EmployerId)
+            //    .ToPagedList(pageIndex, pageSize);
+            //return View(employers);
+             var jobRequests = db.JobRequests.AsNoTracking()
                .Include(path => path.Job)
+               .Where(p => p.Job.JobCategoryId == jobCat)
                .Include(t => t.Candidate)
                .Where(p => !p.VerifiedByAdmin)
                .OrderByDescending(p => p.JobRequestId)
-               .ToList());
+               .ToPagedList(pageIndex, pageSize);
+            return View(jobRequests);
         }
 
         [HttpGet]

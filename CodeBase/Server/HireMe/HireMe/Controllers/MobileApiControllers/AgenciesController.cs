@@ -224,7 +224,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 //jobRequests = jobRequests.Where(p => p.Candidate.StaffType == StaffType.Agency && p.Candidate.AgencyId == agency.AgencyId).ToList();
                 //return Request.CreateResponse(HttpStatusCode.OK, jobRequests, jsonFormatter);
 
-                var jobRequests = db.v_SearchJobRequests_Mobile.Where(p => p.AgencyId == agencyId).ToList();
+                var jobRequests = db.v_SearchJobRequests_Mobile.Where(p => p.AgencyId == agencyId && p.IsPublished).ToList();
                 return Request.CreateResponse(HttpStatusCode.OK, jobRequests, jsonFormatter);
             }
             else

@@ -272,7 +272,7 @@ namespace HireMe.Controllers
                 }
 
                 string idProofImagePath1 = string.Empty;
-                if (model.id_proof != null && model.id_proof.ContentLength > 0)
+                if (model.id_proof_back != null && model.id_proof_back.ContentLength > 0)
                 {
 
                     string theFileName = Path.GetFileNameWithoutExtension(model.id_proof_back.FileName);
@@ -377,7 +377,7 @@ namespace HireMe.Controllers
             ViewBag.UserRolesViewBag = new SelectList(context.Roles.Where(u => !u.Name.Contains("Admin"))
                                          .ToList(), "Name", "Name");
 
-            ViewData["Country"] = context.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
+            ViewData["Country"] = countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
             // If we got this far, something failed, redisplay form   
             ViewBag.SelectedRole = model.UserRoles;
             ViewBag.SecurityQuestions = context.SecurityQuestions.ToList().Take(3);

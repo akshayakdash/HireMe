@@ -48,10 +48,10 @@ namespace HireMe.Controllers
             var cities = db.Cities.ToList();
             var districts = db.Districts.ToList();
 
-            ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
-            ViewBag.Country = countries;
-            ViewBag.City = cities;
-            ViewBag.District = districts;
+            //ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
+            //ViewBag.Country = countries;
+            //ViewBag.City = cities;
+            //ViewBag.District = districts;
 
             if (ModelState.IsValid)
             {
@@ -67,17 +67,47 @@ namespace HireMe.Controllers
                 // now check if it has file associated with it
 
                 #region ProfileImageUpload
+                string path = Server.MapPath("~/Uploads/");
                 string profileImagePath = string.Empty;
                 if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
                 {
+                    ////Use Namespace called :  System.IO  
+                    //string FileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
 
-                    string theFileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
+                    ////To Get File Extension  
+                    //string FileExtension = Path.GetExtension(model.profile_pic.FileName);
+
+                    ////Add Current Date To Attached File Name  
+                    //FileName = DateTime.Now.ToString("yyyyMMdd") + "-" + FileName.Trim() + FileExtension;
+
+                    ////Get Upload path from Web.Config file AppSettings.  
+                    ////string UploadPath = ConfigurationManager.AppSettings["UserImagePath"].ToString();
+
+                    //var UploadPath = Path.Combine(Server.MapPath("~/App_Data/uploads"), FileName);
+                    //imagePath = UploadPath;
+
+                    ////Its Create complete path to store in server.  
+                    ////model.ImagePath = UploadPath + FileName;
+
+                    ////To copy and save file into server.  
+                    //model.profile_pic.SaveAs(imagePath);
+
+                    //string theFileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
+                    //byte[] thePictureAsBytes = new byte[model.profile_pic.ContentLength];
+                    //using (BinaryReader theReader = new BinaryReader(model.profile_pic.InputStream))
+                    //{
+                    //    thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
+                    //}
+                    //profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.profile_pic.FileName);
                     byte[] thePictureAsBytes = new byte[model.profile_pic.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(model.profile_pic.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
                     }
-                    profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
                 }
                 #endregion
 
@@ -86,28 +116,32 @@ namespace HireMe.Controllers
                 if (model.id_proof != null && model.id_proof.ContentLength > 0)
                 {
 
-
-                    string theFileName = Path.GetFileNameWithoutExtension(model.id_proof.FileName);
+                    //string theFileName = Path.GetFileNameWithoutExtension(model.id_proof.FileName);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.id_proof.FileName);
                     byte[] thePictureAsBytes = new byte[model.id_proof.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(model.id_proof.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof.ContentLength);
                     }
-                    idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    //idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
                 if (model.id_proof1 != null && model.id_proof1.ContentLength > 0)
                 {
 
-
                     string theFileName = Path.GetFileNameWithoutExtension(model.id_proof1.FileName);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.id_proof1.FileName);
                     byte[] thePictureAsBytes = new byte[model.id_proof1.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(model.id_proof1.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof1.ContentLength);
                     }
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
+                    System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
                 }
                 #endregion
                 var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
@@ -164,12 +198,17 @@ namespace HireMe.Controllers
                     ViewBag.NewCandidatePassword = randomPassword;
                     ViewBag.NewCandidateRegistered = true;
                     ViewBag.AgencyProfileVerfied = true;
+
+                    ViewData["Country"] = countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
+                    ViewBag.Country = countries;
+                    ViewBag.City = cities;
+                    ViewBag.District = districts;
                     return RedirectToAction("RegisterCandidate");
                 }
                 //var country = context.Countries.ToList();
                 //var city = context.Cities.ToList();
                 //var district = context.Districts.ToList();
-                ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
+                ViewData["Country"] = countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
                 ViewBag.Country = countries;
                 ViewBag.City = cities;
                 ViewBag.District = districts;
@@ -180,6 +219,10 @@ namespace HireMe.Controllers
 
             ViewBag.NewCandidateRegistered = false;
             ViewBag.AgencyProfileVerfied = true;
+            ViewData["Country"] = countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
+            ViewBag.Country = countries;
+            ViewBag.City = cities;
+            ViewBag.District = districts;
             return View(model);
         }
         [HttpGet]
