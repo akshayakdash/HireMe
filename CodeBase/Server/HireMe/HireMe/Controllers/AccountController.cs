@@ -210,6 +210,7 @@ namespace HireMe.Controllers
                         age = age - 1;
                 }
                 #region ProfileImageUpload
+                string path = Server.MapPath("~/Uploads/");
                 string profileImagePath = string.Empty;
                 if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
                 {
@@ -234,13 +235,22 @@ namespace HireMe.Controllers
                     ////To copy and save file into server.  
                     //model.profile_pic.SaveAs(imagePath);
 
-                    string theFileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
+                    //string theFileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
+                    //byte[] thePictureAsBytes = new byte[model.profile_pic.ContentLength];
+                    //using (BinaryReader theReader = new BinaryReader(model.profile_pic.InputStream))
+                    //{
+                    //    thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
+                    //}
+                    //profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.profile_pic.FileName);
                     byte[] thePictureAsBytes = new byte[model.profile_pic.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(model.profile_pic.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
                     }
-                    profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
                 }
                 #endregion
 
@@ -249,28 +259,32 @@ namespace HireMe.Controllers
                 if (model.id_proof != null && model.id_proof.ContentLength > 0)
                 {
 
-
-                    string theFileName = Path.GetFileNameWithoutExtension(model.id_proof.FileName);
+                    //string theFileName = Path.GetFileNameWithoutExtension(model.id_proof.FileName);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.id_proof.FileName);
                     byte[] thePictureAsBytes = new byte[model.id_proof.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(model.id_proof.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof.ContentLength);
                     }
-                    idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    //idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
+                    System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
                 if (model.id_proof != null && model.id_proof.ContentLength > 0)
                 {
 
-
                     string theFileName = Path.GetFileNameWithoutExtension(model.id_proof_back.FileName);
+                    string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.id_proof_back.FileName);
                     byte[] thePictureAsBytes = new byte[model.id_proof_back.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(model.id_proof_back.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof_back.ContentLength);
                     }
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
+                    System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
                 }
                 #endregion
                 string contactNumber = model.PhoneNumber.Replace("-", "");
@@ -278,10 +292,10 @@ namespace HireMe.Controllers
                 var securityQuestionAnswer = new ApplicationUserSecurityQuestionAnswer { SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer };
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, Address = model.Address, PhoneNumber = phoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
                 user.SecurityQuestionAnswers = new System.Collections.Generic.List<ApplicationUserSecurityQuestionAnswer> { securityQuestionAnswer };
-                
+
                 if (model.UserRoles.Contains("Agency"))
                 {
-                    
+
                     var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = age.ToString(), IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1 };
                     agency.CreatedDate = DateTime.Now.ToString();
                     user.Agencies = new System.Collections.Generic.List<Agency> { agency };
@@ -290,6 +304,8 @@ namespace HireMe.Controllers
                 {
                     var candidate = new Candidate { Gender = model.Gender, StaffType = StaffType.Independent, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1, Age = age };
                     candidate.CreatedDate = DateTime.Now.ToString();
+                    candidate.ContactOption = "Email,Phone";// added on 6th Apr 2019
+                    candidate.EmailId = model.Email;
                     var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
                     if (cntry != null)
                         candidate.Country = cntry.CountryName;
@@ -305,6 +321,8 @@ namespace HireMe.Controllers
                 {
                     var employer = new Employer { Gender = model.Gender, FirstName = model.FirstName, LastName = model.LastName, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1, Age = age };
                     employer.CreatedDate = DateTime.Now.ToString();
+                    employer.ContactOption = "Email,Phone"; // added on 6th Apr 2019
+                    employer.EmailId = model.Email;
                     var cntry = countries.FirstOrDefault(p => p.CountryId == employer.CountryId);
                     if (cntry != null)
                         employer.Country = cntry.CountryName;
