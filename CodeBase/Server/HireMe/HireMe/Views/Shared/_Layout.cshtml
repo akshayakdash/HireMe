@@ -51,7 +51,7 @@
                                  data-speed="300"
                                  data-transform_in="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;"
                                  data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
-                                <span class="text-gradient">Personal Home Management Platform</span>
+                                <!--<span class="text-gradient">Personal Home Management Platform</span>-->
                             </div>
                             <div class="tp-caption"
                                  data-x="750"
@@ -77,7 +77,7 @@
                                  data-speed="300"
                                  data-transform_in="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;"
                                  data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
-                                <span class="text-gradient">Personal Home Management Platform</span>
+                                <!--<span class="text-gradient">Personal Home Management Platform</span>-->
                             </div>
                             <div class="tp-caption"
                                  data-x="750"
@@ -103,7 +103,7 @@
                                  data-speed="300"
                                  data-transform_in="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;"
                                  data-transform_out="o:0;sX:0.75;sY:0.75;s:300;e:Power2.easeInOut;">
-                                <span class="text-gradient">Personal Home Management Platform</span>
+                                <!--<span class="text-gradient">Personal Home Management Platform</span>-->
                             </div>
                             <div class="tp-caption"
                                  data-x="750"
@@ -158,18 +158,18 @@
 
                             <ul class="menu clearfix xyz" id="menu desktopview-menu">
 
-                                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("ACCEUIL", "Index", "Home")</li>
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
-                                    <li>@Html.ActionLink("Dashboard", "Index", "Users")</li>
+                                    <li>@Html.ActionLink("TABLEAU DE BORD", "Index", "Users")</li>
                                 }
-                                <li>@Html.ActionLink("Offers & Services", "About", "Home")</li>
+                                <li>@Html.ActionLink("OFFRES ET SERVICES", "About", "Home")</li>
                                 <li><a href="~/Home/FAQ">FAQ</a></li>
-                                <li><a href="~/Home/Contact">Contact Us</a></li>
+                                <li><a href="~/Home/Contact">CONTACTEZ NOUS</a></li>
                                 
                                 @if (Request.IsAuthenticated)
                                 {
-                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
+                                    using (Html.BeginForm("Se déconnecter", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
                                     {
                                         @Html.AntiForgeryToken()
 
@@ -209,14 +209,14 @@
                                 else
                                 {
                                     <li class="dropdown">
-                                        <a href="#" class="waves">REGISTER</a>
+                                        <a href="#" class="waves">INSCRIPTION</a>
                                         <ul>
-                                            <li><a class="waves" href="~/Home/CandidatInfo?Length=4">CANDIDATE</a></li>
-                                            <li><a class="waves" href="~/Home/EmployerInfo?Length=4">EMPLOYER</a></li>
-                                            <li><a class="waves" href="~/Home/AgencyInfo?Length=4">AGENCY</a></li>
+                                            <li><a class="waves" href="~/Home/EmployerInfo?Length=4">EMPLOYEUR</a></li>
+                                            <li><a class="waves" href="~/Home/CandidatInfo?Length=4">CANDIDAT</a></li>
+                                            <li><a class="waves" href="~/Home/AgencyInfo?Length=4">AGENCE</a></li>
                                         </ul>
                                     </li>
-                                    <li>@Html.ActionLink("LOG IN", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                                    <li>@Html.ActionLink("CONNEXION", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                                 }
                                 <li><a href="javascript:void(0);" class="language-toggle" title="Change Language" onclick="toggleLanguage()"><i class="fa fa-language"></i></a></li>
                             </ul>
