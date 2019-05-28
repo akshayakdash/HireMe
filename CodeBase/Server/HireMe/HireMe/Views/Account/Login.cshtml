@@ -83,7 +83,7 @@
                     <div class="form-logo">
                         <img src="~/assets/images/logo.png" alt="JOBtek" />
                     </div>
-                    <h2>Login</h2>
+                    <h2>CONNEXION</h2>
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 </div><!-- headline -->
             </div>
@@ -103,7 +103,7 @@
                                 @*<input type="text" class="form-control">
                                     <span class="input-lable">E-mail address</span>*@
                                 @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "User Name", @name = "userName",  @required="true"  })
-                                <span class="input-lable">User Name</span>
+                                <span class="input-lable">Nom d'utilisateur</span>
 
                                 @*@Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })*@
                             </div>
@@ -117,7 +117,7 @@
                                     <span class="input-group-text"><img src="~/assets/images/password.png" alt=""></span>
                                 </div>
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @name = "password",  @required = "true" })
-                                <span class="input-lable">Password</span>
+                                <span class="input-lable">Mot de passe</span>
                             </div>
                             <div class="row">
                                 <div class="col-sm-12 error-arrow">
@@ -127,18 +127,18 @@
                             <div class="checkbox">
                                 <label>
                                     @Html.CheckBoxFor(m => m.RememberMe)
-                                    Remember me
+                                    Souviens-toi de moi
                                     <span></span>
                                 </label>
                             </div>
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-style-1 btn-lg waves">Log in <i class="decode-icon-cursor"></i></button>
+                                <button type="submit" class="btn btn-style-1 btn-lg waves">CONNEXION<i class="decode-icon-cursor"></i></button>
                             </div>
                             <span>
                                 @*@Html.ActionLink("Don't have an account?", "Register")*@
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle reg-btn reg-btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Don't have an account?
+                                        N'avez pas de compte?
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                         <a class="dropdown-item" href="/Home/CandidatInfo?Length=4">CANDIDATE</a>
@@ -147,7 +147,7 @@
                                     </div>
                                 </div>
                             </span>
-                            <span style="float:right;"><a href="/Account/ForgotPassword">Forgotten password?</a></span>
+                            <span style="float:right;"><a href="/Account/ForgotPassword">Mot de passe oublié?</a></span>
                         </div>
                     </fieldset>
             }
