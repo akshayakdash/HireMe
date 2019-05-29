@@ -3,7 +3,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -30,7 +34,48 @@ namespace HireMe.Controllers
 
             return View();
         }
+        [HttpPost]
+        public ActionResult Contact(Contactus contact)
+        {
+            string Name = contact.Name;
+            string Email = contact.Email;
+            string Message = contact.Message;
 
+
+
+            using (SmtpClient client = new SmtpClient())
+            {
+                try
+                {
+                    client.Port = 587;
+                    client.Host = "smtp.gmail.com";
+                    client.EnableSsl = true;
+                    client.Timeout = 10000;
+                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    client.UseDefaultCredentials = false;
+
+
+                    client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
+
+                    MailMessage mail = new MailMessage(Email, ConfigurationManager.AppSettings["FromMailUserName"]);
+                    mail.Subject = "Contactus - JobTek";
+                    mail.Body = "Dear Administrator,<br/>Please find the message below from " + Name + ".<br/><br/>" + Message;
+                    mail.IsBodyHtml = true;
+                    mail.BodyEncoding = UTF8Encoding.UTF8;
+                    mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                    client.Send(mail);
+                    ViewBag.Message = "Merci de rester en contact. Nous reviendrons vers vous au plus tôt.";
+
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = "Désolé pour le dérangement, veuillez réessayer plus tard.";
+                }
+
+            }
+
+                return View(contact);
+        }
         public ActionResult FAQ()
         {
             return View();
