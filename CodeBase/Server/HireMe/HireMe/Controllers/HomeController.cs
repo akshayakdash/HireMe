@@ -30,8 +30,6 @@ namespace HireMe.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
         [HttpPost]
@@ -41,7 +39,7 @@ namespace HireMe.Controllers
             string Email = contact.Email;
             string Message = contact.Message;
 
-
+            ViewBag.Message = "";
 
             using (SmtpClient client = new SmtpClient())
             {
