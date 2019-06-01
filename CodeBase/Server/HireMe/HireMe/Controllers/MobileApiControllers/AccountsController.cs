@@ -44,6 +44,9 @@ namespace HireMe.Controllers.MobileApiControllers
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
             var districts = db.Districts.ToList();
+            model.SecurityQuestionId = 1;
+            model.SecurityQuestionAnswer = "default";
+
             if (ModelState.IsValid)
             {
 
