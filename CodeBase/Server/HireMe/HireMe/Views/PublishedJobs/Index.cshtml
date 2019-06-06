@@ -605,7 +605,7 @@
                                         <span class="validate" data-ng-if="jr.ProfileVerified"><img src="~/assets/images/verified.png" alt="Varified"></span>
                                         <div class="left">
 
-                                            <img ng-src="data:image/jpeg;base64, {{jr.ProfilePicUrl}}" />
+                                            <img ng-src=" {{jr.ProfilePicUrl}}" />
                                             <div class="rating">
                                                 @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
                                                 <i class="fa fa-star"></i>
@@ -706,7 +706,7 @@
                                     <div class="profileitems searchprofile-section">
                                         <span class="validate" data-ng-if="jr.Employer.ProfileVerified"><img src="~/assets/images/verified.png" alt="Verified"></span>
                                         <div class="left">
-                                            <img ng-src="data:image/jpeg;base64, {{jr.Employer.ProfilePicUrl}}" />
+                                            <img ng-src=" {{jr.Employer.ProfilePicUrl}}" />
                                             <div class="rating">
                                                 @*<a href="#" ng-click="setFavouriteJobRequest(jr.JobRequestId)">
                                                 <i class="fa fa-star"></i>

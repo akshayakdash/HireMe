@@ -234,7 +234,7 @@
                                                 var profilePicUrl = userManager.FindByName(@User.Identity.GetUserName()).ProfilePicUrl;
                                                 if (!string.IsNullOrWhiteSpace(profilePicUrl))
                                                 {
-                                                    <img src="data:image/jpeg;base64, @profilePicUrl" class="avatar img-circle" alt="Avatar">
+                                                    <img src=" @profilePicUrl" class="avatar img-circle" alt="Avatar">
                                                 }
                                                 else
                                                 {
