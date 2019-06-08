@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace HireMe.Controllers
 {
-    public class CandidateJobRequestsController : Controller
+    public class CandidateJobRequestsController : BaseController
     {
         // GET: CandidateJobRequests
         public ActionResult Index()

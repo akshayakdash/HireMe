@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-md-12 regd-form">
                                 <div class="headline text-center wow fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-                                    <h2><i class="fa fa-cogs"></i>&nbsp;Manage my Profile</h2>
+                                    <h2><i class="fa fa-cogs"></i>&nbsp;Gérer mon profil</h2>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 col-sm-4 text-center">
@@ -87,7 +87,7 @@
                                             <a href="@ViewBag.ProfilePicUrl" class="fancybox">
                                                 <img src="@ViewBag.ProfilePicUrl">
                                             </a>
-                                            <div class="title">Profile Pic</div>
+                                            <div class="title">Photo de profil</div>
                                         </div>
                                         @if (!Model.ProfileVerified)
                                         {
@@ -99,7 +99,7 @@
                                         <table class="table">
                                             <tbody>
                                                 <tr>
-                                                    <td>Name:</td>
+                                                    <td>Prénom:</td>
                                                     <td>@(Model.FirstName + " " + Model.LastName)</td>
                                                 </tr>
                                                 <tr>
@@ -111,19 +111,25 @@
                                                     <td>@Model.PhoneNumber</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Profile Verified:</td>
-                                                    <td>@(Model.ProfileVerified ? "Yes" : "No")</td>
+                                                    <td>Profil vérifié:</td>
+                                                    <td>@(Model.ProfileVerified ? "Oui" : "Non")</td>
                                                 </tr>
                                             </tbody>
                                         </table>
 
                                     </div>
                                     <div class="col-md-3 col-sm-4 text-center">
-                                        <div class="profile-pic">
+                                        <div class="idcard-pic">
                                             <a href="@ViewBag.IdProofDoc" class="fancybox">
                                                 <img src="@ViewBag.IdProofDoc">
                                             </a>
-                                            <div class="title">ID Card</div>
+                                            <div class="title">Pièce d'identité Recto</div>
+                                        </div>
+                                        <div class="idcard-pic">
+                                            <a href="@ViewBag.IdProofDoc1" class="fancybox">
+                                                <img src="@ViewBag.IdProofDoc1">
+                                            </a>
+                                            <div class="title">Pièce d'identité Verso</div>
                                         </div>
                                         @*<input class="form-control" id="IdProofDoc" name="IdProofDoc" placeholder="" type="file" style="height:inherit;">
                                             <button type="submit" class="btn btn-style-1 waves mb-0 btn-block"><i class="fa fa-check"></i>&nbsp;Save</button>*@
@@ -154,7 +160,7 @@
                                                     else
                                                     {
                                                         @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = "" })
-                                                    }<span class="input-lable">First Name</span>
+                                                    }<span class="input-lable">Prénom</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
@@ -167,7 +173,7 @@
                                                     else
                                                     {
                                                         @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "" })
-                                                    }<span class="input-lable">Last Name</span>
+                                                    }<span class="input-lable">Nom</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
@@ -181,7 +187,7 @@
                                                     {
                                                         @Html.TextBoxFor(m => m.Age, new { @class = "form-control", @placeholder = "" })
                                                     }
-                                                    <span class="input-lable">Age</span>
+                                                    <span class="input-lable">Âge</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
@@ -198,7 +204,7 @@
                                                                      }, htmlAttributes: new { @class = "form-control", id = "City" })*@
                                                     @Html.DropDownList("CityId", new SelectList("", "Value", "Text"), new { @class = "form-control" })
                                                     @*@Html.DropDownListFor(m => m.CityId, new SelectList(ViewBag.City, "CityId", "CityName"), htmlAttributes: new { @class = "form-control", id = "City" })*@
-                                                    <span class="input-lable">City</span>
+                                                    <span class="input-lable">Ville</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
@@ -207,7 +213,7 @@
                                                     @*<select id="District" name="DistrictId" class="form-control"></select>*@
                                                     @Html.DropDownList("DistrictId", new SelectList("", "Value", "Text"),  new { @class = "form-control" })
                                                     @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
-                                                    <span class="input-lable">District</span>
+                                                    <span class="input-lable">Quartier</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
@@ -216,14 +222,14 @@
 
 
                                                     @Html.DropDownListFor(m => m.CountryId, new SelectList(ViewBag.Country, "CountryId", "CountryName"), htmlAttributes: new { @class = "form-control", id = "Country" })
-                                                    <span class="input-lable">Country</span>
+                                                    <span class="input-lable">Pays</span>
                                                 </div>
                                                 <div class="input-group mb-2">
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                     </div>
                                                     @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "", @rows = 3, @height = "100%" })
-                                                    <span class="input-lable">Address</span>
+                                                    <span class="input-lable">Adresse </span>
                                                 </div>
                                             </fieldset>
 
@@ -258,7 +264,7 @@
                                                 @if (Model.ContactOption != null)
                                                 {
                                                     <div class="mb-4">
-                                                        <span class="mr-3">Set your contact option</span>
+                                                        <span class="mr-3">Définissez votre option de contact</span>
                                                         <div class="checkbox inline mr-3">
                                                             <label>
                                                                 <input checked="@(Model.ContactOption.Contains("Email"))" name='ContactOption' type="checkbox" value="Email"> Email
@@ -294,7 +300,7 @@
                                                     </div>*@
 
                                                 <p>
-                                                    <i class="bizhub-icon-lock-1" style="font-size:20px;"></i> <a href="/Manage/ChangePassword">Change Password</a>
+                                                    <i class="bizhub-icon-lock-1" style="font-size:20px;"></i> <a href="/Manage/ChangePassword">Changer le mot de passe</a>
                                                 </p>
 
 
@@ -303,7 +309,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12 text-center">
-                                        <button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Update Profile</button>
+                                        <button type="submit" class="btn btn-style-1 btn-lg waves"><i class="fa fa-check"></i>&nbsp;Mettre à jour le profil</button>
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +322,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="headline text-center">
-                                <h2>Our Trusted Partners</h2>
+                                <h2>Nos partenaires de confiance</h2>
                             </div><!-- headline -->
                         </div><!-- col -->
                     </div><!-- row -->
@@ -371,7 +377,7 @@
                     url: '/Account/GetCities?id=1', // we are calling json method
                     dataType: 'json',
                     success: function (cities) {
-                       $("#CityId").append('<option value="">' + ' --Select City--' + '</option>');
+                        $("#CityId").append('<option value="">' + ' --Choisissez la ville--' + '</option>');
                         $.each(cities, function (i, city) {
                             $("#CityId").append('<option value="' + city.Value + '">' + city.Text + '</option>');
                         });
@@ -383,7 +389,7 @@
 
                             dataType: 'json',
                             success: function (districts) {
-                                $("#DistrictId").append('<option value="">' + ' --Select District--' + '</option>');
+                                $("#DistrictId").append('<option value="">' + ' --Choisissez le quartier--' + '</option>');
                                 $.each(districts, function (i, district) {
                                     $("#DistrictId").append('<option value="' + district.Value + '">' + district.Text + '</option>');
                                 });

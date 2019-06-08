@@ -10,7 +10,7 @@ using System.Web.Mvc;
 namespace HireMe.Controllers
 {
     [Authorize]
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
         private ApplicationDbContext context;
         public RoleController()

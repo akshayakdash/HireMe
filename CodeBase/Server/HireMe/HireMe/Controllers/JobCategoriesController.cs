@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace HireMe.Controllers
 {
-    public class JobCategoriesController : Controller
+    public class JobCategoriesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

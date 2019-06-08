@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace HireMe.Controllers
 {
-    public class AgencyController : Controller
+    public class AgencyController : BaseController
     {
         ApplicationDbContext db = ApplicationDbContext.Create();
         // GET: Agency

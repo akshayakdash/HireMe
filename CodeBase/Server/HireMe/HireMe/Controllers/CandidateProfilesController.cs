@@ -13,7 +13,7 @@ using System.IO;
 
 namespace HireMe.Controllers
 {
-    public class CandidateProfilesController : Controller
+    public class CandidateProfilesController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

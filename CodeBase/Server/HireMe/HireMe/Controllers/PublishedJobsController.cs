@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace HireMe.Controllers
 {
-    public class PublishedJobsController : Controller
+    public class PublishedJobsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: PublishedJobs

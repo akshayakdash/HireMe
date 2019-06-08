@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
-    public class NotificationController : Controller
+    public class NotificationController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

@@ -11414,6 +11414,34 @@ blockquote {
         display: none;
     }
 
+    .idcard-pic {
+        border: 2px solid #fe005a;
+        padding: 2px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        min-height: 90px;
+        position: relative;
+    }
+
+        .idcard-pic .title {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            background: rgba(254, 0, 90, 0.64);
+            left: 0;
+            padding: 5px 0;
+            font-size: 17px;
+            color: #fff;
+        }
+
+        .idcard-pic img {
+            max-height: 90px;
+        }
+
+
+
+
+
     .profile-pic {
         border: 2px solid #fe005a;
         padding: 2px;

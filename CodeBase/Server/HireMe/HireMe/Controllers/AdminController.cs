@@ -13,7 +13,7 @@ using PagedList;
 
 namespace HireMe.Controllers
 {
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

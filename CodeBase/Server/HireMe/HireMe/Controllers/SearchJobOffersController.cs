@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace HireMe.Controllers
 {
-    public class SearchJobOffersController : Controller
+    public class SearchJobOffersController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

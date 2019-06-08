@@ -12,7 +12,7 @@ using HireMe.Utility;
 
 namespace HireMe.Controllers
 {
-    public class JobRequestsController : Controller
+    public class JobRequestsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

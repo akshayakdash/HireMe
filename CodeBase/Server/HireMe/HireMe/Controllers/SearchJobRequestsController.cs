@@ -13,7 +13,7 @@ using System.Linq.Dynamic;
 
 namespace HireMe.Controllers
 {
-    public class SearchJobRequestsController : Controller
+    public class SearchJobRequestsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

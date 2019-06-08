@@ -10,7 +10,7 @@ using HireMe.Models;
 
 namespace HireMe.Controllers
 {
-    public class DemoCandidateController : Controller
+    public class DemoCandidateController : BaseController
     {
       
         public ActionResult DashBoard()

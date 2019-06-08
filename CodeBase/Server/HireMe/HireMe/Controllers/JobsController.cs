@@ -10,7 +10,7 @@ using HireMe.Models;
 
 namespace HireMe.Controllers
 {
-    public class JobsController : Controller
+    public class JobsController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

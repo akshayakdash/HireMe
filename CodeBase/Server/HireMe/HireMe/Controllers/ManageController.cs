@@ -12,7 +12,7 @@ using System.IO;
 namespace HireMe.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -105,7 +105,7 @@ namespace HireMe.Controllers
                 updateProfileViewModel.ProfileVerified = candidate.ProfileVerified;
                 updateProfileViewModel.Age = candidate.Age.HasValue ? candidate.Age.Value : 0;
                 ViewBag.IdProofDoc = candidate.IdProofDoc;
-
+                ViewBag.IdProofDoc1 = candidate.IdProofDoc1;
             }
             else if (role == "Employer")
             {
@@ -114,6 +114,7 @@ namespace HireMe.Controllers
                 updateProfileViewModel.ProfileVerified = employer.ProfileVerified;
                 updateProfileViewModel.Age = employer.Age;
                 ViewBag.IdProofDoc = employer.IdProofDoc;
+                ViewBag.IdProofDoc1 = employer.IdProofDoc1;
             }
             else if (role == "Agency")
             {
@@ -122,6 +123,7 @@ namespace HireMe.Controllers
                 updateProfileViewModel.ProfileVerified = agency.ProfileVerified;
                 updateProfileViewModel.Age = agency.ManagerAge != null ? int.Parse(agency.ManagerAge) : 0;
                 ViewBag.IdProofDoc = agency.IdProofDoc;
+                ViewBag.IdProofDoc1 = agency.IdProofDoc1;
             }
 
             var country = context.Countries.ToList();
