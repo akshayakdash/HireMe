@@ -381,7 +381,7 @@ namespace HireMe.Controllers
             // If we got this far, something failed, redisplay form   
             ViewBag.SelectedRole = model.UserRoles;
             ViewBag.SecurityQuestions = context.SecurityQuestions.ToList().Take(3);
-            ViewBag.Country = countries;
+            //ViewBag.Country = countries;
             ViewBag.City = cities;
             ViewBag.District = districts;
             return View(model);

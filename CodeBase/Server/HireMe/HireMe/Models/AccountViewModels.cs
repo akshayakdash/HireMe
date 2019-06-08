@@ -57,36 +57,36 @@ namespace HireMe.Models
         //[EmailAddress]
         //public string Email { get; set; }
 
-        [Required(ErrorMessage = "User Name is required.")]
+        [Required(ErrorMessage = "Nom d'utilisateur est nécessaire.")]
         [Display(Name = "User Name")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Password is required.")]
+        [Required(ErrorMessage = "Mot de passe est nécessaire.")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Souviens-toi de moi?")]
         public bool RememberMe { get; set; }
     }
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "S'il vous plaît entrer Email.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Veuillez entrer votre nom d'utilisateur.")]
         [Display(Name = "UserName")]
         public string UserName { get; set; }
 
-        [Required]
-        [Display(Name = "First Name")]
+        [Required(ErrorMessage = "S'il vous plaît entrer Prénom.")]
+        [Display(Name = "Prénom")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
-        [Required]
+        [Display(Name = "Nom")]
+        [Required(ErrorMessage = "S'il vous plaît entrer Nom.")]
         public string LastName { get; set; }
 
         //[Required]
@@ -111,17 +111,17 @@ namespace HireMe.Models
             }
         }
 
-        [Required]
+        [Required(ErrorMessage = "S'il vous plaît entrer la date de naissance.")]
         public DateTime DOB { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "S'il vous plaît sélectionner le sexe.")]
         public Gender Gender { get; set; }
 
         [Display(Name = "Address")]
         //[Required]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "You must provide a valid phone number")]
+        [Required(ErrorMessage = "Vous devez fournir un numéro de téléphone valide.")]
         //[Display(Name = "Contact Number")]
         //[DataType(DataType.PhoneNumber)]
         //[Phone()]
@@ -132,20 +132,20 @@ namespace HireMe.Models
         public string CountryCode { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$", ErrorMessage = "Password should be of 6 characters long and should contain" +
-            "at least one Upper case letter, " +
-            "one lower case letter " +
-            "one digit " +
-            "one special character " +
-            "e.g Pass@123")]
+        [StringLength(100, ErrorMessage = "Le {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
+        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$", ErrorMessage = "Le mot de passe doit comporter 6 caractères et doit contenir" +
+            "au moins une lettre majuscule, " +
+            "une lettre minuscule " +
+            "Un chiffre " +
+            "un caractère spécial " +
+            "par exemple Pass@123")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         //[Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -160,8 +160,9 @@ namespace HireMe.Models
         public string id_proof_base64 { get; set; }
         public string id_proof_back_base64 { get; set; }
 
-        [Required(ErrorMessage = "Please agree the terms and conditions")]
-        [Display(Name = "Agree Terms and Conditions")]
+        
+        [Range(typeof(bool), "true", "true", ErrorMessage = "Veuillez accepter les termes et conditions.")]
+        [Display(Name = "J'accepte les termes et conditions")]
         public bool AgreeTermsAndConditions { get; set; }
 
         //[Required(ErrorMessage = "Please select the security question.")]
@@ -169,12 +170,12 @@ namespace HireMe.Models
         //[Required(ErrorMessage = "Please enter the security question's answer.")]
         public string SecurityQuestionAnswer { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Veuillez sélectionner un pays.")]
         public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Veuillez choisir une ville.")]
         public int? CityId { get; set; }
         [NotMapped]
         public string City { get; set; }
@@ -185,21 +186,21 @@ namespace HireMe.Models
         public string District { get; set; }
 
         #region Agency Section
-        [Display(Name = "Company Name")]
-        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Comapny name is required")]
+        [Display(Name = "Nom de la compagnie")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Le nom de l'entreprise est obligatoire.")]
         public string CompanyName { get; set; }
 
-        [Display(Name = "Responsible Name")]
-        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Responsible name is required")]
+        [Display(Name = "Nom du responsable")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Le nom du responsable est requis.")]
         public string ResponsibleName { get; set; }
 
-        [Display(Name = "Website URL")]
-        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Website URL is required")]
+        [Display(Name = "URL du site")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "L'URL du site est obligatoire.")]
         [DataType(DataType.Url)]
         public string WebSiteUrl { get; set; }
 
-        [Display(Name = "Company Activities")]
-        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Company activity description is required")]
+        [Display(Name = "Activités de l'entreprise")]
+        [RequiredIf("UserRoles", "Agency", ErrorMessage = "Une description de l'activité de l'entreprise est requise.")]
         public string CompanyActivity { get; set; }
         #endregion
     }

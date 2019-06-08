@@ -37,17 +37,16 @@ namespace HireMe.Models
 
     public class RegisterCandidateViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Moyens entrez l'e-mail.")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Moyens entrez prénom.")]
         [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Last Name")]
-        [Required]
+        [Required(ErrorMessage = "Moyens entrez Nom.")]
         public string LastName { get; set; }
 
         //[Required]
@@ -72,17 +71,17 @@ namespace HireMe.Models
             }
         }
 
-        [Required]
+        [Required(ErrorMessage = "Veuillez entrer votre date de naissance.")]
         public DateTime DOB { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Veuillez choisir le sexe.")]
         public Gender Gender { get; set; }
 
         [Display(Name = "Address")]
         //[Required]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "You must provide a valid phone number")]
+        [Required(ErrorMessage = "Vous devez fournir un numéro de téléphone valide.")]
         //[Display(Name = "Contact Number")]
         //[DataType(DataType.PhoneNumber)]
         //[Phone()]
@@ -102,12 +101,12 @@ namespace HireMe.Models
         public string id_proof_base64 { get; set; }
         public string id_proof1_base64 { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "S'il vous plaît sélectionnez votre pays.")]
         public int? CountryId { get; set; }
         [NotMapped]
         public string Country { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "S'il vous plaît sélectionnez votre ville.")]
         public int? CityId { get; set; }
         [NotMapped]
         public string City { get; set; }

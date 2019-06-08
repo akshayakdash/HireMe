@@ -449,7 +449,7 @@
 
                                 </div>
 
-                                <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="">Submit</button>
+                                <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="" onclick="return Validate();">Submit</button>
                                 @*<input type="submit" class="btn btn-style-1 btn-lg waves" value="Register" />*@
                             </div><!-- tab-pane -->
                         </div>
@@ -828,8 +828,20 @@
 }
 
 <script type="text/javascript">
+    function Validate()
+    {
+        var input = $("#AgreeTermsAndConditions");
+        if (input.is(':checked') === true) {
+            return true;
+        }
+        else {
+            alert("Veuillez accepter les termes et conditions.");
+            return false;
+        }
+        
+    }
     $(document).ready(function () {
-
+        
         var districts = ["", ""]
 
         $("#CountryId").change(function () {
@@ -839,7 +851,7 @@
                 url: '/Account/GetCities?id=' + $("#CountryId").val(), // we are calling json method
                 dataType: 'json',
                 success: function (cities) {
-                    $("#CityId").append('<option value="">' + ' --Select City--' + '</option>');
+                    $("#CityId").append('<option value="">' + ' --Choisissez la ville--' + '</option>');
                     $.each(cities, function (i, city) {
                         $("#CityId").append('<option value="' + city.Value + '">' + city.Text + '</option>');
                     });
@@ -859,7 +871,7 @@
 
                 dataType: 'json',
                 success: function (districts) {
-                    $("#DistrictId").append('<option value="">' + ' --Select District--' + '</option>');
+                    $("#DistrictId").append('<option value="">' + ' --Choisissez le quartier--' + '</option>');
                     $.each(districts, function (i, district) {
                         $("#DistrictId").append('<option value="' + district.Value + '">' + district.Text + '</option>');
                     });
