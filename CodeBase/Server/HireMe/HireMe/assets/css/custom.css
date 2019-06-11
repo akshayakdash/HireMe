@@ -11419,7 +11419,7 @@ blockquote {
         padding: 2px;
         border-radius: 5px;
         margin-bottom: 10px;
-        min-height: 90px;
+        min-height: 200px;
         position: relative;
     }
 
@@ -11435,7 +11435,7 @@ blockquote {
         }
 
         .idcard-pic img {
-            max-height: 90px;
+            max-height: 200px;
         }
 
 

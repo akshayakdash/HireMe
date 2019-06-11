@@ -5,34 +5,6 @@
     #footer-container {
         display: none;
     }
-    .owl-dots{
-        display:none;
-    }
-    .blog-article{
-        border: 2px solid #fe005a;
-    padding: 2px;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    min-height: 160px;
-    position: relative;
-    }
-    .owl-prev, .owl-next {
-        background: rgba(1, 1, 1, 0.3) no-repeat center center;
-        top: 40%;
-    }
-    .owl-carousel{
-        margin-bottom:0;
-    }
-    .idcardtitle {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background: rgba(254, 0, 90, 0.64);
-    left: 0;
-    padding: 5px 0;
-    font-size: 17px;
-    color: #fff;
-    }
 </style>
 
 <script>
@@ -110,7 +82,7 @@
                                     <h2><i class="fa fa-cogs"></i>&nbsp;Gérer mon profil</h2>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3 col-sm-6 text-center">
+                                    <div class="col-md-3 col-sm-4 text-center">
                                         <div class="profile-pic">
                                             <a href="@ViewBag.ProfilePicUrl" class="fancybox">
                                                 <img src="@ViewBag.ProfilePicUrl">
@@ -144,54 +116,30 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
-                                    <div class="col-md-3 col-sm-6 text-center">
-                                        <div class="owl-carousel blog-articles-slider1">
-                                            <div class="item">
-                                                <div class="blog-article">
-                                                    <div class="blog-article-thumbnail">
-                                                        <a href="@ViewBag.IdProofDoc" class="fancybox">
-                                                            <img src="@ViewBag.IdProofDoc">
-                                                        </a>
-                                                        <div class="idcardtitle">Pièce d'identité Recto</div>
-                                                    </div><!-- blog-article-thumbnail -->
-                                                </div><!-- blog-article -->
-                                            </div><!-- item -->
-                                            <div class="item">
-                                                <div class="blog-article">
-                                                    <div class="blog-article-thumbnail">
-                                                        <a href="@ViewBag.IdProofDoc1" class="fancybox">
-                                                            <img src="@ViewBag.IdProofDoc1">
-                                                        </a>
-                                                        <div class="idcardtitle">Pièce d'identité Verso</div>
-                                                    </div><!-- blog-article-thumbnail -->
-                                                </div><!-- blog-article -->
-                                            </div><!-- item -->
-                                        </div>
-                                    </div>
-                                        <!--<div class="col-md-3 col-sm-6 text-center">
-                                            <div class="idcard-pic">
-                                                <a href="@ViewBag.IdProofDoc" class="fancybox">
-                                                    <img src="@ViewBag.IdProofDoc">
-                                                </a>
-                                                <div class="title">Pièce d'identité Recto</div>
-                                            </div>
-                                            <div class="idcard-pic">
-                                                <a href="@ViewBag.IdProofDoc1" class="fancybox">
-                                                    <img src="@ViewBag.IdProofDoc1">
-                                                </a>
-                                                <div class="title">Pièce d'identité Verso</div>
-                                            </div>
 
-                                            @if (!Model.ProfileVerified)
-                                            {
-                                                <input class="form-control" accept="image/*" id="idcard" name="idcard" placeholder="" type="file" style="height:inherit;">
-                                                <button type="button" id="upload-id-card-button" class="btn btn-style-1 waves mb-0 btn-block"><i class="fa fa-check"></i>&nbsp;Save &nbsp;<i id="progress2" class="fa fa-spinner fa-spin" style="font-size:24px;display:none;"></i></button>
-                                            }
-                                        </div>-->
-                                        <!--<input class="form-control" id="IdProofDoc" name="IdProofDoc" placeholder="" type="file" style="height:inherit;">
-                                        <button type="submit" class="btn btn-style-1 waves mb-0 btn-block"><i class="fa fa-check"></i>&nbsp;Save</button>-->
                                     </div>
+                                    <div class="col-md-3 col-sm-4 text-center">
+                                        <div class="idcard-pic">
+                                            <a href="@ViewBag.IdProofDoc" class="fancybox">
+                                                <img src="@ViewBag.IdProofDoc">
+                                            </a>
+                                            <div class="title">Pièce d'identité Recto</div>
+                                        </div>
+                                        <div class="idcard-pic">
+                                            <a href="@ViewBag.IdProofDoc1" class="fancybox">
+                                                <img src="@ViewBag.IdProofDoc1">
+                                            </a>
+                                            <div class="title">Pièce d'identité Verso</div>
+                                        </div>
+                                        @*<input class="form-control" id="IdProofDoc" name="IdProofDoc" placeholder="" type="file" style="height:inherit;">
+                                            <button type="submit" class="btn btn-style-1 waves mb-0 btn-block"><i class="fa fa-check"></i>&nbsp;Save</button>*@
+                                        @if (!Model.ProfileVerified)
+                                        {
+                                            <input class="form-control" accept="image/*" id="idcard" name="idcard" placeholder="" type="file" style="height:inherit;">
+                                            <button type="button" id="upload-id-card-button" class="btn btn-style-1 waves mb-0 btn-block"><i class="fa fa-check"></i>&nbsp;Save &nbsp;<i id="progress2" class="fa fa-spinner fa-spin" style="font-size:24px;display:none;"></i></button>
+                                        }
+                                    </div>
+                                </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         @*<h5>Advance Profiles</h5>*@
@@ -263,8 +211,8 @@
                                                         <span class="input-group-text"><img src="~/assets/images/map.png" alt=""></span>
                                                     </div>
                                                     @*<select id="District" name="DistrictId" class="form-control"></select>*@
-                                                    @*@Html.DropDownList("DistrictId", new SelectList("", "Value", "Text"),  new { @class = "form-control" })*@
-                                                    @Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })
+                                                    @Html.DropDownList("DistrictId", new SelectList("", "Value", "Text"),  new { @class = "form-control" })
+                                                    @*@Html.DropDownListFor(m => m.DistrictId, new SelectList(ViewBag.District, "DistrictId", "DistrictName"), htmlAttributes: new { @class = "form-control", id = "District" })*@
                                                     <span class="input-lable">Quartier</span>
                                                 </div>
                                                 <div class="input-group mb-2">

@@ -4363,6 +4363,7 @@
 .blog-article-thumbnail img {
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
+    min-height:160px;
 }
 
 .blog-article-thumbnail .owl-carousel,

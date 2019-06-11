@@ -1060,33 +1060,6 @@
                 }
             });
 
-            // BLOG ARTICLES SLIDER //
-            $(".owl-carousel.blog-articles-slider1").owlCarousel({
-                autoplay: false,
-                autoplayTimeout: 5000,
-                autoplayHoverPause: false,
-                smartSpeed: 1200,
-                loop: false,
-                nav: true,
-                navText: ["", ""],
-                navTitle:["Front", "Back"],
-                dots: true,
-                mouseDrag: true,
-                touchDrag: true,
-                margin: 30,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    480: {
-                        items: 1
-                    },
-                    992: {
-                        items: 1
-                    }
-                }
-            });
-
 
             // TESTIMONIALS CAROUSEL //
             $(".owl-carousel.testimonials-carousel").owlCarousel({

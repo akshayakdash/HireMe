@@ -476,6 +476,18 @@ namespace HireMe.Controllers
                         //clonedJobRequest.CandidateId = candidate.CandidateId;
                         var candidate = db.Candidates.Include(p => p.JobRequests).FirstOrDefault(t => t.CandidateId == cndId);
                         candidate.Disponibility = candidateProfile.Disponibility;
+                        //This was not there I have added the same
+                        candidate.ExpectedMinSalary = candidateProfile.ExpectedMinSalary;
+                        candidate.ExpectedMaxSalary = candidateProfile.ExpectedMaxSalary;
+                        candidate.ExperienceInYears = candidateProfile.ExperienceInYears;
+                        candidate.ExperienceInMonths = candidateProfile.ExperienceInMonths;
+                        candidate.MinGroupPeople = candidateProfile.MinGroupPeople;
+                        candidate.MaxGroupPeople = candidateProfile.MaxGroupPeople;
+                        candidate.SalaryType = candidateProfile.SalaryType;
+                        candidate.CanRead = candidateProfile.CanRead;
+                        candidate.CanWrite = candidateProfile.CanWrite;
+                        candidate.SleepOnSite = candidateProfile.SleepOnSite;
+
                         candidate.JobRequests.Add(clonedJobRequest);
                         db.JobRequests.Add(clonedJobRequest);
                         db.SaveChanges();
