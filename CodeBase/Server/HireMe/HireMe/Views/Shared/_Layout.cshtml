@@ -125,7 +125,7 @@
 
         }
 
-        @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+        @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
                                                                 .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
                                                                 .Select(c => c.Value);
             string role = roles.FirstOrDefault();}
@@ -166,7 +166,7 @@
                                 <li>@Html.ActionLink("OFFRES ET SERVICES", "About", "Home")</li>
                                 <li><a href="~/Home/FAQ">FAQ</a></li>
                                 <li><a href="~/Home/Contact">CONTACTEZ NOUS</a></li>
-                                
+
                                 @if (Request.IsAuthenticated)
                                 {
                                     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm1", @class = "navbar-right" }))
@@ -281,7 +281,7 @@
                                 {
                                     @*<li>@Html.ActionLink("Dashboard", "Index", "Users", new { @class = "waves" })</li>*@
                                     <li class="divider"></li>
-                                    
+
                                     <li class="">
                                         <a href="~/Home" class="@Html.IsSelected(controllers: "Home", cssClass: "waves active")"><i class="fa fa-home"></i> ACCEUIL</a>
                                     </li>
@@ -439,7 +439,7 @@
                     <a href="~/Admin/ValidateJobRequests" class="@Html.IsSelected(controllers: "Admin", actions: "ValidateJobRequests", cssClass: "active")"><i class="fa fa-graduation-cap"></i> Demandes d'emploi</a>
                     <a href="~/Admin/ValidateJobOffers" class="@Html.IsSelected(controllers: "Admin", actions: "ValidateJobOffers", cssClass: "active")"><i class="fa fa-graduation-cap"></i> Offres d'emplois</a>
                     <a href="~/Admin/ExportMembers" class="@Html.IsSelected(controllers: "Admin", actions: "ExportMembers", cssClass: "active")"><i class="fa fa-upload"></i> Exportation</a>
-                                                        
+
                 }
 
             </div>
@@ -531,56 +531,60 @@
     }
     <!-- Start of LiveChat (www.livechatinc.com) code -->
     <script type="text/javascript">
-            window.__lc = window.__lc || {};
-            window.__lc.license = 10397537;
-            (function () {
-                var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
-                lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
-            })();
+        window.__lc = window.__lc || {};
+        window.__lc.license = 10397537;
+        (function () {
+            var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;
+            lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);
+        })();
     </script>
+        
+    <!--Required for google recaptcha-->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <script type="text/javascript">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
-                //toggleLanguage();
-
-
-            }
-
-
-            function toggleLanguage() {
-
-                var selectFieldValue = document.querySelector("#google_translate_element select").value;
-                //alert();
-                var language = selectFieldValue == "fr" ? "en" : "fr";//document.getElementById("language").value;
-                var selectField = document.querySelector("#google_translate_element select");
-                for (var i = 0; i < selectField.children.length; i++) {
-                    var option = selectField.children[i];
-                    // find desired langauge and change the former language of the hidden selection-field
-                    if (option.value == language) {
-                        selectField.selectedIndex = i;
-                        // trigger change event afterwards to make google-lib translate this side
-                        selectField.dispatchEvent(new Event('change'));
-                        break;
-                    }
-                }
-                //setChangeLanguageText();
-            }
-
-            //function setChangeLanguageText() {
-            //    //var selectField = document.querySelector("#google_translate_element select").value;
-            //    //$(".language-toggle").prop("title", "Change language to French");
-
-            //    //if (selectField == "fr") {
-            //    //    $(".language-toggle").prop("title", "Change language to English");
-            //    //} else {
-            //    //    $(".language-toggle").prop("title", "Change language to French");
-            //    //}
-            //}
-            //setTimeout(function () {
-            //    setChangeLanguageText();
-            //}, 5000)
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element');
             //toggleLanguage();
+
+
+        }
+
+
+        function toggleLanguage() {
+
+            var selectFieldValue = document.querySelector("#google_translate_element select").value;
+            //alert();
+            var language = selectFieldValue == "fr" ? "en" : "fr";//document.getElementById("language").value;
+            var selectField = document.querySelector("#google_translate_element select");
+            for (var i = 0; i < selectField.children.length; i++) {
+                var option = selectField.children[i];
+                // find desired langauge and change the former language of the hidden selection-field
+                if (option.value == language) {
+                    selectField.selectedIndex = i;
+                    // trigger change event afterwards to make google-lib translate this side
+                    selectField.dispatchEvent(new Event('change'));
+                    break;
+                }
+            }
+            //setChangeLanguageText();
+        }
+
+                //function setChangeLanguageText() {
+                //    //var selectField = document.querySelector("#google_translate_element select").value;
+                //    //$(".language-toggle").prop("title", "Change language to French");
+
+                //    //if (selectField == "fr") {
+                //    //    $(".language-toggle").prop("title", "Change language to English");
+                //    //} else {
+                //    //    $(".language-toggle").prop("title", "Change language to French");
+                //    //}
+                //}
+                //setTimeout(function () {
+                //    setChangeLanguageText();
+                //}, 5000)
+                //toggleLanguage();
     </script>
 
     <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

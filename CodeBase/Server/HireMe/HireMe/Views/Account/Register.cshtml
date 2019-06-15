@@ -1,32 +1,37 @@
 ﻿
 <style>
     /*Custom Modal*/
-.Terms_Condition{
-    max-height:500px;
-    overflow-x:auto;
-}
-.Terms_Condition p {
-    margin-bottom: 10px;
-}
-.modal-xl {
-    max-width: 85%;
-}
-.terms-header {
-    background: #efefef;
-    padding: 2px 10px;
-    font-size: 16px;
-    font-weight: 600;
-}
-.terms-subheader {
-    font-size: 16px;
-}
-.terms-list{
-    
-}
-.terms-list li{
-    padding-left:20px;
-}
-/*/////////Custom Modal////////////*/
+    .Terms_Condition {
+        max-height: 500px;
+        overflow-x: auto;
+    }
+
+        .Terms_Condition p {
+            margin-bottom: 10px;
+        }
+
+    .modal-xl {
+        max-width: 85%;
+    }
+
+    .terms-header {
+        background: #efefef;
+        padding: 2px 10px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .terms-subheader {
+        font-size: 16px;
+    }
+
+    .terms-list {
+    }
+
+        .terms-list li {
+            padding-left: 20px;
+        }
+    /*/////////Custom Modal////////////*/
     #footer-container {
         display: none;
     }
@@ -43,9 +48,11 @@
     #Address {
         height: 100%;
     }
+
     #mySidenav {
         display: none;
     }
+
     #header {
         display: none;
     }
@@ -270,7 +277,62 @@
                                 </div>
                             </div><!-- tab-pane -->
                             <div class="tab-pane fade show" id="tab-1-2">
-                                <div class="form-section">
+                                <!--Phone no validation with google recaptcha-->
+                                <div class="form-section verify-tel-sec">
+                                    <h6 class="text-uppercase">Verify your tel number</h6>
+                                    <fieldset>
+                                        <div id="alert-area"></div>
+
+                                        <div class="input-group mb-2 gr-captcha-sec">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><img src="~/assets/images/phone.png" alt=""></span>
+                                                <span class="required-field"></span>
+                                            </div>
+                                            <div style="width:100px;">
+                                                @Html.DropDownListFor(m => m.CountryCode, new List
+                                                <SelectListItem>
+                                                {
+                                                new SelectListItem{ Text="(+225)", Value = "+225" },
+                                                }, htmlAttributes: new { @class = "", @style = "margin:0;", id = "country_code" })
+                                            </div>
+                                            @Html.TextBoxFor(m => m.ConfirmPhoneNumber, new { @class = "form-control", @placeholder = "" })
+                                            <span class="input-lable contact-lable">Numéro de contact</span>
+                                        </div>
+                                        <div class="row gr-captcha-sec">
+                                            <div class="col-sm-12 error-arrow">
+                                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="g-recaptcha gr-captcha-sec" data-sitekey="6LdHcTwUAAAAAIFoGNGSjl_daxhYsQUWVV9PKWWW"></div>
+
+                                        <div class="row gr-captcha-sec">
+                                            <button type="button" class="btn-sm pull-left" onclick="goBackToUserForm()">Cancel</button>
+                                            <button type="button" class="btn-sm pull-right" onclick="validateGoogleRecaptcha()">Validate</button>
+                                        </div>
+                                        <div class="row gr-captcha-sec">
+                                            By clicking on Validate an sms will be sent to your mobile number
+                                        </div>
+
+                                        <div class="info-bip-sec" style="display:none;">
+                                            <div class="row">
+                                                Please enter the 4 digit code received to your number
+                                                <h3 id="tel-num"></h3>
+                                            </div>
+                                            <div class="row">
+                                                <input id="info-bip-code" placeholder="4 digit code" />
+                                                <input type="hidden" value="" id="info-bip-pinid" />
+                                            </div>
+                                        </div>
+
+                                        <div class="row info-bip-sec" style="display:none;">
+                                            <button type="button" class="btn-sm pull-left" onclick="goBackGrCaptchaForm()">Cancel</button>
+                                            <button type="button" class="btn-sm pull-right" onclick="validateInfoBipPin()">Continue</button>
+                                        </div>
+                                    </fieldset>
+
+                                </div>
+
+                                <div class="form-section doc-sec" style="display:none;">
                                     <h6 class="text-uppercase">Document a télécharger</h6>
 
                                     <fieldset>
@@ -310,65 +372,65 @@
                                 </div>
 
                                 @if (ViewBag.SelectedRole == "Agency")
-                            {
-                        <div class="form-section">
-                            <h6 class="text-uppercase">Section Agence</h6>
+                                {
+                                    <div class="form-section doc-sec" style="display:none;">
+                                        <h6 class="text-uppercase">Section Agence</h6>
 
-                            <fieldset>
+                                        <fieldset>
 
-                                <div id="alert-area"></div>
+                                            <div id="alert-area"></div>
 
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
-                                        <span class="required-field"></span>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/user.png" alt=""></span>
+                                                    <span class="required-field"></span>
+                                                </div>
+                                                @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "" })
+                                                <span class="input-lable">Nom de la compagnie</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 error-arrow">
+                                                    @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                                    <span class="required-field"></span>
+                                                </div>
+                                                @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "" })
+                                                <span class="input-lable">Nom du responsable</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 error-arrow">
+                                                    @Html.ValidationMessageFor(m => m.ResponsibleName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-2">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                                    <span class="required-field"></span>
+                                                </div>
+                                                @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "" })
+                                                <span class="input-lable">URL du site WEB</span>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-12 error-arrow">
+                                                    @Html.ValidationMessageFor(m => m.WebSiteUrl, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
+                                                    <span class="required-field"></span>
+                                                </div>
+                                                @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "" })
+                                                <span class="input-lable">Description</span>
+                                            </div>
+                                        </fieldset>
                                     </div>
-                                    @Html.TextBoxFor(m => m.CompanyName, new { @class = "form-control", @placeholder = "" })
-                                    <span class="input-lable">Nom de la compagnie</span>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 error-arrow">
-                                        @Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
-                                        <span class="required-field"></span>
-                                    </div>
-                                    @Html.TextBoxFor(m => m.ResponsibleName, new { @class = "form-control", @placeholder = "" })
-                                    <span class="input-lable">Nom du responsable</span>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 error-arrow">
-                                        @Html.ValidationMessageFor(m => m.ResponsibleName, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
-                                        <span class="required-field"></span>
-                                    </div>
-                                    @Html.TextBoxFor(m => m.WebSiteUrl, new { @class = "form-control", @placeholder = "" })
-                                    <span class="input-lable">URL du site WEB</span>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-12 error-arrow">
-                                        @Html.ValidationMessageFor(m => m.WebSiteUrl, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><img src="~/assets/images/id.png" alt=""></span>
-                                        <span class="required-field"></span>
-                                    </div>
-                                    @Html.TextAreaFor(m => m.CompanyActivity, new { @class = "form-control", @placeholder = "" })
-                                    <span class="input-lable">Description</span>
-                                </div>
-                            </fieldset>
-                        </div>
-                            }
-                                <div class="form-section">
+                                }
+                                <div class="form-section doc-sec" style="display:none;">
                                     <h6 class="text-uppercase">Nom d'utilisateur & Mot de passe</h6>
 
                                     <fieldset>
@@ -415,24 +477,24 @@
                                         </div>
 
                                         @*@if (ViewBag.SecurityQuestions != null)
-                                        {
-                                            <div class="input-group mb-2">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
-                                                    <span class="required-field"></span>
+                                            {
+                                                <div class="input-group mb-2">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><img src="~/assets/images/question.png" alt=""></span>
+                                                        <span class="required-field"></span>
+                                                    </div>
+                                                    @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control" })
+                                                    <span class="input-lable">Security Question</span>
                                                 </div>
-                                                @Html.DropDownList("SecurityQuestionId", new SelectList(ViewBag.SecurityQuestions, "SecurityQuestionId", "Question"), new { @class = "form-control" })
-                                                <span class="input-lable">Security Question</span>
-                                            </div>
-                                            <div class="input-group">
-                                                <div class="input-group-prepend">
-                                                    <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
-                                                    <span class="required-field"></span>
+                                                <div class="input-group">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text"><img src="~/assets/images/answer.png" alt=""></span>
+                                                        <span class="required-field"></span>
+                                                    </div>
+                                                    @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
+                                                    <span class="input-lable">Security Answer</span>
                                                 </div>
-                                                @Html.TextBoxFor(m => m.SecurityQuestionAnswer, new { @class = "form-control", @placeholder = "" })
-                                                <span class="input-lable">Security Answer</span>
-                                            </div>
-                                        }*@
+                                            }*@
                                         <div class="checkbox">
                                             <label>
                                                 @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
@@ -449,7 +511,7 @@
 
                                 </div>
 
-                                <button style="float:right;" class="btn btn-style-1 btn-lg waves" id="submit" type="submit" name="submit" value="" onclick="return Validate();">Submit</button>
+                                <button style="float:right; display:none;" class="btn btn-style-1 btn-lg waves doc-sec" id="submit" type="submit" name="submit" value="" onclick="return Validate();">Submit</button>
                                 @*<input type="submit" class="btn btn-style-1 btn-lg waves" value="Register" />*@
                             </div><!-- tab-pane -->
                         </div>
@@ -809,8 +871,8 @@
                             </div>
                         </div>
                         <!--<div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>-->
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>-->
                     </div>
 
                 </div>
@@ -820,16 +882,129 @@
     </div>
 
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.inputmask.bundle.js"></script>
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+<script src="~/assets/plugins/jquery/jquery-2.2.4.min.js"></script>
+
 @section Scripts {
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
 }
-
+<script src="~/Scripts/jquery.inputmask.bundle.js"></script>
 <script type="text/javascript">
-    function Validate()
-    {
+    function goBackToUserForm() {
+        grecaptcha.reset();
+        // $(this).hide();
+        $(".nextbtn").show();
+        $(".nextbtn").addClass("active");
+        $("#tab-1-2").hide();
+        $("#tab-1-1").show();
+    }
+
+    function goBackGrCaptchaForm() {
+        grecaptcha.reset();
+        $(".gr-captcha-sec").show();
+        $(".info-bip-sec").hide();
+    }
+
+    function requestForInfoBipPin(contactNumber) {
+        var data = {
+            applicationId: "C875EB281731D7407DC415D5D1CDA216",
+            messageId: "3CFD4CFADFFC4DD6F8710B966C2C7768",
+            from: "JobTek",
+            to: "+919861696748" //contactNumber
+        };
+
+        $.ajax({
+            url: "https://gn9g6.api.infobip.com/2fa/1/pin",
+            method: "POST",
+            //dataType: "json",
+            crossDomain: true,
+            contentType: "application/json",
+            data: JSON.stringify(data),
+            cache: false,
+            //beforeSend: function (xhr) {
+            //    /* Authorization header */
+            //    xhr.setRequestHeader("Authorization", "Basic " + Utils.getUsernamePassword());
+            //    xhr.setRequestHeader("X-Mobile", "false");
+            //},
+            headers: { "Authorization": "App 75ba074d74c8443fb7477345b600f110-c1f7659a-4b43-4a34-ad2f-38e9bbef9a15" },
+            success: function (response) {
+                console.log(response);
+                console.log(response.pinId)
+                $("#info-bip-pinid").val(response.pinId);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Unable to request for pin. Please try after sometime.");
+            }
+        });
+    }
+
+    function validateInfoBipPin() {
+        var pinId = $("#info-bip-pinid").val();
+        var pin = $("#info-bip-code").val();
+        $.ajax({
+            type: 'GET',
+            url: '/Account/ValidateInfoBipPin?pinId=' + pinId + '&pin=' + pin, // we are calling json method
+            //dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                if (response.Verified) {
+                    $('.verify-tel-sec').hide();
+                    $('.gr-captcha-sec').hide();
+                    $('.info-bip-sec').hide();
+                    $('.doc-sec').show();
+                } else {
+                    alert("Incorrect Pin");
+                }
+            },
+            error: function (ex) {
+                console.log(ex);
+                alert('Invalid PIN');
+            }
+        });
+    }
+
+    function validateGoogleRecaptcha() {
+        // check whether the google recaptcha is valid or not
+        var gCaptchaResponse = grecaptcha.getResponse();
+        //console.log(gCaptchaResponse);
+        //alert(gCaptchaResponse);
+
+        // send the response making an ajax call to validate through google recaptcha
+        $.ajax({
+            type: 'GET',
+            url: '/Account/ValidateCaptcha?gcaptchaResp=' + gCaptchaResponse, // we are calling json method
+            //dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                if (response.Success) {
+                    $(".gr-captcha-sec").hide();
+                    $(".info-bip-sec").show();
+                    $("#tel-num").html($("#ConfirmPhoneNumber").val());
+
+                    var cntryCode = $("#country_code").val();
+                    var unmaskedPhoneNum = $("#ConfirmPhoneNumber").val().replace(/-/g, ''); //$("#ConfirmPhoneNumber").inputmask('unmaskedvalue');
+                    var phoneNumWithCntryCode = cntryCode + unmaskedPhoneNum;
+                    console.log(phoneNumWithCntryCode);
+                    // raise a request for PIN
+                    requestForInfoBipPin(phoneNumWithCntryCode);
+
+                } else {
+                    alert("Invalid captcha");
+                }
+
+            },
+            error: function (ex) {
+                console.log(ex);
+                alert('Invalid Captcha');
+            }
+        });
+    }
+
+
+    function Validate() {
         var input = $("#AgreeTermsAndConditions");
         if (input.is(':checked') === true) {
             return true;
@@ -838,10 +1013,10 @@
             alert("Veuillez accepter les termes et conditions.");
             return false;
         }
-        
+
     }
     $(document).ready(function () {
-        
+
         var districts = ["", ""]
 
         $("#CountryId").change(function () {
@@ -885,38 +1060,38 @@
     });
 </script>
 @*<script>
-    $(document).ready(function () {
-        var locations = {
-            '0': [],
-            '1': ['Choose District', 'Abobo', 'Adjamé', 'Anyama', 'Attécoubé', 'Bingerville'],
-            '2': ['Choose District'],
-            '3': ['Choose District'],
-            '4': ['Choose District'],
-            '5': ['Choose District'],
+        $(document).ready(function () {
+            var locations = {
+                '0': [],
+                '1': ['Choose District', 'Abobo', 'Adjamé', 'Anyama', 'Attécoubé', 'Bingerville'],
+                '2': ['Choose District'],
+                '3': ['Choose District'],
+                '4': ['Choose District'],
+                '5': ['Choose District'],
 
-        }
-
-        var $District = $('#District');
-        $('#City').change(function () {
-            if ($(this).val()) {
-
-                var city = $(this).val(), lcns = locations[city] || [];
-
-                //var html = $.map(lcns, function (lcn,index) {
-                //    return '<option value="' + index + '">' + lcn + '</option>'
-                //}).join('');
-
-                var html = "";
-                for (var i = 0; i < locations[city].length; i++) {
-                    //alert(html);
-                    html = html + '<option value="' + i + '">' + locations[city][i] + '</option>'
-                }
-
-                $District.html(html)
             }
+
+            var $District = $('#District');
+            $('#City').change(function () {
+                if ($(this).val()) {
+
+                    var city = $(this).val(), lcns = locations[city] || [];
+
+                    //var html = $.map(lcns, function (lcn,index) {
+                    //    return '<option value="' + index + '">' + lcn + '</option>'
+                    //}).join('');
+
+                    var html = "";
+                    for (var i = 0; i < locations[city].length; i++) {
+                        //alert(html);
+                        html = html + '<option value="' + i + '">' + locations[city][i] + '</option>'
+                    }
+
+                    $District.html(html)
+                }
+            });
         });
-    });
-</script>*@
+    </script>*@
 <script type="text/javascript">
     var urlParams = new URLSearchParams(window.location.search);
     var myParam = urlParams.get('userRole');
@@ -950,6 +1125,9 @@
                 && $('#Email').valid()
                 && $('#PhoneNumber').valid()) {
 
+                // set the confirm phone number for validation
+                $("#ConfirmPhoneNumber").val($('#PhoneNumber').val());
+
                 $(this).hide();
                 $(".backbtn").show();
                 $(".backbtn").addClass("active");
@@ -968,14 +1146,17 @@
         })
 
         $('input[type=radio][name=Role]').change(function () {
-           
-                //window.location.href = "http://stackoverflow.com";
+
+            //window.location.href = "http://stackoverflow.com";
             window.location.href = window.location.pathname + "?userRole=" + this.value;
         });
     })
 
+    //$(window).load(function () {
     $("#phone").inputmask({ "mask": "(999) 999-9999" });
     $("#PhoneNumber").inputmask({ "mask": "99-99-99-99" });
+    $("#ConfirmPhoneNumber").inputmask({ "mask": "99-99-99-99" });
+    //});
 </script>
 
 

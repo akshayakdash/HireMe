@@ -11,6 +11,8 @@ using Microsoft.Owin.Security;
 using HireMe.Models;
 using System.IO;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.Net;
 
 namespace HireMe.Controllers
 {
@@ -387,6 +389,35 @@ namespace HireMe.Controllers
             return View(model);
         }
 
+
+        [HttpGet]
+        [AllowAnonymous]
+        //[AllowHtml]
+        public JsonResult ValidateCaptcha(string gcaptchaResp)
+        {
+            string secret = System.Web.Configuration.WebConfigurationManager.AppSettings["recaptchaPrivateKey"];
+            var client = new WebClient();
+            var jsonResult = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, gcaptchaResp));
+            return Json(JsonConvert.DeserializeObject<CaptchaResponse>(jsonResult.ToString()), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public JsonResult ValidateInfoBipPin(string pinId, string pin)
+        {
+            var vm = new { pin = pin };
+            var infoBipPublicKey = System.Web.Configuration.WebConfigurationManager.AppSettings["infoBipPublicKey"];
+            using (var client = new WebClient())
+            {
+                var dataString = JsonConvert.SerializeObject(vm);
+                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                client.Headers.Add(HttpRequestHeader.Authorization, "App "+ infoBipPublicKey);
+                var res = client.UploadString(new Uri("https://gn9g6.api.infobip.com/2fa/1/pin/"+pinId+"/verify"), "POST", dataString);
+                return Json(JsonConvert.DeserializeObject<InfoBipResponse>(res.ToString()), JsonRequestBehavior.AllowGet);
+            }
+            //return Json("", JsonRequestBehavior.AllowGet);
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -642,11 +673,11 @@ namespace HireMe.Controllers
         [HttpGet]
         public JsonResult GetCities(int id)
         {
-            
+
             List<SelectListItem> cities = new List<SelectListItem>();
             cities = context.Cities.Where(t => t.CountryId == id).Select(p => new SelectListItem { Text = p.CityName, Value = p.CityId.ToString() }).ToList();
-            
-            return Json(new SelectList(cities, "Value", "Text"),JsonRequestBehavior.AllowGet);
+
+            return Json(new SelectList(cities, "Value", "Text"), JsonRequestBehavior.AllowGet);
         }
 
         [AllowAnonymous]
@@ -719,5 +750,33 @@ namespace HireMe.Controllers
         }
         #endregion
 
+    }
+
+    public class CaptchaResponse
+    {
+        [JsonProperty("success")]
+        public bool Success
+        {
+            get;
+            set;
+        }
+        [JsonProperty("error-codes")]
+        public List<string> ErrorMessage
+        {
+            get;
+            set;
+        }
+    }
+
+    public class InfoBipResponse
+    {
+        [JsonProperty("pinId")]
+        public string PinId { get; set; }
+        [JsonProperty("msisdn")]
+        public string Msisdn { get; set; }
+        [JsonProperty("verified")]
+        public bool Verified { get; set; }
+        [JsonProperty("attemptsRemaining")]
+        public int AttemptsRemaining { get; set; }
     }
 }

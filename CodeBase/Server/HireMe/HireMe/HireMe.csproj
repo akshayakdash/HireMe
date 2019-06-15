@@ -254,6 +254,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AgencyController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CandidateJobRequestsController.cs" />
     <Compile Include="Controllers\CandidateProfilesController.cs" />
     <Compile Include="Controllers\DemoCandidateController.cs" />
@@ -365,6 +366,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Candidate.cs" />
     <Compile Include="Models\CandidateProfileViewModel.cs" />
+    <Compile Include="Models\Contactus.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MySqlIdentityConfiguration\MySqlConfiguration.cs" />
