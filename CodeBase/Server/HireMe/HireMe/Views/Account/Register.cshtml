@@ -298,6 +298,19 @@
                                             @Html.TextBoxFor(m => m.ConfirmPhoneNumber, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable contact-lable">Numéro de contact</span>
                                         </div>
+                                        @*<div class="row gr-captcha-sec">
+                                            <div class="col-sm-12 error-arrow">
+                                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="g-recaptcha gr-captcha-sec" data-sitekey="6LdHcTwUAAAAAIFoGNGSjl_daxhYsQUWVV9PKWWW"></div>
+                                        <div class="row gr-captcha-sec">
+                                            <button type="button" class="btn-sm pull-left" onclick="goBackToUserForm()">Cancel</button>
+                                            <button type="button" class="btn-sm pull-right" onclick="validateGoogleRecaptcha()">Validate</button>
+                                        </div>
+                                        <div class="row gr-captcha-sec">
+                                            By clicking on Validate an sms will be sent to your mobile number
+                                        </div>*@
                                         <div class="row gr-captcha-sec">
                                             <div class="col-sm-12 error-arrow">
                                                 @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
@@ -305,29 +318,55 @@
                                         </div>
                                         <div class="g-recaptcha gr-captcha-sec" data-sitekey="6LdHcTwUAAAAAIFoGNGSjl_daxhYsQUWVV9PKWWW"></div>
 
-                                        <div class="row gr-captcha-sec">
-                                            <button type="button" class="btn-sm pull-left" onclick="goBackToUserForm()">Cancel</button>
-                                            <button type="button" class="btn-sm pull-right" onclick="validateGoogleRecaptcha()">Validate</button>
-                                        </div>
-                                        <div class="row gr-captcha-sec">
-                                            By clicking on Validate an sms will be sent to your mobile number
+                                        <div id="beforeDiv">
+                                        <div class="" style="margin-top:-50px;text-align: right;position:absolute;right:15px;">
+                                            <button type="button" class="btn-sm ml-2 btn-info" onclick="goBackToUserForm()" style="cursor:pointer;padding: 6px 12px;">Annuler</button>
+                                            <button type="button" class="btn-sm" onclick="validateGoogleRecaptcha()" style="cursor:pointer;padding: 6px 12px;">Valider</button>
                                         </div>
 
+
+                                        <div class="row gr-captcha-sec">
+                                            <div class="col-sm-12">
+                                                En cliquant sur «Valider» un SMS vous seras envoyé
+                                            </div>
+                                        </div>
+                                        <div class="row mt-2">
+                                            <div class="col-sm-12 mb-2 text-center">
+                                                <a href="#" style="padding: 5px 12px;border: 1px solid #ccc;">Renvoyer le code</a>
+                                            </div>
+                                        </div>
+                                        </div>
                                         <div class="info-bip-sec" style="display:none;">
                                             <div class="row">
-                                                Please enter the 4 digit code received to your number
-                                                <h3 id="tel-num"></h3>
-                                            </div>
-                                            <div class="row">
-                                                <input id="info-bip-code" placeholder="4 digit code" />
-                                                <input type="hidden" value="" id="info-bip-pinid" />
-                                            </div>
-                                        </div>
+                                                <div class="col-md-12 ">
+                                                    <h3 id="tel-num"></h3>
+                                                    <input id="info-bip-code" class="form-control" placeholder="Code à 4 chiffres" />
+                                                    <input type="hidden" class="form-control" value="" id="info-bip-pinid" />
 
-                                        <div class="row info-bip-sec" style="display:none;">
+                                                    <div class="">
+                                                        <button type="button" class="btn-sm btn-info" onclick="goBackGrCaptchaForm()" style="cursor:pointer;padding: 6px 12px;">Annuler</button>
+                                                        <button type="button" class="btn-sm ml-2" onclick="validateInfoBipPin()" style="cursor:pointer;padding: 6px 12px;">Valider</button>
+                                                    </div>
+
+                                                    <div>
+                                                        En cliquant sur «Continuer» vous allez confirmer le code
+                                                    </div>
+
+                                                    <div class="row mt-2">
+                                                        <div class="col-sm-12 mb-2 text-center">
+                                                            <a href="#" style="padding: 5px 12px;border: 1px solid #ccc;">Renvoyer le code</a>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                
+                                            </div>
+                                         </div>
+                                        
+                                        @*<div class="row info-bip-sec" style="display:none;">
                                             <button type="button" class="btn-sm pull-left" onclick="goBackGrCaptchaForm()">Cancel</button>
                                             <button type="button" class="btn-sm pull-right" onclick="validateInfoBipPin()">Continue</button>
-                                        </div>
+                                        </div>*@
                                     </fieldset>
 
                                 </div>
@@ -911,7 +950,8 @@
             applicationId: "C875EB281731D7407DC415D5D1CDA216",
             messageId: "3CFD4CFADFFC4DD6F8710B966C2C7768",
             from: "JobTek",
-            to: "+919861696748" //contactNumber
+            to: "+917504835326" //contactNumber
+            //to: contactNumber
         };
 
         $.ajax({
@@ -929,8 +969,8 @@
             //},
             headers: { "Authorization": "App 75ba074d74c8443fb7477345b600f110-c1f7659a-4b43-4a34-ad2f-38e9bbef9a15" },
             success: function (response) {
-                console.log(response);
-                console.log(response.pinId)
+                //console.log(response);
+                //console.log(response.pinId)
                 $("#info-bip-pinid").val(response.pinId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -987,12 +1027,20 @@
                     var cntryCode = $("#country_code").val();
                     var unmaskedPhoneNum = $("#ConfirmPhoneNumber").val().replace(/-/g, ''); //$("#ConfirmPhoneNumber").inputmask('unmaskedvalue');
                     var phoneNumWithCntryCode = cntryCode + unmaskedPhoneNum;
-                    console.log(phoneNumWithCntryCode);
+                    //console.log(phoneNumWithCntryCode);
                     // raise a request for PIN
                     requestForInfoBipPin(phoneNumWithCntryCode);
 
                 } else {
                     alert("Invalid captcha");
+                    $("#beforeDiv").hide();
+                    $(".gr-captcha-sec").hide();
+                    $(".info-bip-sec").show();
+                    $("#tel-num").html($("#ConfirmPhoneNumber").val());
+
+                    var cntryCode = $("#country_code").val();
+                    var unmaskedPhoneNum = $("#ConfirmPhoneNumber").val().replace(/-/g, ''); //$("#ConfirmPhoneNumber").inputmask('unmaskedvalue');
+                    var phoneNumWithCntryCode = cntryCode + unmaskedPhoneNum;
                 }
 
             },
