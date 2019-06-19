@@ -319,7 +319,7 @@
                                         <div class="g-recaptcha gr-captcha-sec" data-sitekey="6LdHcTwUAAAAAIFoGNGSjl_daxhYsQUWVV9PKWWW"></div>
 
                                         <div id="beforeDiv">
-                                        <div class="" style="margin-top:-50px;text-align: right;position:absolute;right:15px;">
+                                        <div class="gr-captcha-sec" style="margin-top:-50px;text-align: right;position:absolute;right:15px;">
                                             <button type="button" class="btn-sm ml-2 btn-info" onclick="goBackToUserForm()" style="cursor:pointer;padding: 6px 12px;">Annuler</button>
                                             <button type="button" class="btn-sm" onclick="validateGoogleRecaptcha()" style="cursor:pointer;padding: 6px 12px;">Valider</button>
                                         </div>
@@ -330,11 +330,11 @@
                                                 En cliquant sur «Valider» un SMS vous seras envoyé
                                             </div>
                                         </div>
-                                        <div class="row mt-2">
+                                        @*<div class="row mt-2">
                                             <div class="col-sm-12 mb-2 text-center">
                                                 <a href="#" style="padding: 5px 12px;border: 1px solid #ccc;">Renvoyer le code</a>
                                             </div>
-                                        </div>
+                                        </div>*@
                                         </div>
                                         <div class="info-bip-sec" style="display:none;">
                                             <div class="row">
@@ -354,7 +354,7 @@
 
                                                     <div class="row mt-2">
                                                         <div class="col-sm-12 mb-2 text-center">
-                                                            <a href="#" style="padding: 5px 12px;border: 1px solid #ccc;">Renvoyer le code</a>
+                                                            <a onclick="resendRequestForInfoBipPin()" href="#" style="padding: 5px 12px;border: 1px solid #ccc;">Renvoyer le code</a>
                                                         </div>
                                                     </div>
 
@@ -950,8 +950,8 @@
             applicationId: "C875EB281731D7407DC415D5D1CDA216",
             messageId: "3CFD4CFADFFC4DD6F8710B966C2C7768",
             from: "JobTek",
-            to: "+917504835326" //contactNumber
-            //to: contactNumber
+            //to: "+919861696748" //contactNumber
+            to: contactNumber
         };
 
         $.ajax({
@@ -977,6 +977,33 @@
                 alert("Unable to request for pin. Please try after sometime.");
             }
         });
+    }
+
+    function resendRequestForInfoBipPin() {
+        var pinId = $("#info-bip-pinid").val();
+
+        if (pinId) {
+            $.ajax({
+                url: "https://gn9g6.api.infobip.com/2fa/1/pin/" + pinId + "/resend",
+                method: "POST",
+                //dataType: "json",
+                crossDomain: true,
+                contentType: "application/json",
+                cache: false,
+                headers: { "Authorization": "App 75ba074d74c8443fb7477345b600f110-c1f7659a-4b43-4a34-ad2f-38e9bbef9a15" },
+                success: function (response) {
+                    console.log(response);
+                    console.log(response.pinId);
+                    $("#info-bip-pinid").val(response.pinId);
+                    alert("Resend pin successfull.Please check your phone number and enter the code.");
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Unable to request for pin. Please try after sometime.");
+                }
+            });
+        } else {
+            alert("Unable to process your request. Please try again later.")
+        }
     }
 
     function validateInfoBipPin() {
