@@ -298,6 +298,19 @@
                                             @Html.TextBoxFor(m => m.ConfirmPhoneNumber, new { @class = "form-control", @placeholder = "" })
                                             <span class="input-lable contact-lable">Numéro de contact</span>
                                         </div>
+                                        @*<div class="row gr-captcha-sec">
+                                            <div class="col-sm-12 error-arrow">
+                                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="g-recaptcha gr-captcha-sec" data-sitekey="6LdHcTwUAAAAAIFoGNGSjl_daxhYsQUWVV9PKWWW"></div>
+                                        <div class="row gr-captcha-sec">
+                                            <button type="button" class="btn-sm pull-left" onclick="goBackToUserForm()">Cancel</button>
+                                            <button type="button" class="btn-sm pull-right" onclick="validateGoogleRecaptcha()">Validate</button>
+                                        </div>
+                                        <div class="row gr-captcha-sec">
+                                            By clicking on Validate an sms will be sent to your mobile number
+                                        </div>*@
                                         <div class="row gr-captcha-sec">
                                             <div class="col-sm-12 error-arrow">
                                                 @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
@@ -305,12 +318,14 @@
                                         </div>
                                         <div class="g-recaptcha gr-captcha-sec" data-sitekey="6LdHcTwUAAAAAIFoGNGSjl_daxhYsQUWVV9PKWWW"></div>
 
-                                        <div class="row gr-captcha-sec">
-                                            <button type="button" class="btn-sm pull-left" onclick="goBackToUserForm()">Cancel</button>
-                                            <button type="button" class="btn-sm pull-right" onclick="validateGoogleRecaptcha()">Validate</button>
+                                        <div class="" style="position: absolute;right: 15px;margin-top: -45px;">
+                                            <button type="button" class="btn-sm ml-2" onclick="goBackToUserForm()" style="cursor:pointer;">Cancel</button>
+                                            <button type="button" class="btn-sm" onclick="validateGoogleRecaptcha()" style="cursor:pointer;">Validate</button>
                                         </div>
                                         <div class="row gr-captcha-sec">
-                                            By clicking on Validate an sms will be sent to your mobile number
+                                            <div class="col-sm-12">
+                                                En cliquant sur Valider, un SMS sera envoyé sur votre numéro de portable.
+                                            </div>
                                         </div>
 
                                         <div class="info-bip-sec" style="display:none;">
@@ -911,7 +926,8 @@
             applicationId: "C875EB281731D7407DC415D5D1CDA216",
             messageId: "3CFD4CFADFFC4DD6F8710B966C2C7768",
             from: "JobTek",
-            to: "+919861696748" //contactNumber
+            //to: "+919861696748" //contactNumber
+            to: contactNumber
         };
 
         $.ajax({
@@ -929,8 +945,8 @@
             //},
             headers: { "Authorization": "App 75ba074d74c8443fb7477345b600f110-c1f7659a-4b43-4a34-ad2f-38e9bbef9a15" },
             success: function (response) {
-                console.log(response);
-                console.log(response.pinId)
+                //console.log(response);
+                //console.log(response.pinId)
                 $("#info-bip-pinid").val(response.pinId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -987,7 +1003,7 @@
                     var cntryCode = $("#country_code").val();
                     var unmaskedPhoneNum = $("#ConfirmPhoneNumber").val().replace(/-/g, ''); //$("#ConfirmPhoneNumber").inputmask('unmaskedvalue');
                     var phoneNumWithCntryCode = cntryCode + unmaskedPhoneNum;
-                    console.log(phoneNumWithCntryCode);
+                    //console.log(phoneNumWithCntryCode);
                     // raise a request for PIN
                     requestForInfoBipPin(phoneNumWithCntryCode);
 
