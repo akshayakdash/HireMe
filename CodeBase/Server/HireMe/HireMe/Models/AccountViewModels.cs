@@ -163,8 +163,8 @@ namespace HireMe.Models
         public string id_proof_back_base64 { get; set; }
 
         
-        [Range(typeof(bool), "true", "true", ErrorMessage = "Veuillez accepter les termes et conditions.")]
-        [Display(Name = "J'accepte les termes et conditions")]
+        //[Range(typeof(bool), "true", "true", ErrorMessage = "Veuillez accepter les termes et conditions.")]
+        //[Display(Name = "J'accepte les termes et conditions")]
         public bool AgreeTermsAndConditions { get; set; }
 
         //[Required(ErrorMessage = "Please select the security question.")]

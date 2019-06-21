@@ -536,7 +536,9 @@
                                             }*@
                                         <div class="checkbox">
                                             <label>
-                                                @Html.CheckBoxFor(m => m.AgreeTermsAndConditions)
+                                                @Html.CheckBoxFor(m => m.AgreeTermsAndConditions, new Dictionary < string, object >{
+                                                    { "id", "p1isCompleted"},
+                                                    { "onclick","setCompleteStatus.call(this)"} })
                                                 <span></span>
                                             </label>
                                             <span data-toggle="modal" data-target="#myModal" style="cursor: pointer;">J'accepte les termes et conditions</span>
@@ -550,7 +552,7 @@
 
                                 </div>
 
-                                <button style="float:right; display:none;" class="btn btn-style-1 btn-lg waves doc-sec" id="submit" type="submit" name="submit" value="" onclick="return Validate();">Submit</button>
+                                <button style="float:right; display:none;" class="btn btn-style-1 btn-lg waves doc-sec" id="submit" type="submit" name="submit" value="" disabled>Submit</button>
                                 @*<input type="submit" class="btn btn-style-1 btn-lg waves" value="Register" />*@
                             </div><!-- tab-pane -->
                         </div>
@@ -950,7 +952,7 @@
             applicationId: "C875EB281731D7407DC415D5D1CDA216",
             messageId: "3CFD4CFADFFC4DD6F8710B966C2C7768",
             from: "JobTek",
-            //to: "+919861696748" //contactNumber
+            //to: "+917504835326" //contactNumber
             to: contactNumber
         };
 
@@ -1079,17 +1081,15 @@
     }
 
 
-    function Validate() {
-        var input = $("#AgreeTermsAndConditions");
-        if (input.is(':checked') === true) {
-            return true;
+    function setCompleteStatus() {
+        if (this.checked) {
+            $("#submit").prop('disabled', false);
         }
         else {
-            alert("Veuillez accepter les termes et conditions.");
-            return false;
+            $("#submit").prop('disabled', true);
         }
-
     }
+
     $(document).ready(function () {
 
         var districts = ["", ""]
