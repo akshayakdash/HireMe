@@ -13,6 +13,7 @@ using System.Data.Entity;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using HireMe.Utility;
+using System.Configuration;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -78,7 +79,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
-                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    profileImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     //profileImagePath = model.profile_pic_base64;
                 }
                 #endregion
@@ -104,7 +105,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //idProofImagePath = model.id_proof_base64;
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
-                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads / " + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
@@ -126,7 +127,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //idProofImagePath1 = model.id_proof_back_base64;
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_back_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_back_base64));
-                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
                 string contactNumber = model.PhoneNumber.Replace("-", "");
@@ -182,9 +183,13 @@ namespace HireMe.Controllers.MobileApiControllers
 
                 var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 // first check if there is any user already exists on this user name
-                var userExists = UserManager.FindByNameAsync(model.UserName).Result;
+                ApplicationUser userExists = UserManager.FindByNameAsync(model.UserName).Result;
+                    if (userExists == null)
+                        // then check if there is any user already exists on this email id
+                        userExists = UserManager.FindByEmailAsync(model.Email).Result;
                 if (userExists != null)
                     return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "User Name already taken." });
+
                 var result = UserManager.CreateAsync(user, model.Password).Result;
 
                 if (result.Succeeded)

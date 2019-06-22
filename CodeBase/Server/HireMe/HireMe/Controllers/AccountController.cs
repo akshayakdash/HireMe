@@ -13,6 +13,7 @@ using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Net;
+using System.Configuration;
 
 namespace HireMe.Controllers
 {
@@ -252,7 +253,7 @@ namespace HireMe.Controllers
                         thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
                     }
                     System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
-                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    profileImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
 
@@ -270,7 +271,7 @@ namespace HireMe.Controllers
                     }
                     //idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                     System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
-                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
@@ -286,7 +287,7 @@ namespace HireMe.Controllers
                     }
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
                     System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
-                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
                 string contactNumber = model.PhoneNumber.Replace("-", "");

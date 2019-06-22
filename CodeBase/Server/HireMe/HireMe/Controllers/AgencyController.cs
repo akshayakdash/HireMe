@@ -13,6 +13,7 @@ using System.Web.Security;
 using Microsoft.AspNet.Identity.Owin;
 using HireMe.Utility;
 using Newtonsoft.Json;
+using System.Configuration;
 
 namespace HireMe.Controllers
 {
@@ -107,7 +108,7 @@ namespace HireMe.Controllers
                         thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
                     }
                     System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
-                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    profileImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
 
@@ -125,7 +126,7 @@ namespace HireMe.Controllers
                     }
                     //idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
                     System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
-                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
@@ -141,7 +142,7 @@ namespace HireMe.Controllers
                     }
                     idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
                     System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
-                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
                 var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
