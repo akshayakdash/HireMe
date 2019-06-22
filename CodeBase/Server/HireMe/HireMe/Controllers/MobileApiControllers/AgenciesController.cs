@@ -14,6 +14,7 @@ using System.IO;
 using System.Web;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
+using System.Configuration;
 
 namespace HireMe.Controllers.MobileApiControllers
 {
@@ -89,7 +90,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.profile_pic_base64));
-                    profileImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    profileImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     //profileImagePath = model.profile_pic_base64;
                 }
                 #endregion
@@ -114,7 +115,7 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
-                    idProofImagePath = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     //profileImagePath = model.profile_pic_base64;
                 }
 
@@ -137,7 +138,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //idProofImagePath = model.id_proof_base64;
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof1_base64));
-                    idProofImagePath1 = "http://40.89.160.98/Uploads/" + fileName;
+                    idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
                 var user = new ApplicationUser { UserName = randomUserName, Email = model.Email,
@@ -282,14 +283,14 @@ namespace HireMe.Controllers.MobileApiControllers
                     string fileName = Guid.NewGuid().ToString()  + "_" + Path.GetFileName(skillPic.FileName);
                     skillPic.SaveAs(path + fileName);
 
-                    jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
                 else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic1Base64))
                 {
                     //jobRequest.SkillPic1 = jobRequest.SkillPic1Base64;
                     string fileName = Guid.NewGuid().ToString()  + ".jpg";//+Base64Extensions.GetFileExtension(jobRequest.SkillPic1Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic1Base64));
-                    jobRequest.SkillPic1 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
 
@@ -305,7 +306,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     string fileName = Guid.NewGuid().ToString()  + "_" + Path.GetFileName(skillPic.FileName);
                     skillPic.SaveAs(path + fileName);
 
-                    jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName;
+                    jobRequest.SkillPic2 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     //jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
                 }
                 else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic2Base64))
@@ -313,7 +314,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //jobRequest.SkillPic2 = jobRequest.SkillPic2Base64;
                     string fileName = Guid.NewGuid().ToString()  + ".jpg";// + Base64Extensions.GetFileExtension(jobRequest.SkillPic2Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic2Base64));
-                    jobRequest.SkillPic2 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic2 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
                 if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
@@ -328,7 +329,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     string fileName = Guid.NewGuid().ToString()  + "_" + Path.GetFileName(skillPic.FileName);
                     skillPic.SaveAs(path + fileName);
 
-                    jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic3 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                     //jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
                 }
                 else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic3Base64))
@@ -336,7 +337,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //jobRequest.SkillPic3 = jobRequest.SkillPic3Base64;
                     string fileName = Guid.NewGuid().ToString()  + ".jpg";// Base64Extensions.GetFileExtension(jobRequest.SkillPic3Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic3Base64));
-                    jobRequest.SkillPic3 = "http://40.89.160.98/Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
+                    jobRequest.SkillPic3 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
 
 
@@ -521,7 +522,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Profile_pic_base64));
 
 
-                user.ProfilePicUrl = "http://40.89.160.98/Uploads/" + fileName; //model.Profile_pic_base64;
+                user.ProfilePicUrl = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //model.Profile_pic_base64;
 
 
                 //user.ProfilePicUrl = model.Profile_pic_base64;
@@ -565,7 +566,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Front_base64));
 
-                    existingAgency.IdProofDoc = "http://40.89.160.98/Uploads/" + fileName; //model.Id_Card_Front_base64;
+                    existingAgency.IdProofDoc = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //model.Id_Card_Front_base64;
                     db.Entry(existingAgency).Property(p => p.IdProofDoc).IsModified = true;
                 }
 
@@ -576,7 +577,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.profile_pic_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.Id_Card_Back_base64));
 
-                    existingAgency.IdProofDoc1 = "http://40.89.160.98/Uploads/" + fileName; //model.Id_Card_Back_base64;
+                    existingAgency.IdProofDoc1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //model.Id_Card_Back_base64;
                     db.Entry(existingAgency).Property(p => p.IdProofDoc1).IsModified = true;
                 }
                 db.SaveChanges();
