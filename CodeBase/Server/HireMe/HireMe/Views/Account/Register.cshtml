@@ -952,7 +952,7 @@
             applicationId: "C875EB281731D7407DC415D5D1CDA216",
             messageId: "3CFD4CFADFFC4DD6F8710B966C2C7768",
             from: "JobTek",
-            //to: "+917504835326" //contactNumber
+            //to: "+919861696748" //contactNumber
             to: contactNumber
         };
 
@@ -1057,6 +1057,7 @@
                     var unmaskedPhoneNum = $("#ConfirmPhoneNumber").val().replace(/-/g, ''); //$("#ConfirmPhoneNumber").inputmask('unmaskedvalue');
                     var phoneNumWithCntryCode = cntryCode + unmaskedPhoneNum;
                     //console.log(phoneNumWithCntryCode);
+                    $("#tel-num").html(phoneNumWithCntryCode);
                     // raise a request for PIN
                     requestForInfoBipPin(phoneNumWithCntryCode);
 
