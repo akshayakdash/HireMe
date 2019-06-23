@@ -105,7 +105,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //idProofImagePath = model.id_proof_base64;
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
-                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads / " + fileName;
+                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
@@ -141,6 +141,16 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = age.ToString(), IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1 };
                     agency.CreatedDate = DateTime.Now.ToString();
+                    var cntry = countries.FirstOrDefault(p => p.CountryId == model.CountryId);
+                    if (cntry != null)
+                        agency.Country = cntry.CountryName;
+                    var cty = cities.FirstOrDefault(p => p.CityId == model.CityId);
+                    if (cty != null)
+                        agency.City = cities.FirstOrDefault(p => p.CityId == model.CityId).CityName;
+                    var dstrct = districts.FirstOrDefault(p => p.DistrictId == model.DistrictId);
+                    if (dstrct != null)
+                        agency.District = districts.FirstOrDefault(p => p.DistrictId == model.DistrictId).DistrictName;
+                    agency.ProfileVerified = false;
                     user.Agencies = new System.Collections.Generic.List<Agency> { agency };
                 }
                 else if (model.UserRoles.Contains("Candidate"))

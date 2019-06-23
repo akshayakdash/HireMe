@@ -1,0 +1,28 @@
+﻿@model HireMe.Models.JobTaskViewModel
+
+<div class="col-sm-12">
+    <div class="filtersection-panel">
+        <div class="filtersection-header">
+            @Html.HiddenFor(p => p.JobTaskId, new { @value = "@item.JobTaskId" })
+            @Html.HiddenFor(p => p.JobTaskName, new { @value = "@item.JobTaskName" })
+            <span style="background-color:#ff055a;"><img style="width: 15px;" src="@(Model.IconImage)" alt=""></span>
+            <span>@Model.JobTaskName</span>
+
+            <div class="switch-area-inner switch-area-inner-cus">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(p => p.Selected)
+                    <span class=""></span>
+                </label>
+            </div>
+        </div>
+        <div class="filtersection-body">
+            <div class="">
+                @Html.TextBoxFor(p => p.Note, new { @class = "form-control", @placeholder = "Comment" })
+            </div>
+        </div>
+    </div>
+    @if (Model.SubTasks.Any())
+    {
+        @Html.EditorFor(x => x.SubTasks)
+    }
+</div>

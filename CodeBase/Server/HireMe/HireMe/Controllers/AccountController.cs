@@ -301,6 +301,16 @@ namespace HireMe.Controllers
 
                     var agency = new Agency { AgencyName = model.CompanyName, CompanyActivityDesc = model.CompanyActivity, AgencyWebsiteURL = model.WebSiteUrl, ManagerFirstName = model.ResponsibleName, AgencyLogo = profileImagePath, ManagerAge = age.ToString(), IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1 };
                     agency.CreatedDate = DateTime.Now.ToString();
+                    var cntry = countries.FirstOrDefault(p => p.CountryId == model.CountryId);
+                    if (cntry != null)
+                        agency.Country = cntry.CountryName;
+                    var cty = cities.FirstOrDefault(p => p.CityId == model.CityId);
+                    if (cty != null)
+                        agency.City = cities.FirstOrDefault(p => p.CityId == model.CityId).CityName;
+                    var dstrct = districts.FirstOrDefault(p => p.DistrictId == model.DistrictId);
+                    if (dstrct != null)
+                        agency.District = districts.FirstOrDefault(p => p.DistrictId == model.DistrictId).DistrictName;
+                    agency.ProfileVerified = false;
                     user.Agencies = new System.Collections.Generic.List<Agency> { agency };
                 }
                 else if (model.UserRoles.Contains("Candidate"))

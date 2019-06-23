@@ -52,7 +52,7 @@ namespace HireMe.Controllers
             {
                 Job job = db.Jobs.Include(p => p.JobTasks).FirstOrDefault(p => p.JobId == id);
 
-                var candidateProfile = new CandidateProfileViewModel { JobId = id.Value, JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks) };
+                var candidateProfile = new CandidateProfileViewModel { JobId = id.Value, JobTasks = AutoMapper.Mapper.Map<List<JobTaskViewModel>>(job.JobTasks.Where(p => p.ParentJobTaskId == null).ToList()) };
 
                 ViewBag.Cities = db.Cities.Select(p => new SelectListItem { Text = p.CityName, Value = p.CityId.ToString() }).ToList();
                 ViewBag.Districts = db.Districts.Select(p => new SelectListItem { Text = p.DistrictName, Value = p.DistrictId.ToString() }).ToList();
@@ -152,12 +152,31 @@ namespace HireMe.Controllers
 
 
 
-                    candidateProfile.JobTasks.ForEach(task =>
+                    //candidateProfile.JobTasks.ForEach(task =>
+                    //{
+                    //    if (task.Selected)
+                    //    {
+                    //        jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
+                    //    }
+                    //});
+
+                    Action<JobTaskViewModel> saveJobRequestTaskTree = null;
+
+                    saveJobRequestTaskTree = (task) =>
                     {
+                        //Console.WriteLine(n.Value);
                         if (task.Selected)
                         {
                             jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
                         }
+                        if (task.SubTasks != null)
+                            task.SubTasks.ToList().ForEach(saveJobRequestTaskTree);
+                    };
+
+
+                    candidateProfile.JobTasks.ForEach(task =>
+                    {
+                        saveJobRequestTaskTree(task);
                     });
 
                     existingCandidate.Disponibility = candidateProfile.Disponibility;
