@@ -105,7 +105,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //idProofImagePath = model.id_proof_base64;
                     string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(model.id_proof_base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(model.id_proof_base64));
-                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads / " + fileName;
+                    idProofImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
 
                 string idProofImagePath1 = string.Empty;
