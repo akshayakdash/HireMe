@@ -10,6 +10,7 @@ using HireMe.Models;
 using Microsoft.AspNet.Identity;
 using AutoMapper;
 using System.IO;
+using System.Configuration;
 
 namespace HireMe.Controllers
 {
@@ -91,13 +92,25 @@ namespace HireMe.Controllers
                     candidate.ProfilePicUrl = appUser.ProfilePicUrl;
                     var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
 
-                    candidateProfile.JobTasks.ForEach(task =>
+                    Action<JobTaskViewModel> saveJobRequestTaskTree = null;
+
+                    saveJobRequestTaskTree = (task) =>
                     {
+                        //Console.WriteLine(n.Value);
                         if (task.Selected)
                         {
                             jobRequest.JobRequestJobTasks.Add(new JobRequestJobTask { JobTaskId = task.JobTaskId, TaskResponse = task.Note });
                         }
+                        if (task.SubTasks != null)
+                            task.SubTasks.ToList().ForEach(saveJobRequestTaskTree);
+                    };
+
+
+                    candidateProfile.JobTasks.ForEach(task =>
+                    {
+                        saveJobRequestTaskTree(task);
                     });
+
 
                     candidate.JobRequests.Add(jobRequest);
 
@@ -109,45 +122,45 @@ namespace HireMe.Controllers
                 else
                 {
 
-
+                    string path = Server.MapPath("~/Uploads/");
                     var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { } };
                     if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
                     {
-                        var skillPic = candidateProfile.JobRequestSkillPic1;
-                        string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                        byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                        using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(candidateProfile.JobRequestSkillPic1.FileName);
+                        byte[] thePictureAsBytes = new byte[candidateProfile.JobRequestSkillPic1.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(candidateProfile.JobRequestSkillPic1.InputStream))
                         {
-                            thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                            thePictureAsBytes = theReader.ReadBytes(candidateProfile.JobRequestSkillPic1.ContentLength);
                         }
 
-                        jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+                        System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                        jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     }
 
                     if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
                     {
-                        var skillPic = candidateProfile.JobRequestSkillPic2;
-                        string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                        byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                        using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(candidateProfile.JobRequestSkillPic2.FileName);
+                        byte[] thePictureAsBytes = new byte[candidateProfile.JobRequestSkillPic2.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(candidateProfile.JobRequestSkillPic2.InputStream))
                         {
-                            thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                            thePictureAsBytes = theReader.ReadBytes(candidateProfile.JobRequestSkillPic2.ContentLength);
                         }
 
-                        jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+                        System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                        jobRequest.SkillPic2 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     }
 
                     if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
                     {
-                        var skillPic = candidateProfile.JobRequestSkillPic3;
-                        string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
-                        byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
-                        using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(candidateProfile.JobRequestSkillPic3.FileName);
+                        byte[] thePictureAsBytes = new byte[candidateProfile.JobRequestSkillPic3.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(candidateProfile.JobRequestSkillPic3.InputStream))
                         {
-                            thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
+                            thePictureAsBytes = theReader.ReadBytes(candidateProfile.JobRequestSkillPic3.ContentLength);
                         }
 
-                        jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+                        System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                        jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     }
 
 

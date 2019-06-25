@@ -1,25 +1,26 @@
 ﻿@model HireMe.Models.Agency
 
 
-@{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                        .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                        .Select(c => c.Value);
+@{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                                         .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                         .Select(c => c.Value);
     string role = roles.FirstOrDefault();}
 
 <!--Needs to be added-->
 <div class="row">
     <div class="col-sm-4">
-@if (role == "Admin")
-{
-        <div class="agency-pics">
-            <img src="@(Model.IdProofDoc)" />
-            <h3>Agency Logo</h3>
-        </div>
-}
+        @if (role == "Admin")
+        {
+            <div class="agency-pics">
+                <img src="@(Model.IdProofDoc)" />
+                <h3>Agency ID Proof</h3>
+            </div>
+        }
         <div class="agency-pics">
             <img src="@(Model.AgencyLogo)" />
-            <h3>Agency ID Proof</h3>
+            <h3>Agency Logo</h3>
         </div>
+
     </div>
     <div class="col-sm-8">
         <table class="table">
@@ -48,22 +49,22 @@
                         @Html.DisplayFor(model => model.ManagerFirstName)
                     </td>
                 </tr>
-                <tr>
+                @*<tr>
                     <td>
-                        @*Manager last name*@
+                        Manager last name
                     </td>
                     <td>
-                        @*@Html.DisplayFor(model => model.ManagerLastName)*@
+                        @Html.DisplayFor(model => model.ManagerLastName)
                     </td>
-                </tr>
-                <tr>
+                </tr>*@
+                @*<tr>
                     <td>
                         Manager DOB
                     </td>
                     <td>
-                       @Html.DisplayFor(model => model.ManagerDOB)
+                        @Html.DisplayFor(model => model.ManagerDOB)
                     </td>
-                </tr>
+                </tr>*@
                 <tr>
                     <td>
                         Company Activity Desc.
@@ -107,7 +108,7 @@
                             Profile Verified
                         </td>
                         <td>
-                           @Html.DisplayFor(model => model.ProfileVerified)
+                            @Html.DisplayFor(model => model.ProfileVerified)
                         </td>
                     </tr>
                     <tr>
@@ -115,7 +116,7 @@
                             Created Date
                         </td>
                         <td>
-                             @Html.DisplayFor(model => model.CreatedDate)
+                            @Html.DisplayFor(model => model.CreatedDate)
                         </td>
                     </tr>
                 </tbody>
