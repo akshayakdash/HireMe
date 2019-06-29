@@ -364,9 +364,17 @@ namespace HireMe.Controllers
         [HttpGet]
         public ActionResult GetAgencyDetailsPartialView(int agencyId)
         {
-            var agency = db.Agencies.Find(agencyId);
+            var agency = db.Agencies
+                .Include(t => t.ApplicationUser)
+                .FirstOrDefault(p => p.AgencyId == agencyId);
             if (agency == null)
                 return HttpNotFound();
+            if (agency.CountryId != 0 && agency.Country == null)
+                agency.Country = db.Countries.FirstOrDefault(p => p.CountryId == agency.CountryId)?.CountryName;
+            if (agency.CityId != 0 && agency.City == null)
+                agency.City = db.Cities.FirstOrDefault(p => p.CityId == agency.CityId)?.CityName;
+            if (agency.DistrictId != 0 && agency.District == null)
+                agency.District = db.Districts.FirstOrDefault(p => p.DistrictId == agency.DistrictId)?.DistrictName;
             return PartialView("_agencyDetails", agency);
         }
 

@@ -168,6 +168,13 @@
                                                 </div><!-- blog-article -->
                                             </div><!-- item -->
                                         </div>
+
+                                        @if (!Model.ProfileVerified)
+                                        {
+                                            <input class="form-control" accept="image/*" id="idcard" name="idcard" placeholder="Id card front" type="file" style="height:inherit;">
+                                            <input class="form-control" accept="image/*" id="idcard_back" name="idcard_back" placeholder="Id card back" type="file" style="height:inherit;">
+                                            <button type="button" id="upload-id-card-button" class="btn btn-style-1 waves mb-0 btn-block"><i class="fa fa-check"></i>&nbsp;Save &nbsp;<i id="progress2" class="fa fa-spinner fa-spin" style="font-size:24px;display:none;"></i></button>
+                                        }
                                     </div>
                                         <!--<div class="col-md-3 col-sm-6 text-center">
                                             <div class="idcard-pic">
@@ -596,6 +603,22 @@
                 formData.append('idcard', file, file.name);
             }
 
+
+            var fileSelectBack = document.getElementById('idcard_back')
+            var files_back = fileSelectBack.files;
+            //$(form).append(file);
+
+            for (var i = 0; i < files_back.length; i++) {
+                var file = files_back[i];
+
+                // Check the file type.
+                if (!file.type.match('image.*')) {
+                    continue;
+                }
+
+                // Add the file to the request.
+                formData.append('idcard1', file, file.name);
+            }
             console.log(formData);
             $.ajax({
                 // Your server script to process the upload
@@ -637,6 +660,8 @@
                 }
             });
         });
+
+
     </script>
     <script src="~/Scripts/angular.min.js"></script>
     <script type="text/javascript">

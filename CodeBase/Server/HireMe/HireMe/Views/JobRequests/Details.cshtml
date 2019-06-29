@@ -70,12 +70,12 @@
 
 @helper ShowTaskTree(IEnumerable<HireMe.Models.JobTask> jobTasks)
 {
-for (int i = 0; i < jobTasks.Count(); i++)
-{
-    count = count + 1;
-    var item = jobTasks.ElementAt(i);
-    if (Model.JobRequestJobTasks.Any(p => p.JobTaskId == item.JobTaskId))
+    for (int i = 0; i < jobTasks.Count(); i++)
     {
+        count = count + 1;
+        var item = jobTasks.ElementAt(i);
+        if (Model.JobRequestJobTasks.Any(p => p.JobTaskId == item.JobTaskId))
+        {
             @*@<div class="checkbox" style="margin-left:25px;">
                 <label>
 
@@ -205,8 +205,8 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
                 </div>
             </div>
-                                    }
-                                }
+        }
+    }
 }
 
 <script>
@@ -235,9 +235,9 @@ for (int i = 0; i < jobTasks.Count(); i++)
 
 
 <div id="main-container-user" ng-app="myApp" ng-controller="searchJobRequestCtrl">
-    @{  var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                    .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                    .Select(c => c.Value);
+    @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
+                                      .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                      .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
 
@@ -277,16 +277,38 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                     <tbody>
                                         <tr>
                                             <td>Name:</td>
-                                            <td>@(Model.Candidate.FirstName + " " + Model.Candidate.LastName) </td>
+                                            @if (role == "Admin")
+                                            {
+                                                <td>@(Model.Candidate.FirstName + " " + Model.Candidate.LastName) </td>
+                                            }
+                                            else
+                                            {
+                                                <td>@(Model.Candidate.FirstName)</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>Email:</td>
                                             <td>@Model.Candidate.EmailId</td>
                                         </tr>
-                                        <tr>
-                                            <td>Phone:</td>
-                                            <td>@Model.Candidate.ContactNo</td>
-                                        </tr>
+                                        @if (Model.Candidate.StaffType != StaffType.Agency)
+                                        {
+                                            <tr>
+                                                <td>Phone:</td>
+                                                <td>@Model.Candidate.ContactNo</td>
+                                            </tr>
+                                        }
+                                        else
+                                        {
+                                            if (role == "Agency")
+                                            {
+                                                <tr>
+                                                    <td>Phone:</td>
+                                                    <td>@Model.Candidate.ContactNo</td>
+                                                </tr>
+                                            }
+                                        }
+
                                         <tr>
                                             <td>Address:</td>
                                             <td>@(Model.Candidate.Country + ", " + (Model.Candidate.City ?? "") + ", " + (Model.Candidate.District ?? "") )</td>
@@ -609,7 +631,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                     {
                                         <div class="col-lg-4">
                                             <div class="additional-desc">
-                                                <img src="data:image/jpeg;base64, @Model.SkillPic1" />
+                                                <img src="@Model.SkillPic1" />
                                             </div>
                                         </div>
                                     }
@@ -617,7 +639,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                     {
                                         <div class="col-lg-4">
                                             <div class="additional-desc">
-                                                <img src="data:image/jpeg;base64, @Model.SkillPic2" />
+                                                <img src="@Model.SkillPic2" />
                                             </div>
                                         </div>
                                     }
@@ -625,7 +647,7 @@ for (int i = 0; i < jobTasks.Count(); i++)
                                     {
                                         <div class="col-md-4">
                                             <div class="additional-desc">
-                                                <img src="data:image/jpeg;base64, @Model.SkillPic3" />
+                                                <img src="@Model.SkillPic3" />
                                             </div>
                                         </div>
                                     }

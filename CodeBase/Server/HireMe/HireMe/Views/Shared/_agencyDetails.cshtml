@@ -2,8 +2,8 @@
 
 
 @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                                         .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                                         .Select(c => c.Value);
+                                                          .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                                          .Select(c => c.Value);
     string role = roles.FirstOrDefault();}
 
 <!--Needs to be added-->
@@ -43,6 +43,14 @@
                 </tr>
                 <tr>
                     <td>
+                        Agency Contact No
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => model.PhoneNo)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         Manager first name
                     </td>
                     <td>
@@ -50,21 +58,22 @@
                     </td>
                 </tr>
                 @*<tr>
-                    <td>
-                        Manager last name
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.ManagerLastName)
-                    </td>
-                </tr>*@
+                        <td>
+                            Manager last name
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ManagerLastName)
+                        </td>
+                    </tr>*@
                 @*<tr>
-                    <td>
-                        Manager DOB
-                    </td>
-                    <td>
-                        @Html.DisplayFor(model => model.ManagerDOB)
-                    </td>
-                </tr>*@
+                        <td>
+                            Manager DOB
+                        </td>
+                        <td>
+                            @Html.DisplayFor(model => model.ManagerDOB)
+                        </td>
+                    </tr>*@
+
                 <tr>
                     <td>
                         Company Activity Desc.
@@ -108,7 +117,7 @@
                             Profile Verified
                         </td>
                         <td>
-                            @Html.DisplayFor(model => model.ProfileVerified)
+                            @(Model.ProfileVerified ? "Yes" : "No")
                         </td>
                     </tr>
                     <tr>

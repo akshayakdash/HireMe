@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HireMe.Models;
 using System.IO;
+using System.Configuration;
 
 namespace HireMe.Controllers
 {
@@ -165,8 +166,8 @@ namespace HireMe.Controllers
                 //    DistrictId = user.DistrictId
                 //};
 
-               // user.FirstName = model.FirstName;
-               // user.LastName = model.LastName;
+                // user.FirstName = model.FirstName;
+                // user.LastName = model.LastName;
                 user.PhoneNumber = model.PhoneNumber;
                 user.Email = model.Email;
                 user.Address = model.Address;
@@ -221,7 +222,7 @@ namespace HireMe.Controllers
                     {
                         //agency.ManagerFirstName = model.FirstName;
                         //agency.ManagerLastName = model.LastName;
-                         agency.ManagerAge = model.Age.ToString();
+                        agency.ManagerAge = model.Age.ToString();
                         agency.CountryId = model.CountryId;
                         agency.CityId = model.CityId;
                         agency.DistrictId = model.DistrictId;
@@ -261,6 +262,7 @@ namespace HireMe.Controllers
         {
             #region ProfileImageUpload
             string profileImagePath = string.Empty;
+            string path = Server.MapPath("~/Uploads/");
             try
             {
                 if (Request.Files != null && Request.Files.Count > 0)
@@ -270,13 +272,14 @@ namespace HireMe.Controllers
                     var file = Request.Files[0];
                     if (file != null && file.ContentLength > 0)
                     {
-                        string theFileName = Path.GetFileNameWithoutExtension(file.FileName);
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
                         byte[] thePictureAsBytes = new byte[file.ContentLength];
                         using (BinaryReader theReader = new BinaryReader(file.InputStream))
                         {
                             thePictureAsBytes = theReader.ReadBytes(file.ContentLength);
                         }
-                        profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                        System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                        profileImagePath = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     }
                 }
                 var userId = User.Identity.GetUserId();
@@ -318,45 +321,110 @@ namespace HireMe.Controllers
         [HttpPost]
         public ActionResult UpdateIdCard()
         {
-            #region ProfileImageUpload
-            string profileImagePath = string.Empty;
+            #region IdCard
+            string idcard_front = string.Empty;
+            string idcard_back = string.Empty;
             try
             {
+                string path = Server.MapPath("~/Uploads/");
                 if (Request.Files != null && Request.Files.Count > 0)
                 {
                     ////To copy and save file into server.  
                     //model.profile_pic.SaveAs(imagePath);
-                    var file = Request.Files[0];
-                    if (file != null && file.ContentLength > 0)
+
+                    HttpPostedFileBase idCardFrontFile = Request.Files["idcard"];
+                    HttpPostedFileBase idCardBackFile = Request.Files["idcard1"];
+
+                    if (idCardFrontFile != null && idCardFrontFile.ContentLength > 0)
                     {
-                        string theFileName = Path.GetFileNameWithoutExtension(file.FileName);
-                        byte[] thePictureAsBytes = new byte[file.ContentLength];
-                        using (BinaryReader theReader = new BinaryReader(file.InputStream))
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(idCardFrontFile.FileName);
+                        byte[] thePictureAsBytes = new byte[idCardFrontFile.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(idCardFrontFile.InputStream))
                         {
-                            thePictureAsBytes = theReader.ReadBytes(file.ContentLength);
+                            thePictureAsBytes = theReader.ReadBytes(idCardFrontFile.ContentLength);
                         }
-                        profileImagePath = Convert.ToBase64String(thePictureAsBytes);
+                        //idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
+                        System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                        idcard_front = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     }
+
+                    if (idCardBackFile != null && idCardBackFile.ContentLength > 0)
+                    {
+                        string fileName = Guid.NewGuid().ToString() + Path.GetExtension(idCardBackFile.FileName);
+                        byte[] thePictureAsBytes = new byte[idCardBackFile.ContentLength];
+                        using (BinaryReader theReader = new BinaryReader(idCardBackFile.InputStream))
+                        {
+                            thePictureAsBytes = theReader.ReadBytes(idCardBackFile.ContentLength);
+                        }
+                        //idProofImagePath = Convert.ToBase64String(thePictureAsBytes);
+                        System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
+                        idcard_back = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
+                    }
+
+                    //foreach (var file in Request.Files)
+                    //{
+                    //    if (file != null && file.ContentLength > 0)
+                    //    {
+                    //        //string theFileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    //        //byte[] thePictureAsBytes = new byte[file.ContentLength];
+                    //        //using (BinaryReader theReader = new BinaryReader(file.InputStream))
+                    //        //{
+                    //        //    thePictureAsBytes = theReader.ReadBytes(file.ContentLength);
+                    //        //}
+                    //        //idcard_front = Convert.ToBase64String(thePictureAsBytes);
+
+
+                    //    }
+                    //}
+
+                    //var file = Request.Files[0];
+
                 }
                 var userId = User.Identity.GetUserId();
                 var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 if (userManager.IsInRole(userId, "Candidate"))
                 {
                     var existingCandidate = context.Candidates.FirstOrDefault(p => p.AspNetUserId == userId);
-                    existingCandidate.IdProofDoc = profileImagePath;
-                    context.Entry(existingCandidate).Property(p => p.IdProofDoc).IsModified = true;
+                    if (!string.IsNullOrWhiteSpace(idcard_front))
+                    {
+                        existingCandidate.IdProofDoc = idcard_front;
+                        context.Entry(existingCandidate).Property(p => p.IdProofDoc).IsModified = true;
+                    }
+                    if (!string.IsNullOrWhiteSpace(idcard_back))
+                    {
+                        existingCandidate.IdProofDoc1 = idcard_back;
+                        context.Entry(existingCandidate).Property(p => p.IdProofDoc1).IsModified = true;
+                    }
                 }
                 if (userManager.IsInRole(userId, "Employer"))
                 {
                     var existingEmployer = context.Employers.FirstOrDefault(p => p.AspNetUserId == userId);
-                    existingEmployer.IdProofDoc = profileImagePath;
-                    context.Entry(existingEmployer).Property(p => p.IdProofDoc).IsModified = true;
+                    if (!string.IsNullOrWhiteSpace(idcard_front))
+                    {
+                        existingEmployer.IdProofDoc = idcard_front;
+                        context.Entry(existingEmployer).Property(p => p.IdProofDoc).IsModified = true;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(idcard_back))
+                    {
+                        existingEmployer.IdProofDoc1 = idcard_back;
+                        context.Entry(existingEmployer).Property(p => p.IdProofDoc1).IsModified = true;
+                    }
+
                 }
                 if (userManager.IsInRole(userId, "Agency"))
                 {
                     var agency = context.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
-                    agency.IdProofDoc = profileImagePath;
-                    context.Entry(agency).Property(p => p.IdProofDoc).IsModified = true;
+                    if (!string.IsNullOrWhiteSpace(idcard_front))
+                    {
+                        agency.IdProofDoc = idcard_front;
+                        context.Entry(agency).Property(p => p.IdProofDoc).IsModified = true;
+                    }
+                    if (!string.IsNullOrWhiteSpace(idcard_back))
+                    {
+                        agency.IdProofDoc1 = idcard_back;
+                        context.Entry(agency).Property(p => p.IdProofDoc1).IsModified = true;
+                    }
                 }
                 context.SaveChanges();
 

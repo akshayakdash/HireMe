@@ -650,7 +650,8 @@
                                                 @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
 
                                                 <h2 class="name">
-                                                    <span data-ng-bind="jr.FirstName + ' ' + jr.LastName"></span>
+                                                    @*<span data-ng-bind="jr.FirstName + ' ' + jr.LastName"></span>*@
+                                                    <span data-ng-bind="jr.FirstName"></span>
                                                 </h2>
                                                 <h2 class="jobname"><span data-ng-bind="jr.JobName"></span></h2>
                                                 @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
@@ -662,7 +663,8 @@
                                             
                                         </div>
                                         <div class="profile-footer">
-                                            {{jr.AdditionalDescription}}&nbsp;
+                                            @*{{jr.AdditionalDescription}}&nbsp;*@
+                                            {{jr.JobRequestDescription ? jr.JobRequestDescription : jr.AdditionalDescription}}
                                         </div>
                                         <div class="team-contact-info">
                                             <ul class="social-icons">
@@ -735,7 +737,7 @@
                                                 @*<span data-ng-bind="jr.Candidate.StaffType == 1 ? '(Individual)' : '(Agency)'"></span>*@
 
                                                 <h2 class="name">
-                                                    <span data-ng-bind="jr.Employer.FirstName + ' ' + jr.Employer.LastName"></span>
+                                                    <span data-ng-bind="jr.Employer.FirstName"></span>
                                                 </h2>
                                                 <h2 class="jobname"><span data-ng-bind="jr.Job.JobName"></span></h2>
                                                 @*<h3><span class="age"><span data-ng-bind="jr.Candidate.Age + ' yrs'"></span></span><span class="experience" data-ng-bind="'Exp: '+ jr.Candidate.ExperienceInYears + 'yrs'"></span></h3>*@
