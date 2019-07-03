@@ -160,7 +160,7 @@ namespace HireMe.Controllers
                         }
 
                         System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
-                        jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
+                        jobRequest.SkillPic3 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                     }
 
 
@@ -200,6 +200,10 @@ namespace HireMe.Controllers
                     existingCandidate.SleepOnSite = candidateProfile.SleepOnSite;
                     existingCandidate.ExperienceInYears = candidateProfile.ExperienceInYears;
                     existingCandidate.ExperienceInMonths = candidateProfile.ExperienceInMonths;
+                    existingCandidate.SalaryType = candidateProfile.SalaryType;
+                    existingCandidate.MinGroupPeople = candidateProfile.MinGroupPeople;
+                    existingCandidate.MaxGroupPeople = candidateProfile.MaxGroupPeople;
+                    
                     if (candidateProfile.SleepOnSite)
                     {
                         existingCandidate.ExpectedMinRooms = candidateProfile.ExpectedMinRooms;

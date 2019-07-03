@@ -658,7 +658,7 @@ namespace HireMe.Models
         public string District { get; set; }
         public int CountryId { get; set; }
         public int CityId { get; set; }
-        public int DistrictId { get; set; }
+        public int? DistrictId { get; set; }
         public SalaryType SalaryType { get; set; }
         public string SalaryTypeOtherDesc { get; set; }
         public bool CanRead { get; set; }

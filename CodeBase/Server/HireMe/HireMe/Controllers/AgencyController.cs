@@ -33,7 +33,7 @@ namespace HireMe.Controllers
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
             ViewBag.NewCandidateRegistered = false;
             ViewBag.AgencyProfileVerfied = agency.ProfileVerified;
-            ViewData["Country"] = db.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
+            ViewData["Country"] = db.Countries.ToList().Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
             return View();
         }
         [HttpPost]
@@ -145,8 +145,11 @@ namespace HireMe.Controllers
                     idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
-                var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
-                string phoneNumber = model.PhoneNumber.Replace("-", "");
+
+                string contactNumber = model.PhoneNumber.Replace("-", "");
+                string phoneNumber = model.CountryCode + contactNumber;
+                var user = new ApplicationUser { UserName = randomUserName, Email = model.Email, Address = model.Address, PhoneNumber = phoneNumber, FirstName = model.FirstName, LastName = model.LastName, ProfilePicUrl = profileImagePath, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
+                //string phoneNumber = model.PhoneNumber.Replace("-", "");
 
 
                 var candidate = new Candidate { Gender = model.Gender, AgencyId = agency.AgencyId, StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName, Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber, CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId, ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath, IdProofDoc1 = idProofImagePath1, Age = age };
@@ -191,7 +194,7 @@ namespace HireMe.Controllers
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
                     db.SaveChanges();
 
-                    NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + randomPassword, 0, true);
+                    await NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + randomPassword, 0, true);
                     //Ends Here     
                     //return RedirectToAction("Login", "Account");
                     //return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
@@ -201,7 +204,7 @@ namespace HireMe.Controllers
                     ViewBag.AgencyProfileVerfied = true;
 
                     ViewData["Country"] = countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
-                    ViewBag.Country = countries;
+                    //ViewBag.Country = countries;
                     ViewBag.City = cities;
                     ViewBag.District = districts;
                     return RedirectToAction("RegisterCandidate");
@@ -424,44 +427,54 @@ namespace HireMe.Controllers
             ViewBag.NewJobProfileCreated = false;
             if (ModelState.IsValid)
             {
+                string path = Server.MapPath("~/Uploads/");
                 var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now, JobRequestDescription = candidateProfile.AdditionalDescription, JobId = candidateProfile.JobId, JobRequestJobTasks = new List<JobRequestJobTask> { }, AgencyJobRequestGroupId = Guid.NewGuid().ToString(), AgencyJobRequestTitle = candidateProfile.Title };
                 if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic1;
-                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    string theFileName = Guid.NewGuid().ToString() + Path.GetExtension(skillPic.FileName);
                     byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
                     }
 
-                    jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+                    //jobRequest.SkillPic1 = Convert.ToBase64String(thePictureAsBytes);
+
+                    System.IO.File.WriteAllBytes(path + theFileName, thePictureAsBytes);
+                    jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + theFileName;
                 }
 
                 if (candidateProfile.JobRequestSkillPic2 != null && candidateProfile.JobRequestSkillPic2.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic2;
-                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    string theFileName = Guid.NewGuid().ToString() + Path.GetExtension(skillPic.FileName);
                     byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
                     }
 
-                    jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+                    //jobRequest.SkillPic2 = Convert.ToBase64String(thePictureAsBytes);
+
+                    System.IO.File.WriteAllBytes(path + theFileName, thePictureAsBytes);
+                    jobRequest.SkillPic2 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + theFileName;
                 }
 
                 if (candidateProfile.JobRequestSkillPic3 != null && candidateProfile.JobRequestSkillPic3.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic3;
-                    string theFileName = Path.GetFileNameWithoutExtension(skillPic.FileName);
+                    string theFileName = Guid.NewGuid().ToString() + Path.GetExtension(skillPic.FileName);
                     byte[] thePictureAsBytes = new byte[skillPic.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(skillPic.InputStream))
                     {
                         thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
                     }
 
-                    jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+                    //jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
+
+                    System.IO.File.WriteAllBytes(path + theFileName, thePictureAsBytes);
+                    jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + theFileName;
                 }
 
 
