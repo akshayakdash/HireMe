@@ -236,8 +236,8 @@
 
 <div id="main-container-user" ng-app="myApp" ng-controller="searchJobRequestCtrl">
     @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                      .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                      .Select(c => c.Value);
+                                       .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                       .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
 
@@ -287,12 +287,13 @@
                                             }
 
                                         </tr>
-                                        <tr>
-                                            <td>Email:</td>
-                                            <td>@Model.Candidate.EmailId</td>
-                                        </tr>
+
                                         @if (Model.Candidate.StaffType != StaffType.Agency)
                                         {
+                                            <tr>
+                                                <td>Email:</td>
+                                                <td>@Model.Candidate.EmailId</td>
+                                            </tr>
                                             <tr>
                                                 <td>Phone:</td>
                                                 <td>@Model.Candidate.ContactNo</td>
@@ -300,8 +301,12 @@
                                         }
                                         else
                                         {
-                                            if (role == "Agency")
+                                            if (role == "Agency" || role == "Admin")
                                             {
+                                                <tr>
+                                                    <td>Email:</td>
+                                                    <td>@Model.Candidate.EmailId</td>
+                                                </tr>
                                                 <tr>
                                                     <td>Phone:</td>
                                                     <td>@Model.Candidate.ContactNo</td>

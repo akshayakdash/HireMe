@@ -141,20 +141,40 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
-                var user = new ApplicationUser { UserName = randomUserName, Email = model.Email,
-                    Address = model.Address, PhoneNumber = model.PhoneNumber, FirstName = model.FirstName,
-                    LastName = model.LastName, ProfilePicUrl = profileImagePath,
-                    CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId };
+                var user = new ApplicationUser
+                {
+                    UserName = randomUserName,
+                    Email = model.Email,
+                    Address = model.Address,
+                    PhoneNumber = model.PhoneNumber,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    ProfilePicUrl = profileImagePath,
+                    CountryId = model.CountryId,
+                    CityId = model.CityId,
+                    DistrictId = model.DistrictId
+                };
                 string phoneNumber = model.PhoneNumber.Replace("-", "");
 
 
-                var candidate = new Candidate { Gender = model.Gender, AgencyId = agency.AgencyId,
-                    StaffType = StaffType.Agency, FirstName = model.FirstName, LastName = model.LastName,
-                    Address = model.Address, EmailId = model.Email, ContactNo = phoneNumber,
-                    CountryId = model.CountryId, CityId = model.CityId, DistrictId = model.DistrictId,
-                    ProfilePicUrl = profileImagePath, IdProofDoc = idProofImagePath,
-                    IdProofDoc1 = idProofImagePath1, Age = age
-            };
+                var candidate = new Candidate
+                {
+                    Gender = model.Gender,
+                    AgencyId = agency.AgencyId,
+                    StaffType = StaffType.Agency,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    EmailId = model.Email,
+                    ContactNo = phoneNumber,
+                    CountryId = model.CountryId,
+                    CityId = model.CityId,
+                    DistrictId = model.DistrictId,
+                    ProfilePicUrl = profileImagePath,
+                    IdProofDoc = idProofImagePath,
+                    IdProofDoc1 = idProofImagePath1,
+                    Age = age
+                };
 
                 candidate.CreatedDate = DateTime.Now.ToString();
                 var cntry = countries.FirstOrDefault(p => p.CountryId == candidate.CountryId);
@@ -252,7 +272,7 @@ namespace HireMe.Controllers.MobileApiControllers
             //    jr.IsPublished = false;
             //    db.Entry(jr).Property(p => p.IsPublished).IsModified = true;
             //});
-            
+
             db.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Job Request removed successfully." });
         }
@@ -265,12 +285,16 @@ namespace HireMe.Controllers.MobileApiControllers
             if (ModelState.IsValid)
             {
                 string path = HttpContext.Current.Server.MapPath("~/Uploads/");
-                var jobRequest = new JobRequest { IsPublished = true, PublishedDate = DateTime.Now,
+                var jobRequest = new JobRequest
+                {
+                    IsPublished = true,
+                    PublishedDate = DateTime.Now,
                     JobRequestDescription = candidateProfile.AdditionalDescription,
                     JobId = candidateProfile.JobId,
                     JobRequestJobTasks = new List<JobRequestJobTask> { },
                     AgencyJobRequestGroupId = Guid.NewGuid().ToString(),
-                    AgencyJobRequestTitle = candidateProfile.Title };
+                    AgencyJobRequestTitle = candidateProfile.Title
+                };
                 if (candidateProfile.JobRequestSkillPic1 != null && candidateProfile.JobRequestSkillPic1.ContentLength > 0)
                 {
                     var skillPic = candidateProfile.JobRequestSkillPic1;
@@ -280,7 +304,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //{
                     //thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
                     //}
-                    string fileName = Guid.NewGuid().ToString()  + "_" + Path.GetFileName(skillPic.FileName);
+                    string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(skillPic.FileName);
                     skillPic.SaveAs(path + fileName);
 
                     jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
@@ -288,7 +312,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic1Base64))
                 {
                     //jobRequest.SkillPic1 = jobRequest.SkillPic1Base64;
-                    string fileName = Guid.NewGuid().ToString()  + ".jpg";//+Base64Extensions.GetFileExtension(jobRequest.SkillPic1Base64);
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";//+Base64Extensions.GetFileExtension(jobRequest.SkillPic1Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic1Base64));
                     jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
@@ -303,7 +327,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //{
                     //    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
                     //}
-                    string fileName = Guid.NewGuid().ToString()  + "_" + Path.GetFileName(skillPic.FileName);
+                    string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(skillPic.FileName);
                     skillPic.SaveAs(path + fileName);
 
                     jobRequest.SkillPic2 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
@@ -312,7 +336,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic2Base64))
                 {
                     //jobRequest.SkillPic2 = jobRequest.SkillPic2Base64;
-                    string fileName = Guid.NewGuid().ToString()  + ".jpg";// + Base64Extensions.GetFileExtension(jobRequest.SkillPic2Base64);
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// + Base64Extensions.GetFileExtension(jobRequest.SkillPic2Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic2Base64));
                     jobRequest.SkillPic2 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
@@ -326,7 +350,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     //{
                     //    thePictureAsBytes = theReader.ReadBytes(skillPic.ContentLength);
                     //}
-                    string fileName = Guid.NewGuid().ToString()  + "_" + Path.GetFileName(skillPic.FileName);
+                    string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(skillPic.FileName);
                     skillPic.SaveAs(path + fileName);
 
                     jobRequest.SkillPic3 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
@@ -335,7 +359,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 else if (!string.IsNullOrWhiteSpace(candidateProfile.JobRequestSkillPic3Base64))
                 {
                     //jobRequest.SkillPic3 = jobRequest.SkillPic3Base64;
-                    string fileName = Guid.NewGuid().ToString()  + ".jpg";// Base64Extensions.GetFileExtension(jobRequest.SkillPic3Base64);
+                    string fileName = Guid.NewGuid().ToString() + ".jpg";// Base64Extensions.GetFileExtension(jobRequest.SkillPic3Base64);
                     File.WriteAllBytes(path + fileName, Convert.FromBase64String(candidateProfile.JobRequestSkillPic3Base64));
                     jobRequest.SkillPic3 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName; //Convert.ToBase64String(thePictureAsBytes);
                 }
@@ -610,6 +634,25 @@ namespace HireMe.Controllers.MobileApiControllers
                 return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Password updated successfully." });
             }
             return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "Error", Message = "There is some error." });
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("api/Agencies/{agencyId}")]
+        public HttpResponseMessage GetAgencyDetails(int agencyId)
+        {
+            var agency = db.Agencies
+               .Include(t => t.ApplicationUser)
+               .FirstOrDefault(p => p.AgencyId == agencyId);
+            if (agency == null)
+                return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Agency not found."});
+            if (agency.CountryId != 0 && agency.Country == null)
+                agency.Country = db.Countries.FirstOrDefault(p => p.CountryId == agency.CountryId)?.CountryName;
+            if (agency.CityId != 0 && agency.City == null)
+                agency.City = db.Cities.FirstOrDefault(p => p.CityId == agency.CityId)?.CityName;
+            if (agency.DistrictId != 0 && agency.District == null)
+                agency.District = db.Districts.FirstOrDefault(p => p.DistrictId == agency.DistrictId)?.DistrictName;
+            return Request.CreateResponse(HttpStatusCode.OK, agency, jsonFormatter);
         }
         #endregion
 
