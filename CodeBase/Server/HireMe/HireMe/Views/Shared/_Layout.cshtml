@@ -31,7 +31,6 @@
             top:0px !important;
         }
     </style>
-
 </head>
 <body class="sticky-header header-classic page-header-style-1 footer-style-1">
     <div id="google_translate_element" style="display:none;"></div>
@@ -152,7 +151,7 @@
                             @if (((Request.RawUrl.ToString() == "/" || Request.RawUrl.ToString() == "/Home" || Request.RawUrl.ToString() == "/Home/Index")))
                             {
                                 <div class="mobile-app">
-                                    <a class="btn btn-style-4 waves" href="#"><i class="fa fa-download"></i> Mobile App</a>
+                                    <a id="mobile-app-link" class="btn btn-style-4 waves" target="_blank" href="https://play.google.com/store/apps/details?id=com.jobtek.app"><i class="fa fa-download"></i> Mobile App</a>
                                 </div>
                             }
 

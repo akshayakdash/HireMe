@@ -35,43 +35,46 @@ namespace HireMe.Controllers
         [HttpPost]
         public ActionResult Contact(Contactus contact)
         {
-            string Name = contact.Name;
-            string Email = contact.Email;
-            string Message = contact.Message;
-
-            ViewBag.Message = "";
-
-            using (SmtpClient client = new SmtpClient())
+            if (ModelState.IsValid)
             {
-                try
+                string Name = contact.Name;
+                string Email = contact.Email;
+                string Message = contact.Message;
+
+                ViewBag.Message = "";
+
+                using (SmtpClient client = new SmtpClient())
                 {
-                    client.Port = 587;
-                    client.Host = "smtp.gmail.com";
-                    client.EnableSsl = true;
-                    client.Timeout = 10000;
-                    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    client.UseDefaultCredentials = false;
+                    try
+                    {
+                        client.Port = 587;
+                        client.Host = "smtp.gmail.com";
+                        client.EnableSsl = true;
+                        client.Timeout = 10000;
+                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        client.UseDefaultCredentials = false;
 
 
-                    client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
+                        client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
 
-                    MailMessage mail = new MailMessage(Email, ConfigurationManager.AppSettings["FromMailUserName"]);
-                    mail.Subject = "Contactus - JobTek";
-                    mail.Body = "Dear Administrator,<br/>Please find the message below from " + Name + ".<br/><br/>" + Message;
-                    mail.IsBodyHtml = true;
-                    mail.BodyEncoding = UTF8Encoding.UTF8;
-                    mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-                    client.Send(mail);
-                    ViewBag.Message = "Merci de rester en contact. Nous reviendrons vers vous au plus tôt.";
+                        MailMessage mail = new MailMessage(Email, ConfigurationManager.AppSettings["FromMailUserName"]);
+                        mail.Subject = "Contactus - JobTek";
+                        mail.Body = "Cher administrateur,<br/>Veuillez trouver le message ci-dessous de " + Name + ".<br/><br/>" + Message;
+
+                        mail.IsBodyHtml = true;
+                        mail.BodyEncoding = UTF8Encoding.UTF8;
+                        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                        client.Send(mail);
+                        ViewBag.Message = "Merci de rester en contact. Nous reviendrons vers vous au plus tôt.";
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ViewBag.Message = "Désolé pour le dérangement, veuillez réessayer plus tard.";
+                    }
 
                 }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = "Désolé pour le dérangement, veuillez réessayer plus tard.";
-                }
-
             }
-
                 return View(contact);
         }
         public ActionResult FAQ()

@@ -77,9 +77,17 @@
                                     @using (Html.BeginForm("Contact", "Home", FormMethod.Post))
                                     {   @Html.Label("", (string)ViewBag.Message)
                                         @Html.TextBoxFor(m => m.Name, new { placeholder = "Prénom", @class = "form-control" })
+                                        <span class="error-arrow">
+                                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "" })
+                                        </span>
                                         @Html.TextBoxFor(m => m.Email, new { placeholder = "Email", @class = "form-control" })
+                                        <span class="error-arrow">
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "" })
+                                        </span>
                                         @Html.TextAreaFor(m => m.Message, new { placeholder = "Message", @class = "form-control mb-3" })
-
+                                        <span class="error-arrow">
+                                            @Html.ValidationMessageFor(m => m.Message, "", new { @class = "" })
+                                        </span>
                                         <button class="btn btn-style-1 btn-block waves" id="submit" type="submit" name="submit" value="">Soumettre</button>
                                     }
                                 </div>
