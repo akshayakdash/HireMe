@@ -523,16 +523,18 @@ namespace HireMe.Controllers
         [Route("api/JobTekApi/Agencies/{agencyId}")]
         public HttpResponseMessage GetAgencyDetails(int agencyId)
         {
-            var agency = db.Agencies.Find(agencyId);
-            var user = db.Users.Find(agency.AspNetUserId);
+            var agency = db.Agencies
+               .Include(t => t.ApplicationUser)
+               .FirstOrDefault(p => p.AgencyId == agencyId);
             if (agency == null)
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-
-            agency.City = db.Cities.Find(user.CityId).CityName;
-            agency.Country = db.Countries.Find(user.CountryId).CountryName;
-            agency.District = db.Districts.Find(user.DistrictId).DistrictName;
-
-            return Request.CreateResponse(HttpStatusCode.OK, agency);
+                return Request.CreateResponse(HttpStatusCode.NotFound, new { Status = "Error", Message = "Agency not found." });
+            if (agency.CountryId != 0 && agency.Country == null)
+                agency.Country = db.Countries.FirstOrDefault(p => p.CountryId == agency.CountryId)?.CountryName;
+            if (agency.CityId != 0 && agency.City == null)
+                agency.City = db.Cities.FirstOrDefault(p => p.CityId == agency.CityId)?.CityName;
+            if (agency.DistrictId != 0 && agency.District == null)
+                agency.District = db.Districts.FirstOrDefault(p => p.DistrictId == agency.DistrictId)?.DistrictName;
+            return Request.CreateResponse(HttpStatusCode.OK, agency, jsonFormatter);
         }
 
         protected override void Dispose(bool disposing)
