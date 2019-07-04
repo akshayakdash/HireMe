@@ -59,7 +59,7 @@ namespace HireMe.Controllers
 
                         MailMessage mail = new MailMessage(Email, ConfigurationManager.AppSettings["FromMailUserName"]);
                         mail.Subject = "Contactus - JobTek";
-                        mail.Body = "Cher administrateur,<br/>Veuillez trouver le message ci-dessous de " + Name + ".<br/><br/>" + Message;
+                        mail.Body = "Cher administrateur,<br/>Veuillez trouver le message ci-dessous de " + Name + ".<br/><br/>" + Message + "<br/><br/>" + "S'il vous plaît voir les détails ci-dessous pour la communication future<br/><b>Name : " + Name + "<br/>Email : " + Email;
 
                         mail.IsBodyHtml = true;
                         mail.BodyEncoding = UTF8Encoding.UTF8;
