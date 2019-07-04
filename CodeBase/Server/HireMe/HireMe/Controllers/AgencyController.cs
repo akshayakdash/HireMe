@@ -474,7 +474,7 @@ namespace HireMe.Controllers
                     //jobRequest.SkillPic3 = Convert.ToBase64String(thePictureAsBytes);
 
                     System.IO.File.WriteAllBytes(path + theFileName, thePictureAsBytes);
-                    jobRequest.SkillPic1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + theFileName;
+                    jobRequest.SkillPic3 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + theFileName;
                 }
 
 
