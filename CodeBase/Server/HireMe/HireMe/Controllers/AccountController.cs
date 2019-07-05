@@ -140,6 +140,13 @@ namespace HireMe.Controllers
             }
         }
 
+        [AllowAnonymous]
+        public JsonResult CheckEmailExists(string emailId)
+        {
+            var emailIdExists =  context.Users.Count(p => p.Email == emailId) > 0 ? true : false;
+            return Json(emailIdExists, JsonRequestBehavior.AllowGet);
+        }
+
         //
         // GET: /Account/Register
         [AllowAnonymous]
@@ -285,7 +292,7 @@ namespace HireMe.Controllers
                     {
                         thePictureAsBytes = theReader.ReadBytes(model.id_proof_back.ContentLength);
                     }
-                    idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
+                    //idProofImagePath1 = Convert.ToBase64String(thePictureAsBytes);
                     System.IO.File.WriteAllBytes(path + fileName, thePictureAsBytes);
                     idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
@@ -382,7 +389,7 @@ namespace HireMe.Controllers
                 //var city = context.Cities.ToList();
                 //var district = context.Districts.ToList();
                 ViewData["Country"] = context.Countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
-                ViewBag.Country = countries;
+                //ViewBag.Country = countries;
                 ViewBag.City = cities;
                 ViewBag.District = districts;
                 AddErrors(result);
@@ -422,8 +429,8 @@ namespace HireMe.Controllers
             {
                 var dataString = JsonConvert.SerializeObject(vm);
                 client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
-                client.Headers.Add(HttpRequestHeader.Authorization, "App "+ infoBipPublicKey);
-                var res = client.UploadString(new Uri("https://gn9g6.api.infobip.com/2fa/1/pin/"+pinId+"/verify"), "POST", dataString);
+                client.Headers.Add(HttpRequestHeader.Authorization, "App " + infoBipPublicKey);
+                var res = client.UploadString(new Uri("https://gn9g6.api.infobip.com/2fa/1/pin/" + pinId + "/verify"), "POST", dataString);
                 return Json(JsonConvert.DeserializeObject<InfoBipResponse>(res.ToString()), JsonRequestBehavior.AllowGet);
             }
             //return Json("", JsonRequestBehavior.AllowGet);

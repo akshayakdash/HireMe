@@ -41,11 +41,21 @@ namespace HireMe.Controllers
                 .Include(p => p.Candidate)
                 .Include(t => t.Job)
                 .FirstOrDefault(c => c.JobRequestId == id);
+            if (jobRequest == null)
+                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
 
             jobRequest.MasterJobTasks = db.Jobs
                 .Include(p => p.JobTasks)
                 .FirstOrDefault(p => p.JobId == jobRequest.JobId)
                 .JobTasks;
+
+            // Load the agency details if the candidate belongs to an agency
+            if (jobRequest.Candidate.StaffType == StaffType.Agency)
+            {
+                jobRequest.Candidate.Agency = db.Agencies
+                    .Include(path => path.ApplicationUser)
+                    .FirstOrDefault(p => p.AgencyId == jobRequest.Candidate.AgencyId);
+            }
 
             // get the user feedbacks
             // first get the candidateId for the JobRequest

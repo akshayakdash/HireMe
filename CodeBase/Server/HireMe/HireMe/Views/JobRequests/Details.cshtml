@@ -236,8 +236,8 @@
 
 <div id="main-container-user" ng-app="myApp" ng-controller="searchJobRequestCtrl">
     @{ var roles = ((System.Security.Claims.ClaimsIdentity)User.Identity).Claims
-                                       .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
-                                       .Select(c => c.Value);
+                                         .Where(c => c.Type == System.Security.Claims.ClaimTypes.Role)
+                                         .Select(c => c.Value);
         string role = roles.FirstOrDefault();}
 
 
@@ -304,13 +304,27 @@
                                             if (role == "Agency" || role == "Admin")
                                             {
                                                 <tr>
-                                                    <td>Email:</td>
+                                                    <td>Candidate Email:</td>
                                                     <td>@Model.Candidate.EmailId</td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Phone:</td>
+                                                    <td>Candidate Phone:</td>
                                                     <td>@Model.Candidate.ContactNo</td>
                                                 </tr>
+                                            }
+                                            else
+                                            {
+                                                if (Model.Candidate.Agency != null)
+                                                {
+                                                    <tr>
+                                                        <td>Email:</td>
+                                                        <td>@Model.Candidate.Agency.EmailId</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Phone:</td>
+                                                        <td>@Model.Candidate.Agency.PhoneNo</td>
+                                                    </tr>
+                                                }
                                             }
                                         }
 
@@ -796,6 +810,8 @@
 
 
         <div class="container">
+
+
 
             <div class="row">
                 <div class="col-md-12">

@@ -98,6 +98,9 @@ namespace HireMe.Models
         // if contact option is blank then both email and phone no will be visible
         public string ContactOption { get; set; }
         public string IdProofDoc1 { get; set; }
+
+        [NotMapped]
+        public Agency Agency { get; set; }
     }
 
 
