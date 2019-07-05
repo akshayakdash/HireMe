@@ -1248,8 +1248,11 @@
                     dataType: 'json',
                     success: function (response) {
                         if (response) {
+                            //French alert text
                             alert("Email " + $("#Email").val() + " est déjà utilisé. S'il vous plaît, utilisez une autre adresse pour l'inscription.");
+                            //Setting the textbox value as blank, so that user won't be able to proceed
                             $("#Email").val("");
+
                             $("#Email").removeAttr("class");
                             $("#Email").attr("class", "form-control");
                         }
