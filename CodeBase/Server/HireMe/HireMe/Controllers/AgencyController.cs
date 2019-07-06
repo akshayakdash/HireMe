@@ -43,7 +43,7 @@ namespace HireMe.Controllers
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
 
             //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
-            var randomUserName = agency.AgencyName + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
+            var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
 
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
@@ -166,8 +166,8 @@ namespace HireMe.Controllers
                 user.Candidates = new List<Candidate> { candidate };
 
 
-
-                var result =  userManager.CreateAsync(user, "Agency@123").Result;
+                var tempPassword = agency.ApplicationUser.UserName.Trim() + "@" + DateTime.Today.ToString("ddMM");
+                var result = await userManager.CreateAsync(user, tempPassword);
 
                 // now save the security question answer for the user
                 //context.UserSecurityQuestionAnswers.Add(new ApplicationUserSecurityQuestionAnswer { AspNetUserId = user.Id, SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer });
@@ -194,12 +194,12 @@ namespace HireMe.Controllers
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
                     db.SaveChanges();
 
-                    await NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + "Agency@123", 0, true);
+                    await NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + tempPassword, 0, true);
                     //Ends Here     
                     //return RedirectToAction("Login", "Account");
                     //return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
                     ViewBag.NewCandidateUserName = randomUserName;
-                    ViewBag.NewCandidatePassword = "Agency@123";
+                    ViewBag.NewCandidatePassword = tempPassword;
                     ViewBag.NewCandidateRegistered = true;
                     ViewBag.AgencyProfileVerfied = true;
 
@@ -252,7 +252,7 @@ namespace HireMe.Controllers
             candidate.ProfileVerified = true;
             db.SaveChanges();
 
-            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.AgencyName + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.ApplicationUser.UserName.Trim() + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
