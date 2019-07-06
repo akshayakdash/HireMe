@@ -169,7 +169,7 @@ namespace HireMe.Controllers
             var city = context.Cities.ToList();
             var district = context.Districts.ToList();
 
-            ViewBag.Country = country;
+            //ViewBag.Country = country;
             ViewBag.City = city;
             ViewBag.District = district;
 
