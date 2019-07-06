@@ -194,7 +194,7 @@ namespace HireMe.Controllers
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
                     db.SaveChanges();
 
-                    await NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + randomPassword, 0, true);
+                    await NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + tempPassword, 0, true);
                     //Ends Here     
                     //return RedirectToAction("Login", "Account");
                     //return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
