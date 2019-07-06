@@ -48,10 +48,14 @@ namespace HireMe.Controllers.MobileApiControllers
         [HttpPost]
         public HttpResponseMessage RegisterCandidate([FromBody]RegisterCandidateViewModel model, [FromUri]int agencyId)
         {
-            var agency = db.Agencies.FirstOrDefault(p => p.AgencyId == agencyId);
+            var agency = db.Agencies
+                .Include(p => p.ApplicationUser)
+                .FirstOrDefault(p => p.AgencyId == agencyId);
 
-            var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
-            var randomUserName = agency.AgencyName + randomPassword;
+            //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
+            //var randomUserName = agency.AgencyName + randomPassword;
+
+            var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");
 
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
@@ -141,12 +145,15 @@ namespace HireMe.Controllers.MobileApiControllers
                     idProofImagePath1 = ConfigurationManager.AppSettings["ImageUploadBaseURL"] + "Uploads/" + fileName;
                 }
                 #endregion
+
+                string contactNumber = model.PhoneNumber.Replace("-", "");
+                string phoneNumber = model.CountryCode + contactNumber;
                 var user = new ApplicationUser
                 {
                     UserName = randomUserName,
                     Email = model.Email,
                     Address = model.Address,
-                    PhoneNumber = model.PhoneNumber,
+                    PhoneNumber = phoneNumber,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     ProfilePicUrl = profileImagePath,
@@ -154,7 +161,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     CityId = model.CityId,
                     DistrictId = model.DistrictId
                 };
-                string phoneNumber = model.PhoneNumber.Replace("-", "");
+                //string phoneNumber = model.PhoneNumber.Replace("-", "");
 
 
                 var candidate = new Candidate
@@ -189,7 +196,8 @@ namespace HireMe.Controllers.MobileApiControllers
                 user.Candidates = new List<Candidate> { candidate };
 
                 var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var result = UserManager.CreateAsync(user, randomUserName).Result;
+                var tempPassword = agency.ApplicationUser.UserName.Trim() + "@" + DateTime.Today.ToString("ddMM");
+                var result = UserManager.CreateAsync(user, tempPassword).Result;
 
                 if (result.Succeeded)
                 {
@@ -200,7 +208,7 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
                     db.SaveChanges();
 
-                    NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + randomPassword, 0, true);
+                    NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + tempPassword, 0, true);
 
                     return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Registration successful to the portal." });
                 }

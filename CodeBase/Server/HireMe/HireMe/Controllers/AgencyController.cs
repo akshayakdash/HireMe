@@ -40,7 +40,9 @@ namespace HireMe.Controllers
         public async Task<ActionResult> RegisterCandidate(RegisterCandidateViewModel model)
         {
             var userId = User.Identity.GetUserId();
-            var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
+            var agency = db.Agencies
+                .Include(p => p.ApplicationUser)
+                .FirstOrDefault(p => p.AspNetUserId == userId);
 
             //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
             var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
