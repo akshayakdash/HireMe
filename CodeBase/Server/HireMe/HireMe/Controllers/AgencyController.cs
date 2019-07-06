@@ -43,7 +43,7 @@ namespace HireMe.Controllers
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
 
             //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
-            var randomUserName = agency.AgencyName + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
+            var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
 
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
@@ -166,7 +166,7 @@ namespace HireMe.Controllers
                 user.Candidates = new List<Candidate> { candidate };
 
 
-                var tempPassword = agency.AgencyName.Trim() + "@" + DateTime.Today.ToString("ddMM");
+                var tempPassword = agency.ApplicationUser.UserName.Trim() + "@" + DateTime.Today.ToString("ddMM");
                 var result = await userManager.CreateAsync(user, tempPassword);
 
                 // now save the security question answer for the user
@@ -252,7 +252,7 @@ namespace HireMe.Controllers
             candidate.ProfileVerified = true;
             db.SaveChanges();
 
-            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.AgencyName + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.ApplicationUser.UserName.Trim() + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
