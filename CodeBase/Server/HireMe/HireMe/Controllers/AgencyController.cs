@@ -213,7 +213,7 @@ namespace HireMe.Controllers
                 //var city = context.Cities.ToList();
                 //var district = context.Districts.ToList();
                 ViewData["Country"] = countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
-                ViewBag.Country = countries;
+                //ViewBag.Country = countries;
                 ViewBag.City = cities;
                 ViewBag.District = districts;
                 //model.CountryId = ViewData["Country"] as List<SelectListItem>();
@@ -224,7 +224,7 @@ namespace HireMe.Controllers
             ViewBag.NewCandidateRegistered = false;
             ViewBag.AgencyProfileVerfied = true;
             ViewData["Country"] = countries.Select(p => new SelectListItem { Text = p.CountryName, Value = p.CountryId.ToString() }).ToList();
-            ViewBag.Country = countries;
+            //ViewBag.Country = countries;
             ViewBag.City = cities;
             ViewBag.District = districts;
             return View(model);

@@ -11,6 +11,14 @@
     #footer-container {
         display: none;
     }
+
+    .loading {
+        background-color: #ffffff;
+        background-image: url("http://loadinggif.com/images/image-selection/3.gif");
+        background-size: 25px 25px;
+        background-position: right center;
+        background-repeat: no-repeat;
+    }
 </style>
 
 <div id="main-container-user" class="regd-bg">
@@ -418,6 +426,37 @@
         })
 
         //alert();
+
+        $('#Email').blur(function () {
+            // make an ajax to call to check whether the email id is used or not
+            //alert();
+            if ($("#Email").val()) {
+                $("#Email").attr("class", "form-control loading");
+                $.ajax({
+                    type: 'GET',
+                    url: '/Account/CheckEmailExists?emailId=' + $("#Email").val(), // we are calling json method
+                    dataType: 'json',
+                    success: function (response) {
+                        if (response) {
+                            //French alert text
+                            alert("Email " + $("#Email").val() + " est déjà utilisé. S'il vous plaît, utilisez une autre adresse pour l'inscription.");
+                            //Setting the textbox value as blank, so that user won't be able to proceed
+                            $("#Email").val("");
+
+                            $("#Email").removeAttr("class");
+                            $("#Email").attr("class", "form-control");
+                        }
+                        else {
+                            $("#Email").removeAttr("class");
+                            $("#Email").attr("class", "form-control");
+                        }
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve');
+                    }
+                });
+            }
+        })
 
 
     })
