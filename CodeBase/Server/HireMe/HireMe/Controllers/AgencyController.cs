@@ -166,8 +166,8 @@ namespace HireMe.Controllers
                 user.Candidates = new List<Candidate> { candidate };
 
 
-
-                var result = await userManager.CreateAsync(user, "Agency@123");
+                var tempPassword = agency.AgencyName.Trim() + "@" + DateTime.Today.ToString("ddMM");
+                var result = await userManager.CreateAsync(user, tempPassword);
 
                 // now save the security question answer for the user
                 //context.UserSecurityQuestionAnswers.Add(new ApplicationUserSecurityQuestionAnswer { AspNetUserId = user.Id, SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer });
@@ -199,7 +199,7 @@ namespace HireMe.Controllers
                     //return RedirectToAction("Login", "Account");
                     //return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
                     ViewBag.NewCandidateUserName = randomUserName;
-                    ViewBag.NewCandidatePassword = randomPassword;
+                    ViewBag.NewCandidatePassword = tempPassword;
                     ViewBag.NewCandidateRegistered = true;
                     ViewBag.AgencyProfileVerfied = true;
 
