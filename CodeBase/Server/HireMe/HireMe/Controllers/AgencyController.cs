@@ -42,8 +42,8 @@ namespace HireMe.Controllers
             var userId = User.Identity.GetUserId();
             var agency = db.Agencies.FirstOrDefault(p => p.AspNetUserId == userId);
 
-            var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
-            var randomUserName = agency.AgencyName + randomPassword;
+            //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
+            var randomUserName = agency.AgencyName + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
 
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
@@ -167,7 +167,7 @@ namespace HireMe.Controllers
 
 
 
-                var result = await userManager.CreateAsync(user, randomUserName);
+                var result = await userManager.CreateAsync(user, "Agency@123");
 
                 // now save the security question answer for the user
                 //context.UserSecurityQuestionAnswers.Add(new ApplicationUserSecurityQuestionAnswer { AspNetUserId = user.Id, SecurityQuestionId = model.SecurityQuestionId, Answer = model.SecurityQuestionAnswer });
