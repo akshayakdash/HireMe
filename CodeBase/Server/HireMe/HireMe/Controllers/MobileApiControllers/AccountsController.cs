@@ -210,9 +210,25 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.Notifications.Add(new JobTekNotification { Content = "Welcome " + model.UserName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = user.Id, CreatedDate = DateTime.Now });
                     db.SaveChanges();
                 }
+                
                 return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Registration successful to the portal." });
             }
-            return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Internal Server Error." });
+            else
+            {
+                // the code below should probably be refactored into a GetModelErrors
+                // method on your BaseApiController or something like that
+
+                var errors = new List<string>();
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        errors.Add(error.ErrorMessage);
+                    }
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, new { Status = "ERROR", Message = errors.First() });
+            }
+            //return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Internal Server Error." });
 
         }
 
