@@ -48,7 +48,7 @@ namespace HireMe.Controllers
                     MailMessage message = new MailMessage();
                     SmtpClient smtp = new SmtpClient();
                     message.From = new MailAddress(ConfigurationManager.AppSettings["FromMailUserName"]);
-                    message.To.Add(new MailAddress(Email));
+                    message.To.Add(ConfigurationManager.AppSettings["FromMailUserName"]);
                     message.Subject = "Contactus - JobTek";
                     message.IsBodyHtml = true; //to make message body as html  
                     message.Body = "Cher administrateur,<br/>Veuillez trouver le message ci-dessous de " + Name + ".<br/><br/>" + Message + "<br/><br/>" + "S'il vous plaît voir les détails ci-dessous pour la communication future<br/><b>Name : " + Name + "<br/>Email : " + Email;
