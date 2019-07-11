@@ -76,8 +76,8 @@ namespace HireMe.Utility
 
 
                             // SmtpClient client = new SmtpClient();
-                            client.Port = 587;
-                            client.Host = "smtp.gmail.com";
+                            client.Port = int.Parse(ConfigurationManager.AppSettings["EmailPort"]);
+                            client.Host = ConfigurationManager.AppSettings["EmailHost"];
                             client.EnableSsl = true;
                             client.Timeout = 10000;
                             client.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -90,6 +90,8 @@ namespace HireMe.Utility
                                 client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
 
                                 MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMailUserName"], reciever.Email);
+                                mail.From = new MailAddress(ConfigurationManager.AppSettings["FromMailUserName"]);
+
                                 mail.Subject = subject;
                                 mail.Body = content;
                                 mail.IsBodyHtml = true;

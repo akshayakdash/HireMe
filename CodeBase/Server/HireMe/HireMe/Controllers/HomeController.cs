@@ -43,37 +43,27 @@ namespace HireMe.Controllers
 
                 ViewBag.Message = "";
 
-                using (SmtpClient client = new SmtpClient())
+                try
                 {
-                    try
-                    {
-                        client.Port = 587;
-                        client.Host = "smtp.gmail.com";
-                        client.EnableSsl = true;
-                        client.Timeout = 10000;
-                        client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                        client.UseDefaultCredentials = false;
+                    MailMessage message = new MailMessage();
+                    SmtpClient smtp = new SmtpClient();
+                    message.From = new MailAddress(ConfigurationManager.AppSettings["FromMailUserName"]);
+                    message.To.Add(new MailAddress(Email));
+                    message.Subject = "Contactus - JobTek";
+                    message.IsBodyHtml = true; //to make message body as html  
+                    message.Body = "Cher administrateur,<br/>Veuillez trouver le message ci-dessous de " + Name + ".<br/><br/>" + Message + "<br/><br/>" + "S'il vous plaît voir les détails ci-dessous pour la communication future<br/><b>Name : " + Name + "<br/>Email : " + Email;
 
-
-                        client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
-
-                        MailMessage mail = new MailMessage(Email, ConfigurationManager.AppSettings["FromMailUserName"]);
-                        mail.Subject = "Contactus - JobTek";
-                        mail.Body = "Cher administrateur,<br/>Veuillez trouver le message ci-dessous de " + Name + ".<br/><br/>" + Message + "<br/><br/>" + "S'il vous plaît voir les détails ci-dessous pour la communication future<br/><b>Name : " + Name + "<br/>Email : " + Email;
-
-                        mail.IsBodyHtml = true;
-                        mail.BodyEncoding = UTF8Encoding.UTF8;
-                        mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-                        client.Send(mail);
-                        ViewBag.Message = "Merci de rester en contact. Nous reviendrons vers vous au plus tôt.";
-
-                    }
-                    catch (Exception ex)
-                    {
-                        ViewBag.Message = "Désolé pour le dérangement, veuillez réessayer plus tard.";
-                    }
-
+                    smtp.Port = int.Parse(ConfigurationManager.AppSettings["EmailPort"]);
+                    smtp.Host = ConfigurationManager.AppSettings["EmailHost"];
+                    smtp.EnableSsl = true;
+                    smtp.UseDefaultCredentials = false;
+                    smtp.Credentials = new NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
+                    smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                    smtp.Send(message);
                 }
+                catch (Exception) { }
+
+                
             }
                 return View(contact);
         }
