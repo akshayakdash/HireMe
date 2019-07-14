@@ -45,7 +45,8 @@ namespace HireMe.Controllers
                 .FirstOrDefault(p => p.AspNetUserId == userId);
 
             //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
-            var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
+            //var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
+            var randomUserName = GenerateRandomUniqueUserName(6) + DateTime.Today.ToString("mmss");
 
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
@@ -168,7 +169,7 @@ namespace HireMe.Controllers
                 user.Candidates = new List<Candidate> { candidate };
 
 
-                var tempPassword = agency.ApplicationUser.UserName.Trim() + "@" + DateTime.Today.ToString("ddMM");
+                var tempPassword = "Ag" + "@" + DateTime.Today.ToString("ddMM");
                 var result = await userManager.CreateAsync(user, tempPassword);
 
                 // now save the security question answer for the user
@@ -195,8 +196,23 @@ namespace HireMe.Controllers
                     // insert a welcome notification
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
                     db.SaveChanges();
+                    try
+                    {
+                        var message = "Dear " + agency.AgencyName + ","
+                            + "Thanks for registering the candidate " + candidate.FirstName + "."
+                            + "The login access for this candidate is"
+                            + "UserName: " + user.UserName
+                            + "Password: " + tempPassword;
 
-                    await NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + tempPassword, 0, true);
+
+                          await NotificationFramework.SendNotification("", agency.ApplicationUser?.Id, "Candidate Registration", message, 0, true);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    
                     //Ends Here     
                     //return RedirectToAction("Login", "Account");
                     //return RedirectToAction("GetJobCategories", new { candidateId = candidate.CandidateId });
@@ -253,8 +269,16 @@ namespace HireMe.Controllers
                 throw new Exception("Candidate Not Found.");
             candidate.ProfileVerified = true;
             db.SaveChanges();
+            try
+            {
+                NotificationFramework.SendNotification(userId, agency.AspNetUserId, 
+                    @"Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.ApplicationUser.UserName.Trim() + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            }
+            catch
+            {
+                // no op
+            }
 
-            NotificationFramework.SendNotification(userId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.ApplicationUser.UserName.Trim() + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             // else return success message
             return Json("Candidate profile Verified Successfully", JsonRequestBehavior.AllowGet);
         }
@@ -575,6 +599,13 @@ namespace HireMe.Controllers
             {
                 ModelState.AddModelError("", error);
             }
+        }
+
+        private string GenerateRandomUniqueUserName(int length = 4)
+        {
+            Random random = new Random();
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
     }

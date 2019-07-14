@@ -55,7 +55,8 @@ namespace HireMe.Controllers.MobileApiControllers
             //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
             //var randomUserName = agency.AgencyName + randomPassword;
 
-            var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");
+            //var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");
+            var randomUserName = GenerateRandomUniqueUserName(6) + DateTime.Today.ToString("mmss");
 
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
@@ -196,7 +197,8 @@ namespace HireMe.Controllers.MobileApiControllers
                 user.Candidates = new List<Candidate> { candidate };
 
                 var UserManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                var tempPassword = agency.ApplicationUser.UserName.Trim() + "@" + DateTime.Today.ToString("ddMM");
+                //var tempPassword = agency.ApplicationUser.UserName.Trim() + "@" + DateTime.Today.ToString("ddMM");
+                var tempPassword = "Ag" + "@" + DateTime.Today.ToString("ddMM");
                 var result = UserManager.CreateAsync(user, tempPassword).Result;
 
                 if (result.Succeeded)
@@ -208,7 +210,23 @@ namespace HireMe.Controllers.MobileApiControllers
                     db.Notifications.Add(new JobTekNotification { Content = "One candidate registered " + model.FirstName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = agency.AspNetUserId, CreatedDate = DateTime.Now });
                     db.SaveChanges();
 
-                    NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + tempPassword, 0, true);
+                    try
+                    {
+                        var message = "Dear " + agency.AgencyName + ","
+                            + "Thanks for registering the candidate " + candidate.FirstName + "."
+                            + "The login access for this candidate is"
+                            + "UserName: " + user.UserName
+                            + "Password: " + tempPassword;
+
+
+                         NotificationFramework.SendNotification("", agency.ApplicationUser?.Id, "Candidate Registration", message, 0, true);
+                    }
+                    catch
+                    {
+
+                    }
+
+                    //NotificationFramework.SendNotification("", user.Id, "Welcome " + candidate.FirstName + " - JobTek", "Welcome to our portal. Your user id is: " + randomUserName + " and Password is : " + tempPassword, 0, true);
 
                     return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Registration successful to the portal." });
                 }
@@ -671,6 +689,13 @@ namespace HireMe.Controllers.MobileApiControllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private string GenerateRandomUniqueUserName(int length = 4)
+        {
+            Random random = new Random();
+            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }
