@@ -271,8 +271,7 @@ namespace HireMe.Controllers
             db.SaveChanges();
             try
             {
-                NotificationFramework.SendNotification(userId, agency.AspNetUserId, 
-                    @"Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.ApplicationUser.UserName.Trim() + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+                NotificationFramework.SendNotification("", agency.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
             }
             catch
             {

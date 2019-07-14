@@ -219,7 +219,7 @@ namespace HireMe.Controllers.MobileApiControllers
                             + "Password: " + tempPassword;
 
 
-                         NotificationFramework.SendNotification("", agency.ApplicationUser?.Id, "Candidate Registration", message, 0, true);
+                         NotificationFramework.SendNotification("", agency.AspNetUserId, "Candidate Registration", message, 0, true);
                     }
                     catch
                     {
@@ -253,7 +253,15 @@ namespace HireMe.Controllers.MobileApiControllers
             candidate.ProfileVerified = true;
             db.SaveChanges();
 
-            NotificationFramework.SendNotification(agency.AspNetUserId, candidate.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency" + agency.AgencyName + " on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            try
+            {
+                NotificationFramework.SendNotification("", agency.AspNetUserId, "Candidate Account Activation - JOBTek", "Your candidate Account " + candidate.FirstName + " was activated by Agency on " + DateTime.Now.Date.ToString("dd-MMM-yyyy"), 0, true);
+            }
+            catch
+            {
+
+            }
+            
 
             return Request.CreateResponse(HttpStatusCode.Created, new { Status = "OK", Message = "Candidate Profile verified successfully." });
         }
