@@ -212,11 +212,14 @@ namespace HireMe.Controllers.MobileApiControllers
 
                     try
                     {
-                        var message = "Dear " + agency.AgencyName + ","
-                            + "Thanks for registering the candidate " + candidate.FirstName + "."
-                            + "The login access for this candidate is"
-                            + "UserName: " + user.UserName
-                            + "Password: " + tempPassword;
+                        var message = string.Format("Cher {0},<br/>" +
+                                                    "Merci d'avoir enregistré le candidat { 1}.<br/>" +
+                                                    "Les informations de connexion pour ce candidat sont:< r/> " +
+                                                    "Nom d'utilisateur = {2} / {3} (n'importe qui peut être utilisé) <br/> " +
+                                                    "Mot de passe temporaire = { 4 }<br/><br/>" +
+                                                    "Veuillez transmettre ces informations au candidat afin qu'il puisse mettre à jour les informations manquantes (le cas échéant) en se connectant à son compte.<br/>" +
+                                                    "Meilleures salutations,<br/>Team JobTek", agency.AgencyName,
+                            candidate.FirstName, candidate.UserName, candidate.EmailId, tempPassword);
 
 
                          NotificationFramework.SendNotification("", agency.AspNetUserId, "Candidate Registration", message, 0, true);

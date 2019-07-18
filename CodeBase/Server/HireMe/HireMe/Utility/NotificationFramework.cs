@@ -2,14 +2,12 @@
 using HireMe.Models;
 using Microsoft.AspNet.SignalR;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace HireMe.Utility
 {
@@ -24,11 +22,6 @@ namespace HireMe.Utility
                 {
                     // if senderId is "" then it's admin so set it : TO DO
                     var notification = new JobTekNotification { SenderId = senderId, ReceiverId = receiverId, Subject = subject, Content = content, CreatedDate = DateTime.Now, SeenByReceiver = false };
-                    if (string.IsNullOrWhiteSpace(senderId))
-                    {
-                        var admin = db.Users.FirstOrDefault(p => p.UserName == "admin1@gmail.com"); // TO DO: Need to store this in a config file
-                        notification.SenderId = admin.Id;
-                    }
                     db.Notifications.Add(notification);
                     db.SaveChangesAsync();
 
@@ -44,7 +37,7 @@ namespace HireMe.Utility
                         db.Entry(user)
                             .Collection(u => u.SignalRConnections)
                             .Query()
-                            .Where(c => c.Connected == true)
+                            .Where(c => c.Connected)
                             .Load();
 
                         if (user.SignalRConnections == null)
@@ -66,16 +59,6 @@ namespace HireMe.Utility
                     {
                         try
                         {
-                            //client.Port = 25;
-                            //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            //client.UseDefaultCredentials = false;
-                            //client.Host = "smtp.gmail.com";
-                            //mail.Subject = "this is a test email.";
-                            //mail.Body = "this is my test email body";
-                            //client.Send(mail);
-
-
-                            // SmtpClient client = new SmtpClient();
                             client.Port = int.Parse(ConfigurationManager.AppSettings["EmailPort"]);
                             client.Host = ConfigurationManager.AppSettings["EmailHost"];
                             client.EnableSsl = true;
@@ -95,14 +78,14 @@ namespace HireMe.Utility
                                 mail.Subject = subject;
                                 mail.Body = content;
                                 mail.IsBodyHtml = true;
-                                mail.BodyEncoding = UTF8Encoding.UTF8;
+                                mail.BodyEncoding = Encoding.UTF8;
                                 mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
                                 client.Send(mail);
                             }
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-
+                            // ignored
                         }
                     }
 

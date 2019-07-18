@@ -962,8 +962,8 @@
             applicationId: "C875EB281731D7407DC415D5D1CDA216",
             messageId: "3CFD4CFADFFC4DD6F8710B966C2C7768",
             from: "JobTek",
-            //to: "+919861696748" //contactNumber
-            to: contactNumber
+            to: "+919861696748" //contactNumber
+            //to: contactNumber
         };
 
         $.ajax({
@@ -1007,14 +1007,14 @@
                     console.log(response);
                     console.log(response.pinId);
                     $("#info-bip-pinid").val(response.pinId);
-                    alert("Resend pin successfull.Please check your phone number and enter the code.");
+                    alert("Resend pin successful.Please check your phone number and enter the code.");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     alert("Unable to request for pin. Please try after sometime.");
                 }
             });
         } else {
-            alert("Unable to process your request. Please try again later.")
+            alert("Unable to process your request. Please try again later.");
         }
     }
 

@@ -46,7 +46,7 @@ namespace HireMe.Controllers
 
             //var randomPassword = System.Web.Security.Membership.GeneratePassword(5, 1);
             //var randomUserName = agency.ApplicationUser.UserName.Trim() + DateTime.Now.ToString("MMddyyyyHHmmss");// + randomPassword;
-            var randomUserName = GenerateRandomUniqueUserName(6) + DateTime.Today.ToString("mmss");
+            var randomUserName = GenerateRandomUniqueUserName(6) + DateTime.Now.ToString("mmss");
 
             var countries = db.Countries.ToList();
             var cities = db.Cities.ToList();
@@ -75,35 +75,6 @@ namespace HireMe.Controllers
                 string profileImagePath = string.Empty;
                 if (model.profile_pic != null && model.profile_pic.ContentLength > 0)
                 {
-                    ////Use Namespace called :  System.IO  
-                    //string FileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
-
-                    ////To Get File Extension  
-                    //string FileExtension = Path.GetExtension(model.profile_pic.FileName);
-
-                    ////Add Current Date To Attached File Name  
-                    //FileName = DateTime.Now.ToString("yyyyMMdd") + "-" + FileName.Trim() + FileExtension;
-
-                    ////Get Upload path from Web.Config file AppSettings.  
-                    ////string UploadPath = ConfigurationManager.AppSettings["UserImagePath"].ToString();
-
-                    //var UploadPath = Path.Combine(Server.MapPath("~/App_Data/uploads"), FileName);
-                    //imagePath = UploadPath;
-
-                    ////Its Create complete path to store in server.  
-                    ////model.ImagePath = UploadPath + FileName;
-
-                    ////To copy and save file into server.  
-                    //model.profile_pic.SaveAs(imagePath);
-
-                    //string theFileName = Path.GetFileNameWithoutExtension(model.profile_pic.FileName);
-                    //byte[] thePictureAsBytes = new byte[model.profile_pic.ContentLength];
-                    //using (BinaryReader theReader = new BinaryReader(model.profile_pic.InputStream))
-                    //{
-                    //    thePictureAsBytes = theReader.ReadBytes(model.profile_pic.ContentLength);
-                    //}
-                    //profileImagePath = Convert.ToBase64String(thePictureAsBytes);
-
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.profile_pic.FileName);
                     byte[] thePictureAsBytes = new byte[model.profile_pic.ContentLength];
                     using (BinaryReader theReader = new BinaryReader(model.profile_pic.InputStream))
@@ -198,11 +169,14 @@ namespace HireMe.Controllers
                     db.SaveChanges();
                     try
                     {
-                        var message = "Dear " + agency.AgencyName + ","
-                            + "Thanks for registering the candidate " + candidate.FirstName + "."
-                            + "The login access for this candidate is"
-                            + "UserName: " + user.UserName
-                            + "Password: " + tempPassword;
+                        var message = "Cher " + agency.AgencyName + ",<br/>" +
+                                      "Merci d’avoir enregistré le candidat " + candidate.FirstName + ".<br/>" +
+                                      "L'accès à la connexion pour ce candidat est:<br/>" +
+                                      "Nom d'utilisateur : <b>" + user.UserName + "/" + candidate.EmailId + "</b> (<i>n'importe lequel d'entre eux peut être utilisé</i>)<br/>" +
+                                      "Mot de passe temporairement : <b>" + tempPassword + "</b><br/><br/>" +
+                                      "Veuillez transmettre ces informations au candidat afin qu'il puisse mettre à jour les informations manquantes (le cas échéant) en se connectant à son compte.<br/><br/>" +
+                                      "Meilleures salutations,<br/>" +
+                                      "Team JobTek";
 
 
                           await NotificationFramework.SendNotification("", agency.ApplicationUser?.Id, "Candidate Registration", message, 0, true);

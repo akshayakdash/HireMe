@@ -238,7 +238,7 @@ namespace HireMe.Controllers.MobileApiControllers
         public HttpResponseMessage Login(LoginViewModel model)
         {
             var user = db.Users.Include(p => p.Roles).FirstOrDefault(p => p.UserName == model.UserName || p.Email == model.UserName);
-            var roleId = user.Roles.ElementAt(0).RoleId;
+            var roleId = user?.Roles.ElementAt(0).RoleId;
             var role = db.Roles.FirstOrDefault(t => t.Id == roleId);
             int userId = 0;
 
@@ -284,6 +284,7 @@ namespace HireMe.Controllers.MobileApiControllers
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, new { Status = "ERROR", Message = "Invalid Credentials." });
             }
+
         }
 
         [AllowAnonymous]

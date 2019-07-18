@@ -1,4 +1,5 @@
 ﻿using HireMe.Models;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +30,14 @@ namespace HireMe
                 config.CreateMap<JobOffer, EmployerJobOfferViewModel>();
                 config.CreateMap<RegisterCandidateViewModel, Candidate>();
             });
+        }
+        protected void Application_Error()
+        {
+            var ex = Server.GetLastError();
+            //log the error!
+            Logger log = LogManager.GetCurrentClassLogger();
+            log.Error(ex);
+            ;
         }
     }
 }
