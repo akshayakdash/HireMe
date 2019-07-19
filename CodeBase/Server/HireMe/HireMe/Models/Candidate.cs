@@ -804,6 +804,7 @@ namespace HireMe.Models
         [Key]
         public string JobName { get; set; }
         public string TotalRequests { get; set; }
+        public int Year { get; set; }
     }
     [Table("v_jobRequests")]
     public class v_JobRequest_Count
@@ -813,6 +814,7 @@ namespace HireMe.Models
         public string Month { get; set; }
         public string JobName { get; set; }
         public int TotalRequests { get; set; }
+        public int Year { get; set; }
     }
 
     [Table("v_categorywiseoffercount")]
@@ -823,6 +825,7 @@ namespace HireMe.Models
         //public int TotalOffers { get; set; }
         [Column("TotalOffers")]
         public int TotalRequests { get; set; }
+        public int Year { get; set; }
     }
 
     [Table("v_joboffers")]
@@ -835,6 +838,7 @@ namespace HireMe.Models
         //public int TotalOffers { get; set; }
         [Column("TotalOffers")]
         public int TotalRequests { get; set; }
+        public int Year { get; set; }
     }
     #endregion
 

@@ -30,7 +30,7 @@
         $timeout(function () {
             //$scope.data = [350, 450, 100];
 
-            $http.get("/api/jobtekapi/GetJobRequestDoughnotData", {
+            $http.get("/api/jobtekapi/GetJobRequestDoughnotData?year=" + $('#cboYear').find(":selected").text(), {
                 //params: $scope.searchParam
             })
                 .then(function (response) {
@@ -69,7 +69,7 @@
         $timeout(function () {
             //$scope.data = [350, 450, 100];
 
-            $http.get("/api/jobtekapi/GetJobRequestCounts", {
+            $http.get("/api/jobtekapi/GetJobRequestCounts?year=" + $('#cboYear').find(":selected").text(), {
                 //params: $scope.searchParam
             })
                 .then(function (response) {
@@ -80,11 +80,13 @@
                     if (response && response.data) {
                         $scope.line_chart_series = $.map(response.data, function (item) { return item.JobName }).unique();
 
-                        $scope.line_chart_labels = $.map(response.data, function (groupedItem) {
-                            return $.map(groupedItem.Items, function (item) {
-                                return item.Month
-                            })
-                        }).unique()
+                        $scope.line_chart_labels = $.map(response.data,
+                            function(groupedItem) {
+                                return $.map(groupedItem.Items,
+                                    function(item) {
+                                        return item.Month;
+                                    });
+                            }).unique();
 
                         var requestCounts = [];
 
@@ -162,7 +164,7 @@
 
         $scope.getJobRequests = function () {
             $scope.loading = true;
-            $http.get("/api/jobtekapi/GetJobRequestDoughnotData", {
+            $http.get("/api/jobtekapi/GetJobRequestDoughnotData?year=" + $('#cboYear').find(":selected").text(), {
                 //params: $scope.searchParam
             })
                 .then(function (response) {
@@ -190,11 +192,13 @@
                     if (response && response.data) {
                         $scope.line_chart_series = $.map(response.data, function (item) { return item.JobName }).unique();
 
-                        $scope.line_chart_labels = $.map(response.data, function (groupedItem) {
-                            return $.map(groupedItem.Items, function (item) {
-                                return item.Month
-                            })
-                        }).unique()
+                        $scope.line_chart_labels = $.map(response.data,
+                            function(groupedItem) {
+                                return $.map(groupedItem.Items,
+                                    function(item) {
+                                        return item.Month;
+                                    });
+                            }).unique();
 
                         var requestCounts = [];
 
@@ -234,7 +238,7 @@
 
             $scope.loading = true;
 
-            $http.get("/api/jobtekapi/GetJobOfferDoughnotData", {
+            $http.get("/api/jobtekapi/GetJobOfferDoughnotData=Year" + $('#cboYear').find(":selected").text(), {
                 //params: $scope.searchParam
             })
                 .then(function (response) {
@@ -253,7 +257,7 @@
                     }
                 });
 
-            $http.get("/api/jobtekapi/GetJobOfferCounts", {
+            $http.get("/api/jobtekapi/GetJobOfferCounts?year=" + $('#cboYear').find(":selected").text(), {
                 //params: $scope.searchParam
             })
                 .then(function (response) {
@@ -262,11 +266,13 @@
                     if (response && response.data) {
                         $scope.line_chart_series = $.map(response.data, function (item) { return item.JobName }).unique();
 
-                        $scope.line_chart_labels = $.map(response.data, function (groupedItem) {
-                            return $.map(groupedItem.Items, function (item) {
-                                return item.Month
-                            })
-                        }).unique()
+                        $scope.line_chart_labels = $.map(response.data,
+                            function(groupedItem) {
+                                return $.map(groupedItem.Items,
+                                    function(item) {
+                                        return item.Month;
+                                    });
+                            }).unique();
 
                         var requestCounts = [];
 
@@ -300,6 +306,16 @@
                         }
                     }
                 });
+        }
+
+        $scope.populateReportData = function() {
+            if ($scope.jobType === 1) {
+                //alert("Hello" + $('#cboYear').find(":selected").text());
+                $scope.getJobRequests();
+            } else {
+                //alert("Hi" + $('#cboYear').find(":selected").text());
+                $scope.getJobOffers();
+            }
         }
     }]);
 
@@ -426,14 +442,6 @@
     //        });
     //    };
     //}]);
-
-
-
-    function getRandomValue(data) {
-        var l = data.length, previous = l ? data[l - 1] : 50;
-        var y = previous + Math.random() * 10 - 5;
-        return y < 0 ? 0 : y > 100 ? 100 : y;
-    }
 })();
 Array.prototype.unique = function () {
     var arr = [];

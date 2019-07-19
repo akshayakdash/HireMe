@@ -96,7 +96,7 @@ namespace HireMe.Controllers
                     .AsQueryable()
                     .Where(queryString[0].ToString(), searchArgs.ToArray()).ToList();
 
-                if (searchParam != null && searchParam.Tasks != null && searchParam.Tasks.Count > 0)
+                if (searchParam.Tasks != null && searchParam.Tasks.Count > 0)
                 {
                     jobOffers = jobOffers
                         .Where(p => p.JobOfferJobTasks.Select(t => t.JobTaskId).Any(c => searchParam.Tasks.Contains(c))).ToList();
@@ -443,7 +443,7 @@ namespace HireMe.Controllers
         public HttpResponseMessage GetJobCounts(int year = 0)
         {
             year = year == 0 ? DateTime.Today.Year : year;
-            var jobCounts = db.v_JobCounts;
+            var jobCounts = db.v_JobCounts.Where(p => p.Year == year);
             return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
         }
 
@@ -455,7 +455,7 @@ namespace HireMe.Controllers
             year = year == 0 ? DateTime.Today.Year : year;
             try
             {
-                var jobCounts = db.v_JobRequestCount//.Where(p => p.TotalRequests > 0)
+                var jobCounts = db.v_JobRequestCount.Where(p => p.Year == year)
                     .GroupBy(p => p.JobName)
                     .Select(g => new
                     {
@@ -478,7 +478,7 @@ namespace HireMe.Controllers
             year = year == 0 ? DateTime.Today.Year : year;
             try
             {
-                var jobCounts = db.v_JobOfferDoughnotData;
+                var jobCounts = db.v_JobOfferDoughnotData.Where(p=>p.Year == year);
                 return Request.CreateResponse(HttpStatusCode.OK, jobCounts);
             }
             catch (Exception ex)
@@ -495,7 +495,7 @@ namespace HireMe.Controllers
             year = year == 0 ? DateTime.Today.Year : year;
             try
             {
-                var jobCounts = db.v_JobOfferCount//.Where(p => p.TotalRequests > 0)
+                var jobCounts = db.v_JobOfferCount.Where(p => p.Year == year)
                     .GroupBy(p => p.JobName)
                     .Select(g => new
                     {
