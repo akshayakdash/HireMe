@@ -80,6 +80,10 @@
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
       <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
     </Reference>
@@ -93,6 +97,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
     </Reference>
@@ -101,6 +106,8 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -247,6 +254,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\ImageHandler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
@@ -400,6 +408,7 @@
     <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff" />
     <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfont3e6e.woff2" />
     <Content Include="assets\fonts\fontawesome\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="assets\images\3.gif" />
     <Content Include="assets\images\age.png" />
     <Content Include="assets\images\agency.jpg" />
     <Content Include="assets\images\agency1.jpg" />
@@ -589,6 +598,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\arrow.png" />
+    <Content Include="Images\radio.png" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -601,7 +612,14 @@
     <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.eot" />
     <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.ttf" />
     <Content Include="assets\plugins\revolutionslider\fonts\revicons\revicons90c6.woff" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\PublishProfiles\JobTekUat - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\VMDeploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\ChartJs\angular-chart.js" />
     <Content Include="Scripts\ChartJs\app.js" />
@@ -805,15 +823,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812051658203_Signalr_Connection_Table_Added.resx">
       <DependentUpon>201812051658203_Signalr_Connection_Table_Added.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812121839576_Id_proof_for_Agency.resx">
       <DependentUpon>201812121839576_Id_proof_for_Agency.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812201554492_User_Feedback_Added.resx">
       <DependentUpon>201812201554492_User_Feedback_Added.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201812231450568_Agency_JobGroupId_Added.resx">
       <DependentUpon>201812231450568_Agency_JobGroupId_Added.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201901151722314_Id_Proof_Doc1_Colum_Added.resx">
       <DependentUpon>201901151722314_Id_Proof_Doc1_Colum_Added.cs</DependentUpon>
