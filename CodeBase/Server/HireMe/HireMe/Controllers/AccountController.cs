@@ -143,7 +143,7 @@ namespace HireMe.Controllers
         [AllowAnonymous]
         public JsonResult CheckEmailExists(string emailId)
         {
-            var emailIdExists =  context.Users.Count(p => p.Email == emailId) > 0 ? true : false;
+            var emailIdExists = context.Users.Count(p => p.Email == emailId) > 0 ? true : false;
             return Json(emailIdExists, JsonRequestBehavior.AllowGet);
         }
 
@@ -417,6 +417,49 @@ namespace HireMe.Controllers
             var client = new WebClient();
             var jsonResult = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secret, gcaptchaResp));
             return Json(JsonConvert.DeserializeObject<CaptchaResponse>(jsonResult.ToString()), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult RequestForInfoBipPin(InfoBipRequest request)
+        {
+            var vm = new {
+                applicationId = request.applicationId,//System.Web.Configuration.WebConfigurationManager.AppSettings["infoBipApplicationId"],
+                messageId = request.messageId,//System.Web.Configuration.WebConfigurationManager.AppSettings["infoBipMessageId"],
+                from = "JobTek",
+                to = request.to
+            };
+            var infoBipPublicKey = System.Web.Configuration.WebConfigurationManager.AppSettings["infoBipPublicKey"];
+            using (var client = new WebClient())
+            {
+                var dataString = JsonConvert.SerializeObject(vm);
+                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                client.Headers.Add(HttpRequestHeader.Authorization, "App " + infoBipPublicKey);
+                var res = client.UploadString(new Uri("https://gn9g6.api.infobip.com/2fa/1/pin/"), "POST", dataString);
+                return Json(JsonConvert.DeserializeObject<InfoBipResponse>(res.ToString()), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult ResendRequestForInfoBipPin(InfoBipRequest request)
+        {
+            //var vm = new
+            //{
+            //    applicationId = System.Web.Configuration.WebConfigurationManager.AppSettings["infoBipApplicationId"],
+            //    messageId = System.Web.Configuration.WebConfigurationManager.AppSettings["infoBipMessageId"],
+            //    from = "JobTek",
+            //    to = to
+            //};
+            var infoBipPublicKey = System.Web.Configuration.WebConfigurationManager.AppSettings["infoBipPublicKey"];
+            using (var client = new WebClient())
+            {
+                //var dataString = JsonConvert.SerializeObject(vm);
+                client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
+                client.Headers.Add(HttpRequestHeader.Authorization, "App " + infoBipPublicKey);
+                var res = client.UploadString(new Uri("https://gn9g6.api.infobip.com/2fa/1/pin/" + request.pinId + "/resend"), "POST");
+                return Json(JsonConvert.DeserializeObject<InfoBipResponse>(res.ToString()), JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
@@ -796,5 +839,19 @@ namespace HireMe.Controllers
         public bool Verified { get; set; }
         [JsonProperty("attemptsRemaining")]
         public int AttemptsRemaining { get; set; }
+    }
+
+    public class InfoBipRequest
+    {
+        [JsonProperty("applicationId")]
+        public string applicationId { get; set; }
+        [JsonProperty("messageId")]
+        public string messageId { get; set; }
+        [JsonProperty("to")]
+        public string to { get; set; }
+        [JsonProperty("from")]
+        public string from { get; set; }
+        [JsonProperty("pinId")]
+        public string pinId { get; set; }
     }
 }

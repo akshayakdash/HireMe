@@ -967,7 +967,8 @@
         };
 
         $.ajax({
-            url: "https://gn9g6.api.infobip.com/2fa/1/pin",
+            //url: "https://gn9g6.api.infobip.com/2fa/1/pin",
+            url: "/Account/RequestForInfoBipPin",
             method: "POST",
             //dataType: "json",
             crossDomain: true,
@@ -979,11 +980,12 @@
             //    xhr.setRequestHeader("Authorization", "Basic " + Utils.getUsernamePassword());
             //    xhr.setRequestHeader("X-Mobile", "false");
             //},
-            headers: { "Authorization": "App 75ba074d74c8443fb7477345b600f110-c1f7659a-4b43-4a34-ad2f-38e9bbef9a15" },
+            headers: { "Authorization": "App a9b0579dba2904ea8256b687b1fc90c3-171ff64c-b4ec-460c-979d-f830a045ae71" },
             success: function (response) {
-                //console.log(response);
+                console.log(response);
                 //console.log(response.pinId)
-                $("#info-bip-pinid").val(response.pinId);
+                //$("#info-bip-pinid").val(response.pinId);
+                $("#info-bip-pinid").val(response.PinId);
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Unable to request for pin. Please try after sometime.");
@@ -993,20 +995,23 @@
 
     function resendRequestForInfoBipPin() {
         var pinId = $("#info-bip-pinid").val();
+        var infoBipDat = { pinId: pinId };
 
         if (pinId) {
             $.ajax({
-                url: "https://gn9g6.api.infobip.com/2fa/1/pin/" + pinId + "/resend",
+                //url: "https://gn9g6.api.infobip.com/2fa/1/pin/" + pinId + "/resend",
+                url: "/Account/ResendRequestForInfoBipPin",
                 method: "POST",
                 //dataType: "json",
-                crossDomain: true,
+                data: JSON.stringify(infoBipDat),
+                //crossDomain: true,
                 contentType: "application/json",
                 cache: false,
-                headers: { "Authorization": "App 75ba074d74c8443fb7477345b600f110-c1f7659a-4b43-4a34-ad2f-38e9bbef9a15" },
+                headers: { "Authorization": "App a9b0579dba2904ea8256b687b1fc90c3-171ff64c-b4ec-460c-979d-f830a045ae71" },
                 success: function (response) {
                     console.log(response);
-                    console.log(response.pinId);
-                    $("#info-bip-pinid").val(response.pinId);
+                    //console.log(response.pinId);
+                    $("#info-bip-pinid").val(response.PinId);
                     alert("Resend pin successful.Please check your phone number and enter the code.");
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
