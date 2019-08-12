@@ -471,6 +471,7 @@ namespace HireMe.Controllers
             using (var client = new WebClient())
             {
                 var dataString = JsonConvert.SerializeObject(vm);
+                client.Headers.Add("Access-Control-Allow-Origin", "https://www.jobtek-ci.com");
                 client.Headers.Add(HttpRequestHeader.ContentType, "application/json");
                 client.Headers.Add(HttpRequestHeader.Authorization, "App " + infoBipPublicKey);
                 var res = client.UploadString(new Uri("https://gn9g6.api.infobip.com/2fa/1/pin/" + pinId + "/verify"), "POST", dataString);

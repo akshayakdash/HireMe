@@ -20,7 +20,7 @@
     <WebStackScaffolding_DbContextTypeFullName>HireMe.Models.ApplicationDbContext</WebStackScaffolding_DbContextTypeFullName>
     <ProjectView>ShowAllFiles</ProjectView>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
-    <NameOfLastUsedPublishProfile>JobTekUat - Web Deploy</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>VMDeploy</NameOfLastUsedPublishProfile>
     <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
   </PropertyGroup>
   <ProjectExtensions>
