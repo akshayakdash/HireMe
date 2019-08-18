@@ -127,18 +127,18 @@ namespace HireMe.Models
         //[Phone()]
         //[RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         public string PhoneNumber { get; set; }
-        [Required(ErrorMessage = "Vous devez fournir un numéro de téléphone valide.")]
+        //[Required(ErrorMessage = "Vous devez fournir un numéro de téléphone valide.")]
         public string ConfirmPhoneNumber { get; set; }
 
         //[Required]
         public string CountryCode { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Le {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
-        [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$", ErrorMessage = "Le mot de passe doit comporter 6 caractères et doit contenir" +
-            "au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère " +
-            "spécial (ne peut être que  # $ ^ + = ! * ( ) @ % &) " +
-            "par exemple Pass@123")]
+        [StringLength(20, ErrorMessage = "Le {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
+        //[RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{6,}$", ErrorMessage = "Le mot de passe doit comporter 6 caractères et doit contenir" +
+        //    "au moins une lettre majuscule, une lettre minuscule, un chiffre, un caractère " +
+        //    "spécial (ne peut être que  # $ ^ + = ! * ( ) @ % &) " +
+        //    "par exemple Pass@123")]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
