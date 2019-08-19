@@ -278,7 +278,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                En cliquant sur «Valider» un SMS vous seras envoyé
+                                                En cliquant sur «Suivant» un SMS vous seras envoyé
                                             </div>
                                         </div>
                                         <div class="row">
@@ -342,12 +342,12 @@
                                                     <input type="hidden" class="form-control" value="" id="info-bip-pinid" />
 
                                                     <div class="">
-                                                        <button type="button" class="btn-sm btn-info" onclick="goBackGrCaptchaForm()" style="cursor:pointer;padding: 6px 12px;">Annuler</button>
-                                                        <button type="button" class="btn-sm ml-2" onclick="validateInfoBipPin()" style="cursor:pointer;padding: 6px 12px;">Valider</button>
+                                                        <button type="button" class="btn-sm btn-info" onclick="goBackToUserForm()" style="cursor:pointer;padding: 6px 12px;">Annuler</button>
+                                                        <button type="button" class="btn-sm ml-2" onclick="validateInfoBipPin()" style="cursor:pointer;padding: 6px 12px;">Continuer</button>
                                                     </div>
 
                                                     <div>
-                                                        En cliquant sur «Continuer» vous allez confirmer le code
+                                                        entrez le code à 4 chiffres que vous avez reçu sur le numéro affiché ci-dessus et cliquez sur "Continuer" pour confirmer le code.
                                                     </div>
 
                                                     <div class="row mt-2">
@@ -926,7 +926,7 @@
 <script src="~/Scripts/jquery.inputmask.bundle.js"></script>
 <script type="text/javascript">
     function goBackToUserForm() {
-        grecaptcha.reset();
+        //grecaptcha.reset();
         // $(this).hide();
         $(".nextbtn").show();
         $(".nextbtn").addClass("active");

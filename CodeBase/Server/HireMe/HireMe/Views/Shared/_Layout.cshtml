@@ -157,7 +157,7 @@
 
                             <ul class="menu clearfix xyz" id="menu desktopview-menu">
 
-                                <li>@Html.ActionLink("ACCEUIL", "Index", "Home")</li>
+                                <li>@Html.ActionLink("ACCUEIL", "Index", "Home")</li>
                                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
                                 {
                                     <li>@Html.ActionLink("TABLEAU DE BORD", "Index", "Users")</li>
@@ -260,7 +260,7 @@
                                 }
                                 else
                                 {
-                                    <li>@Html.ActionLink("ACCEUIL", "Index", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "Index", cssClass: "waves active") })</li>
+                                    <li>@Html.ActionLink("ACCUEIL", "Index", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "Index", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("OFFRES ET SERVICES", "About", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "About", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("FAQ", "FAQ", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "FAQ", cssClass: "waves active") })</li>
                                     <li>@Html.ActionLink("CONTACTEZ NOUS", "Contact", "Home", new { @class = Html.IsSelected(controllers: "Home", actions: "Contact", cssClass: "waves active") })</li>
@@ -282,7 +282,7 @@
                                     <li class="divider"></li>
 
                                     <li class="">
-                                        <a href="~/Home" class="@Html.IsSelected(controllers: "Home", cssClass: "waves active")"><i class="fa fa-home"></i> ACCEUIL</a>
+                                        <a href="~/Home" class="@Html.IsSelected(controllers: "Home", cssClass: "waves active")"><i class="fa fa-home"></i> ACCUEIL</a>
                                     </li>
                                     <li class="">
                                         <a href="~/Users" class="@Html.IsSelected(controllers: "Users", cssClass: "waves active")"><i class="fa fa-dashboard"></i> TABLEAU DE BORD</a>
