@@ -1,0 +1,170 @@
+﻿@model HireMe.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div id="main-container-user">
+    <h4>User Details</h4>
+    <section class="right-side">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FirstName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LastName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LastName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Address)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Address)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProfilePicUrl)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProfilePicUrl)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ActiveUntil)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ActiveUntil)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CountryId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CountryId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CityId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CityId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DistrictId)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DistrictId)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.EmailConfirmed)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.EmailConfirmed)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PasswordHash)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PasswordHash)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SecurityStamp)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.SecurityStamp)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumber)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PhoneNumberConfirmed)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TwoFactorEnabled)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LockoutEndDateUtc)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LockoutEnabled)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LockoutEnabled)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AccessFailedCount)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AccessFailedCount)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+
+        </dl>
+    </section>
+</div>
+<p>
+    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
