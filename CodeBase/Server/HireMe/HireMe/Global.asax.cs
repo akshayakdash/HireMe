@@ -37,7 +37,7 @@ namespace HireMe
             //log the error!
             Logger log = LogManager.GetCurrentClassLogger();
             log.Error(ex);
-            ;
+            
         }
     }
 }
