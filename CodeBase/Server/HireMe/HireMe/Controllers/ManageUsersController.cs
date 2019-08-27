@@ -144,9 +144,9 @@ namespace HireMe.Controllers
                     }
 
                     // delete signalRConnections, securityQuestionAnswers, OTPLists
-                    user.SignalRConnections?.ToList().ForEach(con => { db.SignalRConnections.Remove(con); });
-                    user.SecurityQuestionAnswers?.ToList().ForEach(seqQuest => { db.UserSecurityQuestionAnswers.Remove(seqQuest); });
-                    user.OTPList?.ToList().ForEach(otp => { db.UserOtps.Remove(otp); });
+                    userEntity.SignalRConnections?.ToList().ForEach(con => { db.SignalRConnections.Remove(con); });
+                    userEntity.SecurityQuestionAnswers?.ToList().ForEach(seqQuest => { db.UserSecurityQuestionAnswers.Remove(seqQuest); });
+                    userEntity.OTPList?.ToList().ForEach(otp => { db.UserOtps.Remove(otp); });
 
                     // now delete all job offers and requests
                     if (isEmployer)
