@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.Net;
 using System.Configuration;
+using HireMe.Utility;
 
 namespace HireMe.Controllers
 {
@@ -382,6 +383,20 @@ namespace HireMe.Controllers
                     // insert a welcome notification
                     context.Notifications.Add(new JobTekNotification { Content = "Welcome " + model.UserName + " to our Portal.", SenderId = "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", ReceiverId = user.Id, CreatedDate = DateTime.Now });
                     context.SaveChanges();
+                    if (model.UserRoles.Contains("Candidate"))
+                    {
+                        await NotificationFramework.SendNotification("b6b5fc19-3222-4733-9d71-a4cf5d30ec98", user.Id, "Registration Successful", "Successfully registered", TypeOfNotification.CandidateRegistration, true);
+                        await NotificationFramework.SendNotification("b6b5fc19-3222-4733-9d71-a4cf5d30ec98", "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", "Candidate Registration", "New Candidate Registered", TypeOfNotification.Admin_CandidateRegistration, true);
+                    }
+                    else if (model.UserRoles.Contains("Agency"))
+                    {
+                        await NotificationFramework.SendNotification("b6b5fc19-3222-4733-9d71-a4cf5d30ec98", user.Id, "Registration Successful", "Successfully registered", TypeOfNotification.AgencyRegistration, true);
+                        await NotificationFramework.SendNotification("b6b5fc19-3222-4733-9d71-a4cf5d30ec98", "b6b5fc19-3222-4733-9d71-a4cf5d30ec98", "Agency Registration", "New Agency Registered", TypeOfNotification.Admin_AgencyRegistration, true);
+                    }
+                    else
+                    {
+
+                    }
                     //Ends Here     
                     return RedirectToAction("Login", "Account");
                 }
