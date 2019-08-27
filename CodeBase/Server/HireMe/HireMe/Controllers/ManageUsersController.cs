@@ -11,6 +11,7 @@ using HireMe.Models;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.AspNet.Identity;
 using System.Transactions;
+using PagedList;
 
 namespace HireMe.Controllers
 {
@@ -42,9 +43,16 @@ namespace HireMe.Controllers
         }
 
         // GET: ManageUsers
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? page)
         {
-            return View(await db.Users.ToListAsync());
+            int pageSize = 10;
+            int pageIndex = 1;
+            pageIndex = page.HasValue ? Convert.ToInt32(page) : 1;
+
+            var users = db.Users
+                .OrderByDescending(p => p.Id)
+                .ToPagedList(pageIndex, pageSize);
+            return View(users);
         }
 
         // GET: ManageUsers/Details/5
@@ -105,10 +113,10 @@ namespace HireMe.Controllers
                     db.Entry(userEntity).Collection(p => p.Employers).Load();// query.Include(p => p.Employers);
                 var isAgency = db.Agencies.Count(p => p.AspNetUserId == user.Id) > 0;
                 if (isAgency)
-                    db.Entry(user).Collection(p => p.Agencies).Load();
+                    db.Entry(userEntity).Collection(p => p.Agencies).Load();
                 var isCandidate = db.Candidates.Count(p => p.AspNetUserId == user.Id) > 0;
                 if (isCandidate)
-                    db.Entry(user).Collection(p => p.Candidates).Load();
+                    db.Entry(userEntity).Collection(p => p.Candidates).Load();
 
                 // Load other related entities
                 db.Entry(userEntity).Collection(p => p.SignalRConnections).Load();
@@ -183,11 +191,65 @@ namespace HireMe.Controllers
                     }
                     else if (isCandidate)
                     {
+                        var candidate = userEntity.Candidates?.FirstOrDefault();
+                        if (candidate != null)
+                        {
+                            var jobRequests = candidate.JobRequests?.ToList();
+                            if (jobRequests != null && jobRequests.Count > 0)
+                            {
+                                jobRequests.ForEach(req =>
+                                {
+                                    db.JobRequests.Remove(req);
+                                    db.Entry(req).State = EntityState.Deleted;
+                                });
+                            }
 
+                            var favJobOffers = candidate.FavouriteJobOffers?.ToList();
+                            if (favJobOffers != null && favJobOffers.Count > 0)
+                            {
+                                favJobOffers.ForEach(favJobOffer =>
+                                {
+                                    candidate.FavouriteJobOffers?.Remove(favJobOffer);
+                                });
+                            }
+                        }
+                        userEntity.Candidates.ToList().ForEach(cnd => userEntity.Candidates.Remove(cnd));
                     }
                     else if (isAgency)
                     {
+                        var agency = userEntity.Agencies?.FirstOrDefault();
+                        if (agency != null)
+                        {
+                            var candidates = agency?.Candidates?.ToList();
+                            if (candidates != null && candidates.Count > 0)
+                            {
+                                candidates.ForEach(candidate => {
+                                    if (candidate != null)
+                                    {
+                                        var jobRequests = candidate.JobRequests?.ToList();
+                                        if (jobRequests != null && jobRequests.Count > 0)
+                                        {
+                                            jobRequests.ForEach(req =>
+                                            {
+                                                db.JobRequests.Remove(req);
+                                                db.Entry(req).State = EntityState.Deleted;
+                                            });
+                                        }
 
+                                        var favJobOffers = candidate.FavouriteJobOffers?.ToList();
+                                        if (favJobOffers != null && favJobOffers.Count > 0)
+                                        {
+                                            favJobOffers.ForEach(favJobOffer =>
+                                            {
+                                                candidate.FavouriteJobOffers?.Remove(favJobOffer);
+                                            });
+                                        }
+                                    }
+                                    agency.Candidates.ToList().ForEach(cnd => agency.Candidates.Remove(cnd));
+                                });
+                            }
+                            userEntity.Agencies.ToList().ForEach(agn => userEntity.Agencies.Remove(agn));
+                        }
                     }
 
                     db.SaveChanges();

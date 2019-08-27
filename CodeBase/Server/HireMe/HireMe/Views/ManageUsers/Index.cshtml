@@ -1,4 +1,7 @@
-﻿@model IEnumerable<HireMe.Models.ApplicationUser>
+﻿@*@model IEnumerable<HireMe.Models.ApplicationUser>*@
+
+@model PagedList.IPagedList<HireMe.Models.ApplicationUser>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -21,131 +24,146 @@
                     Name
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Address)
+                    @*@Html.DisplayNameFor(model => model.Address)*@
+                    Address
                 </th>
                 @*<th>
-                            @Html.DisplayNameFor(model => model.ProfilePicUrl)
-                        </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ActiveUntil)
-                    </th>*@
-                @*<th>
-                            @Html.DisplayNameFor(model => model.CountryId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CityId)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DistrictId)
-                        </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Email)
-                    </th>*@
-                @*<th>
-                        @Html.DisplayNameFor(model => model.EmailConfirmed)
+                        @Html.DisplayNameFor(model => model.ProfilePicUrl)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.PasswordHash)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.SecurityStamp)
-                    </th>*@
                 <th>
-                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                    @Html.DisplayNameFor(model => model.ActiveUntil)
+                </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.CountryId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CityId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DistrictId)
+                    </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PasswordHash)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SecurityStamp)
+                </th>*@
+                <th>
+                    @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
+                    Contact No
                 </th>
                 @*<th>
-                        @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.LockoutEnabled)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AccessFailedCount)
-                    </th>*@
+                    @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.UserName)
+                    @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessFailedCount)
+                </th>*@
+                <th>
+                    @*@Html.DisplayNameFor(model => model.UserName)*@
+                    User Name
                 </th>
                 <th></th>
             </tr>
 
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    <img height="30" width="30" src="@item.ProfilePicUrl"/>
-                </td>
-                <td>
-                    @*@Html.DisplayFor(modelItem => item.FirstName + " " + item.LastName)*@ 
-                    @(item.FirstName + " "+  item.LastName)
-                </td>
-                @*<td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.ProfilePicUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActiveUntil)
-        </td>*@
-                @*<td>
-                @Html.DisplayFor(modelItem => item.CountryId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CityId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DistrictId)
-            </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>*@
-                @*<td>
-            @Html.DisplayFor(modelItem => item.EmailConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PasswordHash)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SecurityStamp)
-        </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                @*<td>
-            @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LockoutEnabled)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessFailedCount)
-        </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        <img height="30" width="30" src="@item.ProfilePicUrl" />
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.FirstName + " " + item.LastName)*@
+                        @(item.FirstName + " " + item.LastName)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Address)*@
+                        @item.Address
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.ProfilePicUrl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ActiveUntil)
+                    </td>*@
+                    @*<td>
+                            @Html.DisplayFor(modelItem => item.CountryId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CityId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DistrictId)
+                        </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>*@
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.EmailConfirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PasswordHash)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SecurityStamp)
+                    </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.PhoneNumber)*@
+                        @item.PhoneNumber
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LockoutEnabled)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccessFailedCount)
+                    </td>*@
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.UserName)*@
+                        @item.UserName
+                    </td>
+                    <td>
+                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
             }
 
         </table>
+        @if (Model != null && Model.Count > 0)
+        {
+            <div id='Paging' style="text-align:center">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+            </div>
+        }
     </section>
 </div>
