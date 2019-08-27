@@ -134,7 +134,7 @@ namespace HireMe.Models
         public DbSet<v_JobCount_JobOffer> v_JobOfferDoughnotData { get; set; }
         public DbSet<v_JobOffer_Count> v_JobOfferCount { get; set; }
 
-
+        public DbSet<EmailTemplate> EmailTemplate { get; set; }
 
     }
 }

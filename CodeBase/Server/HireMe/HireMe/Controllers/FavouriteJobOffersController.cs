@@ -81,7 +81,7 @@ namespace HireMe.Controllers
             }
             db.SaveChanges();
 
-            NotificationFramework.SendNotification("", userId, "Job offer Shortlisted", "Job offer added to favourites");
+            NotificationFramework.SendNotification("", userId, "Job offer Shortlisted", "Job offer added to favourites", TypeOfNotification.NotRequired, false);
             //return View();
             return Json("Successfully added to favourites.", JsonRequestBehavior.AllowGet);
         }

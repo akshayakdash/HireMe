@@ -335,7 +335,7 @@ namespace HireMe.Controllers.MobileApiControllers
                 db.SaveChanges();
 
                 // send email with the code
-                NotificationFramework.SendNotification("", user.Id, "Reset password code", "Your unique code to reset password is : " + newOtp.ToString());
+                NotificationFramework.SendNotification("", user.Id, "Reset password code", "Your unique code to reset password is : " + newOtp.ToString(), TypeOfNotification.ResetPassword, true);
 
                 return Request.CreateResponse(HttpStatusCode.OK, new { Status = "OK", Message = "Your unique code to reset password is generated successfully and sent to your email.", Data = new { OTP = newOtp, Code = code } });
 

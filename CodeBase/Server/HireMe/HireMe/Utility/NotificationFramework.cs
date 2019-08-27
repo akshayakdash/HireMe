@@ -11,9 +11,19 @@ using System.Threading.Tasks;
 
 namespace HireMe.Utility
 {
+    public enum TypeOfNotification
+    {
+        CandidateRegistration = 0,
+        Admin_CandidateRegistration = 1,
+        AgencyRegistration = 2,
+        Admin_AgencyRegistration = 3,
+        ResetPassword = 4,
+        NotRequired = 99
+
+    }
     public static class NotificationFramework
     {
-        public static async Task SendNotification(string senderId, string receiverId, string subject, string content, int category = 0, bool sendAsEmail = true)
+        public static async Task SendNotification(string senderId, string receiverId, string subject, string content, TypeOfNotification NotificationType, bool sendAsEmail)
         {
 
             await Task.Factory.StartNew(() =>
@@ -54,41 +64,43 @@ namespace HireMe.Utility
                         }
                     }
 
-
-                    using (SmtpClient client = new SmtpClient())
+                    if (sendAsEmail)
                     {
-                        try
+                        var emailTemplate = db.EmailTemplate.Where(p => p.EmailType == (int)NotificationType).FirstOrDefault();
+                        using (SmtpClient client = new SmtpClient())
                         {
-                            client.Port = int.Parse(ConfigurationManager.AppSettings["EmailPort"]);
-                            client.Host = ConfigurationManager.AppSettings["EmailHost"];
-                            client.EnableSsl = true;
-                            client.Timeout = 10000;
-                            client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                            client.UseDefaultCredentials = false;
-
-                            var reciever = db.Users.Find(receiverId);
-
-                            if (reciever != null)
+                            try
                             {
-                                client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
+                                client.Port = int.Parse(ConfigurationManager.AppSettings["EmailPort"]);
+                                client.Host = ConfigurationManager.AppSettings["EmailHost"];
+                                client.EnableSsl = true;
+                                client.Timeout = 10000;
+                                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                                client.UseDefaultCredentials = false;
 
-                                MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMailUserName"], reciever.Email);
-                                mail.From = new MailAddress(ConfigurationManager.AppSettings["FromMailUserName"]);
+                                var reciever = db.Users.Find(receiverId);
 
-                                mail.Subject = subject;
-                                mail.Body = content;
-                                mail.IsBodyHtml = true;
-                                mail.BodyEncoding = Encoding.UTF8;
-                                mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-                                client.Send(mail);
+                                if (reciever != null)
+                                {
+                                    client.Credentials = new System.Net.NetworkCredential(ConfigurationManager.AppSettings["FromMailUserName"], ConfigurationManager.AppSettings["FromMailPassword"]);
+
+                                    MailMessage mail = new MailMessage(ConfigurationManager.AppSettings["FromMailUserName"], reciever.Email);
+                                    mail.From = new MailAddress(ConfigurationManager.AppSettings["FromMailUserName"]);
+
+                                    mail.Subject = emailTemplate.EmailSubject;
+                                    mail.Body = emailTemplate.EmailBody;
+                                    mail.IsBodyHtml = true;
+                                    mail.BodyEncoding = Encoding.UTF8;
+                                    mail.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                                    client.Send(mail);
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                // ignored
                             }
                         }
-                        catch (Exception)
-                        {
-                            // ignored
-                        }
                     }
-
                 }
 
 
