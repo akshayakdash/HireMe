@@ -149,19 +149,22 @@
 
                                     </div>
                                 }
-                                    <div class="row">
-                                        <div class="col-sm-12" id='Paging' style="text-align:center">
-                                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-                                            of @Model.PageCount
-
-                                            @Html.PagedListPager(Model, page => Url.Action("Agencies", new { page }))
-                                        </div>
-                                    </div>
+                                    
                         }
                         else
                         {
                             <div class="row"><h2>No Agency registered yet.</h2></div>
                         }
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id='Paging' style="text-align:center">
+                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                of @Model.PageCount
+
+                                @Html.PagedListPager(Model, page => Url.Action("Agencies", new { page }))
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

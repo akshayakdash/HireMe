@@ -136,12 +136,17 @@
                                         </div>
                                         @if (Model != null && Model.Count > 0)
                                         {
-                                            <div id='Paging' style="text-align:center">
-                                                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-                                                of @Model.PageCount
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div id='Paging' style="text-align:center">
+                                                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                                        of @Model.PageCount
 
-                                                @Html.PagedListPager(Model, page => Url.Action("Candidates", new { page }))
+                                                        @Html.PagedListPager(Model, page => Url.Action("Candidates", new { page }))
+                                                    </div>
+                                                </div>
                                             </div>
+                                            
                                         }
                                     </div>
                                     <div class="tab-pane fade show" id="tab-1-2">

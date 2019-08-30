@@ -1,4 +1,13 @@
-﻿@model HireMe.Models.ApplicationUser
+﻿<style>
+    .action-btn {
+        color: #808080;
+        transition: all 0.3s ease-out;
+    }
+    .action-btn:hover {
+        color: #333;
+    }
+</style>
+@model HireMe.Models.ApplicationUser
 
 @{
     ViewBag.Title = "Details";
@@ -62,10 +71,11 @@
                     <div class="header">
                         <i class="fa fa-user"></i> User Details
                         <span class="delete-section pull-right">
+                            <!--
                             <a href="@Url.Action("Details", new {id = Model.Id})"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;|&nbsp;
-                            <span class="delete-section">
-                                <a href="javascript:void(0)" id="@Model.Id" class="delete-prompt"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                            </span>
+                            <span class="delete-section"></span>
+                            -->
+                            <a href="javascript:void(0)" id="@Model.Id" class="delete-prompt action-btn" title="Delete Record"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                         </span>
                     </div>
                     <div class="body">
@@ -74,11 +84,11 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped">
                                         <tr>
-                                            <td>@Html.DisplayNameFor(model => model.FirstName)</td>
+                                            <td>First Name</td>
                                             <td>@Html.DisplayFor(model => model.FirstName)</td>
                                         </tr>
                                         <tr>
-                                            <td>@Html.DisplayNameFor(model => model.LastName)</td>
+                                            <td>Last Name</td>
                                             <td>@Html.DisplayFor(model => model.LastName)</td>
                                         </tr>
                                         <tr>
@@ -86,7 +96,7 @@
                                             <td>@Html.DisplayFor(model => model.Address)</td>
                                         </tr>
                                         <tr>
-                                            <td>@Html.DisplayNameFor(model => model.ProfilePicUrl)</td>
+                                            <td>Profile Pic Url</td>
                                             <td>@Html.DisplayFor(model => model.ProfilePicUrl)</td>
                                         </tr>
                                         <tr>
@@ -94,11 +104,11 @@
                                             <td>@Html.DisplayFor(model => model.Email)</td>
                                         </tr>
                                         <tr>
-                                            <td>@Html.DisplayNameFor(model => model.PhoneNumber)</td>
+                                            <td>Phone Number</td>
                                             <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
                                         </tr>
                                         <tr>
-                                            <td>@Html.DisplayNameFor(model => model.UserName)</td>
+                                            <td>User Name</td>
                                             <td>@Html.DisplayFor(model => model.UserName)</td>
                                         </tr>
                                     </table>
@@ -115,18 +125,25 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+            <!--
             <div class="modal-header alert alert-danger">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title" id="myModalLabel">Information Dialog</h4>
             </div>
+                -->
             <div class="modal-body">
-                <p class="success-message">Are you sure you wish to delete this record ? </p>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-success delete-confirm">OK</button>
-                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <p>Are you sure you wish to delete this record ? </p>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button class="btn btn-primary delete-confirm">OK</button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

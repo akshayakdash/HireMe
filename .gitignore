@@ -333,3 +333,7 @@ ASALocalRun/
 *.lnk
 CodeBase/Server/HireMe/.vs/config/applicationhost.config
 CodeBase/Server/HireMe/HireMe/Web.config
+*.config
+CodeBase/Server/HireMe/.vs/config/applicationhost.config
+*.config
+CodeBase/Server/HireMe/.vs/config/applicationhost.config
