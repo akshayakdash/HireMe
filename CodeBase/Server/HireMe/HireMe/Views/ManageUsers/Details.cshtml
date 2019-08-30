@@ -4,167 +4,130 @@
     ViewBag.Title = "Details";
 }
 
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+        $(document).ready(function () {
+            //start of the document ready function
+            //delcaring global variable to hold primary key value.
+            var pryEmpId;
+            $('.delete-prompt').click(function () {
+                pryEmpId = $(this).attr('id');
+                $('#myModal').modal('show');
+            });
+            var token = $('input[name=__RequestVerificationToken]').val();
 
+            $('.delete-confirm').click(function () {
+                if (pryEmpId != '') {
+                    $.ajax({
+                        url: 'ManageUsers/Delete',
+                        data: { __RequestVerificationToken: token, 'id': pryEmpId },
+                        type: 'post',
+                        success: function (data) {
+                            if (data) {
+                                //now re-using the boostrap modal popup to show success message.
+                                //dynamically we will change background colour
+                                if ($('.modal-header').hasClass('alert-danger')) {
+                                    $('.modal-header').removeClass('alert-danger').addClass('alert-success');
+                                    //hide ok button as it is not necessary
+                                    $('.delete-confirm').css('display', 'none');
+                                }
+                                $('.success-message').html('Record deleted successfully');
+                            }
+                        }, error: function (err) {
+                            if (!$('.modal-header').hasClass('alert-danger')) {
+                                $('.modal-header').removeClass('alert-success').addClass('alert-danger');
+                                $('.delete-confirm').css('display', 'none');
+                            }
+                            $('.success-message').html(err.statusText);
+                        }
+                    });
+                }
+            });
+
+            //function to reset bootstrap modal popups
+            $("#myModal").on("hidden.bs.modal", function () {
+                $(".modal-header").removeClass(' ').addClass('alert-danger');
+                $('.delete-confirm').css('display', 'inline-block');
+                $('.success-message').html('').html('Are you sure you wish to delete this record ?');
+            });
+
+            //end of the docuement ready function
+        });
+</script>
 <div id="main-container-user">
-    <h4>User Details</h4>
     <section class="right-side">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.FirstName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LastName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LastName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ProfilePicUrl)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ProfilePicUrl)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.ActiveUntil)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.ActiveUntil)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CountryId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CountryId)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.CityId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.CityId)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DistrictId)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.DistrictId)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.EmailConfirmed)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.EmailConfirmed)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PasswordHash)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PasswordHash)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.SecurityStamp)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.SecurityStamp)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumberConfirmed)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.TwoFactorEnabled)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LockoutEndDateUtc)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.LockoutEnabled)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.LockoutEnabled)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.AccessFailedCount)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.AccessFailedCount)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UserName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.UserName)
-            </dd>
-
-        </dl>
+        <div class="full-section-container">
+            <div class="jobsearch-section">
+                <div class="left-section">
+                    <div class="header">
+                        <i class="fa fa-user"></i> User Details
+                        <span class="delete-section pull-right">
+                            <a href="@Url.Action("Details", new {id = Model.Id})"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;|&nbsp;
+                            <span class="delete-section">
+                                <a href="javascript:void(0)" id="@Model.Id" class="delete-prompt"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.FirstName)</td>
+                                            <td>@Html.DisplayFor(model => model.FirstName)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.LastName)</td>
+                                            <td>@Html.DisplayFor(model => model.LastName)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Address)</td>
+                                            <td>@Html.DisplayFor(model => model.Address)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.ProfilePicUrl)</td>
+                                            <td>@Html.DisplayFor(model => model.ProfilePicUrl)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.Email)</td>
+                                            <td>@Html.DisplayFor(model => model.Email)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.PhoneNumber)</td>
+                                            <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>@Html.DisplayNameFor(model => model.UserName)</td>
+                                            <td>@Html.DisplayFor(model => model.UserName)</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </div>
-<p>
-    @Html.ActionLink("Delete", "Delete", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<!-- Bootstrap modal pop-up -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Information Dialog</h4>
+            </div>
+            <div class="modal-body">
+                <p class="success-message">Are you sure you wish to delete this record ? </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success delete-confirm">OK</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

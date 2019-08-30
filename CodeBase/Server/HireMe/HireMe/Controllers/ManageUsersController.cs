@@ -286,73 +286,56 @@ namespace HireMe.Controllers
 
         private ApplicationUser GetApplicationUserWithAllChildren(string id)
         {
-            var query = db.Set<ApplicationUser>().AsQueryable();
-            var navigationProperties = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
-                .CreateObjectSet<ApplicationUser>()
-                .EntitySet
-                .ElementType
-                .NavigationProperties
-                .Select(p => p.Name);
-            //foreach (var navProp in navigationProperties)
-            //{
-            //    query = query.Include(navProp);
-            //}
-
-
-
-            var isEmployer = db.Employers.Count(p => p.AspNetUserId == id) > 0;
-            if (isEmployer)
-                query = query.Include(p => p.Employers);
-            var isAgency = db.Agencies.Count(p => p.AspNetUserId == id) > 0;
-            if (isAgency)
-                query = query.Include(p => p.Agencies);
-            var isCandidate = db.Candidates.Count(p => p.AspNetUserId == id) > 0;
-            if (isCandidate)
-                query = query.Include(p => p.Candidates);
-
-            query = query.Include(p => p.Roles)
-                .Include(p => p.SecurityQuestionAnswers)
-                .Include(p => p.Claims)
-                .Include(p => p.SignalRConnections)
-                .Include(p => p.OTPList);
-            var result = query.SingleOrDefault(p => p.Id == id);
-            if (isEmployer)
+            try
             {
-                result.Employers?.ForEach(employer =>
-                {
-                    db.Entry(employer).Collection(p => p.JobOffers).Load();
-                    db.Entry(employer).Collection(p => p.FavouriteJobRequests).Load();
+                var query = db.Set<ApplicationUser>().AsQueryable();
+                var navigationProperties = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext
+                    .CreateObjectSet<ApplicationUser>()
+                    .EntitySet
+                    .ElementType
+                    .NavigationProperties
+                    .Select(p => p.Name);
+                //foreach (var navProp in navigationProperties)
+                //{
+                //    query = query.Include(navProp);
+                //}
 
-                    employer.JobOffers?.ForEach(joboffer =>
+
+
+                var isEmployer = db.Employers.Count(p => p.AspNetUserId == id) > 0;
+                if (isEmployer)
+                    query = query.Include(p => p.Employers);
+                var isAgency = db.Agencies.Count(p => p.AspNetUserId == id) > 0;
+                if (isAgency)
+                    query = query.Include(p => p.Agencies);
+                var isCandidate = db.Candidates.Count(p => p.AspNetUserId == id) > 0;
+                if (isCandidate)
+                    query = query.Include(p => p.Candidates);
+
+                query = query.Include(p => p.Roles)
+                    .Include(p => p.SecurityQuestionAnswers)
+                    .Include(p => p.Claims)
+                    .Include(p => p.SignalRConnections)
+                    .Include(p => p.OTPList);
+                var result = query.SingleOrDefault(p => p.Id == id);
+                if (isEmployer)
+                {
+                    result.Employers?.ForEach(employer =>
                     {
-                        db.Entry(joboffer).Collection(p => p.JobOfferJobTasks).Load();
-                        db.Entry(joboffer).Collection(p => p.JobOfferNotes).Load();
+                        db.Entry(employer).Collection(p => p.JobOffers).Load();
+                        db.Entry(employer).Collection(p => p.FavouriteJobRequests).Load();
+
+                        employer.JobOffers?.ForEach(joboffer =>
+                        {
+                            db.Entry(joboffer).Collection(p => p.JobOfferJobTasks).Load();
+                            db.Entry(joboffer).Collection(p => p.JobOfferNotes).Load();
+                        });
                     });
-                });
-            }
+                }
 
-            if (isCandidate)
-            {
-                result.Candidates?.ForEach(candidate =>
+                if (isCandidate)
                 {
-                    db.Entry(candidate).Collection(p => p.JobRequests).Load();
-                    db.Entry(candidate).Collection(p => p.FavouriteJobOffers).Load();
-
-                    candidate.JobRequests?.ForEach(jobrequest =>
-                    {
-                        db.Entry(jobrequest).Collection(p => p.JobRequestJobTasks).Load();
-                        db.Entry(jobrequest).Collection(p => p.JobRequestNotes).Load();
-                    });
-                });
-            }
-
-            if (isAgency)
-            {
-                result.Agencies?.ForEach(agency =>
-                {
-                    db.Entry(agency).Collection(p => p.Candidates).Load();
-
-                    agency.Candidates?.ForEach(candidate =>
+                    result.Candidates?.ForEach(candidate =>
                     {
                         db.Entry(candidate).Collection(p => p.JobRequests).Load();
                         db.Entry(candidate).Collection(p => p.FavouriteJobOffers).Load();
@@ -363,10 +346,34 @@ namespace HireMe.Controllers
                             db.Entry(jobrequest).Collection(p => p.JobRequestNotes).Load();
                         });
                     });
-                });
-            }
+                }
 
-            return result;
+                if (isAgency)
+                {
+                    result.Agencies?.ForEach(agency =>
+                    {
+                        db.Entry(agency).Collection(p => p.Candidates).Load();
+
+                        agency.Candidates?.ForEach(candidate =>
+                        {
+                            db.Entry(candidate).Collection(p => p.JobRequests).Load();
+                            db.Entry(candidate).Collection(p => p.FavouriteJobOffers).Load();
+
+                            candidate.JobRequests?.ForEach(jobrequest =>
+                            {
+                                db.Entry(jobrequest).Collection(p => p.JobRequestJobTasks).Load();
+                                db.Entry(jobrequest).Collection(p => p.JobRequestNotes).Load();
+                            });
+                        });
+                    });
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         private void IncludeSubNavigationProps(ApplicationUser result)

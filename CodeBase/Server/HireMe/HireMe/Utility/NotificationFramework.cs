@@ -95,7 +95,7 @@ namespace HireMe.Utility
                                     client.Send(mail);
                                 }
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
                                 // ignored
                             }

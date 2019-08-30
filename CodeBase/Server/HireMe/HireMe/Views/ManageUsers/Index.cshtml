@@ -1,163 +1,169 @@
 ﻿@*@model IEnumerable<HireMe.Models.ApplicationUser>*@
-
 @model PagedList.IPagedList<HireMe.Models.ApplicationUser>
 @using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    .image-circle {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid #ccc;
+    }
 
+</style>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+        $(document).ready(function () {
+            //start of the document ready function
+            //delcaring global variable to hold primary key value.
+            var pryEmpId;
+            $('.delete-prompt').click(function () {
+                pryEmpId = $(this).attr('id');
+                $('#myModal').modal('show');
+            });
+            var token = $('input[name=__RequestVerificationToken]').val();
+
+            $('.delete-confirm').click(function () {
+                if (pryEmpId != '') {
+                    $.ajax({
+                        url: 'ManageUsers/Delete',
+                        data: { __RequestVerificationToken: token, 'id': pryEmpId },
+                        type: 'post',
+                        success: function (data) {
+                            if (data) {
+                                //now re-using the boostrap modal popup to show success message.
+                                //dynamically we will change background colour
+                                if ($('.modal-header').hasClass('alert-danger')) {
+                                    $('.modal-header').removeClass('alert-danger').addClass('alert-success');
+                                    //hide ok button as it is not necessary
+                                    $('.delete-confirm').css('display', 'none');
+                                }
+                                $('.success-message').html('Record deleted successfully');
+                            }
+                        }, error: function (err) {
+                            if (!$('.modal-header').hasClass('alert-danger')) {
+                                $('.modal-header').removeClass('alert-success').addClass('alert-danger');
+                                $('.delete-confirm').css('display', 'none');
+                            }
+                            $('.success-message').html(err.statusText);
+                        }
+                    });
+                }
+            });
+
+            //function to reset bootstrap modal popups
+            $("#myModal").on("hidden.bs.modal", function () {
+                $(".modal-header").removeClass(' ').addClass('alert-danger');
+                $('.delete-confirm').css('display', 'inline-block');
+                $('.success-message').html('').html('Are you sure you wish to delete this record ?');
+            });
+
+            //end of the docuement ready function
+        });
+</script>
 <div id="main-container-user">
     <section class="right-side">
-        <table class="table">
-            <tr>
-                <th>
-                    User
-                </th>
-                <th>
-                    Name
-                </th>
-                <th>
-                    @*@Html.DisplayNameFor(model => model.Address)*@
-                    Address
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.ProfilePicUrl)
-                    </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ActiveUntil)
-                </th>*@
-                @*<th>
-                        @Html.DisplayNameFor(model => model.CountryId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CityId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DistrictId)
-                    </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>*@
-                @*<th>
-                    @Html.DisplayNameFor(model => model.EmailConfirmed)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PasswordHash)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SecurityStamp)
-                </th>*@
-                <th>
-                    @*@Html.DisplayNameFor(model => model.PhoneNumber)*@
-                    Contact No
-                </th>
-                @*<th>
-                    @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LockoutEndDateUtc)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LockoutEnabled)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AccessFailedCount)
-                </th>*@
-                <th>
-                    @*@Html.DisplayNameFor(model => model.UserName)*@
-                    User Name
-                </th>
-                <th></th>
-            </tr>
+        <div class="full-section-container">
+            <div class="jobsearch-section">
+                <div class="left-section">
+                    <div class="header">
+                        <i class="fa fa-users"></i> Users List
+                    </div>
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead class="bg-pink">
+                                            <tr>
+                                                <th width="5%">
+                                                    User
+                                                </th>
+                                                <th width="30%">
+                                                    Name
+                                                </th>
+                                                <th width="40%">
+                                                    Address
+                                                </th>
+                                                <th width="5%">
+                                                    Tel. Num
+                                                </th>
+                                                <th width="10%">
+                                                    Username
+                                                </th>
+                                                <th width="10%">
+                                                    Action
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        <img src="@item.ProfilePicUrl" class="image-circle" />
+                                                    </td>
+                                                    <td>
+                                                        @(item.FirstName + " " + item.LastName)
+                                                    </td>
+                                                    <td>
+                                                        @item.Address
+                                                    </td>
+                                                    <td>
+                                                        @item.PhoneNumber
+                                                    </td>
+                                                    <td>
+                                                        @item.UserName
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("Details", new {id = item.Id})"><i class="fa fa-eye" aria-hidden="true"></i></a>&nbsp;|&nbsp;
+                                                        <span class="delete-section">
+                                                            <a href="javascript:void(0)" id="@item.Id" class="delete-prompt"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                    @if (Model != null && Model.Count > 0)
+                                    {
+                                        <div id='Paging' style="text-align:center">
+                                            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+                                            of @Model.PageCount
 
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <img height="30" width="30" src="@item.ProfilePicUrl" />
-                    </td>
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.FirstName + " " + item.LastName)*@
-                        @(item.FirstName + " " + item.LastName)
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.LastName)
-                    </td>*@
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.Address)*@
-                        @item.Address
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.ProfilePicUrl)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ActiveUntil)
-                    </td>*@
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.CountryId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CityId)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DistrictId)
-                        </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>*@
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.EmailConfirmed)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PasswordHash)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SecurityStamp)
-                    </td>*@
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.PhoneNumber)*@
-                        @item.PhoneNumber
-                    </td>
-                    @*<td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumberConfirmed)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TwoFactorEnabled)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LockoutEndDateUtc)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LockoutEnabled)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AccessFailedCount)
-                    </td>*@
-                    <td>
-                        @*@Html.DisplayFor(modelItem => item.UserName)*@
-                        @item.UserName
-                    </td>
-                    <td>
-                        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |*@
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                    </td>
-                </tr>
-            }
-
-        </table>
-        @if (Model != null && Model.Count > 0)
-        {
-            <div id='Paging' style="text-align:center">
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
-                of @Model.PageCount
-
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        }
+        </div>
+
     </section>
+</div>
+<!-- Bootstrap modal pop-up -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header alert alert-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Information Dialog</h4>
+            </div>
+            <div class="modal-body">
+                <p class="success-message">Are you sure you wish to delete this record ? </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success delete-confirm">OK</button>
+                <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
 </div>
